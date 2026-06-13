@@ -42,11 +42,7 @@ jobs:
                   "title": "${{ github.event.repository.name }}",
                   "description": "${{ github.event.repository.description || '' }} - Development version",
                   "upload_type": "software",
-                  "license": "EUPL-1.2",
-                  "creators": [
-                    {"name": "Associação MILK - Movimentos de Intervenções e Linguagens Kulturais e Arte", "orcid": "0000-0000-0000-0000"},
-                    {"name": "Eduardo Maurício Vieira Cabral e Araujo", "orcid": "0009-0004-9132-2925"}
-                  ]
+                  "license": "EUPL-1.2"
                 }
               }' \
               https://zenodo.org/api/deposit/depositions)
