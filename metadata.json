@@ -1,20 +1,28 @@
 {
   "title": "Atlas Vivo MILK - Portugal",
-  "description": "Atlas Vivo MILK é um ecossistema soberano de dados, cultura e património, com foco em interoperabilidade, financiamento e conformidade legal (RGPD, AI Act, NIS2).",
+  "description": "Atlas Vivo MILK é um ecossistema soberano de dados, cultura e património, com foco em interoperabilidade, financiamento e conformidade legal (RGPD, AI Act, NIS2). Plataforma Web para preservação e mapeamento do patrimônio imaterial português.",
   "license": "EUPL-1.2",
-  "keywords": ["Atlas Vivo MILK", "cultura", "património", "soberania digital", "interoperabilidade", "Portugal"],
+  "keywords": ["Atlas Vivo MILK", "cultura", "património", "soberania digital", "interoperabilidade", "Portugal", "folclore", "património imaterial", "lendas", "Web App", "RGPD", "AI Act", "NIS2"],
   "creators": [
     {
-      "name": "Associação MILK - Movimentos de Intervenções e Linguagens Kulturais e Arte",
-      "orcid": "0000-0000-0000-0000"
+      "name": "Associação MILK - Movimento de Intervenções e Linguagens Kulturais e Arte"
     },
     {
       "name": "Eduardo Maurício Vieira Cabral e Araujo",
-      "orcid": "0000-0000-0000-0000"
+      "orcid": "0009-0004-9132-2925"
     }
   ],
   "version": "1.0.0",
-  "datePublished": "2026-06-06",
+  "datePublished": "2025-06-14",
   "doi": "",
-  "relatedIdentifiers": []
+  "relatedIdentifiers": [
+    {
+      "relation": "hasPart",
+      "identifier": "https://github.com/milkivc/atlas-datasets"
+    },
+    {
+      "relation": "hasPart",
+      "identifier": "https://github.com/milkivc/atlas-docs"
+    }
+  ]
 }
