@@ -1,0 +1,466 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2024-06-26T12:00:00Z",
+    "author": "Associação MILK - Sistema Auto-Validante Territorial",
+    "license": "MIT",
+    "description": "Base de dados de Entidades Territoriais (Câmaras, Freguesias, Paróquias, Associações)"
+  },
+  "entidades": {
+    "camaras": [
+      {
+        "id": "cm-porto",
+        "name": "Câmara Municipal do Porto",
+        "type": "Câmara Municipal",
+        "district": "Porto",
+        "region": "Norte",
+        "website": "https://www.cm-porto.pt",
+        "email": "geral@cm-porto.pt",
+        "phone": "+351 222 091 000",
+        "address": "Praça General Humberto Delgado, 4049-001 Porto",
+        "freguesias": [
+          {
+            "id": "131002",
+            "name": "Cedofeita",
+            "code": "131002",
+            "population": 22000,
+            "area": 1.2
+          },
+          {
+            "id": "131003",
+            "name": "Ildefonso",
+            "code": "131003",
+            "population": 18000,
+            "area": 1.5
+          },
+          {
+            "id": "131004",
+            "name": "Massarelos",
+            "code": "131004",
+            "population": 6000,
+            "area": 0.8
+          },
+          {
+            "id": "131005",
+            "name": "Miragaia",
+            "code": "131005",
+            "population": 4000,
+            "area": 0.5
+          },
+          {
+            "id": "131006",
+            "name": "São Nicolau",
+            "code": "131006",
+            "population": 3000,
+            "area": 0.3
+          },
+          {
+            "id": "131007",
+            "name": "Vitória",
+            "code": "131007",
+            "population": 2000,
+            "area": 0.2
+          }
+        ],
+        "contactos": {
+          "atendimento": "+351 222 091 000",
+          "emergencia": "+351 222 091 100",
+          "email": "geral@cm-porto.pt"
+        },
+        "servicos": [
+          "Urbanismo",
+          "Obras Públicas",
+          "Limpeza Urbana",
+          "Transporte",
+          "Cultura",
+          "Educação",
+          "Saúde",
+          "Ação Social"
+        ]
+      },
+      {
+        "id": "cm-lisboa",
+        "name": "Câmara Municipal de Lisboa",
+        "type": "Câmara Municipal",
+        "district": "Lisboa",
+        "region": "Lisboa",
+        "website": "https://www.cm-lisboa.pt",
+        "email": "geral@cm-lisboa.pt",
+        "phone": "+351 218 170 000",
+        "address": "Praça do Município, 1100-035 Lisboa",
+        "freguesias": [
+          {
+            "id": "110601",
+            "name": "Misericórdia",
+            "code": "110601",
+            "population": 12000,
+            "area": 1.0
+          },
+          {
+            "id": "110602",
+            "name": "Arroios",
+            "code": "110602",
+            "population": 30000,
+            "area": 2.5
+          },
+          {
+            "id": "110603",
+            "name": "Avenidas Novas",
+            "code": "110603",
+            "population": 20000,
+            "area": 2.0
+          },
+          {
+            "id": "110604",
+            "name": "Beato",
+            "code": "110604",
+            "population": 15000,
+            "area": 1.8
+          },
+          {
+            "id": "110605",
+            "name": "Belém",
+            "code": "110605",
+            "population": 16000,
+            "area": 3.0
+          },
+          {
+            "id": "110606",
+            "name": "Campolide",
+            "code": "110606",
+            "population": 14000,
+            "area": 1.5
+          }
+        ],
+        "contactos": {
+          "atendimento": "+351 218 170 000",
+          "emergencia": "+351 218 170 100",
+          "email": "geral@cm-lisboa.pt"
+        },
+        "servicos": [
+          "Urbanismo",
+          "Obras Públicas",
+          "Limpeza Urbana",
+          "Transporte",
+          "Cultura",
+          "Educação",
+          "Saúde",
+          "Ação Social"
+        ]
+      },
+      {
+        "id": "cm-funchal",
+        "name": "Câmara Municipal do Funchal",
+        "type": "Câmara Municipal",
+        "district": "Funchal",
+        "region": "Madeira",
+        "website": "https://www.cm-funchal.pt",
+        "email": "geral@cm-funchal.pt",
+        "phone": "+351 291 235 600",
+        "address": "Rua do Bispo, 9000-049 Funchal",
+        "freguesias": [
+          {
+            "id": "710101",
+            "name": "Imaculado Coração de Maria",
+            "code": "710101",
+            "population": 25000,
+            "area": 2.0
+          },
+          {
+            "id": "710102",
+            "name": "Monte",
+            "code": "710102",
+            "population": 20000,
+            "area": 3.0
+          },
+          {
+            "id": "710103",
+            "name": "Santa Luzia",
+            "code": "710103",
+            "population": 15000,
+            "area": 1.5
+          },
+          {
+            "id": "710104",
+            "name": "Santa Maria Maior",
+            "code": "710104",
+            "population": 13000,
+            "area": 1.2
+          },
+          {
+            "id": "710105",
+            "name": "Santo António",
+            "code": "710105",
+            "population": 22000,
+            "area": 2.5
+          }
+        ],
+        "contactos": {
+          "atendimento": "+351 291 235 600",
+          "emergencia": "+351 291 235 700",
+          "email": "geral@cm-funchal.pt"
+        },
+        "servicos": [
+          "Urbanismo",
+          "Obras Públicas",
+          "Limpeza Urbana",
+          "Transporte",
+          "Cultura",
+          "Turismo",
+          "Saúde",
+          "Ação Social"
+        ]
+      }
+    ],
+    "paroquias": [
+      {
+        "id": "patriarcado-lisboa",
+        "name": "Patriarcado de Lisboa",
+        "type": "Diocese",
+        "region": "Lisboa",
+        "website": "https://www.patriarcado-lisboa.pt",
+        "email": "secretaria@patriarcado-lisboa.pt",
+        "phone": "+351 218 866 800",
+        "address": "Largo da Sé, 1100-501 Lisboa",
+        "paroquias": [
+          {
+            "id": "pl-se",
+            "name": "Sé de Lisboa",
+            "address": "Largo da Sé, Lisboa",
+            "phone": "+351 218 866 800"
+          },
+          {
+            "id": "pl-santo-antonio",
+            "name": "Santo António",
+            "address": "Rua de Santo António, Lisboa",
+            "phone": "+351 218 877 700"
+          },
+          {
+            "id": "pl-martires",
+            "name": "Mártires",
+            "address": "Rua dos Mártires, Lisboa",
+            "phone": "+351 218 888 800"
+          },
+          {
+            "id": "pl-corpo-santo",
+            "name": "Corpo Santo",
+            "address": "Rua do Corpo Santo, Lisboa",
+            "phone": "+351 218 899 900"
+          },
+          {
+            "id": "pl-conceicao",
+            "name": "Nossa Senhora da Conceição",
+            "address": "Rua da Conceição, Lisboa",
+            "phone": "+351 218 800 000"
+          }
+        ]
+      },
+      {
+        "id": "diocese-porto",
+        "name": "Diocese do Porto",
+        "type": "Diocese",
+        "region": "Porto",
+        "website": "https://www.diocese-porto.pt",
+        "email": "secretaria@diocese-porto.pt",
+        "phone": "+351 222 091 700",
+        "address": "Terrço da Sé, 4000-496 Porto",
+        "paroquias": [
+          {
+            "id": "dp-se",
+            "name": "Sé do Porto",
+            "address": "Terrço da Sé, Porto",
+            "phone": "+351 222 091 700"
+          },
+          {
+            "id": "dp-santo-ildefonso",
+            "name": "Santo Ildefonso",
+            "address": "Rua de Santo Ildefonso, Porto",
+            "phone": "+351 222 092 800"
+          },
+          {
+            "id": "dp-sao-jose",
+            "name": "São José das Taipas",
+            "address": "Rua das Taipas, Porto",
+            "phone": "+351 222 093 900"
+          },
+          {
+            "id": "dp-massarelos",
+            "name": "Massarelos",
+            "address": "Rua de Massarelos, Porto",
+            "phone": "+351 222 094 000"
+          },
+          {
+            "id": "dp-miragaia",
+            "name": "Miragaia",
+            "address": "Rua de Miragaia, Porto",
+            "phone": "+351 222 095 100"
+          }
+        ]
+      },
+      {
+        "id": "diocese-funchal",
+        "name": "Diocese do Funchal",
+        "type": "Diocese",
+        "region": "Madeira",
+        "website": "https://www.diocese-funchal.pt",
+        "email": "secretaria@diocese-funchal.pt",
+        "phone": "+351 291 235 600",
+        "address": "Rua do Bispo, 9000-049 Funchal",
+        "paroquias": [
+          {
+            "id": "df-se",
+            "name": "Sé do Funchal",
+            "address": "Rua do Bispo, Funchal",
+            "phone": "+351 291 235 600"
+          },
+          {
+            "id": "df-imaculado",
+            "name": "Imaculado Coração de Maria",
+            "address": "Rua do Imaculado, Funchal",
+            "phone": "+351 291 236 700"
+          },
+          {
+            "id": "df-monte",
+            "name": "Monte",
+            "address": "Rua do Monte, Funchal",
+            "phone": "+351 291 237 800"
+          },
+          {
+            "id": "df-santa-luzia",
+            "name": "Santa Luzia",
+            "address": "Rua de Santa Luzia, Funchal",
+            "phone": "+351 291 238 900"
+          },
+          {
+            "id": "df-santo-antonio",
+            "name": "Santo António",
+            "address": "Rua de Santo António, Funchal",
+            "phone": "+351 291 239 000"
+          }
+        ]
+      }
+    ],
+    "associacoes": [
+      {
+        "id": "assoc-moradores-bonfim",
+        "name": "Associação de Moradores do Bonfim",
+        "type": "Associação de Moradores",
+        "region": "Porto",
+        "address": "Rua do Bonfim, 123, Porto",
+        "email": "moradores.bonfim@email.pt",
+        "phone": "+351 222 123 456",
+        "website": "https://moradoresbonfim.pt",
+        "focus": ["Habitação", "Comunidade", "Urbanismo"],
+        "freguesia": "Cedofeita"
+      },
+      {
+        "id": "assoc-cultural-porto",
+        "name": "Associação Cultural do Porto",
+        "type": "Associação Cultural",
+        "region": "Porto",
+        "address": "Rua das Flores, 45, Porto",
+        "email": "cultura.porto@email.pt",
+        "phone": "+351 222 234 567",
+        "website": "https://culturaporto.pt",
+        "focus": ["Cultura", "Eventos", "Património"],
+        "freguesia": "São Nicolau"
+      },
+      {
+        "id": "assoc-jovens-porto",
+        "name": "Associação de Jovens do Porto",
+        "type": "Associação Juvenil",
+        "region": "Porto",
+        "address": "Rua de Santa Catarina, 78, Porto",
+        "email": "jovens.porto@email.pt",
+        "phone": "+351 222 345 678",
+        "website": "https://jovensporto.pt",
+        "focus": ["Juventude", "Educação", "Desporto"],
+        "freguesia": "Ildefonso"
+      },
+      {
+        "id": "assoc-solidariedade-porto",
+        "name": "Associação de Solidariedade do Porto",
+        "type": "IPSS",
+        "region": "Porto",
+        "address": "Rua de Cedofeita, 90, Porto",
+        "email": "solidariedade.porto@email.pt",
+        "phone": "+351 222 456 789",
+        "website": "https://solidariedadeporto.pt",
+        "focus": ["Solidariedade", "Inclusão", "Apoio Social"],
+        "freguesia": "Massarelos"
+      },
+      {
+        "id": "assoc-empresarios-porto",
+        "name": "Associação de Empresários do Porto",
+        "type": "Associação Empresarial",
+        "region": "Porto",
+        "address": "Rua de São João, 12, Porto",
+        "email": "empresarios.porto@email.pt",
+        "phone": "+351 222 567 890",
+        "website": "https://empresariosporto.pt",
+        "focus": ["Negócios", "Inovação", "Economia"],
+        "freguesia": "Vitória"
+      },
+      {
+        "id": "assoc-moradores-alfama",
+        "name": "Associação de Moradores de Alfama",
+        "type": "Associação de Moradores",
+        "region": "Lisboa",
+        "address": "Largo de São Miguel, 10, Lisboa",
+        "email": "moradores.alfama@email.pt",
+        "phone": "+351 218 123 456",
+        "website": "https://moradoresalfama.pt",
+        "focus": ["Habitação", "Património", "Comunidade"],
+        "freguesia": "Misericórdia"
+      },
+      {
+        "id": "assoc-cultural-lisboa",
+        "name": "Associação Cultural de Lisboa",
+        "type": "Associação Cultural",
+        "region": "Lisboa",
+        "address": "Rua da Madalena, 20, Lisboa",
+        "email": "cultura.lisboa@email.pt",
+        "phone": "+351 218 234 567",
+        "website": "https://culturalisboa.pt",
+        "focus": ["Cultura", "Artes", "Eventos"],
+        "freguesia": "Arroios"
+      },
+      {
+        "id": "assoc-jovens-lisboa",
+        "name": "Associação de Jovens de Lisboa",
+        "type": "Associação Juvenil",
+        "region": "Lisboa",
+        "address": "Rua de São Bento, 30, Lisboa",
+        "email": "jovens.lisboa@email.pt",
+        "phone": "+351 218 345 678",
+        "website": "https://jovenslisboa.pt",
+        "focus": ["Juventude", "Educação", "Desporto"],
+        "freguesia": "Avenidas Novas"
+      },
+      {
+        "id": "assoc-solidariedade-lisboa",
+        "name": "Associação de Solidariedade de Lisboa",
+        "type": "IPSS",
+        "region": "Lisboa",
+        "address": "Rua de Arroios, 40, Lisboa",
+        "email": "solidariedade.lisboa@email.pt",
+        "phone": "+351 218 456 789",
+        "website": "https://solidariedadelisboa.pt",
+        "focus": ["Solidariedade", "Inclusão", "Apoio Social"],
+        "freguesia": "Beato"
+      },
+      {
+        "id": "assoc-empresarios-lisboa",
+        "name": "Associação de Empresários de Lisboa",
+        "type": "Associação Empresarial",
+        "region": "Lisboa",
+        "address": "Avenida da Liberdade, 50, Lisboa",
+        "email": "empresarios.lisboa@email.pt",
+        "phone": "+351 218 567 890",
+        "website": "https://empresarioslisboa.pt",
+        "focus": ["Negócios", "Inovação", "Economia"],
+        "freguesia": "Belém"
+      }
+    ]
+  }
+}
