@@ -1,29 +1,157 @@
 {
-  "name": "atlas-vivo-milk-backend",
+  "name": "atlas-vivo-milk-swh",
   "version": "1.0.0",
-  "description": "Backend services for Atlas Vivo MILK - Portuguese cultural heritage mapping",
-  "main": "index.js",
+  "description": "ATLAS VIVO MILK - Software Heritage Integration Layer for Digital Heritage Preservation with EU/Portugal Compliance",
+  "main": "app.js",
+  "module": "app.ts",
+  "types": "app.ts",
   "scripts": {
+    "start": "node app.js",
+    "start:dev": "NODE_ENV=development node app.js",
+    "start:prod": "NODE_ENV=production node app.js",
+    "dev": "nodemon app.ts",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "lint": "eslint . --ext .ts,.js",
+    "lint:fix": "eslint . --ext .ts,.js --fix",
+    "format": "prettier --write \"src/**/*.{ts,js}\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist coverage",
+    "prepare": "npm run build",
     "fetch:dgt": "node fetch_dgt_data.js",
     "fetch:ipma": "node fetch_ipma_data.js",
     "fetch:dados-gov": "node fetch_dados_gov.js",
     "fetch:assembleia": "node fetch_assembleia_data.js",
     "fetch:all": "node fetch_dgt_data.js && node fetch_ipma_data.js && node fetch_dados_gov.js && node fetch_assembleia_data.js"
   },
-  "dependencies": {
-    "axios": "^1.6.0"
-  },
   "keywords": [
     "cultural-heritage",
+    "digital-preservation",
+    "software-heritage",
+    "swh",
+    "folk-traditions",
     "portugal",
-    "open-data",
-    "geospatial",
-    "api-integration"
+    "open-science",
+    "academic-research",
+    "eu-funding",
+    "gdpr-compliant",
+    "fair-principles",
+    "codeberg",
+    "forgejo",
+    "interoperability",
+    "eu-directive-2019-1024",
+    "lei-26-2016",
+    "fct-eligibility",
+    "ani-eligibility"
   ],
-  "author": "Associação MILK",
-  "license": "EUPL-1.2",
+  "author": "MILK Association <compliance@milk.pt>",
+  "license": "CC-BY-SA-4.0",
+  "homepage": "https://milk.pt",
   "repository": {
     "type": "git",
     "url": "https://github.com/milkivc/atlas-vivo-milk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/milkivc/atlas-vivo-milk/issues",
+    "email": "compliance@milk.pt"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "compression": "^1.7.4",
+    "morgan": "^1.10.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.5",
+    "@types/cors": "^2.8.17",
+    "@types/compression": "^1.7.5",
+    "@types/morgan": "^1.9.9",
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2",
+    "nodemon": "^3.0.2",
+    "eslint": "^8.55.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.2",
+    "prettier": "^3.1.1",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.11",
+    "ts-jest": "^29.1.1",
+    "supertest": "^6.3.3",
+    "@types/supertest": "^2.0.16"
+  },
+  "overrides": {
+    "glob": "^10.3.10"
+  },
+  "files": [
+    "app.js",
+    "app.ts",
+    "dist/",
+    "fetch_dgt_data.js",
+    "fetch_ipma_data.js",
+    "fetch_dados_gov.js",
+    "fetch_assembleia_data.js",
+    "index.js"
+  ],
+  "export": {
+    ".": {
+      "import": "./app.ts",
+      "require": "./app.js"
+    }
+  },
+  "codeberg": {
+    "enabled": true,
+    "namespace": "milkivc",
+    "mirror": true,
+    "description": "MILK Atlas Vivo - Software Heritage Integration for Digital Heritage Preservation with EU/Portugal Compliance"
+  },
+  "compliance": {
+    "gdpr": true,
+    "euOpenData": true,
+    "ptAdminAccess": true,
+    "academicEligibility": true,
+    "fundingEligibility": true,
+    "standards": [
+      "FAIR Principles",
+      "Dublin Core",
+      "Schema.org",
+      "DataCite",
+      "CodeMeta"
+    ],
+    "legalFramework": {
+      "eu": [
+        "GDPR (Regulation (EU) 2016/679)",
+        "Directive (EU) 2019/1024 on Open Data",
+        "Horizon Europe Framework Programme",
+        "Creative Europe Programme"
+      ],
+      "portugal": [
+        "Lei n.º 26/2016 (Acesso à Informação Administrativa)",
+        "Lei n.º 58/2019 (Proteção de Dados Pessoais)",
+        "Decreto-Lei n.º 125/2018 (Governo Aberto)"
+      ]
+    }
+  },
+  "funding": {
+    "eu": [
+      "Horizon Europe",
+      "Creative Europe"
+    ],
+    "national": [
+      "FCT - Fundação para a Ciência e a Tecnologia",
+      "ANI - Agência Nacional de Inovação"
+    ]
   }
 }
