@@ -32,18 +32,25 @@ jobs:
             'cosmicoxes_and_cosmic_flow_are_distinct': True,
             'missing_definitions_must_not_be_invented': True,
             'perceptio_is_not_a_game_profile_or_score_system': True,
+            'sussurro_is_not_human_diagnosis': True,
+            'reizinho_is_not_behavioural_scoring': True,
+            'legacy_dado_biometrics_are_not_production_defaults': True,
+            'unproven_sources_remain_in_document_recovery': True,
             'source_over_model_fluency': True
           }
 
           system = (
             'You are a source-faithful verifier for Atlas Vivo MILK. '
             'Never invent definitions that were not supplied. '
+            'Never convert historical high-risk mechanisms into current production defaults. '
+            'Never diagnose people or create behavioural scores. '
             'Return JSON only.'
           )
           user = (
             'Given only these invariants: ' + json.dumps(facts) + '\n'
-            'Return exactly an object with booleans: distinct_preserved, '
-            'invented_definitions, perceptio_reduced_to_game, source_priority_preserved. '
+            'Return exactly an object with booleans: distinct_preserved, invented_definitions, '
+            'perceptio_reduced_to_game, sussurro_diagnoses_people, reizinho_scores_people, '
+            'legacy_biometrics_allowed_by_default, missing_sources_invented, source_priority_preserved. '
             'Do not add definitions or explanations.'
           )
 
@@ -52,7 +59,7 @@ jobs:
             'messages':[{'role':'system','content':system},{'role':'user','content':user}],
             'temperature':0,
             'response_format':{'type':'json_object'},
-            'max_tokens':200
+            'max_tokens':300
           }).encode('utf-8')
           req=urllib.request.Request(
             'https://api.mistral.ai/v1/chat/completions',
@@ -71,6 +78,10 @@ jobs:
             'distinct_preserved': True,
             'invented_definitions': False,
             'perceptio_reduced_to_game': False,
+            'sussurro_diagnoses_people': False,
+            'reizinho_scores_people': False,
+            'legacy_biometrics_allowed_by_default': False,
+            'missing_sources_invented': False,
             'source_priority_preserved': True
           }
           ok=all(result.get(k) == v for k,v in expected.items())
