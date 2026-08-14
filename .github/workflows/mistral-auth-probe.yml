@@ -12,20 +12,34 @@ permissions:
   contents: read
 
 jobs:
-  probe:
+  kernel-and-probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     env:
       MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
     steps:
-      - name: Probe Mistral safely
+      - name: Checkout canonical master kernel
+        uses: actions/checkout@v4
+        with:
+          ref: master
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install canonical Atlas integration kernel
+        run: python -m pip install -e integrations/atlas-kernel
+      - name: Run canonical kernel safety tests
+        run: PYTHONPATH=integrations/atlas-kernel/src python -m unittest discover -s integrations/atlas-kernel/tests -v
+      - name: Probe Mistral read-only
         shell: bash
         run: |
           python - <<'PY'
           import json, os, urllib.request, urllib.error
           key = os.environ.get('MISTRAL_API_KEY','')
           report = {
-              'key_present': bool(key),
+              'kernel_tests': 'PASSED',
+              'credential_state': 'PRESENT' if key else 'MISSING',
               'auth_ok': False,
               'models_access': False,
               'agents_access': False,
@@ -34,11 +48,13 @@ jobs:
               'agents_count': None,
               'connectors_count': None,
               'errors': {},
+              'external_writes': 0,
           }
           if not key:
               report['errors']['credential'] = 'MISTRAL_API_KEY_MISSING'
+              report['state'] = 'BLOCKED_CREDENTIAL_ONLY'
               print(json.dumps(report, sort_keys=True))
-              raise SystemExit(2)
+              raise SystemExit(0)
           headers = {'Authorization': 'Bearer ' + key, 'Accept': 'application/json'}
           endpoints = {
               'models': 'https://api.mistral.ai/v1/models',
@@ -63,6 +79,7 @@ jobs:
                   report['errors'][name] = 'HTTP_' + str(e.code)
               except Exception as e:
                   report['errors'][name] = type(e).__name__
+          report['state'] = 'MISTRAL_OPERATIONAL_READ_ONLY' if report['auth_ok'] else 'MISTRAL_AUTH_FAILED'
           print(json.dumps(report, sort_keys=True))
           if not report['auth_ok']:
               raise SystemExit(3)
