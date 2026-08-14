@@ -1,0 +1,87 @@
+name: Atlas Mistral first safeguarded pass
+
+on:
+  push:
+    branches:
+      - codex/safety-gate-2026-08-10
+    paths:
+      - ".github/workflows/mistral-atlas-first-pass.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  first-pass:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - name: Run Drive curator and research decoder
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os, re, urllib.request, urllib.error
+
+          raw=os.environ.get('MISTRAL_API_KEY','').strip()
+          if raw.startswith('MISTRAL_API_KEY='):
+              raw=raw.split('=',1)[1].strip().strip('"').strip("'")
+          key=''.join(raw.split())
+          H={'Authorization':'Bearer '+key,'Accept':'application/json','Content-Type':'application/json'}
+
+          def req(method,path,payload=None):
+              data=None if payload is None else json.dumps(payload,ensure_ascii=False).encode()
+              r=urllib.request.Request('https://api.mistral.ai'+path,headers=H,data=data,method=method)
+              with urllib.request.urlopen(r,timeout=120) as x:
+                  return json.loads(x.read().decode())
+
+          def agents():
+              b=req('GET','/v1/agents/pages')
+              return {x.get('name'):x for x in b.get('data',[]) if isinstance(x,dict)}
+
+          def safe_text(obj):
+              parts=[]
+              def walk(x):
+                  if isinstance(x,dict):
+                      if x.get('type')=='message.output':
+                          c=x.get('content')
+                          if isinstance(c,str): parts.append(c)
+                          elif isinstance(c,list):
+                              for z in c:
+                                  if isinstance(z,dict) and isinstance(z.get('text'),str): parts.append(z['text'])
+                      for v in x.values(): walk(v)
+                  elif isinstance(x,list):
+                      for v in x: walk(v)
+              walk(obj)
+              s='\n'.join(parts)
+              s=re.sub(r'https?://\S+','[URL_REDACTED]',s)
+              s=re.sub(r'[A-Za-z0-9_\-]{28,}','[OPAQUE_ID_REDACTED]',s)
+              s=re.sub(r'[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}','[EMAIL_REDACTED]',s)
+              return s[:6000]
+
+          A=agents()
+          drive=A['MILK Drive Curator — Read Only']['id']
+          research=A['MILK Research Decoder — Web App']['id']
+
+          prompts={
+            'drive': '''FAÇA UMA PRIMEIRA VARREDURA READ-ONLY DO GOOGLE DRIVE. Não crie, mova, apague, renomeie nem publique nada. Não devolva títulos, nomes pessoais, URLs, IDs brutos, conteúdo textual ou credenciais. Trabalhe apenas com contagens e categorias agregadas. Identifique sinais de: ORIGINAL_IMUTAVEL, CANONICO, DERIVADO, DUPLICADO_CANDIDATO, CONTAMINACAO_PROCESSUAL, CREDENCIAL_OU_SEGREDO, DADOS_PESSOAIS, CURADORIA, CODIGO, ASSET, STAGING_MIGRACAO, PENDENTE_DE_AUTOR. Informe também se o connector Google Drive está autenticado e operacional. Saída curta em JSON ou texto estruturado, sem dados sensíveis.''',
+            'research': '''Use o Google Drive em READ-ONLY para localizar documentos canónicos do Atlas Vivo MILK relacionados com CONTEXTO_CANONICO_ATLAS, COSMICOXES/Cosmic Flow/Catasterismo, Palavra Ritual, SEER/SEER POSSÍVEL/PERCEPTIO e OlHaPIN/OLHO DO ATLAS. Não exponha excertos, URLs, IDs, nomes pessoais ou conteúdo sensível. Não resuma a pesquisa. Produza apenas a PRIMEIRA MATRIZ COMPUTACIONAL agregada: conceitos nucleares encontrados; relações entre conceitos; quais devem virar motores; quais viram estruturas de dados; quais viram dispositivos/interações; quais dependem de validação humana; quais lacunas ainda precisam de recuperação documental. Separar CONFIRMADO_POR_FONTE de EM_RECUPERACAO_DOCUMENTAL. Não escrever no Drive.'''
+          }
+
+          out={}
+          for label,agent_id in [('drive',drive),('research',research)]:
+              try:
+                  body=req('POST','/v1/conversations',{'agent_id':agent_id,'inputs':[{'role':'user','content':prompts[label]}]})
+                  out[label]={'ok':True,'summary':safe_text(body),'conversation_created':bool(body.get('conversation_id') or body.get('id'))}
+              except urllib.error.HTTPError as e:
+                  rawerr=e.read().decode('utf-8','ignore')[:1200]
+                  rawerr=re.sub(r'[A-Za-z0-9_\-]{28,}','[OPAQUE_ID_REDACTED]',rawerr)
+                  out[label]={'ok':False,'http':e.code,'error':rawerr}
+              except Exception as e:
+                  out[label]={'ok':False,'error_type':type(e).__name__}
+
+          print('ATLAS_FIRST_PASS_BEGIN')
+          print(json.dumps(out,ensure_ascii=False,indent=2,sort_keys=True))
+          print('ATLAS_FIRST_PASS_END')
+          PY
