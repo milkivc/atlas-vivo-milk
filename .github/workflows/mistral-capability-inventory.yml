@@ -1,0 +1,114 @@
+name: Mistral capability inventory
+
+on:
+  push:
+    branches:
+      - codex/safety-gate-2026-08-10
+    paths:
+      - ".github/workflows/mistral-capability-inventory.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - name: Build read-only inventory
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request, urllib.error
+
+          raw = os.environ.get('MISTRAL_API_KEY','').strip()
+          if raw.startswith('MISTRAL_API_KEY='):
+              raw = raw.split('=',1)[1].strip().strip('"').strip("'")
+          key = ''.join(raw.split())
+          if not key:
+              raise SystemExit('MISTRAL_API_KEY missing')
+
+          headers = {'Authorization':'Bearer '+key,'Accept':'application/json'}
+
+          def get(url):
+              req = urllib.request.Request(url, headers=headers, method='GET')
+              with urllib.request.urlopen(req, timeout=30) as r:
+                  return json.loads(r.read().decode('utf-8'))
+
+          out = {
+              'state':'READ_ONLY',
+              'external_writes':0,
+              'models':[],
+              'connectors':[],
+              'agents':[],
+              'libraries':[],
+              'errors':{}
+          }
+
+          endpoints = {
+              'models':'https://api.mistral.ai/v1/models',
+              'connectors':'https://api.mistral.ai/v1/connectors?page_size=200',
+              'agents':'https://api.mistral.ai/v1/agents/pages',
+              'libraries':'https://api.mistral.ai/v1/libraries'
+          }
+
+          for name, url in endpoints.items():
+              try:
+                  body = get(url)
+                  if name == 'models':
+                      items = body.get('data', []) if isinstance(body, dict) else body
+                      out[name] = [
+                          {
+                              'id': x.get('id'),
+                              'object': x.get('object'),
+                              'owned_by': x.get('owned_by'),
+                              'capabilities': x.get('capabilities')
+                          }
+                          for x in items if isinstance(x, dict)
+                      ]
+                  elif name == 'connectors':
+                      items = body.get('items', [])
+                      out[name] = [
+                          {
+                              'id': x.get('id'),
+                              'name': x.get('name'),
+                              'description': x.get('description'),
+                              'visibility': x.get('visibility'),
+                              'auth_type': x.get('auth_type')
+                          }
+                          for x in items if isinstance(x, dict)
+                      ]
+                  elif name == 'agents':
+                      items = body.get('data', [])
+                      out[name] = [
+                          {
+                              'id': x.get('id'),
+                              'name': x.get('name'),
+                              'model': x.get('model'),
+                              'description': x.get('description'),
+                              'version': x.get('version')
+                          }
+                          for x in items if isinstance(x, dict)
+                      ]
+                  elif name == 'libraries':
+                      items = body.get('data', [])
+                      out[name] = [
+                          {
+                              'id': x.get('id'),
+                              'name': x.get('name'),
+                              'description': x.get('description')
+                          }
+                          for x in items if isinstance(x, dict)
+                      ]
+              except urllib.error.HTTPError as e:
+                  out['errors'][name] = 'HTTP_'+str(e.code)
+              except Exception as e:
+                  out['errors'][name] = type(e).__name__
+
+          print('MISTRAL_CAPABILITY_INVENTORY_BEGIN')
+          print(json.dumps(out, ensure_ascii=False, indent=2, sort_keys=True))
+          print('MISTRAL_CAPABILITY_INVENTORY_END')
+          PY
