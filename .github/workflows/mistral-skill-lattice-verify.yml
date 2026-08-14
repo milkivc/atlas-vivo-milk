@@ -1,0 +1,59 @@
+name: Verify Atlas Mistral skill lattice
+
+on:
+  push:
+    branches:
+      - codex/safety-gate-2026-08-10
+    paths:
+      - ".github/workflows/mistral-skill-lattice-verify.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - name: Verify three agents contain MILK_SKILL_LATTICE_V1
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          raw=os.environ.get('MISTRAL_API_KEY','').strip()
+          if raw.startswith('MISTRAL_API_KEY='):
+              raw=raw.split('=',1)[1].strip().strip('"').strip("'")
+          key=''.join(raw.split())
+          H={'Authorization':'Bearer '+key,'Accept':'application/json'}
+          def get(path):
+              r=urllib.request.Request('https://api.mistral.ai'+path,headers=H)
+              with urllib.request.urlopen(r,timeout=60) as x: return json.loads(x.read().decode())
+          page=get('/v1/agents/pages')
+          targets=['MILK Drive Curator — Read Only','MILK Research Decoder — Web App','MILK Sovereign Orchestrator']
+          byname={a.get('name'):a for a in page.get('data',[])}
+          result={}
+          for name in targets:
+              a=byname.get(name)
+              if not a:
+                  result[name]={'exists':False,'skill_lattice':False}; continue
+              full=get('/v1/agents/'+a['id'])
+              ins=full.get('instructions') or ''
+              meta=full.get('metadata') or {}
+              result[name]={
+                  'exists':True,
+                  'id':a['id'],
+                  'version':full.get('version'),
+                  'skill_lattice':'[MILK_SKILL_LATTICE_V1]' in ins,
+                  'negative_skills':meta.get('negative_skills'),
+                  'dormant_potential':meta.get('dormant_potential'),
+                  'counterevidence':meta.get('counterevidence'),
+                  'zero_learning':meta.get('zero_learning')
+              }
+          print(json.dumps(result,ensure_ascii=False,sort_keys=True))
+          if not all(v.get('exists') and v.get('skill_lattice') and v.get('negative_skills')=='enabled' and v.get('dormant_potential')=='enabled' and v.get('counterevidence')=='required' and v.get('zero_learning')=='true' for v in result.values()):
+              raise SystemExit('SKILL_LATTICE_VERIFY_FAILED')
+          print('SKILL_LATTICE_VERIFY_OK')
+          PY
