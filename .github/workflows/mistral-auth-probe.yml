@@ -36,7 +36,10 @@ jobs:
         run: |
           python - <<'PY'
           import json, os, urllib.request, urllib.error
-          key = os.environ.get('MISTRAL_API_KEY','')
+          raw_key = os.environ.get('MISTRAL_API_KEY','').strip()
+          if raw_key.startswith('MISTRAL_API_KEY='):
+              raw_key = raw_key.split('=', 1)[1].strip().strip('"').strip("'")
+          key = ''.join(raw_key.split())
           report = {
               'kernel_tests': 'PASSED',
               'credential_state': 'PRESENT' if key else 'MISSING',
