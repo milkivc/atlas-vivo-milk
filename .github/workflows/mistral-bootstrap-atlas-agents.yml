@@ -62,6 +62,7 @@ jobs:
           10. Se houver dúvida de autoria, intenção, classificação ou destino: PENDENTE_DE_AUTOR.
           11. Nenhuma conclusão operacional sem evidência e recibo.
           12. Segurança e integridade prevalecem sobre velocidade.
+          13. Mistral é condutor silencioso de fluxo; não representa nem substitui a voz da IA MILK.
           '''
 
           drive_name='MILK Drive Curator — Read Only'
