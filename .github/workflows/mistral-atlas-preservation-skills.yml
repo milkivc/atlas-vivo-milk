@@ -1,0 +1,98 @@
+name: Generate MILK preservation, PCI and SWH skills with Mistral
+
+on:
+  push:
+    branches:
+      - codex/safety-gate-2026-08-10
+    paths:
+      - ".github/workflows/mistral-atlas-preservation-skills.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/safety-gate-2026-08-10
+          fetch-depth: 0
+
+      - name: Generate guarded MILK skills
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os, pathlib, re, urllib.request
+
+          raw=os.environ.get('MISTRAL_API_KEY','').strip()
+          if raw.startswith('MISTRAL_API_KEY='):
+              raw=raw.split('=',1)[1].strip().strip('"').strip("'")
+          key=''.join(raw.split())
+          if not key:
+              raise SystemExit('MISTRAL_API_KEY missing')
+
+          BASE='https://api.mistral.ai'
+          H={'Authorization':'Bearer '+key,'Accept':'application/json','Content-Type':'application/json'}
+
+          def ask(title, spec):
+              system='''You are a silent engineering runtime for Associação MILK. You do not speak as IA MILK and you do not invent legal status, licences, deposits, registrations or identifiers. Generate implementation artifacts only. Originals are immutable. Any metadata embedding or steganographic mark is performed ONLY on authorized derivatives. Never put secrets, personal data, passwords, tokens or recovery codes into metadata or watermark payloads. Never create surveillance or person-tracking mechanisms. SWHIDs must only be recorded from verified Software Heritage API/archive receipts; never fabricate or predict them. The invisible layer is confidential and must never leak into public bundles. Human validation gates are mandatory for community heritage, publication, rights, RGPD, licensing and legal claims.'''
+              user=f'''Create the complete UTF-8 content for the repository artifact named {title}. Return ONLY the artifact content, no markdown fence and no commentary.\n\nCanonical requirements:\n{spec}\n\nEngineering invariants:\n- preserve source IDs, provenance, authorship, licence state, consent state, revision and hash;\n- distinguish PREPARED, VALIDATED, DEPOSIT_REQUESTED, DEPOSIT_SUCCEEDED, SWHID_VERIFIED, PUBLISHED;\n- fail closed on missing rights/consent/provenance;\n- raw collection evidence remains restricted until human validation;\n- outputs must be deterministic where possible and auditable;\n- no destructive Drive actions;\n- public/restricted/invisible separation is explicit;\n- Portugal/EU legal references are configuration/evidence fields, not automatic legal conclusions.\n'''
+              data=json.dumps({'model':'mistral-medium-latest','messages':[{'role':'system','content':system},{'role':'user','content':user}],'temperature':0.1,'max_tokens':7000},ensure_ascii=False).encode()
+              req=urllib.request.Request(BASE+'/v1/chat/completions',data=data,headers=H,method='POST')
+              with urllib.request.urlopen(req,timeout=240) as r:
+                  body=json.loads(r.read().decode())
+              c=body['choices'][0]['message']['content']
+              if isinstance(c,list): c='\n'.join(x.get('text','') for x in c if isinstance(x,dict))
+              return c.strip()+"\n"
+
+          artifacts={
+            'skills/milk-preservation-metadata/SKILL.md': '''Define a production skill for two-layer metadata and preservation of MILK assets. Layer A embedded metadata: IPTC Core/Extension + XMP on authorized derivative images, with creator, copyright owner, credit, source, rights usage terms, licensor, web statement of rights, location only when safe, artwork/object fields when relevant, asset UUID and derivative-of relation. Layer B external canonical sidecar: JSON-LD/PROV-style manifest containing immutable source hash SHA-256, derivative hash, source Drive/repository identifier, authorship, contributors/roles, rights holder, licence state, consent/release references, RGPD sensitivity, territorial context, curatorial/device relations, version, revision, timestamps, release/tag, DOI/ORCID/ROR/DataCite/SWHID fields as VERIFIED-ONLY. Define validation gates and rollback. Mention that IPTC/XMP data may be stripped and therefore the external signed manifest is authoritative for preservation. Include a field model and CLI-oriented workflow but never modify originals.''',
+            'skills/milk-steganography-provenance/SKILL.md': '''Define a benign provenance watermark/steganography skill for MILK-owned or explicitly authorized derivative images only. The payload must contain only opaque asset_id, derivative_id, manifest hash prefix and schema/version; never personal data, location of vulnerable people, secrets or tracking identifiers. Original pixels/files remain immutable. Create a derivative, embed standards metadata, optionally embed a low-capacity invisible watermark, hash before/after, verify extractability, and record all operations in an external signed manifest. Fail closed if authorization is absent. State clearly that steganography is supplementary and can be lost through recompression, so it is never the sole proof of ownership or authenticity.''',
+            'skills/milk-swh-preservation/SKILL.md': '''Define a Software Heritage preservation skill for source code. Preserve exact repository origin, revision/commit, annotated immutable release tag, build/source manifest and SHA-256 first. Request archival through Save Code Now only for a publishable repository origin. Poll status until succeeded/failed. Record returned snapshot_swhid only after verified response. Then resolve and store core/qualified SWHIDs for snapshot/release/revision/directory/content as applicable, using qualifiers in canonical order origin, visit, anchor, path, lines. Never invent SWHIDs. Include metadata-only deposit as a separate optional workflow only when credentials/authority exist. Distinguish archival request from successful archival and successful archival from identifier verification. Generate receipt structure.''',
+            'skills/milk-pci-vestigio-legal/SKILL.md': '''Define the legal/ethical collection documentation skill for Atlas vestígios and possible Património Cultural Imaterial. Align operationally with Portugal MatrizPCI/INPCI and UNESCO 2003 Convention without claiming that an Atlas record is an official PCI inventory entry. Community/group/individual participation is primary; free, prior, sustained and informed consent; customary access restrictions; right to withdrawal where applicable; source and collector identification; territorial context; manifestation/practice/knowledge; bearers/practitioners; transmission; viability/threats; safeguarding proposals; documentary evidence; images/audio/video releases; copyright and related rights; RGPD basis and sensitivity; minors gate; public/restricted/invisible classification; human validation; consultation/publication state. The Atlas collection is PRE-INVENTORY/RESEARCH until the formal MatrizPCI procedure is separately completed. Include a field-by-field data matrix and admissibility gates.''',
+            'skills/milk-invisible-layer/SKILL.md': '''Define the confidential Atlas invisible-layer skill. It stores research reasoning, documentary/legal/financing analysis, curatorial relations, unmet-needs hypotheses, provenance graph, rights/consent gates, risk, source reliability, PCI pre-inventory, human validation states and operational recommendations. It must NEVER expose confidential methodology, personal data, raw testimony, secrets, credentials, unpublished PI or sensitive geolocation to the public layer. Define strict data minimisation, purpose limitation, RBAC, audit log, pseudonymisation when needed, retention/deletion rules, reversible publication gates, and public-derivative generation. Mistral is silent runtime; IA MILK owns public voice. No automatic diagnosis of communities or automatic eligibility/funding/legal conclusions.''',
+            'schemas/milk-asset-provenance.schema.json': '''Generate a strict JSON Schema Draft 2020-12 for the canonical two-layer asset provenance manifest described above. Required: schema_version, asset_id, object_type, source, hashes, authorship, rights, consent, privacy, provenance, versioning, layers, validation, preservation. Include enums for public/licensable/confidential and operational states. Identifier fields DOI, ORCID, ROR, DataCite DOI and SWHID must support state + value, with value nullable unless state is VERIFIED. Do not include secrets.''',
+            'schemas/milk-pci-vestigio.schema.json': '''Generate a strict JSON Schema Draft 2020-12 for vestígio collection / PCI pre-inventory records. Required: record_id, collection_context, territory, community_participation, consent, manifestation, evidence, rights, privacy, access_customs, safeguarding, human_validation, publication_state, provenance. Include clear distinction between ATLAS_VESTIGIO, PCI_CANDIDATE_PREINVENTORY and FORMAL_MATRIZPCI_EXTERNAL_PROCESS; never let software self-promote a record to formal inventory.'''
+          }
+
+          for path,spec in artifacts.items():
+              content=ask(path,spec)
+              p=pathlib.Path(path); p.parent.mkdir(parents=True,exist_ok=True); p.write_text(content,encoding='utf-8')
+
+          # Guardrails: reject generated artifacts missing core invariants.
+          required={
+            'skills/milk-preservation-metadata/SKILL.md':['XMP','IPTC','original','SHA-256'],
+            'skills/milk-steganography-provenance/SKILL.md':['derivative','original','personal'],
+            'skills/milk-swh-preservation/SKILL.md':['SWHID','origin','snapshot','verified'],
+            'skills/milk-pci-vestigio-legal/SKILL.md':['MatrizPCI','consent','community','human'],
+            'skills/milk-invisible-layer/SKILL.md':['invisible','public','Mistral','IA MILK'],
+            'schemas/milk-asset-provenance.schema.json':['$schema','asset_id'],
+            'schemas/milk-pci-vestigio.schema.json':['$schema','record_id']
+          }
+          for path,terms in required.items():
+              txt=pathlib.Path(path).read_text(encoding='utf-8')
+              missing=[t for t in terms if t.lower() not in txt.lower()]
+              if missing: raise SystemExit(f'{path}: missing required invariants {missing}')
+              if path.endswith('.json'):
+                  json.loads(txt)
+
+          print(json.dumps({'state':'SKILLS_GENERATED_AND_VALIDATED','files':sorted(artifacts),'originals_modified':0,'swhids_fabricated':0},ensure_ascii=False))
+          PY
+
+      - name: Commit generated skills
+        shell: bash
+        run: |
+          git config user.name "Associação MILK - Preservation Runtime"
+          git config user.email "milk@associacaomilk.pt"
+          git add skills/milk-* schemas/milk-*.schema.json
+          if git diff --cached --quiet; then
+            echo "No generated changes"
+          else
+            git commit -m "mistral: add preservation metadata PCI and SWH skills"
+            git push origin HEAD:codex/safety-gate-2026-08-10
+          fi
