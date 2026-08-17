@@ -1,0 +1,175 @@
+name: MILK Total Execution Audit
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths:
+      - '.github/workflows/milk-total-execution-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: milk-total-execution-audit
+  cancel-in-progress: false
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
+      CODEBERG_USER: ${{ secrets.CODEBERG_USER }}
+      CODEBERG_REPO: ${{ secrets.CODEBERG_REPO }}
+      DEPLOY_HOST: troi.ptservidor.net
+      DEPLOY_USER: associ16
+      DEPLOY_PORT: ${{ secrets.PTSERVIDOR_SSH_PORT || secrets.SSH_PORT || '22' }}
+      DEPLOY_KEY: ${{ secrets.PTSERVIDOR_SSH_PRIVATE_KEY || secrets.SSH_PRIVATE_KEY || secrets.CPANEL_SSH_KEY }}
+      DEPLOY_KNOWN_HOSTS: ${{ secrets.PTSERVIDOR_KNOWN_HOSTS || secrets.SSH_KNOWN_HOSTS }}
+      FTPS_HOST: associacaomilk.pt
+      FTPS_USER: migration@associacaomilk.pt
+      FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD || secrets.FTPS_PASSWORD }}
+      NEXTCLOUD_URL: ${{ secrets.NEXTCLOUD_URL }}
+      NEXTCLOUD_USER: ${{ secrets.NEXTCLOUD_USER }}
+      NEXTCLOUD_PASSWORD: ${{ secrets.NEXTCLOUD_PASSWORD }}
+      ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
+      ORCID_ACCESS_TOKEN: ${{ secrets.ORCID_ACCESS_TOKEN }}
+      ORCID_ID: ${{ secrets.ORCID_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Mistral sovereign gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY" || { echo '::error::MISTRAL_API_KEY missing'; exit 2; }
+          python - <<'PY'
+          import json, os, urllib.request, urllib.error
+          key=os.environ['MISTRAL_API_KEY'].strip()
+          h={'Authorization':'Bearer '+key,'Content-Type':'application/json','Accept':'application/json'}
+          def req(method,path,payload=None):
+              d=None if payload is None else json.dumps(payload,ensure_ascii=False).encode()
+              r=urllib.request.Request('https://api.mistral.ai/v1'+path,headers=h,data=d,method=method)
+              with urllib.request.urlopen(r,timeout=60) as x:
+                  b=x.read().decode(); return json.loads(b) if b else {}
+          a=req('GET','/agents')
+          if isinstance(a,dict): a=a.get('data') or a.get('items') or []
+          orch=next((x for x in a if (x.get('metadata') or {}).get('role')=='orchestrator'),None)
+          if not orch:
+              orch=next((x for x in a if 'orchestrator' in (x.get('name') or '').lower()),None)
+          if not orch: raise SystemExit('orchestrator not found')
+          prompt='''Atlas Vivo MILK. Executar os corredores ainda pendentes sem inventar sucesso: Codeberg/Forgejo por push não destrutivo; PTServidor/Nextcloud apenas com credenciais reais e recibos; FTPS somente após canário upload + download-back + SHA-256; Zenodo/ORCID apenas validação de credenciais e metadados, sem publicação se autoria/licença/OAuth não estiverem comprovados. Google Drive permanece read-only. Não tocar em /home/associ16/public_html. Não revelar segredos. Distinguir EXECUTADO, VERIFICADO, BLOQUEADO e NÃO DISPONÍVEL.'''
+          try:
+              out=req('POST','/conversations',{'agent_id':orch['id'],'inputs':prompt,'store':False})
+              ok=True
+          except Exception as e:
+              out={'warning':type(e).__name__}; ok=False
+          receipt={'mistral_gate_called':True,'mistral_gate_response_received':ok,'orchestrator_id':orch.get('id')}
+          open('mistral-gate-receipt.json','w').write(json.dumps(receipt,indent=2))
+          print(json.dumps(receipt))
+          PY
+
+      - name: Execute independent corridors
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os,json,hashlib,ssl,ftplib,urllib.request,urllib.error,subprocess,tempfile,pathlib,time
+          R={'state':'EXECUTION_AUDIT','codeberg':{},'ptservidor_ssh':{},'ftps':{},'nextcloud':{},'zenodo':{},'orcid':{},'public_endpoints':{}}
+          def present(*names):
+              return any(os.environ.get(n,'').strip() for n in names)
+          def fetch(url, headers=None, method='GET', data=None, timeout=25):
+              req=urllib.request.Request(url,headers=headers or {},method=method,data=data)
+              with urllib.request.urlopen(req,timeout=timeout) as r: return r.status,r.read()
+          for name,url in {'atlas':'https://atlas.associacaomilk.pt/','nextcloud_cloud':'https://cloud.associacaomilk.pt/status.php','nextcloud_path':'https://associacaomilk.pt/nextcloud/status.php'}.items():
+              try:
+                  s,b=fetch(url); R['public_endpoints'][name]={'reachable':True,'http':s,'bytes':len(b)}
+              except Exception as e: R['public_endpoints'][name]={'reachable':False,'error':type(e).__name__}
+
+          # Codeberg: create private repository only if all credentials are present; push one staging branch, never mirror/force.
+          tok=os.environ.get('CODEBERG_TOKEN','').strip(); user=os.environ.get('CODEBERG_USER','').strip(); repo=os.environ.get('CODEBERG_REPO','').strip()
+          if tok and user and repo:
+              api=f'https://codeberg.org/api/v1/repos/{user}/{repo}'
+              hdr={'Authorization':'token '+tok,'Content-Type':'application/json'}
+              try:
+                  s,_=fetch(api,hdr); exists=(s==200)
+              except urllib.error.HTTPError as e:
+                  exists=False if e.code==404 else (_ for _ in ()).throw(e)
+              if not exists:
+                  payload=json.dumps({'name':repo,'private':True,'description':'Canonical forge staging for Atlas Vivo MILK'}).encode()
+                  s,_=fetch('https://codeberg.org/api/v1/user/repos',hdr,'POST',payload)
+                  R['codeberg']['repo_created']=s in (200,201)
+              remote=f'https://{user}:{tok}@codeberg.org/{user}/{repo}.git'
+              subprocess.run(['git','remote','remove','codeberg'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+              subprocess.run(['git','remote','add','codeberg',remote],check=True)
+              branch='atlas-safety-staging-2026-08-17'
+              p=subprocess.run(['git','push','codeberg',f'HEAD:refs/heads/{branch}'],text=True,capture_output=True)
+              R['codeberg'].update({'credentials':True,'branch':branch,'push_ok':p.returncode==0,'force_used':False,'mirror_used':False})
+          else: R['codeberg']={'credentials':False,'status':'BLOCKED_MISSING_SECRET'}
+
+          # SSH read-only/preflight only. No deployment from an unverified package.
+          key=os.environ.get('DEPLOY_KEY','').strip(); known=os.environ.get('DEPLOY_KNOWN_HOSTS','').strip()
+          if key and known:
+              home=pathlib.Path.home()/'.ssh'; home.mkdir(mode=0o700,exist_ok=True)
+              k=home/'id_atlas_total'; kh=home/'known_hosts'; k.write_text(key+'\n'); kh.write_text(known+'\n'); k.chmod(0o600); kh.chmod(0o600)
+              cmd=['ssh','-i',str(k),'-p',os.environ.get('DEPLOY_PORT','22'),'-o','BatchMode=yes','-o','IdentitiesOnly=yes','-o','StrictHostKeyChecking=yes',f"{os.environ.get('DEPLOY_USER')}@{os.environ.get('DEPLOY_HOST')}","set -eu; printf 'HOME_OK\\n'; df -Pk /home/associ16; for p in /home/associ16/atlas_milk_private /home/associ16/atlas_milk_private/migration /home/associ16/atlas_milk_private/nextcloud-data /home/associ16/atlas.associacaomilk.pt; do if [ -e \"$p\" ]; then echo EXISTS:$p; else echo ABSENT:$p; fi; done"]
+              p=subprocess.run(cmd,text=True,capture_output=True)
+              R['ptservidor_ssh']={'credentials':True,'preflight_ok':p.returncode==0,'output':p.stdout[-3000:] if p.returncode==0 else ''}
+          else: R['ptservidor_ssh']={'credentials':False,'status':'BLOCKED_MISSING_SSH_SECRET'}
+
+          # Explicit FTPS canary when password exists. Leaves the canary as evidence; never deletes source/destination material.
+          pwd=os.environ.get('FTPS_PASSWORD','').strip()
+          if pwd:
+              data=os.urandom(4096); sha=hashlib.sha256(data).hexdigest(); name='atlas-canary-'+str(int(time.time()))+'.bin'
+              ftp=ftplib.FTP_TLS(timeout=35); ftp.connect(os.environ['FTPS_HOST'],21); ftp.login(os.environ['FTPS_USER'],pwd); ftp.prot_p()
+              import io
+              ftp.storbinary('STOR '+name,io.BytesIO(data)); back=io.BytesIO(); ftp.retrbinary('RETR '+name,back.write); ftp.quit()
+              got=hashlib.sha256(back.getvalue()).hexdigest()
+              R['ftps']={'credentials':True,'uploaded':True,'downloaded_back':True,'bytes':len(data),'sha256':sha,'remote_sha256':got,'verified':sha==got,'remote_name':name}
+          else: R['ftps']={'credentials':False,'status':'BLOCKED_MISSING_FTPS_SECRET'}
+
+          # Nextcloud authenticated WebDAV receipt upload if configured.
+          nurl=os.environ.get('NEXTCLOUD_URL','').strip().rstrip('/'); nu=os.environ.get('NEXTCLOUD_USER','').strip(); np=os.environ.get('NEXTCLOUD_PASSWORD','').strip()
+          if nurl and nu and np:
+              import base64
+              auth='Basic '+base64.b64encode((nu+':'+np).encode()).decode(); hdr={'Authorization':auth}
+              dav=nurl+'/remote.php/dav/files/'+nu+'/Atlas-Vivo-MILK'
+              try: fetch(dav,hdr,'MKCOL',b'')
+              except urllib.error.HTTPError as e:
+                  if e.code not in (405,409): raise
+              receipt=json.dumps({'project':'Atlas Vivo MILK','kind':'continuity-receipt','source':'MILK Total Execution Audit','ts':int(time.time())},sort_keys=True).encode()
+              sha=hashlib.sha256(receipt).hexdigest(); target=dav+'/continuity-'+str(int(time.time()))+'.json'
+              s,_=fetch(target,hdr,'PUT',receipt); s2,b=fetch(target,hdr)
+              R['nextcloud']={'credentials':True,'upload_http':s,'download_http':s2,'bytes':len(b),'sha256':sha,'remote_sha256':hashlib.sha256(b).hexdigest(),'verified':hashlib.sha256(b).hexdigest()==sha}
+          else: R['nextcloud']={'credentials':False,'status':'BLOCKED_MISSING_NEXTCLOUD_SECRET_OR_ENDPOINT'}
+
+          z=os.environ.get('ZENODO_TOKEN','').strip()
+          if z:
+              try:
+                  s,b=fetch('https://zenodo.org/api/deposit/depositions?size=1',{'Authorization':'Bearer '+z}); R['zenodo']={'credentials':True,'auth_ok':s==200,'publication_performed':False}
+              except Exception as e:R['zenodo']={'credentials':True,'auth_ok':False,'error':type(e).__name__,'publication_performed':False}
+          else:R['zenodo']={'credentials':False,'status':'BLOCKED_MISSING_TOKEN','publication_performed':False}
+
+          ot=os.environ.get('ORCID_ACCESS_TOKEN','').strip(); oid=os.environ.get('ORCID_ID','').strip()
+          if ot and oid:
+              try:
+                  s,b=fetch('https://api.orcid.org/v3.0/'+oid+'/record',{'Authorization':'Bearer '+ot,'Accept':'application/json'}); R['orcid']={'credentials':True,'auth_ok':s==200,'write_performed':False}
+              except Exception as e:R['orcid']={'credentials':True,'auth_ok':False,'error':type(e).__name__,'write_performed':False}
+          else:R['orcid']={'credentials':False,'status':'BLOCKED_MISSING_OAUTH','write_performed':False}
+          open('total-execution-receipt.json','w').write(json.dumps(R,ensure_ascii=False,indent=2))
+          print(json.dumps(R,ensure_ascii=False))
+          PY
+
+      - name: Preserve sanitised receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: milk-total-execution-audit
+          path: |
+            mistral-gate-receipt.json
+            total-execution-receipt.json
+          retention-days: 30
+          if-no-files-found: error
