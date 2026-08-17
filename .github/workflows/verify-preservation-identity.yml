@@ -1,0 +1,23 @@
+name: Verify preservation identity
+
+on:
+  push:
+    branches:
+      - codex/safety-gate-2026-08-10
+    paths:
+      - "docs/preservation/**"
+      - "metadata.json"
+      - ".zenodo.json"
+      - "ops/verify_preservation_identity.py"
+      - ".github/workflows/verify-preservation-identity.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python ops/verify_preservation_identity.py
