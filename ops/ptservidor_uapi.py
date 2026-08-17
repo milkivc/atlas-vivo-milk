@@ -6,7 +6,13 @@ ou secret manager do executor. Por defeito só executa leituras. Escritas exigem
 ATLAS_ALLOW_REMOTE_WRITE=1.
 """
 from __future__ import annotations
-import json, os, secrets, string, urllib.parse, urllib.request
+import base64
+import json
+import os
+import secrets
+import string
+import urllib.parse
+import urllib.request
 
 HOST = os.getenv('CPANEL_HOST', 'troi.ptservidor.net')
 PORT = int(os.getenv('CPANEL_PORT', '2083'))
@@ -20,7 +26,6 @@ def _auth_header() -> str:
     if TOKEN:
         return f'cpanel {USER}:{TOKEN}'
     if PASSWORD:
-        import base64
         raw = base64.b64encode(f'{USER}:{PASSWORD}'.encode()).decode()
         return f'Basic {raw}'
     raise RuntimeError('NO_CPANEL_AUTH_REFERENCE')
@@ -37,43 +42,35 @@ def uapi(module: str, function: str, **params):
         'User-Agent': 'Atlas-Vivo-MILK-UAPI/1.0',
     })
     with urllib.request.urlopen(req, timeout=45) as response:
-        payload = json.load(response)
-    return payload
+        return json.load(response)
 
 
 def list_ftp():
     return uapi('Ftp', 'list_ftp')
 
 
-def ftp_exists(user: str, domain: str='associacaomilk.pt'):
+def ftp_exists(user: str, domain: str = 'associacaomilk.pt'):
     return uapi('Ftp', 'ftp_exists', user=user, domain=domain)
 
 
-def _random_password(length: int=36) -> str:
+def _random_password(length: int = 36) -> str:
     alphabet = string.ascii_letters + string.digits + '!@#%_-'
     return 'M!' + ''.join(secrets.choice(alphabet) for _ in range(length))
 
 
-def create_migration_ftp(local_user: str, home: str='atlas_milk_private/migration'):
+def create_migration_ftp(local_user: str, home: str = 'atlas_milk_private/migration'):
     if not ALLOW_WRITE:
         raise RuntimeError('REMOTE_WRITE_GATE_CLOSED')
     password = _random_password()
-    result = uapi(
-        'Ftp', 'add_ftp', user=local_user, domain='associacaomilk.pt',
-        pass_=password, quota=0, homedir=home,
-    )
-    # urllib encodes keyword pass_ literally; rebuild with correct API key when executing.
-    # Keep password only in process memory and return it to the caller for the immediate canary.
-    return result, password
-
-
-def add_ftp_exact(local_user: str, password: str, home: str='atlas_milk_private/migration'):
-    if not ALLOW_WRITE:
-        raise RuntimeError('REMOTE_WRITE_GATE_CLOSED')
-    return uapi('Ftp', 'add_ftp', **{
-        'user': local_user, 'domain': 'associacaomilk.pt', 'pass': password,
-        'quota': 0, 'homedir': home,
+    result = uapi('Ftp', 'add_ftp', **{
+        'user': local_user,
+        'domain': 'associacaomilk.pt',
+        'pass': password,
+        'quota': 0,
+        'homedir': home,
     })
+    # Password exists only in process memory and is returned only for the immediate canary.
+    return result, password
 
 
 def delete_ftp(local_user: str):
