@@ -1,5 +1,6 @@
 name: Mistral curatorial engineering research panel
 
+# execution-trigger: 2026-08-17
 on:
   push:
     branches:
