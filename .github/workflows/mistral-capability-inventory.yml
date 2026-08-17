@@ -22,7 +22,7 @@ jobs:
         shell: bash
         run: |
           python - <<'PY'
-          import json, os, urllib.request, urllib.error
+          import json, os, urllib.request, urllib.error, urllib.parse
 
           raw = os.environ.get('MISTRAL_API_KEY','').strip()
           if raw.startswith('MISTRAL_API_KEY='):
@@ -38,6 +38,31 @@ jobs:
               with urllib.request.urlopen(req, timeout=30) as r:
                   return json.loads(r.read().decode('utf-8'))
 
+          def get_cursor_pages(url):
+              items = []
+              seen_tokens = set()
+              page_token = None
+              while True:
+                  page_url = url
+                  if page_token:
+                      sep = '&' if '?' in page_url else '?'
+                      page_url += sep + urllib.parse.urlencode({'page_token': page_token})
+                  body = get(page_url)
+                  if not isinstance(body, dict):
+                      raise TypeError('cursor-paginated endpoint did not return an object')
+                  data = body.get('data', [])
+                  if not isinstance(data, list):
+                      raise TypeError('cursor-paginated endpoint data is not a list')
+                  items.extend(x for x in data if isinstance(x, dict))
+                  next_token = body.get('next_page_token')
+                  if not next_token:
+                      break
+                  if next_token in seen_tokens:
+                      raise RuntimeError('cursor pagination returned a repeated token')
+                  seen_tokens.add(next_token)
+                  page_token = next_token
+              return items
+
           out = {
               'state':'READ_ONLY',
               'external_writes':0,
@@ -51,13 +76,19 @@ jobs:
           endpoints = {
               'models':'https://api.mistral.ai/v1/models',
               'connectors':'https://api.mistral.ai/v1/connectors?page_size=200',
-              'agents':'https://api.mistral.ai/v1/agents/pages',
-              'libraries':'https://api.mistral.ai/v1/libraries'
+              'agents':'https://api.mistral.ai/v1/agents/pages?page_size=100',
+              'libraries':'https://api.mistral.ai/v1/libraries?page_size=100'
           }
 
           for name, url in endpoints.items():
               try:
-                  body = get(url)
+                  if name in ('agents', 'libraries'):
+                      items = get_cursor_pages(url)
+                      body = None
+                  else:
+                      body = get(url)
+                      items = []
+
                   if name == 'models':
                       items = body.get('data', []) if isinstance(body, dict) else body
                       out[name] = [
@@ -82,7 +113,6 @@ jobs:
                           for x in items if isinstance(x, dict)
                       ]
                   elif name == 'agents':
-                      items = body.get('data', [])
                       out[name] = [
                           {
                               'id': x.get('id'),
@@ -91,17 +121,16 @@ jobs:
                               'description': x.get('description'),
                               'version': x.get('version')
                           }
-                          for x in items if isinstance(x, dict)
+                          for x in items
                       ]
                   elif name == 'libraries':
-                      items = body.get('data', [])
                       out[name] = [
                           {
                               'id': x.get('id'),
                               'name': x.get('name'),
                               'description': x.get('description')
                           }
-                          for x in items if isinstance(x, dict)
+                          for x in items
                       ]
               except urllib.error.HTTPError as e:
                   out['errors'][name] = 'HTTP_'+str(e.code)
