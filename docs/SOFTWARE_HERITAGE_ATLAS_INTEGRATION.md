@@ -97,3 +97,7 @@ Snapshot preservado anteriormente:
 `swh:1:snp:a347d3000d5369dc5ea04fc229085252952833cd`
 
 Este identificador deve permanecer na cadeia de proveniência, mesmo que snapshots posteriores sejam capturados.
+
+## 8. Regra operacional adicionada em 2026-08-17
+
+Cada contribuição técnica nova do Atlas que altere código, contratos, schemas, curadorias digitalizadas ou mecanismos de preservação deve produzir um bundle verificável com SHA-256. O bundle é preservado no Software Heritage quando for código-fonte e replicado para o Nextcloud privado quando o canal WebDAV estiver autenticado. Nenhuma destas cópias substitui a fonte autoral ou a forja canónica.
