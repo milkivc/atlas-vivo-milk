@@ -1,0 +1,24 @@
+name: Atlas Nextcloud integration tests
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths:
+      - 'integrations/nextcloud/**'
+      - '.github/workflows/nextcloud-integration-tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit tests
+        working-directory: integrations/nextcloud
+        run: python -m unittest -v test_atlas_nextcloud.py
