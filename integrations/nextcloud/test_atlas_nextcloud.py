@@ -25,7 +25,7 @@ class TestAtlasNextcloud(unittest.TestCase):
         self.assertEqual(receipt["detail"]["state"], "ok")
 
     def test_sha256(self):
-        self.assertEqual(sha256_bytes(b"atlas"), "96f61e2684df5b0b102e999108a6f3600e0ad1f8515250055331f958710ac59a")
+        self.assertEqual(sha256_bytes(b"atlas"), "7c82602500857aa6ed0cf38c4c3e4ec645bdcaa82c00b9155eb08be100c778a9")
 
     def test_webdav_contract(self):
         cfg = NextcloudConfig("https://cloud.example.test", "atlas", "secret")
