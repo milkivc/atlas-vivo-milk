@@ -1,4 +1,4 @@
-import json, os, pathlib, subprocess, urllib.request, urllib.error, time
+import json, os, pathlib, urllib.request, urllib.error, time, re
 
 BASE='https://api.mistral.ai'
 KEY=''.join(os.environ.get('MISTRAL_API_KEY','').strip().split())
@@ -57,20 +57,25 @@ def run_agent(agent_id,prompt):
     return text(r)
 
 
-def parse_json(raw):
-    s=raw.strip()
-    if s.startswith('```'):
-        s=s.split('\n',1)[1]
-        s=s.rsplit('```',1)[0]
-    try: return json.loads(s)
-    except Exception:
-        a=s.find('{'); b=s.rfind('}')
-        if a<0 or b<=a: raise ValueError('agent did not return JSON')
-        return json.loads(s[a:b+1])
+def parse_file_blocks(raw):
+    # Protocol:
+    # ===FILE path===\n<verbatim content>\n===END FILE===
+    pat=re.compile(r'^===FILE ([^\r\n=]+)===\r?\n(.*?)\r?\n===END FILE===\s*$',re.M|re.S)
+    matches=pat.findall(raw.strip())
+    if not matches:
+        # More tolerant global parser for multiple blocks.
+        pat2=re.compile(r'===FILE ([^\r\n=]+)===\r?\n(.*?)\r?\n===END FILE===',re.S)
+        matches=pat2.findall(raw)
+    if not matches:
+        raise ValueError('agent did not return file blocks')
+    files={}
+    for path,content in matches:
+        path=path.strip()
+        files[path]=content
+    return files
 
 
-def write_files(payload):
-    files=payload.get('files',{})
+def write_files(files):
     if not isinstance(files,dict) or not files:
         raise ValueError('files mapping missing')
     written=[]
@@ -94,23 +99,24 @@ ia_name='MILK Sovereign Orchestrator'
 if web_name not in by or ia_name not in by:
     raise SystemExit('required Mistral agents missing')
 
-COMMON='''ATLAS VIVO MILK — EXECUÇÃO DE CÓDIGO, 17/08/2026. Tu és executor Mistral. Não produzas relatório: produz ficheiros executáveis. Regras: Drive origem read-only; não publicar; não tocar associacaomilk.pt; branch de segurança; COSMICOXES != Cosmic Flow; camada invisível nunca exposta; gate Nuno >=13, consentimento, anonimato/pseudónimo/nome, retirada e revisão humana; PT-PT; RGPD; WCAG 2.2 AA; proveniência; sem conteúdo territorial inventado; dados ausentes ficam explicitamente PENDENTE/NOT_VERIFIED. A Web App pública deve ficar desacoplada do Nextcloud em runtime para conteúdo já publicado. IA MILK é memória institucional + RAG + proveniência, não autoridade autoral. Responde SOMENTE JSON: {"files":{"caminho":"conteudo"},"tests":["..."],"state":"EXECUTED"}. Não uses caminhos fora dos prefixos autorizados.'''
+COMMON='''ATLAS VIVO MILK — EXECUÇÃO DE CÓDIGO, 17/08/2026. Tu és executor Mistral. Não produzas relatório: produz ficheiros executáveis. Regras: Drive origem read-only; não publicar; não tocar associacaomilk.pt; branch de segurança; COSMICOXES != Cosmic Flow; camada invisível nunca exposta; gate Nuno >=13, consentimento, anonimato/pseudónimo/nome, retirada e revisão humana; PT-PT; RGPD; WCAG 2.2 AA; proveniência; sem conteúdo territorial inventado; dados ausentes ficam explicitamente PENDENTE/NOT_VERIFIED. A Web App pública deve ficar desacoplada do Nextcloud em runtime para conteúdo já publicado. IA MILK é memória institucional + RAG + proveniência, não autoridade autoral. FORMATO OBRIGATÓRIO: para cada ficheiro escreve exactamente ===FILE caminho=== numa linha, depois conteúdo verbatim, depois ===END FILE=== numa linha. Sem markdown fences, sem comentários fora dos blocos. Não uses caminhos fora do prefixo autorizado.'''
 
-web_prompt=COMMON+'''\nPREFIXO AUTORIZADO: webapp/. Constrói um primeiro corpo integral funcional da Web App Atlas com React + TypeScript + Vite, MapLibre e Three.js quando justificável. Inclui package.json, tsconfig, Vite config, index.html, src/main.tsx, App, estilos, domínio de dados, sequência pública canónica COSMICOXES → Copérnico/globo → Cosmic Flow → selo Atlas → Fucô/Galeria → MILKs territoriais → inflar → partículas → papel rasgado → brincar/convite/tentar a sorte → Nuno; componentes mínimos para Galeria Diletante, Crónicas Cãotadas por Fucô, MILK territorial e contribuição Nuno; adaptador de API; tipos de freguesia/município/festa; estados PENDENTE/tem_conteudo_curatorial; acessibilidade; testes unitários de invariantes e README técnico. Não inventar dados reais; criar fixtures marcadas NOT_VERIFIED. O build deve passar npm test e npm run build.'''
+web_prompt=COMMON+'''\nPREFIXO AUTORIZADO: webapp/. Constrói um primeiro corpo integral funcional da Web App Atlas com React + TypeScript + Vite, MapLibre e Three.js quando justificável. Inclui package.json, tsconfig, Vite config, index.html, src/main.tsx, App, estilos, domínio de dados, sequência pública canónica COSMICOXES → Copérnico/globo → Cosmic Flow → selo Atlas → Fucô/Galeria → MILKs territoriais → inflar → partículas → papel rasgado → brincar/convite/tentar a sorte → Nuno; componentes mínimos para Galeria Diletante, Crónicas Cãotadas por Fucô, MILK territorial e contribuição Nuno; adaptador de API; tipos de freguesia/município/festa; estados PENDENTE/tem_conteudo_curatorial; acessibilidade; testes unitários de invariantes e README técnico. Não inventar dados reais; fixtures devem ficar NOT_VERIFIED. O build deve passar npm test e npm run build. Mantém o lote inicial em no máximo 16 ficheiros.'''
 
-ia_prompt=COMMON+'''\nPREFIXO AUTORIZADO: ia-milk/. Constrói a engenharia funcional da IA MILK com RAG obrigatório antes de fine-tuning: schemas para source registry, fragmentos, provenance e estados epistémicos source_fact/observation/quotation/inference/interpretation/counter_interpretation/hypothesis/community_testimony/model_candidate; pipeline Python puro para ingestão de corpus exportado, chunking determinístico, hashing SHA-256, índice lexical local de fallback, contratos para embeddings Mistral sem incluir segredo, retrieval, citations, memória episódica/procedural e receipts; router de funções para curadoria, territorial, migração e Web App; evals de não-invenção, separação COSMICOXES/Cosmic Flow, gates Nuno e camada invisível; README de treino que distingue RAG, avaliação e futuro fine-tuning. Inclui unittest executável sem dependências externas obrigatórias. Nunca treinar com credenciais/dados sensíveis; classificar/bloquear esses fragmentos.'''
+ia_prompt=COMMON+'''\nPREFIXO AUTORIZADO: ia-milk/. Constrói a engenharia funcional da IA MILK com RAG obrigatório antes de fine-tuning: schemas para source registry, fragmentos, provenance e estados epistémicos source_fact/observation/quotation/inference/interpretation/counter_interpretation/hypothesis/community_testimony/model_candidate; pipeline Python puro para ingestão de corpus exportado, chunking determinístico, hashing SHA-256, índice lexical local de fallback, contratos para embeddings Mistral sem incluir segredo, retrieval, citations, memória episódica/procedural e receipts; router de funções para curadoria, territorial, migração e Web App; evals de não-invenção, separação COSMICOXES/Cosmic Flow, gates Nuno e camada invisível; README de treino que distingue RAG, avaliação e futuro fine-tuning. Inclui unittest executável sem dependências externas obrigatórias. Nunca treinar com credenciais/dados sensíveis; classificar/bloquear esses fragmentos. Mantém o lote inicial em no máximo 16 ficheiros.'''
 
 results={}
 for name,prompt in ((web_name,web_prompt),(ia_name,ia_prompt)):
     raw=run_agent(by[name]['id'],prompt)
-    payload=parse_json(raw)
-    results[name]={'written':write_files(payload),'tests':payload.get('tests',[]),'state':payload.get('state')}
+    files=parse_file_blocks(raw)
+    results[name]={'written':write_files(files),'state':'EXECUTED'}
 
-# Hard safety checks before any commit.
-for p in ROOT.joinpath('webapp').rglob('*'):
-    if p.is_file() and p.stat().st_size>2_000_000: raise SystemExit('oversized generated file '+str(p))
-for p in ROOT.joinpath('ia-milk').rglob('*'):
-    if p.is_file() and p.stat().st_size>2_000_000: raise SystemExit('oversized generated file '+str(p))
+for folder in ('webapp','ia-milk'):
+    root=ROOT/folder
+    if not root.exists(): raise SystemExit(folder+' missing after agent execution')
+    for p in root.rglob('*'):
+        if p.is_file() and p.stat().st_size>2_000_000:
+            raise SystemExit('oversized generated file '+str(p))
 
 pathlib.Path('artifacts').mkdir(exist_ok=True)
 pathlib.Path('artifacts/mistral-build-receipt.json').write_text(json.dumps({'state':'MISTRAL_WEBAPP_IA_MILK_CODE_GENERATED','results':results,'external_publication_writes':0,'drive_writes':0},ensure_ascii=False,indent=2),encoding='utf-8')
