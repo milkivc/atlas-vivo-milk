@@ -1,0 +1,66 @@
+name: IA MILK Phase 1 FTPS Migration RSA
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths: ['.github/workflows/ia-milk-fase1-ftps-migrate-rsa.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-input requests selenium
+          command -v openssl
+          command -v google-chrome || command -v chromium || command -v chromium-browser
+      - name: Generate ephemeral RSA receiving key
+        run: |
+          set -euo pipefail
+          openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:3072 -out /tmp/ia_milk_fase1_rsa.key >/dev/null 2>&1
+          chmod 600 /tmp/ia_milk_fase1_rsa.key
+          openssl pkey -in /tmp/ia_milk_fase1_rsa.key -pubout -out ia-milk-fase1-rsa-public.pem >/dev/null 2>&1
+          sha256sum ia-milk-fase1-rsa-public.pem | awk '{print "IA_MILK_FASE1_RSA_KEY_READY fingerprint=" $1}'
+      - name: Publish public key only
+        uses: actions/upload-artifact@v4
+        with:
+          name: ia-milk-fase1-rsa-public-key
+          path: ia-milk-fase1-rsa-public.pem
+          retention-days: 1
+      - name: Wait for encrypted credential locator
+        shell: bash
+        env:
+          BRANCH: codex/safety-gate-2026-08-10
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 180); do
+            git fetch -q origin "$BRANCH" || true
+            if git show "origin/$BRANCH:ia_milk/fase1_payload.rsa.b64" >/tmp/fase1_payload.rsa.b64 2>/dev/null; then echo 'ENCRYPTED_MIGRATION_PAYLOAD_RECEIVED'; break; fi
+            sleep 5
+          done
+          test -s /tmp/fase1_payload.rsa.b64 || { echo '::error::encrypted migration payload not received'; exit 2; }
+          base64 -d /tmp/fase1_payload.rsa.b64 >/tmp/fase1_payload.rsa.bin
+          openssl pkeyutl -decrypt -inkey /tmp/ia_milk_fase1_rsa.key -in /tmp/fase1_payload.rsa.bin -out /tmp/fase1_cfg.json -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256 -pkeyopt rsa_mgf1_md:sha256
+          chmod 600 /tmp/fase1_cfg.json
+          rm -f /tmp/fase1_payload.rsa.bin /tmp/fase1_payload.rsa.b64
+      - name: Execute Phase 1 migration
+        run: python ia_milk/sovereign/fase1_ftps_migrate_rsa.py
+      - name: Scrub ephemeral key material
+        if: always()
+        run: rm -f /tmp/ia_milk_fase1_rsa.key /tmp/fase1_cfg.json
+      - name: Preserve sanitised migration receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ia-milk-fase1-ftps-migration-receipt-rsa
+          path: ia-milk-fase1-ftps-receipt.json
+          retention-days: 30
+          if-no-files-found: warn
