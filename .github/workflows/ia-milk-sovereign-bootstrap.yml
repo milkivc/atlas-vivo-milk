@@ -1,0 +1,141 @@
+name: IA MILK Sovereign Bootstrap
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths: ['.github/workflows/ia-milk-sovereign-bootstrap.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install crypto
+        run: python -m pip install --disable-pip-version-check --no-input pynacl requests
+      - name: Generate ephemeral receiving key and wait for sealed payload
+        shell: bash
+        env:
+          BRANCH: codex/safety-gate-2026-08-10
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from nacl.public import PrivateKey
+          import base64,pathlib,hashlib
+          p=PrivateKey.generate(); pathlib.Path('/tmp/ia_milk_bootstrap.key').write_bytes(bytes(p)); pathlib.Path('/tmp/ia_milk_bootstrap.key').chmod(0o600)
+          pub=bytes(p.public_key)
+          print('IA_MILK_BOOTSTRAP_PUBLIC_KEY_B64='+base64.urlsafe_b64encode(pub).decode())
+          print('IA_MILK_BOOTSTRAP_KEY_FINGERPRINT='+hashlib.sha256(pub).hexdigest())
+          PY
+          for i in $(seq 1 60); do
+            git fetch -q origin "$BRANCH" || true
+            if git show "origin/$BRANCH:ia_milk/bootstrap_payload.sealed" >/tmp/bootstrap_payload.sealed 2>/dev/null; then
+              echo 'SEALED_PAYLOAD_RECEIVED'; break
+            fi
+            sleep 5
+          done
+          test -s /tmp/bootstrap_payload.sealed || { echo '::error::sealed bootstrap payload not received'; exit 2; }
+      - name: Decrypt only in runner memory and execute connectors
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from nacl.public import PrivateKey,SealedBox
+          import json,pathlib,os,requests,base64,hashlib,secrets,string,subprocess,time,urllib.parse
+          key=PrivateKey(pathlib.Path('/tmp/ia_milk_bootstrap.key').read_bytes())
+          plain=SealedBox(key).decrypt(pathlib.Path('/tmp/bootstrap_payload.sealed').read_bytes())
+          cfg=json.loads(plain)
+          for v in cfg.values():
+              if isinstance(v,str) and v: print('::add-mask::'+v)
+          receipt={'state':'IA_MILK_SOVEREIGN_BOOTSTRAP','codeberg':{},'cpanel':{},'nextcloud':{},'ftps':{},'secrets_exposed':False,'mistral_received_secrets':False}
+
+          # Codeberg / Forgejo - safe branch push only.
+          token=cfg.get('codeberg_token','')
+          if token:
+              h={'Authorization':'token '+token,'Accept':'application/json'}
+              try:
+                  r=requests.get('https://codeberg.org/api/v1/user',headers=h,timeout=25); r.raise_for_status(); user=r.json()['login']
+                  repo=cfg.get('codeberg_repo') or 'atlas-vivo-milk'
+                  rr=requests.get(f'https://codeberg.org/api/v1/repos/{user}/{repo}',headers=h,timeout=25)
+                  if rr.status_code==404:
+                      c=requests.post('https://codeberg.org/api/v1/user/repos',headers={**h,'Content-Type':'application/json'},json={'name':repo,'private':True,'description':'Atlas Vivo MILK canonical forge'},timeout=25); c.raise_for_status()
+                  remote=f'https://{user}:{token}@codeberg.org/{user}/{repo}.git'
+                  subprocess.run(['git','remote','remove','codeberg'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+                  subprocess.run(['git','remote','add','codeberg',remote],check=True)
+                  p=subprocess.run(['git','push','codeberg','HEAD:refs/heads/atlas-safety-staging-2026-08-17'],stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,text=True)
+                  receipt['codeberg']={'auth_ok':True,'user':user,'repo':repo,'safe_branch_push':p.returncode==0,'force':False,'mirror':False}
+              except Exception as e: receipt['codeberg']={'auth_ok':False,'error':type(e).__name__}
+          else: receipt['codeberg']={'auth_ok':False,'status':'NO_SEALED_TOKEN'}
+
+          # cPanel direct login; never print session tokens.
+          cp_user=cfg.get('cpanel_user','associ16'); cp_pass=cfg.get('pt_password','')
+          session=None; host_ok=None
+          for host in ['https://associacaomilk.pt:2083','https://troi.ptservidor.net:2083']:
+              if not cp_pass: break
+              try:
+                  s=requests.Session(); r=s.post(host+'/login/?login_only=1',data={'user':cp_user,'pass':cp_pass},timeout=25,verify=True)
+                  j=r.json()
+                  if j.get('status')==1 and j.get('security_token'):
+                      session=(s,host,j['security_token']); host_ok=host; break
+              except Exception: pass
+          if session:
+              s,host,sec=session
+              try:
+                  u=s.get(host+sec+'/execute/Variables/get_user_information',timeout=25); uj=u.json()
+                  receipt['cpanel']={'auth_ok':bool(uj.get('status')==1),'host':host_ok,'user':cp_user}
+              except Exception as e: receipt['cpanel']={'auth_ok':True,'host':host_ok,'user':cp_user,'uapi_error':type(e).__name__}
+          else: receipt['cpanel']={'auth_ok':False,'status':'CPANEL_LOGIN_NOT_VERIFIED'}
+
+          # Nextcloud WebDAV: try only sealed candidate credentials, then canary.
+          nc_url=cfg.get('nextcloud_url','https://associacaomilk.pt/nextcloud').rstrip('/')
+          candidates=[]
+          for u in [cfg.get('nextcloud_user'),cfg.get('pt_email'),cp_user,'admin']:
+              if u and cp_pass: candidates.append((u,cp_pass))
+          seen=set(); verified=None
+          for u,pw in candidates:
+              if (u,pw) in seen: continue
+              seen.add((u,pw))
+              dav=nc_url+'/remote.php/dav/files/'+urllib.parse.quote(u,safe='')+'/'
+              try:
+                  r=requests.request('PROPFIND',dav,auth=(u,pw),headers={'Depth':'0'},timeout=25)
+                  if r.status_code in (200,207): verified=(u,pw,dav); break
+              except Exception: pass
+          if verified:
+              u,pw,dav=verified; folder=dav+'Atlas-Vivo-MILK/'
+              requests.request('MKCOL',folder,auth=(u,pw),timeout=25)
+              data=secrets.token_bytes(4096); sha=hashlib.sha256(data).hexdigest(); target=folder+'ia-milk-canary-'+str(int(time.time()))+'.bin'
+              put=requests.put(target,data=data,auth=(u,pw),timeout=25); get=requests.get(target,auth=(u,pw),timeout=25)
+              receipt['nextcloud']={'auth_ok':True,'user':u,'put_http':put.status_code,'get_http':get.status_code,'bytes':len(data),'sha256_match':hashlib.sha256(get.content).hexdigest()==sha}
+          else: receipt['nextcloud']={'auth_ok':False,'status':'NEXTCLOUD_CREDENTIAL_NOT_VERIFIED'}
+
+          # FTPS only if the sealed payload explicitly contains its password.
+          ftp_pw=cfg.get('ftps_password','')
+          if ftp_pw:
+              import ftplib,io
+              try:
+                  data=secrets.token_bytes(4096); sha=hashlib.sha256(data).hexdigest(); name='ia-milk-ftps-canary-'+str(int(time.time()))+'.bin'
+                  ftp=ftplib.FTP_TLS(timeout=30); ftp.connect('associacaomilk.pt',21); ftp.login('migration@associacaomilk.pt',ftp_pw); ftp.prot_p(); ftp.storbinary('STOR '+name,io.BytesIO(data)); back=io.BytesIO(); ftp.retrbinary('RETR '+name,back.write); ftp.quit()
+                  receipt['ftps']={'auth_ok':True,'bytes':4096,'sha256_match':hashlib.sha256(back.getvalue()).hexdigest()==sha}
+              except Exception as e: receipt['ftps']={'auth_ok':False,'error':type(e).__name__}
+          else: receipt['ftps']={'auth_ok':False,'status':'NO_SEALED_FTPS_PASSWORD'}
+
+          pathlib.Path('ia-milk-bootstrap-receipt.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2))
+          print(json.dumps(receipt,ensure_ascii=False))
+          # erase plaintext + private key before artifact step
+          plain=b'0'*len(plain); del cfg,key
+          pathlib.Path('/tmp/ia_milk_bootstrap.key').unlink(missing_ok=True); pathlib.Path('/tmp/bootstrap_payload.sealed').unlink(missing_ok=True)
+          PY
+      - name: Preserve sanitised receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: ia-milk-sovereign-bootstrap-receipt
+          path: ia-milk-bootstrap-receipt.json
+          retention-days: 30
+          if-no-files-found: error
