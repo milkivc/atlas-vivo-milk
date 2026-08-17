@@ -1,0 +1,46 @@
+name: IA MILK Drive Current Read Probe
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths: ['.github/workflows/ia-milk-drive-current-read-probe.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe current Drive files without credentials
+        run: |
+          python - <<'PY'
+          import requests, json
+          stored=[
+            ('1lyckWiCteK6d7OudgVvF4OgFEsItdZOZ','pdf'),
+            ('1wyYUdNjBju7RBvWjOqhNrAQ7tRue7Roi','pdf'),
+            ('1PyitSgNwIPrXO7KYH0Mz-2o5zIUCmHEA','html'),
+            ('1l4E63oYCHfsEchKNe-bMvP0MiKvQN8a0','md'),
+            ('1Cv8DCbItFIw4DiehAbN4z2giZ4IfgJh-','md'),
+          ]
+          native=[
+            ('1SkZGeSHSDcrcsv3NOP1yNqGe2-DoomLwKqLwFlBSTqM','doc','https://docs.google.com/document/d/{}/export?format=docx'),
+            ('1bNmeX2DRtfc4thZ9Y-vBejpDgO-zmwNdgPgSwNiCHkw','doc','https://docs.google.com/document/d/{}/export?format=docx'),
+          ]
+          out=[]
+          for fid,kind in stored:
+            u=f'https://drive.usercontent.google.com/download?id={fid}&export=download&confirm=t'
+            try:
+              r=requests.get(u,headers={'Range':'bytes=0-7'},allow_redirects=True,timeout=30,stream=True)
+              c=next(r.iter_content(chunk_size=8),b'')
+              out.append({'id':fid,'kind':kind,'http':r.status_code,'type':r.headers.get('content-type',''),'range':r.headers.get('content-range',''),'first4':c[:4].hex(),'host':requests.utils.urlparse(r.url).hostname})
+            except Exception as e: out.append({'id':fid,'kind':kind,'error':type(e).__name__})
+          for fid,kind,tpl in native:
+            u=tpl.format(fid)
+            try:
+              r=requests.get(u,headers={'Range':'bytes=0-7'},allow_redirects=True,timeout=30,stream=True)
+              c=next(r.iter_content(chunk_size=8),b'')
+              out.append({'id':fid,'kind':kind,'http':r.status_code,'type':r.headers.get('content-type',''),'range':r.headers.get('content-range',''),'first4':c[:4].hex(),'host':requests.utils.urlparse(r.url).hostname})
+            except Exception as e: out.append({'id':fid,'kind':kind,'error':type(e).__name__})
+          print(json.dumps(out,sort_keys=True))
+          PY
