@@ -1,0 +1,76 @@
+name: IA MILK Takeout FTPS Migration v2
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths: ['.github/workflows/ia-milk-takeout-ftps-migrate-v2.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --disable-pip-version-check --no-input pynacl requests selenium
+          command -v google-chrome || command -v chromium || command -v chromium-browser
+
+      - name: Generate ephemeral receiving key
+        run: |
+          python - <<'PY'
+          from nacl.public import PrivateKey
+          import base64, hashlib, json, pathlib
+          key = PrivateKey.generate()
+          pathlib.Path('/tmp/ia_milk_takeout_v2.key').write_bytes(bytes(key))
+          pathlib.Path('/tmp/ia_milk_takeout_v2.key').chmod(0o600)
+          pub = bytes(key.public_key)
+          data = {
+            'public_key_b64': base64.urlsafe_b64encode(pub).decode(),
+            'fingerprint': hashlib.sha256(pub).hexdigest(),
+          }
+          pathlib.Path('ia-milk-takeout-public-key.json').write_text(json.dumps(data))
+          print('IA_MILK_TAKEOUT_V2_KEY_READY fingerprint=' + data['fingerprint'])
+          PY
+
+      - name: Publish public key only
+        uses: actions/upload-artifact@v4
+        with:
+          name: ia-milk-takeout-v2-public-key
+          path: ia-milk-takeout-public-key.json
+          retention-days: 1
+
+      - name: Wait for sealed migration payload
+        shell: bash
+        env:
+          BRANCH: codex/safety-gate-2026-08-10
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 120); do
+            git fetch -q origin "$BRANCH" || true
+            if git show "origin/$BRANCH:ia_milk/ftps_migration_payload_v2.sealed.b64" >/tmp/ftps_migration_payload_v2.sealed.b64 2>/dev/null; then
+              echo 'SEALED_MIGRATION_PAYLOAD_RECEIVED'
+              break
+            fi
+            sleep 5
+          done
+          test -s /tmp/ftps_migration_payload_v2.sealed.b64 || { echo '::error::sealed migration payload not received'; exit 2; }
+
+      - name: Execute migration
+        run: python ia_milk/sovereign/takeout_ftps_migrate.py
+
+      - name: Preserve sanitised migration receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ia-milk-takeout-ftps-migration-receipt
+          path: ia-milk-takeout-ftps-receipt.json
+          retention-days: 30
+          if-no-files-found: warn
