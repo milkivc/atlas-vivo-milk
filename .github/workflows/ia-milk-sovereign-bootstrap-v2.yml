@@ -25,28 +25,19 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
-          BRANCH: codex/safety-gate-2026-08-10
           RUN_ID: ${{ github.run_id }}
         run: |
           set -euo pipefail
-          PUB=$(python - <<'PY'
-          from nacl.public import PrivateKey
-          import base64,pathlib
-          p=PrivateKey.generate(); pathlib.Path('/tmp/k').write_bytes(bytes(p)); pathlib.Path('/tmp/k').chmod(0o600)
-          print(base64.urlsafe_b64encode(bytes(p.public_key)).decode())
-          PY
-          )
           python - <<'PY'
-          import json,os,urllib.request
-          body={'body':f"IA_MILK_BOOTSTRAP_RUN={os.environ['RUN_ID']}\nIA_MILK_BOOTSTRAP_PUBLIC_KEY_B64={os.environ['PUB']}"}
+          from nacl.public import PrivateKey
+          import base64,pathlib,json,os,urllib.request
+          p=PrivateKey.generate(); pathlib.Path('/tmp/k').write_bytes(bytes(p)); pathlib.Path('/tmp/k').chmod(0o600)
+          pub=base64.urlsafe_b64encode(bytes(p.public_key)).decode()
+          body={'body':f"IA_MILK_BOOTSTRAP_RUN={os.environ['RUN_ID']}\nIA_MILK_BOOTSTRAP_PUBLIC_KEY_B64={pub}"}
           req=urllib.request.Request(f"https://api.github.com/repos/{os.environ['REPO']}/issues/27/comments",data=json.dumps(body).encode(),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},method='POST')
           urllib.request.urlopen(req,timeout=30).read()
+          print('EPHEMERAL_PUBLIC_KEY_PUBLISHED')
           PY
-        env:
-          GH_TOKEN: ${{ github.token }}
-          REPO: ${{ github.repository }}
-          RUN_ID: ${{ github.run_id }}
-          PUB: ${{ env.PUB }}
       - name: Wait for sealed payload and execute
         shell: bash
         env:
@@ -84,8 +75,7 @@ jobs:
               except Exception: pass
           R['cpanel']={'auth_ok':bool(sess),'user':cp_user}
           nc=cfg.get('nextcloud_url','https://associacaomilk.pt/nextcloud').rstrip('/'); verified=None
-          candidates=[cfg.get('nextcloud_user'),cfg.get('pt_email'),cp_user,'admin']
-          for u in [x for x in candidates if x]:
+          for u in [x for x in [cfg.get('nextcloud_user'),cfg.get('pt_email'),cp_user,'admin'] if x]:
               try:
                   dav=nc+'/remote.php/dav/files/'+urllib.parse.quote(u,safe='')+'/'; r=requests.request('PROPFIND',dav,auth=(u,cp_pass),headers={'Depth':'0'},timeout=25)
                   if r.status_code in (200,207): verified=(u,cp_pass,dav); break
