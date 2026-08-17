@@ -1,0 +1,86 @@
+name: PTServidor direct FTPS canary
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PT_HOST: associacaomilk.pt
+      PT_USER: migration@associacaomilk.pt
+      PT_PASSWORD: ${{ secrets.PTSERVIDOR_FTP_PASSWORD }}
+      CONTROL_DOC_ID: 1SkZGeSHSDcrcsv3NOP1yNqGe2-DoomLwKqLwFlBSTqM
+      CONTROL_REVISION: AIroW37fqVkbfd68AvjCr2S490yEUsMx2P_ItCxWrqNNr360Tk2g25D9Qx2zeGXR0KoyibpoUA8CV_124s7h3QwHW2csL-RpJflFYy16Otk
+    steps:
+      - name: Validate secret reference
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${PT_PASSWORD:-}" ]; then
+            echo 'PTSERVIDOR_FTP_PASSWORD is not available to this runner.'
+            exit 2
+          fi
+      - name: Upload and verify private canary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ftplib,ssl,hashlib,json,io,os,datetime,pathlib
+          host=os.environ['PT_HOST']; user=os.environ['PT_USER']; password=os.environ['PT_PASSWORD']
+          payload={
+            'kind':'ATLAS_VIVO_MILK_PRESERVATION_CANARY',
+            'source_status':'DERIVED_CANARY_FROM_READ_ONLY_SOURCE',
+            'source_document_id':os.environ['CONTROL_DOC_ID'],
+            'source_revision':os.environ['CONTROL_REVISION'],
+            'branch':'codex/safety-gate-2026-08-10',
+            'drive_writes':0,
+            'production_writes':0,
+          }
+          data=(json.dumps(payload,sort_keys=True,ensure_ascii=False,separators=(',',':'))+'\n').encode('utf-8')
+          local_hash=hashlib.sha256(data).hexdigest()
+          ctx=ssl.create_default_context()
+          ftp=ftplib.FTP_TLS(context=ctx,timeout=30)
+          ftp.connect(host,21)
+          ftp.auth(); ftp.prot_p(); ftp.login(user,password)
+          try:
+            ftp.mkd('canary')
+          except ftplib.error_perm as e:
+            if not str(e).startswith('550'): raise
+          remote='canary/atlas-drive-canary.json'
+          ftp.storbinary('STOR '+remote,io.BytesIO(data))
+          size=ftp.size(remote)
+          buf=io.BytesIO(); ftp.retrbinary('RETR '+remote,buf.write)
+          remote_data=buf.getvalue(); remote_hash=hashlib.sha256(remote_data).hexdigest()
+          ftp.quit()
+          verified=(size==len(data) and remote_data==data and remote_hash==local_hash)
+          receipt={
+            'state':'CANARY_VERIFIED' if verified else 'CANARY_FAILED',
+            'transport':'FTPS_EXPLICIT_TLS',
+            'tls_verified':True,
+            'host':host,
+            'remote_path':remote,
+            'bytes':len(data),
+            'remote_size':size,
+            'local_sha256':local_hash,
+            'remote_sha256':remote_hash,
+            'verified':verified,
+            'source_drive_writes':0,
+            'production_writes':0,
+            'timestamp':datetime.datetime.now(datetime.timezone.utc).isoformat(),
+          }
+          pathlib.Path('artifacts').mkdir(exist_ok=True)
+          pathlib.Path('artifacts/ptservidor-ftps-canary-receipt.json').write_text(json.dumps(receipt,indent=2),encoding='utf-8')
+          print(json.dumps(receipt,sort_keys=True))
+          if not verified: raise SystemExit(3)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ptservidor-ftps-canary-receipt
+          path: artifacts/ptservidor-ftps-canary-receipt.json
+          if-no-files-found: ignore
