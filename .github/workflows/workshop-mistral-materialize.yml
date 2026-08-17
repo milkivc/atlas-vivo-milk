@@ -44,6 +44,11 @@ jobs:
                   print('API_ERROR', method, path, e.code, raw[:800])
                   raise
 
+          def items(obj):
+              if isinstance(obj, list): return obj
+              if isinstance(obj, dict): return obj.get('data') or obj.get('results') or []
+              return []
+
           library_specs=[
             ('IA MILK — Governação e Memória Canónica','Memória relacional, continuidade, Hermeneuta-C1, regras epistémicas, proveniência e gates humanos.'),
             ('IA MILK — Corpus Cultural e Territorial','PERCEPTIO, festas, folclore, ofícios, dispositivos, curadorias e repertórios culturais autorizados.'),
@@ -52,9 +57,8 @@ jobs:
           ]
 
           _, listed=req('GET','/libraries?page_size=100')
-          existing_libs={x.get('name'):x for x in (listed.get('data') or [])}
-          libs={}
-          created_libs=0
+          existing_libs={x.get('name'):x for x in items(listed)}
+          libs={}; created_libs=0
           for name,desc in library_specs:
               if name in existing_libs:
                   libs[name]=existing_libs[name]['id']
@@ -89,9 +93,8 @@ jobs:
           ]
 
           _, agents_list=req('GET','/agents?page_size=100')
-          existing_agents={x.get('name'):x for x in (agents_list.get('data') or [])}
-          created_agents=0
-          agent_ids={}
+          existing_agents={x.get('name'):x for x in items(agents_list)}
+          created_agents=0; agent_ids={}
           for name,role,library_ids in agent_specs:
               if name in existing_agents:
                   agent_ids[name]=existing_agents[name]['id']
@@ -109,12 +112,8 @@ jobs:
               agent_ids[name]=obj['id']; created_agents+=1
               print('AGENT_CREATED', name, obj['id'])
 
-          # Smoke-test factual contract without private corpus.
           orch=agent_ids['MILK Sovereign Orchestrator']
-          status, conv=req('POST','/conversations',{
-              'agent_id':orch,
-              'inputs':'Responde apenas com IA_MILK_RUNTIME_OK e nada mais.'
-          })
+          status, conv=req('POST','/conversations',{'agent_id':orch,'inputs':'Responde apenas com IA_MILK_RUNTIME_OK e nada mais.'})
           print('ORCHESTRATOR_CONVERSATION_HTTP',status)
           print('ORCHESTRATOR_CONVERSATION_ID',conv.get('conversation_id') or conv.get('id') or 'unknown')
           print('SUMMARY_LIBRARIES_TOTAL',len(libs))
