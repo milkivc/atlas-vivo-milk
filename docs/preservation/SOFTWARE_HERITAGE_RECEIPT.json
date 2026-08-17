@@ -1,0 +1,12 @@
+{
+  "origin": "https://github.com/milkivc/atlas-vivo-milk",
+  "save_request_id": 2433157,
+  "save_request_date": "2026-08-17T14:41:22.781920+00:00",
+  "save_task_status": "succeeded",
+  "visit_status": "full",
+  "visit_date": "2026-08-17T14:41:28.987000+00:00",
+  "snapshot": "a347d3000d5369dc5ea04fc229085252952833cd",
+  "swhid": "swh:1:snp:a347d3000d5369dc5ea04fc229085252952833cd",
+  "source": "GitHub Actions preservation identity pipeline run 32039904697",
+  "verified": true
+}
