@@ -1,5 +1,6 @@
 name: Preservation identity pipeline — DOI SWHID DataCite IGAC
 
+# execution-trigger: 2026-08-17
 on:
   push:
     branches:
