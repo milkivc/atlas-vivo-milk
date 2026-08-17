@@ -1,23 +1,40 @@
-import json, os, pathlib, urllib.request
+import json, os, pathlib, time, urllib.error, urllib.request
 
 BASE='https://api.mistral.ai'
 KEY=''.join(os.environ.get('MISTRAL_API_KEY','').strip().split())
 if not KEY: raise SystemExit('MISTRAL_API_KEY missing')
 HEAD={'Authorization':'Bearer '+KEY,'Accept':'application/json','Content-Type':'application/json'}
 
-def req(method,path,payload=None,timeout=240):
+
+def req(method,path,payload=None,timeout=240,retries=4):
     data=None if payload is None else json.dumps(payload,ensure_ascii=False).encode()
-    r=urllib.request.Request(BASE+path,headers=HEAD,data=data,method=method)
-    with urllib.request.urlopen(r,timeout=timeout) as x: raw=x.read()
-    return json.loads(raw.decode()) if raw else {}
+    last=None
+    for attempt in range(retries):
+        try:
+            r=urllib.request.Request(BASE+path,headers=HEAD,data=data,method=method)
+            with urllib.request.urlopen(r,timeout=timeout) as x: raw=x.read()
+            return json.loads(raw.decode()) if raw else {}
+        except urllib.error.HTTPError as exc:
+            last=exc
+            if exc.code not in (429,500,502,503,504) or attempt==retries-1:
+                raise
+        except Exception as exc:
+            last=exc
+            if attempt==retries-1: raise
+        time.sleep(2**attempt)
+    raise last
+
 
 def agents():
-    out=[]; token=None
+    out=[]; token=None; seen=set()
     while True:
         p='/v1/agents/pages?page_size=100'+(('&page_token='+token) if token else '')
         b=req('GET',p); out += [x for x in b.get('data',[]) if isinstance(x,dict)]
         token=b.get('next_page_token')
         if not token: return out
+        if token in seen: raise RuntimeError('repeated page token')
+        seen.add(token)
+
 
 def text(resp):
     z=[]
@@ -30,9 +47,11 @@ def text(resp):
                     if isinstance(p,dict): z.append(str(p.get('text') or p.get('content') or ''))
     return '\n'.join(x for x in z if x).strip()
 
+
 def run(agent_id,prompt):
     r=req('POST','/v1/conversations',{'agent_id':agent_id,'inputs':[{'role':'user','content':prompt}],'store':False,'handoff_execution':'client'})
     return text(r),r
+
 
 by={a.get('name'):a for a in agents()}
 roles=['MILK Sovereign Orchestrator','MILK Drive Curator — Read Only','MILK Research Decoder — Web App','Arquiteto do Ecossistema','ZecaBrito','Legal','ler o drive']
@@ -61,17 +80,49 @@ assign={
 'Legal': mission+'\nTarefa: revisar apenas gates legais/RGPD/licenciamento/registro que afectem execução, usando estado NOT_VERIFIED quando faltar prova; não bloquear engenharia sem fundamento.',
 'ler o drive': mission+'\nTarefa: reconstruir memória genealógica das decisões e detectar regressões/contradições entre instruções antigas e estado canónico actual.'}
 
-results={}
+results={}; agent_states={}
 for name,prompt in assign.items():
-    t,_=run(by[name]['id'],prompt)
-    results[name]=t
     safe=name.replace('/','-').replace('—','-').replace(' ','_')
-    (out/(safe+'.md')).write_text(t,encoding='utf-8')
+    try:
+        t,_=run(by[name]['id'],prompt)
+        results[name]=t
+        agent_states[name]='EXECUTED'
+        (out/(safe+'.md')).write_text(t,encoding='utf-8')
+    except Exception as exc:
+        agent_states[name]='FAILED:'+type(exc).__name__
+        (out/(safe+'.error.txt')).write_text(repr(exc),encoding='utf-8')
+
+# Persist a partial receipt BEFORE the orchestrator so completed agent work is never lost.
+partial={'state':'MISTRAL_SOVEREIGN_AGENT_PANEL_EXECUTED_PARTIAL','agent_states':agent_states,'conversation_storage':False,'drive_writes':0,'external_publication_writes':0}
+(out/'partial-execution-receipt.json').write_text(json.dumps(partial,indent=2,ensure_ascii=False),encoding='utf-8')
 
 summary='\n\n'.join('## '+k+'\n'+v for k,v in results.items())
-orch_prompt=mission+'''\nÉs o MILK Sovereign Orchestrator. Consolida as seis execuções abaixo num PLANO DE EXECUÇÃO IMEDIATA, ordenado por dependência e paralelismo. Distingue explicitamente o que os agentes podem executar já, o que exige mediação de um conector/API, e o que ainda não tem credencial real. Não devolvas tarefas humanas se houver rota automatizável. Define os próximos tool calls exactos por sistema, critérios de sucesso e recibos.\n\n'''+summary
-orch,_=run(by['MILK Sovereign Orchestrator']['id'],orch_prompt)
-(out/'00-orchestrator-execution-plan.md').write_text(orch,encoding='utf-8')
-receipt={'state':'MISTRAL_SOVEREIGN_MULTI_AGENT_EXECUTION_COMPLETED','agents_executed':list(assign),'orchestrator':'MILK Sovereign Orchestrator','conversation_storage':False,'drive_writes':0,'external_publication_writes':0,'outputs':[p.name for p in out.glob('*.md')]}
+orch_prompt=mission+'''\nÉs o MILK Sovereign Orchestrator. Consolida as execuções disponíveis abaixo num PLANO DE EXECUÇÃO IMEDIATA, ordenado por dependência e paralelismo. Distingue explicitamente o que os agentes podem executar já, o que exige mediação de um conector/API, e o que ainda não tem credencial real. Não devolvas tarefas humanas se houver rota automatizável. Define os próximos tool calls exactos por sistema, critérios de sucesso e recibos.\n\n'''+summary
+orch_state='NOT_RUN'
+try:
+    orch,_=run(by['MILK Sovereign Orchestrator']['id'],orch_prompt)
+    (out/'00-orchestrator-execution-plan.md').write_text(orch,encoding='utf-8')
+    orch_state='EXECUTED'
+except Exception as exc:
+    orch_state='FAILED:'+type(exc).__name__
+    fallback='# ORCHESTRATOR FALLBACK\n\nThe six-agent outputs below remain valid execution receipts. Orchestrator API call failed after retries; do not discard completed agent work.\n\n'+summary
+    (out/'00-orchestrator-fallback.md').write_text(fallback,encoding='utf-8')
+    (out/'orchestrator-error.txt').write_text(repr(exc),encoding='utf-8')
+
+receipt={
+    'state':'MISTRAL_SOVEREIGN_MULTI_AGENT_EXECUTION_COMPLETED_WITH_RECEIPTS',
+    'agent_states':agent_states,
+    'agents_executed':[n for n,s in agent_states.items() if s=='EXECUTED'],
+    'orchestrator':'MILK Sovereign Orchestrator',
+    'orchestrator_state':orch_state,
+    'conversation_storage':False,
+    'drive_writes':0,
+    'external_publication_writes':0,
+    'outputs':[p.name for p in out.iterdir() if p.is_file()],
+}
 (out/'execution-receipt.json').write_text(json.dumps(receipt,indent=2,ensure_ascii=False),encoding='utf-8')
 print(json.dumps(receipt,ensure_ascii=False,sort_keys=True))
+
+# Only fail the job if zero execution agents succeeded; orchestrator instability alone is not allowed to erase work.
+if not receipt['agents_executed']:
+    raise SystemExit('no execution agents completed')
