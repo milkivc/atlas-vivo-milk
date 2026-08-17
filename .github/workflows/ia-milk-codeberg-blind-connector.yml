@@ -1,0 +1,128 @@
+name: IA MILK Codeberg Blind Connector
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths:
+      - '.github/workflows/ia-milk-codeberg-blind-connector.yml'
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  connect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      BRANCH: codex/safety-gate-2026-08-10
+      TARGET_REPO: atlas-vivo-milk
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Mistral blind orchestration gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python - <<'PY'
+          import json,os,urllib.request
+          h={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json','Accept':'application/json'}
+          def req(method,path,payload=None):
+              d=None if payload is None else json.dumps(payload).encode()
+              r=urllib.request.Request('https://api.mistral.ai/v1'+path,headers=h,data=d,method=method)
+              with urllib.request.urlopen(r,timeout=60) as x:
+                  b=x.read().decode(); return json.loads(b) if b else {}
+          agents=req('GET','/agents')
+          if isinstance(agents,dict): agents=agents.get('data') or agents.get('items') or []
+          orch=next((a for a in agents if (a.get('metadata') or {}).get('role')=='orchestrator'),None)
+          if not orch: orch=next((a for a in agents if 'orchestrator' in (a.get('name') or '').lower()),None)
+          if not orch: raise SystemExit('orchestrator not found')
+          prompt='Autoriza o corredor connector://codeberg em modo secret-blind. O agente não deve receber, ler, pedir, reproduzir ou persistir qualquer token. Só pode receber AUTH_OK/AUTH_FAIL, identidade redigida e resultado de push de staging não destrutivo. Proibidos --force, --mirror, apagar branches e publicação automática.'
+          try:
+              req('POST','/conversations',{'agent_id':orch['id'],'inputs':prompt,'store':False}); ok=True
+          except Exception: ok=False
+          print(json.dumps({'mistral_called':True,'response_received':ok,'secret_visible_to_agent':False}))
+          PY
+
+      - name: Generate ephemeral sealing key
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check --no-input cryptography
+          python - <<'PY'
+          from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey
+          from cryptography.hazmat.primitives.serialization import Encoding,PrivateFormat,PublicFormat,NoEncryption
+          import base64,pathlib,json,os,urllib.request
+          p=X25519PrivateKey.generate()
+          pathlib.Path('/tmp/cbk').write_bytes(p.private_bytes(Encoding.Raw,PrivateFormat.Raw,NoEncryption()))
+          pathlib.Path('/tmp/cbk').chmod(0o600)
+          pub=base64.urlsafe_b64encode(p.public_key().public_bytes(Encoding.Raw,PublicFormat.Raw)).decode()
+          body={'body':f"IA_MILK_CODEBERG_RUN={os.environ['RUN_ID']}\nIA_MILK_CODEBERG_PUBLIC_KEY_B64={pub}"}
+          req=urllib.request.Request(f"https://api.github.com/repos/{os.environ['REPO']}/issues/27/comments",data=json.dumps(body).encode(),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},method='POST')
+          urllib.request.urlopen(req,timeout=30).read()
+          print('CODEBERG_EPHEMERAL_PUBLIC_KEY_READY')
+          PY
+
+      - name: Consume sealed token and connect Codeberg
+        shell: bash
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 90); do
+            git fetch -q origin "$BRANCH" || true
+            if git show "origin/$BRANCH:ia_milk/codeberg_token_one_time.bin.b64" >/tmp/cb.b64 2>/dev/null; then echo SEALED_CODEBERG_TOKEN_RECEIVED; break; fi
+            sleep 4
+          done
+          test -s /tmp/cb.b64 || { echo 'sealed token not received'; exit 2; }
+          base64 -d /tmp/cb.b64 >/tmp/cb.bin
+          python - <<'PY'
+          from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey,X25519PublicKey
+          from cryptography.hazmat.primitives.kdf.hkdf import HKDF
+          from cryptography.hazmat.primitives import hashes
+          from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+          import pathlib,json,os,urllib.request,urllib.error,subprocess
+          raw=pathlib.Path('/tmp/cb.bin').read_bytes()
+          priv=X25519PrivateKey.from_private_bytes(pathlib.Path('/tmp/cbk').read_bytes())
+          shared=priv.exchange(X25519PublicKey.from_public_bytes(raw[:32]))
+          key=HKDF(algorithm=hashes.SHA256(),length=32,salt=None,info=b'IA-MILK-CODEBERG-BLIND-V1').derive(shared)
+          cfg=json.loads(AESGCM(key).decrypt(raw[32:44],raw[44:],b'IA-MILK'))
+          tok=cfg['token'].strip(); print('::add-mask::'+tok)
+          hdr={'Authorization':'token '+tok,'Accept':'application/json'}
+          req=urllib.request.Request('https://codeberg.org/api/v1/user',headers=hdr)
+          with urllib.request.urlopen(req,timeout=30) as r: user=json.loads(r.read().decode())
+          login=user.get('login'); target=os.environ['TARGET_REPO']
+          if not login: raise SystemExit('Codeberg login missing')
+          repo_url=f'https://codeberg.org/api/v1/repos/{login}/{target}'
+          try:
+              with urllib.request.urlopen(urllib.request.Request(repo_url,headers=hdr),timeout=30) as r:
+                  repo=json.loads(r.read().decode()); exists=True
+          except urllib.error.HTTPError as e:
+              if e.code==404: exists=False; repo={}
+              else: raise
+          receipt={'state':'CODEBERG_BLIND_CONNECTOR','auth_ok':True,'repo_exists':exists,'target_repo':target,'secret_visible_to_mistral':False,'force_used':False,'mirror_used':False,'push_ok':False}
+          if exists:
+              remote=f'https://{login}:{tok}@codeberg.org/{login}/{target}.git'
+              subprocess.run(['git','remote','remove','codeberg'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+              subprocess.run(['git','remote','add','codeberg',remote],check=True)
+              p=subprocess.run(['git','push','codeberg','HEAD:refs/heads/atlas-safety-staging-2026-08-17'],stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,text=True)
+              receipt['push_ok']=p.returncode==0
+          pathlib.Path('codeberg-blind-connector-receipt.json').write_text(json.dumps(receipt,indent=2))
+          print(json.dumps(receipt))
+          pathlib.Path('/tmp/cbk').unlink(missing_ok=True); pathlib.Path('/tmp/cb.bin').unlink(missing_ok=True); pathlib.Path('/tmp/cb.b64').unlink(missing_ok=True)
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ia-milk-codeberg-blind-connector-receipt
+          path: codeberg-blind-connector-receipt.json
+          retention-days: 30
