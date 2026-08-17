@@ -1,0 +1,23 @@
+name: Activate seven-agent Mistral advisory mesh
+
+on:
+  push:
+    branches:
+      - codex/safety-gate-2026-08-10
+    paths:
+      - ".github/workflows/mistral-orchestrator-advisory-mesh.yml"
+      - "ops/mistral_orchestrator_advisory_mesh.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mesh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: python ops/mistral_orchestrator_advisory_mesh.py
