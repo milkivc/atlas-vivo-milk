@@ -32,16 +32,19 @@ jobs:
           H = {'Authorization':'Bearer '+key,'Accept':'application/json','Content-Type':'application/json'}
           BASE = 'https://api.mistral.ai'
 
-          def req(method, path, payload=None, retries=3):
+          def req(method, path, payload=None, retries=2):
               data = None if payload is None else json.dumps(payload, ensure_ascii=False).encode('utf-8')
               for attempt in range(retries):
                   try:
                       r = urllib.request.Request(BASE+path, headers=H, data=data, method=method)
                       with urllib.request.urlopen(r, timeout=180) as x:
                           return json.loads(x.read().decode('utf-8'))
-                  except urllib.error.HTTPError:
-                      if attempt < retries-1:
-                          time.sleep(2*(attempt+1))
+                  except urllib.error.HTTPError as e:
+                      err = e.read().decode('utf-8','ignore')[:1500]
+                      err = re.sub(r'[A-Za-z0-9_\-]{30,}', '[OPAQUE_REDACTED]', err)
+                      print('MISTRAL_HTTP_ERROR', e.code, err)
+                      if e.code >= 500 and attempt < retries-1:
+                          time.sleep(2)
                           continue
                       raise
 
@@ -49,74 +52,65 @@ jobs:
               parts = []
               def walk(x):
                   if isinstance(x, dict):
-                      if x.get('type') == 'message.output':
-                          c = x.get('content')
-                          if isinstance(c, str):
-                              parts.append(c)
-                          elif isinstance(c, list):
-                              for z in c:
-                                  if isinstance(z, dict) and isinstance(z.get('text'), str):
-                                      parts.append(z['text'])
-                      for v in x.values():
-                          walk(v)
+                      c = x.get('content')
+                      if x.get('type') == 'message.output' and isinstance(c, str):
+                          parts.append(c)
+                      elif x.get('type') == 'message.output' and isinstance(c, list):
+                          for z in c:
+                              if isinstance(z,dict) and isinstance(z.get('text'),str):
+                                  parts.append(z['text'])
+                      for v in x.values(): walk(v)
                   elif isinstance(x, list):
-                      for v in x:
-                          walk(v)
+                      for v in x: walk(v)
               walk(obj)
-              s = '\n'.join(parts)
-              s = re.sub(r'https?://\S+', '[URL_REDACTED]', s)
-              s = re.sub(r'[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}', '[EMAIL_REDACTED]', s)
+              s='\n'.join(parts)
+              s=re.sub(r'https?://\S+','[URL_REDACTED]',s)
+              s=re.sub(r'[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}','[EMAIL_REDACTED]',s)
               return s[:18000]
 
-          listed = req('GET','/v1/agents/pages')
-          agents = {a.get('name'):a for a in listed.get('data',[]) if isinstance(a,dict)}
-          reader = agents.get('ler o drive') or agents.get('MILK Drive Curator — Read Only')
-          engineer = agents.get('Arquiteto do Ecossistema') or agents.get('MILK Research Decoder — Web App')
+          listed=req('GET','/v1/agents/pages')
+          agents={a.get('name'):a for a in listed.get('data',[]) if isinstance(a,dict)}
+          reader=agents.get('ler o drive') or agents.get('MILK Drive Curator — Read Only')
+          engineer=agents.get('Arquiteto do Ecossistema') or agents.get('MILK Research Decoder — Web App')
           if not reader or not engineer:
-              print(json.dumps({'state':'BLOCKED_AGENT_SELECTION','available':sorted(agents.keys())}, ensure_ascii=False))
+              print(json.dumps({'state':'BLOCKED_AGENT_SELECTION','available':sorted(agents.keys())},ensure_ascii=False))
               raise SystemExit(2)
 
-          scope = (
-              'RECORTE AUTORAL FECHADO: Livro Cubo + 7 dinâmicas; Festival Dado 100Lado; '
-              'A Casa que Não Existe; Propostas/Dinâmicas Espetaculares; 6 + 12 Juntas apenas com fonte exacta; '
-              '20 dinâmicas F01-F20 das festas; curadorias toponímicas; falARTE; simpliCIDADE; ARTÉRIA/ARTE-RIA conforme fonte; '
-              'brincadeiras; gírias; trava-línguas; seres folclóricos; festas; SESC estrutura e criação; '
-              'Dinâmicas para o Atlas Cultural Português; Lidoterapia conforme fonte; Palavra Ritual; Curadoria do Inesperado; '
-              'Poesia Marginal; somente a parte curatorial de Curadoria cultural para cidades inteligentes Atlas, sem smart-cities; '
-              'convites das festas; Histórias absurdas de Portugal; ficheiro das 138 lendas; travesseiros para pedras e balões em territórios abandonados somente com fonte exacta; '
-              'O Mesmo Lugar Não Existe distinto de A Casa que Não Existe; Dispositivo Doblado usando somente Dispositivo Doblado.pdf.'
-          )
-          rules = (
-              'REGRAS: fonte original reconhecível por nome/conteúdo prevalece; LOTE/conexões/saneamento/consolidação/catálogos derivados não são autoridade e ficam intocados; '
-              'excluir o reservatório das 104; Drive somente leitura; preservar voz, humor, sarcasmo, grafia e autoria; Hermenêutica C1 sem inventar; '
-              'tecnologia adapta-se à curadoria; forma nasce do fenómeno; encontro, silêncio, espera, ausência, recusa e não-evento podem ser arte; '
-              'falARTE é expressão que se faz arte; sem lógica de mercado, engagement forçado ou produto obrigatório; testes ficam nos bastidores; '
-              'COSMICOXES é distinto de Cosmic Flow; Mistral é processamento transitório Zero Learning, sem fine-tuning, dataset, Library persistente ou memória oculta.'
-          )
-          reader_prompt = (
-              'EXECUTE AGORA a recuperação autoral e reescrita C1 usando o Google Drive em READ-ONLY. ' + scope + ' ' + rules +
-              ' Priorize as Sheets F01-F20 e relações festa-dinâmica-convite, as 138 lendas, fontes originais de cada núcleo e Dispositivo Doblado.pdf. '
-              'Localize também as fontes exactas de travesseiros para pedras e balões em territórios abandonados. '
-              'Não use nomes de LOTE como prova. Entregue uma matriz operacional com nome exacto, fonte, grau de prova, reescrita C1 necessária, relações, condição fenomenológica, consequências digitais/territoriais sustentadas e lacunas. Não escreva no Drive.'
-          )
-          recovered_body = req('POST','/v1/conversations',{'agent_id':reader['id'],'inputs':[{'role':'user','content':reader_prompt}]})
-          recovered = text_out(recovered_body)
+          scope=('RECORTE AUTORAL FECHADO: Livro Cubo + 7 dinâmicas; Festival Dado 100Lado; A Casa que Não Existe; '
+                 'Propostas/Dinâmicas Espetaculares; 6 + 12 Juntas apenas com fonte exacta; 20 dinâmicas F01-F20 das festas; '
+                 'curadorias toponímicas; falARTE; simpliCIDADE; ARTÉRIA/ARTE-RIA conforme fonte; brincadeiras; gírias; trava-línguas; '
+                 'seres folclóricos; festas; SESC estrutura e criação; Dinâmicas para o Atlas Cultural Português; Lidoterapia conforme fonte; '
+                 'Palavra Ritual; Curadoria do Inesperado; Poesia Marginal; somente a parte curatorial de Curadoria cultural para cidades inteligentes Atlas, sem smart-cities; '
+                 'convites das festas; Histórias absurdas de Portugal; ficheiro das 138 lendas; travesseiros para pedras e balões em territórios abandonados somente com fonte exacta; '
+                 'O Mesmo Lugar Não Existe distinto de A Casa que Não Existe; Dispositivo Doblado usando somente Dispositivo Doblado.pdf.')
+          rules=('REGRAS: fonte original reconhecível por nome/conteúdo prevalece; LOTE/conexões/saneamento/consolidação/catálogos derivados não são autoridade e ficam intocados; '
+                 'excluir o reservatório das 104; Drive somente leitura; preservar voz, humor, sarcasmo, grafia e autoria; Hermenêutica C1 sem inventar; '
+                 'tecnologia adapta-se à curadoria; forma nasce do fenómeno; encontro, silêncio, espera, ausência, recusa e não-evento podem ser arte; '
+                 'falARTE é expressão que se faz arte; sem lógica de mercado, engagement forçado ou produto obrigatório; testes ficam nos bastidores; '
+                 'COSMICOXES é distinto de Cosmic Flow; Mistral é processamento transitório Zero Learning, sem fine-tuning, dataset, Library persistente ou memória oculta.')
+
+          reader_prompt=('EXECUTE AGORA a recuperação autoral e reescrita C1 usando o Google Drive em READ-ONLY. '+scope+' '+rules+
+                         ' Priorize as Sheets F01-F20 e relações festa-dinâmica-convite, as 138 lendas, fontes originais de cada núcleo e Dispositivo Doblado.pdf. '
+                         'Localize também as fontes exactas de travesseiros para pedras e balões em territórios abandonados. Não use nomes de LOTE como prova. '
+                         'Entregue matriz operacional com nome exacto, fonte, grau de prova, reescrita C1 necessária, relações, condição fenomenológica, consequências digitais/territoriais sustentadas e lacunas. Não escreva no Drive.')
+          recovered_body=req('POST','/v1/conversations',{'agent_id':reader['id'],'inputs':reader_prompt,'store':False})
+          recovered=text_out(recovered_body)
           if not recovered.strip():
+              print('READER_RAW_KEYS', sorted(recovered_body.keys()))
               raise SystemExit('reader returned empty output')
 
-          engineer_prompt = (
-              'EXECUTE AGORA engenharia computacional experiencial baseada apenas na matriz recuperada abaixo. ' + scope + ' ' + rules +
-              ' Não descreva curadorias: derive mecanismos que criem condições para a experiência acontecer, inclusive nada acontecer. '
-              'Preserve F01-F20, convites próprios, lendas e territorialidade. Corrija qualquer lógica que trate 104 como canónico. '
-              'Produza PATCH_READY em JSON com source_anchor, estados, eventos, contratos, estruturas de dados, APIs/eventos UI, testes de fidelidade e mudanças mínimas no código existente. '
-              'Se não puder ver a base de código, marque TARGET_CODE_LOOKUP_REQUIRED em vez de inventar caminhos. Não publique e não escreva no Drive. MATRIZ: ' + recovered[:16000]
-          )
-          engineered_body = req('POST','/v1/conversations',{'agent_id':engineer['id'],'inputs':[{'role':'user','content':engineer_prompt}]})
-          engineered = text_out(engineered_body)
+          engineer_prompt=('EXECUTE AGORA engenharia computacional experiencial baseada apenas na matriz recuperada abaixo. '+scope+' '+rules+
+                           ' Não descreva curadorias: derive mecanismos que criem condições para a experiência acontecer, inclusive nada acontecer. '
+                           'Preserve F01-F20, convites próprios, lendas e territorialidade. Corrija qualquer lógica que trate 104 como canónico. '
+                           'Produza PATCH_READY em JSON com source_anchor, estados, eventos, contratos, estruturas de dados, APIs/eventos UI, testes de fidelidade e mudanças mínimas no código existente. '
+                           'Se não puder ver a base de código, marque TARGET_CODE_LOOKUP_REQUIRED em vez de inventar caminhos. Não publique e não escreva no Drive. MATRIZ: '+recovered[:16000])
+          engineered_body=req('POST','/v1/conversations',{'agent_id':engineer['id'],'inputs':engineer_prompt,'store':False})
+          engineered=text_out(engineered_body)
           if not engineered.strip():
+              print('ENGINEER_RAW_KEYS', sorted(engineered_body.keys()))
               raise SystemExit('engineer returned empty output')
 
           print('ATLAS_MISTRAL_EXECUTION_BEGIN')
-          print(json.dumps({'state':'RECOVERY_C1_ENGINEERING_EXECUTED','reader_agent':reader.get('name'),'engineer_agent':engineer.get('name'),'recovery':recovered,'engineering':engineered,'drive_writes':0,'libraries_created':0,'fine_tuning_started':0}, ensure_ascii=False, indent=2))
+          print(json.dumps({'state':'RECOVERY_C1_ENGINEERING_EXECUTED','reader_agent':reader.get('name'),'engineer_agent':engineer.get('name'),'recovery':recovered,'engineering':engineered,'drive_writes':0,'libraries_created':0,'fine_tuning_started':0},ensure_ascii=False,indent=2))
           print('ATLAS_MISTRAL_EXECUTION_END')
           PY
