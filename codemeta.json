@@ -1,0 +1,26 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "Atlas Vivo MILK",
+  "version": "1.0.0",
+  "codeRepository": "https://github.com/milkivc/atlas-vivo-milk",
+  "license": "https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12",
+  "description": "Infraestrutura cultural e territorial da Associação MILK para documentação, mediação, cartografia e preservação interoperável de património, memórias e dispositivos curatoriais, com validação humana e separação entre camadas públicas, internas e sensíveis.",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Nuno Filipe Fernandes Vieira Cabral e",
+      "familyName": "Araujo",
+      "@id": "https://orcid.org/0009-0009-1781-4020",
+      "affiliation": {"@type":"Organization","name":"Associação MILK - Movimento de Intervenções e Linguagens Kulturais e Arte"}
+    },
+    {
+      "@type": "Person",
+      "givenName": "Eduardo Mauricio Vieira Cabral e",
+      "familyName": "Araujo",
+      "@id": "https://orcid.org/0009-0007-6892-6570",
+      "affiliation": {"@type":"Organization","name":"Associação MILK - Movimento de Intervenções e Linguagens Kulturais e Arte"}
+    }
+  ],
+  "keywords": ["património cultural","cartografia cultural","mediação cultural","humanidades digitais","interoperabilidade","soberania digital","Portugal"]
+}
