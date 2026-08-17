@@ -1,0 +1,96 @@
+name: IA MILK FTPS One-Time Bootstrap
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths: ['.github/workflows/ia-milk-ftps-one-time-bootstrap.yml']
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - run: |
+          python -m pip install --disable-pip-version-check --no-input cryptography playwright
+          python -m playwright install chromium
+      - name: Publish ephemeral public key
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey
+          from cryptography.hazmat.primitives.serialization import Encoding,PrivateFormat,PublicFormat,NoEncryption
+          import base64,pathlib,json,os,urllib.request
+          p=X25519PrivateKey.generate(); pathlib.Path('/tmp/k').write_bytes(p.private_bytes(Encoding.Raw,PrivateFormat.Raw,NoEncryption())); pathlib.Path('/tmp/k').chmod(0o600)
+          pub=base64.urlsafe_b64encode(p.public_key().public_bytes(Encoding.Raw,PublicFormat.Raw)).decode()
+          body={'body':f"IA_MILK_FTPS_BOOTSTRAP_RUN={os.environ['RUN_ID']}\nIA_MILK_FTPS_BOOTSTRAP_PUBLIC_KEY_B64={pub}"}
+          req=urllib.request.Request(f"https://api.github.com/repos/{os.environ['REPO']}/issues/27/comments",data=json.dumps(body).encode(),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},method='POST'); urllib.request.urlopen(req,timeout=30).read()
+          print('EPHEMERAL_PUBLIC_KEY_PUBLISHED')
+          PY
+      - name: Consume sealed one-time URL and verify FTPS
+        shell: bash
+        env:
+          BRANCH: codex/safety-gate-2026-08-10
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 75); do
+            git fetch -q origin "$BRANCH" || true
+            if git show "origin/$BRANCH:ia_milk/ftps_one_time_url.bin.b64" >/tmp/url.b64 2>/dev/null; then echo 'SEALED_URL_RECEIVED'; break; fi
+            sleep 4
+          done
+          test -s /tmp/url.b64 || { echo '::error::sealed URL not received'; exit 2; }
+          base64 -d /tmp/url.b64 >/tmp/url.bin
+          python - <<'PY'
+          from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey,X25519PublicKey
+          from cryptography.hazmat.primitives.kdf.hkdf import HKDF
+          from cryptography.hazmat.primitives import hashes
+          from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+          from playwright.sync_api import sync_playwright
+          import pathlib,json,re,ftplib,io,secrets,hashlib,time
+          raw=pathlib.Path('/tmp/url.bin').read_bytes(); eph,nonce,ct=raw[:32],raw[32:44],raw[44:]
+          priv=X25519PrivateKey.from_private_bytes(pathlib.Path('/tmp/k').read_bytes()); shared=priv.exchange(X25519PublicKey.from_public_bytes(eph)); key=HKDF(algorithm=hashes.SHA256(),length=32,salt=None,info=b'IA-MILK-FTPS-ONETIME-V1').derive(shared)
+          cfg=json.loads(AESGCM(key).decrypt(nonce,ct,b'IA-MILK')); url=cfg['url']; print('::add-mask::'+url)
+          body=''
+          with sync_playwright() as p:
+              b=p.chromium.launch(headless=True); page=b.new_page(); page.goto(url,wait_until='networkidle',timeout=60000); body=page.locator('body').inner_text(timeout=15000); b.close()
+          # Extract candidate non-UI lines; never print body.
+          lines=[x.strip() for x in body.splitlines() if x.strip()]
+          deny=('ptservidor','password','copiar','copy','expire','segredo','secret','paste','destroy','link','clique','click','nota','note')
+          cand=[]
+          for x in lines:
+              if len(x)<6 or len(x)>256: continue
+              if any(d in x.lower() for d in deny): continue
+              if re.search(r'\s{2,}',x): continue
+              cand.append(x)
+          receipt={'state':'FTPS_ONE_TIME_CREDENTIAL_CONSUMED','candidate_count':len(cand),'verified':False,'bytes':0,'sha256_match':False}
+          for pw in cand:
+              print('::add-mask::'+pw)
+              try:
+                  ftp=ftplib.FTP_TLS(timeout=30); ftp.connect('associacaomilk.pt',21); ftp.login('migration@associacaomilk.pt',pw); ftp.prot_p(); data=secrets.token_bytes(4096); sha=hashlib.sha256(data).hexdigest(); name='ia-milk-canary-'+str(int(time.time()))+'.bin'; ftp.storbinary('STOR '+name,io.BytesIO(data)); back=io.BytesIO(); ftp.retrbinary('RETR '+name,back.write); ftp.quit(); ok=hashlib.sha256(back.getvalue()).hexdigest()==sha
+                  if ok:
+                      receipt.update({'verified':True,'bytes':4096,'sha256_match':True,'remote_name':name}); break
+              except Exception:
+                  pass
+          pathlib.Path('ia-milk-ftps-canary-receipt.json').write_text(json.dumps(receipt,indent=2)); print(json.dumps(receipt))
+          pathlib.Path('/tmp/k').unlink(missing_ok=True); pathlib.Path('/tmp/url.bin').unlink(missing_ok=True); pathlib.Path('/tmp/url.b64').unlink(missing_ok=True)
+          if not receipt['verified']: raise SystemExit('FTPS credential not verified')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ia-milk-ftps-canary-receipt
+          path: ia-milk-ftps-canary-receipt.json
+          retention-days: 30
