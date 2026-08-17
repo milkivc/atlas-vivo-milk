@@ -2,33 +2,33 @@
   "metadata": {
     "title": "Atlas Vivo MILK",
     "upload_type": "software",
-    "description": "Plataforma Web para preservação e mapeamento do patrimônio imaterial português. Alinhada com RGPD, AI Act, NIS2 e princípios de soberania tecnológica da UE.",
+    "description": "Infraestrutura cultural e territorial da Associação MILK para documentação, mediação, cartografia e preservação interoperável de património, memórias e dispositivos curatoriais, com validação humana e separação entre camadas públicas, internas e sensíveis.",
     "creators": [
       {
-        "name": "Associação MILK - Movimento de Intervenções e Linguagens Kulturais e Arte",
-        "affiliation": "Associação MILK"
+        "name": "Nuno Filipe Fernandes Vieira Cabral e Araujo",
+        "orcid": "0009-0009-1781-4020",
+        "affiliation": "Associação MILK - Movimento de Intervenções e Linguagens Kulturais e Arte"
       },
       {
-        "name": "Eduardo Maurício Vieira Cabral e Araujo",
-        "orcid": "0009-0004-9132-2925",
-        "affiliation": "Associação MILK"
+        "name": "Eduardo Mauricio Vieira Cabral e Araujo",
+        "orcid": "0009-0007-6892-6570",
+        "affiliation": "Associação MILK - Movimento de Intervenções e Linguagens Kulturais e Arte"
       }
     ],
     "license": "EUPL-1.2",
     "version": "1.0.0",
     "keywords": [
-      "folclore",
+      "Atlas Vivo MILK",
+      "património cultural",
       "património imaterial",
-      "lendas",
-      "Portugal",
-      "Web App",
-      "cultura",
+      "cartografia cultural",
+      "mediação cultural",
+      "humanidades digitais",
+      "interoperabilidade",
       "soberania digital",
-      "RGPD",
-      "AI Act",
-      "NIS2"
+      "Portugal"
     ],
-    "notes": "Projeto financiado por fundos europeus. Dados anonimizados em conformidade com RGPD. Infraestrutura alinhada com provedores UE.",
+    "notes": "Metadados de depósito preparados na branch de segurança. A publicação de uma versão DOI exige validação prévia de autoria, licença, versão, conteúdo do release e consistência com CITATION.cff/codemeta/DataCite. Não declarar conformidade jurídica apenas por presença destes metadados.",
     "related_identifiers": [
       {
         "identifier": "https://github.com/milkivc/atlas-vivo-milk",
@@ -36,17 +36,6 @@
         "relation": "isSupplementTo"
       }
     ],
-    "communities": [
-      {
-        "identifier": "milkivc"
-      }
-    ],
-    "access_right": "open",
-    "conformity": {
-      "rgpd": true,
-      "ai_act": true,
-      "nis2": true,
-      "eu_tech_sovereignty": true
-    }
+    "access_right": "open"
   }
 }
