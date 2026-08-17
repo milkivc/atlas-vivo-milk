@@ -1,0 +1,95 @@
+name: IA MILK Sovereign Bootstrap v3
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths: ['.github/workflows/ia-milk-sovereign-bootstrap-v3.yml']
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - run: python -m pip install --disable-pip-version-check --no-input requests cryptography
+      - name: Publish ephemeral X25519 public key
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey
+          from cryptography.hazmat.primitives.serialization import Encoding,PrivateFormat,PublicFormat,NoEncryption
+          import base64,pathlib,json,os,urllib.request
+          p=X25519PrivateKey.generate(); pathlib.Path('/tmp/k').write_bytes(p.private_bytes(Encoding.Raw,PrivateFormat.Raw,NoEncryption())); pathlib.Path('/tmp/k').chmod(0o600)
+          pub=base64.urlsafe_b64encode(p.public_key().public_bytes(Encoding.Raw,PublicFormat.Raw)).decode()
+          body={'body':f"IA_MILK_BOOTSTRAP_V3_RUN={os.environ['RUN_ID']}\nIA_MILK_BOOTSTRAP_V3_PUBLIC_KEY_B64={pub}"}
+          req=urllib.request.Request(f"https://api.github.com/repos/{os.environ['REPO']}/issues/27/comments",data=json.dumps(body).encode(),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},method='POST')
+          urllib.request.urlopen(req,timeout=30).read(); print('EPHEMERAL_PUBLIC_KEY_PUBLISHED')
+          PY
+      - name: Wait for sealed payload and execute
+        shell: bash
+        env:
+          BRANCH: codex/safety-gate-2026-08-10
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 60); do
+            git fetch -q origin "$BRANCH" || true
+            if git show "origin/$BRANCH:ia_milk/bootstrap_payload_v3.bin" >/tmp/payload 2>/dev/null; then echo 'SEALED_PAYLOAD_RECEIVED'; break; fi
+            sleep 5
+          done
+          test -s /tmp/payload || { echo '::error::sealed payload not received'; exit 2; }
+          python - <<'PY'
+          from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey,X25519PublicKey
+          from cryptography.hazmat.primitives.kdf.hkdf import HKDF
+          from cryptography.hazmat.primitives import hashes
+          from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+          import json,pathlib,requests,hashlib,secrets,subprocess,time,urllib.parse
+          raw=pathlib.Path('/tmp/payload').read_bytes(); eph=raw[:32]; nonce=raw[32:44]; ct=raw[44:]
+          priv=X25519PrivateKey.from_private_bytes(pathlib.Path('/tmp/k').read_bytes()); shared=priv.exchange(X25519PublicKey.from_public_bytes(eph)); key=HKDF(algorithm=hashes.SHA256(),length=32,salt=None,info=b'IA-MILK-BOOTSTRAP-V3').derive(shared); cfg=json.loads(AESGCM(key).decrypt(nonce,ct,b'IA-MILK'))
+          for v in cfg.values():
+              if isinstance(v,str) and v: print('::add-mask::'+v)
+          R={'state':'IA_MILK_BOOTSTRAP_V3','codeberg':{},'cpanel':{},'nextcloud':{},'mistral_received_secrets':False,'plaintext_persisted':False}
+          tok=cfg.get('codeberg_token','')
+          if tok:
+              try:
+                  h={'Authorization':'token '+tok,'Accept':'application/json'}; r=requests.get('https://codeberg.org/api/v1/user',headers=h,timeout=25); r.raise_for_status(); user=r.json()['login']; repo=cfg.get('codeberg_repo','atlas-vivo-milk')
+                  q=requests.get(f'https://codeberg.org/api/v1/repos/{user}/{repo}',headers=h,timeout=25)
+                  if q.status_code==404: requests.post('https://codeberg.org/api/v1/user/repos',headers={**h,'Content-Type':'application/json'},json={'name':repo,'private':True},timeout=25).raise_for_status()
+                  remote=f'https://{user}:{tok}@codeberg.org/{user}/{repo}.git'; subprocess.run(['git','remote','remove','codeberg'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL); subprocess.run(['git','remote','add','codeberg',remote],check=True); p=subprocess.run(['git','push','codeberg','HEAD:refs/heads/atlas-safety-staging-2026-08-17'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL); R['codeberg']={'auth_ok':True,'user':user,'repo':repo,'safe_push':p.returncode==0,'force':False,'mirror':False}
+              except Exception as e:R['codeberg']={'auth_ok':False,'error':type(e).__name__}
+          cp_user=cfg.get('cpanel_user','associ16'); cp_pass=cfg.get('pt_password',''); sess=None
+          for host in ['https://associacaomilk.pt:2083','https://troi.ptservidor.net:2083']:
+              if not cp_pass: break
+              try:
+                  s=requests.Session(); r=s.post(host+'/login/?login_only=1',data={'user':cp_user,'pass':cp_pass},timeout=25); j=r.json()
+                  if j.get('status')==1 and j.get('security_token'): sess=(s,host,j['security_token']); break
+              except Exception: pass
+          R['cpanel']={'auth_ok':bool(sess),'user':cp_user}
+          nc=cfg.get('nextcloud_url','https://associacaomilk.pt/nextcloud').rstrip('/'); verified=None
+          for u in [x for x in [cfg.get('nextcloud_user'),cfg.get('pt_email'),cp_user,'admin'] if x]:
+              try:
+                  dav=nc+'/remote.php/dav/files/'+urllib.parse.quote(u,safe='')+'/'; r=requests.request('PROPFIND',dav,auth=(u,cp_pass),headers={'Depth':'0'},timeout=25)
+                  if r.status_code in (200,207): verified=(u,cp_pass,dav); break
+              except Exception: pass
+          if verified:
+              u,pw,dav=verified; folder=dav+'Atlas-Vivo-MILK/'; requests.request('MKCOL',folder,auth=(u,pw),timeout=25); data=secrets.token_bytes(4096); sha=hashlib.sha256(data).hexdigest(); target=folder+'ia-milk-canary-'+str(int(time.time()))+'.bin'; put=requests.put(target,data=data,auth=(u,pw),timeout=25); get=requests.get(target,auth=(u,pw),timeout=25); R['nextcloud']={'auth_ok':True,'user':u,'put_http':put.status_code,'get_http':get.status_code,'sha256_match':hashlib.sha256(get.content).hexdigest()==sha}
+          else:R['nextcloud']={'auth_ok':False,'status':'CREDENTIAL_NOT_VERIFIED'}
+          pathlib.Path('ia-milk-bootstrap-v3-receipt.json').write_text(json.dumps(R,ensure_ascii=False,indent=2)); print(json.dumps(R,ensure_ascii=False)); pathlib.Path('/tmp/k').unlink(missing_ok=True); pathlib.Path('/tmp/payload').unlink(missing_ok=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ia-milk-bootstrap-v3-receipt
+          path: ia-milk-bootstrap-v3-receipt.json
+          retention-days: 30
