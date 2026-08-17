@@ -1,4 +1,4 @@
-name: IA MILK Takeout FTPS Migration v2
+name: IA MILK Phase1 FTPS Migration v3 — Mistral Orchestrated
 
 on:
   push:
@@ -12,13 +12,65 @@ jobs:
   migrate:
     runs-on: ubuntu-latest
     timeout-minutes: 330
+    env:
+      MISTRAL_API_KEY_RAW: ${{ secrets.MISTRAL_API_KEY }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Install dependencies
+      - name: Mistral sovereign orchestration gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, urllib.request, urllib.error
+          raw=os.environ.get('MISTRAL_API_KEY_RAW','').strip()
+          if raw.startswith('MISTRAL_API_KEY='): raw=raw.split('=',1)[1].strip()
+          if len(raw)>=2 and raw[0]==raw[-1] and raw[0] in "'\"": raw=raw[1:-1].strip()
+          if not raw: raise SystemExit('MISTRAL_API_KEY missing')
+          API='https://api.mistral.ai/v1'; H={'Authorization':f'Bearer {raw}','Content-Type':'application/json','Accept':'application/json'}
+          def req(method,path,payload=None):
+              data=None if payload is None else json.dumps(payload,ensure_ascii=False).encode()
+              r=urllib.request.Request(API+path,data=data,headers=H,method=method)
+              try:
+                  with urllib.request.urlopen(r,timeout=60) as x:
+                      b=x.read().decode(); return json.loads(b) if b else None
+              except urllib.error.HTTPError as e:
+                  raise RuntimeError(f'{method} {path} HTTP {e.code}: '+e.read().decode('utf-8','replace')[:1200])
+          agents=req('GET','/agents')
+          if isinstance(agents,dict): agents=agents.get('data') or agents.get('items') or []
+          by={a.get('name'):a for a in agents if isinstance(a,dict)}
+          required=['MILK Sovereign Platform Orchestrator','MILK — Migração Preservativa','MILK — Testes e Validação','MILK — Conformidade RGPD e Soberania','MILK — Documentação e Memória']
+          missing=[n for n in required if n not in by]
+          if missing: raise SystemExit('Missing canonical Mistral agents: '+','.join(missing))
+          prompt=('Tarefa operacional autorizada: continuar migração preservativa do Atlas Vivo MILK. '
+                  'Origem Google Drive em modo somente leitura. Destino PTServidor privado via FTPS. '
+                  'Lote actual: 12 objetos prioritários previamente sondados como diretamente legíveis. '
+                  'Obrigatório: delegar ao especialista MILK — Migração Preservativa; preservar IDs/proveniência; '
+                  'não apagar nem alterar origem; verificar cada objeto no destino por SHA-256; produzir recibo sanitizado; '
+                  'não receber nem pedir credenciais; não declarar migração integral concluída por este lote. '
+                  'Classifica o lote e confirma os gates técnicos que o executor deve aplicar. Não inclua nem solicite segredos.')
+          resp=req('POST','/conversations',{'agent_id':by['MILK Sovereign Platform Orchestrator']['id'],'inputs':prompt,'store':False,'handoff_execution':'server'})
+          rawj=json.dumps(resp,ensure_ascii=False)
+          low=rawj.lower()
+          handoff=('handoff' in low and 'migra' in low)
+          if not handoff: raise SystemExit('Mistral migration specialist handoff not observed')
+          receipt={'state':'MISTRAL_MIGRATION_ORCHESTRATION_VERIFIED','agents_required':len(required),'agents_verified':len(required),'handoff_to_migration_specialist':True,'source_read_only':True,'sha256_required':True,'secrets_sent_to_mistral':False,'conversation_stored':False}
+          open('mistral-migration-orchestration.json','w').write(json.dumps(receipt,ensure_ascii=False,indent=2))
+          print(json.dumps(receipt,ensure_ascii=False))
+          PY
+
+      - name: Preserve Mistral orchestration receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: mistral-migration-orchestration
+          path: mistral-migration-orchestration.json
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Install migration dependencies
         run: |
           python -m pip install --disable-pip-version-check --no-input pynacl requests selenium
           command -v google-chrome || command -v chromium || command -v chromium-browser
@@ -28,22 +80,15 @@ jobs:
           python - <<'PY'
           from nacl.public import PrivateKey
           import base64, hashlib, json, pathlib
-          key = PrivateKey.generate()
-          pathlib.Path('/tmp/ia_milk_takeout_v2.key').write_bytes(bytes(key))
-          pathlib.Path('/tmp/ia_milk_takeout_v2.key').chmod(0o600)
-          pub = bytes(key.public_key)
-          data = {
-            'public_key_b64': base64.urlsafe_b64encode(pub).decode(),
-            'fingerprint': hashlib.sha256(pub).hexdigest(),
-          }
-          pathlib.Path('ia-milk-takeout-public-key.json').write_text(json.dumps(data))
-          print('IA_MILK_TAKEOUT_V2_KEY_READY fingerprint=' + data['fingerprint'])
+          key=PrivateKey.generate(); pathlib.Path('/tmp/ia_milk_takeout_v2.key').write_bytes(bytes(key)); pathlib.Path('/tmp/ia_milk_takeout_v2.key').chmod(0o600)
+          pub=bytes(key.public_key); data={'public_key_b64':base64.urlsafe_b64encode(pub).decode(),'fingerprint':hashlib.sha256(pub).hexdigest()}
+          pathlib.Path('ia-milk-takeout-public-key.json').write_text(json.dumps(data)); print('IA_MILK_TAKEOUT_V3_KEY_READY fingerprint='+data['fingerprint'])
           PY
 
       - name: Publish public key only
         uses: actions/upload-artifact@v4
         with:
-          name: ia-milk-takeout-v2-public-key
+          name: ia-milk-takeout-v3-public-key
           path: ia-milk-takeout-public-key.json
           retention-days: 1
 
@@ -55,10 +100,7 @@ jobs:
           set -euo pipefail
           for i in $(seq 1 120); do
             git fetch -q origin "$BRANCH" || true
-            if git show "origin/$BRANCH:ia_milk/ftps_migration_payload_v2.sealed.b64" >/tmp/ftps_migration_payload_v2.sealed.b64 2>/dev/null; then
-              echo 'SEALED_MIGRATION_PAYLOAD_RECEIVED'
-              break
-            fi
+            if git show "origin/$BRANCH:ia_milk/ftps_migration_payload_v2.sealed.b64" >/tmp/ftps_migration_payload_v2.sealed.b64 2>/dev/null; then echo 'SEALED_MIGRATION_PAYLOAD_RECEIVED'; break; fi
             sleep 5
           done
           test -s /tmp/ftps_migration_payload_v2.sealed.b64 || { echo '::error::sealed migration payload not received'; exit 2; }
@@ -70,7 +112,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ia-milk-takeout-ftps-migration-receipt
+          name: ia-milk-phase1-ftps-migration-receipt
           path: ia-milk-takeout-ftps-receipt.json
           retention-days: 30
           if-no-files-found: warn
