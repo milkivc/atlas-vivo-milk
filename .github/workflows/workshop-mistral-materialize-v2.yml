@@ -1,0 +1,81 @@
+name: WORKSHOP - Materialize IA MILK v2
+
+on:
+  push:
+    branches:
+      - workshop/mistral-exec-20260817
+    paths:
+      - '.github/workflows/workshop-mistral-materialize-v2.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - name: Reconcile Mistral Libraries and Agents
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY" || { echo 'MISTRAL_SECRET_PRESENT=false'; exit 2; }
+          python - <<'PY'
+          import json, os, urllib.request, urllib.error
+          BASE='https://api.mistral.ai/v1'; KEY=os.environ['MISTRAL_API_KEY']
+          def req(method,path,body=None):
+              data=None if body is None else json.dumps(body).encode()
+              r=urllib.request.Request(BASE+path,data=data,method=method)
+              r.add_header('Authorization','Bearer '+KEY); r.add_header('Accept','application/json')
+              if data is not None:r.add_header('Content-Type','application/json')
+              try:
+                  with urllib.request.urlopen(r,timeout=45) as resp:
+                      raw=resp.read().decode(); return resp.status,json.loads(raw) if raw else {}
+              except urllib.error.HTTPError as e:
+                  raw=e.read().decode('utf-8','replace'); print('API_ERROR',method,path,e.code,raw[:800]); raise
+          def items(o):
+              if isinstance(o,list):return o
+              if isinstance(o,dict):return o.get('data') or o.get('results') or []
+              return []
+          specs=[
+            ('IA MILK — Governação e Memória Canónica','Memória relacional, continuidade, Hermeneuta-C1, regras epistémicas, proveniência e gates humanos.'),
+            ('IA MILK — Corpus Cultural e Territorial','PERCEPTIO, festas, folclore, ofícios, dispositivos, curadorias e repertórios culturais autorizados.'),
+            ('IA MILK — Engenharia e Interoperabilidade','Arquitectura técnica, dados, APIs, Codeberg/Forgejo, PTServidor, Nextcloud, interoperabilidade e preservação.'),
+            ('IA MILK — Referências Científicas','Artigos e fontes científicas verificadas para apoio académico, metodológico e de património cultural.')]
+          _,o=req('GET','/libraries?page_size=100'); ex={x.get('name'):x for x in items(o)}; libs={}; newlibs=0
+          for n,d in specs:
+              if n in ex: libs[n]=ex[n]['id']; print('LIB_REUSED',n,ex[n]['id'])
+              else:
+                  _,x=req('POST','/libraries',{'name':n,'description':d}); libs[n]=x['id']; newlibs+=1; print('LIB_CREATED',n,x['id'])
+          rules=('Responder em português europeu. Preservar fonte, autoria, proveniência, genealogia e estado epistémico. '
+                 'Nunca inventar fonte, página, DOI, ISBN, autoria, licença, financiamento, validação ou publicação. '
+                 'Distinguir facto, inferência, hipótese, proposta, possibilidade e decisão humana. '
+                 'Nenhuma publicação, classificação sensível, decisão jurídica, institucional ou curatorial irreversível sem gate humano. '
+                 'Não criar perfis psicológicos, scoring humano, biometria, vigilância de participação ou geolocalização individual. '
+                 'SEER é termo canónico e não deve ser corrigido para ser. COSMICOXES e Cosmic Flow são entidades distintas. '
+                 'A camada pública nunca deve fornecer caminho inverso para a camada invisível.')
+          G=libs[specs[0][0]]; C=libs[specs[1][0]]; E=libs[specs[2][0]]; R=libs[specs[3][0]]
+          agents=[
+            ('MILK Sovereign Orchestrator','Orquestra a IA MILK; distribui tarefas aos especialistas; mantém intenção, relação e devolução.',[G,C,E,R]),
+            ('MILK Arquitecto','Arquitectura sistémica, camadas pública/invisível/física, dependências e anti-regressão.',[G,E]),
+            ('MILK Ontologia Protocolos Dados','Ontologias, modelos de dados, identificadores, grafos, proveniência e interoperabilidade semântica.',[G,E]),
+            ('MILK Codificador','Implementação técnica auditável, simples, reversível, testável e sem contaminar originais.',[E]),
+            ('MILK Revisão de Repositório','Auditoria de repositórios, genealogia, Codeberg/Forgejo canónico, dependências e risco de regressão.',[E,G]),
+            ('MILK Testes e Validação','Testes anti-regressão, integridade, fixity, contratos, acessibilidade e evidência de execução.',[E,G]),
+            ('MILK Documentação e Memória','Memória institucional, continuidade, documentação técnica/académica e rastreabilidade.',[G,R]),
+            ('MILK Conformidade','RGPD, AI Act, acessibilidade, direitos culturais, minimização, consentimento e gates humanos.',[G,R]),
+            ('MILK Excelência Académica Semântica','Hermeneuta-C1, rigor académico, genealogia conceptual, bibliografia verificável e semântica autoral.',[G,R,C]),
+            ('MILK Publicação Interoperável','Prepara Zenodo, ORCID, DataCite, Software Heritage e Codeberg sem publicar sem autorização específica.',[E,R,G])]
+          _,o=req('GET','/agents?page_size=100'); exa={x.get('name'):x for x in items(o)}; ids={}; newagents=0
+          for n,d,lids in agents:
+              if n in exa: ids[n]=exa[n]['id']; print('AGENT_REUSED',n,exa[n]['id']); continue
+              payload={'model':'mistral-medium-latest','name':n,'description':d,'instructions':rules+' Função específica: '+d,'tools':[{'type':'document_library','library_ids':lids}],'completion_args':{'temperature':0.2,'top_p':0.95}}
+              _,x=req('POST','/agents',payload); ids[n]=x['id']; newagents+=1; print('AGENT_CREATED',n,x['id'])
+          status,conv=req('POST','/conversations',{'agent_id':ids['MILK Sovereign Orchestrator'],'inputs':'Responde apenas com IA_MILK_RUNTIME_OK e nada mais.'})
+          print('ORCHESTRATOR_CONVERSATION_HTTP',status)
+          print('ORCHESTRATOR_CONVERSATION_ID',conv.get('conversation_id') or conv.get('id') or 'unknown')
+          print('SUMMARY_LIBRARIES_TOTAL',len(libs)); print('SUMMARY_LIBRARIES_CREATED',newlibs)
+          print('SUMMARY_AGENTS_TOTAL',len(ids)); print('SUMMARY_AGENTS_CREATED',newagents); print('IA_MILK_MATERIALIZED=true')
+          PY
