@@ -62,6 +62,61 @@ COSMICOXES → Copernicus/globe → Cosmic Flow → Atlas seal → Fucô/Galeria
 ## Nuno contribution gate
 Nuno is the only public contribution portal for text/word, sound, photography, audio and other admitted formats. Backend requirements: age gate, consent, anonymous/pseudonym/name choice, withdrawal, provenance and mandatory human review. No automatic publication.
 
+## Nextcloud total-engineering mandate
+Nextcloud is a sovereign private infrastructure component, not a public CMS replacement and not merely backup storage. The engineering panel must integrate all useful supported capabilities while preserving the public/private boundary.
+
+Use the current official Nextcloud Developer/Admin manuals as the primary technical source and engineer around:
+
+1. authenticated WebDAV `/remote.php/dav` for private file operations;
+2. chunked/resumable and bulk upload patterns for migration and large media;
+3. WebDAV SEARCH for corpus discovery without exposing raw content publicly;
+4. Versions and Trashbin APIs for recoverability and documentary genealogy;
+5. Comments/metadata where useful for human review trails;
+6. OCS Capabilities API for feature detection rather than hard-coded assumptions;
+7. OCS Share API only behind human gates, with expiry/password/permissions policies;
+8. Direct Download API for short-lived, controlled delivery when a public/static service needs a validated private asset without receiving permanent Nextcloud credentials;
+9. FullTextSearch collection/API only if the installed instance exposes it; treat as optional capability, never mandatory runtime dependency;
+10. notifications/activity as an internal review/operations channel where available;
+11. external-storage integration only when needed, with cron/background scanning and no arbitrary network mounts;
+12. background jobs using Cron where the hosting permits it; do not rely on AJAX for operational workflows;
+13. dedicated restricted service users and app passwords, never the human account password;
+14. OIDC/RBAC integration where available, preserving public / curatorial / admin separation;
+15. private immutable-ish receipts/checkpoints for migration, Mistral runs, SWHID, DataCite/Zenodo/IGAC preparation and Web App builds;
+16. rollback packages for every staging deployment;
+17. IA MILK source registry, annotations, episodic/procedural memory and execution receipts stored in MILK-controlled private areas;
+18. no public Atlas runtime endpoint may expose Nextcloud credentials, private WebDAV paths, invisible-layer records or sensitive metadata.
+
+### Required private Nextcloud tree
+- `/00_CONTROLO_E_INDICE`
+- `/01_CORPUS_SOBERANO/Originais`
+- `/01_CORPUS_SOBERANO/Exports_Google_Nativos`
+- `/02_IA_MILK/Source_Registry`
+- `/02_IA_MILK/Annotations`
+- `/02_IA_MILK/Episodic_Memory`
+- `/02_IA_MILK/Procedural_Memory`
+- `/02_IA_MILK/Execution_Receipts`
+- `/03_CURADORIA_PRIVADA/Candidatos`
+- `/03_CURADORIA_PRIVADA/Validacao_Humana`
+- `/04_MIGRACAO/Staging`
+- `/04_MIGRACAO/Checkpoints`
+- `/04_MIGRACAO/Verified`
+- `/05_PRESERVACAO/Software_Heritage`
+- `/05_PRESERVACAO/DataCite_Zenodo_IGAC`
+- `/06_WEBAPP/Staging_Artifacts`
+- `/06_WEBAPP/Rollback`
+- `/07_AUDITORIA/Logs_Sanitizados`
+
+### Required Nextcloud/Web App contracts
+For every curatorial mechanism, additionally specify:
+- which private source/media objects live in Nextcloud;
+- which public projection is copied/derived into the Web App runtime;
+- provenance linkage between private source and public object;
+- upload/download/versioning/rollback behaviour;
+- review and withdrawal path;
+- offline/degraded behaviour when Nextcloud is unavailable;
+- capability-detection strategy;
+- performance boundary so the public Web App never blocks on Nextcloud for already-published content.
+
 ## Non-negotiable prohibitions
 - Do not alter/delete/move Google Drive originals.
 - Do not auto-publish.
@@ -71,6 +126,8 @@ Nuno is the only public contribution portal for text/word, sound, photography, a
 - Do not replace authorial names with descriptive AI-generated names.
 - Do not expose the Invisible Layer.
 - Do not collapse COSMICOXES, Cosmic Flow, Festival Dado Sem Lado, LIVRO CUBO, NÓS or other devices into one concept.
+- Do not use Nextcloud as the public serving layer for every request; published data/assets must be materialized into the Web App runtime after validation.
+- Do not store secrets in Git, GitHub Actions artifacts or public logs.
 
 ## Engineering output required from Mistral panel
 For every proposal or mechanism discussed, return:
@@ -90,5 +147,9 @@ For every proposal or mechanism discussed, return:
 14. preservation/interoperability output (GeoJSON, Web Annotation, IIIF, JSON-LD, RO-Crate/DataCite only where appropriate).
 15. physical bill-of-materials categories without inventing vendor prices.
 16. evidence/source URLs for external engineering research.
+17. Nextcloud private-object contract.
+18. Nextcloud capability dependencies and fallback.
+19. publication materialization contract from private Nextcloud object to public runtime object.
+20. rollback/version/withdrawal contract.
 
 The task is engineering research and executable design, not autonomous curatorial authorship.
