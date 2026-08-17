@@ -1,0 +1,30 @@
+name: Mistral sovereign Atlas execution
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths:
+      - 'ops/mistral_sovereign_execution_run.py'
+      - '.github/workflows/mistral-sovereign-execution-run.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Execute sovereign Mistral agent mesh
+        run: python ops/mistral_sovereign_execution_run.py
+      - name: Upload execution receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: atlas-mistral-sovereign-execution
+          path: artifacts/sovereign-execution
+          if-no-files-found: error
+          retention-days: 30
