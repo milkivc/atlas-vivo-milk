@@ -46,10 +46,11 @@ jobs:
           set -euo pipefail
           for i in $(seq 1 60); do
             git fetch -q origin "$BRANCH" || true
-            if git show "origin/$BRANCH:ia_milk/bootstrap_payload_v3.bin" >/tmp/payload 2>/dev/null; then echo 'SEALED_PAYLOAD_RECEIVED'; break; fi
+            if git show "origin/$BRANCH:ia_milk/bootstrap_payload_v3.bin.b64" >/tmp/payload.b64 2>/dev/null; then echo 'SEALED_PAYLOAD_RECEIVED'; break; fi
             sleep 5
           done
-          test -s /tmp/payload || { echo '::error::sealed payload not received'; exit 2; }
+          test -s /tmp/payload.b64 || { echo '::error::sealed payload not received'; exit 2; }
+          base64 -d /tmp/payload.b64 >/tmp/payload
           python - <<'PY'
           from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey,X25519PublicKey
           from cryptography.hazmat.primitives.kdf.hkdf import HKDF
@@ -86,7 +87,7 @@ jobs:
           if verified:
               u,pw,dav=verified; folder=dav+'Atlas-Vivo-MILK/'; requests.request('MKCOL',folder,auth=(u,pw),timeout=25); data=secrets.token_bytes(4096); sha=hashlib.sha256(data).hexdigest(); target=folder+'ia-milk-canary-'+str(int(time.time()))+'.bin'; put=requests.put(target,data=data,auth=(u,pw),timeout=25); get=requests.get(target,auth=(u,pw),timeout=25); R['nextcloud']={'auth_ok':True,'user':u,'put_http':put.status_code,'get_http':get.status_code,'sha256_match':hashlib.sha256(get.content).hexdigest()==sha}
           else:R['nextcloud']={'auth_ok':False,'status':'CREDENTIAL_NOT_VERIFIED'}
-          pathlib.Path('ia-milk-bootstrap-v3-receipt.json').write_text(json.dumps(R,ensure_ascii=False,indent=2)); print(json.dumps(R,ensure_ascii=False)); pathlib.Path('/tmp/k').unlink(missing_ok=True); pathlib.Path('/tmp/payload').unlink(missing_ok=True)
+          pathlib.Path('ia-milk-bootstrap-v3-receipt.json').write_text(json.dumps(R,ensure_ascii=False,indent=2)); print(json.dumps(R,ensure_ascii=False)); pathlib.Path('/tmp/k').unlink(missing_ok=True); pathlib.Path('/tmp/payload').unlink(missing_ok=True); pathlib.Path('/tmp/payload.b64').unlink(missing_ok=True)
           PY
       - uses: actions/upload-artifact@v4
         with:
