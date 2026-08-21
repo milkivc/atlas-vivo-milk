@@ -111,3 +111,4 @@ jobs:
           grep -Fq "data-action=\"sorte\"" /tmp/atlas-live.html
 
 # Deployment trigger authorized by human validation on 2026-08-13.
+\n# Production trigger: seven dynamics authorized and Mistral-audited on 2026-08-21.\n
