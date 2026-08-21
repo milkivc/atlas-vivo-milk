@@ -1,0 +1,35 @@
+{
+  "@context": "https://schema.datacite.org/meta/kernel-4.4/",
+  "identifier": {
+    "identifier": "10.5281/zenodo.XXXXXXX",
+    "identifierType": "DOI"
+  },
+  "creators": [
+    {
+      "name": "Eduardo Maurício Vieira Cabral e Araújo",
+      "nameType": "Personal",
+      "givenName": "Eduardo Maurício Vieira Cabral e",
+      "familyName": "Araújo",
+      "nameIdentifiers": [{"nameIdentifier": "0009-0007-6892-6570", "nameIdentifierScheme": "ORCID", "schemeURI": "https://orcid.org/"}],
+      "affiliations": [{"affiliation": "Associação MILK", "affiliationIdentifier": "0009-0004-9132-2925", "affiliationIdentifierScheme": "ORCID", "schemeURI": "https://orcid.org/"}]
+    },
+    {
+      "name": "Nuno Filipe Fernandes Vieira Cabral e Araújo",
+      "nameType": "Personal", 
+      "givenName": "Nuno Filipe Fernandes Vieira Cabral e",
+      "familyName": "Araújo",
+      "nameIdentifiers": [{"nameIdentifier": "0009-0004-9132-2925", "nameIdentifierScheme": "ORCID", "schemeURI": "https://orcid.org/"}],
+      "affiliations": [{"affiliation": "Associação MILK", "affiliationIdentifier": "0009-0004-9132-2925", "affiliationIdentifierScheme": "ORCID", "schemeURI": "https://orcid.org/"}]
+    }
+  ],
+  "titles": [{"title": "Atlas Vivo MILK - Sistema de Informação Cultural Territorial", "titleType": "MainTitle", "lang": "por"}],
+  "publisher": {"name": "Associação MILK", "publisherIdentifier": "0009-0004-9132-2925", "publisherIdentifierScheme": "ORCID", "schemeURI": "https://orcid.org/"},
+  "publicationYear": "2026",
+  "resourceType": {"resourceTypeGeneral": "Software", "resourceTypeSpecific": "WebApplication"},
+  "rightsList": [{"rights": "EUPL-1.2", "rightsURI": "https://joinup.ec.europa.eu/collection/eupl/eupl-12", "rightsIdentifier": "EUPL-1.2", "rightsIdentifierScheme": "SPDX"}, {"rights": "CC-BY-4.0", "rightsURI": "https://creativecommons.org/licenses/by/4.0/", "rightsIdentifier": "CC-BY-4.0", "rightsIdentifierScheme": "SPDX"}],
+  "descriptions": [{"description": "Atlas Vivo MILK é um sistema de informação cultural territorial desenvolvido pela Associação MILK. O sistema integra dados geospaciais, património cultural imaterial, e infraestruturas digitais para apoio à memória situada, mediação pública e governança documental.", "descriptionType": "Abstract", "lang": "por"}],
+  "subjects": [{"subject": "cultural heritage", "subjectScheme": "GEMET"}, {"subject": "geospatial data", "subjectScheme": "INSPIRE"}, {"subject": "Portugal", "subjectScheme": "ISO 3166-1"}],
+  "contributors": [{"contributorType": "ProjectLeader", "name": "Nuno Filipe Fernandes Vieira Cabral e Araújo", "nameIdentifiers": [{"nameIdentifier": "0009-0004-9132-2925", "nameIdentifierScheme": "ORCID"}]}],
+  "version": "v2.0.0-prototype",
+  "language": "por"
+}
