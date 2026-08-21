@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 concurrency:
   group: atlas-ptservidor-production
@@ -122,6 +123,20 @@ jobs:
           node -e "const c=require('/tmp/atlas-catalogue.json'); if(c.entradas.length!==49) process.exit(1)"
           test -s /tmp/atlas-book.css
           for motor in "Inventário do Meu Mundo" "Catástrofe Produtiva" "O Ponto de Kusama" "O Corpo que Percebe" "Escutar o Silêncio" "O Rizoma Interior" "O Cubo Interior"; do grep -Fq "$motor" /tmp/atlas-live.js; done
+
+      - name: Record verified deployment receipt
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment 35 --repo "$GITHUB_REPOSITORY" --body "MILK_ATLAS_DEPLOY_VERIFIED run=$GITHUB_RUN_ID commit=$GITHUB_SHA catalogue_entries=49 public_layer=play invisible_layer=separate smoke_test=passed"
+
+      - name: Record failed deployment receipt
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment 35 --repo "$GITHUB_REPOSITORY" --body "MILK_ATLAS_DEPLOY_FAILED run=$GITHUB_RUN_ID commit=$GITHUB_SHA publication_claimed=no inspect_actions=yes"
 
 # Deployment trigger authorized by human validation on 2026-08-13.
 # Production trigger: catálogo dinâmico MILK autorizado em 2026-08-21.
