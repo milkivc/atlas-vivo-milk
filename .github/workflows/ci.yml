@@ -61,7 +61,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Lint Markdown files
-        run: npx --yes markdownlint-cli2@0.18.1 --config .github/markdownlint-config.json "**/*.md" "#node_modules"
+        run: npx --yes markdownlint-cli@0.44.0 -c .github/markdownlint-config.json "**/*.md" --ignore "node_modules/**"
       - name: Lint YAML files
         uses: ibiqlik/action-yamllint@v3
         with:
