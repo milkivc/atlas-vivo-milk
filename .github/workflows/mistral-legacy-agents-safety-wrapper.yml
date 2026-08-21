@@ -1,0 +1,24 @@
+name: Harden legacy Mistral agents
+
+on:
+  push:
+    branches:
+      - codex/safety-gate-2026-08-10
+    paths:
+      - ".github/workflows/mistral-legacy-agents-safety-wrapper.yml"
+      - "ops/mistral_legacy_safety_wrapper.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  harden:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply and verify non-destructive safety wrapper
+        run: python ops/mistral_legacy_safety_wrapper.py

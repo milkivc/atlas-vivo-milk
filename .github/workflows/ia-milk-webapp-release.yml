@@ -1,0 +1,78 @@
+name: IA MILK Web App Release
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths:
+      - 'webapp/**'
+      - 'ia_milk/sovereign/**'
+      - '.github/workflows/ia-milk-webapp-release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Assert sovereign release boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f ia_milk/sovereign/runtime.py
+          test -f ia_milk/sovereign/secret_broker.py
+          test -d webapp
+          ! grep -R -E 'MISTRAL_API_KEY|OPENAI_API_KEY|ANTHROPIC_API_KEY' webapp ia_milk/sovereign --exclude='secret_broker.py' --exclude='test_secret_boundary.py'
+          echo IA_MILK_RELEASE_BOUNDARY_OK
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: webapp/package.json
+      - name: Install and test Web App
+        working-directory: webapp
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f package-lock.json ]; then npm ci; else npm install --no-audit --no-fund; fi
+          npm test -- --run
+          npm run build
+      - name: Build immutable deployment package
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release/atlas-webapp release/ia-milk-private
+          cp -a webapp/dist/. release/atlas-webapp/
+          cp -a ia_milk/sovereign/. release/ia-milk-private/
+          python - <<'PY'
+          import hashlib,json,pathlib,time
+          root=pathlib.Path('release')
+          entries=[]
+          for p in sorted(root.rglob('*')):
+              if p.is_file():
+                  b=p.read_bytes(); entries.append({'path':str(p.relative_to(root)),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()})
+          receipt={'state':'IA_MILK_WEBAPP_RELEASE_BUILT','owner':'IA_MILK','mistral_required':False,'files':len(entries),'entries':entries,'target_public':'/home/associ16/atlas.associacaomilk.pt','target_private':'/home/associ16/atlas_milk_private/ia-milk','main_site_allowed':False,'built_at':int(time.time())}
+          pathlib.Path('release/RELEASE_RECEIPT.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2))
+          print(json.dumps({'state':receipt['state'],'files':receipt['files'],'mistral_required':False}))
+          PY
+          tar -C release -czf atlas-ia-milk-sovereign-release.tar.gz .
+          sha256sum atlas-ia-milk-sovereign-release.tar.gz | tee atlas-ia-milk-sovereign-release.sha256
+      - name: Verify no secret material in artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! grep -R -E '(sk-[A-Za-z0-9_-]{20,}|BEGIN (RSA |OPENSSH |EC )?PRIVATE KEY|password\s*[:=]\s*[^$<{])' release
+          echo RELEASE_SECRET_SCAN_OK
+      - uses: actions/upload-artifact@v4
+        with:
+          name: atlas-ia-milk-sovereign-release
+          path: |
+            atlas-ia-milk-sovereign-release.tar.gz
+            atlas-ia-milk-sovereign-release.sha256
+            release/RELEASE_RECEIPT.json
+          retention-days: 30
+          if-no-files-found: error

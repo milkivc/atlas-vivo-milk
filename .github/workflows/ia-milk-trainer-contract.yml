@@ -1,0 +1,34 @@
+name: IA MILK Trainer Contract
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths:
+      - 'ia_milk/sovereign/**'
+      - '.github/workflows/ia-milk-trainer-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Static sovereignty assertions
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,pathlib
+          a=json.loads(pathlib.Path('ia_milk/sovereign/architecture.json').read_text())
+          assert a['identity']=='IA_MILK'
+          assert a['mistral_is_dependency'] is False
+          assert a['trainers']['mistral']['secret_access'] is False
+          assert a['trainers']['mistral']['writes_canonical_memory_directly'] is False
+          assert a['secret_policy']['values_in_trainer_prompts'] is False
+          assert a['secret_policy']['values_in_git'] is False
+          print('IA_MILK_TRAINER_BOUNDARY_OK')
+          PY

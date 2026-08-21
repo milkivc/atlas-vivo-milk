@@ -1,0 +1,71 @@
+name: Mistral legacy agents read-only audit
+
+on:
+  push:
+    branches:
+      - codex/safety-gate-2026-08-10
+    paths:
+      - ".github/workflows/mistral-legacy-agents-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - name: Inspect legacy agent metadata and safety surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, urllib.request, urllib.parse, re
+          raw=os.environ.get('MISTRAL_API_KEY','').strip()
+          if raw.startswith('MISTRAL_API_KEY='):
+              raw=raw.split('=',1)[1].strip().strip('"').strip("'")
+          key=''.join(raw.split())
+          if not key: raise SystemExit('MISTRAL_API_KEY missing')
+          H={'Authorization':'Bearer '+key,'Accept':'application/json'}
+          BASE='https://api.mistral.ai'
+          def get(path):
+              r=urllib.request.Request(BASE+path,headers=H,method='GET')
+              with urllib.request.urlopen(r,timeout=45) as x:
+                  return json.loads(x.read().decode())
+          body=get('/v1/agents/pages?page_size=100')
+          agents={a.get('name'):a for a in body.get('data',[]) if isinstance(a,dict)}
+          legacy=['ZecaBrito','Arquiteto do Ecossistema','Legal','ler o drive']
+          out=[]
+          for name in legacy:
+              a=agents.get(name)
+              if not a:
+                  out.append({'name':name,'present':False}); continue
+              full=get('/v1/agents/'+a['id'])
+              tools=full.get('tools') or []
+              instructions=full.get('instructions') or ''
+              normalized=instructions.lower()
+              flags={
+                'mentions_read_only': ('read-only' in normalized or 'somente leitura' in normalized or 'apenas leitura' in normalized),
+                'mentions_no_delete': ('não apagar' in normalized or 'nao apagar' in normalized or 'never delete' in normalized),
+                'mentions_rgpd': ('rgpd' in normalized or 'gdpr' in normalized),
+                'mentions_human_gate': ('human' in normalized or 'humana' in normalized or 'humano' in normalized),
+                'mentions_secrets_guard': ('credential' in normalized or 'credencial' in normalized or 'token' in normalized or 'segredo' in normalized),
+              }
+              out.append({
+                'name':name,'present':True,'id':full.get('id'),'model':full.get('model'),'version':full.get('version'),
+                'description':full.get('description'),
+                'tool_types':[t.get('type') for t in tools if isinstance(t,dict)],
+                'connector_ids':[t.get('connector_id') for t in tools if isinstance(t,dict) and t.get('connector_id')],
+                'handoff_count':len(full.get('handoffs') or []),
+                'metadata':full.get('metadata') or {},
+                'instruction_safety_flags':flags,
+                'instruction_length':len(instructions),
+              })
+          report={'state':'READ_ONLY_LEGACY_AGENT_AUDIT','external_writes':0,'drive_writes':0,'agents':out}
+          print('MISTRAL_LEGACY_AGENT_AUDIT_BEGIN')
+          print(json.dumps(report,ensure_ascii=False,sort_keys=True))
+          print('MISTRAL_LEGACY_AGENT_AUDIT_END')
+          PY

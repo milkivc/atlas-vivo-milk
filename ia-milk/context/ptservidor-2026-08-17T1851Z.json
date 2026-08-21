@@ -1,0 +1,20 @@
+{
+  "context_type": "migration_operational_state",
+  "timestamp_utc": "2026-08-17T18:51:25Z",
+  "source": "PTServidor tickets 882572 and 123504 plus Mistral execution receipt",
+  "facts": {
+    "restricted_ftp_account_exists": true,
+    "private_staging_root": "atlas_milk_private/migration",
+    "transport": "FTPS_EXPLICIT_TLS",
+    "port": 21,
+    "source_drive_policy": "READ_ONLY_PRESERVE_ORIGINALS",
+    "remote_canary_verified": false,
+    "migration_state": "NOT_STARTED_WITH_REMOTE_EVIDENCE",
+    "blocker": "PASTEBIN_ACCESS_BLOCKED"
+  },
+  "prohibitions": [
+    "do_not_claim_migration_started_without_remote_size_and_download_back_sha256",
+    "do_not_modify_delete_or_move_google_drive_source",
+    "do_not_write_to_public_webroot"
+  ]
+}

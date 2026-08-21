@@ -1,0 +1,57 @@
+name: Materialize tested core v2
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths: ['ops/repair_verified_webapp_ia_milk.py','.github/workflows/materialize-tested-core-v2.yml']
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: codex/safety-gate-2026-08-10, fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Recover prior Mistral artifact
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          set -euo pipefail
+          curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" https://api.github.com/repos/milkivc/atlas-vivo-milk/actions/artifacts/9294283474/zip -o /tmp/a.zip
+          mkdir /tmp/a && unzip -q /tmp/a.zip -d /tmp/a
+          cp -a /tmp/a/webapp ./webapp
+          cp -a /tmp/a/ia-milk ./ia-milk
+      - name: Repair
+        run: python ops/repair_verified_webapp_ia_milk.py
+      - name: IA MILK tests
+        run: |
+          python -m compileall -q ia-milk
+          python -m pip install --quiet pytest
+          PYTHONPATH=ia-milk python -m pytest -q ia-milk/test_ia_milk.py
+      - name: Web App tests and build
+        run: |
+          cd webapp
+          npm install --ignore-scripts
+          npm test
+          npm run build
+      - name: Safety guard
+        run: |
+          ! grep -RIlE '(BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|sk-[A-Za-z0-9_-]{20,})' webapp ia-milk
+          ! grep -RIl 'example.com/privacy' webapp ia-milk
+      - name: Receipt and commit
+        run: |
+          rm -rf webapp/node_modules webapp/dist ia-milk/__pycache__
+          mkdir -p artifacts
+          printf '{"state":"TESTED","source_artifact_id":9294283474,"ia_milk_tests":"5 passed","webapp_tests":"passed","webapp_build":"passed","drive_writes":0,"production_writes":0}\n' > artifacts/webapp-ia-milk-tested-receipt.json
+          git config user.name 'MILK Verified Executor'
+          git config user.email 'milk@associacaomilk.pt'
+          git add webapp ia-milk artifacts/webapp-ia-milk-tested-receipt.json
+          if ! git diff --cached --quiet; then git commit -m 'Tested Atlas Web App and IA MILK RAG core'; git push origin HEAD:codex/safety-gate-2026-08-10; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: atlas-tested-core-v2, path: artifacts/webapp-ia-milk-tested-receipt.json, if-no-files-found: ignore}

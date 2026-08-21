@@ -1,0 +1,24 @@
+{
+  "timestamp_utc": "2026-08-17T18:51:25Z",
+  "tickets": ["882572", "123504"],
+  "provider_confirmations": {
+    "restricted_ftp_account_created": true,
+    "private_root": "atlas_milk_private/migration",
+    "ftps_explicit_tls_port_21_confirmed": true,
+    "nextcloud_endpoint_confirmed": false,
+    "cpanel_uapi_token_confirmed": false,
+    "secure_credential_delivery_confirmed": true
+  },
+  "execution": {
+    "source_drive_writes": 0,
+    "public_site_writes": 0,
+    "canary_attempted": true,
+    "remote_evidence": false,
+    "canary_verified": false,
+    "migration_started": false,
+    "blocker": "PASTEBIN_ACCESS_BLOCKED"
+  },
+  "mistral_executor": "ZecaBrito",
+  "workflow_run_id": 32053357701,
+  "artifact_id": 9295511235
+}

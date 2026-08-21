@@ -1,0 +1,89 @@
+name: Mistral read-only authentication probe
+
+on:
+  push:
+    branches:
+      - codex/safety-gate-2026-08-10
+    paths:
+      - ".github/workflows/mistral-auth-probe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  kernel-and-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - name: Checkout canonical master kernel
+        uses: actions/checkout@v4
+        with:
+          ref: master
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install canonical Atlas integration kernel
+        run: python -m pip install -e integrations/atlas-kernel
+      - name: Run canonical kernel safety tests
+        run: PYTHONPATH=integrations/atlas-kernel/src python -m unittest discover -s integrations/atlas-kernel/tests -v
+      - name: Probe Mistral read-only
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request, urllib.error
+          raw_key = os.environ.get('MISTRAL_API_KEY','').strip()
+          if raw_key.startswith('MISTRAL_API_KEY='):
+              raw_key = raw_key.split('=', 1)[1].strip().strip('"').strip("'")
+          key = ''.join(raw_key.split())
+          report = {
+              'kernel_tests': 'PASSED',
+              'credential_state': 'PRESENT' if key else 'MISSING',
+              'auth_ok': False,
+              'models_access': False,
+              'agents_access': False,
+              'connectors_access': False,
+              'models_count': None,
+              'agents_count': None,
+              'connectors_count': None,
+              'errors': {},
+              'external_writes': 0,
+          }
+          if not key:
+              report['errors']['credential'] = 'MISTRAL_API_KEY_MISSING'
+              report['state'] = 'BLOCKED_CREDENTIAL_ONLY'
+              print(json.dumps(report, sort_keys=True))
+              raise SystemExit(0)
+          headers = {'Authorization': 'Bearer ' + key, 'Accept': 'application/json'}
+          endpoints = {
+              'models': 'https://api.mistral.ai/v1/models',
+              'agents': 'https://api.mistral.ai/v1/agents/pages',
+              'connectors': 'https://api.mistral.ai/v1/connectors?page_size=100',
+          }
+          for name, url in endpoints.items():
+              try:
+                  req = urllib.request.Request(url, headers=headers, method='GET')
+                  with urllib.request.urlopen(req, timeout=30) as r:
+                      body = json.loads(r.read().decode('utf-8'))
+                  report[name + '_access'] = True
+                  report['auth_ok'] = True
+                  if name == 'models':
+                      items = body.get('data', body if isinstance(body, list) else [])
+                  elif name == 'agents':
+                      items = body.get('data', [])
+                  else:
+                      items = body.get('items', [])
+                  report[name + '_count'] = len(items)
+              except urllib.error.HTTPError as e:
+                  report['errors'][name] = 'HTTP_' + str(e.code)
+              except Exception as e:
+                  report['errors'][name] = type(e).__name__
+          report['state'] = 'MISTRAL_OPERATIONAL_READ_ONLY' if report['auth_ok'] else 'MISTRAL_AUTH_FAILED'
+          print(json.dumps(report, sort_keys=True))
+          if not report['auth_ok']:
+              raise SystemExit(3)
+          PY

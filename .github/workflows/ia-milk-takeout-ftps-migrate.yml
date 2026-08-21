@@ -1,0 +1,235 @@
+name: IA MILK Takeout FTPS Migration
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths: ['.github/workflows/ia-milk-takeout-ftps-migrate.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Install sealed-payload and browser dependencies
+        run: |
+          python -m pip install --disable-pip-version-check --no-input pynacl requests selenium
+          command -v google-chrome || command -v chromium || command -v chromium-browser
+
+      - name: Generate ephemeral receiving key and wait for sealed migration payload
+        shell: bash
+        env:
+          BRANCH: codex/safety-gate-2026-08-10
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from nacl.public import PrivateKey
+          import base64, pathlib, hashlib
+          key = PrivateKey.generate()
+          pathlib.Path('/tmp/ia_milk_takeout.key').write_bytes(bytes(key))
+          pathlib.Path('/tmp/ia_milk_takeout.key').chmod(0o600)
+          pub = bytes(key.public_key)
+          print('IA_MILK_TAKEOUT_PUBLIC_KEY_B64=' + base64.urlsafe_b64encode(pub).decode())
+          print('IA_MILK_TAKEOUT_KEY_FINGERPRINT=' + hashlib.sha256(pub).hexdigest())
+          PY
+          for i in $(seq 1 120); do
+            git fetch -q origin "$BRANCH" || true
+            if git show "origin/$BRANCH:ia_milk/ftps_migration_payload.sealed.b64" >/tmp/ftps_migration_payload.sealed.b64 2>/dev/null; then
+              echo 'SEALED_MIGRATION_PAYLOAD_RECEIVED'
+              break
+            fi
+            sleep 5
+          done
+          test -s /tmp/ftps_migration_payload.sealed.b64 || { echo '::error::sealed migration payload not received'; exit 2; }
+
+      - name: Consume one-time FTP credential and migrate Drive Takeout files
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from nacl.public import PrivateKey, SealedBox
+          from selenium import webdriver
+          from selenium.webdriver.common.by import By
+          from selenium.webdriver.support.ui import WebDriverWait
+          import base64, hashlib, io, json, os, pathlib, requests, secrets, time, ftplib
+
+          private_key = PrivateKey(pathlib.Path('/tmp/ia_milk_takeout.key').read_bytes())
+          ciphertext = base64.urlsafe_b64decode(pathlib.Path('/tmp/ftps_migration_payload.sealed.b64').read_text().strip().encode())
+          raw = SealedBox(private_key).decrypt(ciphertext)
+          cfg = json.loads(raw.decode('utf-8'))
+          paste_url = cfg['ptservidor_paste_url']
+          print('::add-mask::' + paste_url)
+
+          options = webdriver.ChromeOptions()
+          options.add_argument('--headless=new')
+          options.add_argument('--no-sandbox')
+          options.add_argument('--disable-dev-shm-usage')
+          options.add_argument('--disable-gpu')
+          options.add_argument('--window-size=1280,900')
+          driver = webdriver.Chrome(options=options)
+          try:
+              driver.get(paste_url)
+              end = time.time() + 45
+              password = ''
+              while time.time() < end:
+                  try:
+                      btn = driver.find_element(By.ID, 'loadconfirm-open-now')
+                      if btn.is_displayed() and btn.is_enabled():
+                          btn.click()
+                          time.sleep(1)
+                  except Exception:
+                      pass
+                  for selector, attr in [('#plaintext','textContent'),('#prettyprint','textContent'),('#message','value')]:
+                      try:
+                          el = driver.find_element(By.CSS_SELECTOR, selector)
+                          txt = (el.get_attribute(attr) or '').strip()
+                          if txt and len(txt) >= 4:
+                              password = txt
+                              break
+                      except Exception:
+                          pass
+                  if password:
+                      break
+                  time.sleep(0.5)
+              if not password:
+                  raise RuntimeError('PRIVATEBIN_DECRYPTION_NO_CONTENT')
+          finally:
+              driver.quit()
+          print('::add-mask::' + password)
+          if '\n' in password or '\r' in password:
+              lines=[x.strip() for x in password.replace('\r','\n').split('\n') if x.strip()]
+              if len(lines)==1:
+                  password=lines[0]
+              else:
+                  raise RuntimeError('PRIVATEBIN_CREDENTIAL_FORMAT_UNEXPECTED')
+          print('PRIVATEBIN_CREDENTIAL_CONSUMED_AND_MASKED')
+
+          host='associacaomilk.pt'
+          user='migration@associacaomilk.pt'
+          files = [
+            {'id':'1dtNB8IVLyxjHgtk8oNONSATnZecBh-xD','name':'takeout-20260531T022747Z-001.zip','bytes':472837},
+            {'id':'1IRi0m1D7b6l2-hnithFwYTMNQLmBzZSn','name':'takeout-20260531T022748Z-17-003.zip','bytes':203847569},
+            {'id':'107eiuj7UYGrE2S3rFl0tN5UllnvPB4V_','name':'takeout-20260531T022748Z-17-002.zip','bytes':1956142674},
+            {'id':'1eZfqI8qEFrTQfYGnY-MJo3HMePmuTZFA','name':'takeout-20260531T022748Z-17-001.zip','bytes':2053143205},
+            {'id':'1FgXD-5-2ZUxbhbvwQv4vOlv03TJKEIiI','name':'takeout-20260531T022748Z-9-001.zip','bytes':158758423},
+            {'id':'1Vs2cZk5gkSpH5Ae76Vy9fL8ZYIZT98V-','name':'takeout-20260531T022748Z-15-001.zip','bytes':70132736},
+            {'id':'1Yl06Do-dLamuDO5dUbM0J8IYDunPTzaj','name':'takeout-20260531T022748Z-14-001.zip','bytes':22558},
+          ]
+          receipt={'state':'TAKEOUT_FTPS_MIGRATION','source':'Google Drive Takeout folder','source_read_only':True,'destination':'PTServidor private FTPS','files':[],'total_expected_bytes':sum(x['bytes'] for x in files),'total_verified_bytes':0,'verified_files':0,'failed_files':0,'secrets_exposed':False,'mistral_received_secrets':False}
+
+          def connect():
+              ftp=ftplib.FTP_TLS(timeout=300)
+              ftp.connect(host,21)
+              ftp.login(user,password)
+              ftp.prot_p()
+              ftp.set_pasv(True)
+              return ftp
+
+          ftp=connect()
+          try:
+              # Real write/read canary before large transfers.
+              canary=secrets.token_bytes(4096)
+              csha=hashlib.sha256(canary).hexdigest()
+              cname='ia-milk-migration-canary-' + str(int(time.time())) + '.bin'
+              ftp.storbinary('STOR '+cname,io.BytesIO(canary),blocksize=1024*1024)
+              h=hashlib.sha256(); count=[0]
+              def cwrite(b): h.update(b); count[0]+=len(b)
+              ftp.retrbinary('RETR '+cname,cwrite,blocksize=1024*1024)
+              if count[0] != 4096 or h.hexdigest()!=csha:
+                  raise RuntimeError('FTPS_CANARY_FIXITY_FAILED')
+              try: ftp.delete(cname)
+              except Exception: pass
+              print('FTPS_CANARY_OK bytes=4096 sha256_match=true')
+              folder='takeout_2026-05-31'
+              try: ftp.mkd(folder)
+              except ftplib.error_perm as e:
+                  if not str(e).startswith('550'):
+                      raise
+              ftp.cwd(folder)
+              print('FTPS_DESTINATION_READY')
+          except Exception:
+              try: ftp.quit()
+              except Exception: pass
+              raise
+          try: ftp.quit()
+          except Exception: pass
+
+          work=pathlib.Path('/tmp/ia_milk_takeout')
+          work.mkdir(mode=0o700,exist_ok=True)
+          for item in files:
+              rec={'drive_id':item['id'],'name':item['name'],'expected_bytes':item['bytes'],'transferred':False,'verified':False}
+              path=work/item['name']
+              try:
+                  url=f"https://drive.usercontent.google.com/download?id={item['id']}&export=download&confirm=t"
+                  h=hashlib.sha256(); n=0
+                  with requests.get(url,stream=True,timeout=(30,300)) as r:
+                      r.raise_for_status()
+                      with open(path,'wb') as f:
+                          for chunk in r.iter_content(chunk_size=8*1024*1024):
+                              if not chunk: continue
+                              f.write(chunk); h.update(chunk); n+=len(chunk)
+                  if n != item['bytes']:
+                      raise RuntimeError(f'DRIVE_SIZE_MISMATCH:{n}')
+                  local_sha=h.hexdigest()
+                  rec['local_bytes']=n; rec['local_sha256']=local_sha
+                  print(f"DRIVE_DOWNLOAD_OK name={item['name']} bytes={n}")
+
+                  ftp=connect()
+                  try:
+                      ftp.cwd('takeout_2026-05-31')
+                      with open(path,'rb') as f:
+                          ftp.storbinary('STOR '+item['name'],f,blocksize=1024*1024)
+                      rec['transferred']=True
+                      rh=hashlib.sha256(); rn=[0]
+                      def rwrite(b): rh.update(b); rn[0]+=len(b)
+                      ftp.retrbinary('RETR '+item['name'],rwrite,blocksize=1024*1024)
+                      remote_sha=rh.hexdigest()
+                      rec['remote_bytes']=rn[0]; rec['remote_sha256']=remote_sha
+                      rec['verified']=(rn[0]==n and remote_sha==local_sha)
+                      if not rec['verified']:
+                          raise RuntimeError('REMOTE_FIXITY_MISMATCH')
+                  finally:
+                      try: ftp.quit()
+                      except Exception: pass
+                  receipt['verified_files']+=1
+                  receipt['total_verified_bytes']+=n
+                  # Checkpoint receipt after each verified real file.
+                  receipt['files'].append(rec)
+                  pathlib.Path('ia-milk-takeout-ftps-receipt.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2))
+                  print(f"MIGRATED_VERIFIED name={item['name']} bytes={n} sha256_match=true")
+                  path.unlink(missing_ok=True)
+              except Exception as e:
+                  rec['error']=type(e).__name__ + ':' + str(e)[:160]
+                  receipt['failed_files']+=1
+                  if rec not in receipt['files']: receipt['files'].append(rec)
+                  pathlib.Path('ia-milk-takeout-ftps-receipt.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2))
+                  print(f"::error::MIGRATION_FILE_FAILED name={item['name']} error={type(e).__name__}")
+                  path.unlink(missing_ok=True)
+                  break
+
+          receipt['complete_subset']=(receipt['verified_files']==len(files) and receipt['failed_files']==0 and receipt['total_verified_bytes']==receipt['total_expected_bytes'])
+          pathlib.Path('ia-milk-takeout-ftps-receipt.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2))
+          print('MIGRATION_SUBSET_RESULT ' + json.dumps({'verified_files':receipt['verified_files'],'failed_files':receipt['failed_files'],'verified_bytes':receipt['total_verified_bytes'],'expected_bytes':receipt['total_expected_bytes'],'complete_subset':receipt['complete_subset']}))
+
+          password='0'*len(password); paste_url=''; raw=b'0'*len(raw); del cfg,private_key
+          pathlib.Path('/tmp/ia_milk_takeout.key').unlink(missing_ok=True)
+          pathlib.Path('/tmp/ftps_migration_payload.sealed.b64').unlink(missing_ok=True)
+          if not receipt['complete_subset']:
+              raise SystemExit(3)
+          PY
+
+      - name: Preserve sanitised migration receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ia-milk-takeout-ftps-migration-receipt
+          path: ia-milk-takeout-ftps-receipt.json
+          retention-days: 30
+          if-no-files-found: warn

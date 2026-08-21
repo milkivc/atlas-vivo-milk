@@ -1,0 +1,41 @@
+name: IA MILK Drive Public Read Probe
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths: ['.github/workflows/ia-milk-drive-public-read-probe.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe Google Drive shared Takeout files without credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import requests, json
+          files = [
+            ('1dtNB8IVLyxjHgtk8oNONSATnZecBh-xD',472837),
+            ('1IRi0m1D7b6l2-hnithFwYTMNQLmBzZSn',203847569),
+            ('107eiuj7UYGrE2S3rFl0tN5UllnvPB4V_',1956142674),
+            ('1eZfqI8qEFrTQfYGnY-MJo3HMePmuTZFA',2053143205),
+            ('1FgXD-5-2ZUxbhbvwQv4vOlv03TJKEIiI',158758423),
+            ('1Vs2cZk5gkSpH5Ae76Vy9fL8ZYIZT98V-',70132736),
+            ('1Yl06Do-dLamuDO5dUbM0J8IYDunPTzaj',22558),
+          ]
+          out=[]
+          for fid,size in files:
+            u=f'https://drive.usercontent.google.com/download?id={fid}&export=download&confirm=t'
+            try:
+              r=requests.get(u,headers={'Range':'bytes=0-7'},allow_redirects=True,timeout=30,stream=True)
+              chunk=next(r.iter_content(chunk_size=8),b'')
+              out.append({'id':fid,'expected_size':size,'http':r.status_code,'content_type':r.headers.get('content-type',''),'range':r.headers.get('content-range',''),'magic':chunk[:4].hex(),'final_host':requests.utils.urlparse(r.url).hostname})
+            except Exception as e:
+              out.append({'id':fid,'expected_size':size,'error':type(e).__name__})
+          print(json.dumps(out,sort_keys=True))
+          PY

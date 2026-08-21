@@ -1,0 +1,60 @@
+name: Mistral native workflows inventory
+
+on:
+  push:
+    branches:
+      - codex/safety-gate-2026-08-10
+    paths:
+      - .github/workflows/mistral-native-workflows-inventory.yml
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Inventory native Mistral workflows read-only
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request, urllib.error
+          raw=os.environ.get('MISTRAL_API_KEY','').strip()
+          if raw.startswith('MISTRAL_API_KEY='):
+              raw=raw.split('=',1)[1].strip().strip('"').strip("'")
+          key=''.join(raw.split())
+          if not key: raise SystemExit('MISTRAL_API_KEY missing')
+          H={'Authorization':'Bearer '+key,'Accept':'application/json'}
+          def get(path):
+              r=urllib.request.Request('https://api.mistral.ai'+path,headers=H,method='GET')
+              with urllib.request.urlopen(r,timeout=60) as x:
+                  return json.loads(x.read().decode('utf-8'))
+          out={'external_writes':0,'workflows':[],'registrations':[],'errors':{}}
+          try:
+              b=get('/v1/workflows')
+              for w in b.get('workflows',[]) if isinstance(b,dict) else []:
+                  if isinstance(w,dict):
+                      out['workflows'].append({k:w.get(k) for k in ['id','name','display_name','description','archived'] if k in w})
+          except urllib.error.HTTPError as e:
+              out['errors']['workflows']='HTTP_'+str(e.code)
+          except Exception as e:
+              out['errors']['workflows']=type(e).__name__
+          try:
+              b=get('/v1/workflows/registrations?limit=100&active_only=false&include_shared=true&with_workflow=false')
+              items=[]
+              if isinstance(b,dict):
+                  items=b.get('workflow_registrations') or b.get('workflow_versions') or []
+              for r in items:
+                  if isinstance(r,dict):
+                      out['registrations'].append({k:r.get(k) for k in ['id','workflow_id','active','deployment_name','created_at'] if k in r})
+          except urllib.error.HTTPError as e:
+              out['errors']['registrations']='HTTP_'+str(e.code)
+          except Exception as e:
+              out['errors']['registrations']=type(e).__name__
+          out['workflow_count']=len(out['workflows'])
+          out['registration_count']=len(out['registrations'])
+          print('MISTRAL_NATIVE_WORKFLOWS_BEGIN')
+          print(json.dumps(out,ensure_ascii=False,indent=2,sort_keys=True))
+          print('MISTRAL_NATIVE_WORKFLOWS_END')
+          PY

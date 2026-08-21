@@ -1,0 +1,64 @@
+name: IA MILK Fase1 24 Read Probe
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths: ['.github/workflows/ia-milk-fase1-24-read-probe.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe 24 priority Drive objects without credentials
+        run: |
+          python - <<'PY'
+          import json, requests
+          items = [
+            ('1d4jJEk-g4O1qewxjJ_TQFQqKcRbsSDcFW2t8W1vfwbU','sheet','FESTAS_827'),
+            ('1y_pmQuhyxvAXkzrGPABtCvX6-vYZ8lf8kaKIq9_ZE9k','sheet','STAGING'),
+            ('1WPyQ5ALgS-GxiGE1NeEQJ6Zk2sR4uYsJ-_jOW-jkopQ','sheet','atlas_vivo_publico'),
+            ('1EcjRxUSm8VAdjDIGD-9mMFTDcd6WpcCXqgeUADEJzOU','sheet','GENEALOGIA'),
+            ('1K23zqLmGmTL4a-_gfX0c9o9aL-lW3-pt','stored','CURADORIAS_DOCX'),
+            ('14mwrts0eSyTdD5kumUjNiFBhHoAr5FzsB397jWq9hI0','doc','RELATORIO_CAMADA_PUBLICA'),
+            ('1Pm-kIm8EJJxg5e2Gd3qnyPnJCBfiT2di','stored','LOTE023_HTML'),
+            ('1YbyJHckLAxn4Zxv1AETVoYWNV3DRM3UEaXuZ2mW39y0','sheet','MATRIZ_DESTINOS'),
+            ('1V3CrLFXJFDBDR_mkZ0Qi68HYjs7REr-Bdec18Ga8mGY','doc','NORMA_MAE'),
+            ('1TGQZDc1gun11X_F6DE8CgM4V0_Hswpkds1uKA5bDKa4','doc','PONTE_CANONICA'),
+            ('1EJJ2gA8OY59qDXshvew0V5u_0qjJqcSQJr-yZOjMdks','doc','METODOLOGIA_INTEROPERAVEL'),
+            ('1NYvrnFi-Hs0-FEkjf02cJszd-_qPx7OPYyxDjVSqZqg','doc','CODE_CONTRACT'),
+            ('1JzSgVn3aFi7sAyIz0pO8Z_nbnP5ZtgQ7H1kqoh7G6o8','doc','CORPUS_INTEGRATION_ENGINE'),
+            ('13Sk-Ee3Y3R-ntW_fDXv7I1izy54RO7rBfLI--TH91Xs','doc','ARQUITETURA_PUBLICA'),
+            ('1KWbuNotvt-Ucb4hQgnK22do4qGqAs3Iw','stored','ATLAS_REESCRITA_DOCX'),
+            ('1jO4QnPQv4WKInUtu8dZYv82C32lVryGR','stored','ATLAS_EXAUSTIVO_A'),
+            ('1Ux7B7IJd730jWXM9kSPMCCO0W_yNqFpS','stored','ATLAS_EXAUSTIVO_B'),
+            ('1q5P3--iz5U9_G4X-1QVd4eeoilvUcgVA','stored','ATLAS_FINAL_A'),
+            ('1jqkbSXaCUO7UvlNYqjWqeuW9nxz97CU2','stored','ATLAS_FINAL_B'),
+            ('1GG4hu8LyCKlp26iAARpPklrFy_syDFJY','stored','CAMADA_INVISIVEL_TXT'),
+            ('1HV_8xHAohn5DVTJLstZatb2FBqvfVWSm','stored','CAMADA_INVISIVEL_DOCX'),
+            ('11DUtnXI3cc3h79D4C9uSXATyc7wPxYmh','stored','CAMADA_INVISIVEL_PDF'),
+            ('14Mr5Lu2C-tWEzfK1g_v0Mif9lR65lMT3','stored','GLOSSARIO_MD'),
+            ('1iFVw9xmpOrT1fyOQIT3CATY1sLZgju3J','stored','WORK_HANDOFF_MD'),
+          ]
+          out=[]
+          for fid, kind, label in items:
+            if kind == 'doc':
+              url=f'https://docs.google.com/document/d/{fid}/export?format=docx'
+            elif kind == 'sheet':
+              url=f'https://docs.google.com/spreadsheets/d/{fid}/export?format=xlsx'
+            else:
+              url=f'https://drive.usercontent.google.com/download?id={fid}&export=download&confirm=t'
+            try:
+              r=requests.get(url,headers={'Range':'bytes=0-7'},allow_redirects=True,timeout=45,stream=True)
+              first=next(r.iter_content(chunk_size=8),b'')
+              host=requests.utils.urlparse(r.url).hostname
+              login=(host=='accounts.google.com' or b'<html' in first.lower() or b'<!do' in first.lower())
+              out.append({'label':label,'id':fid,'kind':kind,'http':r.status_code,'host':host,'range':r.headers.get('content-range',''),'content_type':r.headers.get('content-type',''),'first4':first[:4].hex(),'direct_read':bool(r.status_code in (200,206) and not login)})
+            except Exception as e:
+              out.append({'label':label,'id':fid,'kind':kind,'direct_read':False,'error':type(e).__name__})
+          print(json.dumps(out,ensure_ascii=False,sort_keys=True))
+          print('DIRECT_READ_COUNT='+str(sum(1 for x in out if x.get('direct_read'))))
+          print('AUTH_REQUIRED_COUNT='+str(sum(1 for x in out if not x.get('direct_read'))))
+          PY

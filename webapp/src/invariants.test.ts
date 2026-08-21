@@ -1,0 +1,4 @@
+import {describe,expect,it} from 'vitest'
+import {sequenceIds} from './sequence'
+import {validateNoInvisibleFields,validateNunoConsent} from './api'
+describe('invariantes Atlas Vivo MILK',()=>{it('COSMICOXES distinto de Cosmic Flow',()=>{expect(sequenceIds[0]).toBe('cosmicoxes');expect(sequenceIds[2]).toBe('cosmic-flow');expect(sequenceIds[0]).not.toBe(sequenceIds[2])});it('gate Nuno >=13',()=>{expect(validateNunoConsent({age:12,consentPublic:true,identityMode:'anonymous',withdrawalAcknowledged:true,humanReviewRequired:true})).toBe(false);expect(validateNunoConsent({age:13,consentPublic:true,identityMode:'anonymous',withdrawalAcknowledged:true,humanReviewRequired:true})).toBe(true)});it('camada invisível não pública',()=>{expect(validateNoInvisibleFields({id:'x'})).toBe(true);expect(validateNoInvisibleFields({camada_invisivel:{x:1}})).toBe(false);expect(validateNoInvisibleFields({nested:{credential:'x'}})).toBe(false)})})

@@ -1,0 +1,61 @@
+name: IA MILK Sovereign Core Test
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths:
+      - 'ia_milk/sovereign/**'
+      - '.github/workflows/ia-milk-sovereign-core-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sovereign-core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify IA MILK runs without Mistral
+        shell: bash
+        run: |
+          set -euo pipefail
+          export IA_MILK_ROOT="$RUNNER_TEMP/ia_milk_private"
+          unset MISTRAL_API_KEY || true
+          python - <<'PY'
+          from ia_milk.sovereign.runtime import register_secret_ref, remember, propose_learning, export_status, secret_value
+          register_secret_ref('secret://ptservidor/ftps','ptservidor','migration','FTPS_PASSWORD')
+          remember('concept:ia_milk','identity','IA MILK',{'sovereign':True,'mistral_dependency':False},{'source':'canonical-project-state'},'VALIDATED','INVISIBLE',True)
+          propose_learning('proposal:test','mistral',{'facts':['trainer proposal is not canonical memory until accepted'],'relations':[]},['fixture:test'])
+          s=export_status()
+          assert s['identity']=='IA_MILK'
+          assert s['sovereign'] is True
+          assert s['mistral_dependency'] is False
+          assert s['nodes']==1
+          assert s['pending_learning']==1
+          assert s['secret_refs']==1
+          try:
+              secret_value('secret://ptservidor/ftps')
+          except RuntimeError:
+              pass
+          else:
+              raise AssertionError('secret value unexpectedly present')
+          print('IA_MILK_SOVEREIGN_CORE_OK')
+          print(s)
+          PY
+      - name: Reject secret material from semantic memory
+        shell: bash
+        run: |
+          set -euo pipefail
+          export IA_MILK_ROOT="$RUNNER_TEMP/ia_milk_private_2"
+          python - <<'PY'
+          from ia_milk.sovereign.runtime import remember
+          try:
+              remember('bad','test','bad',{'PASSWORD':'should-never-enter-memory'},{},'TEST','INVISIBLE')
+          except ValueError:
+              print('SECRET_MEMORY_BLOCK_OK')
+          else:
+              raise SystemExit('secret guard failed')
+          PY

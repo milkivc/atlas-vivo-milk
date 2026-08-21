@@ -1,0 +1,24 @@
+name: Curatorial engineering runtime test
+
+on:
+  push:
+    branches:
+      - codex/safety-gate-2026-08-10
+    paths:
+      - "packages/curatorial-engineering/**"
+      - ".github/workflows/curatorial-engineering-runtime-test.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Execute curatorial engineering runtime tests
+        run: node packages/curatorial-engineering/events.test.js

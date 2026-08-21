@@ -1,0 +1,37 @@
+name: Preservation identity pipeline — DOI SWHID DataCite IGAC
+
+# execution-trigger: 2026-08-17
+on:
+  push:
+    branches:
+      - codex/safety-gate-2026-08-10
+    paths:
+      - "codemeta.json"
+      - ".zenodo.json"
+      - "metadata.json"
+      - "CITATION.cff"
+      - "ops/preservation_identity_pipeline.py"
+      - ".github/workflows/preservation-identity-pipeline.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
+
+jobs:
+  preserve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Execute preservation and identity pipeline
+        run: python ops/preservation_identity_pipeline.py
+      - name: Upload preservation receipts and dossiers
+        uses: actions/upload-artifact@v4
+        with:
+          name: atlas-preservation-identity
+          path: artifacts/preservation-identity
+          if-no-files-found: error
+          retention-days: 30

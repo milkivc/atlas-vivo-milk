@@ -1,0 +1,39 @@
+name: IA MILK Nextcloud Canary
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    env:
+      IA_MILK_ROOT: ${{ runner.temp }}/ia_milk_private
+      NEXTCLOUD_URL: ${{ secrets.NEXTCLOUD_URL }}
+      NEXTCLOUD_USER: ${{ secrets.NEXTCLOUD_USER }}
+      NEXTCLOUD_PASSWORD: ${{ secrets.NEXTCLOUD_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Require secret store inputs without revealing values
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$NEXTCLOUD_URL" || { echo '::error::NEXTCLOUD_URL missing'; exit 2; }
+          test -n "$NEXTCLOUD_USER" || { echo '::error::NEXTCLOUD_USER missing'; exit 2; }
+          test -n "$NEXTCLOUD_PASSWORD" || { echo '::error::NEXTCLOUD_PASSWORD missing'; exit 2; }
+      - name: Run sovereign put-get canary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os
+          from ia_milk.sovereign.connectors.nextcloud_vault import install_standard_refs, canary
+          install_standard_refs()
+          result=canary(os.environ['NEXTCLOUD_URL'],os.environ['NEXTCLOUD_USER'],'secret://nextcloud/password')
+          print(json.dumps(result,ensure_ascii=False))
+          if result['state']!='VERIFIED': raise SystemExit(1)
+          PY

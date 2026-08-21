@@ -1,0 +1,138 @@
+name: Bootstrap MILK aesthetic research library
+
+on:
+  push:
+    branches:
+      - codex/safety-gate-2026-08-10
+    paths:
+      - ".github/workflows/mistral-aesthetic-library-bootstrap.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - name: Create/reuse research Library, attach tools, and apply aesthetic-systemic skill
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request, urllib.error, mimetypes, tempfile, pathlib
+
+          raw=os.environ.get('MISTRAL_API_KEY','').strip()
+          if raw.startswith('MISTRAL_API_KEY='):
+              raw=raw.split('=',1)[1].strip().strip('"').strip("'")
+          key=''.join(raw.split())
+          if not key:
+              raise SystemExit('MISTRAL_API_KEY missing')
+
+          BASE='https://api.mistral.ai'
+          H={'Authorization':'Bearer '+key,'Accept':'application/json','Content-Type':'application/json'}
+          def req(method,path,payload=None,headers=None,raw_response=False):
+              data=None if payload is None else json.dumps(payload,ensure_ascii=False).encode()
+              hh=dict(H)
+              if headers: hh.update(headers)
+              r=urllib.request.Request(BASE+path,headers=hh,data=data,method=method)
+              with urllib.request.urlopen(r,timeout=120) as x:
+                  b=x.read()
+                  if raw_response: return b
+                  return json.loads(b.decode()) if b else {}
+
+          # 1. Create/reuse Library.
+          lib_name='MILK — Estética, Território e Humanidades'
+          libs=req('GET','/v1/libraries?page_size=100').get('data',[])
+          lib=next((x for x in libs if x.get('name')==lib_name),None)
+          created=False
+          if not lib:
+              lib=req('POST','/v1/libraries',{
+                  'name':lib_name,
+                  'description':'Biblioteca académica e referencial do Atlas Vivo MILK: estética, filosofia, semiótica, dialogismo, território, cultura, sociologia, antropologia, política, economia, linguagem e metodologias. Exclui segredos, credenciais, dados pessoais e fotografias. Uso por RAG; não é corpus de fine-tuning.',
+                  'owner_type':'Workspace',
+                  'chunk_size':1800
+              })
+              created=True
+          lib_id=lib['id']
+
+          # 2. Upload a library policy/epistemic contract as the first safe document if absent.
+          docs=req('GET',f'/v1/libraries/{lib_id}/documents?page_size=100').get('data',[])
+          names={d.get('name') for d in docs}
+          policy_name='MILK_LIBRARY_EPISTEMIC_CONTRACT.txt'
+          if policy_name not in names:
+              policy='''MILK ACADEMIC LIBRARY — EPISTEMIC CONTRACT\n\nPurpose: retrieval and relational reasoning, not model training.\nMandatory analytic rhythm: DESCRIÇÃO -> ANÁLISE -> INTERPRETAÇÃO -> CONTRA-LEITURA -> POSSIBILIDADES.\nSpatial lenses: PROFUNDO -> SUPERFÍCIE -> MARGENS -> EXCLUÍDOS/INVISIBILIZADOS -> RELAÇÕES -> RETORNO AO TODO.\nHuman reading is multilayered: emotional, social, cultural, political, economic, historical, territorial, linguistic, sensory and institutional. Never diagnose a person or infer inner states as facts.\nAesthetic analysis studies form, rhythm, materiality, absence, excess, silence, gesture, relation, context and reception. Aesthetic value is not reduced to beauty.\nSpeech analysis must build a semantic-dialogic-semiotic glossary: word, context, speaker-position, interlocutor, register, rhythm, metaphor, silence, index, icon, symbol, tension, polyphony, contradiction, territorial resonance and historical shift.\nNon-linear/systemic reasoning: connect multiple scales and domains, preserve contradictions, revisit earlier hypotheses, trace loops, emergent relations and weak signals.\nInternet research must distinguish source-derived claims, external research, inference, hypothesis and proposal; cite sources and search counter-evidence.\nNo source is discarded: unsafe/obsolete material becomes negative skill, counterexample, genealogy, test case or redesign prompt.\nNever merge authorial concepts by similarity; source outranks fluency.\n'''
+              payload={'file':{'fileName':policy_name,'content':policy}}
+              req('POST',f'/v1/libraries/{lib_id}/documents',payload)
+
+          # 3. Try two direct Drive reads. Only accept if actual PDF bytes are returned.
+          candidates=[
+              ('Dissertacao finalizada pós qualificação.pdf','1ebROKOg6q8_XSGK89M3hfyFFCX9HqiF_'),
+              ('arcabouco_metodologico_folclore_vivo_tese_80p.pdf','1LzZDtPSd3zDY_kfbn-hVFhqBWOX2ZevZ')
+          ]
+          ingested=[]; blocked=[]
+          names={d.get('name') for d in req('GET',f'/v1/libraries/{lib_id}/documents?page_size=100').get('data',[])}
+          for fname,fid in candidates:
+              if fname in names:
+                  ingested.append({'name':fname,'state':'ALREADY_PRESENT'}); continue
+              url=f'https://drive.google.com/uc?export=download&id={fid}'
+              try:
+                  r=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'})
+                  with urllib.request.urlopen(r,timeout=45) as x:
+                      body=x.read(25_000_000)
+                      ctype=(x.headers.get('Content-Type') or '').lower()
+                  if not body.startswith(b'%PDF'):
+                      blocked.append({'name':fname,'state':'DRIVE_AUTH_OR_EXPORT_REQUIRED','content_type':ctype[:80]})
+                      continue
+                  # Libraries endpoint accepts File content; latin1 preserves byte values through JSON only as an experiment is unsafe for arbitrary binary.
+                  # Use files upload endpoint multipart is required for robust binary upload; skip rather than corrupt.
+                  blocked.append({'name':fname,'state':'PDF_ACCESSIBLE_BUT_BINARY_UPLOAD_NOT_ATTEMPTED_WITH_JSON'})
+              except Exception as e:
+                  blocked.append({'name':fname,'state':'DRIVE_AUTH_OR_EXPORT_REQUIRED','error':type(e).__name__})
+
+          # 4. Apply aesthetic/systemic layer + built-in web search and library retrieval.
+          page=req('GET','/v1/agents/pages')
+          agents={a.get('name'):a for a in page.get('data',[]) if isinstance(a,dict)}
+          targets=['MILK Research Decoder — Web App','MILK Sovereign Orchestrator']
+          marker='[MILK_AESTHETIC_SYSTEMIC_V1]'
+          layer='''\n\n[MILK_AESTHETIC_SYSTEMIC_V1]\nESTÉTICA SISTÉMICA, EXPANSIVA E RELACIONAL\n- Toda leitura complexa segue explicitamente: DESCRIÇÃO -> ANÁLISE -> INTERPRETAÇÃO. Depois acrescenta CONTRA-LEITURA e POSSIBILIDADES quando útil.\n- DESCRIÇÃO: regista forma, matéria, linguagem, gesto, ritmo, cor, som, silêncio, escala, presença, ausência, localização e contexto sem saltar para explicações.\n- ANÁLISE: identifica relações, estruturas, tensões, assimetrias, recorrências, diferenças, mediações, circulação, poderes, temporalidades e condições materiais.\n- INTERPRETAÇÃO: formula sentidos possíveis, sempre graduando fonte/inferência/hipótese e procurando interpretações alternativas.\n- Olhar obrigatório em quatro direcções: PROFUNDO, SUPERFÍCIE, MARGENS e EXCLUÍDOS/INVISIBILIZADOS. Depois regressar ao sistema inteiro e verificar o que mudou na leitura.\n- Nunca tratar margem como deficiência nem exclusão como essência identitária. Procurar processos, relações de poder, barreiras, agência, criação, resistência e ambivalência.\n- SEER HUMANO é multilayer: emocional, social, cultural, político, económico, histórico, territorial, linguístico, sensorial, corporal, institucional e relacional. Camadas podem contradizer-se. Nunca diagnosticar estados internos nem reduzir pessoa a perfil.\n- Estética não é sinónimo de beleza. Ler estética como regime de percepção, forma, relação, sensibilidade, distribuição do visível/audível, materialidade, ritmo, ausência, excesso, gesto, recepção e disputa de sentido.\n- Criar e manter GLOSSÁRIO SEMÂNTICO-DIALÓGICO-SEMIÓTICO: termo; usos; contexto; posição do falante; interlocutor; registro; polissemia; metáfora; índice; ícone; símbolo; ritmo; silêncio; gíria; tensão; contrapalavra; polifonia; deslocamento histórico; ressonância territorial; palavras vizinhas e opositoras.\n- A estética da fala inclui não só o que é dito, mas COMO: ritmo, hesitação, repetição, pausa, intensidade, pronome, endereço, humor, ironia, quebra sintáctica, neologismo, silêncio e relação com quem escuta. Não inferir emoção como facto; descrever marcas e oferecer hipóteses.\n- Pensamento NÃO LINEAR e SISTÉMICO: trabalhar ciclos, redes, escalas, feedbacks, emergência, contradições, causalidade concorrente, dependências, efeitos de segunda ordem e futuros possíveis. Voltar a passos anteriores quando nova relação altera a interpretação.\n- Prospectar expansivamente: para cada achado perguntar (a) que outras disciplinas ajudam, (b) que territórios comparáveis existem, (c) que contrapontos existem, (d) que nova activação curatorial/dispositivo pode emergir, (e) que risco nasce, (f) que evidência falta.\n- Web search é ferramenta de ampliação, não autoridade automática. Pesquisar lateralmente e em profundidade; preferir fontes primárias/académicas quando adequadas; procurar contra-evidência; citar e separar pesquisa externa da fonte MILK.\n- Document Library é memória académica de consulta, não treino. Fazer retrieval com referências e comparar documentos antes de sintetizar.\n- Quando uma capa/fotografia de livro for recebida: extrair apenas elementos visíveis, identificar a obra sem inventar edição/autoria ausente, pesquisar fontes bibliográficas e académicas na web, mapear conceitos, críticas e contrapontos, e ligar ao grafo MILK.\n- Toda proposta inovadora deve indicar: origem da relação, disciplinas envolvidas, evidências, analogias, diferenças, riscos, activações possíveis, contraindicações e gate humano.\n[/MILK_AESTHETIC_SYSTEMIC_V1]\n'''
+          updates=[]; missing=[]
+          for name in targets:
+              a=agents.get(name)
+              if not a:
+                  missing.append(name); continue
+              full=req('GET',f"/v1/agents/{a['id']}")
+              old=full.get('instructions') or ''
+              instructions=old if marker in old else old+layer
+              tools=list(full.get('tools') or [])
+              def ttype(t): return t.get('type') if isinstance(t,dict) else None
+              if not any(ttype(t) in ('web_search','web_search_premium') for t in tools):
+                  tools.append({'type':'web_search'})
+              # Replace/merge document_library so this Library is available without dropping any existing library ids.
+              dl=next((t for t in tools if ttype(t)=='document_library'),None)
+              if dl is None:
+                  tools.append({'type':'document_library','library_ids':[lib_id]})
+              else:
+                  ids=list(dl.get('library_ids') or [])
+                  if lib_id not in ids: ids.append(lib_id)
+                  dl['library_ids']=ids
+              meta=full.get('metadata') or {}
+              meta.update({'aesthetic_systemic':'v1','research_library_id':lib_id,'web_prospection':'enabled','analysis_rhythm':'description-analysis-interpretation','glossary':'semantic-dialogic-semiotic','human_layers':'multidimensional','zero_learning':'true'})
+              out=req('PATCH',f"/v1/agents/{a['id']}",{'instructions':instructions,'tools':tools,'metadata':meta})
+              updates.append({'name':name,'id':a['id'],'version':out.get('version'),'tool_types':[ttype(t) for t in (out.get('tools') or [])]})
+
+          report={
+              'state':'MILK_AESTHETIC_LIBRARY_BOOTSTRAPPED',
+              'library':{'id':lib_id,'name':lib_name,'created':created},
+              'drive_candidates':{'ingested':ingested,'blocked':blocked},
+              'agents_updated':updates,
+              'missing_agents':missing,
+              'drive_writes':0,
+              'fine_tuning':0,
+              'library_is_training':False
+          }
+          print(json.dumps(report,ensure_ascii=False,sort_keys=True))
+          if missing: raise SystemExit('Expected agent missing: '+', '.join(missing))
+          PY

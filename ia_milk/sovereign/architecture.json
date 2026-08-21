@@ -1,0 +1,63 @@
+{
+  "identity": "IA_MILK",
+  "canonical_memory_owner": "Associacao_MILK",
+  "runtime_target": "PTServidor/Nextcloud",
+  "mistral_role": "external_trainer_only",
+  "mistral_is_dependency": false,
+  "secret_policy": {
+    "values_in_semantic_memory": false,
+    "values_in_git": false,
+    "values_in_trainer_prompts": false,
+    "values_in_logs": false,
+    "opaque_references_only": true,
+    "runtime_secret_store_required": true
+  },
+  "memory": {
+    "persistent": true,
+    "backend": "sqlite_or_postgresql_on_ptservidor",
+    "document_store": "nextcloud_private",
+    "stores": [
+      "facts",
+      "relations",
+      "contradictions",
+      "hypotheses",
+      "provenance",
+      "territorial_context",
+      "rights",
+      "validation_states",
+      "trainer_proposals",
+      "connector_receipts"
+    ]
+  },
+  "trainers": {
+    "mistral": {
+      "allowed": true,
+      "persistent_memory_owner": false,
+      "secret_access": false,
+      "writes_canonical_memory_directly": false
+    },
+    "future_models": {
+      "allowed_if_adapter_compliant": true,
+      "secret_access": false,
+      "writes_canonical_memory_directly": false
+    }
+  },
+  "connectors": {
+    "nextcloud": "local_connector_with_secret_ref",
+    "ptservidor": "local_connector_with_secret_ref",
+    "google_drive": "read_only_source",
+    "codeberg_forgejo": "canonical_forge_after_authentication",
+    "zenodo": "human_gated_publication",
+    "orcid": "personal_oauth_human_gated",
+    "posthog": "privacy_minimized_observability"
+  },
+  "human_gates": [
+    "publication",
+    "authorship",
+    "licensing",
+    "legal_decisions",
+    "curatorial_decisions",
+    "sensitive_data_processing",
+    "destructive_actions"
+  ]
+}

@@ -1,0 +1,62 @@
+name: Amplify Atlas Mistral agents with skill lattice
+
+on:
+  push:
+    branches:
+      - codex/safety-gate-2026-08-10
+    paths:
+      - ".github/workflows/mistral-skill-lattice-amplify.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  amplify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - name: Append intelligence amplification layer without replacing existing instructions
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+
+          raw=os.environ.get('MISTRAL_API_KEY','').strip()
+          if raw.startswith('MISTRAL_API_KEY='):
+              raw=raw.split('=',1)[1].strip().strip('"').strip("'")
+          key=''.join(raw.split())
+          if not key:
+              raise SystemExit('MISTRAL_API_KEY missing')
+          BASE='https://api.mistral.ai'
+          H={'Authorization':'Bearer '+key,'Accept':'application/json','Content-Type':'application/json'}
+          def req(method,path,payload=None):
+              data=None if payload is None else json.dumps(payload,ensure_ascii=False).encode()
+              r=urllib.request.Request(BASE+path,headers=H,data=data,method=method)
+              with urllib.request.urlopen(r,timeout=90) as x:
+                  return json.loads(x.read().decode())
+
+          page=req('GET','/v1/agents/pages')
+          agents={a.get('name'):a for a in page.get('data',[]) if isinstance(a,dict)}
+          targets=['MILK Drive Curator — Read Only','MILK Research Decoder — Web App','MILK Sovereign Orchestrator']
+          marker='[MILK_SKILL_LATTICE_V1]'
+          layer='''\n\n[MILK_SKILL_LATTICE_V1]\nINTELIGÊNCIA AMPLIADA — CAMPO DO POSSÍVEL\n- Nada da pesquisa é lixo por defeito. Cada elemento deve poder funcionar como capacidade, limite, contraindicação, caso de teste, sinal, genealogia, potencial dormente, proposta, relação ou exemplo de falha.\n- Uma regra negativa é uma SKILL NEGATIVA: reconhece quando NÃO fazer, explica porquê e procura alternativa segura.\n- Falhas históricas viram guardrails e testes de regressão; nunca são apagadas nem repetidas cegamente.\n- Ausência de resultado não significa inexistência. Ativa protocolo de busca negativa/Nulometria e declara limite de cobertura.\n- Retrieval tem de ser avaliado antes da síntese: se insuficiente, contraditório ou ruidoso, corrigir a busca ou abster-se.\n- Toda resposta substantiva faz segunda passagem: suporte por fonte, conceitos não colapsados, contra-evidência, direitos, incerteza e alternativas.\n- Recuperação deve combinar semântica + metadados + relações de grafo; proximidade textual não cria relação canónica.\n- Preserva contradições como nós de conhecimento. Não resolve divergência por média, maioria ou apagamento.\n- Mantém POTENCIAL_AINDA_NAO_ACTIVADO para ideias, mecânicas e dispositivos dormentes; procura condições futuras de ativação sem os declarar recomendados.\n- Quando nenhuma resposta existente for suficiente, pode produzir PROPOSTA_DE_NOVO_DISPOSITIVO, mostrando lacuna, fontes, componentes reutilizados, riscos e gate humano; nunca atribuir automaticamente autoria/canonicidade à proposta.\n- Pode recombinar curadorias por composição, mas cada objeto mantém identidade, fonte e contribuição própria.\n- Pode raciocinar contrafactualmente ('o que mudaria se...'), mas cenário é HIPOTESE e factos preservados continuam separados.\n- Metrologias do OLHO DO ATLAS funcionam como skills de leitura, nunca como scores de pessoas: Batimetria=profundidade; Bimetria=relação de dois parâmetros; Duametria=tensão/dualidade; Nulometria=ausência documentável; Ametria=qualitativo sem unidade fixa; Dinametria=fluxo/mudança; Assimetria=desequilíbrio; Desmetria=desordem/fricção; Minometria=microescala; Nanometria=escala especializada que pode exigir parceiro técnico.\n- Para qualquer metrologia: exigir fonte, escala, método, evidência, limite interpretativo, impacto no seer humano, proposta de cuidado e validação humana.\n- Nunca diagnosticar indivíduos, nunca criar score humano, nunca usar biometria/vigilância como default, nunca tratar não-encontrado como não-existente, nunca publicar sem gates, nunca fundir conceitos autorais por semelhança.\n- A inteligência deve maximizar possibilidade COM rastreabilidade: descobrir ativações, combinações, lacunas, futuros não realizados e ressonâncias interterritoriais, sempre distinguindo CONFIRMADO_POR_FONTE / INFERENCIA / HIPOTESE / PROPOSTA.\n[/MILK_SKILL_LATTICE_V1]\n'''
+          updated=[]; already=[]; missing=[]
+          for name in targets:
+              a=agents.get(name)
+              if not a:
+                  missing.append(name); continue
+              full=req('GET',f"/v1/agents/{a['id']}")
+              old=full.get('instructions') or ''
+              if marker in old:
+                  already.append(name); continue
+              meta=full.get('metadata') or {}
+              meta.update({'skill_lattice':'v1','negative_skills':'enabled','dormant_potential':'enabled','counterevidence':'required','zero_learning':'true'})
+              out=req('PATCH',f"/v1/agents/{a['id']}",{'instructions':old+layer,'metadata':meta})
+              updated.append({'name':name,'id':a['id'],'version':out.get('version')})
+          print(json.dumps({'state':'SKILL_LATTICE_APPLIED','updated':updated,'already_present':already,'missing':missing,'drive_writes':0,'fine_tuning':0,'libraries_created':0},ensure_ascii=False,sort_keys=True))
+          if missing:
+              raise SystemExit('Expected agent missing: '+', '.join(missing))
+          PY

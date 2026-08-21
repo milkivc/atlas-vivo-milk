@@ -1,0 +1,10 @@
+from pathlib import Path
+
+def put(path, body):
+    p=Path(path); p.parent.mkdir(parents=True,exist_ok=True); p.write_text(body,encoding='utf-8')
+
+put('webapp/src/vite-env.d.ts','''/// <reference types="vite/client" />\n''')
+put('webapp/src/components/GaleriaDiletante.tsx','''import React from 'react'\nexport type GaleriaItem={id:string;titulo:string;imagemUrl?:string;estado:'PENDENTE'|'PUBLICADO'|'NOT_VERIFIED'}\ntype Props={items?:GaleriaItem[]}\nconst GaleriaDiletante:React.FC<Props>=({items=[]})=><section aria-labelledby="galeria-diletante-title"><h2 id="galeria-diletante-title">Galeria Diletante</h2>{items.length===0?<p>Conteúdo curatorial: PENDENTE.</p>:<ul>{items.map(item=><li key={item.id}><strong>{item.titulo}</strong><span> — {item.estado}</span>{item.imagemUrl?<img src={item.imagemUrl} alt="" loading="lazy"/>:null}</li>)}</ul>}</section>\nexport default GaleriaDiletante\n''')
+put('webapp/src/components/CronicasFuco.tsx','''import React from 'react'\nexport type CronicaFuco={id:string;titulo:string;excerto?:string;estado:'PENDENTE'|'PUBLICADO'|'NOT_VERIFIED'}\ntype Props={cronicas?:CronicaFuco[]}\nconst CronicasFuco:React.FC<Props>=({cronicas=[]})=><section aria-labelledby="cronicas-fuco-title"><h2 id="cronicas-fuco-title">Crónicas Cãotadas por Fucô</h2>{cronicas.length===0?<p>Crónicas: PENDENTE.</p>:<ul>{cronicas.map(c=><li key={c.id}><article><h3>{c.titulo}</h3>{c.excerto?<p>{c.excerto}</p>:null}<small>{c.estado}</small></article></li>)}</ul>}</section>\nexport default CronicasFuco\n''')
+put('webapp/src/components/MilkTerritorial.tsx','''import React from 'react'\nimport type {Distrito} from '../domain'\ntype Props={distritos?:Distrito[]}\nconst MilkTerritorial:React.FC<Props>=({distritos=[]})=><section aria-labelledby="milk-territorial-title"><h2 id="milk-territorial-title">MILK territorial</h2>{distritos.length===0?<p>Base territorial pública: PENDENTE / NOT_VERIFIED.</p>:<ul>{distritos.map(d=><li key={d.id}>{d.nome} — {d.concelhos.length} concelho(s)</li>)}</ul>}</section>\nexport default MilkTerritorial\n''')
+print('webapp_compile_repair_v2=true')

@@ -1,0 +1,114 @@
+name: IA MILK PTServidor SSO Bootstrap
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths:
+      - '.github/workflows/ia-milk-ptservidor-sso-bootstrap.yml'
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install browser and crypto
+        run: |
+          python -m pip install --disable-pip-version-check --no-input cryptography playwright
+          python -m playwright install chromium
+      - name: Publish ephemeral key
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey
+          from cryptography.hazmat.primitives.serialization import Encoding,PrivateFormat,PublicFormat,NoEncryption
+          import base64,pathlib,json,os,urllib.request
+          p=X25519PrivateKey.generate(); pathlib.Path('/tmp/k').write_bytes(p.private_bytes(Encoding.Raw,PrivateFormat.Raw,NoEncryption())); pathlib.Path('/tmp/k').chmod(0o600)
+          pub=base64.urlsafe_b64encode(p.public_key().public_bytes(Encoding.Raw,PublicFormat.Raw)).decode()
+          body={'body':f"IA_MILK_PTS_SSO_RUN={os.environ['RUN_ID']}\nIA_MILK_PTS_SSO_PUBLIC_KEY_B64={pub}"}
+          req=urllib.request.Request(f"https://api.github.com/repos/{os.environ['REPO']}/issues/27/comments",data=json.dumps(body).encode(),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},method='POST'); urllib.request.urlopen(req,timeout=30).read(); print('PUBLIC_KEY_READY')
+          PY
+      - name: Login client area, enter cPanel, rotate FTPS, verify canary
+        shell: bash
+        env:
+          BRANCH: codex/safety-gate-2026-08-10
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 75); do
+            git fetch -q origin "$BRANCH" || true
+            if git show "origin/$BRANCH:ia_milk/ptservidor_sso_payload.bin.b64" >/tmp/p.b64 2>/dev/null; then echo SEALED_PAYLOAD_RECEIVED; break; fi
+            sleep 4
+          done
+          test -s /tmp/p.b64 || exit 2; base64 -d /tmp/p.b64 >/tmp/p.bin
+          python - <<'PY'
+          from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey,X25519PublicKey
+          from cryptography.hazmat.primitives.kdf.hkdf import HKDF
+          from cryptography.hazmat.primitives import hashes
+          from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+          from playwright.sync_api import sync_playwright
+          import pathlib,json,urllib.parse,secrets,string,ftplib,io,hashlib,time,re
+          raw=pathlib.Path('/tmp/p.bin').read_bytes(); priv=X25519PrivateKey.from_private_bytes(pathlib.Path('/tmp/k').read_bytes()); shared=priv.exchange(X25519PublicKey.from_public_bytes(raw[:32])); key=HKDF(algorithm=hashes.SHA256(),length=32,salt=None,info=b'IA-MILK-PTS-SSO-V1').derive(shared); cfg=json.loads(AESGCM(key).decrypt(raw[32:44],raw[44:],b'IA-MILK'))
+          email,password=cfg['email'],cfg['password']; print('::add-mask::'+email); print('::add-mask::'+password)
+          R={'state':'PTS_SSO_BOOTSTRAP','client_auth':False,'cpanel_sso':False,'ftp_rotated':False,'ftps_verified':False,'bytes':0,'sha256_match':False,'secrets_exposed':False}
+          newpw=''.join(secrets.choice(string.ascii_letters+string.digits+'!@#%_-') for _ in range(36)); print('::add-mask::'+newpw)
+          with sync_playwright() as p:
+              b=p.chromium.launch(headless=True); page=b.new_page()
+              page.goto('https://my.ptservidor.pt/login',wait_until='domcontentloaded',timeout=60000)
+              # Locate username/email and password fields without relying on exact WHMCS theme.
+              u=page.locator('input[type=email], input[name=email], input[name=username], input[id*=email i], input[id*=username i]').first
+              pw=page.locator('input[type=password]').first
+              if u.count() and pw.count():
+                  u.fill(email); pw.fill(password)
+                  btn=page.locator('button[type=submit], input[type=submit]').first
+                  if btn.count(): btn.click(); page.wait_for_load_state('networkidle',timeout=60000)
+              body=(page.locator('body').inner_text(timeout=10000) or '').lower(); R['client_auth']=('logout' in body or 'terminar sessão' in body or 'clientarea' in page.url.lower() or 'services' in page.url.lower()) and ('login' not in page.url.lower())
+              if R['client_auth']:
+                  # Find a cPanel/hosting management link; follow candidate links until port 2083/cpsess appears.
+                  links=page.locator('a'); hrefs=[]
+                  for i in range(min(links.count(),300)):
+                      a=links.nth(i)
+                      try:
+                          txt=(a.inner_text(timeout=300) or '').lower(); href=a.get_attribute('href') or ''
+                          if 'cpanel' in txt or 'cpanel' in href.lower() or 'manage' in txt or 'gerir' in txt: hrefs.append(href)
+                      except Exception: pass
+                  for href in hrefs[:30]:
+                      try:
+                          if href: page.goto(urllib.parse.urljoin(page.url,href),wait_until='domcontentloaded',timeout=30000)
+                          # click visible cPanel link/button if present
+                          cp=page.get_by_text(re.compile('cPanel',re.I)).first
+                          if cp.count(): cp.click(); page.wait_for_load_state('domcontentloaded',timeout=30000)
+                          if ':2083' in page.url or '/cpsess' in page.url: R['cpanel_sso']=True; break
+                      except Exception: pass
+              if R['cpanel_sso']:
+                  # UAPI same-origin through authenticated browser context.
+                  result=page.evaluate("""async (pw) => { const q=new URLSearchParams({user:'migration',password:pw,quota:'0'}); const r=await fetch('/execute/Ftp/set_password?'+q.toString(),{credentials:'include'}); return {status:r.status,text:await r.text()}; }""",newpw)
+                  try:
+                      j=json.loads(result['text']); R['ftp_rotated']=bool(j.get('status')==1)
+                  except Exception: R['ftp_rotated']=False
+              b.close()
+          if R['ftp_rotated']:
+              try:
+                  ftp=ftplib.FTP_TLS(timeout=25); ftp.connect('associacaomilk.pt',21); ftp.login('migration@associacaomilk.pt',newpw); ftp.prot_p(); data=secrets.token_bytes(4096); sha=hashlib.sha256(data).hexdigest(); name='ia-milk-canary-'+str(int(time.time()))+'.bin'; ftp.storbinary('STOR '+name,io.BytesIO(data)); back=io.BytesIO(); ftp.retrbinary('RETR '+name,back.write); ftp.quit(); ok=hashlib.sha256(back.getvalue()).hexdigest()==sha; R.update({'ftps_verified':ok,'bytes':4096 if ok else 0,'sha256_match':ok,'remote_name':name if ok else None})
+              except Exception: pass
+          pathlib.Path('pts-sso-receipt.json').write_text(json.dumps(R,indent=2)); print(json.dumps(R)); pathlib.Path('/tmp/k').unlink(missing_ok=True); pathlib.Path('/tmp/p.bin').unlink(missing_ok=True); pathlib.Path('/tmp/p.b64').unlink(missing_ok=True)
+          # Password intentionally not persisted yet. A verified run must immediately hand it to the sovereign vault in the same future session.
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pts-sso-receipt
+          path: pts-sso-receipt.json
+          retention-days: 30

@@ -1,0 +1,70 @@
+name: Software Heritage Atlas preservation
+
+on:
+  push:
+    branches:
+      - codex/safety-gate-2026-08-10
+    paths:
+      - "docs/SOFTWARE_HERITAGE_ATLAS_INTEGRATION.md"
+      - "ops/swh_atlas_preservation.py"
+      - ".github/workflows/software-heritage-atlas-preservation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  ATLAS_SOURCE_ORIGIN: https://github.com/milkivc/atlas-vivo-milk
+  NEXTCLOUD_WEBDAV_URL: ${{ secrets.NEXTCLOUD_WEBDAV_URL }}
+  NEXTCLOUD_USER: ${{ secrets.NEXTCLOUD_USER }}
+  NEXTCLOUD_APP_PASSWORD: ${{ secrets.NEXTCLOUD_APP_PASSWORD }}
+
+jobs:
+  preserve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install official SWH identifier tooling
+        run: pip install 'swh.model[cli]'
+      - name: Execute Software Heritage preservation
+        run: python ops/swh_atlas_preservation.py
+      - name: Prepare immutable contribution bundle
+        run: |
+          mkdir -p artifacts/software-heritage/bundle
+          cp docs/SOFTWARE_HERITAGE_ATLAS_INTEGRATION.md artifacts/software-heritage/bundle/
+          cp artifacts/software-heritage/execution-receipt.json artifacts/software-heritage/bundle/
+          cp artifacts/software-heritage/manifest.json artifacts/software-heritage/bundle/
+          find artifacts/software-heritage/bundle -type f -print0 | sort -z | xargs -0 sha256sum > artifacts/software-heritage/SHA256SUMS.txt
+          tar -czf artifacts/software-heritage/atlas-swh-contribution-bundle.tar.gz -C artifacts/software-heritage bundle SHA256SUMS.txt
+          sha256sum artifacts/software-heritage/atlas-swh-contribution-bundle.tar.gz > artifacts/software-heritage/BUNDLE_SHA256.txt
+      - name: Persist to Nextcloud when restricted WebDAV is available
+        id: nextcloud
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${NEXTCLOUD_WEBDAV_URL:-}" ] || [ -z "${NEXTCLOUD_USER:-}" ] || [ -z "${NEXTCLOUD_APP_PASSWORD:-}" ]; then
+            echo '{"state":"NEXTCLOUD_AUTH_NOT_AVAILABLE","written":false}' > artifacts/software-heritage/nextcloud-receipt.json
+            exit 0
+          fi
+          base="${NEXTCLOUD_WEBDAV_URL%/}/Atlas-Vivo-MILK/Preservacao/Software-Heritage/${GITHUB_RUN_ID}"
+          curl --fail --silent --show-error -u "$NEXTCLOUD_USER:$NEXTCLOUD_APP_PASSWORD" -X MKCOL "${NEXTCLOUD_WEBDAV_URL%/}/Atlas-Vivo-MILK" || true
+          curl --fail --silent --show-error -u "$NEXTCLOUD_USER:$NEXTCLOUD_APP_PASSWORD" -X MKCOL "${NEXTCLOUD_WEBDAV_URL%/}/Atlas-Vivo-MILK/Preservacao" || true
+          curl --fail --silent --show-error -u "$NEXTCLOUD_USER:$NEXTCLOUD_APP_PASSWORD" -X MKCOL "${NEXTCLOUD_WEBDAV_URL%/}/Atlas-Vivo-MILK/Preservacao/Software-Heritage" || true
+          curl --fail --silent --show-error -u "$NEXTCLOUD_USER:$NEXTCLOUD_APP_PASSWORD" -X MKCOL "$base" || true
+          curl --fail --silent --show-error -u "$NEXTCLOUD_USER:$NEXTCLOUD_APP_PASSWORD" -T artifacts/software-heritage/atlas-swh-contribution-bundle.tar.gz "$base/atlas-swh-contribution-bundle.tar.gz"
+          curl --fail --silent --show-error -u "$NEXTCLOUD_USER:$NEXTCLOUD_APP_PASSWORD" -T artifacts/software-heritage/BUNDLE_SHA256.txt "$base/BUNDLE_SHA256.txt"
+          curl --fail --silent --show-error -u "$NEXTCLOUD_USER:$NEXTCLOUD_APP_PASSWORD" -X PROPFIND -H 'Depth: 0' "$base/atlas-swh-contribution-bundle.tar.gz" > artifacts/software-heritage/nextcloud-propfind.xml
+          printf '{"state":"NEXTCLOUD_WRITE_VERIFIED_BY_PROPFIND","written":true,"remote":"%s"}\n' "$base" > artifacts/software-heritage/nextcloud-receipt.json
+      - name: Upload preservation evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: atlas-software-heritage-preservation
+          path: artifacts/software-heritage
+          if-no-files-found: error
+          retention-days: 30

@@ -1,0 +1,115 @@
+name: PTServidor transport preflight
+
+on:
+  push:
+    branches:
+      - codex/safety-gate-2026-08-10
+    paths:
+      - ".github/workflows/ptservidor-transport-preflight.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      PT_HOST: troi.ptservidor.net
+      PT_USER: associ16
+      FTP_HOST_1: ${{ secrets.PTSERVIDOR_FTP_HOST }}
+      FTP_HOST_2: ${{ secrets.FTP_HOST }}
+      FTP_USER_1: ${{ secrets.PTSERVIDOR_FTP_USER }}
+      FTP_USER_2: ${{ secrets.FTP_USER }}
+      FTP_PASS_1: ${{ secrets.PTSERVIDOR_FTP_PASSWORD }}
+      FTP_PASS_2: ${{ secrets.FTP_PASSWORD }}
+      FTP_PASS_3: ${{ secrets.CPANEL_PASSWORD }}
+      WEBDAV_URL_1: ${{ secrets.PTSERVIDOR_WEBDAV_URL }}
+      WEBDAV_URL_2: ${{ secrets.NEXTCLOUD_WEBDAV_URL }}
+      WEBDAV_USER_1: ${{ secrets.NEXTCLOUD_USERNAME }}
+      WEBDAV_USER_2: ${{ secrets.NEXTCLOUD_USER }}
+      WEBDAV_PASS_1: ${{ secrets.NEXTCLOUD_APP_PASSWORD }}
+      WEBDAV_PASS_2: ${{ secrets.NEXTCLOUD_PASSWORD }}
+    steps:
+      - name: Read-only network and credential-reference preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          first_nonempty() {
+            local x
+            for x in "$@"; do
+              if [ -n "$x" ]; then printf '%s' "$x"; return 0; fi
+            done
+            return 1
+          }
+
+          bool() { if [ -n "${1:-}" ]; then echo true; else echo false; fi; }
+
+          echo 'PTSERVIDOR_TRANSPORT_PREFLIGHT_BEGIN'
+          echo 'external_writes=0'
+          echo 'source_drive_writes=0'
+          echo 'target_file_writes=0'
+
+          if getent ahosts "$PT_HOST" >/tmp/pt-hosts 2>/dev/null; then
+            echo 'dns_pt_host=true'
+          else
+            echo 'dns_pt_host=false'
+          fi
+
+          if timeout 5 bash -c "</dev/tcp/$PT_HOST/21" 2>/dev/null; then
+            echo 'tcp_ftp_21=true'
+          else
+            echo 'tcp_ftp_21=false'
+          fi
+
+          if timeout 5 bash -c "</dev/tcp/$PT_HOST/443" 2>/dev/null; then
+            echo 'tcp_https_443=true'
+          else
+            echo 'tcp_https_443=false'
+          fi
+
+          ftp_host="$(first_nonempty "$FTP_HOST_1" "$FTP_HOST_2" "$PT_HOST" || true)"
+          ftp_user="$(first_nonempty "$FTP_USER_1" "$FTP_USER_2" || true)"
+          ftp_pass="$(first_nonempty "$FTP_PASS_1" "$FTP_PASS_2" "$FTP_PASS_3" || true)"
+          webdav_url="$(first_nonempty "$WEBDAV_URL_1" "$WEBDAV_URL_2" || true)"
+          webdav_user="$(first_nonempty "$WEBDAV_USER_1" "$WEBDAV_USER_2" || true)"
+          webdav_pass="$(first_nonempty "$WEBDAV_PASS_1" "$WEBDAV_PASS_2" || true)"
+
+          echo "ftp_host_reference_present=$(bool "$ftp_host")"
+          echo "ftp_user_reference_present=$(bool "$ftp_user")"
+          echo "ftp_password_reference_present=$(bool "$ftp_pass")"
+          echo "webdav_url_reference_present=$(bool "$webdav_url")"
+          echo "webdav_user_reference_present=$(bool "$webdav_user")"
+          echo "webdav_password_reference_present=$(bool "$webdav_pass")"
+
+          # Authentication tests are strictly read-only. Never downgrade to plaintext FTP.
+          if [ -n "$ftp_host" ] && [ -n "$ftp_user" ] && [ -n "$ftp_pass" ]; then
+            if curl --silent --show-error --fail --max-time 20 \
+              --ssl-reqd --ftp-ssl-control --user "$ftp_user:$ftp_pass" \
+              --list-only "ftp://$ftp_host/" >/tmp/ftp-listing 2>/tmp/ftp-error; then
+              echo 'ftps_auth_readonly_ok=true'
+            else
+              echo 'ftps_auth_readonly_ok=false'
+              code=$?
+              echo "ftps_auth_exit_code=$code"
+            fi
+          else
+            echo 'ftps_auth_readonly_ok=not_attempted_missing_reference'
+          fi
+
+          if [ -n "$webdav_url" ] && [ -n "$webdav_user" ] && [ -n "$webdav_pass" ]; then
+            status=$(curl --silent --show-error --output /tmp/webdav-propfind \
+              --write-out '%{http_code}' --max-time 20 \
+              --request PROPFIND --header 'Depth: 0' \
+              --user "$webdav_user:$webdav_pass" "$webdav_url" || true)
+            case "$status" in
+              200|207) echo 'webdav_auth_readonly_ok=true' ;;
+              *) echo 'webdav_auth_readonly_ok=false'; echo "webdav_http_status=$status" ;;
+            esac
+          else
+            echo 'webdav_auth_readonly_ok=not_attempted_missing_reference'
+          fi
+
+          echo 'PTSERVIDOR_TRANSPORT_PREFLIGHT_END'

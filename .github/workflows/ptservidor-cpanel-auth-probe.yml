@@ -1,0 +1,46 @@
+name: PTServidor cPanel auth reference probe
+
+on:
+  push:
+    branches: [codex/safety-gate-2026-08-10]
+    paths:
+      - '.github/workflows/ptservidor-cpanel-auth-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      CPANEL_TOKEN_A: ${{ secrets.PTSERVIDOR_CPANEL_API_TOKEN }}
+      CPANEL_TOKEN_B: ${{ secrets.CPANEL_API_TOKEN }}
+      CPANEL_TOKEN_C: ${{ secrets.CPANEL_TOKEN }}
+      CPANEL_PASS_A: ${{ secrets.PTSERVIDOR_CPANEL_PASSWORD }}
+      CPANEL_PASS_B: ${{ secrets.CPANEL_PASSWORD }}
+      FTP_USER_A: ${{ secrets.PTSERVIDOR_FTP_USERNAME }}
+      FTP_USER_B: ${{ secrets.PTSERVIDOR_FTP_USER }}
+      FTP_PASS_A: ${{ secrets.PTSERVIDOR_FTP_PASSWORD }}
+      NEXTCLOUD_URL: ${{ secrets.NEXTCLOUD_WEBDAV_URL }}
+      NEXTCLOUD_USER: ${{ secrets.NEXTCLOUD_USER }}
+      NEXTCLOUD_PASS: ${{ secrets.NEXTCLOUD_APP_PASSWORD }}
+    steps:
+      - name: Report only presence booleans
+        shell: bash
+        run: |
+          set -euo pipefail
+          present(){ if [ -n "${1:-}" ]; then echo true; else echo false; fi; }
+          echo "ptservidor_cpanel_api_token=$(present "$CPANEL_TOKEN_A")"
+          echo "cpanel_api_token=$(present "$CPANEL_TOKEN_B")"
+          echo "cpanel_token=$(present "$CPANEL_TOKEN_C")"
+          echo "ptservidor_cpanel_password=$(present "$CPANEL_PASS_A")"
+          echo "cpanel_password=$(present "$CPANEL_PASS_B")"
+          echo "ptservidor_ftp_username=$(present "$FTP_USER_A")"
+          echo "ptservidor_ftp_user=$(present "$FTP_USER_B")"
+          echo "ptservidor_ftp_password=$(present "$FTP_PASS_A")"
+          echo "nextcloud_webdav_url=$(present "$NEXTCLOUD_URL")"
+          echo "nextcloud_user=$(present "$NEXTCLOUD_USER")"
+          echo "nextcloud_app_password=$(present "$NEXTCLOUD_PASS")"
+          echo 'secret_values_exposed=false'
