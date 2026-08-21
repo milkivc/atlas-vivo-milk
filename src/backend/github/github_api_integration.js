@@ -371,7 +371,7 @@ jobs:
 
       - name: Check for placeholder ORCIDs
         run: |
-          if grep -r "0000-0000-0000-0000" .; then
+          if grep -r "ORCID-VALIDO-OBRIGATORIO" .; then
             echo "❌ ORCID placeholder encontrado!"
             exit 1
           else
