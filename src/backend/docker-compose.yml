@@ -1,0 +1,190 @@
+version: '3.8'
+
+# ============================================
+# ATLAS VIVO MILK - Docker Compose Configuration
+# ============================================
+#
+# Services:
+#   - app: Main SWH Integration application
+#   - nginx: Reverse proxy with SSL termination
+#   - redis: Caching layer (optional)
+#   - mongodb: Database (optional - for future use)
+#
+# Usage:
+#   Development: docker-compose -f docker-compose.yml up -d
+#   Production:  docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+#
+# ============================================
+
+services:
+  # Main Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: atlas-vivo-milk-swh-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - LOG_LEVEL=debug
+      - FORGEJO_ENABLED=true
+      - FORGEJO_API_URL=https://codeberg.org/api/v1
+      - FORGEJO_NAMESPACE=milkivc
+      # Uncomment and set your token in production
+      # - FORGEJO_ACCESS_TOKEN=${FORGEJO_ACCESS_TOKEN}
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - atlas-network
+    depends_on:
+      - redis
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/swh/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: atlas-vivo-milk-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - atlas-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # MongoDB (Optional - for future data storage)
+  mongodb:
+    image: mongo:7
+    container_name: atlas-vivo-milk-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=change_this_password
+      - MONGO_INITDB_DATABASE=atlas_vivo_milk
+    volumes:
+      - mongodb-data:/data/db
+      - mongodb-config:/data/configdb
+    networks:
+      - atlas-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # PostgreSQL (Optional - for relational data)
+  postgres:
+    image: postgres:15-alpine
+    container_name: atlas-vivo-milk-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=atlas
+      - POSTGRES_PASSWORD=change_this_password
+      - POSTGRES_DB=atlas_vivo_milk
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - atlas-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U atlas -d atlas_vivo_milk"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Nginx Reverse Proxy (Optional)
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: atlas-vivo-milk-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./nginx/logs:/var/log/nginx
+    networks:
+      - atlas-network
+    depends_on:
+      - app
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Monitoring with Prometheus (Optional)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: atlas-vivo-milk-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    networks:
+      - atlas-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Grafana Dashboard (Optional)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: atlas-vivo-milk-grafana
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - atlas-network
+    depends_on:
+      - prometheus
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  atlas-network:
+    driver: bridge
+    name: atlas-vivo-milk-network
+
+volumes:
+  redis-data:
+    driver: local
+  mongodb-data:
+    driver: local
+  mongodb-config:
+    driver: local
+  postgres-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
