@@ -60,8 +60,23 @@ jobs:
     needs: validate
     steps:
       - uses: actions/checkout@v4
-      - name: Lint Markdown files
-        run: npx --yes markdownlint-cli@0.44.0 -c .github/markdownlint-config.json "**/*.md" --ignore "node_modules/**"
+      - name: Lint changed Markdown files
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -n "${GITHUB_BASE_REF:-}" ]; then
+            git fetch --no-tags --depth=1 origin "$GITHUB_BASE_REF"
+            base="origin/$GITHUB_BASE_REF"
+          else
+            git fetch --no-tags --depth=2 origin "${GITHUB_REF_NAME}"
+            base="HEAD^"
+          fi
+          mapfile -t files < <(git diff --name-only "$base"...HEAD -- '*.md')
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "No changed Markdown files"
+            exit 0
+          fi
+          npx --yes markdownlint-cli@0.44.0 -c .github/markdownlint-config.json "${files[@]}"
       - name: Lint YAML files
         uses: ibiqlik/action-yamllint@v3
         with:
