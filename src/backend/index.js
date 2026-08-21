@@ -104,8 +104,7 @@ const commands = {
     await commands['assembleia:deputados']();
     console.log('');
     await commands['assembleia:iniciativas']();
-    console.log('
-=== All API integrations tested successfully! ===');
+    console.log('\n=== All API integrations tested successfully! ===');
   },
   
   'help': function() {
