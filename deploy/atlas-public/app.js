@@ -18,7 +18,6 @@ faceNav.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End
 renderFace(0);
 const bookNote=document.querySelector('#book-note'),registerStatus=document.querySelector('#register-status');
 document.querySelector('#save-note').onclick=()=>{bookState.note=bookNote.value.trim();registerStatus.textContent=bookState.note?'ficou aqui':'ainda vazio'};
-document.querySelector('#export-note').onclick=()=>{bookState.note=bookNote.value.trim();const record=[`LIVRO CUBO — registo local`,new Date().toLocaleString('pt-PT'),`faces atravessadas: ${[...bookState.opened].map(i=>BOOK_FACES[i].name).join(', ')}`,`face actual: ${BOOK_FACES[bookState.face].name}`,'',bookState.note||'(sem vestígio escrito)'].join('\n');const url=URL.createObjectURL(new Blob([record],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='livro-cubo-registo.txt';a.click();URL.revokeObjectURL(url);registerStatus.textContent='registo descarregado por decisão humana'};
 const dlg=document.querySelector('#engine'),body=document.querySelector('#engineBody');dlg.querySelector('.close').onclick=()=>{stopMedia();dlg.close()};dlg.onclick=e=>{if(e.target===dlg){stopMedia();dlg.close()}};
 let audio,stream,raf;const state={inventory:[],catastrophe:'',points:0,body:'',silence:'',rizoma:[]};
 function stopMedia(){if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;if(raf)cancelAnimationFrame(raf);raf=0}
