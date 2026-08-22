@@ -1,4 +1,4 @@
-name: MILK OlHAPIN — auditoria determinística Codeberg
+name: MILK OlHAPIN — auditoria histórica Codeberg
 
 on:
   push:
@@ -15,7 +15,7 @@ permissions:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     env:
       CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
       GH_TOKEN: ${{ github.token }}
@@ -29,7 +29,8 @@ jobs:
         run: |
           set -euo pipefail
           test -n "$CODEBERG_TOKEN"
-          mkdir -p "$RUNNER_TEMP/olhapin-audit/repos" "$RUNNER_TEMP/olhapin-audit/evidence"
+          ROOT="$RUNNER_TEMP/olhapin-history-audit"
+          mkdir -p "$ROOT/repos" "$ROOT/evidence"
           auth_status=$(curl --silent --show-error -o "$RUNNER_TEMP/codeberg-user.json" -w '%{http_code}' \
             -H "Authorization: token $CODEBERG_TOKEN" https://codeberg.org/api/v1/user || true)
           test "$auth_status" = 200
@@ -41,18 +42,17 @@ jobs:
           curl --fail --silent --show-error \
             'https://codeberg.org/api/v1/orgs/milkivc/repos?limit=100' > "$RUNNER_TEMP/codeberg-milkivc-repos.json" || printf '[]' > "$RUNNER_TEMP/codeberg-milkivc-repos.json"
           jq -s '[.[][] | select((.name // "" | ascii_downcase | contains("atlas")) or (.full_name // "" | ascii_downcase | contains("atlas"))) | {full_name,clone_url,html_url,default_branch,private}] | unique_by(.full_name)' \
-            "$RUNNER_TEMP/codeberg-user-repos.json" "$RUNNER_TEMP/codeberg-associacaomilk-repos.json" "$RUNNER_TEMP/codeberg-milkivc-repos.json" \
-            > "$RUNNER_TEMP/olhapin-audit/repos.json"
-          count=$(jq 'length' "$RUNNER_TEMP/olhapin-audit/repos.json")
+            "$RUNNER_TEMP/codeberg-user-repos.json" "$RUNNER_TEMP/codeberg-associacaomilk-repos.json" "$RUNNER_TEMP/codeberg-milkivc-repos.json" > "$ROOT/repos.json"
           echo "auth_user=$auth_user" >> "$GITHUB_OUTPUT"
-          echo "repo_count=$count" >> "$GITHUB_OUTPUT"
-          test "$count" -gt 0
+          echo "repo_count=$(jq 'length' "$ROOT/repos.json")" >> "$GITHUB_OUTPUT"
+          test "$(jq 'length' "$ROOT/repos.json")" -gt 0
 
-      - name: Clone read-only and scan content
-        id: scan
+      - name: Full clone and scan every reachable branch and historical commit
+        id: history
         shell: bash
         run: |
           set -euo pipefail
+          ROOT="$RUNNER_TEMP/olhapin-history-audit"
           credential_file="$RUNNER_TEMP/codeberg-credentials"
           trap 'rm -f "$credential_file"' EXIT
           printf 'protocol=https\nhost=codeberg.org\nusername=%s\npassword=%s\n\n' "${{ steps.discover.outputs.auth_user }}" "$CODEBERG_TOKEN" | \
@@ -60,159 +60,211 @@ jobs:
           chmod 600 "$credential_file"
 
           python - <<'PY'
-          import json, os, pathlib, re, subprocess, hashlib, shutil
+          import json, os, pathlib, re, subprocess, hashlib, shutil, collections
 
-          root = pathlib.Path(os.environ['RUNNER_TEMP']) / 'olhapin-audit'
-          repos_dir = root / 'repos'
-          evidence_dir = root / 'evidence'
-          repos = json.loads((root / 'repos.json').read_text(encoding='utf-8'))
-          cred = pathlib.Path(os.environ['RUNNER_TEMP']) / 'codeberg-credentials'
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'olhapin-history-audit'
+          repos=json.loads((root/'repos.json').read_text(encoding='utf-8'))
+          cred=pathlib.Path(os.environ['RUNNER_TEMP'])/'codeberg-credentials'
+          repos_dir=root/'repos'; evidence=root/'evidence'
+          repos_dir.mkdir(exist_ok=True); evidence.mkdir(exist_ok=True)
 
-          terms = {
-              'olhapin': re.compile(r'ol\s*ha?pin|olho\s+do\s+atlas', re.I),
-              'nulometria': re.compile(r'nulometria', re.I),
-              'batimetria': re.compile(r'batimetria', re.I),
-              'bimetria': re.compile(r'\bbimetria\b', re.I),
-              'assimetria': re.compile(r'assimetria', re.I),
-              'minometria': re.compile(r'minometria', re.I),
-              'duametria': re.compile(r'duametria', re.I),
-              'auditarRealidade': re.compile(r'auditarRealidade'),
-              'iniciarEscavacao': re.compile(r'iniciarEscava[cç][aã]o', re.I),
-              'SteganographyEngine': re.compile(r'SteganographyEngine'),
-              'ShmitaYovel': re.compile(r'Shmita|Yovel', re.I),
-              'forno_comunitario': re.compile(r'forno\s+comunit[aá]rio', re.I),
-              'assinatura_invisivel': re.compile(r'assinatura\s+invis[ií]vel', re.I),
-              'swhid': re.compile(r'\bSWHID\b|swh:1:', re.I),
-              'mistral': re.compile(r'\bMistral\b', re.I),
+          pattern=r'OlHAPIN|OLHAPIN|OlHaPIN|OLHO[ _-]+DO[ _-]+ATLAS|nulometria|batimetria|bimetria|assimetria|minometria|duametria|auditarRealidade|iniciarEscava|SteganographyEngine|ShmitaYovelEngine|forno[[:space:]]+comunit'
+          term_patterns={
+            'olhapin': re.compile(r'ol\s*ha?pin|olho[ _-]+do[ _-]+atlas',re.I),
+            'nulometria': re.compile(r'nulometria',re.I),
+            'batimetria': re.compile(r'batimetria',re.I),
+            'bimetria': re.compile(r'\bbimetria\b',re.I),
+            'assimetria': re.compile(r'assimetria',re.I),
+            'minometria': re.compile(r'minometria',re.I),
+            'duametria': re.compile(r'duametria',re.I),
+            'auditarRealidade': re.compile(r'auditarRealidade'),
+            'iniciarEscavacao': re.compile(r'iniciarEscava',re.I),
+            'SteganographyEngine': re.compile(r'SteganographyEngine'),
+            'ShmitaYovel': re.compile(r'Shmita|Yovel',re.I),
+            'forno_comunitario': re.compile(r'forno\s+comunit',re.I),
+            'SWHID_claim': re.compile(r'\bSWHID\b|swh:1:',re.I),
+            'Mistral': re.compile(r'\bMistral\b',re.I),
           }
-          text_ext = {'.ts','.tsx','.js','.mjs','.cjs','.py','.md','.txt','.json','.yaml','.yml','.html','.css','.sh','.toml','.xml','.csv'}
-          matches=[]
-          all_findings=[]
-          repos_scanned=[]
-          codeberg_secret_patterns=[
-              re.compile(r'(?i)(?:token|password|secret|api[_-]?key)\s*[:=]\s*["\']?[A-Za-z0-9_\-]{16,}'),
-              re.compile(r'(?i)authorization:\s*(?:bearer|token)\s+[A-Za-z0-9._\-]{16,}'),
+          ext_ok={'.ts','.tsx','.js','.mjs','.cjs','.py','.md','.txt','.json','.yaml','.yml','.html','.css','.sh','.toml','.xml','.csv'}
+          secret_patterns=[
+            re.compile(r'(?i)(?:token|password|secret|api[_-]?key)\s*[:=]\s*["\']?[A-Za-z0-9_\-]{16,}'),
+            re.compile(r'(?i)authorization:\s*(?:bearer|token)\s+[A-Za-z0-9._\-]{16,}'),
           ]
+          repo_inventory=[]; branch_hits=[]; history_hits=[]; hygiene=[]; errors=[]
+          seen_evidence=set()
+
+          def run(cmd,cwd=None,check=True):
+            p=subprocess.run(cmd,cwd=cwd,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+            if check and p.returncode: raise RuntimeError(p.stderr[-1000:])
+            return p
+
+          def classify(raw):
+            try: text=raw.decode('utf-8')
+            except UnicodeDecodeError: return None
+            terms=[k for k,rx in term_patterns.items() if rx.search(text)]
+            zero_width=any(c in text for c in ('\u200b','\u200c','\u200d','\ufeff'))
+            secret_like=any(rx.search(text) for rx in secret_patterns)
+            return text,terms,zero_width,secret_like
+
+          def extract_blob(repo_dir, commit, path):
+            p=run(['git','show',f'{commit}:{path}'],cwd=repo_dir,check=False)
+            if p.returncode: return None
+            return p.stdout.encode('utf-8')
 
           for repo in repos:
-              full = repo.get('full_name') or ''
-              if not full: continue
-              dest = repos_dir / full.replace('/','__')
-              url = repo.get('clone_url') or f'https://codeberg.org/{full}.git'
-              cmd=['git','-c',f'credential.helper=store --file={cred}','clone','--depth','1','--no-tags',url,str(dest)]
-              p=subprocess.run(cmd,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
-              if p.returncode:
-                  all_findings.append({'repo':full,'type':'clone_error','detail':p.stderr[-500:]})
-                  continue
-              head=subprocess.check_output(['git','-C',str(dest),'rev-parse','HEAD'],text=True).strip()
-              repos_scanned.append({'repo':full,'head':head,'default_branch':repo.get('default_branch')})
-              for path in dest.rglob('*'):
-                  if not path.is_file() or '.git' in path.parts: continue
-                  rel=path.relative_to(dest).as_posix()
-                  if path.stat().st_size > 2_000_000 or path.suffix.lower() not in text_ext: continue
-                  try:
-                      raw=path.read_bytes()
-                      text=raw.decode('utf-8')
-                  except Exception:
-                      continue
-                  hit_terms=[k for k,rx in terms.items() if rx.search(text)]
-                  zero_width=any(ch in text for ch in ('\u200b','\u200c','\u200d','\ufeff'))
-                  secret_like=any(rx.search(text) for rx in codeberg_secret_patterns)
-                  if hit_terms or zero_width or secret_like:
-                      sha=hashlib.sha256(raw).hexdigest()
-                      rec={'repo':full,'path':rel,'sha256':sha,'bytes':len(raw),'terms':hit_terms,'zero_width':zero_width,'secret_like':secret_like}
-                      all_findings.append(rec)
-                      if any(t in hit_terms for t in ('olhapin','nulometria','batimetria','bimetria','assimetria','minometria','duametria','auditarRealidade','iniciarEscavacao','SteganographyEngine','ShmitaYovel','forno_comunitario')):
-                          matches.append(rec)
-                          safe_name=(full+'__'+rel).replace('/','__')
-                          shutil.copy2(path,evidence_dir/safe_name)
+            full=repo.get('full_name') or ''
+            if not full: continue
+            d=repos_dir/full.replace('/','__')
+            url=repo.get('clone_url') or f'https://codeberg.org/{full}.git'
+            p=run(['git','-c',f'credential.helper=store --file={cred}','clone','--no-tags',url,str(d)],check=False)
+            if p.returncode:
+              errors.append({'repo':full,'error':'clone_failed','detail':p.stderr[-500:]}); continue
+            run(['git','fetch','origin','+refs/heads/*:refs/remotes/origin/*'],cwd=d,check=False)
+            head=run(['git','rev-parse','HEAD'],cwd=d).stdout.strip()
+            refs=run(['git','for-each-ref','--format=%(refname:short)|%(objectname)','refs/remotes/origin'],cwd=d).stdout.splitlines()
+            branches=[]
+            for item in refs:
+              if not item or item.startswith('origin/HEAD'): continue
+              name,sha=item.split('|',1); branches.append({'ref':name,'sha':sha})
+            commit_count=int(run(['git','rev-list','--all','--count'],cwd=d).stdout.strip() or 0)
+            repo_inventory.append({'repo':full,'default_branch':repo.get('default_branch'),'head':head,'branches':branches,'reachable_commits':commit_count})
 
-          (root/'repos-scanned.json').write_text(json.dumps(repos_scanned,ensure_ascii=False,indent=2),encoding='utf-8')
-          (root/'findings.json').write_text(json.dumps(all_findings,ensure_ascii=False,indent=2),encoding='utf-8')
-          (root/'olhapin-matches.json').write_text(json.dumps(matches,ensure_ascii=False,indent=2),encoding='utf-8')
-          print(f'repos_scanned={len(repos_scanned)}')
-          print(f'findings={len(all_findings)}')
-          print(f'olhapin_matches={len(matches)}')
+            # Current content hygiene on default checkout, metadata only.
+            for path in d.rglob('*'):
+              if not path.is_file() or '.git' in path.parts or path.stat().st_size>2_000_000 or path.suffix.lower() not in ext_ok: continue
+              raw=path.read_bytes(); cls=classify(raw)
+              if not cls: continue
+              text,terms,zw,secret_like=cls
+              if zw or secret_like or 'Mistral' in terms or 'SWHID_claim' in terms:
+                hygiene.append({'repo':full,'path':path.relative_to(d).as_posix(),'sha256':hashlib.sha256(raw).hexdigest(),'terms':terms,'zero_width':zw,'secret_like':secret_like})
+
+            # Every remote branch current tree.
+            for br in branches:
+              ref=br['ref']; commit=br['sha']
+              g=run(['git','grep','-I','-i','-l','-E',pattern,commit,'--'],cwd=d,check=False)
+              if g.returncode not in (0,1): errors.append({'repo':full,'ref':ref,'error':'git_grep_failed'}); continue
+              for path in sorted(set(x.strip() for x in g.stdout.splitlines() if x.strip())):
+                if pathlib.Path(path).suffix.lower() not in ext_ok: continue
+                raw=extract_blob(d,commit,path)
+                if raw is None or len(raw)>2_000_000: continue
+                cls=classify(raw)
+                if not cls: continue
+                text,terms,zw,secret_like=cls
+                sha=hashlib.sha256(raw).hexdigest()
+                rec={'repo':full,'ref':ref,'commit':commit,'path':path,'sha256':sha,'bytes':len(raw),'terms':terms,'zero_width':zw,'secret_like':secret_like}
+                branch_hits.append(rec)
+                key=(full,sha)
+                if key not in seen_evidence and not secret_like:
+                  seen_evidence.add(key)
+                  out=evidence/(full+'__'+path+'__'+sha[:12]).replace('/','__')
+                  out.write_bytes(raw)
+
+            # Historical commits where relevant text was added/removed/changed.
+            lg=run(['git','log','--all','--format=%H','-i','-G',pattern,'--'],cwd=d,check=False)
+            candidate_commits=[]
+            seen=set()
+            for c in lg.stdout.splitlines():
+              c=c.strip()
+              if c and c not in seen: seen.add(c); candidate_commits.append(c)
+            for commit in candidate_commits:
+              g=run(['git','grep','-I','-i','-l','-E',pattern,commit,'--'],cwd=d,check=False)
+              if g.returncode not in (0,1): continue
+              for path in sorted(set(x.strip() for x in g.stdout.splitlines() if x.strip())):
+                if pathlib.Path(path).suffix.lower() not in ext_ok: continue
+                raw=extract_blob(d,commit,path)
+                if raw is None or len(raw)>2_000_000: continue
+                cls=classify(raw)
+                if not cls: continue
+                text,terms,zw,secret_like=cls
+                sha=hashlib.sha256(raw).hexdigest()
+                rec={'repo':full,'commit':commit,'path':path,'sha256':sha,'bytes':len(raw),'terms':terms,'zero_width':zw,'secret_like':secret_like}
+                history_hits.append(rec)
+                key=(full,sha)
+                if key not in seen_evidence and not secret_like:
+                  seen_evidence.add(key)
+                  out=evidence/(full+'__HISTORY__'+path+'__'+sha[:12]).replace('/','__')
+                  out.write_bytes(raw)
+
+          # Deduplicate exact records.
+          def dedup(rows, keys):
+            out=[]; seen=set()
+            for r in rows:
+              k=tuple(r.get(x) for x in keys)
+              if k not in seen: seen.add(k); out.append(r)
+            return out
+          branch_hits=dedup(branch_hits,['repo','ref','path','sha256'])
+          history_hits=dedup(history_hits,['repo','commit','path','sha256'])
+          hygiene=dedup(hygiene,['repo','path','sha256'])
+
+          for name,obj in [('repo-inventory.json',repo_inventory),('branch-hits.json',branch_hits),('history-hits.json',history_hits),('hygiene-current.json',hygiene),('errors.json',errors)]:
+            (root/name).write_text(json.dumps(obj,ensure_ascii=False,indent=2),encoding='utf-8')
+
+          lines=['# OlHAPIN Codeberg — auditoria histórica','',f'Repositórios: {len(repo_inventory)}',f'Branches com scan: {sum(len(r["branches"]) for r in repo_inventory)}',f'Hits nas árvores de branches: {len(branch_hits)}',f'Hits em commits históricos: {len(history_hits)}',f'Ficheiros atuais com sinais de higiene: {len(hygiene)}','']
+          for r in repo_inventory:
+            lines.append(f"- `{r['repo']}` head=`{r['head']}` commits={r['reachable_commits']} branches={len(r['branches'])}")
+          lines += ['','## Branch hits']
+          for x in branch_hits: lines.append(f"- `{x['repo']}:{x['ref']}:{x['path']}` sha256=`{x['sha256']}` terms={','.join(x['terms'])}")
+          lines += ['','## Historical hits']
+          for x in history_hits[:200]: lines.append(f"- `{x['repo']}:{x['commit'][:12]}:{x['path']}` sha256=`{x['sha256']}` terms={','.join(x['terms'])}")
+          lines += ['','No Codeberg writes. Secret-like file contents were not copied to evidence.']
+          (root/'SUMMARY.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
+          print('\n'.join(lines[:120]))
           PY
 
-          echo "match_count=$(jq 'length' "$RUNNER_TEMP/olhapin-audit/olhapin-matches.json")" >> "$GITHUB_OUTPUT"
-          echo "finding_count=$(jq 'length' "$RUNNER_TEMP/olhapin-audit/findings.json")" >> "$GITHUB_OUTPUT"
+          echo "branch_hits=$(jq 'length' "$ROOT/branch-hits.json")" >> "$GITHUB_OUTPUT"
+          echo "history_hits=$(jq 'length' "$ROOT/history-hits.json")" >> "$GITHUB_OUTPUT"
+          echo "hygiene=$(jq 'length' "$ROOT/hygiene-current.json")" >> "$GITHUB_OUTPUT"
 
-      - name: Static TypeScript validation of matched sources
-        id: typescript
+      - name: Validate recovered TypeScript evidence
+        id: ts
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/olhapin-audit/ts-results"
+          ROOT="$RUNNER_TEMP/olhapin-history-audit"
           npm --silent --prefix "$RUNNER_TEMP/olhapin-ts" init -y >/dev/null 2>&1
           npm --silent --prefix "$RUNNER_TEMP/olhapin-ts" install --no-audit --no-fund typescript@5.8.3 @types/node@22 >/dev/null 2>&1
           python - <<'PY'
           import json, os, pathlib, subprocess, hashlib
-          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'olhapin-audit'
-          results=[]
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'olhapin-history-audit'
+          tsc=pathlib.Path(os.environ['RUNNER_TEMP'])/'olhapin-ts/node_modules/.bin/tsc'
+          rows=[]
           for f in (root/'evidence').iterdir():
-              if f.suffix.lower() not in {'.ts','.tsx'}: continue
-              out=root/'ts-results'/f.stem
-              out.mkdir(parents=True,exist_ok=True)
-              cmd=[str(pathlib.Path(os.environ['RUNNER_TEMP'])/'olhapin-ts/node_modules/.bin/tsc'),
-                   '--pretty','false','--noEmit','--strict','false','--skipLibCheck','true',
-                   '--target','ES2022','--module','commonjs','--moduleResolution','node',
-                   '--types','node',str(f)]
-              p=subprocess.run(cmd,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)
-              results.append({'file':f.name,'sha256':hashlib.sha256(f.read_bytes()).hexdigest(),'tsc_exit':p.returncode,'diagnostics':p.stdout[-4000:]})
-          (root/'typescript-validation.json').write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding='utf-8')
+            if f.suffix.lower() not in {'.ts','.tsx'}: continue
+            p=subprocess.run([str(tsc),'--pretty','false','--noEmit','--skipLibCheck','true','--target','ES2022','--module','commonjs','--moduleResolution','node','--types','node',str(f)],stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)
+            rows.append({'file':f.name,'sha256':hashlib.sha256(f.read_bytes()).hexdigest(),'exit':p.returncode,'diagnostics':p.stdout[-5000:]})
+          (root/'typescript-validation.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2),encoding='utf-8')
           PY
-          echo "ts_count=$(jq 'length' "$RUNNER_TEMP/olhapin-audit/typescript-validation.json")" >> "$GITHUB_OUTPUT"
-          echo "ts_fail=$(jq '[.[]|select(.tsc_exit != 0)]|length' "$RUNNER_TEMP/olhapin-audit/typescript-validation.json")" >> "$GITHUB_OUTPUT"
-
-      - name: Build sanitized factual summary
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          import json, os, pathlib
-          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'olhapin-audit'
-          repos=json.loads((root/'repos-scanned.json').read_text())
-          matches=json.loads((root/'olhapin-matches.json').read_text())
-          ts=json.loads((root/'typescript-validation.json').read_text())
-          lines=['# OlHAPIN Codeberg audit','',f'Repositories scanned: {len(repos)}',f'OlHAPIN/metrology source matches: {len(matches)}',f'TypeScript files checked: {len(ts)}','']
-          for r in repos: lines.append(f"- repo `{r['repo']}` @ `{r['head']}`")
-          lines += ['','## Matches']
-          for m in matches:
-              lines.append(f"- `{m['repo']}:{m['path']}` sha256=`{m['sha256']}` terms={','.join(m['terms']) or '-'} zero_width={str(m['zero_width']).lower()} secret_like={str(m['secret_like']).lower()}")
-          lines += ['','## TypeScript validation']
-          for t in ts: lines.append(f"- `{t['file']}` tsc_exit={t['tsc_exit']} sha256=`{t['sha256']}`")
-          lines += ['','No repository contents were modified. No secret values are included in this report.']
-          (root/'SUMMARY.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
-          PY
-          cat "$RUNNER_TEMP/olhapin-audit/SUMMARY.md"
+          echo "checked=$(jq 'length' "$ROOT/typescript-validation.json")" >> "$GITHUB_OUTPUT"
+          echo "failed=$(jq '[.[]|select(.exit != 0)]|length' "$ROOT/typescript-validation.json")" >> "$GITHUB_OUTPUT"
 
       - uses: actions/upload-artifact@v4
         with:
-          name: olhapin-codeberg-evidence
+          name: olhapin-codeberg-history-evidence
           path: |
-            ${{ runner.temp }}/olhapin-audit/SUMMARY.md
-            ${{ runner.temp }}/olhapin-audit/repos.json
-            ${{ runner.temp }}/olhapin-audit/repos-scanned.json
-            ${{ runner.temp }}/olhapin-audit/olhapin-matches.json
-            ${{ runner.temp }}/olhapin-audit/typescript-validation.json
-            ${{ runner.temp }}/olhapin-audit/evidence/
+            ${{ runner.temp }}/olhapin-history-audit/SUMMARY.md
+            ${{ runner.temp }}/olhapin-history-audit/repos.json
+            ${{ runner.temp }}/olhapin-history-audit/repo-inventory.json
+            ${{ runner.temp }}/olhapin-history-audit/branch-hits.json
+            ${{ runner.temp }}/olhapin-history-audit/history-hits.json
+            ${{ runner.temp }}/olhapin-history-audit/hygiene-current.json
+            ${{ runner.temp }}/olhapin-history-audit/errors.json
+            ${{ runner.temp }}/olhapin-history-audit/typescript-validation.json
+            ${{ runner.temp }}/olhapin-history-audit/evidence/
           if-no-files-found: error
           retention-days: 7
 
-      - name: Publish sanitized receipt
+      - name: Publish factual receipt
         if: always()
         shell: bash
         env:
           REPOS: ${{ steps.discover.outputs.repo_count }}
-          MATCHES: ${{ steps.scan.outputs.match_count }}
-          FINDINGS: ${{ steps.scan.outputs.finding_count }}
-          TS_COUNT: ${{ steps.typescript.outputs.ts_count }}
-          TS_FAIL: ${{ steps.typescript.outputs.ts_fail }}
+          BRANCH_HITS: ${{ steps.history.outputs.branch_hits }}
+          HISTORY_HITS: ${{ steps.history.outputs.history_hits }}
+          HYGIENE: ${{ steps.history.outputs.hygiene }}
+          TS_CHECKED: ${{ steps.ts.outputs.checked }}
+          TS_FAILED: ${{ steps.ts.outputs.failed }}
         run: |
           set -euo pipefail
-          body="OLHAPIN_CODEBERG_AUDIT run=${GITHUB_RUN_ID} repos=${REPOS:-unknown} metrology_matches=${MATCHES:-unknown} hygiene_findings=${FINDINGS:-unknown} ts_checked=${TS_COUNT:-unknown} ts_failed=${TS_FAIL:-unknown} codeberg_writes=0 github_master_writes=0 secret_values_disclosed=0 artifact=olhapin-codeberg-evidence"
-          curl --fail --silent --show-error -X POST \
-            -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" -H "Content-Type: application/json" \
-            "https://api.github.com/repos/$GH_REPOSITORY/issues/35/comments" \
-            -d "$(jq -n --arg body "$body" '{body:$body}')" >/dev/null
+          body="OLHAPIN_CODEBERG_HISTORY_AUDIT run=${GITHUB_RUN_ID} repos=${REPOS:-unknown} branch_hits=${BRANCH_HITS:-unknown} history_hits=${HISTORY_HITS:-unknown} hygiene_current=${HYGIENE:-unknown} ts_checked=${TS_CHECKED:-unknown} ts_failed=${TS_FAILED:-unknown} codeberg_writes=0 github_master_writes=0 secret_values_disclosed=0 artifact=olhapin-codeberg-history-evidence"
+          curl --fail --silent --show-error -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" -H "Content-Type: application/json" \
+            "https://api.github.com/repos/$GH_REPOSITORY/issues/35/comments" -d "$(jq -n --arg body "$body" '{body:$body}')" >/dev/null
