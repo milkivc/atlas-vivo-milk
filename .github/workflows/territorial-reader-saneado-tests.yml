@@ -1,0 +1,79 @@
+name: MILK Territorial Reader — saneamento e testes
+
+on:
+  push:
+    branches:
+      - 'work/territorial-reader-saneado-20260822'
+    paths:
+      - 'src/territorial-reader/**'
+      - '.github/workflows/territorial-reader-saneado-tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Syntax check every territorial-reader JavaScript file
+        shell: bash
+        run: |
+          set -euo pipefail
+          find src/territorial-reader -type f -name '*.js' -print0 | sort -z | xargs -0 -n1 node --check
+
+      - name: Run deterministic anti-fabrication tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --test src/territorial-reader/tests/territorial-reader.test.js
+
+      - name: Audit residual simulated data markers
+        id: residue
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -RniE 'mock(Freguesias|Atas|Associacoes)|dados mock|simular dados|adicionar dados mock|fallback.*mock' src/territorial-reader \
+            --exclude='territorial-reader.test.js' > "$RUNNER_TEMP/residue.txt" || true
+          count=$(wc -l < "$RUNNER_TEMP/residue.txt" | tr -d ' ')
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          cat "$RUNNER_TEMP/residue.txt" || true
+          test "$count" = 0
+
+      - name: Verify official territorial source remains reachable
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --location --max-time 30 \
+            --output /dev/null \
+            'https://www.dgterritorio.gov.pt/atividades/cartografia/cartografia-tematica/caop'
+
+      - name: Verify no common secret material is present in territorial source
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -RniE '(api[_-]?key|password|secret|token)[[:space:]]*[:=][[:space:]]*["'"'][A-Za-z0-9._-]{16,}' src/territorial-reader; then
+            echo 'Possible plaintext secret detected' >&2
+            exit 1
+          fi
+
+      - name: Publish factual receipt
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPOSITORY: ${{ github.repository }}
+        run: |
+          conclusion='${{ job.status }}'
+          body="TERRITORIAL_READER_SANEADO_TEST run=${GITHUB_RUN_ID} conclusion=${conclusion} branch=${GITHUB_REF_NAME} master_writes=0 mock_runtime_allowed=0 human_gate=required"
+          curl --fail --silent --show-error -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json' -H 'Content-Type: application/json' \
+            "https://api.github.com/repos/$GH_REPOSITORY/issues/35/comments" \
+            -d "$(jq -n --arg body "$body" '{body:$body}')" >/dev/null
