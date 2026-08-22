@@ -1,0 +1,81 @@
+name: MILK integral Drive Mistral to FTPS
+
+on:
+  push:
+    branches: [ops/ftps-fallback-probe-20260822]
+    paths:
+      - '.github/workflows/milk-drive-integral-mistral-ftps.yml'
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: milk-drive-integral-mistral-ftps
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ops/ftps-fallback-probe-20260822
+
+      - name: Create one-run FTPS credential bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:3072 -out /tmp/milk-drive-ftps.key >/dev/null 2>&1
+          openssl pkey -in /tmp/milk-drive-ftps.key -pubout -out /tmp/milk-drive-ftps.pub >/dev/null 2>&1
+          python - <<'PY'
+          import base64,json,os,urllib.request
+          pub=base64.b64encode(open('/tmp/milk-drive-ftps.pub','rb').read()).decode()
+          msg=f"MILK_DRIVE_INTEGRAL_EPHEMERAL_PUBLIC_KEY run={os.environ['RUN_ID']} alg=RSA-OAEP-SHA256 data={pub}"
+          req=urllib.request.Request(f"https://api.github.com/repos/{os.environ['REPO']}/issues/35/comments",data=json.dumps({'body':msg}).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Content-Type':'application/json','Accept':'application/vnd.github+json'})
+          with urllib.request.urlopen(req,timeout=30) as r:r.read()
+          print(f"MILK_DRIVE_INTEGRAL_BRIDGE_READY run={os.environ['RUN_ID']} secret_persisted=0",flush=True)
+          PY
+
+      - name: Receive encrypted credential and migrate
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          trap 'rm -f /tmp/milk-drive-ftps.key /tmp/milk-drive-ftps.pub /tmp/milk-drive-ftps.cipher /tmp/milk-drive-ftps.pass /tmp/milk-drive-cipher.b64' EXIT
+          python - <<'PY'
+          import json,os,time,urllib.parse,urllib.request
+          from datetime import datetime,timedelta,timezone
+          marker=f"MILK_DRIVE_INTEGRAL_CIPHERTEXT run={os.environ['RUN_ID']} data="
+          since=(datetime.now(timezone.utc)-timedelta(hours=1)).isoformat().replace('+00:00','Z')
+          query=urllib.parse.urlencode({'per_page':100,'since':since})
+          deadline=time.time()+1200
+          while time.time()<deadline:
+              req=urllib.request.Request(f"https://api.github.com/repos/{os.environ['REPO']}/issues/35/comments?{query}",headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'})
+              with urllib.request.urlopen(req,timeout=60) as r: comments=json.loads(r.read())
+              for item in reversed(comments):
+                  body=item.get('body','')
+                  if body.startswith(marker):
+                      data=body[len(marker):].strip()
+                      if data:
+                          open('/tmp/milk-drive-cipher.b64','w',encoding='utf-8').write(data)
+                          print(f"MILK_DRIVE_INTEGRAL_CIPHERTEXT_RECEIVED run={os.environ['RUN_ID']}",flush=True)
+                          raise SystemExit(0)
+              time.sleep(5)
+          raise SystemExit('CIPHERTEXT_TIMEOUT')
+          PY
+          base64 -d /tmp/milk-drive-cipher.b64 > /tmp/milk-drive-ftps.cipher
+          openssl pkeyutl -decrypt -inkey /tmp/milk-drive-ftps.key -in /tmp/milk-drive-ftps.cipher \
+            -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256 -out /tmp/milk-drive-ftps.pass
+          FTPS_PASS="$(cat /tmp/milk-drive-ftps.pass)"
+          echo "::add-mask::$FTPS_PASS"
+          test -n "$FTPS_PASS"
+          export MILK_FTPS_PASSWORD_FILE=/tmp/milk-drive-ftps.pass
+          python ops/milk_drive_mistral_to_ftps.py
