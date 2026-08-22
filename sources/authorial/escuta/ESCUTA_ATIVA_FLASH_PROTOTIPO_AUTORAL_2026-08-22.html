@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Atlas Vivo MILK - Escuta Ativa e O Flash</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: #000; overflow: hidden;
+            font-family: 'Courier New', Courier, monospace;
+            color: #fff;
+        }
+        #canvas-container {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+        }
+        /* O clarão dramático de Larry Fink */
+        #flash-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #fff; opacity: 0; pointer-events: none;
+            z-index: 5; transition: opacity 0.1s ease-out;
+        }
+        /* Interface de Recolha do Território */
+        #ui-layer {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            z-index: 10; text-align: center; opacity: 0; pointer-events: none;
+            transition: opacity 2s ease; width: 90%; max-width: 500px;
+        }
+        #provocation {
+            font-size: 1.2rem; letter-spacing: 1px; margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+        }
+        input[type="text"] {
+            background: transparent; border: none; border-bottom: 1px solid #fff;
+            color: #fff; font-size: 1.2rem; padding: 10px; width: 100%;
+            font-family: inherit; outline: none; text-align: center;
+        }
+        input[type="text"]::placeholder { color: rgba(255,255,255,0.4); }
+    </style>
+    <!-- Three.js para as partículas cósmicas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+    <div id="flash-overlay"></div>
+    
+    <div id="ui-layer">
+        <div id="provocation">No silêncio, a memória ganha forma.<br><br>Isto cheira-me a história. De onde és?</div>
+        <input type="text" id="territory-input" placeholder="Tua rua, bairro ou zona...">
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. CONFIGURAÇÃO VISUAL (THREE.JS)
+        // ==========================================
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000);
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 50;
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        const particleCount = 2000;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const lifetimes = new Float32Array(particleCount);
+        const velocities = [];
+        let activeIndex = 0;
+
+        for (let i = 0; i < particleCount; i++) {
+            positions[i * 3] = 9999;
+            lifetimes[i] = 0;
+            velocities.push(new THREE.Vector3(0, 0, 0));
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('lifetime', new THREE.BufferAttribute(lifetimes, 1));
+
+        const material = new THREE.ShaderMaterial({
+            uniforms: { color: { value: new THREE.Color(0x44aaff) } },
+            vertexShader: `
+                attribute float lifetime; varying float vLifetime;
+                void main() {
+                    vLifetime = lifetime;
+                    vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
+                    gl_PointSize = (25.0 * lifetime) * (100.0 / -mvPos.z);
+                    gl_Position = projectionMatrix * mvPos;
+                }
+            `,
+            fragmentShader: `
+                uniform vec3 color; varying float vLifetime;
+                void main() {
+                    if (vLifetime <= 0.0) discard;
+                    float dist = length(gl_PointCoord - vec2(0.5));
+                    if (dist > 0.5) discard;
+                    gl_FragColor = vec4(color, (0.5 - dist) * 2.0 * vLifetime);
+                }
+            `,
+            transparent: true, blending: THREE.AdditiveBlending, depthWrite: false
+        });
+
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        // ==========================================
+        // 2. CONFIGURAÇÃO SONORA (MURRAY SCHAFER - LIMPEZA DE OUVIDOS)
+        // ==========================================
+        let audioCtx, noiseSource, noiseFilter, harmonicOsc, harmonicGain;
+        let audioInitialized = false;
+
+        function initAudio() {
+            if (audioInitialized) return;
+            audioInitialized = true;
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            
+            // Gerador de Ruído (O Caos / Frequências urbanas)
+            const bufferSize = audioCtx.sampleRate * 2;
+            const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const output = noiseBuffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) output[i] = Math.random() * 2 - 1;
+            
+            noiseSource = audioCtx.createBufferSource();
+            noiseSource.buffer = noiseBuffer;
+            noiseSource.loop = true;
+
+            noiseFilter = audioCtx.createBiquadFilter();
+            noiseFilter.type = 'lowpass';
+            noiseFilter.frequency.value = 5000; // Começa com muito ruído
+
+            noiseSource.connect(noiseFilter);
+            noiseFilter.connect(audioCtx.destination);
+            noiseSource.start();
+
+            // Gerador Harmónico (A verdade oculta no silêncio)
+            harmonicOsc = audioCtx.createOscillator();
+            harmonicOsc.type = 'sine';
+            harmonicOsc.frequency.value = 220; // Frequência base calmante
+            
+            harmonicGain = audioCtx.createGain();
+            harmonicGain.gain.value = 0; // Invisível inicialmente
+
+            harmonicOsc.connect(harmonicGain);
+            harmonicGain.connect(audioCtx.destination);
+            harmonicOsc.start();
+        }
+
+        // ==========================================
+        // 3. DINÂMICA DE INTERAÇÃO (FINK: CORPO E TENSÃO)
+        // ==========================================
+        let lastPointer = { x: window.innerWidth/2, y: window.innerHeight/2 };
+        let pointerSpeed = 0;
+        let stillnessTimer = 0;
+        let isFlashing = false;
+
+        function updateInteraction(x, y) {
+            if (!audioInitialized) initAudio();
+            if (isFlashing) return;
+
+            // Calcular a velocidade do gesto (Corpo-Território)
+            const dx = x - lastPointer.x;
+            const dy = y - lastPointer.y;
+            pointerSpeed = Math.sqrt(dx*dx + dy*dy);
+            lastPointer = { x, y };
+
+            // O movimento rápido levanta as partículas
+            const vec = new THREE.Vector3((x / window.innerWidth) * 2 - 1, -(y / window.innerHeight) * 2 + 1, 0.5);
+            vec.unproject(camera);
+            const dir = vec.sub(camera.position).normalize();
+            const distance = -camera.position.z / dir.z;
+            const pos = camera.position.clone().add(dir.multiplyScalar(distance));
+
+            const spawnCount = Math.min(Math.floor(pointerSpeed * 0.5) + 1, 20);
+            for (let i = 0; i < spawnCount; i++) {
+                let idx = activeIndex % particleCount;
+                positions[idx * 3] = pos.x + (Math.random() - 0.5) * 5;
+                positions[idx * 3 + 1] = pos.y + (Math.random() - 0.5) * 5;
+                positions[idx * 3 + 2] = pos.z;
+                
+                velocities[idx].set((Math.random() - 0.5), (Math.random() - 0.5), (Math.random() - 0.5));
+                lifetimes[idx] = 1.0;
+                activeIndex++;
+            }
+        }
+
+        window.addEventListener('mousemove', (e) => updateInteraction(e.clientX, e.clientY));
+        window.addEventListener('touchmove', (e) => {
+            e.preventDefault(); updateInteraction(e.touches[0].clientX, e.touches[0].clientY);
+        }, { passive: false });
+
+        // ==========================================
+        // 4. O CICLO DE ANIMAÇÃO E O GATILHO DO DESEJO
+        // ==========================================
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const dt = clock.getDelta();
+
+            if (!isFlashing) {
+                // Dinâmica de Limpeza Acústica e Foco
+                if (pointerSpeed < 2) {
+                    stillnessTimer += dt;
+                    if (audioInitialized) {
+                        // Se o corpo abranda, o ruído desaparece e o harmónico sobe
+                        noiseFilter.frequency.setTargetAtTime(200, audioCtx.currentTime, 0.5);
+                        harmonicGain.gain.setTargetAtTime(0.5, audioCtx.currentTime, 1.0);
+                    }
+                } else {
+                    stillnessTimer = 0;
+                    if (audioInitialized) {
+                        // Movimento errático traz de volta o caos urbano
+                        noiseFilter.frequency.setTargetAtTime(5000, audioCtx.currentTime, 0.1);
+                        harmonicGain.gain.setTargetAtTime(0.0, audioCtx.currentTime, 0.1);
+                    }
+                }
+
+                // O DISPARO DO FLASH (O momento fotográfico decisivo após 3 segundos de foco)
+                if (stillnessTimer > 3.0) {
+                    triggerFlash();
+                }
+            }
+
+            // Física das partículas (Curl Noise orgânico)
+            for (let i = 0; i < particleCount; i++) {
+                if (lifetimes[i] > 0) {
+                    positions[i * 3] += velocities[i].x;
+                    positions[i * 3 + 1] += velocities[i].y;
+                    positions[i * 3 + 2] += velocities[i].z;
+                    
+                    // Se estiver em quietude, as partículas colapsam para o centro (tensão do frame)
+                    if (stillnessTimer > 1.0 && !isFlashing) {
+                        velocities[i].x *= 0.9; velocities[i].y *= 0.9;
+                    } else {
+                        velocities[i].x += Math.sin(positions[i * 3 + 1]) * 0.01;
+                        velocities[i].y += Math.cos(positions[i * 3]) * 0.01;
+                    }
+
+                    lifetimes[i] -= dt * 0.5;
+                }
+            }
+
+            geometry.attributes.position.needsUpdate = true;
+            geometry.attributes.lifetime.needsUpdate = true;
+            particles.rotation.y += 0.002;
+            pointerSpeed *= 0.9; // Decaimento da velocidade
+
+            renderer.render(scene, camera);
+        }
+
+        // ==========================================
+        // 5. O CLARÃO (ILLUMINATION & EXAGGERATION)
+        // ==========================================
+        function triggerFlash() {
+            isFlashing = true;
+            
+            // Clarão visual
+            const flash = document.getElementById('flash-overlay');
+            flash.style.opacity = 1;
+            
+            // Clarão sonoro (Acorde revelador)
+            if (audioInitialized) {
+                harmonicOsc.frequency.setValueAtTime(440, audioCtx.currentTime); // Salto de oitava
+                harmonicGain.gain.setValueAtTime(1, audioCtx.currentTime);
+                harmonicGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 2);
+                noiseGain = audioCtx.createGain();
+                noiseSource.disconnect();
+                noiseSource.connect(noiseGain);
+                noiseGain.connect(audioCtx.destination);
+                noiseGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1);
+            }
+
+            // Após o flash, revelar a interface de recolha do Atlas
+            setTimeout(() => {
+                flash.style.transition = 'opacity 2s ease-out';
+                flash.style.opacity = 0;
+                
+                const ui = document.getElementById('ui-layer');
+                ui.style.pointerEvents = 'auto';
+                ui.style.opacity = 1;
+                
+                // Mudar a cor das partículas para dourado (A memória encontrada)
+                material.uniforms.color.value.setHex(0xffaa00);
+            }, 100);
+        }
+
+        // Simulação de submissão do território
+        document.getElementById('territory-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter' && this.value.trim() !== '') {
+                document.getElementById('provocation').innerHTML = "O teu território foi semeado no Atlas.<br>Bem-vindo.";
+                this.style.display = 'none';
+                // As partículas aceleram, representando a nova vida no território
+                for (let i = 0; i < particleCount; i++) lifetimes[i] = 1.0;
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>
