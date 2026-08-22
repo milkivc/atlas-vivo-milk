@@ -79,3 +79,5 @@ jobs:
           test -n "$FTPS_PASS"
           export MILK_FTPS_PASSWORD_FILE=/tmp/milk-drive-ftps.pass
           python ops/milk_drive_mistral_to_ftps.py
+
+# trigger integral migration 2026-08-22T20:49+01:00
