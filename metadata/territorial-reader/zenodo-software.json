@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "title": "Atlas Vivo MILK — Leitor Territorial Saneado",
+    "upload_type": "software",
+    "description": "Versão saneada e testada do Leitor Territorial do Atlas Vivo MILK. O módulo identifica indícios territoriais com trecho de evidência, proveniência e validação humana; remove dados simulados e fallbacks fabricados e desativa perfil psicológico, pontuação de sentimento e decisão pública automatizada.",
+    "creators": [
+      {
+        "name": "Araujo, Eduardo Maurício Vieira Cabral e",
+        "affiliation": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
+        "orcid": "0009-0007-6892-6570"
+      },
+      {
+        "name": "Araujo, Nuno Filipe Fernandes Vieira Cabral e",
+        "affiliation": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
+        "orcid": "0009-0009-1781-4020"
+      }
+    ],
+    "version": "2.0.0",
+    "license": "EUPL-1.2",
+    "access_right": "open",
+    "keywords": [
+      "Atlas Vivo MILK",
+      "leitura territorial",
+      "proveniência",
+      "validação humana",
+      "CAOP",
+      "DTMNFR",
+      "património cultural"
+    ],
+    "notes": "Assinatura autoral: Eduardo Mauer. Manutenção institucional: Associação MILK. O logótipo e a identidade visual têm direitos próprios e não são licenciados automaticamente pela EUPL-1.2 do código."
+  }
+}
