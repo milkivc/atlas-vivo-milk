@@ -1,0 +1,101 @@
+name: MILK ephemeral FTPS Takeout resume
+
+on:
+  push:
+    branches: [ops/ftps-fallback-probe-20260822]
+    paths:
+      - '.github/workflows/milk-ephemeral-ftps-takeout-resume.yml'
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: milk-ephemeral-ftps-takeout-resume
+  cancel-in-progress: false
+
+jobs:
+  resume:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.run_id }}
+      BRANCH: ${{ github.ref_name }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ops/ftps-fallback-probe-20260822
+
+      - name: Create one-run RSA bridge and wait for encrypted FTPS credential
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          trap 'rm -f /tmp/milk-ftps.key /tmp/milk-ftps.pub /tmp/milk-ftps.cipher /tmp/milk-ftps.pass' EXIT
+
+          openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:3072 -out /tmp/milk-ftps.key >/dev/null 2>&1
+          openssl pkey -in /tmp/milk-ftps.key -pubout -out /tmp/milk-ftps.pub >/dev/null 2>&1
+          PUB_B64="$(base64 -w0 /tmp/milk-ftps.pub)"
+
+          python - <<'PY'
+          import json, os, urllib.request
+          token=os.environ['GH_TOKEN']; repo=os.environ['REPO']; run=os.environ['RUN_ID']
+          pub=os.environ['PUB_B64']
+          body=f"MILK_FTPS_EPHEMERAL_PUBLIC_KEY run={run} alg=RSA-OAEP-SHA256 data={pub}"
+          req=urllib.request.Request(
+              f"https://api.github.com/repos/{repo}/issues/35/comments",
+              data=json.dumps({'body':body}).encode(),method='POST',
+              headers={'Authorization':'Bearer '+token,'Content-Type':'application/json','Accept':'application/vnd.github+json'})
+          with urllib.request.urlopen(req,timeout=60) as r:r.read()
+          print(f"MILK_FTPS_EPHEMERAL_BRIDGE_READY run={run} secret_persisted=0")
+          PY
+        env:
+          PUB_B64: ${{ env.PUB_B64 }}
+
+      - name: Receive ciphertext, decrypt in memory, and resume verified Takeout
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          trap 'rm -f /tmp/milk-ftps.key /tmp/milk-ftps.pub /tmp/milk-ftps.cipher /tmp/milk-ftps.pass /tmp/milk-cipher.b64' EXIT
+
+          # Recreate keypair is intentionally NOT allowed. The first step's filesystem is
+          # shared within the job, so the same ephemeral private key remains in /tmp.
+          test -s /tmp/milk-ftps.key
+
+          python - <<'PY'
+          import json, os, time, urllib.request
+          token=os.environ['GH_TOKEN']; repo=os.environ['REPO']; run=os.environ['RUN_ID']
+          marker=f"MILK_FTPS_CIPHERTEXT run={run} data="
+          deadline=time.time()+900
+          while time.time()<deadline:
+              req=urllib.request.Request(
+                  f"https://api.github.com/repos/{repo}/issues/35/comments?per_page=100",
+                  headers={'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'})
+              with urllib.request.urlopen(req,timeout=60) as r:comments=json.loads(r.read())
+              for item in reversed(comments):
+                  body=item.get('body','')
+                  if body.startswith(marker):
+                      data=body[len(marker):].strip()
+                      if data:
+                          open('/tmp/milk-cipher.b64','w',encoding='utf-8').write(data)
+                          print(f"MILK_FTPS_CIPHERTEXT_RECEIVED run={run}")
+                          raise SystemExit(0)
+              time.sleep(5)
+          print(f"MILK_FTPS_EPHEMERAL_BLOCKED run={run} cause=CIPHERTEXT_TIMEOUT")
+          raise SystemExit(2)
+          PY
+
+          base64 -d /tmp/milk-cipher.b64 > /tmp/milk-ftps.cipher
+          openssl pkeyutl -decrypt -inkey /tmp/milk-ftps.key -in /tmp/milk-ftps.cipher \
+            -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256 -out /tmp/milk-ftps.pass
+
+          FTPS_PASS="$(cat /tmp/milk-ftps.pass)"
+          echo "::add-mask::$FTPS_PASS"
+          test -n "$FTPS_PASS"
+
+          export MILK_FTPS_PASSWORD_FILE=/tmp/milk-ftps.pass
+          python ops/milk_takeout_resume.py
