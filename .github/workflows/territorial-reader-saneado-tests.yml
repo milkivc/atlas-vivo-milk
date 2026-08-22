@@ -55,14 +55,25 @@ jobs:
             --output /dev/null \
             'https://www.dgterritorio.gov.pt/atividades/cartografia/cartografia-tematica/caop'
 
-      - name: Verify no common secret material is present in territorial source
+      - name: Verify no common plaintext secret material is present
         shell: bash
         run: |
           set -euo pipefail
-          if grep -RniE '(api[_-]?key|password|secret|token)[[:space:]]*[:=][[:space:]]*["'"'][A-Za-z0-9._-]{16,}' src/territorial-reader; then
-            echo 'Possible plaintext secret detected' >&2
-            exit 1
-          fi
+          python - <<'PY'
+          import pathlib, re, sys
+          root = pathlib.Path('src/territorial-reader')
+          rx = re.compile(r'''(?ix)\b(?:api[_-]?key|password|secret|token)\b\s*[:=]\s*["']?[A-Za-z0-9._-]{16,}''')
+          findings=[]
+          for path in root.rglob('*'):
+              if not path.is_file() or path.suffix.lower() not in {'.js','.json','.md','.txt','.yml','.yaml'}:
+                  continue
+              try: text=path.read_text(encoding='utf-8')
+              except UnicodeDecodeError: continue
+              if rx.search(text): findings.append(str(path))
+          if findings:
+              print('Possible plaintext secret material:', *findings, sep='\n- ', file=sys.stderr)
+              raise SystemExit(1)
+          PY
 
       - name: Publish factual receipt
         if: always()
