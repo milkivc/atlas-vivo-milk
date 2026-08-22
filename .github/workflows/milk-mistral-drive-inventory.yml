@@ -28,6 +28,13 @@ jobs:
           import json, os, urllib.request
           api='https://api.mistral.ai/v1/connectors/google_drive_mcp/tools/search_files/call'
           headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json','Accept':'application/json'}
+          issue=f'https://api.github.com/repos/{os.environ["REPO"]}/issues/35/comments'
+          gh_headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Content-Type':'application/json','Accept':'application/vnd.github+json'}
+          def post(msg):
+              print(msg,flush=True)
+              req=urllib.request.Request(issue,data=json.dumps({'body':msg}).encode(),method='POST',headers=gh_headers)
+              with urllib.request.urlopen(req,timeout=30) as r:r.read()
+          post(f'MILK_MISTRAL_DRIVE_INVENTORY_STARTED run={os.environ["RUN_ID"]} source_writes=0 values_disclosed=0')
           def search(token=None):
               args={'query':None,'page_size':1000,'page_token':token}
               req=urllib.request.Request(api,data=json.dumps({'arguments':args}).encode(),method='POST',headers=headers)
@@ -57,11 +64,9 @@ jobs:
                       except Exception: pass
                   if f.get('shared_with_me_time'): shared+=1
               token=page.get('next_page_token')
+              if pages % 5 == 0:
+                  post(f'MILK_MISTRAL_DRIVE_INVENTORY_PROGRESS run={os.environ["RUN_ID"]} pages={pages} objects={objects} source_writes=0 values_disclosed=0')
               if not token: break
               if pages>=200: raise RuntimeError('pagination_guard')
-          msg=(f'MILK_MISTRAL_DRIVE_INVENTORY run={os.environ["RUN_ID"]} pages={pages} objects={objects} files={files} folders={folders} '
-               f'known_bytes={known_bytes} google_native={native} shared_marked={shared} unique_ids={len(seen)} source_writes=0 values_disclosed=0')
-          print(msg,flush=True)
-          req=urllib.request.Request(f'https://api.github.com/repos/{os.environ["REPO"]}/issues/35/comments',data=json.dumps({'body':msg}).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Content-Type':'application/json','Accept':'application/vnd.github+json'})
-          with urllib.request.urlopen(req,timeout=30) as r:r.read()
+          post(f'MILK_MISTRAL_DRIVE_INVENTORY run={os.environ["RUN_ID"]} pages={pages} objects={objects} files={files} folders={folders} known_bytes={known_bytes} google_native={native} shared_marked={shared} unique_ids={len(seen)} source_writes=0 values_disclosed=0')
           PY
