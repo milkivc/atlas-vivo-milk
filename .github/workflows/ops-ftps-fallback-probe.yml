@@ -1,0 +1,70 @@
+name: MILK PTServidor credential-route probe
+
+on:
+  push:
+    branches: ['ops/ftps-fallback-probe-20260822']
+    paths: ['.github/workflows/ops-ftps-fallback-probe.yml']
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PWD_SECRET: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.run_id }}
+    steps:
+      - name: Probe existing PTServidor routes without disclosing secret or filenames
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ftplib, json, os, ssl, urllib.request
+          secret=os.environ.get('PWD_SECRET','').strip()
+          if not secret:
+              raise SystemExit('PTSERVIDOR_SECRET_MISSING')
+          candidates=[
+            ('troi.ptservidor.net','migration@associacaomilk.pt'),
+            ('associacaomilk.pt','migration@associacaomilk.pt'),
+            ('troi.ptservidor.net','associ16'),
+            ('associacaomilk.pt','associ16'),
+          ]
+          results=[]
+          for host,user in candidates:
+              ok=False; root_count=None; private_path=None; err=''
+              try:
+                  ftp=ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=30)
+                  ftp.connect(host,21); ftp.login(user,secret); ftp.prot_p(); ftp.voidcmd('TYPE I')
+                  try:
+                      root_count=len([x for x in ftp.nlst() if x not in ('.','..')])
+                  except Exception:
+                      root_count=None
+                  if user=='associ16':
+                      for p in ('atlas_milk_private/migration','/atlas_milk_private/migration'):
+                          try:
+                              ftp.cwd(p); private_path='reachable'; break
+                          except Exception:
+                              pass
+                  else:
+                      private_path='account_root'
+                  ftp.quit(); ok=True
+              except Exception as exc:
+                  err=type(exc).__name__
+              results.append({'host':host,'user':user,'ok':ok,'root_count':root_count,'private_path':private_path,'error_class':err})
+          usable=[r for r in results if r['ok']]
+          safe=';'.join(f"{r['host']}|{r['user']}|ok={str(r['ok']).lower()}|private={r['private_path'] or 'na'}|err={r['error_class'] or 'none'}" for r in results)
+          body=f"MILK_PTSERVIDOR_ROUTE_PROBE run={os.environ['RUN_ID']} usable={len(usable)} results={safe} secret_disclosed=0 filenames_disclosed=0"
+          print(body)
+          req=urllib.request.Request(
+              f"https://api.github.com/repos/{os.environ['REPO']}/issues/35/comments",
+              data=json.dumps({'body':body}).encode(),method='POST',
+              headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Content-Type':'application/json','Accept':'application/vnd.github+json'})
+          urllib.request.urlopen(req,timeout=30).read()
+          if not usable:
+              raise SystemExit(2)
+          PY
