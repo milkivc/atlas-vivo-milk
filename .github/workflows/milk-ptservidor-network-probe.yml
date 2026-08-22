@@ -1,0 +1,56 @@
+name: MILK PTServidor network probe
+
+on:
+  push:
+    branches: [ops/ftps-fallback-probe-20260822]
+    paths:
+      - '.github/workflows/milk-ptservidor-network-probe.yml'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.run_id }}
+    steps:
+      - name: Probe provider-confirmed endpoints
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, socket, urllib.request
+
+          results=[]
+          for host in ('associacaomilk.pt','troi.ptservidor.net'):
+              ipv4=[]
+              try:
+                  ipv4=sorted({x[4][0] for x in socket.getaddrinfo(host,21,socket.AF_INET,socket.SOCK_STREAM)})
+              except Exception:
+                  pass
+              reachable=False
+              err='no_ipv4'
+              for ip in ipv4:
+                  try:
+                      with socket.create_connection((ip,21),timeout=10) as s:
+                          banner=s.recv(256).decode('utf-8','replace').replace('\r',' ').replace('\n',' ')[:80]
+                      reachable=True
+                      err='ok'
+                      break
+                  except Exception as exc:
+                      err=type(exc).__name__
+              results.append(f'{host}|ipv4={len(ipv4)}|tcp21={str(reachable).lower()}|state={err}')
+
+          msg=f"MILK_PTSERVIDOR_NETWORK_PROBE run={os.environ['RUN_ID']} " + ';'.join(results) + ' secrets_used=0'
+          print(msg,flush=True)
+          req=urllib.request.Request(
+              f"https://api.github.com/repos/{os.environ['REPO']}/issues/35/comments",
+              data=json.dumps({'body':msg}).encode(),method='POST',
+              headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Content-Type':'application/json','Accept':'application/vnd.github+json'})
+          with urllib.request.urlopen(req,timeout=30) as r:r.read()
+          PY
