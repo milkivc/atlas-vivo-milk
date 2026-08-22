@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "work": {
+    "title": "Atlas Vivo MILK — Leitor Territorial Saneado",
+    "type": "software",
+    "version": "2.0.0",
+    "project": "Atlas Vivo MILK",
+    "institutionalMaintainer": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte"
+  },
+  "authorialSignature": {
+    "displayName": "Eduardo Mauer",
+    "legalName": "Eduardo Maurício Vieira Cabral e Araujo",
+    "orcid": "https://orcid.org/0009-0007-6892-6570",
+    "role": [
+      "concepção autoral",
+      "direção curatorial",
+      "orientação metodológica"
+    ]
+  },
+  "projectContributors": [
+    {
+      "name": "Nuno Filipe Fernandes Vieira Cabral e Araujo",
+      "orcid": "https://orcid.org/0009-0009-1781-4020",
+      "role": "contributor"
+    }
+  ],
+  "rights": {
+    "softwareLicense": "EUPL-1.2",
+    "softwareSpdx": "EUPL-1.2",
+    "logoAndBrand": {
+      "asset": "logo-milk.png",
+      "creatorSignature": "Eduardo Mauer",
+      "rightsNotice": "© Eduardo Maurício Vieira Cabral e Araujo / Associação MILK. Todos os direitos sobre o sinal gráfico e identidade visual reservados, salvo autorização expressa do titular.",
+      "trademarkRegistrationClaimed": false,
+      "registrationOrCertificationClaimed": false,
+      "reuseLicense": "NO-AUTOMATIC-LICENCE"
+    }
+  },
+  "governance": {
+    "humanValidationRequired": true,
+    "automatedPublication": false,
+    "noPsychologicalProfiling": true,
+    "noFabricatedTerritorialData": true,
+    "sourceProvenanceRequired": true
+  },
+  "qualification": {
+    "basis": "autoria e titularidade declaradas pelo titular; identificadores ORCID já presentes nos metadados canónicos do projeto",
+    "legalRegistrationProven": false,
+    "externalPersistentIdentifiers": "somente após emissão e verificação pela plataforma correspondente"
+  }
+}
