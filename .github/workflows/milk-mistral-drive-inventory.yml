@@ -1,0 +1,67 @@
+name: MILK Mistral Drive inventory
+
+on:
+  push:
+    branches: [ops/ftps-fallback-probe-20260822]
+    paths:
+      - '.github/workflows/milk-mistral-drive-inventory.yml'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.run_id }}
+    steps:
+      - name: Enumerate complete visible Drive without disclosure
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, urllib.request
+          api='https://api.mistral.ai/v1/connectors/google_drive_mcp/tools/search_files/call'
+          headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json','Accept':'application/json'}
+          def search(token=None):
+              args={'query':None,'page_size':1000,'page_token':token}
+              req=urllib.request.Request(api,data=json.dumps({'arguments':args}).encode(),method='POST',headers=headers)
+              with urllib.request.urlopen(req,timeout=120) as r: res=json.loads(r.read().decode())
+              texts=[x.get('text','') for x in res.get('content',[]) if isinstance(x,dict) and isinstance(x.get('text'),str)]
+              for t in texts:
+                  try:
+                      x=json.loads(t)
+                      if isinstance(x,dict) and isinstance(x.get('files'),list): return x
+                  except Exception: pass
+              raise RuntimeError('unparseable_search_response')
+          token=None; pages=0; objects=0; folders=0; files=0; known_bytes=0; native=0; shared=0
+          seen=set()
+          while True:
+              page=search(token); pages+=1
+              for f in page.get('files',[]):
+                  if not isinstance(f,dict): continue
+                  fid=str(f.get('id') or '')
+                  if not fid or fid in seen: continue
+                  seen.add(fid); objects+=1
+                  mt=str(f.get('mime_type') or '')
+                  if mt=='application/vnd.google-apps.folder': folders+=1
+                  else:
+                      files+=1
+                      if mt.startswith('application/vnd.google-apps.'): native+=1
+                      try: known_bytes += int(f.get('file_size') or 0)
+                      except Exception: pass
+                  if f.get('shared_with_me_time'): shared+=1
+              token=page.get('next_page_token')
+              if not token: break
+              if pages>=200: raise RuntimeError('pagination_guard')
+          msg=(f'MILK_MISTRAL_DRIVE_INVENTORY run={os.environ["RUN_ID"]} pages={pages} objects={objects} files={files} folders={folders} '
+               f'known_bytes={known_bytes} google_native={native} shared_marked={shared} unique_ids={len(seen)} source_writes=0 values_disclosed=0')
+          print(msg,flush=True)
+          req=urllib.request.Request(f'https://api.github.com/repos/{os.environ["REPO"]}/issues/35/comments',data=json.dumps({'body':msg}).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Content-Type':'application/json','Accept':'application/vnd.github+json'})
+          with urllib.request.urlopen(req,timeout=30) as r:r.read()
+          PY
