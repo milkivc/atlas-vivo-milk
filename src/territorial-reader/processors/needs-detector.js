@@ -1,562 +1,280 @@
-/**
- * @file needs-detector.js
- * @description Detetor de Necessidades com IA para análise de dados territoriais.
- * @author Associação MILK - Sistema Auto-Validante Territorial
- * @version 1.0.0
- * @license MIT
- * @namespace TerritorialReader.Processors
+/*
+ * Atlas Vivo MILK — Leitor Territorial / Detetor de Indícios de Necessidade
+ * Copyright: Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte
+ * SPDX-License-Identifier: EUPL-1.2
+ *
+ * Regra: este módulo não diagnostica pessoas, não decide prioridades públicas e não
+ * transforma palavras-chave em factos. Produz indícios rastreáveis para validação humana.
  */
 
-const { v4: uuidv4 } = require('uuid');
+'use strict';
+
 const crypto = require('crypto');
 
-/**
- * @class NeedsDetector
- * @description Detetor de necessidades com base em dados de Atas, Reclamações e Análises.
- * @implements {SelfHealing, AutoReflexive, Traceable}
- */
+const HUMAN_REVIEW_STATE = 'PENDENTE_VALIDACAO_HUMANA';
+
+const NEED_MARKERS = [
+  /\bn[aã]o\s+(?:h[aá]|existe|existem|temos|dispomos)\b/iu,
+  /\bsem\s+(?:um|uma|o|a|os|as)?\s*[\p{L}\d]/iu,
+  /\bfalta(?:m)?\b/iu,
+  /\bcar[eê]ncia(?:s)?\b/iu,
+  /\bprecis(?:a|amos|am|o)\b/iu,
+  /\bnecessidade(?:s)?\b/iu,
+  /\bfoi\s+(?:encerrad[oa]|retirad[oa]|demolid[oa])\b/iu,
+  /\bdeixou\s+de\s+(?:existir|funcionar)\b/iu,
+  /\bdificuldade(?:s)?\s+(?:de|em|para)\b/iu,
+  /\bimpede\s+(?:o|a|os|as)?\b/iu,
+];
+
+const FALSE_POSITIVE_GUARDS = [
+  /\bn[aã]o\s+falta\b/iu,
+  /\bn[aã]o\s+h[aá]\s+falta\b/iu,
+  /\bsem\s+falta\b/iu,
+  /\bn[aã]o\s+[ée]\s+(?:necess[aá]rio|preciso)\b/iu,
+];
+
+const THEMES = Object.freeze({
+  cultura_memoria: ['cultura', 'memória', 'arquivo', 'biblioteca', 'museu', 'teatro', 'cinema', 'património', 'tradição', 'festa', 'romaria'],
+  encontro_convivencia: ['encontro', 'convivência', 'convívio', 'reunião', 'estar juntos', 'espaço comum', 'comunidade', 'associação'],
+  espaco_publico: ['praça', 'jardim', 'parque', 'rua', 'largo', 'espaço público', 'banco', 'sombra', 'fonte'],
+  acessibilidade: ['acessibilidade', 'rampa', 'cadeira de rodas', 'mobilidade reduzida', 'barreira', 'degrau', 'piso tátil', 'língua gestual'],
+  mobilidade: ['autocarro', 'comboio', 'metro', 'transporte', 'paragem', 'ciclovia', 'passeio', 'travessia', 'mobilidade'],
+  cuidado_comunitario: ['cuidado', 'apoio', 'isolamento', 'solidão', 'descanso', 'saúde comunitária', 'idosos', 'crianças', 'jovens'],
+  infraestrutura_basica: ['água', 'saneamento', 'esgoto', 'eletricidade', 'iluminação', 'pavimento', 'estrada'],
+  ambiente: ['árvore', 'floresta', 'rio', 'mar', 'água', 'resíduos', 'lixo', 'poluição', 'biodiversidade', 'natureza'],
+  habitacao: ['habitação', 'casa', 'alojamento', 'renda', 'arrendamento'],
+  educacao: ['escola', 'creche', 'educação', 'formação', 'aprendizagem'],
+});
+
+const INFRASTRUCTURE_HINTS = Object.freeze({
+  cultura_memoria: ['espaço cultural', 'arquivo comunitário', 'biblioteca de proximidade', 'dispositivo de memória'],
+  encontro_convivencia: ['espaço de encontro', 'casa comunitária', 'dispositivo de convivência'],
+  espaco_publico: ['microinfraestrutura de espaço público', 'zona de sombra/repouso', 'dispositivo de permanência'],
+  acessibilidade: ['adaptação de acessibilidade', 'percurso acessível'],
+  mobilidade: ['infraestrutura de mobilidade de proximidade'],
+  cuidado_comunitario: ['espaço comunitário de cuidado e encontro'],
+  infraestrutura_basica: ['infraestrutura básica a confirmar pela entidade competente'],
+  ambiente: ['infraestrutura ecológica/de cuidado territorial'],
+  habitacao: ['necessidade habitacional a documentar'],
+  educacao: ['espaço educativo/de aprendizagem não formal'],
+});
+
+function sha256(value) {
+  return crypto.createHash('sha256').update(String(value), 'utf8').digest('hex');
+}
+
+function normalizeWhitespace(value) {
+  return String(value ?? '').replace(/\s+/gu, ' ').trim();
+}
+
+function fold(value) {
+  return normalizeWhitespace(value)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLocaleLowerCase('pt-PT');
+}
+
+function splitSentences(text) {
+  const source = String(text ?? '');
+  const out = [];
+  const rx = /[^.!?\n]+(?:[.!?]+|$)/gu;
+  let match;
+  while ((match = rx.exec(source)) !== null) {
+    const raw = match[0];
+    const clean = normalizeWhitespace(raw.replace(/[.!?]+$/u, ''));
+    if (!clean) continue;
+    const leading = raw.search(/\S/u);
+    const start = match.index + (leading < 0 ? 0 : leading);
+    out.push({ text: clean, start, end: start + clean.length });
+  }
+  return out;
+}
+
 class NeedsDetector {
-  constructor() {
-    this.logger = this._initLogger();
-    this.selfHealing = this._initSelfHealing();
-    this.priorityWeights = this._initPriorityWeights();
-    this.categoryMappings = this._initCategoryMappings();
+  constructor({ logger = null } = {}) {
+    this.logger = logger;
   }
 
-  /**
-   * @method _initLogger
-   * @description Inicializa o sistema de logging com rastreabilidade.
-   * @returns {Object} Logger configurado.
-   */
-  _initLogger() {
-    return {
-      info: (message, metadata = {}) => {
-        const logEntry = {
-          timestamp: new Date().toISOString(),
-          level: 'INFO',
-          message,
-          component: 'NeedsDetector',
-          traceId: uuidv4(),
-          ...metadata,
-        };
-        console.log(JSON.stringify(logEntry));
-        return logEntry;
-      },
-      error: (message, metadata = {}) => {
-        const logEntry = {
-          timestamp: new Date().toISOString(),
-          level: 'ERROR',
-          message,
-          component: 'NeedsDetector',
-          traceId: uuidv4(),
-          ...metadata,
-        };
-        console.error(JSON.stringify(logEntry));
-        return logEntry;
-      },
-    };
-  }
-
-  /**
-   * @method _initSelfHealing
-   * @description Inicializa o mecanismo de auto-correção.
-   * @returns {Object} Módulo de auto-correção.
-   */
-  _initSelfHealing() {
-    return {
-      retry: async (fn, context, retries = 3) => {
-        let lastError;
-        for (let i = 0; i < retries; i++) {
-          try {
-            return await fn();
-          } catch (error) {
-            lastError = error;
-            this.logger.error(`Attempt ${i + 1} failed`, {
-              error: error.message,
-              context,
-            });
-            await new Promise((resolve) => setTimeout(resolve, 1000 * (i + 1)));
-          }
-        }
-        throw new Error(`Max retries (${retries}) exceeded. Last error: ${lastError.message}`);
-      },
-      fallback: (primaryFn, fallbackFn) => {
-        return async (...args) => {
-          try {
-            return await primaryFn(...args);
-          } catch (error) {
-            this.logger.error('Primary function failed, using fallback', {
-              error: error.message,
-            });
-            return fallbackFn(...args);
-          }
-        };
-      },
-    };
-  }
-
-  /**
-   * @method _initPriorityWeights
-   * @description Inicializa pesos de prioridade para categorias de necessidades.
-   * @returns {Object} Pesos de prioridade.
-   */
-  _initPriorityWeights() {
-    return {
-      // Prioridade 5 (Crítica)
-      critical: {
-        weight: 5,
-        categories: ['segurança pública', 'saúde pública', 'emergência', 'risco de vida'],
-      },
-      // Prioridade 4 (Alta)
-      high: {
-        weight: 4,
-        categories: ['infraestrutura crítica', 'água', 'eletricidade', 'saneamento', 'transporte público'],
-      },
-      // Prioridade 3 (Média)
-      medium: {
-        weight: 3,
-        categories: ['educação', 'cultura', 'desporto', 'habitação', 'emprego'],
-      },
-      // Prioridade 2 (Baixa)
-      low: {
-        weight: 2,
-        categories: ['limpeza urbana', 'jardins', 'parques', 'iluminação decorativa'],
-      },
-      // Prioridade 1 (Mínima)
-      minimal: {
-        weight: 1,
-        categories: ['melhorias estéticas', 'eventos pontuais'],
-      },
-    };
-  }
-
-  /**
-   * @method _initCategoryMappings
-   * @description Inicializa mapeamento de palavras-chave para categorias.
-   * @returns {Object} Mapeamento de categorias.
-   */
-  _initCategoryMappings() {
-    return {
-      // Segurança
-      security: {
-        keywords: ['segurança', 'polícia', 'GNR', 'PSP', 'vigilância', 'roubo', 'furto', 'assalto', 'violência', 'vandalismo'],
-        category: 'Segurança Pública',
-        priority: 'critical',
-      },
-      // Saúde
-      health: {
-        keywords: ['saúde', 'hospital', 'centro de saúde', 'médico', 'enfermeiro', 'pandemia', 'vacinação'],
-        category: 'Saúde Pública',
-        priority: 'critical',
-      },
-      // Infraestrutura
-      infrastructure: {
-        keywords: ['estrada', 'rua', 'avenida', 'pavimento', 'iluminação', 'saneamento', 'água', 'esgoto'],
-        category: 'Infraestrutura',
-        priority: 'high',
-      },
-      // Transporte
-      transport: {
-        keywords: ['transporte', 'autocarro', 'metro', 'comboio', 'barco', 'aeroporto', 'ponte', 'túnel'],
-        category: 'Transporte Público',
-        priority: 'high',
-      },
-      // Educação
-      education: {
-        keywords: ['educação', 'escola', 'creche', 'jardim de infância', 'universidade', 'formação'],
-        category: 'Educação',
-        priority: 'medium',
-      },
-      // Cultura
-      culture: {
-        keywords: ['cultura', 'biblioteca', 'museu', 'teatro', 'cinema', 'evento', 'património'],
-        category: 'Cultura',
-        priority: 'medium',
-      },
-      // Desporto
-      sports: {
-        keywords: ['desporto', 'piscina', 'ginásio', 'campo', 'pavilhão', 'clube'],
-        category: 'Desporto',
-        priority: 'medium',
-      },
-      // Habitação
-      housing: {
-        keywords: ['habitação', 'casa', 'apartamento', 'alojamento', 'renda', 'arrendamento'],
-        category: 'Habitação',
-        priority: 'medium',
-      },
-      // Emprego
-      employment: {
-        keywords: ['emprego', 'trabalho', 'desemprego', 'formação', 'qualificação', 'profissional'],
-        category: 'Emprego',
-        priority: 'medium',
-      },
-      // Ambiente
-      environment: {
-        keywords: ['ambiente', 'natureza', 'floresta', 'poluição', 'lixo', 'resíduos', 'reciclagem'],
-        category: 'Ambiente',
-        priority: 'medium',
-      },
-      // Economia
-      economy: {
-        keywords: ['economia', 'negócio', 'empresa', 'comércio', 'turismo', 'investimento'],
-        category: 'Economia',
-        priority: 'medium',
-      },
-      // Limpeza Urbana
-      cleaning: {
-        keywords: ['limpeza', 'lixo', 'resíduos', 'varrição', 'higiene', 'saneamento'],
-        category: 'Limpeza Urbana',
-        priority: 'low',
-      },
-      // Jardins e Parques
-      parks: {
-        keywords: ['jardim', 'parque', 'espaço verde', 'árvore', 'planta', 'floresta'],
-        category: 'Jardins e Parques',
-        priority: 'low',
-      },
-    };
-  }
-
-  /**
-   * @method _generateHash
-   * @description Gera hash SHA-256 para rastreabilidade de dados.
-   * @param {string} data - Dados para gerar hash.
-   * @returns {string} Hash SHA-256.
-   */
-  _generateHash(data) {
-    return crypto.createHash('sha256').update(data).digest('hex');
-  }
-
-  /**
-   * @method _sanitizeText
-   * @description Limpa e normaliza texto.
-   * @param {string} text - Texto a ser sanitizado.
-   * @returns {string} Texto sanitizado.
-   */
-  _sanitizeText(text) {
-    if (!text) return '';
-    return text
-      .replace(/\s+/g, ' ')
-      .replace(/\n/g, ' ')
-      .trim();
-  }
-
-  /**
-   * @method categorizeNeed
-   * @description Categoriza uma necessidade com base em palavras-chave.
-   * @param {string} text - Texto da necessidade.
-   * @returns {Object} Categoria e prioridade.
-   */
-  categorizeNeed(text) {
-    const lowerText = text.toLowerCase();
-    
-    for (const [categoryKey, categoryData] of Object.entries(this.categoryMappings)) {
-      for (const keyword of categoryData.keywords) {
-        if (lowerText.includes(keyword)) {
-          return {
-            category: categoryData.category,
-            priority: categoryData.priority,
-            weight: this.priorityWeights[categoryData.priority].weight,
-          };
-        }
-      }
-    }
-
-    // Categoria padrão
-    return {
-      category: 'Outros',
-      priority: 'low',
-      weight: 1,
-    };
-  }
-
-  /**
-   * @method detectNeedsFromText
-   * @description Deteta necessidades em um texto.
-   * @param {string} text - Texto a ser analisado.
-   * @returns {Object} Necessidades detectadas.
-   */
-  detectNeedsFromText(text) {
-    const needs = {
-      id: uuidv4(),
-      source: 'text',
+  _safeLog(event, payload = {}) {
+    if (!this.logger) return;
+    const safe = {
+      event,
       timestamp: new Date().toISOString(),
-      hash: this._generateHash(text),
-      originalText: text,
-      needs: [],
-      categories: new Set(),
-      priorities: new Set(),
+      ...payload,
     };
-
-    // Dividir o texto em frases
-    const sentences = text.split(/[.!?]+/);
-
-    for (const sentence of sentences) {
-      const trimmedSentence = this._sanitizeText(sentence);
-      if (!trimmedSentence) continue;
-
-      // Verificar se a frase contém palavras-chave de necessidades
-      const needKeywords = ['necessidade', 'precisa', 'falta', 'carência', 'problema', 'dificuldade', 'urgente'];
-      const hasNeed = needKeywords.some((keyword) => trimmedSentence.toLowerCase().includes(keyword));
-
-      if (hasNeed) {
-        const categorized = this.categorizeNeed(trimmedSentence);
-        needs.needs.push({
-          id: uuidv4(),
-          text: trimmedSentence,
-          category: categorized.category,
-          priority: categorized.priority,
-          weight: categorized.weight,
-        });
-        needs.categories.add(categorized.category);
-        needs.priorities.add(categorized.priority);
-      }
-    }
-
-    needs.categories = Array.from(needs.categories);
-    needs.priorities = Array.from(needs.priorities);
-    needs.count = needs.needs.length;
-
-    this.logger.info('Needs detected from text', { needs });
-    return needs;
+    // Nunca registar texto-fonte, nomes de pessoas ou conteúdo de submissões.
+    if (typeof this.logger.info === 'function') this.logger.info(safe);
   }
 
-  /**
-   * @method detectNeedsFromAtas
-   * @description Deteta necessidades a partir de Atas.
-   * @param {Array<Object>} atas - Lista de Atas.
-   * @returns {Object} Necessidades detectadas.
-   */
-  detectNeedsFromAtas(atas) {
-    const allNeeds = {
-      id: uuidv4(),
-      source: 'atas',
-      timestamp: new Date().toISOString(),
-      hash: this._generateHash(JSON.stringify(atas)),
-      atasCount: atas.length,
-      needs: [],
-      categories: new Set(),
-      priorities: new Set(),
-    };
-
-    for (const ata of atas) {
-      // Analisar título
-      const titleNeeds = this.detectNeedsFromText(ata.title);
-      allNeeds.needs.push(...titleNeeds.needs);
-      titleNeeds.categories.forEach((c) => allNeeds.categories.add(c));
-      titleNeeds.priorities.forEach((p) => allNeeds.priorities.add(p));
-
-      // Analisar decisões
-      if (ata.decisions && ata.decisions.length > 0) {
-        const decisionsText = ata.decisions.join(' ');
-        const decisionsNeeds = this.detectNeedsFromText(decisionsText);
-        allNeeds.needs.push(...decisionsNeeds.needs);
-        decisionsNeeds.categories.forEach((c) => allNeeds.categories.add(c));
-        decisionsNeeds.priorities.forEach((p) => allNeeds.priorities.add(p));
-      }
-
-      // Analisar itens de ação
-      if (ata.actionItems && ata.actionItems.length > 0) {
-        const actionItemsText = ata.actionItems.join(' ');
-        const actionItemsNeeds = this.detectNeedsFromText(actionItemsText);
-        allNeeds.needs.push(...actionItemsNeeds.needs);
-        actionItemsNeeds.categories.forEach((c) => allNeeds.categories.add(c));
-        actionItemsNeeds.priorities.forEach((p) => allNeeds.priorities.add(p));
-      }
-
-      // Analisar necessidades explícitas
-      if (ata.needs && ata.needs.length > 0) {
-        for (const need of ata.needs) {
-          const categorized = this.categorizeNeed(need);
-          allNeeds.needs.push({
-            id: uuidv4(),
-            text: need,
-            category: categorized.category,
-            priority: categorized.priority,
-            weight: categorized.weight,
-            sourceAta: ata.title,
-          });
-          allNeeds.categories.add(categorized.category);
-          allNeeds.priorities.add(categorized.priority);
-        }
-      }
+  _findThemes(sentence) {
+    const haystack = fold(sentence);
+    const themes = [];
+    for (const [theme, terms] of Object.entries(THEMES)) {
+      const evidence = terms.filter((term) => haystack.includes(fold(term)));
+      if (evidence.length) themes.push({ theme, evidenceTerms: [...new Set(evidence)] });
     }
-
-    allNeeds.categories = Array.from(allNeeds.categories);
-    allNeeds.priorities = Array.from(allNeeds.priorities);
-    allNeeds.count = allNeeds.needs.length;
-
-    this.logger.info('Needs detected from atas', { allNeeds });
-    return allNeeds;
+    return themes;
   }
 
-  /**
-   * @method detectNeedsFromComplaints
-   * @description Deteta necessidades a partir de Reclamações.
-   * @param {Array<Object>} complaints - Lista de Reclamações.
-   * @returns {Object} Necessidades detectadas.
-   */
-  detectNeedsFromComplaints(complaints) {
-    const allNeeds = {
-      id: uuidv4(),
-      source: 'complaints',
-      timestamp: new Date().toISOString(),
-      hash: this._generateHash(JSON.stringify(complaints)),
-      complaintsCount: complaints.length,
-      needs: [],
-      categories: new Set(),
-      priorities: new Set(),
+  _isNeedCandidate(sentence) {
+    if (FALSE_POSITIVE_GUARDS.some((rx) => rx.test(sentence))) return false;
+    return NEED_MARKERS.some((rx) => rx.test(sentence));
+  }
+
+  _confidence(sentence, themes) {
+    const markerHits = NEED_MARKERS.reduce((n, rx) => n + (rx.test(sentence) ? 1 : 0), 0);
+    const themeHits = themes.reduce((n, item) => n + item.evidenceTerms.length, 0);
+    // Heurística transparente; não é probabilidade estatística.
+    const score = Math.min(1, 0.45 + markerHits * 0.18 + Math.min(themeHits, 3) * 0.08);
+    return Number(score.toFixed(2));
+  }
+
+  detectNeedsFromText(text, context = {}) {
+    if (typeof text !== 'string') throw new TypeError('text must be a string');
+    const sourceHash = sha256(text);
+    const source = {
+      sourceType: context.sourceType || 'text',
+      sourceId: context.sourceId || null,
+      sourceUrl: context.sourceUrl || null,
+      fetchedAt: context.fetchedAt || null,
+      contentHash: sourceHash,
     };
 
-    for (const complaint of complaints) {
-      const categorized = this.categorizeNeed(complaint);
-      allNeeds.needs.push({
-        id: uuidv4(),
-        text: complaint,
-        category: categorized.category,
-        priority: categorized.priority,
-        weight: categorized.weight,
+    const candidates = [];
+    for (const sentence of splitSentences(text)) {
+      if (!this._isNeedCandidate(sentence.text)) continue;
+      const themes = this._findThemes(sentence.text);
+      const confidence = this._confidence(sentence.text, themes);
+      candidates.push({
+        id: crypto.randomUUID(),
+        state: HUMAN_REVIEW_STATE,
+        statement: sentence.text,
+        evidence: {
+          quote: sentence.text,
+          start: sentence.start,
+          end: sentence.end,
+          sourceHash,
+        },
+        themes,
+        infrastructureHints: [...new Set(themes.flatMap((t) => INFRASTRUCTURE_HINTS[t.theme] || []))],
+        confidence,
+        confidenceMeaning: 'força da regra determinística; não é probabilidade nem prioridade pública',
+        requiresHumanValidation: true,
       });
-      allNeeds.categories.add(categorized.category);
-      allNeeds.priorities.add(categorized.priority);
     }
 
-    allNeeds.categories = Array.from(allNeeds.categories);
-    allNeeds.priorities = Array.from(allNeeds.priorities);
-    allNeeds.count = allNeeds.needs.length;
+    const result = {
+      id: crypto.randomUUID(),
+      schemaVersion: '2.0.0',
+      source,
+      state: HUMAN_REVIEW_STATE,
+      count: candidates.length,
+      needs: candidates,
+      categories: [...new Set(candidates.flatMap((c) => c.themes.map((t) => t.theme)))],
+      priorities: [],
+      humanDecisionRequired: true,
+      automatedDecision: false,
+    };
 
-    this.logger.info('Needs detected from complaints', { allNeeds });
-    return allNeeds;
-  }
-
-  /**
-   * @method prioritizeNeeds
-   * @description Prioriza necessidades com base em pesos.
-   * @param {Array<Object>} needs - Lista de necessidades.
-   * @returns {Array<Object>} Necessidades ordenadas por prioridade.
-   */
-  prioritizeNeeds(needs) {
-    return needs.sort((a, b) => {
-      // Ordenar por peso (descendente)
-      if (b.weight !== a.weight) return b.weight - a.weight;
-      // Se mesmo peso, ordenar por categoria (alfabético)
-      return a.category.localeCompare(b.category);
+    this._safeLog('territorial_need_scan_completed', {
+      sourceHash,
+      candidateCount: result.count,
+      categories: result.categories,
     });
+    return result;
   }
 
-  /**
-   * @method generateNeedsReport
-   * @description Gera um relatório de necessidades.
-   * @param {Object} needsData - Dados de necessidades.
-   * @returns {Object} Relatório de necessidades.
-   */
+  detectNeedsFromAtas(atas) {
+    if (!Array.isArray(atas)) throw new TypeError('atas must be an array');
+    const aggregate = [];
+    for (const ata of atas) {
+      const fragments = [ata?.title, ...(ata?.decisions || []), ...(ata?.actionItems || []), ...(ata?.needs || [])]
+        .filter((v) => typeof v === 'string' && v.trim());
+      for (const fragment of fragments) {
+        const scan = this.detectNeedsFromText(fragment, {
+          sourceType: 'ata',
+          sourceId: ata?.id || ata?.title || null,
+          sourceUrl: ata?.sourceUrl || null,
+          fetchedAt: ata?.fetchedAt || null,
+        });
+        aggregate.push(...scan.needs);
+      }
+    }
+    return this._aggregate('atas', atas, aggregate);
+  }
+
+  detectNeedsFromComplaints(complaints) {
+    if (!Array.isArray(complaints)) throw new TypeError('complaints must be an array');
+    const aggregate = [];
+    for (const item of complaints) {
+      const text = typeof item === 'string' ? item : item?.text || item?.description || '';
+      if (!text) continue;
+      const scan = this.detectNeedsFromText(text, {
+        sourceType: 'territorial_contribution',
+        sourceId: typeof item === 'object' ? item.id || null : null,
+        sourceUrl: typeof item === 'object' ? item.sourceUrl || null : null,
+      });
+      aggregate.push(...scan.needs);
+    }
+    return this._aggregate('territorial_contributions', complaints, aggregate);
+  }
+
+  _aggregate(sourceType, sourceValue, needs) {
+    return {
+      id: crypto.randomUUID(),
+      schemaVersion: '2.0.0',
+      source: sourceType,
+      sourceHash: sha256(JSON.stringify(sourceValue)),
+      state: HUMAN_REVIEW_STATE,
+      needs,
+      count: needs.length,
+      categories: [...new Set(needs.flatMap((n) => n.themes.map((t) => t.theme)))],
+      priorities: [],
+      humanDecisionRequired: true,
+      automatedDecision: false,
+    };
+  }
+
+  // Compatibilidade: ordena apenas por força da evidência, nunca por valor humano/político.
+  prioritizeNeeds(needs) {
+    return [...needs].sort((a, b) => (b.confidence || 0) - (a.confidence || 0));
+  }
+
   generateNeedsReport(needsData) {
-    const prioritizedNeeds = this.prioritizeNeeds(needsData.needs);
-    
-    // Agrupar por categoria
-    const needsByCategory = {};
-    for (const need of prioritizedNeeds) {
-      if (!needsByCategory[need.category]) {
-        needsByCategory[need.category] = [];
+    const evidenceOrdered = this.prioritizeNeeds(needsData?.needs || []);
+    const byTheme = {};
+    for (const need of evidenceOrdered) {
+      for (const { theme } of need.themes || []) {
+        (byTheme[theme] ||= []).push(need.id);
       }
-      needsByCategory[need.category].push(need);
     }
-
-    // Agrupar por prioridade
-    const needsByPriority = {};
-    for (const need of prioritizedNeeds) {
-      if (!needsByPriority[need.priority]) {
-        needsByPriority[need.priority] = [];
-      }
-      needsByPriority[need.priority].push(need);
-    }
-
-    // Estatísticas
-    const stats = {
-      totalNeeds: needsData.count,
-      categories: needsData.categories.length,
-      priorities: needsData.priorities.length,
-      needsByCategory,
-      needsByPriority,
+    return {
+      id: crypto.randomUUID(),
+      schemaVersion: '2.0.0',
+      generatedAt: new Date().toISOString(),
+      sourceHash: needsData?.sourceHash || needsData?.source?.contentHash || null,
+      state: HUMAN_REVIEW_STATE,
+      totalCandidates: evidenceOrdered.length,
+      byTheme,
+      candidates: evidenceOrdered,
+      recommendations: [],
+      nextStep: 'VALIDACAO_HUMANA_E_CRUZAMENTO_COM_FONTES_TERRITORIAIS_OFICIAIS',
+      automatedDecision: false,
     };
-
-    const report = {
-      id: uuidv4(),
-      timestamp: new Date().toISOString(),
-      hash: this._generateHash(JSON.stringify(needsData)),
-      source: needsData.source,
-      stats,
-      prioritizedNeeds,
-      recommendations: this._generateRecommendations(needsByPriority),
-    };
-
-    this.logger.info('Needs report generated', { report });
-    return report;
   }
 
-  /**
-   * @method _generateRecommendations
-   * @description Gera recomendações com base em necessidades priorizadas.
-   * @param {Object} needsByPriority - Necessidades agrupadas por prioridade.
-   * @returns {Array} Lista de recomendações.
-   */
-  _generateRecommendations(needsByPriority) {
-    const recommendations = [];
-
-    // Recomendações para necessidades críticas
-    if (needsByPriority.critical && needsByPriority.critical.length > 0) {
-      recommendations.push({
-        priority: 'critical',
-        message: 'Ação imediata necessária para resolver problemas críticos de segurança e saúde.',
-        actions: [
-          'Contactar autoridades competentes (PSP, GNR, Bombeiros, Saúde Pública).',
-          'Alocar recursos de emergência.',
-          'Criar plano de ação imediato.',
-        ],
-      });
-    }
-
-    // Recomendações para necessidades altas
-    if (needsByPriority.high && needsByPriority.high.length > 0) {
-      recommendations.push({
-        priority: 'high',
-        message: 'Priorizar resolução de problemas de infraestrutura e transporte.',
-        actions: [
-          'Contactar Câmaras Municipais e entidades responsáveis.',
-          'Avaliar orçamento disponível.',
-          'Criar cronograma de intervenções.',
-        ],
-      });
-    }
-
-    // Recomendações para necessidades médias
-    if (needsByPriority.medium && needsByPriority.medium.length > 0) {
-      recommendations.push({
-        priority: 'medium',
-        message: 'Planejar melhorias em educação, cultura, desporto e habitação.',
-        actions: [
-          'Criar grupos de trabalho com a comunidade.',
-          'Buscar financiamentos (Portugal 2030, FCT, etc.).',
-          'Avaliar parcerias com entidades locais.',
-        ],
-      });
-    }
-
-    // Recomendações para necessidades baixas
-    if (needsByPriority.low && needsByPriority.low.length > 0) {
-      recommendations.push({
-        priority: 'low',
-        message: 'Manter manutenção regular de limpeza urbana e espaços verdes.',
-        actions: [
-          'Incluir em plano de manutenção anual.',
-          'Buscar voluntários para ações pontuais.',
-        ],
-      });
-    }
-
-    return recommendations;
+  // Compatibilidade com código legado: sem atribuir prioridade automática.
+  categorizeNeed(text) {
+    const themes = this._findThemes(text);
+    return {
+      category: themes[0]?.theme || 'outros',
+      priority: 'review',
+      weight: null,
+      themes,
+      requiresHumanValidation: true,
+    };
   }
 }
 
 module.exports = NeedsDetector;
+module.exports.HUMAN_REVIEW_STATE = HUMAN_REVIEW_STATE;
