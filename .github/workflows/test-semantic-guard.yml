@@ -1,0 +1,28 @@
+name: Test Semantic Guard
+
+on:
+  push:
+    branches:
+      - work/semantic-guard-production-20260822
+    paths:
+      - 'src/guardrails/**'
+      - 'tests/test_guarda_costas_semantico_milk.py'
+      - '.github/workflows/test-semantic-guard.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install test dependency
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Compile guardrail
+        run: python -m py_compile src/guardrails/guarda_costas_semantico_milk.py src/guardrails/mistral_adapter.py
+      - name: Run guardrail tests
+        run: python -m pytest -q tests/test_guarda_costas_semantico_milk.py
