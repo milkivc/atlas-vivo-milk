@@ -1,0 +1,55 @@
+name: MILK Mistral Drive search shape
+
+on:
+  push:
+    branches: [ops/ftps-fallback-probe-20260822]
+    paths:
+      - '.github/workflows/milk-mistral-drive-search-shape.yml'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.run_id }}
+    steps:
+      - name: Inspect response keys only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, urllib.request
+          url='https://api.mistral.ai/v1/connectors/google_drive_mcp/tools/search_files/call'
+          req=urllib.request.Request(url,data=json.dumps({'arguments':{'query':"parent_id = 'root'",'page_size':20}}).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json','Accept':'application/json'})
+          with urllib.request.urlopen(req,timeout=90) as r: res=json.loads(r.read().decode())
+          texts=[x.get('text','') for x in res.get('content',[]) if isinstance(x,dict) and isinstance(x.get('text'),str)]
+          parsed=None
+          for t in texts:
+              try:
+                  x=json.loads(t)
+                  if isinstance(x,(dict,list)): parsed=x; break
+              except Exception: pass
+          top_type=type(parsed).__name__
+          top_keys=sorted(parsed.keys()) if isinstance(parsed,dict) else []
+          arr=[]
+          if isinstance(parsed,list): arr=parsed
+          elif isinstance(parsed,dict):
+              for k in ('files','items','results','data'):
+                  if isinstance(parsed.get(k),list): arr=parsed[k]; break
+          file_keys=sorted(arr[0].keys()) if arr and isinstance(arr[0],dict) else []
+          next_present=False
+          if isinstance(parsed,dict):
+              next_present=any(bool(parsed.get(k)) for k in ('next_page_token','nextPageToken','page_token'))
+          msg=(f'MILK_MISTRAL_DRIVE_SEARCH_SHAPE run={os.environ["RUN_ID"]} top_type={top_type} '
+               f'top_keys={",".join(top_keys)} file_keys={",".join(file_keys)} page_items={len(arr)} next_present={str(next_present).lower()} values_disclosed=0')
+          print(msg,flush=True)
+          req=urllib.request.Request(f'https://api.github.com/repos/{os.environ["REPO"]}/issues/35/comments',data=json.dumps({'body':msg}).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Content-Type':'application/json','Accept':'application/vnd.github+json'})
+          with urllib.request.urlopen(req,timeout=30) as r:r.read()
+          PY
