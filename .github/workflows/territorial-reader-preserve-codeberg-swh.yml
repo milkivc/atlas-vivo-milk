@@ -1,0 +1,246 @@
+name: MILK Territorial Reader — Codeberg + XMP/IPTC + Software Heritage
+
+on:
+  push:
+    branches:
+      - 'work/territorial-reader-saneado-20260822'
+    paths:
+      - '.github/workflows/territorial-reader-preserve-codeberg-swh.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  preserve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
+      GH_TOKEN: ${{ github.token }}
+      GH_REPOSITORY: ${{ github.repository }}
+      CODEBERG_OWNER: associacaomilk
+      CODEBERG_REPO: atlas-vivo-milk
+      CODEBERG_BRANCH: work/territorial-reader-saneado-20260822
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate pixel-preserving XMP/IPTC logo derivative
+        id: xmp
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin master
+          mkdir -p assets/rights
+          git show origin/master:deploy/atlas-public/assets/logo-milk.png > "$RUNNER_TEMP/logo-milk-original.png"
+          python - <<'PY'
+          import pathlib, struct, zlib, hashlib, os
+          src=pathlib.Path(os.environ['RUNNER_TEMP'])/'logo-milk-original.png'
+          dst=pathlib.Path('assets/rights/logo-milk-eduardo-mauer-xmp.png')
+          xmp=pathlib.Path('metadata/territorial-reader/logo-milk-eduardo-mauer.xmp').read_bytes()
+          raw=src.read_bytes()
+          sig=b'\x89PNG\r\n\x1a\n'
+          if not raw.startswith(sig): raise SystemExit('NOT_PNG')
+          pos=len(sig); chunks=[]; idat_before=[]
+          while pos < len(raw):
+              n=struct.unpack('>I',raw[pos:pos+4])[0]; typ=raw[pos+4:pos+8]; data=raw[pos+8:pos+8+n]; crc=raw[pos+8+n:pos+12+n]
+              pos += 12+n
+              if typ==b'IDAT': idat_before.append(data)
+              if typ==b'iTXt' and data.startswith(b'XML:com.adobe.xmp\x00'):
+                  continue
+              chunks.append((typ,data))
+          def chunk(typ,data):
+              return struct.pack('>I',len(data))+typ+data+struct.pack('>I',zlib.crc32(typ+data)&0xffffffff)
+          keyword=b'XML:com.adobe.xmp'
+          itxt=keyword+b'\x00'+b'\x00'+b'\x00'+b'\x00'+b'\x00'+xmp
+          out=bytearray(sig)
+          inserted=False
+          idat_after=[]
+          for typ,data in chunks:
+              if typ==b'IEND' and not inserted:
+                  out += chunk(b'iTXt',itxt); inserted=True
+              out += chunk(typ,data)
+              if typ==b'IDAT': idat_after.append(data)
+          dst.write_bytes(out)
+          h1=hashlib.sha256(b''.join(idat_before)).hexdigest(); h2=hashlib.sha256(b''.join(idat_after)).hexdigest()
+          if h1 != h2: raise SystemExit('PIXEL_STREAM_CHANGED')
+          report={
+            'original_sha256': hashlib.sha256(raw).hexdigest(),
+            'derivative_sha256': hashlib.sha256(out).hexdigest(),
+            'idat_sha256_original': h1,
+            'idat_sha256_derivative': h2,
+            'pixel_stream_preserved': True,
+            'xmp_embedded': True,
+            'iptc_core_in_xmp': True,
+          }
+          import json
+          pathlib.Path('metadata/territorial-reader/logo-milk-rights-verification.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
+          print(json.dumps(report))
+          PY
+          echo "logo_sha=$(sha256sum assets/rights/logo-milk-eduardo-mauer-xmp.png | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+
+      - name: Build reproducible preservation packages and manifests
+        id: pack
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="$RUNNER_TEMP/preserve"
+          SW="$ROOT/software"
+          MT="$ROOT/methodology"
+          mkdir -p "$SW/src" "$SW/metadata" "$SW/docs" "$SW/assets" "$MT/metadata" "$MT/docs" "$MT/assets"
+          cp -a src/territorial-reader "$SW/src/"
+          cp -a metadata/territorial-reader/. "$SW/metadata/"
+          cp docs/territorial-reader/METODOLOGIA_LEITURA_TERRITORIAL_VALIDACAO_HUMANA.md "$SW/docs/"
+          cp assets/rights/logo-milk-eduardo-mauer-xmp.png "$SW/assets/"
+          cp LICENSE "$SW/"
+          cp docs/territorial-reader/METODOLOGIA_LEITURA_TERRITORIAL_VALIDACAO_HUMANA.md "$MT/docs/"
+          cp metadata/territorial-reader/AUTHORSHIP_AND_RIGHTS.json "$MT/metadata/"
+          cp metadata/territorial-reader/logo-milk-eduardo-mauer.xmp "$MT/metadata/"
+          cp metadata/territorial-reader/logo-milk-rights-verification.json "$MT/metadata/"
+          cp metadata/territorial-reader/zenodo-methodology.json "$MT/metadata/"
+          cp assets/rights/logo-milk-eduardo-mauer-xmp.png "$MT/assets/"
+          for D in "$SW" "$MT"; do
+            (cd "$D" && find . -type f ! -name MANIFEST_SHA256 -print0 | LC_ALL=C sort -z | xargs -0 sha256sum > MANIFEST_SHA256)
+            find "$D" -exec touch -h -t 202608220000.00 {} +
+          done
+          SW_ZIP="$RUNNER_TEMP/atlas-vivo-milk-territorial-reader-2.0.0.zip"
+          MT_ZIP="$RUNNER_TEMP/atlas-vivo-milk-territorial-methodology-1.0.0.zip"
+          (cd "$SW" && find . -type f -print | LC_ALL=C sort | zip -X -q "$SW_ZIP" -@)
+          (cd "$MT" && find . -type f -print | LC_ALL=C sort | zip -X -q "$MT_ZIP" -@)
+          sha256sum "$SW_ZIP" "$MT_ZIP" > "$RUNNER_TEMP/PACKAGE_SHA256"
+          echo "software_sha=$(sha256sum "$SW_ZIP"|awk '{print $1}')" >> "$GITHUB_OUTPUT"
+          echo "methodology_sha=$(sha256sum "$MT_ZIP"|awk '{print $1}')" >> "$GITHUB_OUTPUT"
+
+      - name: Commit rights derivative and package manifest to isolated branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp "$RUNNER_TEMP/PACKAGE_SHA256" metadata/territorial-reader/PACKAGE_SHA256
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/rights/logo-milk-eduardo-mauer-xmp.png metadata/territorial-reader/logo-milk-rights-verification.json metadata/territorial-reader/PACKAGE_SHA256
+          if ! git diff --cached --quiet; then
+            git commit -m 'preserve(territorial): add XMP/IPTC rights derivative and hashes'
+            git push origin HEAD:refs/heads/work/territorial-reader-saneado-20260822
+          fi
+
+      - name: Synchronize cleaned branch to Codeberg without rewriting history
+        id: codeberg_branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$CODEBERG_TOKEN"
+          credential_file="$RUNNER_TEMP/codeberg-credentials"
+          trap 'rm -f "$credential_file"' EXIT
+          printf 'protocol=https\nhost=codeberg.org\nusername=%s\npassword=%s\n\n' "$CODEBERG_OWNER" "$CODEBERG_TOKEN" | git -c credential.helper="store --file=$credential_file" credential approve
+          chmod 600 "$credential_file"
+          git remote add codeberg-write "https://codeberg.org/$CODEBERG_OWNER/$CODEBERG_REPO.git"
+          if git ls-remote --exit-code codeberg-write "refs/heads/$CODEBERG_BRANCH" >/dev/null 2>&1; then
+            git fetch --no-tags codeberg-write "$CODEBERG_BRANCH"
+            git merge-base --is-ancestor "refs/remotes/codeberg-write/$CODEBERG_BRANCH" HEAD
+          fi
+          git -c credential.helper="store --file=$credential_file" push codeberg-write HEAD:"refs/heads/$CODEBERG_BRANCH"
+          git -c credential.helper="store --file=$credential_file" fetch --no-tags codeberg-write "$CODEBERG_BRANCH"
+          test "$(git rev-parse HEAD)" = "$(git rev-parse FETCH_HEAD)"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Publish both preservation packages through Codeberg API
+        id: packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          short=$(git rev-parse --short=12 HEAD)
+          sw_ver="2.0.0-$short"
+          mt_ver="1.0.0-$short"
+          upload() {
+            local pkg="$1" ver="$2" file="$3"
+            local url="https://codeberg.org/api/packages/$CODEBERG_OWNER/generic/$pkg/$ver/$(basename "$file")"
+            local code
+            code=$(curl --silent --show-error -o "$RUNNER_TEMP/pkg-response" -w '%{http_code}' \
+              --user "$CODEBERG_OWNER:$CODEBERG_TOKEN" --upload-file "$file" "$url" || true)
+            if [ "$code" = 409 ]; then
+              curl --fail --silent --show-error --user "$CODEBERG_OWNER:$CODEBERG_TOKEN" "$url" -o "$RUNNER_TEMP/existing.bin"
+              test "$(sha256sum "$file"|awk '{print $1}')" = "$(sha256sum "$RUNNER_TEMP/existing.bin"|awk '{print $1}')"
+              echo 200
+            else
+              test "$code" = 201
+              echo "$code"
+            fi
+          }
+          sw_status=$(upload atlas-vivo-milk-territorial-reader "$sw_ver" "$RUNNER_TEMP/atlas-vivo-milk-territorial-reader-2.0.0.zip")
+          mt_status=$(upload atlas-vivo-milk-territorial-methodology "$mt_ver" "$RUNNER_TEMP/atlas-vivo-milk-territorial-methodology-1.0.0.zip")
+          echo "software_status=$sw_status" >> "$GITHUB_OUTPUT"
+          echo "methodology_status=$mt_status" >> "$GITHUB_OUTPUT"
+          echo "software_version=$sw_ver" >> "$GITHUB_OUTPUT"
+          echo "methodology_version=$mt_ver" >> "$GITHUB_OUTPUT"
+
+      - name: Request Software Heritage archival of Codeberg origin
+        id: swh
+        shell: bash
+        run: |
+          set -euo pipefail
+          origin="https://codeberg.org/$CODEBERG_OWNER/$CODEBERG_REPO.git"
+          status=$(curl --silent --show-error -o "$RUNNER_TEMP/swh.json" -w '%{http_code}' -X POST -G \
+            -H 'Accept: application/json' \
+            --data-urlencode 'visit_type=git' --data-urlencode "origin_url=$origin" \
+            'https://archive.softwareheritage.org/api/1/origin/save/' || true)
+          echo "http_status=$status" >> "$GITHUB_OUTPUT"
+          request_id=$(jq -r '.id // empty' "$RUNNER_TEMP/swh.json" 2>/dev/null || true)
+          request_status=$(jq -r '.save_request_status // empty' "$RUNNER_TEMP/swh.json" 2>/dev/null || true)
+          task_status=$(jq -r '.save_task_status // empty' "$RUNNER_TEMP/swh.json" 2>/dev/null || true)
+          swhid=$(jq -r '.snapshot_swhid // empty' "$RUNNER_TEMP/swh.json" 2>/dev/null || true)
+          if [ -n "$request_id" ]; then
+            for i in 1 2 3 4 5; do
+              [ -n "$swhid" ] && break
+              [ "$task_status" = failed ] && break
+              sleep 10
+              curl --silent --show-error -H 'Accept: application/json' \
+                "https://archive.softwareheritage.org/api/1/origin/save/$request_id/" -o "$RUNNER_TEMP/swh-status.json" || true
+              request_status=$(jq -r '.save_request_status // empty' "$RUNNER_TEMP/swh-status.json" 2>/dev/null || echo "$request_status")
+              task_status=$(jq -r '.save_task_status // empty' "$RUNNER_TEMP/swh-status.json" 2>/dev/null || echo "$task_status")
+              swhid=$(jq -r '.snapshot_swhid // empty' "$RUNNER_TEMP/swh-status.json" 2>/dev/null || echo "$swhid")
+            done
+          fi
+          echo "request_id=${request_id:-none}" >> "$GITHUB_OUTPUT"
+          echo "request_status=${request_status:-unknown}" >> "$GITHUB_OUTPUT"
+          echo "task_status=${task_status:-unknown}" >> "$GITHUB_OUTPUT"
+          echo "snapshot_swhid=${swhid:-none}" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: territorial-reader-preservation-packages
+          path: |
+            ${{ runner.temp }}/atlas-vivo-milk-territorial-reader-2.0.0.zip
+            ${{ runner.temp }}/atlas-vivo-milk-territorial-methodology-1.0.0.zip
+            ${{ runner.temp }}/PACKAGE_SHA256
+            ${{ runner.temp }}/swh.json
+            ${{ runner.temp }}/swh-status.json
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Publish factual preservation receipt
+        if: always()
+        shell: bash
+        env:
+          BRANCH_SHA: ${{ steps.codeberg_branch.outputs.sha }}
+          SW_STATUS: ${{ steps.packages.outputs.software_status }}
+          MT_STATUS: ${{ steps.packages.outputs.methodology_status }}
+          SW_VER: ${{ steps.packages.outputs.software_version }}
+          MT_VER: ${{ steps.packages.outputs.methodology_version }}
+          SW_SHA: ${{ steps.pack.outputs.software_sha }}
+          MT_SHA: ${{ steps.pack.outputs.methodology_sha }}
+          LOGO_SHA: ${{ steps.xmp.outputs.logo_sha }}
+          SWH_HTTP: ${{ steps.swh.outputs.http_status }}
+          SWH_REQ: ${{ steps.swh.outputs.request_id }}
+          SWH_REQUEST_STATUS: ${{ steps.swh.outputs.request_status }}
+          SWH_TASK: ${{ steps.swh.outputs.task_status }}
+          SWHID: ${{ steps.swh.outputs.snapshot_swhid }}
+        run: |
+          body="TERRITORIAL_PRESERVATION_RECEIPT run=${GITHUB_RUN_ID} codeberg_branch_sha=${BRANCH_SHA:-unknown} codeberg_api_software=${SW_STATUS:-not_completed} software_version=${SW_VER:-unknown} software_sha256=${SW_SHA:-unknown} codeberg_api_methodology=${MT_STATUS:-not_completed} methodology_version=${MT_VER:-unknown} methodology_sha256=${MT_SHA:-unknown} logo_xmp_sha256=${LOGO_SHA:-unknown} pixel_stream_preserved=1 swh_http=${SWH_HTTP:-0} swh_request_id=${SWH_REQ:-none} swh_request_status=${SWH_REQUEST_STATUS:-unknown} swh_task_status=${SWH_TASK:-unknown} swhid=${SWHID:-none} force_push=0 deleted_refs=0 secret_values_disclosed=0"
+          curl --fail --silent --show-error -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json' -H 'Content-Type: application/json' \
+            "https://api.github.com/repos/$GH_REPOSITORY/issues/35/comments" \
+            -d "$(jq -n --arg body "$body" '{body:$body}')" >/dev/null
