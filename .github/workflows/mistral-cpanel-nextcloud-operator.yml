@@ -70,8 +70,6 @@ jobs:
                   "MILK_CPANEL_BLOCKED",
                   cause="CPANEL_API_TOKEN_MISSING",
                   accepted_secret_names=["CPANEL_API_TOKEN", "CPANEL_TOKEN", "PTSERVIDOR_CPANEL_TOKEN"],
-                  credential_type="cPanel API token",
-                  endpoint=f"https://{HOST}:2083/execute/Module/function",
               )
               raise SystemExit(2)
 
@@ -85,25 +83,21 @@ jobs:
                   headers={
                       "Authorization": f"cpanel {USER}:{TOKEN}",
                       "Accept": "application/json",
-                      "User-Agent": "MILK-cPanel-Control-Plane/1.0",
+                      "User-Agent": "MILK-cPanel-Control-Plane/1.1",
                   },
               )
               try:
                   with urllib.request.urlopen(req, timeout=45) as response:
                       payload = json.loads(response.read())
               except urllib.error.HTTPError as exc:
-                  body = exc.read().decode("utf-8", errors="replace")[:500]
-                  raise RuntimeError(f"HTTP_{exc.code}:{body}") from exc
+                  raise RuntimeError(f"HTTP_{exc.code}") from exc
               result = payload.get("result") if isinstance(payload, dict) else None
               if not isinstance(result, dict):
                   raise RuntimeError("UAPI_RESPONSE_MISSING_RESULT")
               if int(result.get("status", 0)) != 1:
-                  errors = result.get("errors") or ["unknown"]
-                  raise RuntimeError(f"UAPI_{module}_{function}_FAILED:{str(errors[0])[:300]}")
+                  raise RuntimeError(f"UAPI_{module}_{function}_FAILED")
               return result.get("data")
 
-          # Canonical, immutable-by-value change plan. A write run is accepted only
-          # when the caller supplies the exact hash emitted by a prior discovery run.
           change_plan = {
               "schema": "milk.cpanel.change-plan.v1",
               "action": "ensure_nextcloud_domain",
@@ -122,10 +116,8 @@ jobs:
           }
           canonical_plan = json.dumps(change_plan, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
           plan_sha = hashlib.sha256(canonical_plan).hexdigest()
-          emit("MILK_CPANEL_CHANGE_PLAN", sha256=plan_sha, plan=change_plan)
+          emit("MILK_CPANEL_CHANGE_PLAN", sha256=plan_sha, action=change_plan["action"], target=change_plan["target_domain"])
 
-          # Read-only discovery. Each endpoint is isolated so one unavailable cPanel
-          # feature never blocks the rest of the inventory.
           probes = [
               ("server", "Variables", "get_server_information", None),
               ("account", "Variables", "get_user_information", None),
@@ -137,12 +129,24 @@ jobs:
               ("tokens", "Tokens", "list", None),
           ]
           inventory = {}
+          probe_status = {}
           for label, module, function, params in probes:
               try:
-                  inventory[label] = {"status": "PASS", "data": uapi(module, function, params)}
+                  inventory[label] = uapi(module, function, params)
+                  probe_status[label] = "PASS"
               except Exception as exc:
-                  inventory[label] = {"status": "BLOCKED", "reason": str(exc)[:500]}
-          emit("MILK_CPANEL_DISCOVERY", inventory=inventory, source_writes=0)
+                  inventory[label] = None
+                  probe_status[label] = "BLOCKED"
+          inventory_sha = hashlib.sha256(
+              json.dumps(inventory, ensure_ascii=False, sort_keys=True, default=str, separators=(",", ":")).encode()
+          ).hexdigest()
+          emit(
+              "MILK_CPANEL_DISCOVERY",
+              probes=probe_status,
+              private_inventory_sha256=inventory_sha,
+              private_inventory_logged=False,
+              source_writes=0,
+          )
 
           if ACTION == "discover":
               emit("MILK_CPANEL_COMPLETE", action=ACTION, writes=0, plan_sha256=plan_sha)
@@ -162,7 +166,9 @@ jobs:
               )
               raise SystemExit(4)
 
-          domains = uapi("DomainInfo", "list_domains", {"hide_temporary_domains": 0})
+          domains = inventory.get("domains")
+          if domains is None:
+              domains = uapi("DomainInfo", "list_domains", {"hide_temporary_domains": 0})
           serialized = json.dumps(domains, ensure_ascii=False)
           if PROTECTED_DOMAIN not in serialized:
               emit("MILK_CPANEL_BLOCKED", cause="PROTECTED_ROOT_DOMAIN_NOT_FOUND")
