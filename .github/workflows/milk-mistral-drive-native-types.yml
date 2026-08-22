@@ -1,0 +1,54 @@
+name: MILK Mistral Drive native types
+
+on:
+  push:
+    branches: [ops/ftps-fallback-probe-20260822]
+    paths:
+      - '.github/workflows/milk-mistral-drive-native-types.yml'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  count:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.run_id }}
+    steps:
+      - name: Count mime types without filenames
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import collections,json,os,urllib.request
+          api='https://api.mistral.ai/v1/connectors/google_drive_mcp/tools/search_files/call'
+          h={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json','Accept':'application/json'}
+          token=None; counts=collections.Counter(); total=0
+          while True:
+              req=urllib.request.Request(api,data=json.dumps({'arguments':{'query':None,'page_size':1000,'page_token':token}}).encode(),method='POST',headers=h)
+              with urllib.request.urlopen(req,timeout=120) as r: res=json.loads(r.read().decode())
+              page=None
+              for item in res.get('content',[]):
+                  if isinstance(item,dict) and isinstance(item.get('text'),str):
+                      try:
+                          x=json.loads(item['text'])
+                          if isinstance(x,dict) and isinstance(x.get('files'),list): page=x; break
+                      except Exception: pass
+              if page is None: raise RuntimeError('unparseable')
+              for f in page['files']:
+                  mt=str(f.get('mime_type') or 'unknown')
+                  if mt.startswith('application/vnd.google-apps.') and mt!='application/vnd.google-apps.folder':
+                      counts[mt]+=1; total+=1
+              token=page.get('next_page_token')
+              if not token: break
+          detail=','.join(f'{k}={v}' for k,v in sorted(counts.items()))
+          msg=f'MILK_MISTRAL_DRIVE_NATIVE_TYPES run={os.environ["RUN_ID"]} total={total} types={detail} source_writes=0 values_disclosed=0'
+          print(msg,flush=True)
+          req=urllib.request.Request(f'https://api.github.com/repos/{os.environ["REPO"]}/issues/35/comments',data=json.dumps({'body':msg}).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Content-Type':'application/json','Accept':'application/vnd.github+json'})
+          with urllib.request.urlopen(req,timeout=30) as r:r.read()
+          PY
