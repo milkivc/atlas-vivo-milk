@@ -149,11 +149,13 @@ jobs:
               )
               with urllib.request.urlopen(request, timeout=60) as response:
                   payload = json.loads(response.read())
-              status = int(payload.get("status", 0))
+              # cPanel UAPI canonical envelope: result.status / result.data / result.errors.
+              result = payload.get("result") or {}
+              status = int(result.get("status", 0))
               if status != 1:
-                  errors = payload.get("errors") or ["unknown"]
-                  raise RuntimeError(f"CPANEL_{module}_{function}_FAILED detail={str(errors[0])[:180]}")
-              return payload.get("data")
+                  # Do not echo provider error bodies or account inventory into public Actions logs.
+                  raise RuntimeError(f"CPANEL_{module}_{function}_FAILED")
+              return result.get("data")
 
           try:
               data = uapi("DomainInfo", "list_domains")
@@ -182,7 +184,9 @@ jobs:
                   f"domain={DOMAIN} state={state} protected_domains_untouched=yes"
               )
           except Exception as exc:
-              comment(f"MILK_CPANEL_PREFLIGHT_BLOCKED run={RUN_ID} cause={str(exc)[:400]}")
+              # Only an opaque failure code is published. No payload/body/inventory is exposed.
+              code = str(exc).split()[0][:120]
+              comment(f"MILK_CPANEL_PREFLIGHT_BLOCKED run={RUN_ID} cause={code}")
               raise
 
           base = os.environ.get("NEXTCLOUD_BASE_URL", "").strip()
