@@ -1,0 +1,39 @@
+name: MILK Mistral Drive tool schema
+
+on:
+  push:
+    branches: [ops/ftps-fallback-probe-20260822]
+    paths:
+      - '.github/workflows/milk-mistral-drive-tool-schema.yml'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.run_id }}
+    steps:
+      - name: Inspect tool names and schemas only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, urllib.request
+          req=urllib.request.Request('https://api.mistral.ai/v1/connectors/google_drive_mcp/tools',headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Accept':'application/json'})
+          with urllib.request.urlopen(req,timeout=45) as r: tools=json.loads(r.read().decode())
+          safe=[]
+          for t in tools:
+              safe.append({'name':t.get('name'),'description':t.get('description'),'inputSchema':t.get('inputSchema') or t.get('input_schema') or t.get('parameters')})
+          payload=json.dumps(safe,ensure_ascii=False,separators=(',',':'))
+          print('MILK_MISTRAL_DRIVE_TOOL_SCHEMAS '+payload,flush=True)
+          body='MILK_MISTRAL_DRIVE_TOOL_SCHEMAS run='+os.environ['RUN_ID']+' data='+payload
+          req=urllib.request.Request(f"https://api.github.com/repos/{os.environ['REPO']}/issues/35/comments",data=json.dumps({'body':body}).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Content-Type':'application/json','Accept':'application/vnd.github+json'})
+          with urllib.request.urlopen(req,timeout=30) as r:r.read()
+          PY
