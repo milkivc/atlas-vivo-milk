@@ -92,5 +92,7 @@ test('motor gera hipótese explicável e nunca decisão pública', () => {
   assert.equal(out.publishable, false);
   assert.equal(out.actionable, false);
   assert.equal(out.humanValidationRequired, true);
-  assert.equal(out.contradictions.length, 1);
+  const contradictionTypes = new Set(out.contradictions.map((item) => item.type));
+  assert.equal(contradictionTypes.has('MEMORIA_ATIVA+INFRAESTRUTURA_INATIVA'), true);
+  assert.equal(contradictionTypes.has('PERSISTENCIA+AUSENCIA'), true);
 });
