@@ -1,0 +1,151 @@
+name: MILK Territorial Hypothesis — Nextcloud continuity
+
+on:
+  push:
+    branches:
+      - 'work/territorial-hypothesis-engine-20260823'
+    paths:
+      - 'src/territorial-reader/**'
+      - 'docs/territorial-reader/**'
+      - '.github/workflows/territorial-hypothesis-nextcloud-continuity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: territorial-hypothesis-nextcloud-continuity
+  cancel-in-progress: false
+
+jobs:
+  preserve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXTCLOUD_KEY: ${{ secrets.NEXTCLOUD_KEY }}
+      PTSERVIDOR_FTP_WEBDAV: ${{ secrets.PTSERVIDOR_FTP_WEBDAV }}
+      NEXTCLOUD_BASE_URL: ${{ secrets.NEXTCLOUD_BASE_URL }}
+      NEXTCLOUD_USER: ${{ secrets.NEXTCLOUD_USER }}
+      NEXTCLOUD_APP_PASSWORD: ${{ secrets.NEXTCLOUD_APP_PASSWORD }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.run_id }}
+      COMMIT_SHA: ${{ github.sha }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install rclone
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq rclone
+
+      - name: Build immutable continuity bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/milk-continuity"
+          tar -czf "$RUNNER_TEMP/milk-continuity/territorial-hypothesis-${COMMIT_SHA}.tar.gz" \
+            src/territorial-reader \
+            docs/territorial-reader/GENEALOGIA_EPISTEMICA_LEITURA_TERRITORIAL_2026-08-23.md
+          sha256sum "$RUNNER_TEMP/milk-continuity/territorial-hypothesis-${COMMIT_SHA}.tar.gz" \
+            > "$RUNNER_TEMP/milk-continuity/MANIFEST_SHA256.txt"
+          printf 'branch=%s\ncommit=%s\nrun=%s\nmaster_writes=0\n' \
+            "$GITHUB_REF_NAME" "$COMMIT_SHA" "$RUN_ID" \
+            > "$RUNNER_TEMP/milk-continuity/RECEIPT.txt"
+
+      - name: Preserve privately in Nextcloud and verify
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import configparser, json, os, pathlib, re, subprocess, urllib.parse, urllib.request
+
+          raw=(os.environ.get('NEXTCLOUD_KEY') or '').strip()
+          alt=(os.environ.get('PTSERVIDOR_FTP_WEBDAV') or '').strip()
+          base=(os.environ.get('NEXTCLOUD_BASE_URL') or '').strip()
+          user=(os.environ.get('NEXTCLOUD_USER') or '').strip()
+          password=(os.environ.get('NEXTCLOUD_APP_PASSWORD') or '').strip()
+          tmp=pathlib.Path(os.environ['RUNNER_TEMP'])
+          cfg=tmp/'rclone-nextcloud.conf'
+          remote='nextcloud'
+
+          def run(args):
+              p=subprocess.run(args,text=True,capture_output=True,check=False)
+              if p.returncode:
+                  detail=(p.stderr or p.stdout or 'unknown').splitlines()[-1][:240]
+                  raise RuntimeError(detail)
+              return p.stdout
+
+          def obscure(value):
+              return run(['rclone','obscure',value]).strip()
+
+          def absorb(value):
+              nonlocal_vars={}
+              if not value:
+                  return nonlocal_vars
+              try:
+                  obj=json.loads(value)
+                  if isinstance(obj,dict):
+                      for k,v in obj.items(): nonlocal_vars[str(k).upper()]=str(v)
+                      return nonlocal_vars
+              except Exception:
+                  pass
+              for line in value.splitlines():
+                  if '=' in line:
+                      k,v=line.split('=',1); nonlocal_vars[k.strip().upper()]=v.strip()
+              return nonlocal_vars
+
+          if raw.startswith('[') and re.search(r'(?im)^\s*type\s*=\s*webdav\s*$',raw):
+              cfg.write_text(raw.rstrip()+'\n',encoding='utf-8')
+              parser=configparser.ConfigParser(); parser.read_string(raw)
+              sections=[s for s in parser.sections() if parser.get(s,'type',fallback='').strip()=='webdav']
+              if not sections: raise RuntimeError('NEXTCLOUD_WEBDAV_REMOTE_MISSING')
+              remote=sections[0]
+          else:
+              values={}
+              values.update(absorb(alt)); values.update(absorb(raw))
+              base=base or values.get('NEXTCLOUD_BASE_URL') or values.get('BASE_URL') or values.get('URL') or ''
+              user=user or values.get('NEXTCLOUD_USER') or values.get('USER') or values.get('USERNAME') or ''
+              password=password or values.get('NEXTCLOUD_APP_PASSWORD') or values.get('APP_PASSWORD') or values.get('PASSWORD') or ''
+              if raw and not password and '\n' not in raw and '=' not in raw and not raw.startswith('{'):
+                  password=raw
+              missing=[k for k,v in [('BASE_URL',base),('USER',user),('APP_PASSWORD',password)] if not v]
+              if missing: raise RuntimeError('NEXTCLOUD_CREDENTIALS_INCOMPLETE:'+','.join(missing))
+              if not base.startswith('https://'): raise RuntimeError('NEXTCLOUD_HTTPS_REQUIRED')
+              if '/remote.php/' not in base:
+                  base=base.rstrip('/')+'/remote.php/dav/files/'+urllib.parse.quote(user,safe='')+'/'
+              cfg.write_text('[nextcloud]\ntype = webdav\nurl = '+base.rstrip('/')+'/\nvendor = nextcloud\nuser = '+user+'\npass = '+obscure(password)+'\n',encoding='utf-8')
+          os.chmod(cfg,0o600)
+
+          run(['rclone','--config',str(cfg),'lsd',remote+':'])
+          target=remote+':Atlas-Vivo-MILK/.continuity/territorial-reader/2026-08-23/'+os.environ['COMMIT_SHA']
+          source=str(tmp/'milk-continuity')
+          run(['rclone','--config',str(cfg),'copy',source,target,'--checksum','--create-empty-src-dirs'])
+          run(['rclone','--config',str(cfg),'check',source,target,'--one-way','--download'])
+
+          manifest=(tmp/'milk-continuity'/'MANIFEST_SHA256.txt').read_text(encoding='utf-8').split()[0]
+          body=(f"TERRITORIAL_NEXTCLOUD_CONTINUITY run={os.environ['RUN_ID']} "
+                f"commit={os.environ['COMMIT_SHA']} verified=1 sha256={manifest} "
+                f"path=Atlas-Vivo-MILK/.continuity/territorial-reader/2026-08-23/{os.environ['COMMIT_SHA']} "
+                "master_writes=0 secret_values_disclosed=0")
+          req=urllib.request.Request(
+              f"https://api.github.com/repos/{os.environ['REPO']}/issues/35/comments",
+              data=json.dumps({'body':body}).encode(), method='POST',
+              headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Content-Type':'application/json','Accept':'application/vnd.github+json'})
+          with urllib.request.urlopen(req,timeout=45) as response: response.read()
+          print(body)
+          PY
+
+      - name: Report factual block
+        if: failure()
+        shell: bash
+        run: |
+          set -euo pipefail
+          body="TERRITORIAL_NEXTCLOUD_CONTINUITY_BLOCKED run=${GITHUB_RUN_ID} commit=${GITHUB_SHA} action_required=check_nextcloud_webdav_configuration master_writes=0 secret_values_disclosed=0"
+          curl --fail --silent --show-error -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json' -H 'Content-Type: application/json' \
+            "https://api.github.com/repos/$REPO/issues/35/comments" \
+            -d "$(jq -n --arg body "$body" '{body:$body}')" >/dev/null
