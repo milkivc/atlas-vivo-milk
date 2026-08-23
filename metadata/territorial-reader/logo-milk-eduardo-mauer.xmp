@@ -1,5 +1,5 @@
 <?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
-<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Atlas Vivo MILK rights metadata 1.0">
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Atlas Vivo MILK rights metadata 1.1">
   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
     <rdf:Description rdf:about=""
       xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -8,12 +8,13 @@
       xmlns:photoshop="http://ns.adobe.com/photoshop/1.0/"
       xmlns:Iptc4xmpCore="http://iptc.org/std/Iptc4xmpCore/1.0/xmlns/">
       <dc:title><rdf:Alt><rdf:li xml:lang="x-default">MILK — identidade visual</rdf:li></rdf:Alt></dc:title>
-      <dc:creator><rdf:Seq><rdf:li>Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)</rdf:li></rdf:Seq></dc:creator>
-      <dc:publisher><rdf:Bag><rdf:li>Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte</rdf:li></rdf:Bag></dc:publisher>
-      <dc:rights><rdf:Alt><rdf:li xml:lang="x-default">© Eduardo Maurício Vieira Cabral e Araujo / Associação MILK. Todos os direitos sobre o sinal gráfico e identidade visual reservados, salvo autorização expressa do titular.</rdf:li></rdf:Alt></dc:rights>
+      <dc:creator><rdf:Seq><rdf:li>Eduardo Maurício Vieira Cabral e Araujo — Eduardo Mauer — ORCID 0009-0007-6892-6570</rdf:li></rdf:Seq></dc:creator>
+      <dc:publisher><rdf:Bag><rdf:li>Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte — https://associacaomilk.pt</rdf:li></rdf:Bag></dc:publisher>
+      <dc:rights><rdf:Alt><rdf:li xml:lang="x-default">© Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer) / Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte. Todos os direitos sobre o sinal gráfico e identidade visual reservados, salvo autorização expressa do titular.</rdf:li></rdf:Alt></dc:rights>
+      <dc:identifier>https://orcid.org/0009-0007-6892-6570</dc:identifier>
       <xmpRights:Marked>True</xmpRights:Marked>
-      <xmpRights:UsageTerms><rdf:Alt><rdf:li xml:lang="x-default">O logótipo não é abrangido automaticamente pela licença EUPL-1.2 do código. Reprodução, adaptação ou uso de marca dependem de autorização expressa do titular.</rdf:li></rdf:Alt></xmpRights:UsageTerms>
-      <photoshop:Credit>Eduardo Mauer / Associação MILK</photoshop:Credit>
+      <xmpRights:UsageTerms><rdf:Alt><rdf:li xml:lang="x-default">O logótipo e a identidade visual MILK não são abrangidos automaticamente pela licença EUPL-1.2 do código. Reprodução, adaptação ou uso dependem de autorização expressa do titular.</rdf:li></rdf:Alt></xmpRights:UsageTerms>
+      <photoshop:Credit>Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer) / Associação MILK</photoshop:Credit>
       <photoshop:Source>Atlas Vivo MILK — ativo autoral original</photoshop:Source>
       <Iptc4xmpCore:IntellectualGenre>Identidade visual / logótipo</Iptc4xmpCore:IntellectualGenre>
       <Iptc4xmpCore:CreatorContactInfo rdf:parseType="Resource"/>
