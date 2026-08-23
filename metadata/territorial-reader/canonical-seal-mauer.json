@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "assetId": "canonical_seal_mauer",
+  "assetType": "authorial_visual_seal",
+  "canonicalReference": true,
+  "sourceFile": {
+    "originalFilename": "4156C24F-9AF4-4F15-A675-04CAEE0BF64F.jpeg",
+    "mediaType": "image/jpeg",
+    "byteLength": 901545,
+    "sha256": "4e53ef384efb2b23bf2bce11cea8c854b92d427e3cbbbbc7d107966f4681c78e"
+  },
+  "creator": {
+    "legalName": "Eduardo Maurício Vieira Cabral e Araujo",
+    "artisticName": "Eduardo Mauer",
+    "orcid": "https://orcid.org/0009-0007-6892-6570",
+    "affiliation": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte"
+  },
+  "institution": {
+    "name": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
+    "url": "https://associacaomilk.pt"
+  },
+  "rights": {
+    "notice": "© Eduardo Maurício Vieira Cabral e Araujo / Eduardo Mauer / Associação MILK. Todos os direitos sobre o selo visual, sinal gráfico e identidade visual reservados, salvo autorização expressa do titular.",
+    "codeLicenseInheritance": false,
+    "automaticReuseLicense": false,
+    "commercialUseRequiresSeparateAuthorisation": true
+  },
+  "relationshipToInvisibleSeal": {
+    "sameAuthorialSystem": true,
+    "replacesInvisible7x7Seal": false,
+    "rule": "O selo visual MAUER e o selo invisível 7×7 coexistem. Nenhum substitui o outro. Ambos devem permanecer na cadeia de proveniência e presença autoral."
+  },
+  "presencePolicy": {
+    "requiredAcrossReleases": true,
+    "requiredAcrossDeposits": true,
+    "requiredAcrossPreservationPackages": true,
+    "requiredAcrossMetadata": true,
+    "embedWhenTechnicallySafe": true,
+    "otherwiseBindByHashAndProvenance": true,
+    "humanGateOnAbsence": true
+  },
+  "externalIdentifiers": {
+    "doi": null,
+    "swhid": null,
+    "rule": "Preencher apenas após emissão e verificação reais pelas infraestruturas correspondentes."
+  }
+}
