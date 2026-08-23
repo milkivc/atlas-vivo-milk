@@ -7,13 +7,25 @@ const { complexityGuard } = require('../epistemic-constitution/graham-boundary')
 const { nonMaleficenceGate } = require('../epistemic-constitution/non-maleficence-gate');
 const { detectContradictions } = require('./contradiction-engine');
 const { temporalProfile } = require('./temporal-engine');
+const { detectWeakSignals } = require('./weak-signal-detector');
+const { inverseTerritorialProblem } = require('./inverse-territorial-problem');
 
 class TerritorialHypothesisEngine {
-  constructor({ maxCandidateEdges = 50000 } = {}) {
+  constructor({ maxCandidateEdges = 50000, minIndependentWeakSignalSources = 2 } = {}) {
     this.maxCandidateEdges = maxCandidateEdges;
+    this.minIndependentWeakSignalSources = minIndependentWeakSignalSources;
   }
 
-  generate({ graph, claim, risks = [], absenceEvidence = [], searchedSources = [], candidateEdges = 0, metrologies = [] } = {}) {
+  generate({
+    graph,
+    claim,
+    risks = [],
+    absenceEvidence = [],
+    searchedSources = [],
+    candidateEdges = 0,
+    metrologies = [],
+    expectedConditions = [],
+  } = {}) {
     if (!graph || typeof graph.serialize !== 'function') throw new Error('EVIDENCE_GRAPH_REQUIRED');
     if (!claim) throw new Error('CLAIM_REQUIRED');
 
@@ -37,6 +49,8 @@ class TerritorialHypothesisEngine {
     const absence = qualifyAbsence({ searchedSources, explicitAbsenceEvidence: absenceEvidence });
     const complexity = complexityGuard({ nodes: serialized.nodes.length, candidateEdges, maxCandidateEdges: this.maxCandidateEdges });
     const safety = nonMaleficenceGate({ risks, requestedAction: 'ANALYSE' });
+    const weakSignals = detectWeakSignals(serialized.nodes, { minIndependentSources: this.minIndependentWeakSignalSources });
+    const inverseProblems = inverseTerritorialProblem({ expectedConditions, observedEvidence: serialized.nodes });
 
     return {
       state: safety.blockingRisks.length ? 'BLOCKED_PENDING_HUMAN_REVIEW' : 'HYPOTHESIS_CANDIDATE',
@@ -49,6 +63,8 @@ class TerritorialHypothesisEngine {
         dependencyGroups: independence.dependencyGroups,
       },
       contradictions,
+      weakSignals,
+      inverseProblems,
       temporal,
       absence,
       metrologies,
