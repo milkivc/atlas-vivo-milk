@@ -28,6 +28,7 @@ class EvidenceGraph {
       hash: evidence.hash || sha256(evidence.content),
       dependencyKey: evidence.dependencyKey || evidence.canonicalSource || evidence.source,
       claims: Array.isArray(evidence.claims) ? [...evidence.claims] : [],
+      signals: Array.isArray(evidence.signals) ? [...evidence.signals] : [],
       state: 'PRESERVED_EVIDENCE',
     };
     this.nodes.set(normalized.id, normalized);
