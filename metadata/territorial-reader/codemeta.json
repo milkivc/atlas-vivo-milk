@@ -19,33 +19,34 @@
     "DTMNFR",
     "cultural infrastructure"
   ],
-  "author": [
-    {
-      "@type": "Person",
-      "givenName": "Eduardo Maurício Vieira Cabral e",
-      "familyName": "Araujo",
-      "identifier": "https://orcid.org/0009-0007-6892-6570",
-      "alternateName": "Eduardo Mauer",
-      "affiliation": {
-        "@type": "Organization",
-        "name": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte"
-      }
-    },
-    {
-      "@type": "Person",
-      "givenName": "Nuno Filipe Fernandes Vieira Cabral e",
-      "familyName": "Araujo",
-      "identifier": "https://orcid.org/0009-0009-1781-4020",
-      "affiliation": {
-        "@type": "Organization",
-        "name": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte"
-      }
+  "author": {
+    "@type": "Person",
+    "givenName": "Eduardo Maurício Vieira Cabral e",
+    "familyName": "Araujo",
+    "identifier": "https://orcid.org/0009-0007-6892-6570",
+    "alternateName": "Eduardo Mauer",
+    "affiliation": {
+      "@type": "Organization",
+      "name": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
+      "url": "https://associacaomilk.pt"
     }
-  ],
+  },
+  "creator": {
+    "@type": "Person",
+    "name": "Eduardo Maurício Vieira Cabral e Araujo",
+    "alternateName": "Eduardo Mauer",
+    "identifier": "https://orcid.org/0009-0007-6892-6570"
+  },
   "maintainer": {
     "@type": "Organization",
     "name": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
     "url": "https://associacaomilk.pt"
+  },
+  "copyrightHolder": {
+    "@type": "Person",
+    "name": "Eduardo Maurício Vieira Cabral e Araujo",
+    "alternateName": "Eduardo Mauer",
+    "identifier": "https://orcid.org/0009-0007-6892-6570"
   },
   "developmentStatus": "active",
   "isPartOf": "Atlas Vivo MILK"
