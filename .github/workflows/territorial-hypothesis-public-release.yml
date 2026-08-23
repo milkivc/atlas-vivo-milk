@@ -1,0 +1,199 @@
+name: MILK Territorial Hypothesis — public preservation release
+
+on:
+  push:
+    branches:
+      - 'work/territorial-hypothesis-engine-20260823'
+    paths:
+      - 'src/territorial-reader/**'
+      - 'metadata/territorial-reader/**'
+      - 'docs/territorial-reader/**'
+      - 'ops/build_territorial_hypothesis_release.sh'
+      - '.github/workflows/territorial-hypothesis-public-release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: milk-territorial-hypothesis-public-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
+      MILK_ZENODO: ${{ secrets.MILK_ZENODO }}
+      EDU_ZEN_MILK: ${{ secrets.EDU_ZEN_MILK }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.run_id }}
+      CODEBERG_OWNER: associacaomilk
+      CODEBERG_REPO: atlas-vivo-milk
+      CODEBERG_BRANCH: work/territorial-hypothesis-engine-20260823
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Test and validate release metadata
+        run: |
+          set -euo pipefail
+          node --test src/territorial-reader/tests/*.test.js
+          jq -e '.metadata.version == "2.1.0" and .metadata.upload_type == "software"' metadata/territorial-reader/zenodo-software.json >/dev/null
+          jq -e '.version == "2.1.0"' metadata/territorial-reader/codemeta.json >/dev/null
+          jq -e '."milk:openWorld" == true' metadata/territorial-reader/atlas-territorial-minimal-ontology.jsonld >/dev/null
+
+      - name: Mistral release-agent audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python - <<'PY'
+          import json, os, pathlib, urllib.request
+          payload={
+            'model':'mistral-small-latest','temperature':0,
+            'messages':[
+              {'role':'system','content':'És o agente Mistral de revisão de release da Associação MILK. Não inventes DOI, SWHID, licenças ou validações. Verifica se os metadados afirmam apenas o que o pacote suporta e se hipótese, incerteza, mundo aberto e validação humana estão preservados. Responde exactamente RELEASE_AGENT_OK ou RELEASE_AGENT_BLOCKED.'},
+              {'role':'user','content':pathlib.Path('metadata/territorial-reader/zenodo-software.json').read_text(encoding='utf-8')+'\n'+pathlib.Path('metadata/territorial-reader/atlas-territorial-minimal-ontology.jsonld').read_text(encoding='utf-8')}
+            ]}
+          req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
+          with urllib.request.urlopen(req,timeout=90) as r: answer=json.loads(r.read())['choices'][0]['message']['content'].strip()
+          if answer != 'RELEASE_AGENT_OK': raise SystemExit('MISTRAL_RELEASE_AGENT_BLOCKED')
+          print('MISTRAL_RELEASE_AGENT_OK')
+          PY
+
+      - name: Build reproducible package
+        id: pack
+        run: |
+          set -euo pipefail
+          chmod +x ops/build_territorial_hypothesis_release.sh
+          OUT_DIR="$RUNNER_TEMP/release" ops/build_territorial_hypothesis_release.sh
+          file="$RUNNER_TEMP/release/atlas-vivo-milk-territorial-hypothesis-engine-2.1.0.zip"
+          sha=$(sha256sum "$file" | awk '{print $1}')
+          echo "file=$file" >> "$GITHUB_OUTPUT"
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+
+      - name: Fast-forward current branch to Codeberg
+        id: codeberg
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$CODEBERG_TOKEN"
+          credentials="$RUNNER_TEMP/codeberg-credentials"
+          trap 'rm -f "$credentials"' EXIT
+          printf 'protocol=https\nhost=codeberg.org\nusername=%s\npassword=%s\n\n' "$CODEBERG_OWNER" "$CODEBERG_TOKEN" | git -c credential.helper="store --file=$credentials" credential approve
+          chmod 600 "$credentials"
+          git remote add codeberg "https://codeberg.org/$CODEBERG_OWNER/$CODEBERG_REPO.git"
+          if git ls-remote --exit-code codeberg "refs/heads/$CODEBERG_BRANCH" >/dev/null 2>&1; then
+            git fetch --no-tags codeberg "$CODEBERG_BRANCH"
+            git merge-base --is-ancestor FETCH_HEAD HEAD
+          fi
+          git -c credential.helper="store --file=$credentials" push codeberg HEAD:"refs/heads/$CODEBERG_BRANCH"
+          git -c credential.helper="store --file=$credentials" fetch --no-tags codeberg "$CODEBERG_BRANCH"
+          test "$(git rev-parse HEAD)" = "$(git rev-parse FETCH_HEAD)"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Archive Codeberg origin in Software Heritage
+        id: swh
+        shell: bash
+        run: |
+          set -euo pipefail
+          origin="https://codeberg.org/$CODEBERG_OWNER/$CODEBERG_REPO.git"
+          http=$(curl --silent --show-error -o "$RUNNER_TEMP/swh.json" -w '%{http_code}' -X POST -G -H 'Accept: application/json' --data-urlencode 'visit_type=git' --data-urlencode "origin_url=$origin" 'https://archive.softwareheritage.org/api/1/origin/save/' || true)
+          req=$(jq -r '.id // empty' "$RUNNER_TEMP/swh.json" 2>/dev/null || true)
+          swhid=$(jq -r '.snapshot_swhid // empty' "$RUNNER_TEMP/swh.json" 2>/dev/null || true)
+          task=$(jq -r '.save_task_status // empty' "$RUNNER_TEMP/swh.json" 2>/dev/null || true)
+          if [ -n "$req" ]; then
+            for i in 1 2 3 4 5 6; do
+              [ -n "$swhid" ] && break
+              [ "$task" = failed ] && break
+              sleep 10
+              curl --silent --show-error -H 'Accept: application/json' "https://archive.softwareheritage.org/api/1/origin/save/$req/" -o "$RUNNER_TEMP/swh-status.json" || true
+              swhid=$(jq -r '.snapshot_swhid // empty' "$RUNNER_TEMP/swh-status.json" 2>/dev/null || true)
+              task=$(jq -r '.save_task_status // empty' "$RUNNER_TEMP/swh-status.json" 2>/dev/null || true)
+            done
+          fi
+          echo "http=$http" >> "$GITHUB_OUTPUT"
+          echo "request_id=${req:-none}" >> "$GITHUB_OUTPUT"
+          echo "task=${task:-unknown}" >> "$GITHUB_OUTPUT"
+          echo "swhid=${swhid:-none}" >> "$GITHUB_OUTPUT"
+
+      - name: Publish or reuse exact 2.1.0 Zenodo software deposit
+        id: zenodo
+        shell: bash
+        env:
+          RELEASE_FILE: ${{ steps.pack.outputs.file }}
+          RELEASE_SHA: ${{ steps.pack.outputs.sha }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, os, pathlib, requests
+          token=(os.environ.get('MILK_ZENODO') or os.environ.get('EDU_ZEN_MILK') or '').strip()
+          if not token: raise SystemExit('ZENODO_TOKEN_MISSING')
+          api='https://zenodo.org/api/deposit/depositions'
+          params={'access_token':token}
+          metadata=json.loads(pathlib.Path('metadata/territorial-reader/zenodo-software.json').read_text())['metadata']
+          title=metadata['title']; version=metadata['version']
+          r=requests.get(api,params={**params,'size':100},timeout=60); r.raise_for_status()
+          exact=[]
+          for dep in r.json():
+            md=dep.get('metadata') or {}
+            if md.get('title')==title and str(md.get('version',''))==version: exact.append(dep)
+          if len(exact)>1: raise SystemExit('ZENODO_DUPLICATE_EXACT_VERSION_REQUIRES_HUMAN_REVIEW')
+          if exact:
+            dep=exact[0]
+            doi=dep.get('doi') or (dep.get('metadata') or {}).get('doi') or ''
+            if dep.get('submitted') and doi:
+              pathlib.Path(os.environ['RUNNER_TEMP']+'/zenodo-result.json').write_text(json.dumps({'state':'REUSED_PUBLISHED','id':dep['id'],'doi':doi,'conceptdoi':dep.get('conceptdoi','')},indent=2))
+              print('REUSED_PUBLISHED',doi)
+              raise SystemExit(0)
+            deposit_id=dep['id']
+          else:
+            c=requests.post(api,params=params,json={},timeout=60); c.raise_for_status(); dep=c.json(); deposit_id=dep['id']
+          u=requests.put(f'{api}/{deposit_id}',params=params,json={'metadata':metadata},timeout=60); u.raise_for_status(); dep=u.json()
+          bucket=(dep.get('links') or {}).get('bucket')
+          if not bucket: raise SystemExit('ZENODO_BUCKET_LINK_MISSING')
+          release=pathlib.Path(os.environ['RELEASE_FILE'])
+          with release.open('rb') as fh:
+            up=requests.put(bucket.rstrip('/')+'/'+release.name,params=params,data=fh,timeout=180)
+          up.raise_for_status()
+          p=requests.post(f'{api}/{deposit_id}/actions/publish',params=params,timeout=90)
+          if p.status_code not in (200,201,202): raise SystemExit(f'ZENODO_PUBLISH_FAILED_{p.status_code}')
+          pub=p.json(); doi=pub.get('doi') or (pub.get('metadata') or {}).get('doi') or ''
+          if not doi: raise SystemExit('ZENODO_PUBLISHED_WITHOUT_DOI')
+          pathlib.Path(os.environ['RUNNER_TEMP']+'/zenodo-result.json').write_text(json.dumps({'state':'PUBLISHED','id':deposit_id,'doi':doi,'conceptdoi':pub.get('conceptdoi',''),'sha256':os.environ['RELEASE_SHA']},indent=2))
+          print('PUBLISHED',doi)
+          PY
+          state=$(jq -r '.state' "$RUNNER_TEMP/zenodo-result.json")
+          id=$(jq -r '.id' "$RUNNER_TEMP/zenodo-result.json")
+          doi=$(jq -r '.doi' "$RUNNER_TEMP/zenodo-result.json")
+          conceptdoi=$(jq -r '.conceptdoi // ""' "$RUNNER_TEMP/zenodo-result.json")
+          echo "state=$state" >> "$GITHUB_OUTPUT"
+          echo "id=$id" >> "$GITHUB_OUTPUT"
+          echo "doi=$doi" >> "$GITHUB_OUTPUT"
+          echo "conceptdoi=$conceptdoi" >> "$GITHUB_OUTPUT"
+
+      - name: Publish factual release receipt
+        if: always()
+        shell: bash
+        env:
+          SHA: ${{ steps.pack.outputs.sha }}
+          CODEBERG_SHA: ${{ steps.codeberg.outputs.sha }}
+          SWHID: ${{ steps.swh.outputs.swhid }}
+          SWH_TASK: ${{ steps.swh.outputs.task }}
+          DOI: ${{ steps.zenodo.outputs.doi }}
+          ZENODO_ID: ${{ steps.zenodo.outputs.id }}
+          ZENODO_STATE: ${{ steps.zenodo.outputs.state }}
+        run: |
+          set -euo pipefail
+          body="TERRITORIAL_2_1_0_RELEASE run=$RUN_ID conclusion=${{ job.status }} package_sha256=${SHA:-unknown} codeberg_sha=${CODEBERG_SHA:-unknown} zenodo_state=${ZENODO_STATE:-not_completed} zenodo_id=${ZENODO_ID:-none} doi=${DOI:-none} swh_task=${SWH_TASK:-unknown} swhid=${SWHID:-none} mistral_release_agent=required minimal_ontology=1 force_push=0 master_writes=0 secret_values_disclosed=0"
+          curl --fail --silent --show-error -X POST -H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json' -H 'Content-Type: application/json' "https://api.github.com/repos/$REPO/issues/35/comments" -d "$(jq -n --arg body "$body" '{body:$body}')" >/dev/null
