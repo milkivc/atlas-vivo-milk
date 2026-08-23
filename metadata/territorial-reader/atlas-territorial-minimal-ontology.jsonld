@@ -1,0 +1,48 @@
+{
+  "@context": {
+    "milk": "https://associacaomilk.pt/ns/atlas/territorial#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@id": "https://associacaomilk.pt/ns/atlas/territorial/minimal/2.1.0",
+  "@type": "schema:DefinedTermSet",
+  "schema:name": "Atlas Vivo MILK — Minimal Territorial Ontology",
+  "schema:version": "2.1.0",
+  "dcterms:license": "https://spdx.org/licenses/EUPL-1.2.html",
+  "milk:openWorld": true,
+  "milk:kernelPolicy": "Keep the core vocabulary small; add domain detail through explicit profiles, never by silently expanding the kernel.",
+  "milk:classes": [
+    "Territory",
+    "Evidence",
+    "Claim",
+    "Hypothesis",
+    "Absence",
+    "InfrastructureCandidate",
+    "CuratorialMatch",
+    "FundingCandidate",
+    "ValidationEvent",
+    "ProvenanceEvent"
+  ],
+  "milk:relations": [
+    "aboutTerritory",
+    "supports",
+    "contradicts",
+    "derivedFrom",
+    "dependsOn",
+    "observedAt",
+    "possibleResponse",
+    "requiresValidation",
+    "validatedBy",
+    "hasProvenance"
+  ],
+  "milk:semanticRules": [
+    "not-found is not equivalent to non-existence",
+    "hypothesis is not equivalent to fact",
+    "copied sources do not count as independent evidence",
+    "automated output never becomes a public decision without human validation",
+    "sensitive human profiling is outside the ontology kernel"
+  ]
+}
