@@ -11,14 +11,7 @@
         "orcid": "0009-0007-6892-6570"
       }
     ],
-    "contributors": [
-      {
-        "name": "Araujo, Nuno Filipe Fernandes Vieira Cabral e",
-        "affiliation": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
-        "orcid": "0009-0009-1781-4020",
-        "type": "Other"
-      }
-    ],
+    "contributors": [],
     "version": "1.0.0",
     "access_right": "open",
     "keywords": [
@@ -31,6 +24,6 @@
       "RGPD",
       "infraestrutura cultural"
     ],
-    "notes": "Assinatura autoral: Eduardo Mauer. Este depósito documenta o protocolo metodológico e não atribui automaticamente licença ao logótipo ou à identidade visual MILK."
+    "notes": "Autor exclusivo: Eduardo Maurício Vieira Cabral e Araujo, nome artístico Eduardo Mauer, ORCID 0009-0007-6892-6570. Afiliação e manutenção institucional: Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte, https://associacaomilk.pt. Este depósito documenta o protocolo metodológico e não atribui automaticamente licença ao logótipo ou à identidade visual MILK."
   }
 }
