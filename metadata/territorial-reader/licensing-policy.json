@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0.0",
+  "work": {
+    "title": "Atlas Vivo MILK — Leitor Territorial Saneado e Motor de Hipóteses",
+    "version": "2.1.0",
+    "author": {
+      "legalName": "Eduardo Maurício Vieira Cabral e Araujo",
+      "artisticName": "Eduardo Mauer",
+      "orcid": "https://orcid.org/0009-0007-6892-6570",
+      "authorship": "sole"
+    },
+    "institution": {
+      "name": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
+      "url": "https://associacaomilk.pt",
+      "role": "institutional_affiliation_and_maintainer"
+    }
+  },
+  "licensingModel": {
+    "publicSoftware": {
+      "license": "EUPL-1.2",
+      "commercialUsePermittedByPublicLicense": true,
+      "note": "Rights already granted under a public EUPL distribution are not revoked by a later commercial offer."
+    },
+    "commercialAlternative": {
+      "available": true,
+      "type": "separate_proprietary_or_commercial_contract",
+      "requiresRightsClearance": true,
+      "possibleScopes": [
+        "proprietary licence",
+        "dedicated deployment",
+        "managed hosting/SaaS",
+        "support and SLA",
+        "institutional integration",
+        "private connectors",
+        "custom modules",
+        "training and professional services"
+      ]
+    },
+    "brandAndLogo": {
+      "automaticSoftwareLicence": false,
+      "rights": "reserved",
+      "permissionRequired": true
+    },
+    "confidentialLayer": {
+      "madePublicBySoftwareLicence": false,
+      "licenceByObjectRequired": true
+    }
+  },
+  "interoperability": {
+    "principle": "open_contracts_do_not_imply_opening_all_implementation_layers_or_data",
+    "minimalOntology": true,
+    "profilesPreferredOverOntologyExpansion": true,
+    "formatsAndStandards": [
+      "JSON",
+      "JSON-LD",
+      "JSON Schema",
+      "OpenAPI",
+      "GeoJSON",
+      "DCAT-AP",
+      "GeoDCAT-AP",
+      "Dublin Core",
+      "DataCite",
+      "CodeMeta",
+      "CFF",
+      "PROV-O",
+      "SKOS",
+      "IIIF",
+      "W3C Web Annotation",
+      "SPDX",
+      "REUSE",
+      "ORCID",
+      "ROR",
+      "SWHID"
+    ],
+    "conformanceClaimRequiresVerification": true,
+    "openSchemaDoesNotImplyOpenData": true,
+    "brandRightsTransferredByInteroperability": false
+  },
+  "releaseEvidence": {
+    "sha256ManifestRequired": true,
+    "citationCffRequired": true,
+    "codemetaRequired": true,
+    "doiOnlyAfterVerifiedIssuance": true,
+    "swhidOnlyAfterVerifiedArchival": true,
+    "sbomPreferred": true,
+    "dependencyLicenceReviewRequiredForProprietaryRelicensing": true
+  }
+}
