@@ -39,7 +39,7 @@ jobs:
         run: |
           set -euo pipefail
           python - <<'PY'
-          import ftplib,json,os,pathlib,re,ssl,urllib.request
+          import base64,ftplib,json,os,pathlib,re,ssl,urllib.request
           from mistralai.client import Mistral
 
           KEY=os.environ.get('MISTRAL_API_KEY','').strip()
@@ -48,7 +48,7 @@ jobs:
           REPO=os.environ['REPO']; GH=os.environ['GH_TOKEN']; RUN_ID=os.environ['RUN_ID']
 
           def receipt(message):
-              print(message, flush=True)
+              print(message,flush=True)
               req=urllib.request.Request(
                   f'https://api.github.com/repos/{REPO}/issues/35/comments',
                   data=json.dumps({'body':message}).encode(),method='POST',
@@ -56,35 +56,48 @@ jobs:
               with urllib.request.urlopen(req,timeout=45) as r:r.read()
 
           def dump(value):
-              if hasattr(value,'model_dump'): return value.model_dump(by_alias=True)
+              if hasattr(value,'model_dump'):return value.model_dump(by_alias=True)
               if isinstance(value,(dict,list,str,int,float,bool)) or value is None:return value
               try:return dict(value)
               except Exception:return str(value)
 
-          def strings(value):
+          def raw_strings(value):
               value=dump(value)
               if isinstance(value,str):
                   yield value
               elif isinstance(value,dict):
-                  for nested in value.values():yield from strings(nested)
+                  for nested in value.values():yield from raw_strings(nested)
               elif isinstance(value,list):
-                  for nested in value:yield from strings(nested)
+                  for nested in value:yield from raw_strings(nested)
+
+          def candidate_texts(value):
+              for s in raw_strings(value):
+                  yield s
+                  t=s.strip()
+                  if len(t) >= 16 and re.fullmatch(r'[A-Za-z0-9_-]+',t):
+                      try:
+                          decoded=base64.urlsafe_b64decode(t+'='*((4-len(t)%4)%4)).decode('utf-8','ignore')
+                          if decoded:yield decoded
+                      except Exception:pass
+                  if t.startswith('{') or t.startswith('['):
+                      try:
+                          nested=json.loads(t)
+                          yield from candidate_texts(nested)
+                      except Exception:pass
 
           def find_thread_ids(value):
-              value=dump(value); found=[]
+              value=dump(value);found=[]
               def walk(v):
                   if isinstance(v,dict):
                       for k,x in v.items():
-                          if str(k).lower() in ('threadid','thread_id') and isinstance(x,str) and x:
-                              found.append(x)
+                          if str(k).lower() in ('threadid','thread_id') and isinstance(x,str) and x:found.append(x)
                           walk(x)
                   elif isinstance(v,list):
                       for x in v:walk(x)
               walk(value)
               return list(dict.fromkeys(found))
 
-          def extract_password(text):
-              # PTServidor-specific wording only. Avoid interpreting arbitrary e-mail content as credentials.
+          def extract_password_from_text(text):
               patterns=[
                   r'(?is)\bA\s+password\s+é\s*(.+?)(?=\s+Sem\s+outro\s+assunto|\r?\n|$)',
                   r'(?is)\bpassword\s*:\s*([^\r\n]+)',
@@ -97,12 +110,18 @@ jobs:
                       return value
               return None
 
+          def extract_password(value):
+              for text in candidate_texts(value):
+                  found=extract_password_from_text(text)
+                  if found:return found
+              return None
+
           if not KEY:
               receipt(f'MILK_ZERO_KNOWLEDGE_BROKER run={RUN_ID} state=blocked cause=MISTRAL_API_KEY_MISSING secrets_disclosed=0 model_secret_exposure=0')
               with OUT.open('a') as fh:fh.write('ok=no\n')
               raise SystemExit(0)
 
-          password=None; connector_state='unavailable'; threads_checked=0
+          password=None;connector_state='unavailable';threads_checked=0
           try:
               with Mistral(api_key=KEY) as client:
                   candidates=['1a02a62ca0e3cfa7']
@@ -111,9 +130,8 @@ jobs:
                           tool_name='search_threads',connector_id_or_name='gmail',
                           arguments={'query':'from:suporte@ptservidor.pt "882572" after:2026/08/22 -in:spam -in:trash','pageSize':10,'includeTrash':False})
                       connector_state='search_threads_ok'
-                      # Search metadata/snippet is sufficient and avoids reading a full mailbox body when possible.
-                      password=extract_password('\n'.join(strings(sr)))
-                      candidates += find_thread_ids(sr)
+                      password=extract_password(sr)
+                      candidates+=find_thread_ids(sr)
                   except Exception:
                       connector_state='search_threads_failed_direct_id_fallback'
 
@@ -123,10 +141,10 @@ jobs:
                               tr=client.beta.connectors.call_tool(
                                   tool_name='get_thread',connector_id_or_name='gmail',
                                   arguments={'threadId':thread_id,'messageFormat':'full'})
-                              threads_checked += 1
-                              password=extract_password('\n'.join(strings(tr)))
+                              threads_checked+=1
+                              password=extract_password(tr)
                               if password:
-                                  connector_state='get_thread_ok'
+                                  connector_state='get_thread_decoded_ok'
                                   break
                           except Exception:
                               continue
@@ -138,7 +156,7 @@ jobs:
               with OUT.open('a') as fh:fh.write('ok=no\n')
               raise SystemExit(0)
 
-          # Defence-in-depth masking before authentication. The secret is never sent to a model or persisted to repository/artifact.
+          # Mask before transport authentication. Never send credential to chat/completions, agents, repository or artifacts.
           print('::add-mask::'+password)
 
           ftp=None
@@ -159,8 +177,7 @@ jobs:
 
           TMP.write_text(password,encoding='utf-8');TMP.chmod(0o600)
           with OUT.open('a') as fh:
-              fh.write('ok=yes\n')
-              fh.write(f'passfile={TMP}\n')
+              fh.write('ok=yes\n');fh.write(f'passfile={TMP}\n')
           receipt(f'MILK_ZERO_KNOWLEDGE_BROKER run={RUN_ID} state=ready gmail_connector={connector_state} credential_found=1 ftps_auth=ok secrets_disclosed=0 model_secret_exposure=0 persistence=ephemeral_0600 source_writes=0')
           PY
 
