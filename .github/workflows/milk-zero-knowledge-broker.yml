@@ -39,15 +39,7 @@ jobs:
         run: |
           set -euo pipefail
           python - <<'PY'
-          import ftplib
-          import json
-          import os
-          import pathlib
-          import re
-          import ssl
-          import sys
-          import urllib.request
-
+          import ftplib,json,os,pathlib,re,ssl,urllib.request
           from mistralai.client import Mistral
 
           KEY=os.environ.get('MISTRAL_API_KEY','').strip()
@@ -59,15 +51,13 @@ jobs:
               print(message, flush=True)
               req=urllib.request.Request(
                   f'https://api.github.com/repos/{REPO}/issues/35/comments',
-                  data=json.dumps({'body':message}).encode(), method='POST',
+                  data=json.dumps({'body':message}).encode(),method='POST',
                   headers={'Authorization':'Bearer '+GH,'Content-Type':'application/json','Accept':'application/vnd.github+json'})
               with urllib.request.urlopen(req,timeout=45) as r:r.read()
 
           def dump(value):
-              if hasattr(value,'model_dump'):
-                  return value.model_dump(by_alias=True)
-              if isinstance(value,(dict,list,str,int,float,bool)) or value is None:
-                  return value
+              if hasattr(value,'model_dump'): return value.model_dump(by_alias=True)
+              if isinstance(value,(dict,list,str,int,float,bool)) or value is None:return value
               try:return dict(value)
               except Exception:return str(value)
 
@@ -76,105 +66,77 @@ jobs:
               if isinstance(value,str):
                   yield value
               elif isinstance(value,dict):
-                  for nested in value.values(): yield from strings(nested)
+                  for nested in value.values():yield from strings(nested)
               elif isinstance(value,list):
-                  for nested in value: yield from strings(nested)
+                  for nested in value:yield from strings(nested)
 
-          def tools_list(value):
-              raw=dump(value)
-              if isinstance(raw,list): return raw
-              if isinstance(raw,dict):
-                  for key in ('items','data','tools'):
-                      if isinstance(raw.get(key),list): return raw[key]
-              try:return [dump(x) for x in value]
-              except Exception:return []
-
-          def schema_props(tool):
-              schema=(tool.get('inputSchema') or tool.get('input_schema') or {}) if isinstance(tool,dict) else {}
-              return schema.get('properties') or {}
-
-          def build_search_args(tool):
-              props=schema_props(tool); args={}
-              query='from:suporte@ptservidor.pt subject:"[Ticket ID: 882572]" after:2026/08/22 -in:spam -in:trash'
-              for key in ('query','q','search_query','search'):
-                  if key in props:
-                      args[key]=query; break
-              for key in ('max_results','limit','page_size'):
-                  if key in props:
-                      args[key]=10; break
-              return args
-
-          def build_read_args(tool,message_id):
-              props=schema_props(tool); args={}
-              for key in ('message_id','messageId','id'):
-                  if key in props:
-                      args[key]=message_id; break
-              return args
+          def find_thread_ids(value):
+              value=dump(value); found=[]
+              def walk(v):
+                  if isinstance(v,dict):
+                      for k,x in v.items():
+                          if str(k).lower() in ('threadid','thread_id') and isinstance(x,str) and x:
+                              found.append(x)
+                          walk(x)
+                  elif isinstance(v,list):
+                      for x in v:walk(x)
+              walk(value)
+              return list(dict.fromkeys(found))
 
           def extract_password(text):
+              # Exact PTServidor phrase; deliberately narrow to avoid accidentally treating arbitrary mail text as a credential.
               patterns=[
-                  r'(?is)\bA\s+password\s+é\s*(.+?)(?:\s+Sem\s+outro\s+assunto|\r?\n|$)',
-                  r'(?is)\bpassword\s*:\s*(.+?)(?:\r?\n|$)',
+                  r'(?is)\bA\s+password\s+é\s*([^\r\n]+?)(?=\s+Sem\s+outro\s+assunto|\r?\n|$)',
+                  r'(?is)\bpassword\s*:\s*([^\r\n]+)',
               ]
               for pattern in patterns:
                   m=re.search(pattern,text)
-                  if m:
-                      value=m.group(1).strip().strip('`"\'')
-                      if 6 <= len(value) <= 128 and '\n' not in value and '\r' not in value:
-                          return value
+                  if not m:continue
+                  value=m.group(1).strip().strip('`"\'')
+                  if 6 <= len(value) <= 128 and all(c not in value for c in '\r\n'):
+                      return value
               return None
 
           if not KEY:
               receipt(f'MILK_ZERO_KNOWLEDGE_BROKER run={RUN_ID} state=blocked cause=MISTRAL_API_KEY_MISSING secrets_disclosed=0 model_secret_exposure=0')
-              with OUT.open('a') as fh: fh.write('ok=no\n')
+              with OUT.open('a') as fh:fh.write('ok=no\n')
               raise SystemExit(0)
 
-          password=None
-          connector_state='unavailable'
+          password=None; connector_state='unavailable'; threads_checked=0
           try:
               with Mistral(api_key=KEY) as client:
-                  listed=client.beta.connectors.list_tools(
-                      connector_id_or_name='gmail', page=1, page_size=100, refresh=False, pretty=False)
-                  tools=tools_list(listed)
-                  connector_state='tools_listed'
-                  search_tools=[t for t in tools if isinstance(t,dict) and 'search' in str(t.get('name','')).lower()]
-                  read_tools=[t for t in tools if isinstance(t,dict) and any(x in str(t.get('name','')).lower() for x in ('read','get')) and 'message' in str(t.get('name','')).lower()]
+                  # Direct connector calls: no chat/completions, no agent, no model context.
+                  candidates=['1a02a62ca0e3cfa7']
+                  try:
+                      sr=client.beta.connectors.call_tool(
+                          tool_name='search_threads',connector_id_or_name='gmail',
+                          arguments={'query':'from:suporte@ptservidor.pt "882572" after:2026/08/22 -in:spam -in:trash','pageSize':10,'includeTrash':False})
+                      candidates += find_thread_ids(sr)
+                      connector_state='search_threads_ok'
+                  except Exception:
+                      connector_state='search_threads_failed_direct_id_fallback'
 
-                  for tool in search_tools[:3]:
-                      args=build_search_args(tool)
-                      if not args: continue
+                  for thread_id in list(dict.fromkeys(candidates))[:12]:
                       try:
-                          result=client.beta.connectors.call_tool(
-                              tool_name=tool['name'], connector_id_or_name='gmail', arguments=args)
-                          combined='\n'.join(strings(result))
-                          password=extract_password(combined)
-                          if password: break
+                          tr=client.beta.connectors.call_tool(
+                              tool_name='get_thread',connector_id_or_name='gmail',
+                              arguments={'threadId':thread_id,'messageFormat':'full'})
+                          threads_checked += 1
+                          password=extract_password('\n'.join(strings(tr)))
+                          if password:
+                              connector_state='get_thread_ok'
+                              break
                       except Exception:
                           continue
-
-                  if not password:
-                      message_id='1a02a62ca0e3cfa7'
-                      for tool in read_tools[:4]:
-                          args=build_read_args(tool,message_id)
-                          if not args: continue
-                          try:
-                              result=client.beta.connectors.call_tool(
-                                  tool_name=tool['name'], connector_id_or_name='gmail', arguments=args)
-                              combined='\n'.join(strings(result))
-                              password=extract_password(combined)
-                              if password: break
-                          except Exception:
-                              continue
           except Exception:
               connector_state='auth_or_connector_unavailable'
 
           if not password:
-              receipt(f'MILK_ZERO_KNOWLEDGE_BROKER run={RUN_ID} state=blocked gmail_connector={connector_state} credential_found=0 secrets_disclosed=0 model_secret_exposure=0 source_writes=0')
-              with OUT.open('a') as fh: fh.write('ok=no\n')
+              receipt(f'MILK_ZERO_KNOWLEDGE_BROKER run={RUN_ID} state=blocked gmail_connector={connector_state} threads_checked={threads_checked} credential_found=0 secrets_disclosed=0 model_secret_exposure=0 source_writes=0')
+              with OUT.open('a') as fh:fh.write('ok=no\n')
               raise SystemExit(0)
 
-          # Never send the credential to a model, log, repository, artifact or issue.
-          # GitHub runner masking is defence-in-depth only; no later command prints the value.
+          # Mask before any network/auth operation. Never send password to Mistral model, GitHub issue, artifact or repository.
           print('::add-mask::'+password)
 
           ftp=None
@@ -182,18 +144,18 @@ jobs:
               ftp=ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=45)
               ftp.connect('troi.ptservidor.net',21,timeout=45)
               ftp.login('migration@associacaomilk.pt',password)
-              ftp.prot_p(); ftp.voidcmd('TYPE I')
-              try: ftp.quit()
-              except Exception: pass
+              ftp.prot_p();ftp.voidcmd('TYPE I')
+              try:ftp.quit()
+              except Exception:pass
           except Exception:
               try:
-                  if ftp: ftp.close()
-              except Exception: pass
+                  if ftp:ftp.close()
+              except Exception:pass
               receipt(f'MILK_ZERO_KNOWLEDGE_BROKER run={RUN_ID} state=blocked gmail_connector={connector_state} credential_found=1 ftps_auth=failed secrets_disclosed=0 model_secret_exposure=0 source_writes=0')
-              with OUT.open('a') as fh: fh.write('ok=no\n')
+              with OUT.open('a') as fh:fh.write('ok=no\n')
               raise SystemExit(0)
 
-          TMP.write_text(password,encoding='utf-8'); TMP.chmod(0o600)
+          TMP.write_text(password,encoding='utf-8');TMP.chmod(0o600)
           with OUT.open('a') as fh:
               fh.write('ok=yes\n')
               fh.write(f'passfile={TMP}\n')
@@ -214,5 +176,4 @@ jobs:
       - name: Record broker-only status when migration could not start
         if: steps.broker.outputs.ok != 'yes'
         shell: bash
-        run: |
-          echo 'Credential broker finished without exposing a secret; migration was not started by this run.'
+        run: echo 'Credential broker completed without secret disclosure; no migration process was started by this run.'
