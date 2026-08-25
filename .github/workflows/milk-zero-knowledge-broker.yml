@@ -74,16 +74,21 @@ jobs:
               for s in raw_strings(value):
                   yield s
                   t=s.strip()
-                  if len(t) >= 16 and re.fullmatch(r'[A-Za-z0-9_-]+',t):
-                      try:
-                          decoded=base64.urlsafe_b64decode(t+'='*((4-len(t)%4)%4)).decode('utf-8','ignore')
-                          if decoded:yield decoded
-                      except Exception:pass
                   if t.startswith('{') or t.startswith('['):
                       try:
                           nested=json.loads(t)
                           yield from candidate_texts(nested)
                       except Exception:pass
+                  if len(t)>=16 and re.fullmatch(r'[A-Za-z0-9_=/+\-]+',t):
+                      for decoder in (base64.urlsafe_b64decode,base64.b64decode):
+                          try:
+                              decoded=decoder(t+'='*((4-len(t)%4)%4)).decode('utf-8','ignore')
+                              if decoded:
+                                  yield decoded
+                                  if decoded.lstrip().startswith(('{','[')):
+                                      try:yield from candidate_texts(json.loads(decoded))
+                                      except Exception:pass
+                          except Exception:pass
 
           def find_thread_ids(value):
               value=dump(value);found=[]
@@ -121,7 +126,7 @@ jobs:
               with OUT.open('a') as fh:fh.write('ok=no\n')
               raise SystemExit(0)
 
-          password=None;connector_state='unavailable';threads_checked=0
+          password=None;connector_state='unavailable';threads_checked=0;formats_checked=[]
           try:
               with Mistral(api_key=KEY) as client:
                   candidates=['1a02a62ca0e3cfa7']
@@ -137,26 +142,27 @@ jobs:
 
                   if not password:
                       for thread_id in list(dict.fromkeys(candidates))[:12]:
-                          try:
-                              tr=client.beta.connectors.call_tool(
-                                  tool_name='get_thread',connector_id_or_name='gmail',
-                                  arguments={'threadId':thread_id,'messageFormat':'full'})
-                              threads_checked+=1
-                              password=extract_password(tr)
-                              if password:
-                                  connector_state='get_thread_decoded_ok'
-                                  break
-                          except Exception:
-                              continue
+                          for fmt in ('raw','full','metadata','minimal'):
+                              try:
+                                  tr=client.beta.connectors.call_tool(
+                                      tool_name='get_thread',connector_id_or_name='gmail',
+                                      arguments={'threadId':thread_id,'messageFormat':fmt})
+                                  threads_checked+=1;formats_checked.append(fmt)
+                                  password=extract_password(tr)
+                                  if password:
+                                      connector_state=f'get_thread_{fmt}_decoded_ok'
+                                      break
+                              except Exception:
+                                  continue
+                          if password:break
           except Exception:
               connector_state='auth_or_connector_unavailable'
 
           if not password:
-              receipt(f'MILK_ZERO_KNOWLEDGE_BROKER run={RUN_ID} state=blocked gmail_connector={connector_state} threads_checked={threads_checked} credential_found=0 secrets_disclosed=0 model_secret_exposure=0 source_writes=0')
+              receipt(f'MILK_ZERO_KNOWLEDGE_BROKER run={RUN_ID} state=blocked gmail_connector={connector_state} threads_checked={threads_checked} formats={"-".join(dict.fromkeys(formats_checked)) or "none"} credential_found=0 secrets_disclosed=0 model_secret_exposure=0 source_writes=0')
               with OUT.open('a') as fh:fh.write('ok=no\n')
               raise SystemExit(0)
 
-          # Mask before transport authentication. Never send credential to chat/completions, agents, repository or artifacts.
           print('::add-mask::'+password)
 
           ftp=None
