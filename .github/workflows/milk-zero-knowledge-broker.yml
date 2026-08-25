@@ -84,9 +84,9 @@ jobs:
               return list(dict.fromkeys(found))
 
           def extract_password(text):
-              # Exact PTServidor phrase; deliberately narrow to avoid accidentally treating arbitrary mail text as a credential.
+              # PTServidor-specific wording only. Avoid interpreting arbitrary e-mail content as credentials.
               patterns=[
-                  r'(?is)\bA\s+password\s+é\s*([^\r\n]+?)(?=\s+Sem\s+outro\s+assunto|\r?\n|$)',
+                  r'(?is)\bA\s+password\s+é\s*(.+?)(?=\s+Sem\s+outro\s+assunto|\r?\n|$)',
                   r'(?is)\bpassword\s*:\s*([^\r\n]+)',
               ]
               for pattern in patterns:
@@ -105,29 +105,31 @@ jobs:
           password=None; connector_state='unavailable'; threads_checked=0
           try:
               with Mistral(api_key=KEY) as client:
-                  # Direct connector calls: no chat/completions, no agent, no model context.
                   candidates=['1a02a62ca0e3cfa7']
                   try:
                       sr=client.beta.connectors.call_tool(
                           tool_name='search_threads',connector_id_or_name='gmail',
                           arguments={'query':'from:suporte@ptservidor.pt "882572" after:2026/08/22 -in:spam -in:trash','pageSize':10,'includeTrash':False})
-                      candidates += find_thread_ids(sr)
                       connector_state='search_threads_ok'
+                      # Search metadata/snippet is sufficient and avoids reading a full mailbox body when possible.
+                      password=extract_password('\n'.join(strings(sr)))
+                      candidates += find_thread_ids(sr)
                   except Exception:
                       connector_state='search_threads_failed_direct_id_fallback'
 
-                  for thread_id in list(dict.fromkeys(candidates))[:12]:
-                      try:
-                          tr=client.beta.connectors.call_tool(
-                              tool_name='get_thread',connector_id_or_name='gmail',
-                              arguments={'threadId':thread_id,'messageFormat':'full'})
-                          threads_checked += 1
-                          password=extract_password('\n'.join(strings(tr)))
-                          if password:
-                              connector_state='get_thread_ok'
-                              break
-                      except Exception:
-                          continue
+                  if not password:
+                      for thread_id in list(dict.fromkeys(candidates))[:12]:
+                          try:
+                              tr=client.beta.connectors.call_tool(
+                                  tool_name='get_thread',connector_id_or_name='gmail',
+                                  arguments={'threadId':thread_id,'messageFormat':'full'})
+                              threads_checked += 1
+                              password=extract_password('\n'.join(strings(tr)))
+                              if password:
+                                  connector_state='get_thread_ok'
+                                  break
+                          except Exception:
+                              continue
           except Exception:
               connector_state='auth_or_connector_unavailable'
 
@@ -136,7 +138,7 @@ jobs:
               with OUT.open('a') as fh:fh.write('ok=no\n')
               raise SystemExit(0)
 
-          # Mask before any network/auth operation. Never send password to Mistral model, GitHub issue, artifact or repository.
+          # Defence-in-depth masking before authentication. The secret is never sent to a model or persisted to repository/artifact.
           print('::add-mask::'+password)
 
           ftp=None
