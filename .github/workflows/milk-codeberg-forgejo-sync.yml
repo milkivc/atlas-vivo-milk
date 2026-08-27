@@ -1,7 +1,7 @@
 name: MILK — sincronização Codeberg Forgejo
 on:
   push:
-    branches: [work/atlas-total-retomada-20260827]
+    branches: [work/atlas-canonical-surface-20260827]
   workflow_dispatch:
 permissions:
   contents: read
@@ -17,7 +17,7 @@ jobs:
       CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
       GH_TOKEN: ${{ github.token }}
       REPO: ${{ github.repository }}
-      TARGET_BRANCH: work/atlas-total-retomada-20260827
+      TARGET_BRANCH: work/atlas-canonical-surface-20260827
     steps:
       - uses: actions/checkout@v4
         with:
