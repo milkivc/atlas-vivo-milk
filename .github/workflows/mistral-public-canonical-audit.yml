@@ -209,7 +209,7 @@ jobs:
           pathlib.Path("audit-output/receipt.json").write_text(
               json.dumps(receipt,ensure_ascii=False,indent=2),encoding="utf-8")
           pathlib.Path("audit-output/MANIFEST_SHA256").write_text(
-              "\n".join(f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {p}" for p in sorted(pathlib.Path("audit-output").glob("*")))+"\n",
+              "\n".join(f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.name}" for p in sorted(pathlib.Path("audit-output").glob("*")))+"\n",
               encoding="utf-8")
           print(f"MISTRAL_PUBLIC_AUDIT_COMPLETE roles={len(roles)} chunks={len(chunks)} corpus_sha256={corpus_sha}")
           PY
