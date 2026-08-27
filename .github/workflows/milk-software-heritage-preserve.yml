@@ -1,0 +1,52 @@
+name: MILK — preservação Software Heritage
+on:
+  push:
+    branches: [work/atlas-total-retomada-20260827]
+    paths: [.github/workflows/milk-software-heritage-preserve.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  preserve:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+    steps:
+      - name: Request archival of institutional Codeberg origin
+        id: swh
+        shell: bash
+        run: |
+          set -euo pipefail
+          origin='https://codeberg.org/associacaomilk/atlas-vivo-milk.git'
+          http=$(curl --silent --show-error -o "$RUNNER_TEMP/swh.json" -w '%{http_code}' -X POST -G -H 'Accept: application/json' --data-urlencode 'visit_type=git' --data-urlencode "origin_url=$origin" https://archive.softwareheritage.org/api/1/origin/save/ || true)
+          request_id=$(jq -r '.id // empty' "$RUNNER_TEMP/swh.json" 2>/dev/null || true)
+          task=$(jq -r '.save_task_status // empty' "$RUNNER_TEMP/swh.json" 2>/dev/null || true)
+          swhid=$(jq -r '.snapshot_swhid // empty' "$RUNNER_TEMP/swh.json" 2>/dev/null || true)
+          if [ -n "$request_id" ]; then
+            for attempt in 1 2 3 4 5 6; do
+              [ -n "$swhid" ] && break
+              [ "$task" = failed ] && break
+              sleep 10
+              curl --silent --show-error -H 'Accept: application/json' "https://archive.softwareheritage.org/api/1/origin/save/$request_id/" -o "$RUNNER_TEMP/swh-status.json" || true
+              task=$(jq -r '.save_task_status // empty' "$RUNNER_TEMP/swh-status.json" 2>/dev/null || true)
+              swhid=$(jq -r '.snapshot_swhid // empty' "$RUNNER_TEMP/swh-status.json" 2>/dev/null || true)
+            done
+          fi
+          echo "http=$http" >> "$GITHUB_OUTPUT"
+          echo "request_id=${request_id:-none}" >> "$GITHUB_OUTPUT"
+          echo "task=${task:-unknown}" >> "$GITHUB_OUTPUT"
+          echo "swhid=${swhid:-none}" >> "$GITHUB_OUTPUT"
+      - name: Publish factual receipt
+        if: always()
+        shell: bash
+        env:
+          HTTP: ${{ steps.swh.outputs.http }}
+          REQUEST_ID: ${{ steps.swh.outputs.request_id }}
+          TASK: ${{ steps.swh.outputs.task }}
+          SWHID: ${{ steps.swh.outputs.swhid }}
+        run: |
+          body="MILK_SOFTWARE_HERITAGE run=$GITHUB_RUN_ID conclusion=${{ job.status }} http=${HTTP:-0} request_id=${REQUEST_ID:-none} task=${TASK:-unknown} swhid=${SWHID:-none} origin=codeberg external_deletion=0"
+          curl --fail --silent --show-error -X POST -H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json' -H 'Content-Type: application/json' "https://api.github.com/repos/$REPO/issues/35/comments" -d "$(jq -n --arg body "$body" '{body:$body}')" >/dev/null
