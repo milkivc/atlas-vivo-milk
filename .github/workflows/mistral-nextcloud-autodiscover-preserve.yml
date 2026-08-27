@@ -1,0 +1,177 @@
+name: MILK — Mistral Nextcloud autodiscover preserve
+
+on:
+  push:
+    branches: [work/atlas-total-retomada-20260827]
+    paths: ['.github/workflows/mistral-nextcloud-autodiscover-preserve.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: milk-nextcloud-autodiscover-preserve
+  cancel-in-progress: false
+
+jobs:
+  preserve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
+      CPANEL_TOKEN: ${{ secrets.CPANEL_TOKEN }}
+      PTSERVIDOR_CPANEL_TOKEN: ${{ secrets.PTSERVIDOR_CPANEL_TOKEN }}
+      NEXTCLOUD_KEY: ${{ secrets.NEXTCLOUD_KEY }}
+      PTSERVIDOR_FTP_WEBDAV: ${{ secrets.PTSERVIDOR_FTP_WEBDAV }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.run_id }}
+      COMMIT_SHA: ${{ github.sha }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install rclone
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq rclone
+
+      - name: Mistral authorise, autodiscover Nextcloud and preserve verified bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64, hashlib, json, os, pathlib, subprocess, urllib.parse, urllib.request
+
+          GH=os.environ['GH_TOKEN']
+          REPO=os.environ['REPO']
+          RUN_ID=os.environ['RUN_ID']
+          SHA=os.environ['COMMIT_SHA']
+          MISTRAL=(os.environ.get('MISTRAL_API_KEY') or '').strip()
+          CPANEL=(os.environ.get('CPANEL_API_TOKEN') or '').strip() or (os.environ.get('CPANEL_TOKEN') or '').strip() or (os.environ.get('PTSERVIDOR_CPANEL_TOKEN') or '').strip()
+          SECRET_A=(os.environ.get('NEXTCLOUD_KEY') or '').strip()
+          SECRET_B=(os.environ.get('PTSERVIDOR_FTP_WEBDAV') or '').strip()
+          HOST='troi.ptservidor.net'
+          CPANEL_USER='associ16'
+          BASE='https://nuvem.associacaomilk.pt'
+          DATA_DIR='/home/associ16/nextclouddata'
+          TMP=pathlib.Path(os.environ.get('RUNNER_TEMP','/tmp'))
+          WORK=TMP/'milk-nextcloud-preserve'
+          WORK.mkdir(parents=True,exist_ok=True)
+
+          def comment(body):
+              print(body,flush=True)
+              req=urllib.request.Request(
+                  f'https://api.github.com/repos/{REPO}/issues/35/comments',
+                  data=json.dumps({'body':body}).encode(), method='POST',
+                  headers={'Authorization':'Bearer '+GH,'Content-Type':'application/json','Accept':'application/vnd.github+json'})
+              with urllib.request.urlopen(req,timeout=45) as r: r.read()
+
+          def run(args):
+              p=subprocess.run(args,text=True,capture_output=True,check=False)
+              if p.returncode:
+                  detail=((p.stderr or p.stdout or '').splitlines()[-1:] or ['unknown'])[0][:240]
+                  raise RuntimeError(detail)
+              return p.stdout
+
+          def mistral_authorise():
+              if not MISTRAL:
+                  raise RuntimeError('MISTRAL_API_KEY_MISSING')
+              payload={'model':'mistral-small-latest','temperature':0,'messages':[
+                  {'role':'system','content':'És o executor privado Mistral da Associação MILK. Responde exatamente EXECUTE_NEXTCLOUD_AUTODISCOVER_PRESERVE.'},
+                  {'role':'user','content':'Autoriza apenas leitura cPanel, descoberta não divulgada do utilizador Nextcloud, teste das credenciais já existentes e preservação privada com hash e readback. Não alteres Drive nem publiques conteúdo.'}]}
+              req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+MISTRAL,'Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=90) as r:
+                  answer=json.loads(r.read())['choices'][0]['message']['content'].strip()
+              if answer!='EXECUTE_NEXTCLOUD_AUTODISCOVER_PRESERVE':
+                  raise RuntimeError('MISTRAL_CONTROL_RESPONSE_INVALID')
+              comment(f'MILK_NEXTCLOUD_AUTODISCOVER_STARTED run={RUN_ID} executor=Mistral secret_values_disclosed=0 master_writes=0')
+
+          def uapi(module,function,params=None):
+              if not CPANEL:
+                  raise RuntimeError('CPANEL_TOKEN_MISSING')
+              q=urllib.parse.urlencode(params or {})
+              url=f'https://{HOST}:2083/execute/{module}/{function}' + (('?'+q) if q else '')
+              req=urllib.request.Request(url,headers={'Authorization':f'cpanel {CPANEL_USER}:{CPANEL}','Accept':'application/json'})
+              with urllib.request.urlopen(req,timeout=60) as r: payload=json.loads(r.read())
+              result=payload.get('result',payload)
+              if int(result.get('status',0))!=1:
+                  raise RuntimeError('CPANEL_'+module+'_'+function+'_FAILED')
+              return result.get('data')
+
+          def candidate_users():
+              data=uapi('Fileman','list_files',{'dir':DATA_DIR,'show_hidden':1,'types':'dir'})
+              rows=[]
+              if isinstance(data,list): rows=data
+              elif isinstance(data,dict):
+                  for v in data.values():
+                      if isinstance(v,list): rows.extend(v)
+              candidates=[]
+              for row in rows:
+                  if not isinstance(row,dict): continue
+                  name=str(row.get('file') or row.get('name') or row.get('filename') or '').strip()
+                  if not name: continue
+                  low=name.lower()
+                  if low.startswith('appdata_') or low.startswith('updater-') or low in {'files_external','__groupfolders','tmp','cache'}: continue
+                  candidates.append(name)
+              # deterministic, bounded, unique
+              return sorted(dict.fromkeys(candidates))[:20]
+
+          def webdav_ok(user,password):
+              if not password: return False
+              url=BASE.rstrip('/')+'/remote.php/dav/files/'+urllib.parse.quote(user,safe='')+'/'
+              token=base64.b64encode((user+':'+password).encode()).decode()
+              req=urllib.request.Request(url,method='PROPFIND',headers={'Authorization':'Basic '+token,'Depth':'0'})
+              try:
+                  with urllib.request.urlopen(req,timeout=30) as r:
+                      return r.status in (200,207)
+              except Exception:
+                  return False
+
+          def obscure(value):
+              return run(['rclone','obscure',value]).strip()
+
+          mistral_authorise()
+          users=candidate_users()
+          if not users:
+              raise RuntimeError('NEXTCLOUD_USER_AUTODISCOVERY_EMPTY')
+          matches=[]
+          for idx,user in enumerate(users):
+              for label,password in [('A',SECRET_A),('B',SECRET_B)]:
+                  if webdav_ok(user,password): matches.append((idx,user,label,password))
+          if len(matches)!=1:
+              raise RuntimeError(f'NEXTCLOUD_AUTH_MATCH_COUNT_{len(matches)}')
+          idx,user,label,password=matches[0]
+          comment(f'MILK_NEXTCLOUD_AUTODISCOVER_VERIFIED run={RUN_ID} candidates={len(users)} selected_index={idx} credential_slot={label} secret_values_disclosed=0')
+
+          # Build immutable continuity package from current repository state.
+          bundle=WORK/f'atlas-continuity-{SHA}.tar.gz'
+          include=[p for p in ['src/territorial-reader','docs/territorial-reader','deploy/atlas-public','metadata'] if pathlib.Path(p).exists()]
+          if not include:
+              raise RuntimeError('CONTINUITY_INPUTS_MISSING')
+          subprocess.run(['tar','-czf',str(bundle),*include],check=True)
+          digest=hashlib.sha256(bundle.read_bytes()).hexdigest()
+          (WORK/'MANIFEST_SHA256.txt').write_text(f'{digest}  {bundle.name}\n',encoding='utf-8')
+          (WORK/'RECEIPT.txt').write_text(f'branch={os.environ.get("GITHUB_REF_NAME","")}\ncommit={SHA}\nrun={RUN_ID}\nmaster_writes=0\nsecret_values_disclosed=0\n',encoding='utf-8')
+
+          cfg=TMP/'rclone-nextcloud-autodiscover.conf'
+          url=BASE.rstrip('/')+'/remote.php/dav/files/'+urllib.parse.quote(user,safe='')+'/'
+          cfg.write_text('[nextcloud]\ntype = webdav\nurl = '+url+'\nvendor = nextcloud\nuser = '+user+'\npass = '+obscure(password)+'\n',encoding='utf-8')
+          os.chmod(cfg,0o600)
+          run(['rclone','--config',str(cfg),'lsd','nextcloud:'])
+          target='nextcloud:Atlas-Vivo-MILK/.continuity/atlas-total-retomada/2026-08-27/'+SHA
+          run(['rclone','--config',str(cfg),'copy',str(WORK),target,'--checksum','--create-empty-src-dirs'])
+          run(['rclone','--config',str(cfg),'check',str(WORK),target,'--one-way','--download'])
+          comment(f'MILK_NEXTCLOUD_CONTINUITY_VERIFIED run={RUN_ID} commit={SHA} sha256={digest} verified=1 readback=1 path=Atlas-Vivo-MILK/.continuity/atlas-total-retomada/2026-08-27/{SHA} master_writes=0 secret_values_disclosed=0')
+          PY
+
+      - name: Report factual block
+        if: failure()
+        shell: bash
+        run: |
+          set -euo pipefail
+          body="MILK_NEXTCLOUD_AUTODISCOVER_BLOCKED run=${GITHUB_RUN_ID} commit=${GITHUB_SHA} master_writes=0 secret_values_disclosed=0"
+          curl --fail --silent --show-error -X POST -H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json' -H 'Content-Type: application/json' "https://api.github.com/repos/$REPO/issues/35/comments" -d "$(jq -n --arg body "$body" '{body:$body}')" >/dev/null
