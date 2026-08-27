@@ -92,14 +92,33 @@ jobs:
 
       - name: Check for placeholder ORCIDs
         run: |
-          if grep -r "0000-0000-0000-0000" .; then
-            echo "❌ ORCID placeholder (0000-0000-0000-0000) encontrado!"
-            echo "Substitua por ORCIDs válidos:"
-            echo "- Nuno Filipe: 0009-0009-1781-4020"
-            echo "- Eduardo Maurício: 0009-0007-6892-6570"
+          placeholder='0000-0000-0000-'
+
+      - name: Check for missing ORCIDs in metadata
+        run: |
+          # Verificar se metadata.json tem ORCIDs válidos
+          if [ -f "metadata.json" ]; then
+            orcid_nuno=$(jq -r '.creators[] | select(.name | contains("Nuno")) | .orcid' metadata.json 2>/dev/null || echo "")
+            orcid_eduardo=$(jq -r '.creators[] | select(.name | contains("Eduardo")) | .orcid' metadata.json 2>/dev/null || echo "")
+            
+            if [ "$orcid_nuno" != "0009-0009-1781-4020" ]; then
+              echo "❌ ORCID do Nuno está incorreto em metadata.json: $orcid_nuno"
+              exit 1
+            fi
+            
+            if [ "$orcid_eduardo" != "0009-0007-6892-6570" ]; then
+              echo "❌ ORCID do Eduardo está incorreto em metadata.json: $orcid_eduardo"
+              exit 1
+            fi
+            
+            echo "✅ ORCIDs em metadata.json estão corretos"
+          fi
+0000'
+          if grep -r --exclude=validate-orcid.yml "$placeholder" .; then
+            echo "❌ ORCID placeholder encontrado fora do validador."
             exit 1
           else
-            echo "✅ Nenhum ORCID placeholder encontrado"
+            echo "✅ Nenhum ORCID placeholder em metadados ou documentação"
           fi
 
       - name: Check for missing ORCIDs in metadata
