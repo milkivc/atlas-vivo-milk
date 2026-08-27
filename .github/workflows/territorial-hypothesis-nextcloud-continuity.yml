@@ -49,13 +49,13 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/milk-continuity"
-          tar -czf "$RUNNER_TEMP/milk-continuity/atlas-total-retomada-${COMMIT_SHA}.tar.gz" \
+          bundle="$RUNNER_TEMP/milk-continuity/atlas-total-retomada-${COMMIT_SHA}.tar.gz"
+          tar -czf "$bundle" \
             src/territorial-reader \
             deploy/atlas-public \
             metadata/identities.json \
             docs/territorial-reader/GENEALOGIA_EPISTEMICA_LEITURA_TERRITORIAL_2026-08-23.md
-          sha256sum "$RUNNER_TEMP/milk-continuity/territorial-hypothesis-${COMMIT_SHA}.tar.gz" \
-            > "$RUNNER_TEMP/milk-continuity/MANIFEST_SHA256.txt"
+          sha256sum "$bundle" > "$RUNNER_TEMP/milk-continuity/MANIFEST_SHA256.txt"
           printf 'branch=%s\ncommit=%s\nrun=%s\nmaster_writes=0\n' \
             "$GITHUB_REF_NAME" "$COMMIT_SHA" "$RUN_ID" \
             > "$RUNNER_TEMP/milk-continuity/RECEIPT.txt"
