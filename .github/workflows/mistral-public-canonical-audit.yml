@@ -8,6 +8,7 @@ on:
     paths:
       - 'deploy/atlas-public/**'
       - 'docs/ATLAS_PUBLIC_SURFACE_CANONICAL_CONTRACT_20260827.md'
+      - 'docs/public-surface/requirements-540.json'
       - '.github/workflows/mistral-public-canonical-audit.yml'
 
 permissions:
@@ -60,6 +61,7 @@ jobs:
           ]
           allow=[
             pathlib.Path("docs/ATLAS_PUBLIC_SURFACE_CANONICAL_CONTRACT_20260827.md"),
+            pathlib.Path("docs/public-surface/requirements-540.json"),
             *sorted(pathlib.Path("deploy/atlas-public").rglob("*")),
           ]
           text_ext={".html",".css",".js",".json",".md",".txt",".csv",".svg"}
