@@ -1,0 +1,88 @@
+name: MILK — Nextcloud auth probe
+
+on:
+  push:
+    branches: [work/atlas-total-retomada-20260827]
+    paths: ['.github/workflows/nextcloud-auth-probe.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      NEXTCLOUD_KEY: ${{ secrets.NEXTCLOUD_KEY }}
+      PTSERVIDOR_FTP_WEBDAV: ${{ secrets.PTSERVIDOR_FTP_WEBDAV }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.run_id }}
+    steps:
+      - name: Probe documented identities without secret disclosure
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64, json, os, urllib.parse, urllib.request, urllib.error
+
+          base='https://nuvem.associacaomilk.pt'
+          users=['associ16','migration@associacaomilk.pt','milk','admin']
+          secrets=[
+              ('NEXTCLOUD_KEY',(os.environ.get('NEXTCLOUD_KEY') or '').strip()),
+              ('PTSERVIDOR_FTP_WEBDAV',(os.environ.get('PTSERVIDOR_FTP_WEBDAV') or '').strip()),
+          ]
+
+          def request(user,password):
+              url=base+'/remote.php/dav/files/'+urllib.parse.quote(user,safe='')+'/'
+              token=base64.b64encode((user+':'+password).encode()).decode()
+              req=urllib.request.Request(url,method='PROPFIND',headers={
+                  'Authorization':'Basic '+token,
+                  'Depth':'0',
+                  'User-Agent':'MILK-Nextcloud-Auth-Probe/1.0',
+              })
+              try:
+                  with urllib.request.urlopen(req,timeout=25) as r:
+                      return r.status
+              except urllib.error.HTTPError as e:
+                  return e.code
+              except Exception:
+                  return 0
+
+          results=[]
+          winner=None
+          for secret_name,password in secrets:
+              if not password:
+                  results.append((secret_name,'absent',0))
+                  continue
+              for user in users:
+                  status=request(user,password)
+                  ok=status in (200,207)
+                  results.append((secret_name,user,status))
+                  if ok and winner is None:
+                      winner=(secret_name,user,status)
+
+          summary=';'.join(f'{s}|{u}|{code}' for s,u,code in results)
+          if winner:
+              body=(f'NEXTCLOUD_AUTH_PROBE run={os.environ["RUN_ID"]} auth_ok=1 '
+                    f'secret_name={winner[0]} user={winner[1]} http={winner[2]} '
+                    f'base_host=nuvem.associacaomilk.pt attempts={len(results)} '
+                    'secret_values_disclosed=0')
+          else:
+              body=(f'NEXTCLOUD_AUTH_PROBE run={os.environ["RUN_ID"]} auth_ok=0 '
+                    f'base_host=nuvem.associacaomilk.pt results={summary} '
+                    'secret_values_disclosed=0')
+          print(body)
+          req=urllib.request.Request(
+              f'https://api.github.com/repos/{os.environ["REPO"]}/issues/35/comments',
+              data=json.dumps({'body':body}).encode(),method='POST',headers={
+                  'Authorization':'Bearer '+os.environ['GH_TOKEN'],
+                  'Content-Type':'application/json',
+                  'Accept':'application/vnd.github+json',
+              })
+          with urllib.request.urlopen(req,timeout=45) as r: r.read()
+          if not winner:
+              raise SystemExit(2)
+          PY
