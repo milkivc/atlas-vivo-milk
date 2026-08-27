@@ -1,12 +1,14 @@
-name: MILK Territorial Hypothesis — Nextcloud continuity
+name: MILK Atlas total — Nextcloud continuity
 
 on:
   push:
     branches:
-      - 'work/territorial-hypothesis-engine-20260823'
+      - 'work/atlas-total-retomada-20260827'
     paths:
       - 'src/territorial-reader/**'
       - 'docs/territorial-reader/**'
+      - 'deploy/atlas-public/**'
+      - 'metadata/**'
       - '.github/workflows/territorial-hypothesis-nextcloud-continuity.yml'
   workflow_dispatch:
 
@@ -47,8 +49,10 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/milk-continuity"
-          tar -czf "$RUNNER_TEMP/milk-continuity/territorial-hypothesis-${COMMIT_SHA}.tar.gz" \
+          tar -czf "$RUNNER_TEMP/milk-continuity/atlas-total-retomada-${COMMIT_SHA}.tar.gz" \
             src/territorial-reader \
+            deploy/atlas-public \
+            metadata/identities.json \
             docs/territorial-reader/GENEALOGIA_EPISTEMICA_LEITURA_TERRITORIAL_2026-08-23.md
           sha256sum "$RUNNER_TEMP/milk-continuity/territorial-hypothesis-${COMMIT_SHA}.tar.gz" \
             > "$RUNNER_TEMP/milk-continuity/MANIFEST_SHA256.txt"
@@ -121,7 +125,7 @@ jobs:
           os.chmod(cfg,0o600)
 
           run(['rclone','--config',str(cfg),'lsd',remote+':'])
-          target=remote+':Atlas-Vivo-MILK/.continuity/territorial-reader/2026-08-23/'+os.environ['COMMIT_SHA']
+          target=remote+':Atlas-Vivo-MILK/.continuity/atlas-total-retomada/2026-08-27/'+os.environ['COMMIT_SHA']
           source=str(tmp/'milk-continuity')
           run(['rclone','--config',str(cfg),'copy',source,target,'--checksum','--create-empty-src-dirs'])
           run(['rclone','--config',str(cfg),'check',source,target,'--one-way','--download'])
@@ -129,7 +133,7 @@ jobs:
           manifest=(tmp/'milk-continuity'/'MANIFEST_SHA256.txt').read_text(encoding='utf-8').split()[0]
           body=(f"TERRITORIAL_NEXTCLOUD_CONTINUITY run={os.environ['RUN_ID']} "
                 f"commit={os.environ['COMMIT_SHA']} verified=1 sha256={manifest} "
-                f"path=Atlas-Vivo-MILK/.continuity/territorial-reader/2026-08-23/{os.environ['COMMIT_SHA']} "
+                f"path=Atlas-Vivo-MILK/.continuity/atlas-total-retomada/2026-08-27/{os.environ['COMMIT_SHA']} "
                 "master_writes=0 secret_values_disclosed=0")
           req=urllib.request.Request(
               f"https://api.github.com/repos/{os.environ['REPO']}/issues/35/comments",
