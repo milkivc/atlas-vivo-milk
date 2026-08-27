@@ -1,0 +1,42 @@
+name: Atlas — superfície pública e IA MILK
+
+on:
+  push:
+    branches:
+      - work/atlas-canonical-surface-20260827
+    paths:
+      - "deploy/atlas-public/**"
+      - "docs/public-surface/**"
+      - "tests/ia-milk-public-boundary.test.mjs"
+      - ".forgejo/workflows/public-boundary-ci.yml"
+  workflow_dispatch:
+
+jobs:
+  public-boundary:
+    runs-on: docker
+    container:
+      image: node:22-bookworm-slim
+    steps:
+      - uses: actions/checkout@v4
+      - name: Testar fronteira pública da IA MILK
+        run: node tests/ia-milk-public-boundary.test.mjs
+      - name: Impedir referências privadas no pacote público
+        shell: bash
+        run: |
+          set -eu
+          if grep -RInE 'src/territorial-reader|evidence-graph|raw_evidence|source_private|mistral_prompt|CPANEL_|FTPS_|ZENODO_|ORCID_|CODEBERG_' deploy/atlas-public; then
+            echo "MILK_PUBLIC_BOUNDARY_FORBIDDEN_REFERENCE"
+            exit 1
+          fi
+          echo "MILK_PUBLIC_PACKAGE_ISOLATED"
+      - name: Validar manifesto público
+        shell: bash
+        run: |
+          node --input-type=module - <<'NODE'
+          import manifest from "./deploy/atlas-public/public-manifest.json" with { type: "json" };
+          if (manifest.layer !== "public") throw new Error("layer inválida");
+          if (manifest.human_validation?.status !== "approved") throw new Error("gate humano em falta");
+          if (manifest.reverse_link_to_private !== false) throw new Error("ligação reversa proibida");
+          if (manifest.public_contract?.requirements_total !== 540) throw new Error("matriz 540 incompleta");
+          console.log("ATLAS_FORGEJO_PUBLIC_MANIFEST_OK");
+          NODE
