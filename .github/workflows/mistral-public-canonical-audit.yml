@@ -100,6 +100,32 @@ jobs:
             "Toda promoção exige validação humana. Responder em PT-PT."
           )
 
+          def normalise_json(answer, role, phase):
+              cleaned=answer.strip()
+              if cleaned.startswith("```"):
+                  lines=cleaned.splitlines()
+                  if lines and lines[0].strip().lower() in ("```json","```"):
+                      lines=lines[1:]
+                  if lines and lines[-1].strip()=="```":
+                      lines=lines[:-1]
+                  cleaned="\n".join(lines).strip()
+              try:
+                  obj=json.loads(cleaned)
+                  if not isinstance(obj,dict):
+                      raise ValueError("JSON_ROOT_NOT_OBJECT")
+                  return json.dumps(obj,ensure_ascii=False,indent=2), obj
+              except Exception as exc:
+                  error={
+                      "role":role,
+                      "phase":phase,
+                      "decision":"ERROR",
+                      "blocking_findings":["Resposta Mistral não é JSON válido"],
+                      "parse_error":type(exc).__name__,
+                      "raw_response_sha256":hashlib.sha256(answer.encode()).hexdigest(),
+                      "human_validation_required":True,
+                  }
+                  return json.dumps(error,ensure_ascii=False,indent=2), error
+
           def call(role,prompt):
               payload=json.dumps({
                   "model":"mistral-small-latest",
@@ -136,9 +162,10 @@ jobs:
                     "violações do contrato, lacunas, riscos e testes necessários. Não avalies nem solicites a camada invisível. "
                     "Devolve JSON válido com role, chunk, findings, evidence_paths, required_tests e status.\n"+ch["content"]
                   )
-                  answer=call(role,prompt)
+                  raw_answer=call(role,prompt)
+                  answer, parsed_chunk=normalise_json(raw_answer,role,f"chunk-{ch['index']:03d}")
                   out=pathlib.Path(f"audit-output/{role}.chunk-{ch['index']:03d}.json")
-                  out.write_text(answer,encoding="utf-8")
+                  out.write_text(answer+"\n",encoding="utf-8")
                   chunk_reviews.append({
                     "chunk":ch["index"],"chunk_sha256":ch["sha256"],
                     "response_sha256":hashlib.sha256(answer.encode()).hexdigest(),
@@ -152,12 +179,16 @@ jobs:
                 "required_tests, evidence_paths e human_validation_required=true.\n"+
                 "\n".join(pathlib.Path(x["path"]).read_text(encoding="utf-8") for x in chunk_reviews)
               )
-              synthesis=call(role,synthesis_prompt)
+              raw_synthesis=call(role,synthesis_prompt)
+              synthesis, parsed_final=normalise_json(raw_synthesis,role,"final")
+              decision=str(parsed_final.get("decision","ERROR")).upper()
+              if decision not in ("PASS","FAIL"):
+                  decision="ERROR"
               synth_path=pathlib.Path(f"audit-output/{role}.final.json")
-              synth_path.write_text(synthesis,encoding="utf-8")
+              synth_path.write_text(synthesis+"\n",encoding="utf-8")
               role_receipts.append({
                   "role":role,
-                  "status":"REVIEWED",
+                  "status":decision,
                   "chunks":chunk_reviews,
                   "final_path":str(synth_path),
                   "final_sha256":hashlib.sha256(synthesis.encode()).hexdigest(),
@@ -184,9 +215,30 @@ jobs:
           PY
 
       - name: Preservar pareceres e receipts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: mistral-public-canonical-audit-${{ github.run_id }}
           path: audit-output/
           if-no-files-found: error
           retention-days: 90
+
+      - name: Aplicar gate bloqueante dos dez papéis
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          finals=sorted(pathlib.Path("audit-output").glob("*.final.json"))
+          if len(finals) != 10:
+              raise SystemExit(f"MISTRAL_ROLE_COUNT_INVALID:{len(finals)}")
+          decisions=[]
+          for path in finals:
+              data=json.loads(path.read_text(encoding="utf-8"))
+              decision=str(data.get("decision","ERROR")).upper()
+              decisions.append((path.stem,decision))
+          print(json.dumps(decisions,ensure_ascii=False))
+          if any(decision != "PASS" for _,decision in decisions):
+              raise SystemExit("MISTRAL_PUBLIC_AUDIT_BLOCKED")
+          print("MISTRAL_PUBLIC_AUDIT_PASS")
+          PY
