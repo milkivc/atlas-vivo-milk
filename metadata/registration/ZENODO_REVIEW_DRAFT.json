@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0.0",
+  "target": "ZENODO",
+  "status": "READY_FOR_HUMAN_REVIEW",
+  "publishAutomatically": false,
+  "resourceType": "software",
+  "title": "OlHAPIN — H-0047 Territorial Hypothesis Engine",
+  "creators": [
+    {
+      "type": "person",
+      "legalName": "Eduardo Maurício Vieira Cabral e Araujo",
+      "artisticName": "Eduardo Mauer",
+      "displayName": "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)",
+      "orcid": "0009-0007-6892-6570",
+      "affiliation": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte"
+    }
+  ],
+  "institutionalManagement": {
+    "name": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
+    "nipc": "518706451",
+    "website": "https://associacaomilk.pt"
+  },
+  "description": "OlHAPIN — H-0047 Territorial Hypothesis Engine é um núcleo do Atlas Vivo MILK para leitura territorial baseada em proveniência, evidência preservada, interpretação situada, Hermenêutica C1, Metrologias Avançadas, SEER POSSÍVEL e validação humana obrigatória. Autor: Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer), ORCID 0009-0007-6892-6570. Gestão institucional: Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte.",
+  "keywords": [
+    "OlHAPIN",
+    "Atlas Vivo MILK",
+    "H-0047",
+    "Hermenêutica C1",
+    "SEER POSSÍVEL",
+    "Metrologias Avançadas",
+    "territorial reading",
+    "territorial hypothesis",
+    "cultural infrastructure",
+    "intangible cultural heritage",
+    "interoperability",
+    "provenance",
+    "human validation"
+  ],
+  "licenseCandidate": "EUPL-1.2",
+  "licenseRequiresFinalRepositoryCheck": true,
+  "files": {
+    "rule": "Para elegibilidade ao arquivamento de software no Software Heritage através do Zenodo, o draft deve conter um único ficheiro comprimido com o código-fonte.",
+    "sourceArchive": "PENDING_BUILD",
+    "sha256": "PENDING_COMPUTATION"
+  },
+  "version": "PENDING_FINAL_RELEASE_CHECK",
+  "publicationDate": "PENDING_HUMAN_DECISION",
+  "doi": {
+    "reserved": false,
+    "value": null,
+    "registered": false
+  },
+  "visibility": "PENDING_HUMAN_DECISION",
+  "relations": {
+    "softwareHeritage": "PENDING_VERIFICATION",
+    "codeRepository": "https://codeberg.org/associacaomilk/atlas-vivo-milk",
+    "orcid": "https://orcid.org/0009-0007-6892-6570"
+  },
+  "humanReviewChecklist": [
+    "Confirmar commit/release exacta a depositar",
+    "Confirmar licença do conteúdo integral do ZIP",
+    "Confirmar que o ZIP contém apenas material autorizado para depósito público",
+    "Confirmar nome completo e nome artístico",
+    "Confirmar ORCID",
+    "Confirmar denominação integral da Associação",
+    "Confirmar versão",
+    "Confirmar descrição",
+    "Confirmar keywords",
+    "Confirmar visibilidade",
+    "Confirmar DOI reservado, se aplicável",
+    "Confirmar SHA-256 antes de publicação"
+  ],
+  "authorisationTokenRequired": "ZENODO_PUBLISH",
+  "registrationCompleted": false
+}
