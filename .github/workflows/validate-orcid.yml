@@ -25,99 +25,84 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
-      - name: Install dependencies
-        run: npm install node-fetch
-
-      - name: Validate ORCIDs
+      - name: Validate ORCIDs and reject placeholders
+        shell: bash
         run: |
-          node -e "
-            const fs = require('fs');
-            const path = require('path');
-            
-            // Função para validar ORCID
-            function validateORCID(orcid, filePath) {
-              const normalized = orcid.replace(/-/g, '').toLowerCase();
-              if (!/^[0-9]{16}$/.test(normalized)) {
-                console.error('❌ ORCID inválido:', orcid, 'em', filePath);
-                return false;
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+
+          const allowedExtensions = new Set(['.json', '.md', '.yml', '.yaml']);
+          const ignoredDirectories = new Set(['.git', 'node_modules']);
+          const orcidRegex = /\b\d{4}-\d{4}-\d{4}-[\dX]\b/g;
+          const zeroPlaceholder = ['0000', '0000', '0000', '0000'].join('-');
+
+          function scanFiles(dir, out = []) {
+            for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+              if (entry.isDirectory() && ignoredDirectories.has(entry.name)) continue;
+              const filePath = path.join(dir, entry.name);
+              if (entry.isDirectory()) {
+                scanFiles(filePath, out);
+              } else if (allowedExtensions.has(path.extname(entry.name).toLowerCase())) {
+                out.push(filePath);
               }
-              console.log('✅ ORCID válido:', orcid, 'em', filePath);
-              return true;
             }
-            
-            // Função recursiva para varrer diretórios
-            function scanFiles(dir, fileList = []) {
-              const files = fs.readdirSync(dir);
-              files.forEach(file => {
-                const filePath = path.join(dir, file);
-                if (fs.statSync(filePath).isDirectory()) {
-                  scanFiles(filePath, fileList);
-                } else if (filePath.endsWith('.json') || filePath.endsWith('.md') || filePath.endsWith('.yml') || filePath.endsWith('.yaml')) {
-                  fileList.push(filePath);
-                }
-              });
-              return fileList;
-            }
-            
-            // Procurar ORCIDs em arquivos (recursivamente)
-            const allFiles = scanFiles('.');
-            let allValid = true;
-            let orcidCount = 0;
-            
-            allFiles.forEach(filePath => {
-              try {
-                const content = fs.readFileSync(filePath, 'utf8');
-                const orcidMatches = content.match(/000[0-9]{3}-000[0-9]{3}-[0-9]{3}[0-9X]/g) || [];
-                orcidMatches.forEach(orcid => {
-                  orcidCount++;
-                  if (!validateORCID(orcid, filePath)) {
-                    allValid = false;
-                  }
-                });
-              } catch (err) {
-                console.error('⚠️ Erro ao ler arquivo:', filePath, err.message);
+            return out;
+          }
+
+          function validChecksum(orcid) {
+            const compact = orcid.replace(/-/g, '').toUpperCase();
+            if (!/^\d{15}[\dX]$/.test(compact)) return false;
+            let total = 0;
+            for (let i = 0; i < 15; i++) total = (total + Number(compact[i])) * 2;
+            const remainder = total % 11;
+            const result = (12 - remainder) % 11;
+            const expected = result === 10 ? 'X' : String(result);
+            return compact[15] === expected;
+          }
+
+          const files = scanFiles('.');
+          const findings = [];
+          let count = 0;
+
+          for (const filePath of files) {
+            const text = fs.readFileSync(filePath, 'utf8');
+            const matches = text.match(orcidRegex) || [];
+            for (const orcid of matches) {
+              count += 1;
+              if (orcid === zeroPlaceholder) {
+                findings.push(`${filePath}: placeholder ${orcid}`);
+              } else if (!validChecksum(orcid)) {
+                findings.push(`${filePath}: checksum inválido ${orcid}`);
               }
-            });
-            
-            console.log('📊 Total de ORCIDs encontrados:', orcidCount);
-            console.log('📁 Arquivos verificados:', allFiles.length);
-            
-            if (!allValid) {
-              console.error('❌ ORCIDs inválidos encontrados!');
-              process.exit(1);
             }
-          "
+          }
 
-      - name: Check for placeholder ORCIDs
-        run: |
-          if grep -r "0000-0000-0000-0000" .; then
-            echo "❌ ORCID placeholder (0000-0000-0000-0000) encontrado!"
-            echo "Substitua por ORCIDs válidos:"
-            echo "- Nuno Filipe: 0009-0009-1781-4020"
-            echo "- Eduardo Maurício: 0009-0007-6892-6570"
-            exit 1
-          else
-            echo "✅ Nenhum ORCID placeholder encontrado"
-          fi
+          console.log(`ORCIDs encontrados: ${count}`);
+          console.log(`Ficheiros verificados: ${files.length}`);
 
-      - name: Check for missing ORCIDs in metadata
+          if (findings.length) {
+            console.error('Falhas de ORCID:');
+            for (const finding of findings) console.error(`- ${finding}`);
+            process.exit(1);
+          }
+
+          if (count === 0) {
+            console.error('Nenhum ORCID encontrado nos ficheiros de metadados/documentação.');
+            process.exit(1);
+          }
+
+          console.log('ORCIDs válidos e sem placeholders.');
+          NODE
+
+      - name: Verify Eduardo Mauer authorship metadata
+        shell: bash
         run: |
-          # Verificar se metadata.json tem ORCIDs válidos
-          if [ -f "metadata.json" ]; then
-            orcid_nuno=$(jq -r '.creators[] | select(.name | contains("Nuno")) | .orcid' metadata.json 2>/dev/null || echo "")
-            orcid_eduardo=$(jq -r '.creators[] | select(.name | contains("Eduardo")) | .orcid' metadata.json 2>/dev/null || echo "")
-            
-            if [ "$orcid_nuno" != "0009-0009-1781-4020" ]; then
-              echo "❌ ORCID do Nuno está incorreto em metadata.json: $orcid_nuno"
-              exit 1
-            fi
-            
-            if [ "$orcid_eduardo" != "0009-0007-6892-6570" ]; then
-              echo "❌ ORCID do Eduardo está incorreto em metadata.json: $orcid_eduardo"
-              exit 1
-            fi
-            
-            echo "✅ ORCIDs em metadata.json estão corretos"
-          fi
+          set -euo pipefail
+          test -f metadata/territorial-reader/AUTHORSHIP_AND_RIGHTS.json
+          jq -e '.authorialSignature.orcidId == "0009-0007-6892-6570"' metadata/territorial-reader/AUTHORSHIP_AND_RIGHTS.json >/dev/null
+          jq -e '.work.soleAuthor == "Eduardo Maurício Vieira Cabral e Araujo"' metadata/territorial-reader/AUTHORSHIP_AND_RIGHTS.json >/dev/null
+          jq -e '.work.authorialName == "Eduardo Mauer"' metadata/territorial-reader/AUTHORSHIP_AND_RIGHTS.json >/dev/null
+          echo "Metadados autorais verificados."
