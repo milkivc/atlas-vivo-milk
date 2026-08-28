@@ -34,7 +34,7 @@ jobs:
       - name: Validate updated metadata
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
         run: |
           npm install -g ajv-cli
           ajv validate -s .github/schemas/metadata-schema.json -d metadata.json --spec=draft7
@@ -51,6 +51,9 @@ jobs:
     name: Generate DOI via Zenodo
     runs-on: ubuntu-latest
     needs: validate-release
+    outputs:
+      doi: ${{ steps.publish.outputs.doi }}
+      version: ${{ steps.release.outputs.version }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -60,36 +63,39 @@ jobs:
         run: |
           VERSION=${GITHUB_REF#refs/tags/v}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "tag=$GITHUB_REF" >> $GITHUB_OUTPUT
+          echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Require Zenodo token
+        env:
+          ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
+        run: |
+          if [ -z "$ZENODO_TOKEN" ]; then
+            echo "ZENODO_TOKEN ausente; publicação automática bloqueada."
+            exit 1
+          fi
 
       - name: Create Zenodo deposit
         id: zenodo
         env:
           ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
         run: |
-          # Create new deposition
-          DEPOSIT_RESPONSE=$(curl -s -X POST \
+          set -euo pipefail
+          DEPOSIT_RESPONSE=$(curl --fail --silent --show-error -X POST \
             -H "Authorization: Bearer $ZENODO_TOKEN" \
             -H "Content-Type: application/json" \
-            -d '{
-              "metadata": {
-                "title": "${{ github.event.repository.name }} - ${{ steps.release.outputs.version }}",
-                "description": "${{ github.event.repository.description || '' }} - Release ${{ steps.release.outputs.version }}",
-                "upload_type": "software",
-                "license": "EUPL-1.2",
-                "version": "${{ steps.release.outputs.version }}",
-                "publication_date": "$(date +%Y-%m-%d)",
-                "creators": [
-                  {"name": "Associação MILK - Movimentos de Intervenções e Linguagens Kulturais e Arte", "orcid": "0000-0000-0000-0000"},
-                  {"name": "Eduardo Maurício Vieira Cabral e Araujo", "orcid": "0000-0000-0000-0000"}
-                ],
-                "keywords": ["Atlas Vivo MILK", "cultura", "património", "soberania digital", "interoperabilidade", "Portugal"],
-                "notes": "Automatic release from GitHub: ${{ github.event.repository.html_url }}/releases/tag/${{ steps.release.outputs.tag }}"
-              }
-            }' \
+            -d "$(jq -n \
+              --arg title "${{ github.event.repository.name }} - ${{ steps.release.outputs.version }}" \
+              --arg description "${{ github.event.repository.description || 'Atlas Vivo MILK' }} - Release ${{ steps.release.outputs.version }}" \
+              --arg version "${{ steps.release.outputs.version }}" \
+              --arg publication_date "$(date +%Y-%m-%d)" \
+              '{metadata:{title:$title,description:$description,upload_type:"software",license:"EUPL-1.2",version:$version,publication_date:$publication_date,creators:[{name:"Eduardo Maurício Vieira Cabral e Araujo",orcid:"0009-0007-6892-6570"}],keywords:["Atlas Vivo MILK","cultura","património","soberania digital","interoperabilidade","Portugal"],notes:"Release automatizada a partir do repositório Atlas Vivo MILK"}}')" \
             https://zenodo.org/api/deposit/depositions)
-          
-          DEPOSIT_ID=$(echo "$DEPOSIT_RESPONSE" | jq -r '.id')
+
+          DEPOSIT_ID=$(echo "$DEPOSIT_RESPONSE" | jq -r '.id // empty')
+          if [ -z "$DEPOSIT_ID" ]; then
+            echo "Zenodo não devolveu deposition id."
+            exit 1
+          fi
           echo "deposit_id=$DEPOSIT_ID" >> $GITHUB_OUTPUT
           echo "DEPOSIT_ID=$DEPOSIT_ID" >> $GITHUB_ENV
 
@@ -97,88 +103,53 @@ jobs:
         env:
           ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
         run: |
-          # Upload all source files
-          for FILE in $(find . -type f \( -name "*.html" -o -name "*.js" -o -name "*.css" -o -name "*.json" -o -name "*.gs" \) ! -path "./.git/*" ! -path "./.github/*" ! -path "./node_modules/*"); do
+          set -euo pipefail
+          while IFS= read -r -d '' FILE; do
             echo "Uploading $FILE..."
-            curl -s -X POST \
+            curl --fail --silent --show-error -X POST \
               -H "Authorization: Bearer $ZENODO_TOKEN" \
               -F "file=@$FILE" \
-              "https://zenodo.org/api/deposit/depositions/$DEPOSIT_ID/files"
-          done
-          
-          # Upload metadata
-          curl -s -X POST \
-            -H "Authorization: Bearer $ZENODO_TOKEN" \
-            -F "file=@metadata.json" \
-            "https://zenodo.org/api/deposit/depositions/$DEPOSIT_ID/files"
-          
-          # Upload CITATION.cff if exists
-          if [ -f "CITATION.cff" ]; then
-            curl -s -X POST \
-              -H "Authorization: Bearer $ZENODO_TOKEN" \
-              -F "file=@CITATION.cff" \
-              "https://zenodo.org/api/deposit/depositions/$DEPOSIT_ID/files"
-          fi
+              "https://zenodo.org/api/deposit/depositions/$DEPOSIT_ID/files" >/dev/null
+          done < <(find . -type f \( -name "*.html" -o -name "*.js" -o -name "*.css" -o -name "*.json" -o -name "*.gs" -o -name "*.md" -o -name "*.cff" \) ! -path "./.git/*" ! -path "./.github/*" ! -path "./node_modules/*" -print0)
 
       - name: Publish deposit
         id: publish
         env:
           ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
         run: |
-          PUBLISH_RESPONSE=$(curl -s -X POST \
+          set -euo pipefail
+          PUBLISH_RESPONSE=$(curl --fail --silent --show-error -X POST \
             -H "Authorization: Bearer $ZENODO_TOKEN" \
             -H "Content-Type: application/json" \
-            -d '{"published": true}' \
             "https://zenodo.org/api/deposit/depositions/$DEPOSIT_ID/actions/publish")
-          
-          DOI=$(echo "$PUBLISH_RESPONSE" | jq -r '.metadata.doi')
+
+          DOI=$(echo "$PUBLISH_RESPONSE" | jq -r '.metadata.doi // empty')
+          if [ -z "$DOI" ]; then
+            echo "Zenodo publicou sem DOI verificável na resposta."
+            exit 1
+          fi
           echo "doi=$DOI" >> $GITHUB_OUTPUT
           echo "DOI=$DOI" >> $GITHUB_ENV
-
-      - name: Update metadata with DOI
-        run: |
-          jq --arg doi "$DOI" '.doi = $doi' metadata.json > metadata.tmp.json
-          mv metadata.tmp.json metadata.json
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add metadata.json
-          git commit -m "chore: add DOI $DOI [skip ci]" || true
-          git push || true
-
-      - name: Update CITATION.cff with DOI
-        run: |
-          if [ -f "CITATION.cff" ]; then
-            # Add DOI to CITATION.cff if not present
-            if ! grep -q "doi:" CITATION.cff; then
-              echo "doi: $DOI" >> CITATION.cff
-              git config --global user.name "GitHub Actions"
-              git config --global user.email "actions@github.com"
-              git add CITATION.cff
-              git commit -m "chore: add DOI to CITATION.cff [skip ci]" || true
-              git push || true
-            fi
-          fi
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: ${{ steps.release.outputs.tag }}
           name: Release ${{ steps.release.outputs.version }}
           body: |
-            ## Atlas Vivo MILK - Plataforma Web ${{ steps.release.outputs.version }}
-            
+            ## Atlas Vivo MILK — ${{ steps.release.outputs.version }}
+
+            **Autor:** Eduardo Maurício Vieira Cabral e Araujo — Eduardo Mauer  
+            **ORCID:** 0009-0007-6892-6570  
+            **Gestão institucional:** Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte
+
             ### DOI
-            [${{ env.DOI }}](https://doi.org/${{ env.DOI }})
-            
-            ### Changes
-            - Automatic release from GitHub Actions
-            - Published to Zenodo
-            - Updated CITATION.cff with DOI
-            
-            ### Assets
-            - Web application (HTML, CSS, JavaScript)
-            - Backend (Google Apps Script)
-            - Metadata (JSON, CFF)
+            ${{ env.DOI }}
+
+            ### Proveniência
+            - código e metadados do release
+            - licença EUPL-1.2 para a distribuição identificada
+            - cadeia autoral e institucional preservada
           draft: false
           prerelease: false
         env:
@@ -189,28 +160,27 @@ jobs:
     runs-on: ubuntu-latest
     needs: generate-doi
     steps:
-      - name: Notify ORCID
+      - name: Notify Eduardo Mauer ORCID
         env:
           ORCID_TOKEN: ${{ secrets.ORCID_TOKEN }}
           DOI: ${{ needs.generate-doi.outputs.doi }}
+          VERSION: ${{ needs.generate-doi.outputs.version }}
         run: |
-          if [ -n "$ORCID_TOKEN" ] && [ -n "$DOI" ]; then
-            curl -s -X POST \
-              -H "Authorization: Bearer $ORCID_TOKEN" \
-              -H "Content-Type: application/json" \
-              -d '{
-                "work": {
-                  "title": "${{ github.event.repository.name }} - ${{ needs.generate-doi.outputs.version }}",
-                  "doi": "$DOI",
-                  "url": "${{ github.event.repository.html_url }}/releases/tag/${{ github.ref }}",
-                  "type": "software",
-                  "published": "$(date +%Y-%m-%d)"
-                }
-              }' \
-              https://api.orcid.org/v3.0/0000-0000-0000-0000/work
-          else
-            echo "Skipping ORCID sync: missing token or DOI"
+          set -euo pipefail
+          if [ -z "$ORCID_TOKEN" ] || [ -z "$DOI" ]; then
+            echo "ORCID sync não executado: token ou DOI ausente."
+            exit 0
           fi
+
+          curl --fail --silent --show-error -X POST \
+            -H "Authorization: Bearer $ORCID_TOKEN" \
+            -H "Content-Type: application/vnd.orcid+json" \
+            -d "$(jq -n \
+              --arg title "Atlas Vivo MILK - $VERSION" \
+              --arg doi "$DOI" \
+              --arg url "${{ github.event.repository.html_url }}/releases/tag/${{ github.ref_name }}" \
+              '{"title":{"title":{"value":$title}},"type":"software","external-ids":{"external-id":[{"external-id-type":"doi","external-id-value":$doi,"external-id-relationship":"self"}]},"url":{"value":$url}}')" \
+            https://api.orcid.org/v3.0/0009-0007-6892-6570/work >/dev/null
 
   notify:
     name: Notify Success
@@ -218,14 +188,8 @@ jobs:
     needs: [generate-doi, sync-orcid]
     if: always()
     steps:
-      - name: Send notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_COLOR: ${{ job.status == 'success' && 'good' || 'danger' }}
-          SLACK_TITLE: "Release ${{ github.ref }} ${{ job.status }}"
-          SLACK_MESSAGE: |
-            Repository: ${{ github.event.repository.name }}
-            Version: ${{ needs.generate-doi.outputs.version || 'unknown' }}
-            DOI: ${{ needs.generate-doi.outputs.doi || 'not generated' }}
-            Status: ${{ job.status }}
+      - name: Release status
+        run: |
+          echo "Release: ${{ github.ref }}"
+          echo "Zenodo job: ${{ needs.generate-doi.result }}"
+          echo "ORCID job: ${{ needs.sync-orcid.result }}"
