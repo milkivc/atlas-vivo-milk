@@ -17,7 +17,7 @@ jobs:
         id: version
         run: |
           VERSION=${GITHUB_REF#refs/tags/v}
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Validate version format
         run: |
@@ -31,10 +31,12 @@ jobs:
           jq --arg ver "${{ steps.version.outputs.version }}" '.version = $ver' metadata.json > metadata.tmp.json
           mv metadata.tmp.json metadata.json
 
-      - name: Validate updated metadata
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+
+      - name: Validate updated metadata
         run: |
           npm install -g ajv-cli
           ajv validate -s .github/schemas/metadata-schema.json -d metadata.json --spec=draft7
@@ -62,8 +64,8 @@ jobs:
         id: release
         run: |
           VERSION=${GITHUB_REF#refs/tags/v}
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
 
       - name: Require Zenodo token
         env:
@@ -96,8 +98,8 @@ jobs:
             echo "Zenodo não devolveu deposition id."
             exit 1
           fi
-          echo "deposit_id=$DEPOSIT_ID" >> $GITHUB_OUTPUT
-          echo "DEPOSIT_ID=$DEPOSIT_ID" >> $GITHUB_ENV
+          echo "deposit_id=$DEPOSIT_ID" >> "$GITHUB_OUTPUT"
+          echo "DEPOSIT_ID=$DEPOSIT_ID" >> "$GITHUB_ENV"
 
       - name: Upload files to Zenodo
         env:
@@ -128,8 +130,8 @@ jobs:
             echo "Zenodo publicou sem DOI verificável na resposta."
             exit 1
           fi
-          echo "doi=$DOI" >> $GITHUB_OUTPUT
-          echo "DOI=$DOI" >> $GITHUB_ENV
+          echo "doi=$DOI" >> "$GITHUB_OUTPUT"
+          echo "DOI=$DOI" >> "$GITHUB_ENV"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
