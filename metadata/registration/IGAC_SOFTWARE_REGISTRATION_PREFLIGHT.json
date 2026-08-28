@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "target": "IGAC",
+  "service": "Registo de obras literárias e artísticas — programa de computador",
+  "status": "PREPARED_FOR_PHASE_2",
+  "registrationCompleted": false,
+  "humanSubmissionRequired": true,
+  "applicant": {
+    "author": "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)",
+    "orcid": "0009-0007-6892-6570",
+    "institutionalManagement": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
+    "nipc": "518706451"
+  },
+  "work": {
+    "title": "OlHAPIN — H-0047 Territorial Hypothesis Engine",
+    "type": "Programa de computador",
+    "project": "Atlas Vivo MILK"
+  },
+  "igacRequiredMaterials": [
+    {
+      "item": "Totalidade do código-fonte apresentada como exemplar da obra",
+      "status": "TO_BUILD_FROM_REVIEWED_RELEASE"
+    },
+    {
+      "item": "Ficheiro executável do programa",
+      "status": "VERIFY_APPLICABILITY_DO_NOT_INVENT"
+    },
+    {
+      "item": "Breve descrição do programa",
+      "status": "DRAFT_AVAILABLE"
+    },
+    {
+      "item": "Linguagem de programação",
+      "status": "VERIFY_FROM_RELEASE"
+    },
+    {
+      "item": "Compatibilidade de sistemas operativos em que corre",
+      "status": "VERIFY_BY_TEST_DO_NOT_INVENT"
+    },
+    {
+      "item": "Lista de ficheiros",
+      "status": "GENERATE_FROM_RELEASE"
+    },
+    {
+      "item": "Fluxograma",
+      "status": "TO_GENERATE_FROM_CANONICAL_ARCHITECTURE"
+    }
+  ],
+  "descriptionDraft": "OlHAPIN — H-0047 Territorial Hypothesis Engine integra o Atlas Vivo MILK e organiza leitura territorial baseada em fontes declaradas, proveniência, preservação de evidência, interpretação situada, Hermenêutica C1, Metrologias Avançadas, SEER POSSÍVEL e validação humana obrigatória. O registo deve incidir sobre a release integral tecnicamente identificada e sobre o respectivo código-fonte, sem ampliar o objecto registado para elementos não presentes no exemplar entregue.",
+  "finalHumanChecks": [
+    "Confirmar legitimidade do requerente no Balcão Digital",
+    "Confirmar objecto exacto do registo",
+    "Confirmar código integral da release",
+    "Confirmar se existe executável e se é aplicável",
+    "Confirmar linguagens por inspecção do código",
+    "Confirmar compatibilidade por teste real",
+    "Confirmar lista de ficheiros",
+    "Confirmar fluxograma",
+    "Rever titularidade/autoria e qualquer relação institucional",
+    "Rever taxa e pagamento no momento da submissão"
+  ]
+}
