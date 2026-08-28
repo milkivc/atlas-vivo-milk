@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "author": {
+    "legalName": "Eduardo Maurício Vieira Cabral e Araujo",
+    "artisticName": "Eduardo Mauer",
+    "displayName": "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)",
+    "orcid": "https://orcid.org/0009-0007-6892-6570",
+    "orcidId": "0009-0007-6892-6570"
+  },
+  "institution": {
+    "legalName": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
+    "shortName": "Associação MILK",
+    "nipc": "518706451",
+    "website": "https://associacaomilk.pt",
+    "role": "gestão institucional do Atlas Vivo MILK"
+  },
+  "work": {
+    "project": "Atlas Vivo MILK",
+    "canonicalEngine": "OlHAPIN",
+    "registrationTitle": "OlHAPIN — H-0047 Territorial Hypothesis Engine",
+    "semanticTerms": [
+      "OlHAPIN",
+      "SEER POSSÍVEL",
+      "Hermenêutica C1",
+      "Metrologias Avançadas"
+    ]
+  },
+  "rules": {
+    "fullAuthorNameRequiredInFreeText": true,
+    "artisticNameRequiredAlongsideLegalNameInFreeText": true,
+    "fullAssociationNameRequiredInFreeText": true,
+    "externalIdentifiersMustBeVerifiedBeforeClaim": true,
+    "humanApprovalRequiredBeforePublication": true
+  }
+}
