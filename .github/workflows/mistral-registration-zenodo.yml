@@ -1,0 +1,277 @@
+name: MILK — Mistral C1 — Zenodo Registration
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "PREPARE, CREATE_DRAFT ou PUBLISH"
+        required: true
+        default: "PREPARE"
+        type: choice
+        options:
+          - PREPARE
+          - CREATE_DRAFT
+          - PUBLISH
+      confirmation:
+        description: "Para PUBLISH escrever exactamente ZENODO_PUBLISH"
+        required: false
+        default: ""
+        type: string
+      deposition_id:
+        description: "ID do draft Zenodo existente (necessário apenas para PUBLISH)"
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: milk-zenodo-registration
+  cancel-in-progress: false
+
+env:
+  ZENODO_BASE: https://zenodo.org
+  CANONICAL_TITLE: "OlHAPIN — H-0047 Territorial Hypothesis Engine"
+  AUTHOR_LEGAL: "Eduardo Maurício Vieira Cabral e Araujo"
+  AUTHOR_ARTISTIC: "Eduardo Mauer"
+  AUTHOR_ORCID: "0009-0007-6892-6570"
+  ASSOCIATION_LEGAL: "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte"
+  ASSOCIATION_NIPC: "518706451"
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      archive_name: ${{ steps.archive.outputs.archive_name }}
+      sha256: ${{ steps.archive.outputs.sha256 }}
+    steps:
+      - name: Checkout exact revision
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate canonical identity and semantics
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq -e '.author.legalName == "Eduardo Maurício Vieira Cabral e Araujo"' metadata/registration/ASSOCIATION_AUTHOR_PROFILE.json >/dev/null
+          jq -e '.author.artisticName == "Eduardo Mauer"' metadata/registration/ASSOCIATION_AUTHOR_PROFILE.json >/dev/null
+          jq -e '.author.orcidId == "0009-0007-6892-6570"' metadata/registration/ASSOCIATION_AUTHOR_PROFILE.json >/dev/null
+          jq -e '.institution.legalName == "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte"' metadata/registration/ASSOCIATION_AUTHOR_PROFILE.json >/dev/null
+          jq -e '.work.canonicalEngine == "OlHAPIN"' metadata/registration/ASSOCIATION_AUTHOR_PROFILE.json >/dev/null
+          jq -e '.work.semanticTerms | index("SEER POSSÍVEL") != null' metadata/registration/ASSOCIATION_AUTHOR_PROFILE.json >/dev/null
+
+      - name: Validate registration draft
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq -e . metadata/registration/ZENODO_REVIEW_DRAFT.json >/dev/null
+          jq -e '.publishAutomatically == false' metadata/registration/ZENODO_REVIEW_DRAFT.json >/dev/null
+          jq -e '.resourceType == "software"' metadata/registration/ZENODO_REVIEW_DRAFT.json >/dev/null
+          jq -e '.creators[0].displayName == "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)"' metadata/registration/ZENODO_REVIEW_DRAFT.json >/dev/null
+
+      - name: Build reproducible source archive candidate
+        id: archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          short="$(git rev-parse --short=12 HEAD)"
+          archive="olhapin-h0047-${short}.zip"
+          git archive --format=zip --prefix="olhapin-h0047/" --output="$archive" HEAD
+          sha="$(sha256sum "$archive" | awk '{print $1}')"
+          printf '%s  %s\n' "$sha" "$archive" | tee "${archive}.sha256"
+          echo "archive_name=$archive" >> "$GITHUB_OUTPUT"
+          echo "sha256=$sha" >> "$GITHUB_OUTPUT"
+
+      - name: Create deterministic human review sheet
+        shell: bash
+        run: |
+          set -euo pipefail
+          archive='${{ steps.archive.outputs.archive_name }}'
+          sha='${{ steps.archive.outputs.sha256 }}'
+          commit="$(git rev-parse HEAD)"
+          cat > ZENODO_HUMAN_REVIEW.md <<EOF
+          # ZENODO — REVISÃO HUMANA OBRIGATÓRIA
+
+          **Estado:** PREPARADO — NÃO PUBLICADO
+
+          - Título: ${CANONICAL_TITLE}
+          - Autor: ${AUTHOR_LEGAL} (${AUTHOR_ARTISTIC})
+          - ORCID: ${AUTHOR_ORCID}
+          - Gestão institucional: ${ASSOCIATION_LEGAL}
+          - NIPC: ${ASSOCIATION_NIPC}
+          - Recurso: Software
+          - Commit: ${commit}
+          - Ficheiro único: ${archive}
+          - SHA-256: ${sha}
+          - Licença candidata: EUPL-1.2 — validar conteúdo integral antes de publicar
+          - DOI: ainda não registado
+          - Publicação automática: NÃO
+
+          A publicação só pode ocorrer com confirmação humana explícita `ZENODO_PUBLISH`.
+          EOF
+
+      - name: Mistral C1 semantic/legal preflight
+        if: ${{ secrets.MISTRAL_API_KEY != '' }}
+        shell: bash
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os, pathlib, urllib.request
+          agent = pathlib.Path('agents/mistral/REGISTRATION_AGENT_C1.md').read_text(encoding='utf-8')
+          profile = pathlib.Path('metadata/registration/ASSOCIATION_AUTHOR_PROFILE.json').read_text(encoding='utf-8')
+          draft = pathlib.Path('metadata/registration/ZENODO_REVIEW_DRAFT.json').read_text(encoding='utf-8')
+          prompt = f"""{agent}\n\nPERFIL:\n{profile}\n\nDRAFT ZENODO:\n{draft}\n\nTarefa: faz apenas preflight C1. Não autorizes publicação. Identifica conflitos, campos em falta, risco de falsa declaração e devolve JSON com status, conflicts, missing_fields e recommendation."""
+          payload = json.dumps({
+              'model': 'mistral-small-latest',
+              'temperature': 0,
+              'messages': [
+                  {'role':'system','content':'És o agente de registo C1 da Associação MILK. Não podes publicar, aceitar termos nem inventar dados.'},
+                  {'role':'user','content': prompt}
+              ]
+          }).encode('utf-8')
+          req = urllib.request.Request(
+              'https://api.mistral.ai/v1/chat/completions',
+              data=payload,
+              headers={
+                  'Authorization': 'Bearer ' + os.environ['MISTRAL_API_KEY'],
+                  'Content-Type': 'application/json'
+              },
+              method='POST'
+          )
+          with urllib.request.urlopen(req, timeout=60) as r:
+              data=json.load(r)
+          text=data['choices'][0]['message']['content']
+          pathlib.Path('MISTRAL_C1_PREFLIGHT.txt').write_text(text, encoding='utf-8')
+          PY
+
+      - name: Upload review package
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenodo-review-${{ github.sha }}
+          if-no-files-found: error
+          path: |
+            ZENODO_HUMAN_REVIEW.md
+            MISTRAL_C1_PREFLIGHT.txt
+            ${{ steps.archive.outputs.archive_name }}
+            ${{ steps.archive.outputs.archive_name }}.sha256
+            metadata/registration/ZENODO_REVIEW_DRAFT.json
+            metadata/registration/ASSOCIATION_AUTHOR_PROFILE.json
+
+  create-draft:
+    needs: prepare
+    if: ${{ inputs.action == 'CREATE_DRAFT' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: zenodo-draft
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Require Zenodo write token
+        shell: bash
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "${ZENODO_ACCESS_TOKEN:-}" || { echo 'ZENODO_ACCESS_TOKEN ausente'; exit 1; }
+
+      - name: Rebuild archive
+        id: archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          short="$(git rev-parse --short=12 HEAD)"
+          archive="olhapin-h0047-${short}.zip"
+          git archive --format=zip --prefix="olhapin-h0047/" --output="$archive" HEAD
+          echo "archive_name=$archive" >> "$GITHUB_OUTPUT"
+
+      - name: Create Zenodo draft and upload source ZIP — NO PUBLISH
+        shell: bash
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: |
+          set -euo pipefail
+          archive='${{ steps.archive.outputs.archive_name }}'
+          cat > zenodo-api-metadata.json <<EOF
+          {
+            "metadata": {
+              "upload_type": "software",
+              "title": "${CANONICAL_TITLE}",
+              "description": "OlHAPIN — H-0047 Territorial Hypothesis Engine é um núcleo do Atlas Vivo MILK para leitura territorial baseada em proveniência, evidência preservada, Hermenêutica C1, Metrologias Avançadas, SEER POSSÍVEL e validação humana obrigatória. Autor: ${AUTHOR_LEGAL} (${AUTHOR_ARTISTIC}), ORCID ${AUTHOR_ORCID}. Gestão institucional: ${ASSOCIATION_LEGAL}.",
+              "creators": [
+                {
+                  "name": "Vieira Cabral e Araujo, Eduardo Maurício",
+                  "affiliation": "${ASSOCIATION_LEGAL}",
+                  "orcid": "${AUTHOR_ORCID}"
+                }
+              ],
+              "license": "EUPL-1.2",
+              "keywords": ["OlHAPIN","Atlas Vivo MILK","H-0047","Hermenêutica C1","SEER POSSÍVEL","Metrologias Avançadas","interoperability","provenance","human validation"]
+            }
+          }
+          EOF
+          curl --fail-with-body -sS \
+            -H "Authorization: Bearer ${ZENODO_ACCESS_TOKEN}" \
+            -H 'Content-Type: application/json' \
+            -X POST \
+            --data-binary @zenodo-api-metadata.json \
+            "${ZENODO_BASE}/api/deposit/depositions" \
+            | tee zenodo-draft.json
+          dep_id="$(jq -r '.id' zenodo-draft.json)"
+          bucket="$(jq -r '.links.bucket' zenodo-draft.json)"
+          test -n "$dep_id" && test "$dep_id" != null
+          curl --fail-with-body -sS \
+            -H "Authorization: Bearer ${ZENODO_ACCESS_TOKEN}" \
+            --upload-file "$archive" \
+            "${bucket}/$(basename "$archive")" \
+            | tee zenodo-file-upload.json
+          echo "Draft Zenodo criado. NÃO PUBLICADO. deposition_id=${dep_id}"
+
+      - name: Upload Zenodo draft receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenodo-draft-receipt-${{ github.sha }}
+          path: |
+            zenodo-draft.json
+            zenodo-file-upload.json
+            zenodo-api-metadata.json
+
+  publish:
+    if: ${{ inputs.action == 'PUBLISH' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: zenodo-production
+    steps:
+      - name: Human publication gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test '${{ inputs.confirmation }}' = 'ZENODO_PUBLISH' || { echo 'Confirmação inválida'; exit 1; }
+          test -n '${{ inputs.deposition_id }}' || { echo 'deposition_id obrigatório'; exit 1; }
+
+      - name: Publish existing reviewed Zenodo draft
+        shell: bash
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "${ZENODO_ACCESS_TOKEN:-}" || { echo 'ZENODO_ACCESS_TOKEN ausente'; exit 1; }
+          dep='${{ inputs.deposition_id }}'
+          curl --fail-with-body -sS \
+            -H "Authorization: Bearer ${ZENODO_ACCESS_TOKEN}" \
+            -X POST \
+            "${ZENODO_BASE}/api/deposit/depositions/${dep}/actions/publish" \
+            | tee zenodo-published.json
+          jq -e '.submitted == true or .state == "done"' zenodo-published.json >/dev/null
+
+      - name: Upload publication receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenodo-publication-receipt-${{ inputs.deposition_id }}
+          path: zenodo-published.json
