@@ -36,7 +36,7 @@ jobs:
 
           const allowedExtensions = new Set(['.json', '.md', '.yml', '.yaml']);
           const ignoredDirectories = new Set(['.git', 'node_modules']);
-          const orcidRegex = /\b\d{4}-\d{4}-\d{4}-[\dX]\b/g;
+          const orcidRegex = /\b\d{4}-\d{4}-\d{4}-\d{3}[\dX]\b/g;
           const zeroPlaceholder = ['0000', '0000', '0000', '0000'].join('-');
 
           function scanFiles(dir, out = []) {
