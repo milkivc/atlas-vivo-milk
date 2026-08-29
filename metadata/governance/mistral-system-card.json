@@ -1,0 +1,69 @@
+{
+  "schema": "milk_ai_system_card_v1",
+  "systemName": "MILK Mistral Repository Orchestrator",
+  "institution": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
+  "author": {
+    "legalName": "Eduardo Maurício Vieira Cabral e Araujo",
+    "artisticName": "Eduardo Mauer",
+    "orcid": "0009-0007-6892-6570"
+  },
+  "modelProvider": "Mistral AI",
+  "modelSelection": "runtime-configured; record exact model per run",
+  "roleMapping": {
+    "thirdPartyModelProvider": "Mistral AI",
+    "systemIntegratorOrDeployer": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
+    "finalLegalRole": "REVIEW_PER_DEPLOYMENT"
+  },
+  "intendedUses": [
+    "bounded repository orchestration",
+    "metadata preflight",
+    "interoperability gap detection",
+    "official-source funding opportunity triage",
+    "receipt generation"
+  ],
+  "prohibitedUses": [
+    "automated publication approval",
+    "automated funding eligibility decision",
+    "automated public decision",
+    "social scoring",
+    "emotion recognition",
+    "biometric categorisation",
+    "predictive policing",
+    "sensitive-trait inference"
+  ],
+  "decisionAuthority": "NONE",
+  "humanOversight": {
+    "required": true,
+    "dualValidationForFinalActions": true,
+    "validators": [
+      "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)",
+      "Nuno"
+    ]
+  },
+  "traceability": {
+    "recordWorkflowRunId": true,
+    "recordModel": true,
+    "recordPromptPurpose": true,
+    "recordInputSources": true,
+    "recordOutput": true,
+    "recordHumanDecision": true,
+    "secretValuesInLogs": false
+  },
+  "aiAct": {
+    "regulation": "Regulation (EU) 2024/1689",
+    "officialSource": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+    "conformityClaim": false,
+    "riskClassification": "REVIEW_PER_USE_CASE",
+    "transparencyReviewRequiredForPublicSyntheticContent": true,
+    "aiLiteracyDocumentationRequired": true
+  },
+  "eif": {
+    "layers": ["legal", "organisational", "semantic", "technical"],
+    "officialSource": "https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-eif"
+  },
+  "fiware": {
+    "certificationClaim": false,
+    "ngsiLd": true,
+    "tags": ["fiware", "ngsi-ld", "smart-data-models", "interoperability", "provenance", "human-validation"]
+  }
+}
