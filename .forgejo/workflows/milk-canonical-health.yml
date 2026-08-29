@@ -1,0 +1,79 @@
+name: MILK Canonical Forge Health
+
+on:
+  push:
+    branches:
+      - territorio-do-corpo
+  workflow_dispatch:
+
+jobs:
+  canonical-health:
+    runs-on: docker
+    steps:
+      - name: Checkout canonical repository
+        uses: actions/checkout@v6
+
+      - name: Validate canonical metadata and attribution
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          profile = json.loads(Path('metadata/territorio-do-corpo/repository-profile.json').read_text(encoding='utf-8'))
+          card = json.loads(Path('metadata/governance/mistral-system-card.json').read_text(encoding='utf-8'))
+          export = json.loads(Path('PUBLIC_EXPORT_MANIFEST.json').read_text(encoding='utf-8'))
+
+          assert profile['author']['legalName'] == 'Eduardo Maurício Vieira Cabral e Araujo'
+          assert profile['author']['artisticName'] == 'Eduardo Mauer'
+          assert profile['author']['orcid'] == '0009-0007-6892-6570'
+          assert profile['institution']['name'] == 'Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte'
+          assert profile['repositories']['canonical']['service'] == 'Codeberg'
+          assert profile['repositories']['canonical']['platformSoftware'] == 'Forgejo'
+          assert profile['repositories']['canonical']['role'] == 'authoritative_source_of_truth'
+          assert card['decisionAuthority'] == 'NONE'
+          assert export['conceptualContentAdded'] is False
+          assert export['forcePushAllowed'] is False
+          print('CANONICAL_METADATA_OK')
+          PY
+
+      - name: Optional Mistral technical preflight
+        shell: bash
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${MISTRAL_API_KEY:-}" ]; then
+            echo "MISTRAL_SECRET_NOT_PROVISIONED_ON_FORGEJO"
+            exit 0
+          fi
+          python3 - <<'PY'
+          import json, os, urllib.request
+          facts = {
+            'forge': 'Codeberg',
+            'platform': 'Forgejo',
+            'canonical': True,
+            'conceptual_content_added': False,
+            'force_push_allowed': False,
+            'publication_scope': 'allowlist-only'
+          }
+          prompt = (
+            'You are the bounded technical repository orchestrator for Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte. '
+            'Do not invent concepts, alter authorship, make funding eligibility decisions, or expand publication scope. '
+            'Check only these facts: ' + json.dumps(facts) + '. '
+            'Return exactly CANONICAL_TECHNICAL_PREFLIGHT_OK if internally consistent; otherwise return STOP.'
+          )
+          req = urllib.request.Request(
+            'https://api.mistral.ai/v1/conversations',
+            data=json.dumps({'model':'mistral-small-latest','inputs':[{'role':'user','content':prompt}]}).encode(),
+            method='POST',
+            headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json','Accept':'application/json'}
+          )
+          with urllib.request.urlopen(req, timeout=120) as r:
+            payload = json.loads(r.read().decode())
+          answer = ' '.join(str(x.get('content','')) for x in payload.get('outputs',[]) if isinstance(x,dict))
+          if 'CANONICAL_TECHNICAL_PREFLIGHT_OK' not in answer:
+            raise SystemExit('MISTRAL_CANONICAL_PREFLIGHT_FAILED')
+          print('MISTRAL_CANONICAL_PREFLIGHT_OK')
+          PY
