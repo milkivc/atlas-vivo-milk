@@ -1,52 +1,38 @@
 {
   "metadata": {
-    "title": "Atlas Vivo MILK",
+    "title": "Atlas Vivo MILK — Território do Corpo",
     "upload_type": "software",
-    "description": "Plataforma Web para preservação e mapeamento do patrimônio imaterial português. Alinhada com RGPD, AI Act, NIS2 e princípios de soberania tecnológica da UE.",
+    "description": "Release técnica do módulo Território do Corpo do Atlas Vivo MILK. Este depósito descreve software, proveniência, interoperabilidade e preservação; a fundamentação conceptual autoral é mantida separadamente e não é criada por automação.",
     "creators": [
       {
-        "name": "Associação MILK - Movimento de Intervenções e Linguagens Kulturais e Arte",
-        "affiliation": "Associação MILK"
-      },
-      {
         "name": "Eduardo Maurício Vieira Cabral e Araujo",
-        "orcid": "0009-0004-9132-2925",
-        "affiliation": "Associação MILK"
+        "orcid": "0009-0007-6892-6570",
+        "affiliation": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte"
       }
     ],
     "license": "EUPL-1.2",
-    "version": "1.0.0",
+    "version": "2.1.0-territorio-do-corpo",
     "keywords": [
-      "folclore",
-      "património imaterial",
-      "lendas",
-      "Portugal",
-      "Web App",
-      "cultura",
-      "soberania digital",
-      "RGPD",
-      "AI Act",
-      "NIS2"
+      "Atlas Vivo MILK",
+      "Território do Corpo",
+      "research software",
+      "cultural digital infrastructure",
+      "interoperability",
+      "provenance",
+      "Software Heritage",
+      "DataCite",
+      "OpenAIRE",
+      "FIWARE",
+      "NGSI-LD"
     ],
-    "notes": "Projeto financiado por fundos europeus. Dados anonimizados em conformidade com RGPD. Infraestrutura alinhada com provedores UE.",
+    "notes": "Autor: Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer), ORCID 0009-0007-6892-6570. Gestão institucional: Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte. A forja canónica do código é Codeberg, sobre Forgejo.",
     "related_identifiers": [
       {
-        "identifier": "https://github.com/milkivc/atlas-vivo-milk",
+        "identifier": "https://codeberg.org/associacaomilk/atlas-vivo-milk",
         "scheme": "url",
         "relation": "isSupplementTo"
       }
     ],
-    "communities": [
-      {
-        "identifier": "milkivc"
-      }
-    ],
-    "access_right": "open",
-    "conformity": {
-      "rgpd": true,
-      "ai_act": true,
-      "nis2": true,
-      "eu_tech_sovereignty": true
-    }
+    "access_right": "open"
   }
 }
