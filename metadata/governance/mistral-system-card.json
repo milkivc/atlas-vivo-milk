@@ -1,11 +1,12 @@
 {
-  "schema": "milk_ai_system_card_v1",
+  "schema": "milk_ai_system_card_v2",
   "systemName": "MILK Mistral Repository Orchestrator",
   "institution": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
   "author": {
     "legalName": "Eduardo Maurício Vieira Cabral e Araujo",
     "artisticName": "Eduardo Mauer",
-    "orcid": "0009-0007-6892-6570"
+    "orcid": "0009-0007-6892-6570",
+    "roles": ["founder", "idealizer", "lead_author", "implementation_author"]
   },
   "modelProvider": "Mistral AI",
   "modelSelection": "runtime-configured; record exact model per run",
@@ -25,6 +26,7 @@
     "automated publication approval",
     "automated funding eligibility decision",
     "automated public decision",
+    "invented conceptual foundation",
     "social scoring",
     "emotion recognition",
     "biometric categorisation",
@@ -33,12 +35,18 @@
   ],
   "decisionAuthority": "NONE",
   "humanOversight": {
-    "required": true,
-    "dualValidationForFinalActions": true,
-    "validators": [
-      "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)",
-      "Nuno"
-    ]
+    "implementation": {
+      "requiredForFinalPublicationOrDeposit": true,
+      "dualValidationRequiredByDataCollectionRule": false
+    },
+    "dataCollection": {
+      "dualValidationRequired": true,
+      "validators": [
+        "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)",
+        "Nuno Filipe Fernandes Vieira Cabral e Araújo"
+      ],
+      "note": "A segunda validação humana de Nuno aplica-se à recolha de dados; não atribui coautoria automática da implementação."
+    }
   },
   "traceability": {
     "recordWorkflowRunId": true,
@@ -54,8 +62,23 @@
     "officialSource": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
     "conformityClaim": false,
     "riskClassification": "REVIEW_PER_USE_CASE",
+    "highRiskClaim": false,
     "transparencyReviewRequiredForPublicSyntheticContent": true,
     "aiLiteracyDocumentationRequired": true
+  },
+  "interoperableEurope": {
+    "regulation": "Regulation (EU) 2024/903",
+    "officialSource": "https://eur-lex.europa.eu/eli/reg/2024/903/oj",
+    "mandatoryAssessmentClaimForMILK": false,
+    "voluntaryAlignment": true,
+    "publicationMustNotCompromise": [
+      "intellectual_property_rights",
+      "trade_secrets",
+      "public_order",
+      "security",
+      "personal_data",
+      "confidential_information"
+    ]
   },
   "eif": {
     "layers": ["legal", "organisational", "semantic", "technical"],
@@ -64,6 +87,6 @@
   "fiware": {
     "certificationClaim": false,
     "ngsiLd": true,
-    "tags": ["fiware", "ngsi-ld", "smart-data-models", "interoperability", "provenance", "human-validation"]
+    "tags": ["fiware", "ngsi-ld", "interoperability", "provenance", "data-collection", "human-validation"]
   }
 }
