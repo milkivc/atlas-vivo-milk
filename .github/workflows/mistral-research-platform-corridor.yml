@@ -1,0 +1,318 @@
+name: MILK Mistral — Research Platform Corridor
+
+on:
+  push:
+    branches:
+      - work/territorio-do-corpo-codeberg-20260829
+    paths:
+      - 'config/codeberg-public-export.json'
+      - 'config/research-platform-corridor.json'
+      - 'metadata/territorio-do-corpo/**'
+      - 'metadata/governance/mistral-system-card.json'
+      - '.zenodo.json'
+      - 'scripts/codeberg/**'
+      - 'scripts/interoperability/**'
+      - 'scripts/funding/**'
+      - '.forgejo/workflows/**'
+      - '.github/workflows/mistral-research-platform-corridor.yml'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'safe_sync = Codeberg + preservation; prepare_all = also prepare/create reversible drafts; publish = reserved for explicit final release workflow'
+        required: true
+        default: safe_sync
+        type: choice
+        options:
+          - safe_sync
+          - prepare_all
+          - publish
+      confirmation:
+        description: 'For publish mode only: type AUTHORISE_PUBLIC_RELEASE'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: milk-research-platform-corridor-territorio-do-corpo
+  cancel-in-progress: false
+
+jobs:
+  corridor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CODEBERG_OWNER: associacaomilk
+      CODEBERG_REPO: atlas-vivo-milk
+      CODEBERG_BRANCH: territorio-do-corpo
+      CODEBERG_ORIGIN: https://codeberg.org/associacaomilk/atlas-vivo-milk.git
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
+      ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+      ORCID_PUBLIC_ACCESS_TOKEN: ${{ secrets.ORCID_PUBLIC_ACCESS_TOKEN }}
+      ORCID_MEMBER_ACCESS_TOKEN: ${{ secrets.ORCID_MEMBER_ACCESS_TOKEN }}
+      DATACITE_API_KEY: ${{ secrets.DATACITE_API_KEY }}
+      DATACITE_PREFIX: ${{ secrets.DATACITE_PREFIX }}
+
+    steps:
+      - name: Resolve operating mode
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            MODE='${{ inputs.mode }}'
+          else
+            MODE='safe_sync'
+          fi
+          if [ "$MODE" = publish ] && [ '${{ inputs.confirmation }}' != 'AUTHORISE_PUBLIC_RELEASE' ]; then
+            echo '::error::Publish mode requires explicit AUTHORISE_PUBLIC_RELEASE confirmation.'
+            exit 2
+          fi
+          echo "MODE=$MODE" >> "$GITHUB_ENV"
+          mkdir -p reports/platform-corridor
+
+      - name: Checkout working source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up runtimes
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Generate technical research metadata and funding candidates
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/interoperability/generate-research-metadata.js
+          node scripts/funding/generate-current-candidates.js
+
+      - name: Build sanitised Codeberg export
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/codeberg/build_public_export.py
+          cp .zenodo.json build/codeberg-public-export/.zenodo.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          cfg=json.loads(Path('config/research-platform-corridor.json').read_text(encoding='utf-8'))
+          out=Path('build/codeberg-public-export/PLATFORM_CORRIDOR.json')
+          out.write_text(json.dumps(cfg,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+          (cd build/codeberg-public-export && zip -qr ../atlas-vivo-milk-territorio-do-corpo.zip .)
+
+      - name: Mistral bounded technical preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${MISTRAL_API_KEY:-}" || { echo '::error::MISTRAL_API_KEY missing'; exit 3; }
+          python3 - <<'PY'
+          import json, os, pathlib, urllib.request
+          cfg=json.loads(pathlib.Path('config/research-platform-corridor.json').read_text(encoding='utf-8'))
+          manifest=json.loads(pathlib.Path('build/codeberg-public-export/PUBLIC_EXPORT_MANIFEST.json').read_text(encoding='utf-8'))
+          facts={
+            'canonicalForge': cfg['policy']['canonicalForge'],
+            'author': cfg['canonicalIdentity']['authorLegalName'],
+            'artisticName': cfg['canonicalIdentity']['authorArtisticName'],
+            'orcid': cfg['canonicalIdentity']['orcid'],
+            'institution': cfg['canonicalIdentity']['institution'],
+            'conceptualEnrichmentByAgent': cfg['policy']['conceptualEnrichmentByAgent'],
+            'automaticPublicPublication': cfg['policy']['automaticPublicPublication'],
+            'fileCount': manifest['fileCount'],
+            'forcePushAllowed': manifest['forcePushAllowed']
+          }
+          prompt=(
+            'You are the bounded technical orchestration agent for Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte. '
+            'Check only internal technical consistency. Do not invent concepts, rewrite research, change authorship, make legal-compliance claims, make funding eligibility decisions, or authorise publication. '
+            'Facts: '+json.dumps(facts,ensure_ascii=False)+'. '
+            'Return exactly CORRIDOR_PREFLIGHT_OK only if Codeberg/Forgejo is canonical, the author is Eduardo Maurício Vieira Cabral e Araujo with artistic name Eduardo Mauer and ORCID 0009-0007-6892-6570, conceptual enrichment is false, automatic public publication is false, and force push is false. Otherwise return STOP.'
+          )
+          req=urllib.request.Request(
+            'https://api.mistral.ai/v1/conversations',
+            data=json.dumps({'model':'mistral-small-latest','inputs':[{'role':'user','content':prompt}]}).encode(),
+            method='POST',
+            headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json','Accept':'application/json'}
+          )
+          with urllib.request.urlopen(req,timeout=120) as r:
+            payload=json.loads(r.read().decode())
+          answer=' '.join(str(x.get('content','')) for x in payload.get('outputs',[]) if isinstance(x,dict))
+          if 'CORRIDOR_PREFLIGHT_OK' not in answer:
+            raise SystemExit('MISTRAL_CORRIDOR_PREFLIGHT_FAILED')
+          pathlib.Path('reports/platform-corridor/mistral-preflight.json').write_text(json.dumps({'decision':'CORRIDOR_PREFLIGHT_OK','facts':facts},ensure_ascii=False,indent=2)+'\n')
+          PY
+
+      - name: Ensure canonical Codeberg repository and discover authenticated user
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${CODEBERG_TOKEN:-}" || { echo '::error::CODEBERG_TOKEN missing'; exit 4; }
+          AUTH_USER=$(curl -fsS -H "Authorization: token $CODEBERG_TOKEN" https://codeberg.org/api/v1/user | jq -r '.login')
+          test -n "$AUTH_USER" -a "$AUTH_USER" != null
+          echo "CODEBERG_AUTH_USER=$AUTH_USER" >> "$GITHUB_ENV"
+          HTTP=$(curl -sS -o /tmp/codeberg-repo.json -w '%{http_code}' -H "Authorization: token $CODEBERG_TOKEN" "https://codeberg.org/api/v1/repos/$CODEBERG_OWNER/$CODEBERG_REPO")
+          if [ "$HTTP" = 404 ]; then
+            curl -fsS -X POST \
+              -H "Authorization: token $CODEBERG_TOKEN" \
+              -H 'Content-Type: application/json' \
+              -d '{"name":"atlas-vivo-milk","description":"Atlas Vivo MILK — canonical research software forge","private":false,"auto_init":false}' \
+              "https://codeberg.org/api/v1/orgs/$CODEBERG_OWNER/repos" > /tmp/codeberg-created.json
+          elif [ "$HTTP" != 200 ]; then
+            cat /tmp/codeberg-repo.json || true
+            exit 5
+          fi
+
+      - name: Update canonical Codeberg branch without force push
+        shell: bash
+        run: |
+          set -euo pipefail
+          REMOTE="https://${CODEBERG_AUTH_USER}:${CODEBERG_TOKEN}@codeberg.org/${CODEBERG_OWNER}/${CODEBERG_REPO}.git"
+          rm -rf /tmp/canonical-repo
+          if git ls-remote --exit-code --heads "$REMOTE" "$CODEBERG_BRANCH" >/dev/null 2>&1; then
+            git clone --depth 1 --branch "$CODEBERG_BRANCH" "$REMOTE" /tmp/canonical-repo
+          else
+            mkdir -p /tmp/canonical-repo
+            git -C /tmp/canonical-repo init
+            git -C /tmp/canonical-repo checkout -b "$CODEBERG_BRANCH"
+            git -C /tmp/canonical-repo remote add origin "$REMOTE"
+          fi
+          rsync -a --delete --exclude='.git' build/codeberg-public-export/ /tmp/canonical-repo/
+          git -C /tmp/canonical-repo config user.name 'Associação MILK Technical Orchestrator'
+          git -C /tmp/canonical-repo config user.email 'automation@associacaomilk.pt'
+          git -C /tmp/canonical-repo add -A
+          if ! git -C /tmp/canonical-repo diff --cached --quiet; then
+            git -C /tmp/canonical-repo commit -m "sync: canonical sanitised export from ${GITHUB_SHA}"
+            git -C /tmp/canonical-repo push origin "HEAD:refs/heads/$CODEBERG_BRANCH"
+          fi
+          LOCAL_SHA=$(git -C /tmp/canonical-repo rev-parse HEAD)
+          REMOTE_SHA=$(git ls-remote "$REMOTE" "refs/heads/$CODEBERG_BRANCH" | awk '{print $1}')
+          test "$LOCAL_SHA" = "$REMOTE_SHA"
+          jq -n --arg source "$GITHUB_SHA" --arg canonical "$REMOTE_SHA" --arg url "https://codeberg.org/$CODEBERG_OWNER/$CODEBERG_REPO/src/branch/$CODEBERG_BRANCH" \
+            '{status:"verified",sourceCommit:$source,canonicalCommit:$canonical,canonicalUrl:$url,forcePush:false}' \
+            > reports/platform-corridor/codeberg.json
+
+      - name: Request Software Heritage preservation
+        shell: bash
+        run: |
+          set -euo pipefail
+          ENCODED=$(python3 - <<'PY'
+          import urllib.parse
+          print(urllib.parse.quote('https://codeberg.org/associacaomilk/atlas-vivo-milk.git', safe=''))
+          PY
+          )
+          HTTP=$(curl -sS -o reports/platform-corridor/software-heritage.json -w '%{http_code}' -X POST "https://archive.softwareheritage.org/api/1/origin/save/git/url/${ENCODED}/")
+          echo "$HTTP" > reports/platform-corridor/software-heritage.http
+          if [ "$HTTP" -ge 400 ]; then
+            echo "Software Heritage request returned HTTP $HTTP; keeping factual receipt for review."
+          fi
+
+      - name: Prepare Zenodo deposit state without publishing
+        if: env.MODE == 'prepare_all'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${ZENODO_ACCESS_TOKEN:-}" ]; then
+            echo '{"status":"credentials_not_present","action":"no_write"}' > reports/platform-corridor/zenodo.json
+            exit 0
+          fi
+          python3 - <<'PY'
+          import json, os, pathlib, urllib.parse, urllib.request
+          token=os.environ['ZENODO_ACCESS_TOKEN']
+          meta=json.loads(pathlib.Path('.zenodo.json').read_text(encoding='utf-8'))['metadata']
+          headers={'Authorization':'Bearer '+token,'Content-Type':'application/json','Accept':'application/json'}
+          req=urllib.request.Request('https://zenodo.org/api/deposit/depositions?status=draft&size=100',headers=headers)
+          with urllib.request.urlopen(req,timeout=60) as r:
+            drafts=json.loads(r.read().decode())
+          match=next((d for d in drafts if d.get('metadata',{}).get('title')==meta['title'] and d.get('metadata',{}).get('version')==meta['version']),None)
+          created=False
+          if match is None:
+            req=urllib.request.Request('https://zenodo.org/api/deposit/depositions',data=json.dumps({'metadata':meta}).encode(),method='POST',headers=headers)
+            with urllib.request.urlopen(req,timeout=60) as r:
+              match=json.loads(r.read().decode())
+            created=True
+          result={
+            'status':'draft_ready',
+            'createdNow':created,
+            'depositionId':match.get('id'),
+            'doi':match.get('metadata',{}).get('doi'),
+            'reservedDoi':match.get('metadata',{}).get('prereserve_doi',{}).get('doi'),
+            'publishPerformed':False
+          }
+          pathlib.Path('reports/platform-corridor/zenodo.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          PY
+
+      - name: Verify DataCite visibility when a DOI already exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          DOI=$(jq -r '.identifiers.doi // empty' metadata/territorio-do-corpo/repository-profile.json)
+          if [ -z "$DOI" ]; then
+            echo '{"status":"no_doi_yet","direct_registration":"not_attempted"}' > reports/platform-corridor/datacite.json
+          else
+            HTTP=$(curl -sS -o reports/platform-corridor/datacite.json -w '%{http_code}' "https://api.datacite.org/dois/$DOI")
+            echo "$HTTP" > reports/platform-corridor/datacite.http
+          fi
+
+      - name: Verify OpenAIRE discoverability when DOI exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          DOI=$(jq -r '.identifiers.doi // empty' metadata/territorio-do-corpo/repository-profile.json)
+          if [ -z "$DOI" ]; then
+            echo '{"status":"awaiting_published_doi","deposit_strategy":"Zenodo/DataCite trusted-source harvesting"}' > reports/platform-corridor/openaire.json
+          else
+            curl -sS -G --data-urlencode "search=$DOI" 'https://api.openaire.eu/graph/v3/research-products' > reports/platform-corridor/openaire.json || true
+          fi
+
+      - name: Verify ORCID public record when token exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${ORCID_PUBLIC_ACCESS_TOKEN:-}" ]; then
+            jq -n '{status:"public_api_token_not_present",orcid:"0009-0007-6892-6570",automaticWrite:false,writeRequirement:"ORCID Member API plus record-holder OAuth permission"}' > reports/platform-corridor/orcid.json
+          else
+            curl -fsS -H "Authorization: Bearer $ORCID_PUBLIC_ACCESS_TOKEN" -H 'Accept: application/json' \
+              'https://pub.orcid.org/v3.0/0009-0007-6892-6570/record' > reports/platform-corridor/orcid.json
+          fi
+
+      - name: Block automatic publish in this corridor
+        if: env.MODE == 'publish'
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'PUBLICATION_NOT_IMPLEMENTED_IN_ORCHESTRATION_CORRIDOR'
+          echo 'Final Zenodo/DOI publication is intentionally a separate release workflow after review.'
+          exit 9
+
+      - name: Build one-page status
+        if: always()
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          root=pathlib.Path('reports/platform-corridor')
+          data={}
+          for p in root.glob('*.json'):
+            try:data[p.stem]=json.loads(p.read_text(encoding='utf-8'))
+            except Exception:data[p.stem]={'status':'unreadable_receipt'}
+          data['mode']='${{ env.MODE }}'
+          data['canonicalForge']='Codeberg/Forgejo'
+          data['author']='Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)'
+          data['orcid']='0009-0007-6892-6570'
+          data['institution']='Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte'
+          data['automaticIrreversiblePublication']=False
+          pathlib.Path('reports/platform-corridor/STATUS.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+
+      - name: Upload corridor receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: milk-research-platform-corridor
+          path: |
+            reports/platform-corridor
+            build/atlas-vivo-milk-territorio-do-corpo.zip
+            metadata/generated/territorio-do-corpo
+          retention-days: 30
