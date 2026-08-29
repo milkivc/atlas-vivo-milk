@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "layer": "public",
+  "canonical_origin": "https://atlas.associacaomilk.pt",
+  "deprecated_public_origins": [
+    "https://nuvem.associacaomilk.pt"
+  ],
+  "experience_policy": {
+    "explain_on_entry": false,
+    "ask_on_entry": false,
+    "institutional_header_on_entry": false,
+    "card_first_architecture": false,
+    "dashboard_first_architecture": false,
+    "curiosity_first": true,
+    "gesture_first": true,
+    "discovery_first": true,
+    "sensory_response_first": true,
+    "accessibility_without_bureaucratic_onboarding": true,
+    "consent_at_point_of_need": true,
+    "public_reverse_link_to_invisible_layer": false
+  },
+  "opening_sequence": [
+    "black",
+    "seal",
+    "gesture",
+    "cosmicoxes",
+    "cosmic_words",
+    "world_gesture",
+    "dissolve",
+    "globe",
+    "territorial_milks",
+    "ticket",
+    "discovery"
+  ],
+  "source_of_truth": "authorial public-layer corpus + validated public assets",
+  "publication_gate": "human_validation_required"
+}
