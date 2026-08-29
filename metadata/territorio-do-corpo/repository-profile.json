@@ -1,16 +1,34 @@
 {
-  "schema": "milk_research_software_profile_v1",
+  "schema": "milk_research_software_profile_v2",
   "title": "Território do Corpo — Atlas Vivo MILK",
   "resourceType": "Software",
   "version": "2.1.0-territorio-do-corpo",
-  "descriptionTechnical": "Módulo de software baseado em evidência preservada, proveniência, formulação de hipóteses em mundo aberto, campo de possibilidades, correspondência de financiamento e validação humana. Este perfil descreve apenas propriedades técnicas e de interoperabilidade.",
+  "descriptionTechnical": "Módulo técnico do Território do Corpo preparado para recolha rastreável, preservação do original, proveniência, interoperabilidade de metadados, publicação pública saneada e descoberta verificável de oportunidades de financiamento. A fundamentação conceptual não é inferida nem gerada por este perfil.",
   "author": {
     "legalName": "Eduardo Maurício Vieira Cabral e Araujo",
     "artisticName": "Eduardo Mauer",
     "givenName": "Eduardo Maurício Vieira Cabral e",
     "familyName": "Araujo",
-    "orcid": "0009-0007-6892-6570"
+    "orcid": "0009-0007-6892-6570",
+    "roles": [
+      "founder",
+      "idealizer",
+      "lead_author",
+      "implementation_author"
+    ]
   },
+  "contributors": [
+    {
+      "name": "Nuno Filipe Fernandes Vieira Cabral e Araújo",
+      "roles": [
+        "photography_author_portugal_150_plus",
+        "association_web_page_creator",
+        "punctual_contributor",
+        "second_human_validator_for_data_collection"
+      ],
+      "implementationAuthorship": false
+    }
+  ],
   "institution": {
     "name": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
     "nipc": "518706451",
@@ -21,8 +39,8 @@
     "url": "https://spdx.org/licenses/EUPL-1.2.html"
   },
   "repositories": {
-    "github": "https://github.com/milkivc/atlas-vivo-milk/tree/work/territorio-do-corpo-codeberg-20260829",
-    "codeberg": "https://codeberg.org/associacaomilk/atlas-vivo-milk/src/branch/territorio-do-corpo"
+    "githubWorkingSource": "https://github.com/milkivc/atlas-vivo-milk/tree/work/territorio-do-corpo-codeberg-20260829",
+    "codebergPublicTarget": "https://codeberg.org/associacaomilk/atlas-vivo-milk"
   },
   "identifiers": {
     "doi": null,
@@ -31,28 +49,23 @@
   "keywords": [
     "Território do Corpo",
     "Atlas Vivo MILK",
-    "cultural digital infrastructure",
     "research software",
-    "evidence graph",
     "provenance",
-    "open world",
+    "data collection",
     "human validation",
     "interoperability",
     "DataCite",
     "OpenAIRE",
     "Software Heritage",
     "FIWARE",
-    "NGSI-LD",
-    "Smart Data Models"
+    "NGSI-LD"
   ],
   "fundingDiscoveryTags": [
     "cultural heritage",
     "digital arts",
-    "creative industries",
     "culture and creativity",
     "research and innovation",
     "territorial cohesion",
-    "digital public infrastructure",
     "interoperability"
   ],
   "fiware": {
@@ -64,10 +77,9 @@
     "tags": [
       "fiware",
       "ngsi-ld",
-      "smart-data-models",
-      "cultural-heritage",
       "interoperability",
       "provenance",
+      "data-collection",
       "human-validation"
     ]
   },
@@ -75,7 +87,7 @@
     "datacite": {
       "schemaVersion": "4.7",
       "memberApi": "https://api.datacite.org/dois",
-      "mode": "generate-payload; submit only with authorised credentials"
+      "mode": "generate-payload; submit only with authorised credentials and human review"
     },
     "openaire": {
       "type": "software",
@@ -86,7 +98,20 @@
   "preservation": {
     "softwareHeritageSaveApi": "https://archive.softwareheritage.org/api/1/origin/save/",
     "origin": "https://codeberg.org/associacaomilk/atlas-vivo-milk.git",
-    "requestAfterCodebergVerification": true
+    "requestAfterSanitizedCodebergVerification": true,
+    "exactSwhidRequiredBeforeClaim": true
+  },
+  "humanValidation": {
+    "dataCollection": {
+      "dualValidationRequired": true,
+      "validators": [
+        "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)",
+        "Nuno Filipe Fernandes Vieira Cabral e Araújo"
+      ]
+    },
+    "implementation": {
+      "dualValidationRequiredByDataCollectionRule": false
+    }
   },
   "aiOrchestration": {
     "system": "Mistral",
@@ -99,10 +124,14 @@
     "automatedPublication": false,
     "automatedFundingApplication": false,
     "automatedEligibilityDecision": false,
-    "dualHumanValidationRequired": true,
-    "validators": [
-      "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)",
-      "Nuno"
-    ]
+    "implementationDecisionAuthority": "NONE"
+  },
+  "publicationBoundary": {
+    "publicExportByAllowlist": true,
+    "fullRepositoryMirror": false,
+    "excludePrivateInfrastructureTopology": true,
+    "excludeCredentialRoutes": true,
+    "excludePrivateAgentsAndMigrationOperators": true,
+    "excludeUnverifiedConformityClaims": true
   }
 }
