@@ -1,0 +1,44 @@
+{
+  "schema": "milk_repository_federation_v1",
+  "generatedAt": "2026-08-29",
+  "institution": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
+  "author": {
+    "legalName": "Eduardo Maurício Vieira Cabral e Araujo",
+    "artisticName": "Eduardo Mauer",
+    "orcid": "0009-0007-6892-6570"
+  },
+  "canonicalCodebergOwner": "associacaomilk",
+  "policy": {
+    "publicRepositoryMayMigrateToCodeberg": true,
+    "privateRepositoryAutoPublication": false,
+    "privateRepositoryRequiresExplicitClassification": true,
+    "softwareHeritageAfterVerifiedCodebergOrigin": true,
+    "metadataOutputsRequired": [
+      "DataCite-4.7",
+      "OpenAIRE-ResearchProduct-Software"
+    ],
+    "fiwareNgsiLdTagsRequired": true,
+    "mistralOrchestrationRequired": true,
+    "humanValidationRequired": true,
+    "dualHumanValidationRequired": true,
+    "validators": [
+      "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)",
+      "Nuno"
+    ]
+  },
+  "repositories": [
+    {"github":"milkivc/atlas-vivo-milk","visibility":"public","role":"software-core","codebergTarget":"associacaomilk/atlas-vivo-milk","migrationState":"IN_PROGRESS"},
+    {"github":"milkivc/atlas-docs","visibility":"public","role":"documentation","codebergTarget":"associacaomilk/atlas-docs","migrationState":"TO_AUDIT"},
+    {"github":"milkivc/atlas-datasets","visibility":"public","role":"datasets","codebergTarget":"associacaomilk/atlas-datasets","migrationState":"TO_AUDIT"},
+    {"github":"milkivc/catalogo-operacional-milk","visibility":"public","role":"catalogue","codebergTarget":"associacaomilk/catalogo-operacional-milk","migrationState":"TO_AUDIT"},
+    {"github":"milkivc/folclore-vivo-metodologia","visibility":"public","role":"methodology","codebergTarget":"associacaomilk/folclore-vivo-metodologia","migrationState":"TO_AUDIT"},
+    {"github":"milkivc/site-institucional","visibility":"public","role":"institutional-site","codebergTarget":"associacaomilk/site-institucional","migrationState":"TO_AUDIT"},
+    {"github":"milkivc/edumauer","visibility":"public","role":"author-profile","codebergTarget":"associacaomilk/edumauer","migrationState":"TO_AUDIT"},
+    {"github":"milkivc/documentation","visibility":"public","role":"documentation-large","codebergTarget":"associacaomilk/documentation","migrationState":"TO_AUDIT_SIZE_AND_CONTENT"},
+    {"github":"milkivc/milkivc","visibility":"public","role":"github-profile","codebergTarget":null,"migrationState":"NOT_A_RESEARCH_OUTPUT_UNTIL_REVIEW"},
+    {"github":"milkivc/milk-dispositivos-curatoriais","visibility":"private","role":"curatorial-dev","codebergTarget":null,"migrationState":"HOLD_PRIVATE_CLASSIFICATION"},
+    {"github":"milkivc/somos-todos-poss-veis","visibility":"private","role":"project-private","codebergTarget":null,"migrationState":"HOLD_PRIVATE_CLASSIFICATION"},
+    {"github":"milkivc/somostodospossiveis","visibility":"private","role":"project-private","codebergTarget":null,"migrationState":"HOLD_PRIVATE_CLASSIFICATION"},
+    {"github":"milkivc/nextjs-boilerplate","visibility":"private","role":"boilerplate","codebergTarget":null,"migrationState":"EXCLUDE_UNLESS_ADOPTED_AS_MILK_OUTPUT"}
+  ]
+}
