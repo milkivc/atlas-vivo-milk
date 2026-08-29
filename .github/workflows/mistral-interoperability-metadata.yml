@@ -1,0 +1,141 @@
+name: MILK Mistral — Metadata + Interoperability + Funding
+
+on:
+  push:
+    branches:
+      - work/territorio-do-corpo-codeberg-20260829
+    paths:
+      - 'metadata/territorio-do-corpo/**'
+      - 'metadata/governance/mistral-system-card.json'
+      - 'scripts/interoperability/**'
+      - 'scripts/funding/**'
+      - 'src/territorial-reader/funding/**'
+      - 'src/territorial-reader/hypothesis/funding-matcher.js'
+      - 'data/funding/**'
+      - 'config/funding-sources.json'
+      - '.github/workflows/mistral-interoperability-metadata.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: milk-metadata-interoperability-territorio-corpo
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Generate DataCite 4.7 and OpenAIRE software metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/interoperability/generate-research-metadata.js
+
+      - name: Generate official-source funding candidates
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/funding/generate-current-candidates.js
+
+      - name: Validate generated interoperability invariants
+        shell: bash
+        run: |
+          set -euo pipefail
+          D='metadata/generated/territorio-do-corpo/datacite-4.7.json'
+          O='metadata/generated/territorio-do-corpo/openaire-research-product-software.json'
+          F='metadata/generated/territorio-do-corpo/funding-candidates.json'
+          jq empty "$D" "$O" "$F"
+          test "$(jq -r '.data.attributes.creators[0].name' "$D")" = 'Eduardo Maurício Vieira Cabral e Araujo'
+          test "$(jq -r '.data.attributes.creators[0].nameIdentifiers[0].nameIdentifier' "$D")" = 'https://orcid.org/0009-0007-6892-6570'
+          test "$(jq -r '.data.attributes.publisher.name' "$D")" = 'Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte'
+          test "$(jq -r '.type' "$O")" = software
+          test "$(jq -r '.creators[0].fullName' "$O")" = 'Eduardo Maurício Vieira Cabral e Araujo'
+          test "$(jq -r '.interoperability.fiware.tags | index("ngsi-ld") != null' "$O")" = true
+          test "$(jq -r '.policy.automatedApplication' "$F")" = false
+          test "$(jq -r '.dualHumanValidationRequired' "$F")" = true
+
+      - name: Mistral orchestration preflight
+        id: mistral
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY" || { echo "::error::MISTRAL_API_KEY missing"; exit 3; }
+          python - <<'PY'
+          import json, os, pathlib, urllib.request
+          base=pathlib.Path('metadata/generated/territorio-do-corpo')
+          datacite=json.loads((base/'datacite-4.7.json').read_text())
+          openaire=json.loads((base/'openaire-research-product-software.json').read_text())
+          funding=json.loads((base/'funding-candidates.json').read_text())
+          card=json.loads(pathlib.Path('metadata/governance/mistral-system-card.json').read_text())
+          facts={
+            'datacite_creator': datacite['data']['attributes']['creators'][0]['name'],
+            'orcid': datacite['data']['attributes']['creators'][0]['nameIdentifiers'][0]['nameIdentifier'],
+            'openaire_type': openaire['type'],
+            'fiware_tags': openaire['interoperability']['fiware']['tags'],
+            'funding_candidates': funding['candidatesOpenOrUnknown'],
+            'automated_application': funding['policy']['automatedApplication'],
+            'decision_authority': card['decisionAuthority'],
+            'dual_human_validation': card['humanOversight']['dualValidationForFinalActions'],
+          }
+          expected='READY_FOR_HUMAN_REVIEW'
+          prompt=(
+            'You are the Mistral repository orchestration agent for Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte. '
+            'Do not add concepts and do not make legal, funding or publication decisions. '
+            'Check only these machine facts for internal consistency: '+json.dumps(facts,ensure_ascii=False)+'. '
+            'Return exactly READY_FOR_HUMAN_REVIEW if the metadata identifies the canonical author and ORCID, OpenAIRE type is software, FIWARE includes ngsi-ld, automated_application is false, decision_authority is NONE, and dual_human_validation is true. Otherwise return STOP_INCONSISTENT_METADATA.'
+          )
+          req=urllib.request.Request(
+            'https://api.mistral.ai/v1/conversations',
+            data=json.dumps({'model':'mistral-small-latest','inputs':[{'role':'user','content':prompt}]}).encode(),
+            method='POST',
+            headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json','Accept':'application/json'}
+          )
+          with urllib.request.urlopen(req,timeout=120) as response:
+            payload=json.loads(response.read().decode())
+          answer=' '.join(str(x.get('content','')) for x in payload.get('outputs',[]) if isinstance(x,dict))
+          decision=expected if expected in answer else 'STOP_INCONSISTENT_METADATA'
+          report={
+            'schema':'milk_mistral_interoperability_preflight_v1',
+            'decision':decision,
+            'facts':facts,
+            'legalConformityClaim':False,
+            'fundingEligibilityDecision':False,
+            'publicationDecision':False,
+            'humanValidationRequired':True,
+            'dualHumanValidationRequired':True,
+          }
+          (base/'mistral-orchestration-preflight.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+          if decision != expected:
+            raise SystemExit('MISTRAL_PREFLIGHT_FAILED')
+          PY
+
+      - name: Commit generated machine metadata and funding candidates
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add metadata/generated/territorio-do-corpo
+          if ! git diff --cached --quiet; then
+            git commit -m 'build(interoperability): refresh DataCite OpenAIRE and funding metadata'
+            git push origin HEAD:refs/heads/work/territorio-do-corpo-codeberg-20260829
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: territorio-do-corpo-interoperability-metadata
+          path: metadata/generated/territorio-do-corpo
+          retention-days: 30
