@@ -1,0 +1,101 @@
+{
+  "schema": "milk_official_funding_opportunities_v1",
+  "asOf": "2026-08-29",
+  "institution": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
+  "policy": {
+    "officialSourcesOnly": true,
+    "eligibilityDecision": false,
+    "fundingGuarantee": false,
+    "humanValidationRequired": true,
+    "dualHumanValidationRequired": true
+  },
+  "profileKeywords": [
+    "culture",
+    "digital arts",
+    "cultural heritage",
+    "creative industries",
+    "interoperability",
+    "research",
+    "innovation",
+    "programming",
+    "visual arts"
+  ],
+  "opportunities": [
+    {
+      "programme": "Programa de Apoio Sustentado às Artes 2027-2030",
+      "call": "Cruzamento Disciplinar, Circo, Artes de Rua e Artes Digitais",
+      "sourceAuthority": "DGARTES — Direção-Geral das Artes",
+      "sourceUrl": "https://www.dgartes.gov.pt/pt/apoio/10173",
+      "deadline": "2026-10-06T17:59:59+01:00",
+      "window": "candidaturas abertas até 6 de outubro de 2026, 17:59:59",
+      "budgetPublished": "EUR 8,940,000",
+      "technicalSignals": ["culture", "digital arts", "programming", "creative industries"],
+      "eligibilityEvidence": [
+        "Aviso n.º 20875-D/2026/2 publicado pela DGARTES",
+        "O aviso abrange Cruzamento Disciplinar, Circo, Artes de Rua e Artes Digitais"
+      ],
+      "state": "A_VERIFICAR"
+    },
+    {
+      "programme": "Programa de Apoio Sustentado às Artes 2027-2030",
+      "call": "Artes Visuais",
+      "sourceAuthority": "DGARTES — Direção-Geral das Artes",
+      "sourceUrl": "https://www.dgartes.gov.pt/pt/apoio/10172",
+      "deadline": "2026-10-06T17:59:59+01:00",
+      "window": "candidaturas abertas até 6 de outubro de 2026, 17:59:59",
+      "budgetPublished": "EUR 7,740,000",
+      "technicalSignals": ["culture", "visual arts", "digital arts"],
+      "eligibilityEvidence": [
+        "Aviso n.º 20875-B/2026/2 publicado pela DGARTES",
+        "O aviso inclui criação, programação, edição, formação e ações estratégicas de mediação em Artes Visuais"
+      ],
+      "state": "A_VERIFICAR"
+    },
+    {
+      "programme": "Programa de Apoio Sustentado às Artes 2027-2030",
+      "call": "Programação",
+      "sourceAuthority": "DGARTES — Direção-Geral das Artes",
+      "sourceUrl": "https://www.dgartes.gov.pt/pt/apoio/10177",
+      "deadline": "2026-10-06T17:59:59+01:00",
+      "window": "candidaturas abertas até 6 de outubro de 2026, 17:59:59",
+      "budgetPublished": "EUR 18,000,000",
+      "technicalSignals": ["culture", "programming", "creative industries"],
+      "eligibilityEvidence": [
+        "Aviso n.º 20875-E/2026/2 publicado pela DGARTES",
+        "Concurso no domínio da Programação"
+      ],
+      "state": "A_VERIFICAR"
+    },
+    {
+      "programme": "Horizon Europe — Cluster 2 Culture, Creativity and Inclusive Society",
+      "call": "HORIZON-CL2-2026-01-HERITAGE — European Cultural Heritage and the Cultural and Creative Industries",
+      "sourceAuthority": "European Research Executive Agency / European Commission",
+      "sourceUrl": "https://rea.ec.europa.eu/funding-and-grants/horizon-europe-cluster-2-culture-creativity-and-inclusive-society/european-cultural-heritage-and-cultural-and-creative-industries_en",
+      "deadline": "2026-09-23T17:00:00+02:00",
+      "window": "deadline oficial 23 de setembro de 2026",
+      "budgetPublished": "EUR 85,500,000 indicative overall call budget",
+      "technicalSignals": ["cultural heritage", "creative industries", "research", "innovation", "interoperability"],
+      "eligibilityEvidence": [
+        "A REA lista sete tópicos na call 2026 de Cultural Heritage and Cultural and Creative Industries",
+        "A elegibilidade concreta depende do tópico e do consórcio e deve ser verificada no Funding & Tenders Portal"
+      ],
+      "partnersRequired": "A_VERIFICAR_POR_TOPICO",
+      "state": "A_VERIFICAR"
+    },
+    {
+      "programme": "Portugal 2030",
+      "call": "Plano Anual de Avisos — maio de 2026 a abril de 2027",
+      "sourceAuthority": "Portugal 2030",
+      "sourceUrl": "https://portugal2030.pt/plano-anual-de-avisos/",
+      "deadline": null,
+      "window": "211 avisos programados entre maio de 2026 e abril de 2027; filtrar por região, promotor e domínio",
+      "budgetPublished": "EUR 3,158,904,491 total programado no plano anual",
+      "technicalSignals": ["interoperability", "cultural heritage", "digital", "territorial cohesion", "innovation"],
+      "eligibilityEvidence": [
+        "O Plano Anual de Avisos publica avisos programados em formato aberto, pesquisável e editável",
+        "Cada aviso deve ser verificado individualmente antes de ser considerado candidato"
+      ],
+      "state": "SOURCE_INDEX_TO_FILTER"
+    }
+  ]
+}
