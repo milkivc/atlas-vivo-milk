@@ -1,9 +1,6 @@
 name: MILK Mistral — Território do Corpo → Codeberg
 
 on:
-  push:
-    branches:
-      - work/territorio-do-corpo-codeberg-20260829
   workflow_dispatch:
 
 permissions:
@@ -14,141 +11,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  reconcile:
+  hold-for-publication-boundary-review:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    env:
-      CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
-      CODEBERG_USER: associacaomilk
-      CODEBERG_REPO: atlas-vivo-milk
-      CODEBERG_BRANCH: territorio-do-corpo
-      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Inspect GitHub and Codeberg history
-        id: inspect
-        shell: bash
+      - name: Hold public mirror while allowlist is prepared
         run: |
-          set -euo pipefail
-          local_sha=$(git rev-parse HEAD)
-          remote_sha=none
-          state=remote_branch_missing
-          git remote add codeberg-public "https://codeberg.org/$CODEBERG_USER/$CODEBERG_REPO.git"
-          if git fetch --no-tags codeberg-public "refs/heads/$CODEBERG_BRANCH:refs/remotes/codeberg-public/$CODEBERG_BRANCH" 2>/dev/null; then
-            remote_sha=$(git rev-parse "refs/remotes/codeberg-public/$CODEBERG_BRANCH")
-            if [ "$local_sha" = "$remote_sha" ]; then
-              state=equal
-            elif git merge-base --is-ancestor "$remote_sha" "$local_sha"; then
-              state=github_ahead_fast_forward
-            elif git merge-base --is-ancestor "$local_sha" "$remote_sha"; then
-              state=codeberg_ahead
-            else
-              state=diverged
-            fi
-          fi
-          echo "state=$state" >> "$GITHUB_OUTPUT"
-          echo "local_sha=$local_sha" >> "$GITHUB_OUTPUT"
-          echo "remote_sha=$remote_sha" >> "$GITHUB_OUTPUT"
-
-      - name: Mistral validates bounded operation
-        id: mistral
-        shell: bash
-        env:
-          STATE: ${{ steps.inspect.outputs.state }}
-          LOCAL_SHA: ${{ steps.inspect.outputs.local_sha }}
-          REMOTE_SHA: ${{ steps.inspect.outputs.remote_sha }}
-        run: |
-          set -euo pipefail
-          test -n "$MISTRAL_API_KEY" || { echo "::error::MISTRAL_API_KEY missing"; exit 3; }
-          test -n "$CODEBERG_TOKEN" || { echo "::error::CODEBERG_TOKEN missing"; exit 4; }
-          python - <<'PY'
-          import json, os, urllib.request
-          state=os.environ['STATE']
-          expected={
-            'remote_branch_missing':'EXECUTE_CREATE_BRANCH',
-            'equal':'NOOP_EQUAL',
-            'github_ahead_fast_forward':'EXECUTE_FAST_FORWARD_SYNC',
-            'codeberg_ahead':'STOP_REMOTE_AHEAD',
-            'diverged':'STOP_DIVERGED',
-          }[state]
-          prompt=(
-            'You are the Mistral execution agent for Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte. '
-            'Validate one bounded Git migration operation from GitHub to Codeberg/Forgejo. '
-            f"State={state}; GitHub SHA={os.environ['LOCAL_SHA']}; Codeberg SHA={os.environ['REMOTE_SHA']}. "
-            'Target repository is codeberg.org/associacaomilk/atlas-vivo-milk and target branch is territorio-do-corpo. '
-            'Never force-push, delete refs, rewrite history, or modify Codeberg main/master. '
-            f'Return exactly: {expected}'
-          )
-          request=urllib.request.Request(
-            'https://api.mistral.ai/v1/conversations',
-            data=json.dumps({'model':'mistral-small-latest','inputs':[{'role':'user','content':prompt}]}).encode(),
-            method='POST',
-            headers={
-              'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],
-              'Content-Type':'application/json',
-              'Accept':'application/json'
-            }
-          )
-          with urllib.request.urlopen(request, timeout=120) as response:
-            payload=json.loads(response.read().decode())
-          answer=' '.join(str(item.get('content','')) for item in payload.get('outputs',[]) if isinstance(item,dict))
-          if expected not in answer:
-            raise SystemExit('Mistral decision did not match deterministic policy')
-          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as out:
-            out.write('decision='+expected+'\n')
-          PY
-
-      - name: Push new or fast-forward branch to Codeberg
-        if: steps.mistral.outputs.decision == 'EXECUTE_CREATE_BRANCH' || steps.mistral.outputs.decision == 'EXECUTE_FAST_FORWARD_SYNC'
-        shell: bash
-        run: |
-          set -euo pipefail
-          credential_file="$RUNNER_TEMP/codeberg-credentials"
-          trap 'rm -f "$credential_file"' EXIT
-          git config credential.helper "store --file=$credential_file"
-          printf 'protocol=https\nhost=codeberg.org\nusername=%s\npassword=%s\n\n' "$CODEBERG_USER" "$CODEBERG_TOKEN" | git credential approve
-          chmod 600 "$credential_file"
-          git remote add codeberg-write "https://codeberg.org/$CODEBERG_USER/$CODEBERG_REPO.git"
-
-          if git ls-remote --exit-code --heads codeberg-write "$CODEBERG_BRANCH" >/dev/null 2>&1; then
-            git fetch --no-tags codeberg-write "refs/heads/$CODEBERG_BRANCH:refs/remotes/codeberg-write/$CODEBERG_BRANCH"
-            git merge-base --is-ancestor "refs/remotes/codeberg-write/$CODEBERG_BRANCH" HEAD
-          fi
-
-          git push codeberg-write "HEAD:refs/heads/$CODEBERG_BRANCH"
-          git fetch --no-tags codeberg-write "refs/heads/$CODEBERG_BRANCH:refs/remotes/codeberg-write/$CODEBERG_BRANCH"
-          test "$(git rev-parse HEAD)" = "$(git rev-parse refs/remotes/codeberg-write/$CODEBERG_BRANCH)"
-
-      - name: Write factual migration receipt
-        if: always()
-        shell: bash
-        env:
-          STATE: ${{ steps.inspect.outputs.state }}
-          LOCAL_SHA: ${{ steps.inspect.outputs.local_sha }}
-          REMOTE_SHA: ${{ steps.inspect.outputs.remote_sha }}
-          DECISION: ${{ steps.mistral.outputs.decision }}
-        run: |
-          mkdir -p migration-receipts
-          cat > migration-receipts/codeberg-territorio-do-corpo.txt <<EOF
-          CODEBERG_MIGRATION_RECEIPT
-          source_branch=work/territorio-do-corpo-codeberg-20260829
-          target=https://codeberg.org/$CODEBERG_USER/$CODEBERG_REPO/src/branch/$CODEBERG_BRANCH
-          state=${STATE:-not_inspected}
-          decision=${DECISION:-not_decided}
-          github_sha=${LOCAL_SHA:-unknown}
-          previous_codeberg_sha=${REMOTE_SHA:-none}
-          force_push=0
-          deleted_refs=0
-          main_modified=0
-          master_modified=0
-          EOF
-          cat migration-receipts/codeberg-territorio-do-corpo.txt
-
-      - name: Stop on unsafe reconciliation state
-        if: startsWith(steps.mistral.outputs.decision, 'STOP_')
-        run: |
-          echo "::error::Codeberg left unchanged because safe fast-forward was impossible."
-          exit 20
+          echo "PUBLIC_CODEBERG_EXPORT_HELD_FOR_ALLOWLIST_REVIEW"
+          echo "No Git refs are pushed by this temporary gate."
