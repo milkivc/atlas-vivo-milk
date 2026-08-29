@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0.0",
+  "created_at": "2026-08-29",
+  "scope": "PUBLIC_LAYER_SOURCE_CANDIDATES",
+  "policy": {
+    "source_is_read_only": true,
+    "title_is_not_classification": true,
+    "path_is_not_sufficient_for_publication": true,
+    "migration_is_not_publication": true,
+    "requires_content_read": true,
+    "requires_rights_gate": true,
+    "requires_human_publication_gate": true,
+    "reverse_link_to_invisible_forbidden": true,
+    "territorial_engine_excluded": true,
+    "ia_milk_training_excluded": true
+  },
+  "drive_roots": [
+    {"id":"1Tos8W6HcDnzJfRVq6q7GxvKIIj65UNWa","name":"2.1 Camada Pública","state":"SOURCE_ROOT_VERIFIED"},
+    {"id":"1xMsMT133gBpS1YocVp3zThXI48Xf0c51","name":"13_CAMADA_PUBLICA_CONTEUDOS_VISIVEIS_TERRITORIAIS","state":"SOURCE_ROOT_VERIFIED"},
+    {"id":"1OpF0dEHugoIAJHG_vkRCASVBgf38A84x","name":"14_CAMADA_PUBLICA_LUDICA_CURATORIAL_ARTISTICA_AFETIVA_DINAMICA","state":"SOURCE_ROOT_VERIFIED"},
+    {"id":"1oBbsFsd33hNvUSHp29St4CyKuSeU_gPp","name":"01_CAMADA_PUBLICA","state":"SOURCE_ROOT_VERIFIED"},
+    {"id":"1D3bXcOZV7wGyielJUNLChMi2QI2n7W-4","name":"Camada publica 1305","state":"SOURCE_ROOT_VERIFIED_NEEDS_GENEALOGY"},
+    {"id":"1wBTLZx4YaeYfYXAFCr877lYsJKWMjgFf","name":"1. CAMADA PÚBLICA","state":"SOURCE_ROOT_VERIFIED_NEEDS_GENEALOGY"}
+  ],
+  "priority_sources": [
+    {
+      "drive_id":"1WPyQ5ALgS-GxiGE1NeEQJ6Zk2sR4uYsJ-_jOW-jkopQ",
+      "name":"atlas_vivo_publico",
+      "kind":"google_sheet",
+      "role":"territorial/public data candidate",
+      "migration_state":"QUEUE_AFTER_SCHEMA_AND_RIGHTS_REVIEW",
+      "publication_state":"BLOCKED_PENDING_VALIDATION"
+    },
+    {
+      "drive_id":"1UO_fNhIvROaTEEdA6lb-op1AQhIy-cbE1pNb9blMcv0",
+      "name":"EIXO_CENTRAL__O_MESMO_LUGAR_NAO_EXISTE__ESPINHA_DORSAL_CAMADA_PUBLICA_ATLAS_VIVO_MILK",
+      "kind":"google_doc",
+      "role":"public-experience canonical source",
+      "migration_state":"QUEUE_PRESERVATION",
+      "publication_state":"NOT_A_PUBLIC_PAYLOAD"
+    },
+    {
+      "drive_id":"1qCSkb9rGSL8DOZBTAu31mZmWsyYzhECG_J3_KLfbKUg",
+      "name":"LOTE077_ATLAS_VIVO_MILK_ESPECIFICACAO_COMPLETA_CAMADA_PUBLICA_ENCANTADA",
+      "kind":"google_doc",
+      "role":"public-layer specification source",
+      "migration_state":"QUEUE_PRESERVATION",
+      "publication_state":"NOT_A_PUBLIC_PAYLOAD"
+    },
+    {
+      "drive_id":"1u538i3aO6vtyhjGVdah6CE3jrQR4nSilJVBuQ1AN2LQ",
+      "name":"CAMADA_PUBLICA__SISTEMA_INTEGRADO_JOGUINHOS_E_DISPOSITIVOS_PARTICIPATIVOS",
+      "kind":"google_doc",
+      "role":"public interaction devices source",
+      "migration_state":"QUEUE_AFTER_CONTENT_REVIEW",
+      "publication_state":"BLOCKED_PENDING_GENEALOGY"
+    },
+    {
+      "drive_id":"15nS3iuCLhaK99Q6m2o0CRB5qnKD5Br9v",
+      "name":"Regeneracao_Livro_Cubo_Atlas_Vivo_MILK.pdf",
+      "kind":"pdf",
+      "role":"Livro Cubo source",
+      "migration_state":"QUEUE_AFTER_RIGHTS_REVIEW",
+      "publication_state":"BLOCKED_PENDING_PUBLIC_FORM"
+    },
+    {
+      "drive_id":"1cx5pZ7x9HRRTh0NXdaLCZ4jpk40XwEiR",
+      "name":"12_PROPOSTAS_FESTIVAL_DADO_SEM_LADO.md",
+      "kind":"markdown",
+      "role":"Dado Sem Lado curatorial source",
+      "migration_state":"QUEUE_AFTER_GENEALOGY_REVIEW",
+      "publication_state":"BLOCKED_PENDING_PUBLIC_FORM"
+    },
+    {
+      "drive_id":"18kLT8GZBI1Y_vNkubub0qWplDWV0t2cLj0QX0hZnmXs",
+      "name":"Mapeamento da Contracultura e Arte Independente em Portugal",
+      "kind":"google_doc",
+      "role":"research/public-content candidate",
+      "migration_state":"QUEUE_AFTER_CONTENT_RIGHTS_REVIEW",
+      "publication_state":"BLOCKED_PENDING_VALIDATION"
+    }
+  ],
+  "nextcloud_target": {
+    "status":"TARGET_INFRASTRUCTURE_VERIFIED_BUT_PUBLIC_CONTENT_NOT_YET_RECEIPTED",
+    "host":"nuvem.associacaomilk.pt",
+    "data_root_private":"/home/associ16/nextclouddata",
+    "logical_path_proposed":"Atlas Vivo MILK/Camada Pública — Fontes e Materialização/",
+    "note":"Logical path is a migration proposal; creation/promotion requires validated write access and readback receipt."
+  },
+  "required_receipt_fields": [
+    "drive_id",
+    "source_name",
+    "source_revision_or_modified_at",
+    "export_format",
+    "source_sha256",
+    "destination_path",
+    "destination_bytes",
+    "destination_sha256_readback",
+    "migration_status",
+    "rights_state",
+    "publication_state",
+    "source_writes"
+  ]
+}
