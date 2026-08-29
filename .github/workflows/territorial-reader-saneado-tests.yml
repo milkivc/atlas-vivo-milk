@@ -5,6 +5,7 @@ on:
     branches:
       - 'work/territorial-reader-saneado-20260822'
       - 'work/territorial-hypothesis-engine-20260823'
+      - 'work/territorio-do-corpo-codeberg-20260829'
     paths:
       - 'src/territorial-reader/**'
       - '.github/workflows/territorial-reader-saneado-tests.yml'
