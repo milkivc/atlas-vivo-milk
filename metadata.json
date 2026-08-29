@@ -1,33 +1,50 @@
 {
-  "title": "Atlas Vivo MILK - Portugal",
-  "description": "Atlas Vivo MILK é um ecossistema soberano de dados, cultura e património, com foco em interoperabilidade, financiamento e conformidade legal (RGPD, AI Act, NIS2).",
+  "title": "Atlas Vivo MILK — Território do Corpo",
+  "description": "Perfil técnico de software do módulo Território do Corpo, preparado para interoperabilidade, proveniência, preservação e descoberta de oportunidades de financiamento. Não contém declaração automática de conformidade jurídica nem fundamentação conceptual autoral.",
   "license": "EUPL-1.2",
-  "keywords": ["Atlas Vivo MILK", "cultura", "património", "soberania digital", "interoperabilidade", "Portugal"],
   "creators": [
     {
-      "name": "Nuno Filipe Fernandes Vieira Cabral e Araujo",
-      "orcid": "0009-0009-1781-4020"
-    },
-    {
       "name": "Eduardo Maurício Vieira Cabral e Araujo",
-      "orcid": "0009-0007-6892-6570"
+      "artisticName": "Eduardo Mauer",
+      "orcid": "0009-0007-6892-6570",
+      "role": "founder_idealizer_lead_author_and_implementation_author"
     }
   ],
-  "version": "1.0.0",
-  "datePublished": "2026-06-25",
-  "doi": "",
-  "relatedIdentifiers": [
+  "contributors": [
     {
-      "relation": "isPartOf",
-      "identifier": "https://github.com/milkivc/atlas-datasets"
-    },
-    {
-      "relation": "isPartOf",
-      "identifier": "https://github.com/milkivc/atlas-docs"
-    },
-    {
-      "relation": "isPartOf",
-      "identifier": "https://codeberg.org/milkivc/associacao-milk-marco-zero"
+      "name": "Nuno Filipe Fernandes Vieira Cabral e Araújo",
+      "roles": [
+        "photography_author_portugal_150_plus",
+        "association_web_page_creator",
+        "punctual_contributor",
+        "second_human_validator_for_data_collection"
+      ],
+      "implementationAuthorship": false
     }
-  ]
+  ],
+  "institution": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
+  "humanValidation": {
+    "dataCollection": {
+      "dualHumanValidationRequired": true,
+      "validators": [
+        "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)",
+        "Nuno Filipe Fernandes Vieira Cabral e Araújo"
+      ]
+    },
+    "implementation": {
+      "dualHumanValidationRequiredByDataCollectionRule": false
+    }
+  },
+  "version": "2.1.0-territorio-do-corpo",
+  "doi": null,
+  "swhid": null,
+  "repositories": {
+    "githubWorkingSource": "https://github.com/milkivc/atlas-vivo-milk/tree/work/territorio-do-corpo-codeberg-20260829",
+    "codebergPublicTarget": "https://codeberg.org/associacaomilk/atlas-vivo-milk"
+  },
+  "publicationPolicy": {
+    "publicExportByAllowlist": true,
+    "fullRepositoryMirror": false,
+    "humanReviewBeforeDeposit": true
+  }
 }
