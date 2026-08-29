@@ -1,0 +1,298 @@
+{
+  "schema": "milk_funding_candidates_v1",
+  "sourceAsOf": "2026-08-29",
+  "generatedAt": "2026-08-29T00:10:33.791Z",
+  "institution": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
+  "candidatesScanned": 5,
+  "candidatesOpenOrUnknown": 5,
+  "candidates": [
+    {
+      "programme": "Programa de Apoio Sustentado às Artes 2027-2030",
+      "call": "Cruzamento Disciplinar, Circo, Artes de Rua e Artes Digitais",
+      "sourceUrl": "https://www.dgartes.gov.pt/pt/apoio/10173",
+      "sourceAuthority": "DGARTES — Direção-Geral das Artes",
+      "eligibilityEvidence": [
+        "Aviso n.º 20875-D/2026/2 publicado pela DGARTES",
+        "O aviso abrange Cruzamento Disciplinar, Circo, Artes de Rua e Artes Digitais"
+      ],
+      "window": "candidaturas abertas até 6 de outubro de 2026, 17:59:59",
+      "deadline": "2026-10-06T17:59:59+01:00",
+      "deadlineState": "OPEN_BY_DATE",
+      "cofinancing": null,
+      "partnersRequired": null,
+      "technicalSignals": [
+        "culture",
+        "digital arts",
+        "programming",
+        "creative industries"
+      ],
+      "technicalFit": {
+        "overlap": [
+          "culture",
+          "digital arts",
+          "programming",
+          "creative industries"
+        ],
+        "overlapCount": 4,
+        "scoringIsEligibilityDecision": false
+      },
+      "sourceIsTraceable": true,
+      "eligibilityDetermined": false,
+      "fundingGuaranteed": false,
+      "humanValidationRequired": true,
+      "dualHumanValidationRequired": true,
+      "validatorsRequired": [
+        "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)",
+        "Nuno"
+      ]
+    },
+    {
+      "programme": "Programa de Apoio Sustentado às Artes 2027-2030",
+      "call": "Artes Visuais",
+      "sourceUrl": "https://www.dgartes.gov.pt/pt/apoio/10172",
+      "sourceAuthority": "DGARTES — Direção-Geral das Artes",
+      "eligibilityEvidence": [
+        "Aviso n.º 20875-B/2026/2 publicado pela DGARTES",
+        "O aviso inclui criação, programação, edição, formação e ações estratégicas de mediação em Artes Visuais"
+      ],
+      "window": "candidaturas abertas até 6 de outubro de 2026, 17:59:59",
+      "deadline": "2026-10-06T17:59:59+01:00",
+      "deadlineState": "OPEN_BY_DATE",
+      "cofinancing": null,
+      "partnersRequired": null,
+      "technicalSignals": [
+        "culture",
+        "visual arts",
+        "digital arts"
+      ],
+      "technicalFit": {
+        "overlap": [
+          "culture",
+          "visual arts",
+          "digital arts"
+        ],
+        "overlapCount": 3,
+        "scoringIsEligibilityDecision": false
+      },
+      "sourceIsTraceable": true,
+      "eligibilityDetermined": false,
+      "fundingGuaranteed": false,
+      "humanValidationRequired": true,
+      "dualHumanValidationRequired": true,
+      "validatorsRequired": [
+        "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)",
+        "Nuno"
+      ]
+    },
+    {
+      "programme": "Programa de Apoio Sustentado às Artes 2027-2030",
+      "call": "Programação",
+      "sourceUrl": "https://www.dgartes.gov.pt/pt/apoio/10177",
+      "sourceAuthority": "DGARTES — Direção-Geral das Artes",
+      "eligibilityEvidence": [
+        "Aviso n.º 20875-E/2026/2 publicado pela DGARTES",
+        "Concurso no domínio da Programação"
+      ],
+      "window": "candidaturas abertas até 6 de outubro de 2026, 17:59:59",
+      "deadline": "2026-10-06T17:59:59+01:00",
+      "deadlineState": "OPEN_BY_DATE",
+      "cofinancing": null,
+      "partnersRequired": null,
+      "technicalSignals": [
+        "culture",
+        "programming",
+        "creative industries"
+      ],
+      "technicalFit": {
+        "overlap": [
+          "culture",
+          "programming",
+          "creative industries"
+        ],
+        "overlapCount": 3,
+        "scoringIsEligibilityDecision": false
+      },
+      "sourceIsTraceable": true,
+      "eligibilityDetermined": false,
+      "fundingGuaranteed": false,
+      "humanValidationRequired": true,
+      "dualHumanValidationRequired": true,
+      "validatorsRequired": [
+        "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)",
+        "Nuno"
+      ]
+    },
+    {
+      "programme": "Horizon Europe — Cluster 2 Culture, Creativity and Inclusive Society",
+      "call": "HORIZON-CL2-2026-01-HERITAGE — European Cultural Heritage and the Cultural and Creative Industries",
+      "sourceUrl": "https://rea.ec.europa.eu/funding-and-grants/horizon-europe-cluster-2-culture-creativity-and-inclusive-society/european-cultural-heritage-and-cultural-and-creative-industries_en",
+      "sourceAuthority": "European Research Executive Agency / European Commission",
+      "eligibilityEvidence": [
+        "A REA lista sete tópicos na call 2026 de Cultural Heritage and Cultural and Creative Industries",
+        "A elegibilidade concreta depende do tópico e do consórcio e deve ser verificada no Funding & Tenders Portal"
+      ],
+      "window": "deadline oficial 23 de setembro de 2026",
+      "deadline": "2026-09-23T17:00:00+02:00",
+      "deadlineState": "OPEN_BY_DATE",
+      "cofinancing": null,
+      "partnersRequired": "A_VERIFICAR_POR_TOPICO",
+      "technicalSignals": [
+        "cultural heritage",
+        "creative industries",
+        "research",
+        "innovation",
+        "interoperability"
+      ],
+      "technicalFit": {
+        "overlap": [
+          "cultural heritage",
+          "creative industries",
+          "research",
+          "innovation",
+          "interoperability"
+        ],
+        "overlapCount": 5,
+        "scoringIsEligibilityDecision": false
+      },
+      "sourceIsTraceable": true,
+      "eligibilityDetermined": false,
+      "fundingGuaranteed": false,
+      "humanValidationRequired": true,
+      "dualHumanValidationRequired": true,
+      "validatorsRequired": [
+        "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)",
+        "Nuno"
+      ]
+    },
+    {
+      "programme": "Portugal 2030",
+      "call": "Plano Anual de Avisos — maio de 2026 a abril de 2027",
+      "sourceUrl": "https://portugal2030.pt/plano-anual-de-avisos/",
+      "sourceAuthority": "Portugal 2030",
+      "eligibilityEvidence": [
+        "O Plano Anual de Avisos publica avisos programados em formato aberto, pesquisável e editável",
+        "Cada aviso deve ser verificado individualmente antes de ser considerado candidato"
+      ],
+      "window": "211 avisos programados entre maio de 2026 e abril de 2027; filtrar por região, promotor e domínio",
+      "deadline": null,
+      "deadlineState": "DEADLINE_UNKNOWN",
+      "cofinancing": null,
+      "partnersRequired": null,
+      "technicalSignals": [
+        "interoperability",
+        "cultural heritage",
+        "digital",
+        "territorial cohesion",
+        "innovation"
+      ],
+      "technicalFit": {
+        "overlap": [
+          "interoperability",
+          "cultural heritage",
+          "innovation"
+        ],
+        "overlapCount": 3,
+        "scoringIsEligibilityDecision": false
+      },
+      "sourceIsTraceable": true,
+      "eligibilityDetermined": false,
+      "fundingGuaranteed": false,
+      "humanValidationRequired": true,
+      "dualHumanValidationRequired": true,
+      "validatorsRequired": [
+        "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)",
+        "Nuno"
+      ]
+    }
+  ],
+  "fundingMatcher": {
+    "state": "FUNDING_CANDIDATES_TO_VERIFY",
+    "matches": [
+      {
+        "programme": "Programa de Apoio Sustentado às Artes 2027-2030",
+        "call": "Cruzamento Disciplinar, Circo, Artes de Rua e Artes Digitais",
+        "sourceUrl": "https://www.dgartes.gov.pt/pt/apoio/10173",
+        "eligibilityEvidence": [
+          "Aviso n.º 20875-D/2026/2 publicado pela DGARTES",
+          "O aviso abrange Cruzamento Disciplinar, Circo, Artes de Rua e Artes Digitais"
+        ],
+        "window": "candidaturas abertas até 6 de outubro de 2026, 17:59:59",
+        "cofinancing": null,
+        "partnersRequired": null,
+        "state": "A_VERIFICAR",
+        "funded": false
+      },
+      {
+        "programme": "Programa de Apoio Sustentado às Artes 2027-2030",
+        "call": "Artes Visuais",
+        "sourceUrl": "https://www.dgartes.gov.pt/pt/apoio/10172",
+        "eligibilityEvidence": [
+          "Aviso n.º 20875-B/2026/2 publicado pela DGARTES",
+          "O aviso inclui criação, programação, edição, formação e ações estratégicas de mediação em Artes Visuais"
+        ],
+        "window": "candidaturas abertas até 6 de outubro de 2026, 17:59:59",
+        "cofinancing": null,
+        "partnersRequired": null,
+        "state": "A_VERIFICAR",
+        "funded": false
+      },
+      {
+        "programme": "Programa de Apoio Sustentado às Artes 2027-2030",
+        "call": "Programação",
+        "sourceUrl": "https://www.dgartes.gov.pt/pt/apoio/10177",
+        "eligibilityEvidence": [
+          "Aviso n.º 20875-E/2026/2 publicado pela DGARTES",
+          "Concurso no domínio da Programação"
+        ],
+        "window": "candidaturas abertas até 6 de outubro de 2026, 17:59:59",
+        "cofinancing": null,
+        "partnersRequired": null,
+        "state": "A_VERIFICAR",
+        "funded": false
+      },
+      {
+        "programme": "Horizon Europe — Cluster 2 Culture, Creativity and Inclusive Society",
+        "call": "HORIZON-CL2-2026-01-HERITAGE — European Cultural Heritage and the Cultural and Creative Industries",
+        "sourceUrl": "https://rea.ec.europa.eu/funding-and-grants/horizon-europe-cluster-2-culture-creativity-and-inclusive-society/european-cultural-heritage-and-cultural-and-creative-industries_en",
+        "eligibilityEvidence": [
+          "A REA lista sete tópicos na call 2026 de Cultural Heritage and Cultural and Creative Industries",
+          "A elegibilidade concreta depende do tópico e do consórcio e deve ser verificada no Funding & Tenders Portal"
+        ],
+        "window": "deadline oficial 23 de setembro de 2026",
+        "cofinancing": null,
+        "partnersRequired": "A_VERIFICAR_POR_TOPICO",
+        "state": "A_VERIFICAR",
+        "funded": false
+      },
+      {
+        "programme": "Portugal 2030",
+        "call": "Plano Anual de Avisos — maio de 2026 a abril de 2027",
+        "sourceUrl": "https://portugal2030.pt/plano-anual-de-avisos/",
+        "eligibilityEvidence": [
+          "O Plano Anual de Avisos publica avisos programados em formato aberto, pesquisável e editável",
+          "Cada aviso deve ser verificado individualmente antes de ser considerado candidato"
+        ],
+        "window": "211 avisos programados entre maio de 2026 e abril de 2027; filtrar por região, promotor e domínio",
+        "cofinancing": null,
+        "partnersRequired": null,
+        "state": "A_VERIFICAR",
+        "funded": false
+      }
+    ],
+    "fundingGuaranteed": false,
+    "humanValidationRequired": true
+  },
+  "policy": {
+    "officialSourcesPreferred": true,
+    "eligibilityDecision": false,
+    "automatedApplication": false,
+    "fundingGuarantee": false,
+    "dualHumanValidationRequired": true
+  },
+  "humanDecision": null,
+  "dualHumanValidationRequired": true,
+  "validators": [
+    "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)",
+    "Nuno"
+  ]
+}

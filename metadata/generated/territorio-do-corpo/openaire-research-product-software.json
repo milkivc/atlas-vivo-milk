@@ -1,0 +1,99 @@
+{
+  "type": "software",
+  "version": "2.1.0-territorio-do-corpo",
+  "titles": [
+    {
+      "title": "Território do Corpo — Atlas Vivo MILK",
+      "language": "pt"
+    }
+  ],
+  "descriptions": [
+    "Módulo de software baseado em evidência preservada, proveniência, formulação de hipóteses em mundo aberto, campo de possibilidades, correspondência de financiamento e validação humana. Este perfil descreve apenas propriedades técnicas e de interoperabilidade."
+  ],
+  "creators": [
+    {
+      "fullName": "Eduardo Maurício Vieira Cabral e Araujo",
+      "alternateName": "Eduardo Mauer",
+      "orcid": "https://orcid.org/0009-0007-6892-6570",
+      "affiliation": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte"
+    }
+  ],
+  "publisher": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
+  "codeRepositoryUrl": "https://codeberg.org/associacaomilk/atlas-vivo-milk/src/branch/territorio-do-corpo",
+  "documentationUrls": [
+    "https://codeberg.org/associacaomilk/atlas-vivo-milk/src/branch/territorio-do-corpo",
+    "https://github.com/milkivc/atlas-vivo-milk/tree/work/territorio-do-corpo-codeberg-20260829"
+  ],
+  "pids": [],
+  "subjects": [
+    "Território do Corpo",
+    "Atlas Vivo MILK",
+    "cultural digital infrastructure",
+    "research software",
+    "evidence graph",
+    "provenance",
+    "open world",
+    "human validation",
+    "interoperability",
+    "DataCite",
+    "OpenAIRE",
+    "Software Heritage",
+    "FIWARE",
+    "NGSI-LD",
+    "Smart Data Models",
+    "cultural heritage",
+    "digital arts",
+    "creative industries",
+    "culture and creativity",
+    "research and innovation",
+    "territorial cohesion",
+    "digital public infrastructure",
+    "fiware",
+    "ngsi-ld",
+    "smart-data-models",
+    "cultural-heritage",
+    "human-validation"
+  ],
+  "license": {
+    "code": "EUPL-1.2",
+    "url": "https://spdx.org/licenses/EUPL-1.2.html"
+  },
+  "accessRight": "open",
+  "resourceType": "software",
+  "interoperability": {
+    "eifLayers": [
+      "legal",
+      "organisational",
+      "semantic",
+      "technical"
+    ],
+    "fiware": {
+      "profile": "NGSI-LD interoperability profile",
+      "status": "custom-profile-candidate",
+      "ngsiLdContexts": [
+        "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
+      ],
+      "tags": [
+        "fiware",
+        "ngsi-ld",
+        "smart-data-models",
+        "cultural-heritage",
+        "interoperability",
+        "provenance",
+        "human-validation"
+      ]
+    }
+  },
+  "preservation": {
+    "softwareHeritageOrigin": "https://codeberg.org/associacaomilk/atlas-vivo-milk.git",
+    "swhid": null
+  },
+  "_meta": {
+    "generatedFrom": "metadata/territorio-do-corpo/repository-profile.json",
+    "target": "OpenAIRE Research Product / Software interoperability profile",
+    "graphVerificationApi": "https://api.openaire.eu/graph/v3/research-products",
+    "directDepositClaimed": false,
+    "harvestingVerificationRequired": true,
+    "humanValidationRequired": true
+  }
+}

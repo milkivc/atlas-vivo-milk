@@ -1,0 +1,27 @@
+{
+  "schema": "milk_mistral_interoperability_preflight_v1",
+  "decision": "READY_FOR_HUMAN_REVIEW",
+  "facts": {
+    "datacite_creator": "Eduardo Maurício Vieira Cabral e Araujo",
+    "orcid": "https://orcid.org/0009-0007-6892-6570",
+    "openaire_type": "software",
+    "fiware_tags": [
+      "fiware",
+      "ngsi-ld",
+      "smart-data-models",
+      "cultural-heritage",
+      "interoperability",
+      "provenance",
+      "human-validation"
+    ],
+    "funding_candidates": 5,
+    "automated_application": false,
+    "decision_authority": "NONE",
+    "dual_human_validation": true
+  },
+  "legalConformityClaim": false,
+  "fundingEligibilityDecision": false,
+  "publicationDecision": false,
+  "humanValidationRequired": true,
+  "dualHumanValidationRequired": true
+}

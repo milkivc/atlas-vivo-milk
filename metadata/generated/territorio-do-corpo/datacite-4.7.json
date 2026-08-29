@@ -1,0 +1,159 @@
+{
+  "data": {
+    "type": "dois",
+    "attributes": {
+      "creators": [
+        {
+          "name": "Eduardo Maurício Vieira Cabral e Araujo",
+          "nameType": "Personal",
+          "givenName": "Eduardo Maurício Vieira Cabral e",
+          "familyName": "Araujo",
+          "nameIdentifiers": [
+            {
+              "nameIdentifier": "https://orcid.org/0009-0007-6892-6570",
+              "nameIdentifierScheme": "ORCID",
+              "schemeUri": "https://orcid.org"
+            }
+          ],
+          "affiliation": [
+            {
+              "name": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte"
+            }
+          ]
+        }
+      ],
+      "titles": [
+        {
+          "title": "Território do Corpo — Atlas Vivo MILK"
+        }
+      ],
+      "publisher": {
+        "name": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte"
+      },
+      "publicationYear": 2026,
+      "types": {
+        "resourceTypeGeneral": "Software",
+        "resourceType": "Research software"
+      },
+      "version": "2.1.0-territorio-do-corpo",
+      "descriptions": [
+        {
+          "description": "Módulo de software baseado em evidência preservada, proveniência, formulação de hipóteses em mundo aberto, campo de possibilidades, correspondência de financiamento e validação humana. Este perfil descreve apenas propriedades técnicas e de interoperabilidade.",
+          "descriptionType": "Abstract"
+        }
+      ],
+      "subjects": [
+        {
+          "subject": "Território do Corpo"
+        },
+        {
+          "subject": "Atlas Vivo MILK"
+        },
+        {
+          "subject": "cultural digital infrastructure"
+        },
+        {
+          "subject": "research software"
+        },
+        {
+          "subject": "evidence graph"
+        },
+        {
+          "subject": "provenance"
+        },
+        {
+          "subject": "open world"
+        },
+        {
+          "subject": "human validation"
+        },
+        {
+          "subject": "interoperability"
+        },
+        {
+          "subject": "DataCite"
+        },
+        {
+          "subject": "OpenAIRE"
+        },
+        {
+          "subject": "Software Heritage"
+        },
+        {
+          "subject": "FIWARE"
+        },
+        {
+          "subject": "NGSI-LD"
+        },
+        {
+          "subject": "Smart Data Models"
+        },
+        {
+          "subject": "cultural heritage"
+        },
+        {
+          "subject": "digital arts"
+        },
+        {
+          "subject": "creative industries"
+        },
+        {
+          "subject": "culture and creativity"
+        },
+        {
+          "subject": "research and innovation"
+        },
+        {
+          "subject": "territorial cohesion"
+        },
+        {
+          "subject": "digital public infrastructure"
+        },
+        {
+          "subject": "fiware"
+        },
+        {
+          "subject": "ngsi-ld"
+        },
+        {
+          "subject": "smart-data-models"
+        },
+        {
+          "subject": "cultural-heritage"
+        },
+        {
+          "subject": "human-validation"
+        }
+      ],
+      "rightsList": [
+        {
+          "rights": "EUPL-1.2",
+          "rightsUri": "https://spdx.org/licenses/EUPL-1.2.html",
+          "rightsIdentifier": "EUPL-1.2",
+          "rightsIdentifierScheme": "SPDX",
+          "schemeUri": "https://spdx.org/licenses/"
+        }
+      ],
+      "relatedIdentifiers": [
+        {
+          "relatedIdentifier": "https://codeberg.org/associacaomilk/atlas-vivo-milk/src/branch/territorio-do-corpo",
+          "relatedIdentifierType": "URL",
+          "relationType": "IsSourceOf"
+        },
+        {
+          "relatedIdentifier": "https://github.com/milkivc/atlas-vivo-milk/tree/work/territorio-do-corpo-codeberg-20260829",
+          "relatedIdentifierType": "URL",
+          "relationType": "IsVersionOf"
+        }
+      ],
+      "url": "https://codeberg.org/associacaomilk/atlas-vivo-milk/src/branch/territorio-do-corpo",
+      "language": "pt-PT"
+    }
+  },
+  "_meta": {
+    "generatedFrom": "metadata/territorio-do-corpo/repository-profile.json",
+    "target": "DataCite Metadata Schema 4.7 JSON/REST payload",
+    "submissionAutomatic": false,
+    "humanValidationRequired": true
+  }
+}
