@@ -1,0 +1,115 @@
+{
+  "schema": "milk_research_platform_corridor_v1",
+  "canonicalIdentity": {
+    "authorLegalName": "Eduardo Maurício Vieira Cabral e Araujo",
+    "authorArtisticName": "Eduardo Mauer",
+    "orcid": "0009-0007-6892-6570",
+    "institution": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
+    "nipc": "518706451"
+  },
+  "policy": {
+    "canonicalForge": "Codeberg/Forgejo",
+    "githubRole": "non-canonical working and migration surface",
+    "conceptualEnrichmentByAgent": false,
+    "technicalMetadataEnrichment": true,
+    "automaticPublicPublication": false,
+    "automaticFundingApplication": false,
+    "irreversibleActionsRequireExplicitHumanAuthorisation": true,
+    "dualHumanValidationAppliesToDataCollectionOnly": true
+  },
+  "platforms": {
+    "codeberg": {
+      "role": "canonical source forge",
+      "api": "https://codeberg.org/api/v1",
+      "capabilities": [
+        "repository creation and maintenance",
+        "Git branches and tags",
+        "releases",
+        "Forgejo workflows",
+        "webhooks",
+        "issues and pull requests",
+        "canonical source URL for preservation and citation"
+      ],
+      "automatic": [
+        "sanitised allowlist export",
+        "fast-forward canonical updates",
+        "metadata and provenance receipts",
+        "canonical health checks"
+      ]
+    },
+    "softwareHeritage": {
+      "role": "long-term source-code preservation",
+      "api": "https://archive.softwareheritage.org/api/1/origin/save/",
+      "automatic": [
+        "request Save Code Now after verified Codeberg update",
+        "record request id and status",
+        "record SWHID only after it is returned or independently verified"
+      ]
+    },
+    "zenodo": {
+      "role": "research-software deposit, versioned research record and DOI",
+      "api": "https://zenodo.org/api",
+      "automatic": [
+        "prepare metadata",
+        "prepare release archive",
+        "search existing draft",
+        "create a draft when authorised credentials are present and no matching draft exists"
+      ],
+      "humanGate": [
+        "publish deposition",
+        "publish a new version"
+      ]
+    },
+    "datacite": {
+      "role": "DOI metadata graph, discovery and optional direct DOI registration",
+      "publicApi": "https://api.datacite.org",
+      "automatic": [
+        "generate DataCite 4.7 payload",
+        "validate metadata",
+        "discover and verify DOI records",
+        "track provenance and related identifiers"
+      ],
+      "conditional": [
+        "direct DOI creation/update requires a DataCite Repository account or API key tied to one"
+      ],
+      "preferredPath": "use Zenodo DOI unless a direct DataCite Repository integration is deliberately enabled"
+    },
+    "openaire": {
+      "role": "research discovery graph and linkage to grants, organisations and outputs",
+      "api": "https://api.openaire.eu/graph/v3/research-products",
+      "automatic": [
+        "generate OpenAIRE-compatible software profile",
+        "verify harvesting after Zenodo/DataCite publication",
+        "record OpenAIRE graph identifier when discovered"
+      ],
+      "depositStrategy": "prefer trusted-source harvesting through Zenodo/DataCite rather than duplicate direct deposit"
+    },
+    "orcid": {
+      "role": "persistent researcher identity and attribution",
+      "record": "https://orcid.org/0009-0007-6892-6570",
+      "automatic": [
+        "validate canonical ORCID",
+        "read public record when API credentials exist",
+        "prepare work metadata from DOI/release"
+      ],
+      "conditional": [
+        "writing works/funding/affiliations requires ORCID Member API and the record holder's OAuth permission"
+      ],
+      "humanGate": [
+        "one-time OAuth authorisation if automatic ORCID write is to be enabled"
+      ]
+    }
+  },
+  "agent": {
+    "system": "Mistral",
+    "function": "technical orchestration and consistency checking",
+    "mustNot": [
+      "invent concepts",
+      "rewrite research foundations",
+      "change authorship",
+      "declare legal compliance without evidence",
+      "make funding eligibility decisions",
+      "publish irreversible records without explicit gate"
+    ]
+  }
+}
