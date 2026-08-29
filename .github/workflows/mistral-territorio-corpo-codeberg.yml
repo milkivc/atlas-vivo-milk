@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 15
     env:
       CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
-      CODEBERG_USER: milkivc
+      CODEBERG_USER: associacaomilk
       CODEBERG_REPO: atlas-vivo-milk
       CODEBERG_BRANCH: territorio-do-corpo
       MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
@@ -78,8 +78,8 @@ jobs:
             'You are the Mistral execution agent for Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte. '
             'Validate one bounded Git migration operation from GitHub to Codeberg/Forgejo. '
             f"State={state}; GitHub SHA={os.environ['LOCAL_SHA']}; Codeberg SHA={os.environ['REMOTE_SHA']}. "
-            'Never force-push, delete refs, rewrite history, or change Codeberg master. '
-            'The only permitted target is branch territorio-do-corpo. '
+            'Target repository is codeberg.org/associacaomilk/atlas-vivo-milk and target branch is territorio-do-corpo. '
+            'Never force-push, delete refs, rewrite history, or modify Codeberg main/master. '
             f'Return exactly: {expected}'
           )
           request=urllib.request.Request(
@@ -142,6 +142,7 @@ jobs:
           previous_codeberg_sha=${REMOTE_SHA:-none}
           force_push=0
           deleted_refs=0
+          main_modified=0
           master_modified=0
           EOF
           cat migration-receipts/codeberg-territorio-do-corpo.txt
