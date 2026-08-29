@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://milk.local/schemas/training-library.schema.json",
+  "title": "IA MILK Training Library",
+  "type": "object",
+  "required": ["training_id", "created_at", "source_corpora", "entries", "non_closure"],
+  "properties": {
+    "training_id": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string"},
+    "source_corpora": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_id", "source_type"],
+        "properties": {
+          "source_id": {"type": "string"},
+          "source_type": {"enum": ["BOOK", "ARTICLE", "IMAGE", "AUDIO", "VIDEO", "MANUSCRIPT", "FIELD_NOTE", "OTHER"]},
+          "author": {"type": ["string", "null"]},
+          "title": {"type": ["string", "null"]},
+          "locator": {"type": ["string", "null"]},
+          "provenance": {"type": ["string", "null"]}
+        },
+        "additionalProperties": true
+      }
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["entry_id", "entry_type", "body"],
+        "properties": {
+          "entry_id": {"type": "string"},
+          "entry_type": {
+            "enum": [
+              "SOURCE",
+              "CONCEPT",
+              "CONTRADICTION",
+              "QUESTION",
+              "SILENCE",
+              "METAMORPHOSIS",
+              "ALLEGORY",
+              "DOCUMENTED_RELATION",
+              "INFERENCE",
+              "HYPOTHESIS",
+              "CONNECTION",
+              "DISCONNECTION",
+              "UNRESOLVED",
+              "GESTURE",
+              "IMAGE",
+              "SOUND",
+              "OBJECT",
+              "ABSURD",
+              "OTHER"
+            ]
+          },
+          "body": {},
+          "source_refs": {"type": "array", "items": {"type": "string"}},
+          "parent_entry_refs": {"type": "array", "items": {"type": "string"}},
+          "agent_id": {"type": ["string", "null"]},
+          "confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+          "confidence_scope": {"enum": ["FACTUAL_PROVENANCE_ONLY", "NOT_APPLICABLE"]},
+          "status": {"enum": ["OPEN", "SUSPENDED", "ABANDONED", "REAPPEARED", "UNRESOLVED", "DOCUMENTED"]},
+          "closed_meaning": {"const": false}
+        },
+        "additionalProperties": true
+      }
+    },
+    "non_closure": {
+      "type": "object",
+      "required": ["conclusion_required", "silence_valid", "binary_resolution_required", "unplaced_material_preserved"],
+      "properties": {
+        "conclusion_required": {"const": false},
+        "silence_valid": {"const": true},
+        "binary_resolution_required": {"const": false},
+        "unplaced_material_preserved": {"const": true}
+      }
+    }
+  },
+  "additionalProperties": true
+}
