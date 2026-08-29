@@ -1,0 +1,96 @@
+{
+  "schema": "milk_codeberg_public_export_v1",
+  "canonicalForge": {
+    "service": "Codeberg",
+    "platformSoftware": "Forgejo",
+    "owner": "associacaomilk",
+    "repository": "atlas-vivo-milk",
+    "branch": "territorio-do-corpo",
+    "role": "authoritative_source_of_truth"
+  },
+  "source": {
+    "repository": "milkivc/atlas-vivo-milk",
+    "branch": "work/territorio-do-corpo-codeberg-20260829",
+    "role": "non_canonical_working_or_migration_surface"
+  },
+  "publicationPolicy": {
+    "defaultDeny": true,
+    "preservePrivateHistory": false,
+    "forcePush": false,
+    "createRepositoryIfMissing": true,
+    "visibility": "public",
+    "softwareHeritageAfterVerifiedPush": true,
+    "metadataTargets": [
+      "DataCite 4.7",
+      "OpenAIRE Research Product / Software",
+      "FIWARE / NGSI-LD",
+      "Software Heritage"
+    ]
+  },
+  "include": [
+    "LICENSE",
+    "CITATION.cff",
+    "README.md",
+    "FUNDING.md",
+    "GOVERNANCE.md",
+    "CONTRIBUTORS.md",
+    "CONTRIBUTING.md",
+    "CODE_OF_CONDUCT.md",
+    "metadata/territorio-do-corpo/**",
+    "metadata/governance/mistral-system-card.json",
+    "metadata/generated/territorio-do-corpo/**",
+    "scripts/interoperability/**",
+    "scripts/funding/**",
+    "src/territorial-reader/funding/**",
+    "src/territorial-reader/hypothesis/**",
+    "src/territorial-reader/tests/**",
+    "config/funding-sources.json",
+    ".forgejo/workflows/**"
+  ],
+  "exclude": [
+    ".github/**",
+    "**/.env",
+    "**/.env.*",
+    "**/*credential*",
+    "**/*credentials*",
+    "**/*secret*",
+    "**/*password*",
+    "**/*token*.yaml",
+    "**/*token*.yml",
+    "**/*token*.json",
+    "**/*cpanel*",
+    "**/*nextcloud*",
+    "**/*minio*",
+    "ops/**",
+    "infra/**",
+    "secrets/**",
+    "scripts/migration/**",
+    "src/territorial-reader/databases/**",
+    "src/territorial-reader/documentary/**",
+    "src/territorial-reader/epistemic-constitution/**",
+    "src/territorial-reader/metrologies/**",
+    "src/territorial-reader/ontology/**",
+    "src/territorial-reader/processors/**",
+    "src/territorial-reader/scrapers/**",
+    "src/territorial-reader/territory/**"
+  ],
+  "forbiddenContentPatterns": [
+    "-----BEGIN PRIVATE KEY-----",
+    "-----BEGIN OPENSSH PRIVATE KEY-----",
+    "AWS_SECRET_ACCESS_KEY=",
+    "MISTRAL_API_KEY=",
+    "CODEBERG_TOKEN=",
+    "ZENODO_TOKEN=",
+    "NEXTCLOUD_PASSWORD=",
+    "CPANEL_PASSWORD="
+  ],
+  "orchestration": {
+    "system": "Mistral",
+    "role": "bounded technical orchestrator",
+    "mayAddConceptualContent": false,
+    "mayChangeAuthorship": false,
+    "mayPublishOutsideAllowlist": false,
+    "mayForcePush": false,
+    "humanAuthority": "Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)"
+  }
+}
