@@ -38,9 +38,21 @@
     "spdx": "EUPL-1.2",
     "url": "https://spdx.org/licenses/EUPL-1.2.html"
   },
-  "repositories": {
-    "githubWorkingSource": "https://github.com/milkivc/atlas-vivo-milk/tree/work/territorio-do-corpo-codeberg-20260829",
-    "codebergPublicTarget": "https://codeberg.org/associacaomilk/atlas-vivo-milk"
+  "forge": {
+    "canonical": {
+      "service": "Codeberg",
+      "platformSoftware": "Forgejo",
+      "repository": "https://codeberg.org/associacaomilk/atlas-vivo-milk",
+      "gitOrigin": "https://codeberg.org/associacaomilk/atlas-vivo-milk.git",
+      "role": "authoritative_source_of_truth"
+    },
+    "auxiliary": [
+      {
+        "service": "GitHub",
+        "repository": "https://github.com/milkivc/atlas-vivo-milk/tree/work/territorio-do-corpo-codeberg-20260829",
+        "role": "non_canonical_working_or_migration_surface"
+      }
+    ]
   },
   "identifiers": {
     "doi": null,
@@ -58,7 +70,9 @@
     "OpenAIRE",
     "Software Heritage",
     "FIWARE",
-    "NGSI-LD"
+    "NGSI-LD",
+    "Forgejo",
+    "Codeberg"
   ],
   "fundingDiscoveryTags": [
     "cultural heritage",
@@ -127,6 +141,7 @@
     "implementationDecisionAuthority": "NONE"
   },
   "publicationBoundary": {
+    "canonicalForgeMustBeCodebergForgejo": true,
     "publicExportByAllowlist": true,
     "fullRepositoryMirror": false,
     "excludePrivateInfrastructureTopology": true,
