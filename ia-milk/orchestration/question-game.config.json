@@ -1,0 +1,57 @@
+{
+  "id": "ia-milk-question-game-v1",
+  "mode": "question_only_dialogue",
+  "canonical_rules": {
+    "assertions_in_dialogue": false,
+    "answers_must_end_as_questions": true,
+    "concepts_remain_open": true,
+    "author_impersonation": false,
+    "aggressive_language": false,
+    "coercive_language": false,
+    "humiliation": false,
+    "winner_or_final_authority": false,
+    "forced_synthesis": false,
+    "participant_may_remain_silent": true,
+    "participant_may_exit": true,
+    "source_grounding_required": true,
+    "hypotheses_must_be_marked": true,
+    "unsupported_historical_connections_forbidden": true
+  },
+  "agents": [
+    {"role": "source_guardian", "instances": "one_per_corpus", "memory": "source_scoped"},
+    {"role": "question_weaver", "task": "route one corpus question into another corpus as a new question"},
+    {"role": "difference_keeper", "task": "preserve incompatibility, ambiguity and non-equivalence"},
+    {"role": "wonder_router", "task": "select improbable but explicitly hypothetical crossings"},
+    {"role": "gentle_referee", "task": "reject assertion, aggression, coercion, profiling, closure and repetition"},
+    {"role": "provenance_guard", "task": "verify attribution and source status before a concept enters play"}
+  ],
+  "turn_protocol": [
+    "select_source_guardian_A",
+    "generate_question_A_from_source_A",
+    "select_source_guardian_B_without_forcing_similarity",
+    "generate_question_B_that_questions_question_A_from_source_B",
+    "run_difference_keeper",
+    "run_provenance_guard",
+    "run_gentle_referee",
+    "route_to_next_source"
+  ],
+  "anti_loop": {
+    "semantic_repetition_threshold": 0.82,
+    "on_repetition": "change_axis_or_source",
+    "required_axis_shift_every_n_turns": 2,
+    "allow_disconnection_as_result": true
+  },
+  "ethical_boundary": {
+    "human_behavior_knowledge_purpose": ["care", "respect", "accessibility", "autonomy", "wellbeing"],
+    "forbidden_uses": ["vulnerability_exploitation", "covert_manipulation", "identity_profiling", "compulsive_engagement", "psychological_authority_from_pattern"]
+  },
+  "bibliography_gates": {
+    "plinio_reference": "UNRESOLVED_DO_NOT_GUESS",
+    "cartier_bresson_o_imaginario_segundo_a_natureza": "VERIFIED_TITLE_AUTHOR_PAIR",
+    "o_mundo_de_sofia": "JOSTEIN_GAARDER",
+    "george_steiner": "SEPARATE_NODE_WORK_TO_BE_CONFIRMED",
+    "hannah_arendt_eichmann_em_jerusalem": "SOURCE_NODE",
+    "orwell_a_revolucao_dos_bichos": "SOURCE_NODE",
+    "kundera_o_livro_do_riso_e_do_esquecimento": "SOURCE_NODE"
+  }
+}
