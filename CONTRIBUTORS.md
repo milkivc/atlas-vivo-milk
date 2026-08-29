@@ -1,21 +1,19 @@
-# Contributors
+# Autoria e contributos
 
-This file links contributors to their ORCID identifiers for proper attribution.
+## Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)
 
-## Format
-- Name: Full Name
-- ORCID: https://orcid.org/XXXX-XXXX-XXXX-XXXX
-- Role: [Researcher/Artist/Developer/Contributor]
-- Affiliation: [Organization]
+- Fundador da Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte.
+- Idealizador das propostas e autor principal do trabalho tratado neste repositório.
+- Autor da implementação aqui documentada, salvo indicação expressa em ficheiro ou commit específico.
 
-## Current Contributors
+## Nuno Filipe Fernandes Vieira Cabral e Araújo
 
-Please add your information below:
+- Autor de mais de 150 fotografias de Portugal integradas no acervo/trabalho da Associação.
+- Criador da página web da Associação MILK.
+- Colaborador pontual em trabalhos desenvolvidos com Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer).
+- Segunda validação humana na **recolha de dados**.
+- A função de dupla validação da recolha de dados não constitui, por si só, coautoria da implementação, do código ou da arquitectura técnica.
 
----
+## Regra de proveniência
 
-Example:
-- Name: Associação MILK
-- ORCID: [Add ORCID ID]
-- Role: Organization
-- Affiliation: Associação MILK - Movimento de Intervenções e Linguagens Kulturais e Arte
+Autoria de software, fotografia, conteúdo, desenho, investigação, recolha e validação são registadas separadamente. Nenhuma função é inferida automaticamente a partir de outra.
