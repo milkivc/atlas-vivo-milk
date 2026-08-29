@@ -38,11 +38,20 @@
   "version": "2.1.0-territorio-do-corpo",
   "doi": null,
   "swhid": null,
-  "repositories": {
-    "githubWorkingSource": "https://github.com/milkivc/atlas-vivo-milk/tree/work/territorio-do-corpo-codeberg-20260829",
-    "codebergPublicTarget": "https://codeberg.org/associacaomilk/atlas-vivo-milk"
+  "forge": {
+    "canonical": {
+      "service": "Codeberg",
+      "software": "Forgejo",
+      "repository": "https://codeberg.org/associacaomilk/atlas-vivo-milk",
+      "role": "authoritative_source_of_truth"
+    },
+    "auxiliary": {
+      "github": "https://github.com/milkivc/atlas-vivo-milk/tree/work/territorio-do-corpo-codeberg-20260829",
+      "role": "non_canonical_working_or_migration_surface"
+    }
   },
   "publicationPolicy": {
+    "canonicalForgeMustBeCodebergForgejo": true,
     "publicExportByAllowlist": true,
     "fullRepositoryMirror": false,
     "humanReviewBeforeDeposit": true
