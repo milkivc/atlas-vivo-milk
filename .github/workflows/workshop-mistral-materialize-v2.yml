@@ -1,4 +1,4 @@
-name: WORKSHOP - Materialize IA MILK v2
+name: WORKSHOP - Materialize IA MILK v3 — Anti-Flattening
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - workshop/mistral-exec-20260817
     paths:
       - '.github/workflows/workshop-mistral-materialize-v2.yml'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -13,11 +14,11 @@ permissions:
 jobs:
   materialize:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 12
     env:
       MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
     steps:
-      - name: Reconcile Mistral Libraries and Agents
+      - name: Reconcile and harden Mistral Libraries and Agents
         shell: bash
         run: |
           set -euo pipefail
@@ -25,57 +26,100 @@ jobs:
           python - <<'PY'
           import json, os, urllib.request, urllib.error
           BASE='https://api.mistral.ai/v1'; KEY=os.environ['MISTRAL_API_KEY']
+
           def req(method,path,body=None):
-              data=None if body is None else json.dumps(body).encode()
+              data=None if body is None else json.dumps(body,ensure_ascii=False).encode('utf-8')
               r=urllib.request.Request(BASE+path,data=data,method=method)
-              r.add_header('Authorization','Bearer '+KEY); r.add_header('Accept','application/json')
+              r.add_header('Authorization','Bearer '+KEY)
+              r.add_header('Accept','application/json')
               if data is not None:r.add_header('Content-Type','application/json')
               try:
-                  with urllib.request.urlopen(r,timeout=45) as resp:
-                      raw=resp.read().decode(); return resp.status,json.loads(raw) if raw else {}
+                  with urllib.request.urlopen(r,timeout=60) as resp:
+                      raw=resp.read().decode('utf-8','replace')
+                      return resp.status,json.loads(raw) if raw else {}
               except urllib.error.HTTPError as e:
-                  raw=e.read().decode('utf-8','replace'); print('API_ERROR',method,path,e.code,raw[:800]); raise
+                  raw=e.read().decode('utf-8','replace')
+                  print('API_ERROR',method,path,e.code,raw[:1200])
+                  raise
+
           def items(o):
               if isinstance(o,list):return o
               if isinstance(o,dict):return o.get('data') or o.get('results') or []
               return []
+
           specs=[
-            ('IA MILK — Governação e Memória Canónica','Memória relacional, continuidade, Hermeneuta-C1, regras epistémicas, proveniência e gates humanos.'),
-            ('IA MILK — Corpus Cultural e Territorial','PERCEPTIO, festas, folclore, ofícios, dispositivos, curadorias e repertórios culturais autorizados.'),
-            ('IA MILK — Engenharia e Interoperabilidade','Arquitectura técnica, dados, APIs, Codeberg/Forgejo, PTServidor, Nextcloud, interoperabilidade e preservação.'),
-            ('IA MILK — Referências Científicas','Artigos e fontes científicas verificadas para apoio académico, metodológico e de património cultural.')]
-          _,o=req('GET','/libraries?page_size=100'); ex={x.get('name'):x for x in items(o)}; libs={}; newlibs=0
+            ('IA MILK — Governação e Memória Canónica','Memória relacional, continuidade, Hermeneuta-C1, regras epistémicas, proveniência, genealogia e gates humanos.'),
+            ('IA MILK — Corpus Cultural e Territorial','PERCEPTIO, festas, folclore, ofícios, dispositivos, curadorias, experiências, variantes e repertórios culturais autorizados.'),
+            ('IA MILK — Engenharia e Interoperabilidade','Arquitectura técnica, dados, APIs, Codeberg/Forgejo, PTServidor, Nextcloud, interoperabilidade, preservação e fixity.'),
+            ('IA MILK — Referências Científicas','Artigos e fontes científicas verificadas para apoio académico, metodológico, cultural e territorial.')]
+
+          _,o=req('GET','/libraries?page_size=100')
+          ex={x.get('name'):x for x in items(o)}; libs={}; newlibs=0
           for n,d in specs:
-              if n in ex: libs[n]=ex[n]['id']; print('LIB_REUSED',n,ex[n]['id'])
+              if n in ex:
+                  libs[n]=ex[n]['id']; print('LIB_REUSED',n,ex[n]['id'])
               else:
-                  _,x=req('POST','/libraries',{'name':n,'description':d}); libs[n]=x['id']; newlibs+=1; print('LIB_CREATED',n,x['id'])
-          rules=('Responder em português europeu. Preservar fonte, autoria, proveniência, genealogia e estado epistémico. '
-                 'Nunca inventar fonte, página, DOI, ISBN, autoria, licença, financiamento, validação ou publicação. '
-                 'Distinguir facto, inferência, hipótese, proposta, possibilidade e decisão humana. '
-                 'Nenhuma publicação, classificação sensível, decisão jurídica, institucional ou curatorial irreversível sem gate humano. '
-                 'Não criar perfis psicológicos, scoring humano, biometria, vigilância de participação ou geolocalização individual. '
-                 'SEER é termo canónico e não deve ser corrigido para ser. COSMICOXES e Cosmic Flow são entidades distintas. '
-                 'A camada pública nunca deve fornecer caminho inverso para a camada invisível.')
+                  _,x=req('POST','/libraries',{'name':n,'description':d})
+                  libs[n]=x['id']; newlibs+=1; print('LIB_CREATED',n,x['id'])
+
+          rules='''
+CONSTITUIÇÃO OPERATIVA MILK — TRAVA AUTORAL E ANTI-PLANIFICAÇÃO.
+Responder em português europeu quando produzir linguagem MILK.
+Preservar sempre fonte, autoria, proveniência, genealogia, data, versão, estado epistémico e relação entre variantes.
+NOME IGUAL NÃO SIGNIFICA DUPLICADO. Conteúdo semelhante não autoriza descarte. Versões homónimas podem ser estudo, teste, deriva, ensaio, bifurcação ou reelaboração e devem permanecer identificáveis.
+É proibido apagar, fundir, substituir ou declarar redundante uma dinâmica, curadoria, mecanismo, imagem verbal, gesto, personagem, objecto, sequência, temporalidade, materialidade, som, silêncio, desvio, humor, absurdo, tensão, ambiguidade, surpresa, conflito, ritmo ou detalhe autoral apenas para simplificar, organizar, resumir, profissionalizar ou tornar o texto institucionalmente mais palatável.
+REESCRITA É ADITIVA: pode corrigir factos verificáveis, expandir, aprofundar, ligar, tornar tecnicamente executável, interoperável, financiável ou acessível; não pode emagrecer a obra. Se uma revisão reduzir densidade, singularidade, estranheza, polissemia ou potência experiencial, deve falhar com status AUTHORIAL_FLATTENING_BLOCKED.
+LISTA NÃO SUBSTITUI CORPO. Bullet points, tabelas, taxonomias e resumos podem existir somente como índices auxiliares ao lado do corpo integral, nunca como sua substituição.
+A camada pública NÃO explica a teoria. A teoria trabalha no motor invisível; o público vive a experiência. Não converter autores, conceitos ou métodos em aula, legenda pedagógica ou explicação didáctica salvo pedido autoral explícito.
+Toda proposta de financiamento deve ser uma camada de correspondência separada: necessidade pública -> resposta MILK já existente -> evidência -> elegibilidade -> orçamento -> indicador. É proibido domesticar a criação para caber num edital.
+Antes de qualquer alteração a um ficheiro fonte, preservar snapshot exacto, source_hash e relação de derivação. A alteração nunca pode tornar irrecuperável o estado anterior.
+Quando comparar versões, produzir relação genealógica; não escolher automaticamente uma única versão final.
+Nunca inventar fonte, página, DOI, ISBN, autoria, licença, financiamento, validação, execução ou publicação.
+Distinguir facto, inferência, hipótese, proposta, possibilidade e decisão humana.
+Nenhuma publicação, classificação sensível, decisão jurídica, institucional ou curatorial irreversível sem gate humano.
+Não criar perfis psicológicos, scoring humano, biometria, vigilância de participação ou geolocalização individual.
+SEER é termo canónico e não deve ser corrigido para ser. SER POSSÍVEL e SEER POSSÍVEL permanecem distintos quando a fonte os distingue. COSMICOXES e Cosmic Flow são entidades distintas.
+A camada pública nunca deve fornecer caminho inverso para a camada invisível.
+REGRA DE OURO: melhorar significa aumentar potência sem retirar corpo. Perda autoral admissível = zero.
+'''.strip()
+
           G=libs[specs[0][0]]; C=libs[specs[1][0]]; E=libs[specs[2][0]]; R=libs[specs[3][0]]
           agents=[
-            ('MILK Sovereign Orchestrator','Orquestra a IA MILK; distribui tarefas aos especialistas; mantém intenção, relação e devolução.',[G,C,E,R]),
-            ('MILK Arquitecto','Arquitectura sistémica, camadas pública/invisível/física, dependências e anti-regressão.',[G,E]),
-            ('MILK Ontologia Protocolos Dados','Ontologias, modelos de dados, identificadores, grafos, proveniência e interoperabilidade semântica.',[G,E]),
-            ('MILK Codificador','Implementação técnica auditável, simples, reversível, testável e sem contaminar originais.',[E]),
-            ('MILK Revisão de Repositório','Auditoria de repositórios, genealogia, Codeberg/Forgejo canónico, dependências e risco de regressão.',[E,G]),
-            ('MILK Testes e Validação','Testes anti-regressão, integridade, fixity, contratos, acessibilidade e evidência de execução.',[E,G]),
-            ('MILK Documentação e Memória','Memória institucional, continuidade, documentação técnica/académica e rastreabilidade.',[G,R]),
-            ('MILK Conformidade','RGPD, AI Act, acessibilidade, direitos culturais, minimização, consentimento e gates humanos.',[G,R]),
-            ('MILK Excelência Académica Semântica','Hermeneuta-C1, rigor académico, genealogia conceptual, bibliografia verificável e semântica autoral.',[G,R,C]),
-            ('MILK Publicação Interoperável','Prepara Zenodo, ORCID, DataCite, Software Heritage e Codeberg sem publicar sem autorização específica.',[E,R,G])]
-          _,o=req('GET','/agents?page_size=100'); exa={x.get('name'):x for x in items(o)}; ids={}; newagents=0
+            ('MILK Sovereign Orchestrator','Orquestra a IA MILK; distribui tarefas aos especialistas; mantém intenção, relação, densidade e devolução.',[G,C,E,R]),
+            ('MILK Arquitecto','Arquitectura sistémica, camadas pública/invisível/física, dependências e anti-regressão sem domesticar a obra.',[G,E,C]),
+            ('MILK Ontologia Protocolos Dados','Ontologias, modelos de dados, identificadores, grafos, proveniência, variantes e interoperabilidade semântica.',[G,E,C]),
+            ('MILK Codificador','Implementação técnica auditável, reversível, testável e capaz de materializar experiências sem reduzir a dramaturgia autoral.',[E,C,G]),
+            ('MILK Revisão de Repositório','Auditoria de repositórios, genealogia, variantes, Codeberg/Forgejo canónico, dependências e risco de regressão.',[E,G,C]),
+            ('MILK Testes e Validação','Testes anti-regressão, fixity, acessibilidade, execução e testes específicos de perda autoral e planificação.',[E,G,C]),
+            ('MILK Documentação e Memória','Memória institucional e autoral, continuidade, genealogia, documentação técnica/académica e rastreabilidade sem transformar criação em relatório.',[G,R,C]),
+            ('MILK Conformidade','RGPD, AI Act, acessibilidade, direitos culturais, minimização, consentimento e gates humanos sem neutralizar a linguagem artística.',[G,R,C]),
+            ('MILK Excelência Académica Semântica','Hermeneuta-C1, rigor académico, genealogia conceptual, bibliografia verificável e defesa da semântica, ritmo e densidade autoral.',[G,R,C]),
+            ('MILK Publicação Interoperável','Prepara preservação e pegadas institucionais sem publicar sem autorização específica e sem converter a criação em catálogo burocrático.',[E,R,G,C])]
+
+          _,o=req('GET','/agents?page_size=100')
+          exa={x.get('name'):x for x in items(o)}; ids={}; created=0; updated=0
           for n,d,lids in agents:
-              if n in exa: ids[n]=exa[n]['id']; print('AGENT_REUSED',n,exa[n]['id']); continue
-              payload={'model':'mistral-medium-latest','name':n,'description':d,'instructions':rules+' Função específica: '+d,'tools':[{'type':'document_library','library_ids':lids}],'completion_args':{'temperature':0.2,'top_p':0.95}}
-              _,x=req('POST','/agents',payload); ids[n]=x['id']; newagents+=1; print('AGENT_CREATED',n,x['id'])
-          status,conv=req('POST','/conversations',{'agent_id':ids['MILK Sovereign Orchestrator'],'inputs':'Responde apenas com IA_MILK_RUNTIME_OK e nada mais.'})
+              instructions=rules+'\n\nFUNÇÃO ESPECÍFICA: '+d
+              body={'description':d,'instructions':instructions,'tools':[{'type':'document_library','library_ids':lids}],
+                    'completion_args':{'temperature':0.2,'top_p':0.95}}
+              if n in exa:
+                  aid=exa[n]['id']; ids[n]=aid
+                  _,x=req('PATCH','/agents/'+aid,body)
+                  updated+=1
+                  print('AGENT_HARDENED',n,aid,'version',x.get('version','unknown'))
+              else:
+                  payload={'model':'mistral-medium-latest','name':n,**body}
+                  _,x=req('POST','/agents',payload)
+                  ids[n]=x['id']; created+=1
+                  print('AGENT_CREATED',n,x['id'])
+
+          test_prompt='''Teste constitucional. Um editor propõe substituir uma curadoria longa, estranha, sensorial e contraditória por cinco bullets claros para candidatura. Responde apenas em JSON com status e rule. O status obrigatório é AUTHORIAL_FLATTENING_BLOCKED.'''
+          status,conv=req('POST','/conversations',{'agent_id':ids['MILK Sovereign Orchestrator'],'inputs':test_prompt})
           print('ORCHESTRATOR_CONVERSATION_HTTP',status)
           print('ORCHESTRATOR_CONVERSATION_ID',conv.get('conversation_id') or conv.get('id') or 'unknown')
-          print('SUMMARY_LIBRARIES_TOTAL',len(libs)); print('SUMMARY_LIBRARIES_CREATED',newlibs)
-          print('SUMMARY_AGENTS_TOTAL',len(ids)); print('SUMMARY_AGENTS_CREATED',newagents); print('IA_MILK_MATERIALIZED=true')
+          print('SUMMARY_LIBRARIES_TOTAL',len(libs))
+          print('SUMMARY_AGENTS_TOTAL',len(ids))
+          print('SUMMARY_AGENTS_CREATED',created)
+          print('SUMMARY_AGENTS_HARDENED',updated)
+          print('ANTI_FLATTENING_CONSTITUTION_INSTALLED=true')
           PY
