@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "purpose": "curated-reference ingestion for IA MILK",
+  "fields": {
+    "work_id": "stable local identifier",
+    "title": "verified work title",
+    "author": "verified author name",
+    "edition_note": "edition-specific note when known",
+    "source_cover": "Drive/file provenance of cover",
+    "bibliographic_facts": "source-backed facts only",
+    "author_context": "source-backed author context",
+    "critical_lenses": "plural scholarly interpretations with provenance",
+    "counter_readings": "contrasting/limiting interpretations",
+    "milk_competencies": "cognitive capabilities derived for MILK",
+    "territorial_relevance": "possible Atlas use, explicitly hypothesis unless evidenced",
+    "copyright_status": "public-domain/licensed/reference-only/unknown",
+    "source_registry": "list of citations/URLs/DOIs/authority ids",
+    "validation_state": "pending/reviewed/approved",
+    "training_eligibility": "retrieval-only/eval-only/fine-tune-candidate"
+  },
+  "rules": [
+    "Never infer the content of a book from its cover alone.",
+    "Do not ingest copyrighted full text without lawful rights.",
+    "Prefer bibliographic metadata, scholarly criticism, public-domain passages, licensed/open sources, and human-authored summaries.",
+    "Preserve disagreement between critics instead of collapsing it.",
+    "Separate bibliography, interpretation, hypothesis, and MILK application.",
+    "No authorial flattening: derived competencies must not replace the source work."
+  ]
+}
