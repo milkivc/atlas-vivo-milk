@@ -1,0 +1,61 @@
+{
+  "schema": "atlas_vivo_milk_funding_sources_v1",
+  "author": {
+    "name": "Eduardo Maurício Vieira Cabral e Araujo",
+    "artisticName": "Eduardo Mauer",
+    "orcid": "0009-0007-6892-6570"
+  },
+  "institution": "Associação MILK — Movimento de Intervenções e Linguagens Kulturais e Arte",
+  "sources": [
+    {
+      "id": "dgartes-open",
+      "authority": "DGARTES",
+      "url": "https://www.dgartes.gov.pt/pt/vnode/1",
+      "scope": ["arts", "digital-arts", "programming", "visual-arts", "performing-arts"]
+    },
+    {
+      "id": "eu-culture-calls",
+      "authority": "European Commission — Culture and Creativity",
+      "url": "https://culture.ec.europa.eu/funding/calls",
+      "scope": ["culture", "creative-europe", "heritage", "cross-border", "performing-arts"]
+    },
+    {
+      "id": "horizon-cluster2-heritage",
+      "authority": "European Research Executive Agency",
+      "url": "https://rea.ec.europa.eu/funding-and-grants/horizon-europe-cluster-2-culture-creativity-and-inclusive-society/european-cultural-heritage-and-cultural-and-creative-industries_en",
+      "scope": ["research", "innovation", "cultural-heritage", "creative-industries", "digital"]
+    },
+    {
+      "id": "eit-culture-creativity",
+      "authority": "EIT Culture & Creativity",
+      "url": "https://eit-culture-creativity.eu/your-opportunities/calls-funding",
+      "scope": ["innovation", "creative-tech", "culture", "accelerator"]
+    },
+    {
+      "id": "portugal2030-plan",
+      "authority": "Portugal 2030",
+      "url": "https://portugal2030.pt/plano-anual-de-avisos/",
+      "scope": ["territorial-cohesion", "culture", "heritage", "digital", "fedER"]
+    },
+    {
+      "id": "norte2030-open",
+      "authority": "NORTE 2030",
+      "url": "https://www.norte2030.pt/concursos/",
+      "scope": ["culture", "heritage", "inclusion", "territorial"]
+    },
+    {
+      "id": "alentejo2030-open",
+      "authority": "Alentejo 2030",
+      "url": "https://alentejo.portugal2030.pt/ajuda_category/candidaturas-a-apoios/",
+      "scope": ["culture", "heritage", "digital", "territorial"]
+    }
+  ],
+  "policy": {
+    "officialSourcesOnly": true,
+    "eligibilityDecision": false,
+    "fundingGuarantee": false,
+    "humanValidationRequired": true,
+    "dualHumanValidationRequired": true,
+    "validators": ["Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)", "Nuno"]
+  }
+}
