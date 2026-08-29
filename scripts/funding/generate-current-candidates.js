@@ -20,17 +20,17 @@ const result = discoverFundingCandidates(source.opportunities, {
 });
 
 const payload = {
-  schema: 'milk_funding_candidates_v1',
+  schema: 'milk_funding_candidates_v2',
   sourceAsOf: source.asOf,
   generatedAt: new Date().toISOString(),
   institution: source.institution,
   ...result,
   humanDecision: null,
-  dualHumanValidationRequired: true,
-  validators: [
-    'Eduardo Maurício Vieira Cabral e Araujo (Eduardo Mauer)',
-    'Nuno'
-  ]
+  humanReviewRequired: true,
+  automatedEligibilityDecision: false,
+  automatedApplication: false,
+  dualHumanValidationRequiredByDataCollectionRule: false,
+  note: 'A regra de dupla validação humana com Nuno aplica-se à recolha de dados, não à triagem ou implementação de financiamento.'
 };
 
 fs.mkdirSync(path.dirname(output), { recursive: true });
