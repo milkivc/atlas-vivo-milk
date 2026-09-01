@@ -7,6 +7,7 @@ import {
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const opening = document.querySelector('#opening');
 const territory = document.querySelector('#territory');
+const topbar = document.querySelector('.topbar');
 const enter = document.querySelector('#enterAtlas');
 const openingWord = document.querySelector('.opening-word');
 const experience = new AtlasExperienceMachine();
@@ -51,6 +52,7 @@ async function enterTerritory() {
   experience.send('territory_ready');
 
   opening.hidden = true;
+  topbar.hidden = false;
   territory.hidden = false;
   document.querySelector('.author-portal')?.focus();
 }
