@@ -1,37 +1,124 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "layer": "public",
   "canonical_origin": "https://atlas.associacaomilk.pt",
   "deprecated_public_origins": [
     "https://nuvem.associacaomilk.pt"
   ],
+  "source_precedence": "latest_direct_authorial_instruction_over_older_implementation",
   "experience_policy": {
     "explain_on_entry": false,
     "ask_on_entry": false,
+    "mandatory_choice_on_entry": false,
     "institutional_header_on_entry": false,
     "card_first_architecture": false,
     "dashboard_first_architecture": false,
+    "single_active_experience": true,
     "curiosity_first": true,
     "gesture_first": true,
     "discovery_first": true,
     "sensory_response_first": true,
+    "silence_is_valid": true,
+    "abandonment_is_valid": true,
+    "binary_resolution_required": false,
+    "closed_meaning_required": false,
     "accessibility_without_bureaucratic_onboarding": true,
     "consent_at_point_of_need": true,
     "public_reverse_link_to_invisible_layer": false
   },
-  "opening_sequence": [
-    "black",
-    "seal",
-    "gesture",
-    "cosmicoxes",
-    "cosmic_words",
-    "world_gesture",
-    "dissolve",
-    "globe",
-    "territorial_milks",
-    "ticket",
-    "discovery"
-  ],
-  "source_of_truth": "authorial public-layer corpus + validated public assets",
+  "visible_identity": {
+    "project_name_as_visible_heading": false,
+    "seal_or_milk_logomark": true,
+    "milk_watermark": "discreet_transient",
+    "authorial_assets_only": true,
+    "allowed_image_sources": [
+      "validated_user_artworks",
+      "validated_licensed_nuno_a_photographs"
+    ],
+    "asset_publication_requires_catalogue_and_rights": true
+  },
+  "opening": {
+    "initial_state": "cosmicoxes",
+    "forced_gate": false,
+    "transient_layers": [
+      "milk_seal_watermark"
+    ],
+    "possible_progression": [
+      "cosmicoxes",
+      "cosmic_words",
+      "world_gesture",
+      "dissolve",
+      "globe",
+      "territorial_milks",
+      "ticket",
+      "discovery"
+    ]
+  },
+  "authorial_portals": {
+    "primary": [
+      "galeria-diletante",
+      "cronicas-fuco",
+      "milk"
+    ],
+    "not_primary": [
+      "nuno-escuta",
+      "dado-100lado",
+      "reizinho-sainha"
+    ]
+  },
+  "operational_actions": {
+    "labels": [
+      "recolher",
+      "atlas",
+      "partilhar"
+    ],
+    "allowed_as_entry_gate": false
+  },
+  "ticket_contract": {
+    "actions": [
+      "brincar",
+      "convite",
+      "tentar_a_sorte"
+    ],
+    "brincar": "validated_authorial_dynamic_for_current_territory",
+    "convite": "validated_concrete_local_festival_invitation",
+    "tentar_a_sorte": "validated_cultural_territorial_experience",
+    "generic_random_fallback": false,
+    "nuno_direct_route": false,
+    "missing_territorial_evidence": "fail_closed"
+  },
+  "territorial_surface": {
+    "expected_parishes": 3258,
+    "expected_municipalities": 308,
+    "expected_festivals": 827,
+    "festivals_are_commercial_agenda": false,
+    "milks_are_georeferenced": true,
+    "milks_near_behavior": "translucent_luminous",
+    "milks_leave_behavior": "star_dust_dissolve",
+    "distinct_sound_signature": true,
+    "motion_and_sound_require_accessible_control": true
+  },
+  "nuno": {
+    "role": "public_contribution_only",
+    "main_portal": false,
+    "visible_outside_contribution": false,
+    "active_presence_signal": "pulsing_red_heart",
+    "photographs_separate_from_character_asset": true
+  },
+  "curatorial_runtime": {
+    "generic_card_is_final_form": false,
+    "generic_motor_is_final_form": false,
+    "distinct_authored_experience_required": true,
+    "physical_digital_relation_required": true,
+    "trimodal_experience_target": true,
+    "non_closure_required": true,
+    "human_validation_required": true
+  },
+  "document_boundary": {
+    "files_marked_do_not_publish_are_public_assets": false,
+    "raw_internal_history_is_public": false,
+    "validated_materialized_outputs_only": true
+  },
+  "source_of_truth": "latest reconciled authorial public-layer decisions + validated public assets",
   "publication_gate": "human_validation_required"
 }
