@@ -1,0 +1,11 @@
+{
+  "schema": "https://atlas.associacaomilk.pt/schemas/galeria-diletante-publica-v1.json",
+  "idioma": "pt-PT",
+  "dispositivo": "Galeria Diletante",
+  "camada": "publica",
+  "regra": "colisao_palavra_imagem_com_bilhete_pergunta",
+  "autoria_fotografica": "Nuno A.",
+  "publicacao_automatica": false,
+  "gate_humano": true,
+  "fotografias": []
+}
