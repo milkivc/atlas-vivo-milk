@@ -3,8 +3,10 @@ name: Sync Atlas public work to private Nextcloud
 on:
   workflow_dispatch:
   push:
-    branches: [master]
+    branches:
+      - work/atlas-webapp-20260902
     paths:
+      - 'deploy/atlas-public/**'
       - '.github/workflows/sync-atlas-public-work-nextcloud.yml'
 
 permissions:
@@ -24,10 +26,10 @@ jobs:
       NEXTCLOUD_APP_PASSWORD: ${{ secrets.NEXTCLOUD_APP_PASSWORD }}
       NEXTCLOUD_KEY: ${{ secrets.NEXTCLOUD_KEY }}
     steps:
-      - name: Checkout public Web App work branch
+      - name: Checkout current public Web App work branch
         uses: actions/checkout@v4
         with:
-          ref: work/public-experience-architecture-20260829
+          ref: ${{ github.ref_name }}
 
       - name: Install rclone
         run: |
@@ -120,16 +122,12 @@ jobs:
           os.chmod(cfg, 0o600)
           run(['rclone', '--config', str(cfg), 'lsd', remote + ':'], 'NEXTCLOUD_WEBDAV_PROBE_FAILED')
 
-          dest = 'NEXTCLOUD_ATLAS/CAMADA_PUBLICA_WEBAPP_WORK'
+          dest = 'NEXTCLOUD_ATLAS/CAMADA_PUBLICA_WEBAPP_WORK/work-atlas-webapp-20260902'
           run(['rclone', '--config', str(cfg), 'mkdir', f'{remote}:{dest}'], 'NEXTCLOUD_TARGET_PREPARE_FAILED')
-
-          # Copy-only: never delete remote files and never write to Google Drive/source.
           run([
               'rclone', '--config', str(cfg), 'copy', str(root), f'{remote}:{dest}',
               '--create-empty-src-dirs', '--no-traverse'
           ], 'NEXTCLOUD_UPLOAD_FAILED', capture=False)
-
-          # Read-back verification. --one-way allows prior preserved files to coexist remotely.
           run([
               'rclone', '--config', str(cfg), 'check', str(root), f'{remote}:{dest}',
               '--download', '--one-way'
@@ -144,5 +142,3 @@ jobs:
           print('source_writes=0')
           print('remote_deletes=0')
           PY
-
-# Trigger after workflow registration; target remains private Nextcloud staging only.
