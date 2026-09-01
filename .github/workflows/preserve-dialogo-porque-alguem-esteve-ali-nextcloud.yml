@@ -93,7 +93,9 @@ jobs:
                       if not base and not user and not password and '\n' not in raw:
                           password = raw
 
-              base = base or 'https://associacaomilk.pt/nuvem'
+              # PTServidor confirmou em 2026-08-30 que a instalação existente está em /nextcloud;
+              # não existe uma instalação válida em /nuvem nos backups recentes.
+              base = base or 'https://associacaomilk.pt/nextcloud'
               user = user or 'admin'
               if not password:
                   raise RuntimeError('NEXTCLOUD_CREDENTIALS_INCOMPLETE')
