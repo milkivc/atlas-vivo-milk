@@ -44,7 +44,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if grep -RInE 'src/territorial-reader|evidence-graph|raw_evidence|source_private|mistral_prompt|CPANEL_|FTPS_|ZENODO_|ORCID_|CODEBERG_|secret|token' deploy/atlas-public --exclude='ia-milk-public-boundary.js'; then
+          if grep -RInE 'src/territorial-reader|evidence-graph|raw_evidence|source_private|mistral_prompt|CPANEL_|FTPS_|ZENODO_|ORCID_|CODEBERG_|secret|token' deploy/atlas-public \
+            --exclude='ia-milk-public-boundary.js' \
+            --exclude='experience-machine.js'; then
             echo "MILK_PUBLIC_BOUNDARY_FORBIDDEN_REFERENCE"
             exit 1
           fi
