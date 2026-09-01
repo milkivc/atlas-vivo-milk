@@ -1,47 +1,88 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "layer": "public",
-  "product": "Atlas Vivo MILK — superfície pública canónica",
+  "surface": "MILK public authorial experience",
   "public_contract": {
-    "requirements_total": 540,
-    "opening_sequence": [
-      "selo_atlas",
-      "toque",
-      "cosmicoxes",
-      "particulas_palavras",
-      "globo",
-      "milks_territoriais",
-      "bilhete",
-      "descobertas"
-    ],
+    "contract_date": "2026-09-01",
+    "authorial_reconciliation": "latest_direct_instruction_wins",
+    "initial_state": "cosmicoxes",
+    "forced_opening_choice": false,
     "cosmicoxes_is_cosmic_flow": false,
+    "visible_project_name_heading": false,
+    "identity_surface": "seal_or_milk_logomark",
     "nuno_visibility": "collection_only",
-    "public_runtime_sources": [
-      "public-manifest.json",
-      "catalogo-publico-materializado.json"
-    ]
+    "main_authorial_portals": [
+      "galeria-diletante",
+      "cronicas-fuco",
+      "milk"
+    ],
+    "not_main_portals": [
+      "nuno-escuta",
+      "dado-100lado",
+      "reizinho-sainha"
+    ],
+    "ticket_actions": [
+      "brincar",
+      "convite",
+      "tentar_a_sorte"
+    ],
+    "ticket_actions_must_remain_semantically_distinct": true,
+    "generic_random_discovery": false,
+    "card_first_architecture": false,
+    "explanatory_landing": false,
+    "silence_valid": true,
+    "binary_resolution_required": false,
+    "closed_meaning_required": false,
+    "public_reverse_link_to_invisible_layer": false
+  },
+  "territorial_scope": {
+    "parishes": 3258,
+    "municipalities": 308,
+    "festivals": 827,
+    "festival_surface": "territorial_invitation_not_commercial_agenda",
+    "territorial_ticket_requires_concrete_validated_match": true,
+    "generic_fallback_when_match_missing": false
   },
   "curatorial_incorporation": {
-    "human_authorization": "received_2026-08-27",
-    "policy": "incorporar todas as curadorias após reconciliação de genealogia, autoria, direitos, forma pública e teste",
+    "policy": "distinct authored experiences after genealogy, authorship, rights, public form and human validation",
+    "generic_common_motor_is_not_final_implementation": true,
+    "trimodal_target": true,
+    "physical_digital_relation": true,
+    "non_closure": true,
     "incomplete_numbers_are_not_published_as_facts": true
   },
+  "assets_and_rights": {
+    "allowed_visible_sources": [
+      "validated_user_artworks",
+      "validated_licensed_nuno_a_photographs",
+      "validated_authorial_milk_assets"
+    ],
+    "nuno_photographs_require_explicit_rights_gate": true,
+    "catalogue_record_required": true,
+    "license_required": true,
+    "correct_logomarks_required": true,
+    "files_marked_do_not_publish_exposed": false
+  },
+  "runtime_sources": {
+    "existing": [
+      "public-manifest.json",
+      "public-runtime-config.json",
+      "catalogo-curatorial.json"
+    ],
+    "catalogo_curatorial_role": "curatorial_registry_only",
+    "territorial_materialized_dataset": "not_present_in_this_branch",
+    "territorial_actions_without_materialized_dataset": "fail_closed"
+  },
   "ai_milk": {
-    "role": "orquestração, verificação e preparação de produtos públicos",
+    "role": "orchestration_verification_and_public_output_preparation",
     "public_exposure": "materialized_outputs_only",
     "autonomous_publication": false,
-    "mistral_roles": 10,
-    "training_claim": "curriculum_and_evaluation_only"
+    "training_claim": "curriculum_and_evaluation_only",
+    "understanding_never_authorizes_manipulation": true
   },
   "human_validation": {
-    "status": "approved",
-    "approved_at": "2026-08-27",
-    "scope": "incorporação controlada das diretrizes e curadorias; publicação individual permanece sujeita a direitos e evidência"
-  },
-  "source_receipt": {
-    "algorithm": "SHA-256",
-    "sha256": "e684e2440f19be99015b79a278024080dbd841b4c21795322cbb57818a9d60a3",
-    "statement": "ATLAS_PUBLIC_CONTRACT_20260827|540|human-approved|no-private-link"
+    "status": "required",
+    "scope": "curatorial incorporation, rights, territorial evidence and publication"
   },
   "reverse_link_to_private": false
 }
