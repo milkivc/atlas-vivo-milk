@@ -1,4 +1,4 @@
-name: Sync Atlas public work to private Nextcloud
+name: Sync Atlas public work to private storage
 
 on:
   workflow_dispatch:
@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: atlas-public-nextcloud-work-sync
+  group: atlas-public-private-work-sync
   cancel-in-progress: false
 
 jobs:
@@ -25,6 +25,8 @@ jobs:
       NEXTCLOUD_USER: ${{ secrets.NEXTCLOUD_USER }}
       NEXTCLOUD_APP_PASSWORD: ${{ secrets.NEXTCLOUD_APP_PASSWORD }}
       NEXTCLOUD_KEY: ${{ secrets.NEXTCLOUD_KEY }}
+      PTSERVIDOR_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
+
     steps:
       - name: Checkout current public Web App work branch
         uses: actions/checkout@v4
@@ -36,7 +38,9 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq rclone
 
-      - name: Sync working copy to private Nextcloud and verify
+      - name: Try private Nextcloud WebDAV sync and readback
+        id: nextcloud
+        continue-on-error: true
         shell: bash
         run: |
           set -euo pipefail
@@ -142,3 +146,67 @@ jobs:
           print('source_writes=0')
           print('remote_deletes=0')
           PY
+
+      - name: Preserve Web App work in PTServidor private FTPS staging when Nextcloud is unavailable
+        if: steps.nextcloud.outcome == 'failure'
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$PTSERVIDOR_FTPS_PASSWORD" || { echo "::error::PTSERVIDOR_FTPS_PASSWORD missing"; exit 2; }
+          python - <<'PY'
+          import ftplib
+          import hashlib
+          import io
+          import os
+          import pathlib
+          import ssl
+
+          root = pathlib.Path('deploy/atlas-public')
+          password = os.environ['PTSERVIDOR_FTPS_PASSWORD'].strip()
+          remote_root = 'atlas-webapp-work/work-atlas-webapp-20260902'
+
+          ftp = ftplib.FTP_TLS(context=ssl.create_default_context(), timeout=120)
+          ftp.connect('troi.ptservidor.net', 21)
+          ftp.login('migration@associacaomilk.pt', password)
+          ftp.prot_p()
+
+          def ensure(path):
+              ftp.cwd('/')
+              for part in [p for p in path.split('/') if p]:
+                  try:
+                      ftp.mkd(part)
+                  except ftplib.all_errors:
+                      pass
+                  ftp.cwd(part)
+
+          def upload_and_verify(local, rel):
+              payload = local.read_bytes()
+              parent = pathlib.PurePosixPath(rel).parent.as_posix()
+              ensure(remote_root + ('/' + parent if parent != '.' else ''))
+              name = pathlib.PurePosixPath(rel).name
+              ftp.storbinary('STOR ' + name, io.BytesIO(payload), blocksize=1048576)
+              restored = bytearray()
+              ftp.retrbinary('RETR ' + name, restored.extend, blocksize=1048576)
+              if hashlib.sha256(payload).digest() != hashlib.sha256(bytes(restored)).digest():
+                  raise RuntimeError('FTPS_READBACK_MISMATCH ' + rel)
+
+          files = [p for p in root.rglob('*') if p.is_file()]
+          for local in files:
+              upload_and_verify(local, local.relative_to(root).as_posix())
+
+          ftp.quit()
+          print('PTSERVIDOR_PRIVATE_STAGING_VERIFIED')
+          print('destination=' + remote_root)
+          print('files=' + str(len(files)))
+          print('remote_deletes=0')
+          PY
+
+      - name: Report private staging route
+        shell: bash
+        run: |
+          if [ "${{ steps.nextcloud.outcome }}" = "success" ]; then
+            echo "PRIVATE_STAGING_ROUTE=nextcloud"
+          else
+            echo "PRIVATE_STAGING_ROUTE=ptservidor-ftps-fallback"
+            echo "::warning::Nextcloud WebDAV authentication still requires credential repair; Web App construction remains preserved in PTServidor private staging."
+          fi
