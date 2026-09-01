@@ -1,13 +1,192 @@
-const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,opening=document.querySelector('#opening'),territory=document.querySelector('#territory');
-document.querySelector('#enterAtlas').onclick=()=>{opening.classList.add('leaving');setTimeout(()=>{opening.hidden=true;territory.hidden=false;document.querySelector('.author-portal')?.focus()},reduced?10:520)};
-const closeBackdrop=d=>d.addEventListener('click',e=>{if(e.target===d)d.close()});
-const ticket=document.querySelector('#ticket'),ticketResponse=document.querySelector('#ticket-response');let catalogue=[];
-fetch('catalogo-curatorial.json',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()).then(d=>catalogue=Array.isArray(d.entradas)?d.entradas:[]).catch(()=>catalogue=[]);
-document.querySelectorAll('[data-ticket]').forEach(p=>p.onclick=()=>{ticketResponse.textContent='';ticket.showModal()});document.querySelector('.ticket-close').onclick=()=>ticket.close();closeBackdrop(ticket);
-const pick=f=>{const c=catalogue.filter(f);return c.length?c[Math.floor(Math.random()*c.length)]:null};
-document.querySelectorAll('[data-ticket-action]').forEach(b=>b.onclick=()=>{const k=b.dataset.ticketAction,item=k==='brincar'?pick(e=>e.familia==='jogo'):k==='convite'?pick(e=>e.id==='festas-827'||e.mecanica==='convidar'):pick(()=>true);ticketResponse.textContent=item?item.nome+' · '+item.convite:'o território ainda está a chegar'});
-function focusCuradoria(id,family){const locate=n=>{const card=document.querySelector('[data-curadoria="'+CSS.escape(id)+'"]');if(!card&&n>0)return setTimeout(()=>locate(n-1),120);if(!card)return;document.querySelector('[data-family="'+CSS.escape(family)+'"]')?.click();card.scrollIntoView({behavior:reduced?'auto':'smooth',block:'center'});setTimeout(()=>card.querySelector('[data-curadoria]')?.click(),reduced?20:500)};locate(20)}
-document.querySelectorAll('[data-focus-id]').forEach(p=>p.onclick=()=>focusCuradoria(p.dataset.focusId,p.dataset.focusFamily));
-const contribution=document.querySelector('#contribution'),nuno=document.querySelector('[data-contribute]'),trace=document.querySelector('#trace-text'),consent=document.querySelector('#trace-local'),save=document.querySelector('#trace-save'),status=document.querySelector('#trace-status'),key='atlas-milk-vestigio-local-v1';
-nuno.onclick=()=>{nuno.dataset.active='true';trace.value=localStorage.getItem(key)||'';consent.checked=false;save.disabled=true;status.textContent=trace.value?'rascunho local recuperado':'nenhum envio externo';contribution.showModal();trace.focus()};
-consent.onchange=()=>save.disabled=!consent.checked;save.onclick=()=>{if(!consent.checked)return;const v=trace.value.trim();v?localStorage.setItem(key,v):localStorage.removeItem(key);status.textContent=v?'ficou neste aparelho':'nenhum vestígio guardado'};document.querySelector('#trace-remove').onclick=()=>{localStorage.removeItem(key);trace.value='';status.textContent='retirado deste aparelho'};document.querySelector('.contribution-close').onclick=()=>contribution.close();contribution.addEventListener('close',()=>nuno.dataset.active='false');closeBackdrop(contribution);
+import {
+  AtlasExperienceMachine,
+  PUBLIC_STATES,
+  COSMIC_WORDS_SEED
+} from './experience-machine.js';
+
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const opening = document.querySelector('#opening');
+const territory = document.querySelector('#territory');
+const enter = document.querySelector('#enterAtlas');
+const openingWord = document.querySelector('.opening-word');
+const experience = new AtlasExperienceMachine();
+
+experience.setReducedMotion(reduced);
+document.documentElement.dataset.atlasState = experience.state;
+experience.addEventListener('atlas:state', event => {
+  document.documentElement.dataset.atlasState = event.detail.state;
+});
+
+const wait = ms => new Promise(resolve => setTimeout(resolve, reduced ? 0 : ms));
+
+async function enterTerritory() {
+  if (enter.disabled) return;
+  enter.disabled = true;
+
+  const firstEvent = reduced ? 'reduce_motion' : 'gesture';
+  if (!experience.send(firstEvent)) {
+    enter.disabled = false;
+    return;
+  }
+
+  if (reduced) {
+    openingWord.textContent = COSMIC_WORDS_SEED[0];
+  } else {
+    for (const word of COSMIC_WORDS_SEED) {
+      openingWord.textContent = word;
+      await wait(170);
+    }
+  }
+
+  experience.send('continue');
+  openingWord.textContent = 'o mundo cabe num gesto';
+  await wait(420);
+
+  experience.send('dissolve');
+  opening.classList.add('leaving');
+  await wait(620);
+
+  experience.send(reduced ? 'reduce_motion' : 'globe_ready');
+  await wait(80);
+  experience.send('territory_ready');
+
+  opening.hidden = true;
+  territory.hidden = false;
+  document.querySelector('.author-portal')?.focus();
+}
+
+enter.addEventListener('click', enterTerritory);
+
+const closeBackdrop = dialog => dialog.addEventListener('click', event => {
+  if (event.target === dialog) dialog.close();
+});
+
+const ticket = document.querySelector('#ticket');
+const ticketResponse = document.querySelector('#ticket-response');
+let catalogue = [];
+
+fetch('catalogo-curatorial.json', {cache: 'no-store'})
+  .then(response => response.ok ? response.json() : Promise.reject())
+  .then(data => catalogue = Array.isArray(data.entradas) ? data.entradas : [])
+  .catch(() => catalogue = []);
+
+function openTicket() {
+  if (experience.state !== PUBLIC_STATES.TERRITORIAL_MILKS) return;
+  if (!experience.send('open_ticket')) return;
+  ticketResponse.textContent = '';
+  ticket.showModal();
+}
+
+document.querySelectorAll('[data-ticket]').forEach(point => {
+  point.addEventListener('click', openTicket);
+});
+
+document.querySelector('.ticket-close').addEventListener('click', () => ticket.close());
+closeBackdrop(ticket);
+
+ticket.addEventListener('close', () => {
+  if (experience.state === PUBLIC_STATES.TICKET && experience.can('close_ticket')) {
+    experience.send('close_ticket');
+  } else if (experience.state === PUBLIC_STATES.DISCOVERY && experience.can('return_territory')) {
+    experience.send('return_territory');
+  }
+});
+
+const pick = predicate => {
+  const candidates = catalogue.filter(predicate);
+  return candidates.length ? candidates[Math.floor(Math.random() * candidates.length)] : null;
+};
+
+const contribution = document.querySelector('#contribution');
+const nuno = document.querySelector('[data-contribute]');
+const trace = document.querySelector('#trace-text');
+const consent = document.querySelector('#trace-local');
+const save = document.querySelector('#trace-save');
+const status = document.querySelector('#trace-status');
+const key = 'atlas-milk-vestigio-local-v1';
+
+function openContribution(origin = 'territory') {
+  experience.openContribution(origin);
+  nuno.dataset.active = 'true';
+  trace.value = localStorage.getItem(key) || '';
+  consent.checked = false;
+  save.disabled = true;
+  status.textContent = trace.value ? 'rascunho local recuperado' : 'nenhum envio externo';
+  if (!contribution.open) contribution.showModal();
+  trace.focus();
+}
+
+document.querySelectorAll('[data-ticket-action]').forEach(button => {
+  button.addEventListener('click', async () => {
+    const keyAction = button.dataset.ticketAction;
+    const eventName = keyAction === 'sorte' ? 'tentar_a_sorte' : keyAction;
+    const item = keyAction === 'brincar'
+      ? pick(entry => entry.familia === 'jogo')
+      : keyAction === 'convite'
+        ? pick(entry => entry.id === 'festas-827' || entry.mecanica === 'convidar')
+        : pick(() => true);
+
+    if (!experience.can(eventName)) return;
+    experience.send(eventName, {discoveryId: item?.id ?? null});
+    ticketResponse.textContent = item
+      ? `${item.nome} · ${item.convite}`
+      : 'o território ainda está a chegar';
+
+    if (eventName === 'tentar_a_sorte') {
+      await wait(520);
+      ticket.close();
+      openContribution('ticket:tentar_a_sorte');
+    }
+  });
+});
+
+function focusCuradoria(id, family) {
+  const locate = attempts => {
+    const card = document.querySelector(`[data-curadoria="${CSS.escape(id)}"]`);
+    if (!card && attempts > 0) return setTimeout(() => locate(attempts - 1), 120);
+    if (!card) return;
+    document.querySelector(`[data-family="${CSS.escape(family)}"]`)?.click();
+    card.scrollIntoView({behavior: reduced ? 'auto' : 'smooth', block: 'center'});
+    setTimeout(() => card.querySelector('[data-curadoria]')?.click(), reduced ? 20 : 500);
+  };
+  locate(20);
+}
+
+document.querySelectorAll('[data-focus-id]').forEach(portal => {
+  portal.addEventListener('click', () => {
+    const portalId = portal.dataset.focusId;
+    if (experience.state === PUBLIC_STATES.TERRITORIAL_MILKS && experience.can('open_portal')) {
+      experience.send('open_portal', {portalId, deviceId: portalId});
+    }
+    focusCuradoria(portalId, portal.dataset.focusFamily);
+  });
+});
+
+document.querySelector('#engine')?.addEventListener('close', () => {
+  if (experience.state === PUBLIC_STATES.CURATORIAL_DEVICE && experience.can('return_territory')) {
+    experience.send('return_territory');
+  }
+});
+
+nuno.addEventListener('click', () => openContribution('territory'));
+consent.addEventListener('change', () => save.disabled = !consent.checked);
+save.addEventListener('click', () => {
+  if (!consent.checked) return;
+  const value = trace.value.trim();
+  if (value) localStorage.setItem(key, value);
+  else localStorage.removeItem(key);
+  status.textContent = value ? 'ficou neste aparelho' : 'nenhum vestígio guardado';
+});
+
+document.querySelector('#trace-remove').addEventListener('click', () => {
+  localStorage.removeItem(key);
+  trace.value = '';
+  status.textContent = 'retirado deste aparelho';
+});
+
+document.querySelector('.contribution-close').addEventListener('click', () => contribution.close());
+contribution.addEventListener('close', () => {
+  nuno.dataset.active = 'false';
+  experience.closeContribution();
+});
+closeBackdrop(contribution);
