@@ -3,7 +3,7 @@ name: Atlas — fronteira pública e não-regressão
 on:
   push:
     branches:
-      - work/atlas-canonical-surface-20260827
+      - work/public-experience-architecture-20260829
     paths:
       - "deploy/atlas-public/**"
       - "tests/ia-milk-public-boundary.test.mjs"
@@ -26,9 +26,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+
       - name: Provar fronteira pública da IA MILK
         run: node tests/ia-milk-public-boundary.test.mjs
-      - name: Impedir referências invisíveis no pacote público
+
+      - name: Verificar sintaxe do runtime público
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check deploy/atlas-public/experience-machine.js
+          node --check deploy/atlas-public/atlas.js
+          node --check deploy/atlas-public/app.js
+          node --check deploy/atlas-public/curadorias.js
+          echo "ATLAS_PUBLIC_RUNTIME_SYNTAX_OK"
+
+      - name: Impedir referências técnicas privadas no pacote público
         shell: bash
         run: |
           set -euo pipefail
@@ -37,14 +49,27 @@ jobs:
             exit 1
           fi
           echo "MILK_PUBLIC_PACKAGE_ISOLATED"
-      - name: Confirmar manifesto e validação humana
+
+      - name: Confirmar contrato reconciliado sem fingir aprovação humana
         shell: bash
         run: |
+          set -euo pipefail
           node --input-type=module - <<'NODE'
           import manifest from "./deploy/atlas-public/public-manifest.json" with { type: "json" };
-          if (manifest.layer !== "public") throw new Error("layer inválida");
-          if (manifest.human_validation?.status !== "approved") throw new Error("gate humano em falta");
+          import runtime from "./deploy/atlas-public/public-runtime-config.json" with { type: "json" };
+
+          if (manifest.layer !== "public" || runtime.layer !== "public") throw new Error("layer pública inválida");
+          if (!new Set(["required", "approved"]).has(manifest.human_validation?.status)) throw new Error("estado do gate humano inválido");
           if (manifest.reverse_link_to_private !== false) throw new Error("ligação reversa proibida");
-          if (manifest.public_contract?.requirements_total !== 540) throw new Error("matriz 540 incompleta");
-          console.log("ATLAS_PUBLIC_MANIFEST_OK");
+          if (manifest.public_contract?.initial_state !== "cosmicoxes") throw new Error("estado inicial regressivo");
+          if (runtime.opening?.initial_state !== "cosmicoxes") throw new Error("runtime inicial regressivo");
+          if (manifest.public_contract?.generic_random_discovery !== false) throw new Error("fallback aleatório proibido");
+          if (runtime.ticket_contract?.generic_random_fallback !== false) throw new Error("bilhete genérico proibido");
+          if (runtime.ticket_contract?.missing_territorial_evidence !== "fail_closed") throw new Error("território deve falhar fechado");
+          if (manifest.public_contract?.nuno_visibility !== "collection_only") throw new Error("Nuno fora da recolha");
+          if (runtime.nuno?.visible_outside_contribution !== false) throw new Error("Nuno visível fora da contribuição");
+          if (manifest.public_contract?.cosmicoxes_is_cosmic_flow !== false) throw new Error("COSMICOXES colapsado em Cosmic Flow");
+
+          console.log("ATLAS_PUBLIC_RECONCILED_CONTRACT_OK");
+          console.log("human_validation=" + manifest.human_validation.status);
           NODE
