@@ -64,21 +64,38 @@ const closeBackdrop = dialog => dialog.addEventListener('click', event => {
 const ticket = document.querySelector('#ticket');
 const ticketResponse = document.querySelector('#ticket-response');
 let catalogue = [];
+let activeTerritory = null;
 
 fetch('catalogo-curatorial.json', {cache: 'no-store'})
   .then(response => response.ok ? response.json() : Promise.reject())
   .then(data => catalogue = Array.isArray(data.entradas) ? data.entradas : [])
   .catch(() => catalogue = []);
 
-function openTicket() {
-  if (experience.state !== PUBLIC_STATES.TERRITORIAL_MILKS) return;
-  if (!experience.send('open_ticket')) return;
+// A branch ainda não contém a materialização territorial validada.
+// Regra pública: sem evidência territorial concreta não há MILK fictícia,
+// bilhete genérico nem escolha aleatória de festa/dinâmica.
+const territorialPoints = [...document.querySelectorAll('[data-ticket]')];
+territorialPoints.forEach(point => {
+  point.hidden = true;
+  point.setAttribute('aria-hidden', 'true');
+  point.tabIndex = -1;
+});
+document.documentElement.dataset.territorial = 'blocked-until-materialized';
+
+function openTicket(record) {
+  if (!record || record.validated !== true) return false;
+  if (experience.state !== PUBLIC_STATES.TERRITORIAL_MILKS) return false;
+  if (!experience.send('open_ticket', {territoryId: record.id ?? null})) return false;
+  activeTerritory = record;
   ticketResponse.textContent = '';
   ticket.showModal();
+  return true;
 }
 
-document.querySelectorAll('[data-ticket]').forEach(point => {
-  point.addEventListener('click', openTicket);
+// Ponto de integração futuro: apenas um módulo territorial materializado e
+// validado pode chamar este evento. Não cria coordenadas nem conteúdos.
+window.addEventListener('atlas:validated-territory-request', event => {
+  openTicket(event.detail?.territory ?? null);
 });
 
 document.querySelector('.ticket-close').addEventListener('click', () => ticket.close());
@@ -90,12 +107,8 @@ ticket.addEventListener('close', () => {
   } else if (experience.state === PUBLIC_STATES.DISCOVERY && experience.can('return_territory')) {
     experience.send('return_territory');
   }
+  activeTerritory = null;
 });
-
-const pick = predicate => {
-  const candidates = catalogue.filter(predicate);
-  return candidates.length ? candidates[Math.floor(Math.random() * candidates.length)] : null;
-};
 
 const contribution = document.querySelector('#contribution');
 const nuno = document.querySelector('[data-contribute]');
@@ -118,21 +131,17 @@ function openContribution(origin = 'territory') {
 
 document.querySelectorAll('[data-ticket-action]').forEach(button => {
   button.addEventListener('click', async () => {
+    if (!activeTerritory?.validated) return;
+
     const keyAction = button.dataset.ticketAction;
     const eventName = keyAction === 'sorte' ? 'tentar_a_sorte' : keyAction;
-    const item = keyAction === 'brincar'
-      ? pick(entry => entry.familia === 'jogo')
-      : keyAction === 'convite'
-        ? pick(entry => entry.id === 'festas-827' || entry.mecanica === 'convidar')
-        : pick(() => true);
+    const action = activeTerritory.ticket?.[eventName] ?? null;
+    if (!action || action.validated !== true || !experience.can(eventName)) return;
 
-    if (!experience.can(eventName)) return;
-    experience.send(eventName, {discoveryId: item?.id ?? null});
-    ticketResponse.textContent = item
-      ? `${item.nome} · ${item.convite}`
-      : 'o território ainda está a chegar';
+    experience.send(eventName, {discoveryId: action.id ?? null});
+    ticketResponse.textContent = action.text ?? action.convite ?? '';
 
-    if (eventName === 'tentar_a_sorte') {
+    if (eventName === 'tentar_a_sorte' && action.allowContribution === true) {
       await wait(520);
       ticket.close();
       openContribution('ticket:tentar_a_sorte');
