@@ -21,11 +21,15 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
-      - name: Install current Mistral SDK
+      - name: Install stable Mistral SDK with agents extras
         run: |
           set -euo pipefail
           test -n "$MISTRAL_API_KEY"
-          python -m pip install --disable-pip-version-check -q 'mistralai>=2.9,<3'
+          python -m pip install --disable-pip-version-check -q 'mistralai[agents]==2.8.0'
+          python - <<'PY'
+          from mistralai.client import Mistral
+          print('MISTRAL_SDK_IMPORT=PASS')
+          PY
       - name: Provision Library + persistent specialist agents + handoffs
         run: python scripts/provision_mistral_curatorial_foundry.py
       - uses: actions/upload-artifact@v4
