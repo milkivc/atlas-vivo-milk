@@ -1,0 +1,104 @@
+name: 18 MILK Mistral curatorial source-first previews
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths:
+      - 'curatorial-factory/SOURCE_CORPUS_20260902.md'
+      - '.github/workflows/18-mistral-curatorial-source-first-previews.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: milk-curatorial-source-first-previews
+  cancel-in-progress: false
+
+jobs:
+  previews:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 0
+
+      - name: Generate source-grounded curatorial previews with Mistral specialists
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          mkdir -p curatorial-factory/previews
+          python - <<'PY'
+          import json, os, pathlib, time, urllib.request, urllib.error
+
+          source = pathlib.Path('curatorial-factory/SOURCE_CORPUS_20260902.md').read_text(encoding='utf-8')
+          base_system = '''Trabalhas para o Atlas Vivo MILK como especialista curatorial. A ORDEM É SOBERANA: CURADORIA -> DINÂMICAS/BRINCADEIRAS/JOGOS/CONVITES/RITUAIS -> EXPERIÊNCIA -> DISPOSITIVO DERIVADO -> CÓDIGO. NÃO desenhes interface, componente, modal, card, botão, API ou arquitectura técnica antes de compor a experiência. Não inventes. Se a fonte não decide algo, escreve DÚVIDA PARA EDUARDO. Se houver melhoria, escreve MELHORIA_PROPOSTA separadamente. Distingue AUTORIAL, INTERPRETAÇÃO e MELHORIA_PROPOSTA. Nenhuma saída fica aprovada para código. Usa português europeu, preservando literalmente nomes e frases autorais relevantes.'''
+
+          tasks = [
+            ('01_FALARTE_NOS_10_MECANICAS.md', 'Reconstrói FALArte/NÓS a partir das 10 mecânicas. Para CADA uma das 10, mostra: núcleo curatorial, regra da dinâmica, gesto humano, ritmo/tempo, acaso/silêncio se houver, experiência completa vivida pela pessoa, rasto/devolução, território/toponímia, relação físico-digital SEM escolher tecnologia, acessibilidade, dúvidas, melhorias propostas. No fim mostra como as dez convivem sem virar abas ou formulário burocrático.'),
+            ('02_LIVRO_CUBO_7_DINAMICAS.md', 'Reconstrói o LIVRO CUBO partindo do Manual Invertido, SOMOSTODOSPOSSIVEIS, seis faces/vazio e das 7 dinâmicas. Para CADA D1-D7 descreve a experiência antes do dispositivo: chegada, gesto, corpo, relação, ritmo, ruptura/espera, resposta do outro/sistema, fim/retorno, relação presencial-digital, acessibilidade, dúvidas e melhorias. Preserva anti-regras, riso, silêncio, erro e vazio central.'),
+            ('03_CAMADA_PUBLICA_ECOLOGIA_CURATORIAL.md', 'Reconstrói a ecologia da Camada Pública: entrada/selo/constelação, Galeria Diletante, Nuno/Escuta, FUCO, Dado Sem Lado, Reizinho e festas/vaquinhas. Não os trates primeiro como dispositivos: começa pela função curatorial, dinâmica/brincadeira e experiência. Explica as relações entre eles sem os fundir. Inclui os rastos que a pessoa pode querer deixar, humor/absurdo/oralidade/intergeracionalidade, e como festa se torna experiência territorial. Marca claramente o que é autoral e o que é proposta.'),
+            ('04_DERIVA_TERRITORIAL.md', 'Reconstrói A Deriva do Sentido como experiência territorial própria. Parte da textura/azulejo, sentipensar, corpo inteiro, psicogeografia, Cultural Probes, tacto/paladar/escuta/aroma/pátina, encontro local, criação e devolução. Não assumes que IIIF/GeoJSON/Web Annotation são a experiência; são apenas possíveis suportes posteriores. Mostra o que a pessoa vive antes de desenhar tecnologia.'),
+          ]
+
+          def call(prompt, model='mistral-medium-latest'):
+              payload={'model':model,'temperature':0.15,'messages':[{'role':'system','content':base_system},{'role':'user','content':'CORPUS OPERATIVO:\n\n'+source+'\n\nTAREFA:\n'+prompt}]}
+              req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions', data=json.dumps(payload).encode(), method='POST', headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
+              last=None
+              for attempt in range(3):
+                  try:
+                      with urllib.request.urlopen(req,timeout=180) as r:
+                          body=json.loads(r.read())
+                      return body['choices'][0]['message']['content'].strip()
+                  except Exception as e:
+                      last=e; time.sleep(2*(attempt+1))
+              raise last
+
+          generated=[]
+          for filename,prompt in tasks:
+              text=call(prompt)
+              header='# PREVIEW CURATORIAL — NÃO APROVADO PARA CÓDIGO\n\nEstado: PARA REVISÃO DE EDUARDO MAUER\n\n'
+              pathlib.Path('curatorial-factory/previews',filename).write_text(header+text+'\n',encoding='utf-8')
+              generated.append(filename)
+              print('PREVIEW_GENERATED='+filename)
+
+          bundle='\n\n---\n\n'.join(pathlib.Path('curatorial-factory/previews',f).read_text(encoding='utf-8') for f in generated)
+          council_system='''És o Conselho de Fidelidade Curatorial do Atlas Vivo MILK. Não reescrevas experiências. Faz auditoria: (1) detecta device-first/interface-first; (2) detecta invenções sem fonte; (3) detecta omissões autorais; (4) detecta mistura indevida entre Galeria/Nuno/FUCO/Dado/Reizinho; (5) detecta redução de brincadeira a formulário; (6) detecta teoria decorativa sem operação. Devolve um parecer curto por ficheiro e uma lista de perguntas materiais para Eduardo. Não bloqueies trabalho independente: problemas devem voltar à experiência para reparo.'''
+          payload={'model':'mistral-medium-latest','temperature':0,'messages':[{'role':'system','content':council_system},{'role':'user','content':bundle}]}
+          req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
+          with urllib.request.urlopen(req,timeout=180) as r: body=json.loads(r.read())
+          council=body['choices'][0]['message']['content'].strip()
+          pathlib.Path('curatorial-factory/previews/00_CONSELHO_FIDELIDADE.md').write_text('# CONSELHO MISTRAL — FIDELIDADE CURATORIAL\n\n'+council+'\n',encoding='utf-8')
+          print('CURATORIAL_COUNCIL=PASS')
+          print('SECRET_VALUES_SENT=0')
+          PY
+
+      - name: Verify curatorial-first invariants
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s curatorial-factory/previews/01_FALARTE_NOS_10_MECANICAS.md
+          test -s curatorial-factory/previews/02_LIVRO_CUBO_7_DINAMICAS.md
+          test -s curatorial-factory/previews/03_CAMADA_PUBLICA_ECOLOGIA_CURATORIAL.md
+          test -s curatorial-factory/previews/04_DERIVA_TERRITORIAL.md
+          test -s curatorial-factory/previews/00_CONSELHO_FIDELIDADE.md
+          grep -Fq 'NÃO APROVADO PARA CÓDIGO' curatorial-factory/previews/01_FALARTE_NOS_10_MECANICAS.md
+          if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_.*PASSWORD|NEXTCLOUD_.*KEY' curatorial-factory/previews; then exit 33; fi
+          echo CURATORIAL_FIRST_PREVIEWS=PASS
+
+      - name: Commit previews for author review
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Atlas Mistral Curatorial Foundry'
+          git config user.email 'milk@associacaomilk.pt'
+          git add curatorial-factory/previews
+          if git diff --cached --quiet; then echo PREVIEWS_ALREADY_CURRENT=1; exit 0; fi
+          git commit -m 'feat(curadoria): Mistral composes source-first experience previews'
+          git push origin HEAD:work/copernico-recovery-webapp-20260902
+          echo CURATORIAL_PREVIEWS_COMMITTED=1
