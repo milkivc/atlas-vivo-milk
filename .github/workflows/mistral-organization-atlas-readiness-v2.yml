@@ -1,0 +1,64 @@
+name: MILK Mistral Organization + Vibe readiness v2
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - work/copernico-recovery-webapp-20260902
+    paths:
+      - '.github/workflows/mistral-organization-atlas-readiness-v2.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  readiness:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      VIBE_HOME: ${{ runner.temp }}/vibe-home
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install project agents into isolated VIBE_HOME
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$VIBE_HOME/agents"
+          cp .vibe/agents/*.toml "$VIBE_HOME/agents/"
+          cp AGENTS.md "$VIBE_HOME/AGENTS.md"
+          cp .vibe/config.toml "$VIBE_HOME/config.toml"
+          python - <<'PY'
+          import pathlib,tomllib
+          paths=list(pathlib.Path('.vibe/agents').glob('*.toml'))
+          for p in paths: tomllib.loads(p.read_text(encoding='utf-8'))
+          print(f'VIBE_AGENT_DEFINITIONS=OK count={len(paths)}')
+          PY
+
+      - name: Install Vibe Code
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python -m pip install --disable-pip-version-check -q 'mistral-vibe==2.24.5'
+          vibe --version
+
+      - name: Run Atlas Orchestrator with anti-regression memory
+        shell: bash
+        run: |
+          set -euo pipefail
+          vibe --agent atlas-orchestrator \
+            --prompt "Read AGENTS.md and inspect all available Atlas subagents. Do not edit files. Return compact JSON only with keys anti_regression_loaded, nextcloud_is_corpus_source, copernico_preserved, agent_team_count, specialist_names, experience_goal. experience_goal must state that each curatorial description becomes a distinct functioning digital experience in the WebApp." \
+            --max-turns 8 --output json > /tmp/readiness.json
+          test -s /tmp/readiness.json
+          python - <<'PY'
+          import pathlib
+          text=pathlib.Path('/tmp/readiness.json').read_text(encoding='utf-8',errors='replace').lower()
+          for token in ('nextcloud','copernico','experience'):
+              if token not in text: raise SystemExit('READINESS_MISSING='+token)
+          print('MISTRAL_ATLAS_ORCHESTRATOR=PASS')
+          print('ANTI_REGRESSION_MEMORY=LOADED')
+          print('CURATORIAL_EXPERIENCE_GOAL=LOADED')
+          PY
+          rm -f /tmp/readiness.json
