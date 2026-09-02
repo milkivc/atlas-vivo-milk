@@ -1,0 +1,32 @@
+name: MILK alternate Drive bearer probe
+on:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths: ['.github/workflows/drive-somostodos-bearer-probe.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    env:
+      S: ${{ secrets.DRIVE_SOMOSTODOSPOSSIVEIS }}
+    steps:
+      - name: Drive API status only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os, urllib.request, urllib.error
+          tok=os.environ.get('S','').strip()
+          req=urllib.request.Request('https://www.googleapis.com/drive/v3/files?pageSize=1&fields=files(id)',headers={'Authorization':'Bearer '+tok})
+          try:
+              with urllib.request.urlopen(req,timeout=30) as r:
+                  code=r.status
+                  r.read(1024)
+          except urllib.error.HTTPError as e:
+              code=e.code
+          except Exception:
+              print('ALT_DRIVE_BEARER_STATUS=NETWORK_ERROR')
+              raise SystemExit(0)
+          print('ALT_DRIVE_BEARER_STATUS='+str(code))
+          PY
