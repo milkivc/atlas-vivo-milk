@@ -1,0 +1,109 @@
+/* Atlas Vivo MILK — superfície pública experiencial v2
+   Override cirúrgico: preserva COPÉRNICO, dados territoriais e motores existentes. */
+
+/* A entrada começa em preto, com o selo apenas pressentido. */
+html[data-atlas-state="cosmicoxes"] body{
+  background:#020204;
+}
+html[data-atlas-state="cosmicoxes"] #cosmos{
+  opacity:.08;
+}
+.opening-seal{
+  width:clamp(88px,14vw,160px);
+  height:auto;
+  object-fit:contain;
+  opacity:.13;
+  filter:grayscale(1) brightness(1.35) drop-shadow(0 0 24px rgba(255,255,255,.08));
+  transition:opacity .8s ease,filter .8s ease,transform .8s ease;
+  margin:0 0 1.8rem;
+}
+html[data-atlas-state="cosmicoxes"] .cosmicoxes,
+html[data-atlas-state="cosmicoxes"] .opening-word,
+html[data-atlas-state="cosmicoxes"] .copernicus{
+  opacity:0;
+  pointer-events:none;
+}
+html[data-atlas-state="cosmic_words"] .opening-seal,
+html[data-atlas-state="world_gesture"] .opening-seal,
+html[data-atlas-state="dissolve"] .opening-seal{
+  opacity:0;
+  transform:scale(.88);
+}
+html[data-atlas-state="cosmic_words"] .cosmicoxes,
+html[data-atlas-state="cosmic_words"] .opening-word,
+html[data-atlas-state="cosmic_words"] .copernicus,
+html[data-atlas-state="world_gesture"] .cosmicoxes,
+html[data-atlas-state="world_gesture"] .opening-word,
+html[data-atlas-state="world_gesture"] .copernicus{
+  opacity:1;
+  transition:opacity .75s ease;
+}
+.opening-word{
+  min-height:1.35em;
+  margin:.45rem 0 1.55rem;
+  font:400 clamp(2.3rem,7vw,6.4rem)/.92 Georgia,"Times New Roman",serif;
+  letter-spacing:-.045em;
+  max-width:min(90vw,980px);
+  text-wrap:balance;
+}
+
+/* Os três portais autorais são presença, não menu de dashboard. */
+.author-portals{
+  width:min(30vw,270px);
+  gap:1.2rem;
+}
+.author-portal[data-focus-id="milk"] img{
+  width:min(90%,190px);
+  filter:drop-shadow(0 0 24px rgba(255,255,255,.22));
+}
+.author-portal[data-focus-id="milk"] span{
+  letter-spacing:.22em;
+}
+
+/* A superfície não apresenta grelha/catalogação como navegação principal.
+   Os motores continuam no DOM para activação pelos dispositivos/portais. */
+.public-runtime-registry{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  overflow:hidden!important;
+  clip:rect(0 0 0 0)!important;
+  clip-path:inset(50%)!important;
+  white-space:nowrap!important;
+  pointer-events:none!important;
+}
+.public-runtime-registry button,
+.public-runtime-registry textarea,
+.public-runtime-registry input,
+.public-runtime-registry a{
+  pointer-events:none!important;
+  tabindex:-1;
+}
+
+/* COPÉRNICO ocupa o centro real da experiência territorial. */
+.copernico-stage{
+  min-height:100svh;
+  padding-top:max(5.5rem,env(safe-area-inset-top));
+}
+.copernico-shell{
+  min-height:calc(100svh - 5.5rem);
+}
+
+@media(max-width:720px){
+  .author-portals{
+    position:relative;
+    left:auto;
+    top:auto;
+    width:100%;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    align-items:end;
+    margin:0 0 1.2rem;
+  }
+  .author-portal img{height:84px;object-position:center}
+  .author-portal{text-align:center}
+  .author-portal span{font-size:.62rem}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .opening-seal,.cosmicoxes,.opening-word,.copernicus{transition:none!important}
+}
