@@ -1,13 +1,12 @@
-name: MILK Mistral Corpus + Sitejet Orchestration
+name: MILK Mistral Canonical Opening Fix
 
 on:
   push:
     branches:
       - work/mistral-sitejet-orchestration-20260902
     paths:
-      - 'AGENTS.md'
-      - '.vibe/**'
-      - 'docs/agent-input/**'
+      - '.vibe/agents/atlas-opening-fix.toml'
+      - '.vibe/prompts/atlas-opening-fix.md'
       - '.github/workflows/mistral-sitejet-corpus-build.yml'
   workflow_dispatch:
 
@@ -15,13 +14,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: milk-mistral-sitejet-orchestration
+  group: milk-mistral-canonical-opening-fix
   cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 30
     env:
       MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
       CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
@@ -43,51 +42,41 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -f AGENTS.md
+          test -f .vibe/agents/atlas-opening-fix.toml
+          test -f .vibe/prompts/atlas-opening-fix.md
           test -f docs/ATLAS_CAMADA_PUBLICA_EXPERIENCIA_CANONICA_20260829.md
-          test -f docs/ATLAS_PUBLIC_SURFACE_CANONICAL_CONTRACT_20260827.md
-          test -f migration/PUBLIC_LAYER_SOURCE_MANIFEST_20260829.json
-          test -f docs/agent-input/ATLAS_EXECUTION_PACK_20260902.md
-          test -f deploy/atlas-public/experience-machine.js
           test -f deploy/atlas-public/public-runtime-config.json
+          test -f deploy/atlas-public/experience-machine.js
+          test -f deploy/atlas-public/index.html
+          test -f deploy/atlas-public/atlas.js
           node --check deploy/atlas-public/experience-machine.js
           node --check deploy/atlas-public/atlas.js
-          node --check deploy/atlas-public/app.js
           node --test tests/ia-milk-public-boundary.test.mjs
-          echo 'CANONICAL_SOURCE_GATE=OK'
+          echo 'CANONICAL_OPENING_SOURCE_GATE=OK'
 
-      - name: PTServidor cPanel Sitejet read-only capability probe
+      - name: PTServidor Sitejet read-only readiness
         shell: bash
         run: |
           set -euo pipefail
           TOKEN="${CPANEL_API_TOKEN:-${CPANEL_TOKEN:-}}"
           USER="${CPANEL_USER:-associ16}"
           HOST="${CPANEL_HOST:-troi.ptservidor.net}"
-          [ -n "${MISTRAL_API_KEY:-}" ] && echo 'MISTRAL_API_KEY_PRESENT=YES' || echo 'MISTRAL_API_KEY_PRESENT=NO'
-          [ -n "$TOKEN" ] && echo 'CPANEL_API_TOKEN_PRESENT=YES' || echo 'CPANEL_API_TOKEN_PRESENT=NO'
           if [ -z "$TOKEN" ]; then
-            echo 'CPANEL_SITEJET_PROBE=SKIPPED_NO_TOKEN'
+            echo 'CPANEL_SITEJET_READINESS=BLOCKED_NO_API_TOKEN'
             exit 0
           fi
           echo '::add-mask::'$TOKEN
-          auth=(-H "Authorization: cpanel ${USER}:${TOKEN}")
-          STATUS="$(curl -sS --max-time 25 -o /tmp/cpanel-features.json -w '%{http_code}' "${auth[@]}" "https://${HOST}:2083/execute/Features/list_features" || true)"
-          echo "CPANEL_FEATURES_HTTP=$STATUS"
-          SITEJET_STATUS="$(curl -sS --max-time 25 -o /tmp/sitejet-info.json -w '%{http_code}' "${auth[@]}" "https://${HOST}:2083/execute/Sitejet/get_all_user_sitejet_info?domain=atlas.associacaomilk.pt" || true)"
-          echo "CPANEL_SITEJET_INFO_HTTP=$SITEJET_STATUS"
-          if [ "$SITEJET_STATUS" = "200" ]; then
-            python - <<'PY'
+          STATUS="$(curl -sS --max-time 25 -o /tmp/sitejet-info.json -w '%{http_code}' -H "Authorization: cpanel ${USER}:${TOKEN}" "https://${HOST}:2083/execute/Sitejet/get_all_user_sitejet_info?domain=atlas.associacaomilk.pt" || true)"
+          echo "CPANEL_SITEJET_INFO_HTTP=$STATUS"
+          test "$STATUS" = "200" || exit 0
+          python - <<'PY'
           import json
-          try:
-              d=json.load(open('/tmp/sitejet-info.json',encoding='utf-8'))
-              result=d.get('result') or {}
-              rows=result.get('data') or []
-              print('SITEJET_ATLAS_RECORDS='+str(len(rows) if isinstance(rows,list) else 0))
-              print('SITEJET_API_ERRORS='+('YES' if result.get('errors') else 'NO'))
-          except Exception:
-              print('SITEJET_ATLAS_RECORDS=UNKNOWN')
+          d=json.load(open('/tmp/sitejet-info.json',encoding='utf-8'))
+          r=d.get('result') or {}
+          rows=r.get('data') or []
+          print('SITEJET_ATLAS_RECORDS='+str(len(rows) if isinstance(rows,list) else 0))
+          print('SITEJET_API_ERRORS='+('YES' if r.get('errors') else 'NO'))
           PY
-          fi
 
       - name: Install Mistral Vibe Code
         shell: bash
@@ -101,41 +90,43 @@ jobs:
           cp .vibe/prompts/*.md "$VIBE_HOME/prompts/"
           echo "VIBE_HOME=$VIBE_HOME" >> "$GITHUB_ENV"
 
-      - name: Mistral Vibe Code materializes one bounded canonical increment
+      - name: Mistral Code implements PRETO SELO TOQUE
         shell: bash
         run: |
           set -euo pipefail
-          vibe --trust --agent atlas-orchestrator \
-            --prompt "Lê AGENTS.md, docs/agent-input/ATLAS_EXECUTION_PACK_20260902.md, docs/ATLAS_CAMADA_PUBLICA_EXPERIENCIA_CANONICA_20260829.md, docs/ATLAS_PUBLIC_SURFACE_CANONICAL_CONTRACT_20260827.md, deploy/atlas-public/public-runtime-config.json e o código público existente. NÃO uses subagentes nesta fase: os revisores Mistral independentes correm depois. Escolhe UMA única discrepância concreta, de alto impacto e comprovada entre o contrato canónico e a implementação actual; implementa apenas a correcção mínima dessa discrepância em deploy/atlas-public e/ou tests. Não inventes conteúdo, dados territoriais, coordenadas, festivais, assets, perguntas ou dinâmicas. Não publiques. Não alteres catálogo curatorial nem fontes canónicas. Executa apenas os testes necessários para essa alteração e termina a missão assim que a alteração e os testes estiverem completos." \
-            --max-turns 22 --output json > /tmp/mistral-vibe-corpus-build.json
-          test -s /tmp/mistral-vibe-corpus-build.json
+          vibe --trust --agent atlas-opening-fix \
+            --prompt "Executa somente a missão do teu system prompt: materializa PRETO → SELO → TOQUE antes do COSMICOXES existente. Lê apenas as fontes e ficheiros indicados, faz a alteração mínima, executa os testes e termina." \
+            --max-turns 14 --output json > /tmp/mistral-opening.json
+          test -s /tmp/mistral-opening.json
 
-      - name: Deterministic non-regression gate
+      - name: Deterministic opening non-regression gate
         shell: bash
         run: |
           set -euo pipefail
           CHANGED="$(git diff --name-only)"
           echo "$CHANGED"
-          test -n "$CHANGED" || { echo '::error::Mistral produced no code delta'; exit 20; }
+          test -n "$CHANGED" || { echo '::error::Mistral produced no opening delta'; exit 20; }
           while IFS= read -r f; do
             case "$f" in
-              deploy/atlas-public/*|tests/*) ;;
+              deploy/atlas-public/experience-machine.js|deploy/atlas-public/index.html|deploy/atlas-public/atlas.js|deploy/atlas-public/styles.css|tests/*) ;;
               *) echo "::error::Forbidden changed path: $f"; exit 21;;
             esac
           done <<< "$CHANGED"
-          find deploy/atlas-public -maxdepth 1 -name '*.js' -print0 | xargs -0 -n1 node --check
+          COUNT="$(printf '%s\n' "$CHANGED" | sed '/^$/d' | wc -l)"
+          test "$COUNT" -le 4 || { echo "::error::Too many changed files: $COUNT"; exit 22; }
+          node --check deploy/atlas-public/experience-machine.js
+          node --check deploy/atlas-public/atlas.js
           node --test tests/ia-milk-public-boundary.test.mjs
-          grep -Fq "COSMICOXES" deploy/atlas-public/experience-machine.js
-          grep -Fq "TICKET" deploy/atlas-public/experience-machine.js
-          grep -Fq "DISCOVERY" deploy/atlas-public/experience-machine.js
-          grep -Fq "CURATORIAL_DEVICE" deploy/atlas-public/experience-machine.js
-          grep -Fq "brincar" deploy/atlas-public/experience-machine.js
-          grep -Fq "convite" deploy/atlas-public/experience-machine.js
-          grep -Fq "tentar_a_sorte" deploy/atlas-public/experience-machine.js
+          grep -Fq 'COSMICOXES' deploy/atlas-public/experience-machine.js
+          grep -Fq 'selo-atlas.png' deploy/atlas-public/index.html
+          grep -Fq 'prefers-reduced-motion' deploy/atlas-public/atlas.js
+          grep -Fq 'brincar' deploy/atlas-public/experience-machine.js
+          grep -Fq 'convite' deploy/atlas-public/experience-machine.js
+          grep -Fq 'tentar_a_sorte' deploy/atlas-public/experience-machine.js
           git diff --check
-          git diff > /tmp/atlas-corpus-diff.patch
-          test -s /tmp/atlas-corpus-diff.patch
-          echo 'DETERMINISTIC_NON_REGRESSION=OK'
+          git diff > /tmp/opening.diff
+          test -s /tmp/opening.diff
+          echo 'CANONICAL_OPENING_NON_REGRESSION=OK'
 
       - name: Three independent Mistral evidence reviews
         shell: bash
@@ -144,36 +135,34 @@ jobs:
           python - <<'PY'
           import json, os, pathlib, urllib.request
           key=os.environ['MISTRAL_API_KEY'].strip()
-          diff=pathlib.Path('/tmp/atlas-corpus-diff.patch').read_text(encoding='utf-8')
-          pack=pathlib.Path('docs/agent-input/ATLAS_EXECUTION_PACK_20260902.md').read_text(encoding='utf-8')
+          diff=pathlib.Path('/tmp/opening.diff').read_text(encoding='utf-8')
           canon=pathlib.Path('docs/ATLAS_CAMADA_PUBLICA_EXPERIENCIA_CANONICA_20260829.md').read_text(encoding='utf-8')
           roles=[
-            ('curatorial_integrity','Procura perda de genealogia, achatamento de dispositivos, invenção de conteúdo ou transformação do Atlas em cards/menu.'),
-            ('runtime_accessibility','Procura regressões reais de teclado, reduced-motion, fallback textual, lifecycle e desempenho.'),
-            ('public_boundary','Procura exposição da camada não pública, credenciais, dados privados, publicação automática ou dados simulados apresentados como reais.')]
-          failed=[]; reviews=[]
+            ('opening_dramaturgy','Confirma que a alteração implementa PRETO → SELO → TOQUE antes de COSMICOXES e não cria onboarding/menu/header visual na entrada.'),
+            ('runtime_accessibility','Confirma activação por teclado/pointer/touch, foco utilizável e reduced-motion sem apagar significado.'),
+            ('public_boundary','Confirma que não foram adicionados dados, segredos, referências à camada não pública, publicação ou conteúdo inventado.')]
+          failed=[]
           for role,scope in roles:
               payload={'model':'mistral-medium-latest','temperature':0.0,'response_format':{'type':'json_object'},'messages':[
-                {'role':'system','content':f'És o agente Mistral {role} da MILK. {scope} Só podes criar blocker se citares uma linha adicionada do DIFF e ligares a uma regra explícita das FONTES. Responde JSON estrito com pass(boolean), blockers(array), checks(array).'},
-                {'role':'user','content':'FONTES:\n'+pack+'\n\nCANON:\n'+canon+'\n\nDIFF EXACTO:\n'+diff}]}
+                {'role':'system','content':f'És o revisor Mistral {role} da MILK. {scope} Só bloqueias com evidência literal no DIFF ligada à fonte. Responde JSON estrito com pass(boolean), blockers(array), checks(array).'},
+                {'role':'user','content':'FONTE CANÓNICA:\n'+canon+'\n\nDIFF EXACTO:\n'+diff}]}
               req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
               with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
-              review=json.loads(body['choices'][0]['message']['content']); review['role']=role; reviews.append(review)
-              print('MISTRAL_EVIDENCE_REVIEW='+json.dumps(review,ensure_ascii=False))
+              review=json.loads(body['choices'][0]['message']['content'])
+              print('MISTRAL_OPENING_REVIEW='+json.dumps({'role':role,**review},ensure_ascii=False))
               if review.get('pass') is not True or (review.get('blockers') or []): failed.append(role)
-          pathlib.Path('/tmp/mistral-evidence-reviews.json').write_text(json.dumps(reviews,ensure_ascii=False,indent=2),encoding='utf-8')
-          if failed: raise SystemExit('MISTRAL_REVIEW_BLOCKED='+','.join(failed))
-          print('MISTRAL_EVIDENCE_REVIEWS=3_OK')
+          if failed: raise SystemExit('MISTRAL_OPENING_BLOCKED='+','.join(failed))
+          print('MISTRAL_OPENING_REVIEWS=3_OK')
           PY
 
-      - name: Commit only the validated work branch delta
+      - name: Commit validated opening delta to work branch only
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'Associação MILK - Mistral Vibe Code'
           git config user.email 'milk@associacaomilk.pt'
           git add deploy/atlas-public tests
-          git commit -m 'feat(atlas): materialize bounded canonical public increment'
+          git commit -m 'feat(atlas): materialize canonical preto selo toque opening'
           git push origin HEAD:work/mistral-sitejet-orchestration-20260902
-          echo "MISTRAL_CORPUS_COMMIT=$(git rev-parse HEAD)"
+          echo "MISTRAL_OPENING_COMMIT=$(git rev-parse HEAD)"
           echo 'PRODUCTION_PUBLISH=NO'

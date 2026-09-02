@@ -1,0 +1,22 @@
+agent_type = "agent"
+display_name = "Atlas Opening Fix"
+description = "Executa uma única correcção canónica da abertura PRETO-SELO-TOQUE antes de COSMICOXES, sem delegação nem publicação."
+safety = "neutral"
+active_model = "mistral-medium-latest"
+system_prompt_id = "atlas-opening-fix"
+enabled_tools = ["read_file", "grep", "search_replace", "write_file", "bash"]
+
+[tools.read_file]
+permission = "always"
+
+[tools.grep]
+permission = "always"
+
+[tools.search_replace]
+permission = "always"
+
+[tools.write_file]
+permission = "always"
+
+[tools.bash]
+permission = "always"
