@@ -1,0 +1,127 @@
+name: 17 MILK Codestral authorial runtime hardening
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths: ['.github/workflows/17-codestral-authorial-runtime-hardening.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: milk-codestral-authorial-runtime-hardening
+  cancel-in-progress: false
+
+jobs:
+  codestral-hardening:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 0
+
+      - name: Baseline lock
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          node tests/ia-milk-public-boundary.test.mjs
+          node --check deploy/atlas-public/authorial-portals.js
+          cp deploy/atlas-public/authorial-portals.js /tmp/authorial-portals.before.js
+          sha256sum /tmp/authorial-portals.before.js
+          echo CODESTRAL_BASELINE=PASS
+
+      - name: Codestral — generate concrete technical replacement
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, pathlib, urllib.request
+          path=pathlib.Path('deploy/atlas-public/authorial-portals.js')
+          original=path.read_text(encoding='utf-8')
+          system='''És Mistral Codestral a trabalhar no runtime público do Atlas Vivo MILK. A autora acabou de ordenar produção na codificação das experiências. Isto autoriza manutenção TÉCNICA do runtime já existente, não autoriza criar nem alterar curadorias. Devolve SOMENTE o ficheiro JavaScript completo, sem markdown, sem explicações e sem cercas ```; preserva toda a dramaturgia, mecânicas, textos visíveis e assets. Não inventes conteúdo.'''
+          task='''Faz uma alteração mínima e concreta neste ficheiro, mantendo as três experiências exactamente como estão semanticamente. Implementa apenas engenharia:
+1. guarda o elemento que abriu o dialog e restaura o foco quando fecha, se ainda estiver ligado ao DOM;
+2. foco inicial só depois de showModal();
+3. helpers safeStorageGet/safeStorageSet/safeStorageRemove com try/catch e usa-os no Fucô;
+4. clamp x/y do pointer da Galeria entre 0 e largura/altura do campo;
+5. cleanup completo dos listeners por AbortController/signal ou equivalência explícita, para reabrir sem órfãos;
+6. não alterar textos, títulos, frases, assets, ids, classes ou mecânicas.
+Preserva literalmente: Escolhe sem autoridade. Aproxima duas coisas. | Apanha uma frase pelo rabo. Continua-a. | somos todos possíveis | onde arte e afeto são casa e chão
+Não toques noutro ficheiro. Eis o ficheiro actual:\n\n'''+original
+          payload={'model':'codestral-latest','temperature':0,'messages':[{'role':'system','content':system},{'role':'user','content':task}]}
+          req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
+          with urllib.request.urlopen(req,timeout=180) as r: body=json.loads(r.read())
+          out=body['choices'][0]['message']['content'].strip()
+          if out.startswith('```'):
+              lines=out.splitlines()
+              if lines and lines[0].startswith('```'): lines=lines[1:]
+              if lines and lines[-1].strip()=='```': lines=lines[:-1]
+              out='\n'.join(lines).strip()
+          required=['Escolhe sem autoridade. Aproxima duas coisas.','Apanha uma frase pelo rabo. Continua-a.','somos todos possíveis','onde arte e afeto são casa e chão']
+          if any(x not in out for x in required): raise SystemExit('CODESTRAL_AUTHORIAL_TEXT_LOSS')
+          if 'MISTRAL_API_KEY' in out or 'PTSERVIDOR_' in out or 'NEXTCLOUD_' in out: raise SystemExit('CODESTRAL_SECRET_IDENTIFIER_LEAK')
+          if len(out) < int(len(original)*0.75) or len(out) > int(len(original)*1.5): raise SystemExit('CODESTRAL_REPLACEMENT_SIZE_ANOMALY')
+          path.write_text(out+'\n',encoding='utf-8')
+          print('CODESTRAL_REPLACEMENT_WRITTEN=1')
+          print('SECRET_VALUES_SENT_TO_CODESTRAL=0')
+          PY
+          test -n "$(git diff --name-only -- deploy/atlas-public/authorial-portals.js)"
+          echo CODESTRAL_EDIT=REAL
+
+      - name: Strict scope and semantic locks
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t changed < <(git diff --name-only)
+          printf 'CHANGED=%s\n' "${changed[*]}"
+          test "${#changed[@]}" -eq 1
+          test "${changed[0]}" = 'deploy/atlas-public/authorial-portals.js'
+          grep -Fq 'Escolhe sem autoridade. Aproxima duas coisas.' deploy/atlas-public/authorial-portals.js
+          grep -Fq 'Apanha uma frase pelo rabo. Continua-a.' deploy/atlas-public/authorial-portals.js
+          grep -Fq 'somos todos possíveis' deploy/atlas-public/authorial-portals.js
+          grep -Fq 'onde arte e afeto são casa e chão' deploy/atlas-public/authorial-portals.js
+          grep -Eq 'safeStorage(Get|Set|Remove)' deploy/atlas-public/authorial-portals.js
+          grep -Fq 'AbortController' deploy/atlas-public/authorial-portals.js
+          node --check deploy/atlas-public/authorial-portals.js
+          node tests/ia-milk-public-boundary.test.mjs
+          git diff --check
+          total=$(git diff --numstat -- deploy/atlas-public/authorial-portals.js | awk '{print $1+$2}')
+          echo CODESTRAL_DIFF_LINES="$total"
+          test "$total" -le 180
+          echo STRICT_SCOPE_SEMANTIC_LOCK=PASS
+
+      - name: Independent Mistral fidelity review
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, subprocess, urllib.request
+          diff=subprocess.check_output(['git','diff','--','deploy/atlas-public/authorial-portals.js'],text=True)
+          payload={'model':'mistral-medium-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[
+            {'role':'system','content':'Revê um diff do runtime Atlas Vivo MILK. A única autorização é manutenção técnica de experiências já existentes. Bloqueia qualquer mudança de texto visível, mecânica, dramaturgia, asset, conteúdo curatorial, genericização ou segredo. Permite somente foco, cleanup/lifecycle, storage resiliente e clamp de coordenadas. JSON estrito: {"pass":boolean,"blockers":[],"technical_improvements":[]}.'},
+            {'role':'user','content':diff}
+          ]}
+          req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
+          with urllib.request.urlopen(req,timeout=180) as r: body=json.loads(r.read())
+          review=json.loads(body['choices'][0]['message']['content'])
+          print('MISTRAL_REVIEW='+json.dumps(review,ensure_ascii=False))
+          if review.get('pass') is not True or review.get('blockers'): raise SystemExit('FIDELITY_REVIEW_BLOCKED')
+          print('MISTRAL_FIDELITY_REVIEW=PASS')
+          PY
+
+      - name: Commit and push validated Codestral code
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Atlas Mistral Codestral'
+          git config user.email 'milk@associacaomilk.pt'
+          git add deploy/atlas-public/authorial-portals.js
+          git commit -m 'feat(experiences): Codestral hardens authorial runtime lifecycle'
+          git push origin HEAD:work/copernico-recovery-webapp-20260902
+          echo CODESTRAL_CODE_COMMITTED=1
