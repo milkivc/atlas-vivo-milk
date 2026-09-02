@@ -1,0 +1,195 @@
+name: MILK Mistral curatorial runtime fix
+
+on:
+  push:
+    branches:
+      - work/copernico-recovery-webapp-20260902
+    paths:
+      - '.github/workflows/mistral-curatorial-runtime-fix.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: milk-mistral-curatorial-runtime-fix
+  cancel-in-progress: false
+
+jobs:
+  fix:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      BRANCH: work/copernico-recovery-webapp-20260902
+
+    steps:
+      - name: Checkout COPERNICO work branch
+        uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 1
+
+      - name: Preflight exact runtime boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          for f in deploy/atlas-public/falarte.js deploy/atlas-public/palavra-ritual.js deploy/atlas-public/falarte.css deploy/atlas-public/palavra-ritual.css; do
+            test -s "$f" || { echo "::error::MISSING:$f"; exit 10; }
+          done
+          cp deploy/atlas-public/falarte.js /tmp/falarte.before.js
+          cp deploy/atlas-public/palavra-ritual.js /tmp/palavra.before.js
+          cp deploy/atlas-public/falarte.css /tmp/falarte.before.css
+          cp deploy/atlas-public/palavra-ritual.css /tmp/palavra.before.css
+
+      - name: Install Mistral Vibe Code
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check mistral-vibe
+          vibe --version
+
+      - name: Mistral agent A — harden falARTE runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          set +e
+          vibe --trust --max-turns 18 --output json --prompt "MISSÃO FALARTE. Trabalha SOMENTE em deploy/atlas-public/falarte.js e, se estritamente necessário, deploy/atlas-public/falarte.css. Preserva exactamente as 10 mecânicas existentes, títulos, subtítulos, campos e dramaturgia. O rascunho TEXTUAL local em localStorage é permitido e desejado; ficheiros, nomes de ficheiros, paths, blobs e metadados de ficheiro NUNCA podem entrar no rascunho. Torna isso explícito no código com allowlist de campos persistíveis ou equivalente verificável. Não uses fetch, XMLHttpRequest, sendBeacon, WebSocket, EventSource nem endpoints externos. Remetente Ausente é experiência simbólica local: diz explicitamente na interface/código que não envia carta ao espaço, não envia a destinatário e não transmite pela rede; apenas transforma visualmente a carta neste aparelho. Mantém 13+, modo de autoria, preferência de publicação e curadoria humana futura. Adiciona operação de teclado nas 10 mecânicas com ArrowLeft/ArrowRight/Home/End, foco coerente e aria-live para mudanças de dia, ficheiro escolhido, guardar, limpar e transmutar. Respeita prefers-reduced-motion. Não exponhas Camada Invisível, contactos privados, segredos ou prompts. Não alteres outros ficheiros. Não faças commit." > /tmp/mistral-falarte.json
+          rc=$?
+          set -e
+          node --check deploy/atlas-public/falarte.js
+          echo "MISTRAL_AGENT_A_RC=$rc"
+
+      - name: Restore unrelated files after agent A
+        shell: bash
+        run: |
+          set -euo pipefail
+          git status --porcelain -uall
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            case "$f" in
+              deploy/atlas-public/falarte.js|deploy/atlas-public/falarte.css) ;;
+              *) git checkout HEAD -- "$f" 2>/dev/null || rm -rf -- "$f" ;;
+            esac
+          done < <(git status --porcelain -uall | awk '{print $2}')
+
+      - name: Mistral agent B — harden Palavra Ritual runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          set +e
+          vibe --trust --max-turns 18 --output json --prompt "MISSÃO PALAVRA RITUAL. Trabalha SOMENTE em deploy/atlas-public/palavra-ritual.js e, se estritamente necessário, deploy/atlas-public/palavra-ritual.css. Preserva a experiência autoral: palavra como corpo, textura, desvio, silêncio, reaparição e Cosmic Flow como método. O texto do utilizador não pode ser armazenado nem transmitido. Não uses localStorage, sessionStorage, IndexedDB, fetch, XMLHttpRequest, sendBeacon, WebSocket, EventSource ou endpoint externo. Implementa uma invariante explícita e verificável: cada token mantém literalmente o texto original da palavra; as operações encostar/desviar/silêncio/setas alteram apenas estado visual/posição e nunca substituem, removem ou reescrevem a palavra. Guarda o original em data-original-word e verifica/restaura textContent antes/depois das transformações. Mantém teclado por setas, aria-live e speechSynthesis local opcional. Respeita prefers-reduced-motion. Sem Camada Invisível, PII, credenciais, contactos privados ou prompts. Não alteres outros ficheiros. Não faças commit." > /tmp/mistral-palavra.json
+          rc=$?
+          set -e
+          node --check deploy/atlas-public/palavra-ritual.js
+          echo "MISTRAL_AGENT_B_RC=$rc"
+
+      - name: Restore unrelated files after agent B
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            case "$f" in
+              deploy/atlas-public/falarte.js|deploy/atlas-public/falarte.css|deploy/atlas-public/palavra-ritual.js|deploy/atlas-public/palavra-ritual.css) ;;
+              *) git checkout HEAD -- "$f" 2>/dev/null || rm -rf -- "$f" ;;
+            esac
+          done < <(git status --porcelain -uall | awk '{print $2}')
+
+      - name: Deterministic gate — source fidelity and privacy
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check deploy/atlas-public/falarte.js
+          node --check deploy/atlas-public/palavra-ritual.js
+          test "$(grep -c "^    id: '" deploy/atlas-public/falarte.js)" -eq 10
+          grep -Fq "id: 'lugar-escondido'" deploy/atlas-public/falarte.js
+          grep -Fq "id: 'remetente-ausente'" deploy/atlas-public/falarte.js
+          grep -Fq 'localStorage' deploy/atlas-public/falarte.js
+          grep -Eq 'input:not\(\[type="file"\]\)|persist|allowlist|serializ' deploy/atlas-public/falarte.js
+          grep -Eiq 'não (envia|é enviada).*(espaço|destinatário)|não.*rede|sem.*rede' deploy/atlas-public/falarte.js
+          grep -Fq 'data-original-word' deploy/atlas-public/palavra-ritual.js
+          grep -Fq 'textContent' deploy/atlas-public/palavra-ritual.js
+          ! grep -Fq 'localStorage' deploy/atlas-public/palavra-ritual.js
+          ! grep -Fq 'sessionStorage' deploy/atlas-public/palavra-ritual.js
+          if grep -REn 'fetch\(|XMLHttpRequest|sendBeacon|WebSocket|EventSource|https?://' deploy/atlas-public/falarte.js deploy/atlas-public/palavra-ritual.js; then
+            echo '::error::NETWORK_PRIMITIVE_OR_EXTERNAL_RUNTIME_REFERENCE'
+            exit 31
+          fi
+          if grep -REn 'MISTRAL_API_KEY|PTSERVIDOR|client_secret|access_token|contacto_organizador|convite_organizadores_interno|Camada Invisível' deploy/atlas-public/falarte.js deploy/atlas-public/palavra-ritual.js; then
+            echo '::error::PRIVATE_BOUNDARY_LEAK'
+            exit 32
+          fi
+          grep -Eq 'ArrowLeft|ArrowRight' deploy/atlas-public/falarte.js
+          grep -Eq 'Home|End' deploy/atlas-public/falarte.js
+          grep -Eq 'aria-live|role.*status' deploy/atlas-public/falarte.js
+          grep -Eq 'ArrowLeft|ArrowRight|ArrowUp|ArrowDown' deploy/atlas-public/palavra-ritual.js
+          grep -Eq 'aria-live|role.*status' deploy/atlas-public/palavra-ritual.js
+          echo 'CURATORIAL_RUNTIME_DETERMINISTIC=PASS'
+
+      - name: Deterministic gate — no file persistence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib,re,sys
+          s=pathlib.Path('deploy/atlas-public/falarte.js').read_text(encoding='utf-8')
+          # The collector must explicitly exclude file inputs, or iterate an allowlist that cannot include file values.
+          ok = bool(re.search(r'input:not\(\[type=["\']file["\']\]\)', s)) or bool(re.search(r'(PERSIST|DRAFT|SERIALIZ)[A-Z_]*FIELDS', s))
+          if not ok:
+              sys.exit('FILE_PERSISTENCE_BOUNDARY_NOT_EXPLICIT')
+          if re.search(r'files\?\.\[0\].*localStorage|chosen\.name.*localStorage|FileReader.*localStorage', s, re.S):
+              sys.exit('FILE_VALUE_CAN_REACH_LOCAL_STORAGE')
+          print('NO_FILE_PERSISTENCE=PASS')
+          PY
+
+      - name: Mistral agent C — evidence review, advisory
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, pathlib, urllib.request
+          key=os.environ['MISTRAL_API_KEY'].strip()
+          code='\n\n'.join('FILE '+p+'\n'+pathlib.Path(p).read_text(encoding='utf-8') for p in [
+              'deploy/atlas-public/falarte.js','deploy/atlas-public/falarte.css',
+              'deploy/atlas-public/palavra-ritual.js','deploy/atlas-public/palavra-ritual.css'])
+          prompt='''Review the candidate as a production accessibility/privacy/source-fidelity auditor. The binding contract is: FALArte has exactly ten documented mechanics; textual local drafts are permitted; file values/metadata are never persisted; there is no network submission; Remetente Ausente is symbolic local-only and explicitly does not deliver to space, a recipient, or the network; Palavra Ritual stores/transmits nothing and preserves every original word literally while changing only spatial/visual relations; keyboard and reduced-motion support must remain. Return strict JSON with pass, blockers, evidence and tests. Only cite literal code evidence.'''
+          req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps({
+              'model':'mistral-medium-latest','temperature':0.0,'response_format':{'type':'json_object'},
+              'messages':[{'role':'system','content':prompt},{'role':'user','content':code}]
+          }).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+          with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
+          review=json.loads(body['choices'][0]['message']['content'])
+          print('MISTRAL_AGENT_C_REVIEW='+json.dumps(review,ensure_ascii=False))
+          PY
+
+      - name: Exact file boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          changed="$(git status --porcelain -uall | awk '{print $2}' | sort -u)"
+          test -n "$changed"
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            case "$f" in
+              deploy/atlas-public/falarte.js|deploy/atlas-public/falarte.css|deploy/atlas-public/palavra-ritual.js|deploy/atlas-public/palavra-ritual.css) ;;
+              *) echo "::error::FORBIDDEN_CHANGE:$f"; exit 41 ;;
+            esac
+          done <<< "$changed"
+          git diff --check
+          echo 'EXACT_FILE_BOUNDARY=PASS'
+
+      - name: Commit Mistral-validated runtime increment
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Associação MILK - Mistral Vibe Code'
+          git config user.email 'milk@associacaomilk.pt'
+          git add deploy/atlas-public/falarte.js deploy/atlas-public/falarte.css deploy/atlas-public/palavra-ritual.js deploy/atlas-public/palavra-ritual.css
+          git diff --cached --quiet && { echo '::error::MISTRAL_NO_RUNTIME_CHANGE'; exit 50; }
+          git diff --cached --check
+          git commit -m 'fix(webapp): harden falARTE and Palavra Ritual runtimes'
+          git push origin HEAD:$BRANCH
+          echo "MISTRAL_CURATORIAL_COMMIT=$(git rev-parse HEAD)"
+          echo 'MISTRAL_CURATORIAL_RUNTIME=VALIDATED'
