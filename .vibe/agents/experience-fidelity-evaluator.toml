@@ -1,0 +1,12 @@
+agent_type = "subagent"
+display_name = "Experience Fidelity Evaluator"
+description = "Avalia se uma implementação WebApp reproduz a experiência descrita nas fontes: invariantes autorais, mecânica, sensação, ritmo, surpresa, relação territorial, físico/digital, acessibilidade e ausência de fallback genérico. Deve emitir PASS/FAIL com evidência." 
+safety = "safe"
+active_model = "mistral-medium-latest"
+enabled_tools = ["read_file", "grep"]
+
+[tools.read_file]
+permission = "always"
+
+[tools.grep]
+permission = "always"
