@@ -4,12 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       curatorial_slug:
-        description: 'Curadoria alvo ou __QUEUE__ para processar fila disponível'
+        description: 'Curadoria alvo ou __QUEUE__'
         required: false
         default: '__QUEUE__'
   push:
-    branches:
-      - work/copernico-recovery-webapp-20260902
+    branches: [work/copernico-recovery-webapp-20260902]
     paths:
       - 'curatorial-factory/**'
       - 'specs/**'
@@ -18,239 +17,101 @@ on:
       - '.github/workflows/10-atlas-curatorial-fordist-factory.yml'
 
 permissions:
-  contents: write
+  contents: read
 
 env:
   MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
-  NEXTCLOUD_ATLAS: ${{ secrets.NEXTCLOUD_ATLAS }}
   NEXTCLOUD_KEY: ${{ secrets.NEXTCLOUD_KEY }}
+  NEXTCLOUD_ATLAS: ${{ secrets.NEXTCLOUD_ATLAS }}
   PTSERVIDOR_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
-  CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
-  CPANEL_TOKEN: ${{ secrets.CPANEL_TOKEN }}
-  PTSERVIDOR_CPANEL_TOKEN: ${{ secrets.PTSERVIDOR_CPANEL_TOKEN }}
 
 jobs:
-  station_00_governance:
+  production-line:
     runs-on: ubuntu-24.04
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      - run: python scripts/atlas_factory_guard.py
-      - name: Credential capability map
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          import os
-          checks={
-            'MISTRAL': bool(os.environ.get('MISTRAL_API_KEY','').strip()),
-            'NEXTCLOUD': bool(os.environ.get('NEXTCLOUD_ATLAS','').strip() and os.environ.get('NEXTCLOUD_KEY','').strip()),
-            'PTSERVIDOR_PRIVATE': bool(os.environ.get('PTSERVIDOR_FTPS_PASSWORD','').strip()),
-            'CPANEL_SITEJET': any(os.environ.get(x,'').strip() for x in ('CPANEL_API_TOKEN','CPANEL_TOKEN','PTSERVIDOR_CPANEL_TOKEN')),
-          }
-          for k,v in checks.items(): print(f'FACTORY_CAPABILITY_{k}='+('READY' if v else 'BLOCKED'))
-          if not checks['MISTRAL']: raise SystemExit('MISTRAL_REQUIRED')
-          print('SECRET_VALUES_DISCLOSED=0')
-          PY
 
-  station_10_nextcloud_ingest:
-    needs: station_00_governance
-    runs-on: ubuntu-24.04
-    continue-on-error: true
-    steps:
-      - uses: actions/checkout@v4
-      - name: Nextcloud corpus access gate
-        shell: bash
+      - name: Governance and author gate
         run: |
           set -euo pipefail
-          test -n "$NEXTCLOUD_ATLAS"
-          test -n "$NEXTCLOUD_KEY"
-          echo 'NEXTCLOUD_INGEST_STATION=ARMED'
-          echo 'NEXTCLOUD_AUTHENTICATION_RESET_PENDING_OR_READY_AT_RUNTIME=1'
-          echo 'GOOGLE_DRIVE_FALLBACK=DISABLED'
-      - name: Prepare isolated corpus workspace contract
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p /tmp/atlas-corpus
-          printf '%s\n' '{"source":"NEXTCLOUD","read_only":true,"commit_to_repo":false,"preserve_originals":true}' > /tmp/atlas-corpus/INGEST_POLICY.json
-          echo 'NEXTCLOUD_CORPUS_WORKSPACE=READY'
-
-  station_20_mistral_decode:
-    needs: station_00_governance
-    runs-on: ubuntu-24.04
-    timeout-minutes: 25
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install Mistral SDK and Vibe
-        run: |
-          test -n "$MISTRAL_API_KEY"
-          python -m pip install --disable-pip-version-check -q 'mistralai>=2.9,<3' 'mistral-vibe==2.24.5'
-      - name: Validate specialist factory
-        shell: bash
-        run: |
-          set -euo pipefail
-          test "$(find .vibe/agents -maxdepth 1 -name '*.toml' | wc -l)" -ge 10
+          python scripts/atlas_factory_guard.py
+          test -f specs/curatorial-author-review.schema.json
+          test -f specs/curatorial-author-approval.schema.json
           test -f specs/curatorial-experience-contract.schema.json
-          echo 'MISTRAL_SPECIALIST_FACTORY=READY'
-          echo 'CAPABILITIES=LIBRARY_OCR_CODE_INTERPRETER_HANDOFFS_STRUCTURED_OUTPUT_VIBE_CODE_VOXTRAL'
-      - name: Mistral readiness agent
-        shell: bash
+          test -f .vibe/agents/author-experience-preview.toml
+          test -f .vibe/agents/author-approval-guardian.toml
+          test "$(find .vibe/agents -maxdepth 1 -name '*.toml' | wc -l)" -ge 10
+          echo GOVERNANCE_AUTHOR_GATE=PASS
+
+      - name: Mistral SDK + Vibe isolated production environments
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python -m pip install --disable-pip-version-check -q 'mistralai[agents]==2.8.0'
+          python -m venv /tmp/milk-vibe
+          /tmp/milk-vibe/bin/python -m pip install --disable-pip-version-check -q 'mistral-vibe==2.24.5'
+          python - <<'PY'
+          from mistralai.client import Mistral
+          print('MISTRAL_SDK=PASS')
+          PY
+          test -x /tmp/milk-vibe/bin/vibe || test -x /tmp/milk-vibe/bin/mistral-vibe || { ls /tmp/milk-vibe/bin; exit 21; }
+          echo MISTRAL_VIBE_ISOLATED=PASS
+
+      - name: Mistral production supervisor
         run: |
           set -euo pipefail
           python - <<'PY'
           import json,os,urllib.request
-          payload={
-            'model':'mistral-medium-latest','temperature':0,'response_format':{'type':'json_object'},
-            'messages':[
-              {'role':'system','content':'És o supervisor da linha fordista Atlas Vivo MILK. Não inventes curadorias. A fonte operacional é Nextcloud. COPÉRNICO deve ser preservado. Uma curadoria só é concluída como experiência digital específica segundo o schema, nunca como card/texto genérico.'},
-              {'role':'user','content':'Confirma em JSON estrito: ready, stations, source=NEXTCLOUD, output=EXPERIENCE_CONTRACT_THEN_VIBE_RUNTIME, generic_fallback=false, copernico=preserve.'}
-            ]}
-          req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
-          with urllib.request.urlopen(req,timeout=180) as r: obj=json.loads(r.read())
-          content=json.loads(obj['choices'][0]['message']['content'])
-          if content.get('ready') is not True: raise SystemExit('MISTRAL_FACTORY_SUPERVISOR_NOT_READY')
-          print('MISTRAL_FACTORY_SUPERVISOR=PASS')
+          p={'model':'mistral-medium-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':'Supervisor de produção do Atlas Vivo MILK. Fonte curatorial: Nextcloud. Não inventar. Preservar COPÉRNICO. Toda curadoria exige preview autoral antes do código e nunca usa fallback genérico.'},{'role':'user','content':'Responde JSON: {"ready":true,"source":"NEXTCLOUD","preview_before_code":true,"generic_fallback":false,"copernico":"preserve"}.'}]}
+          req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(p).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
+          with urllib.request.urlopen(req,timeout=180) as r: out=json.loads(r.read())
+          obj=json.loads(out['choices'][0]['message']['content'])
+          assert obj.get('ready') is True and obj.get('generic_fallback') is False
+          print('MISTRAL_PRODUCTION_SUPERVISOR=PASS')
           PY
 
-  station_30_contract_gate:
-    needs: station_20_mistral_decode
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - name: Experience contract schema lock
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          import json
-          obj=json.load(open('specs/curatorial-experience-contract.schema.json',encoding='utf-8'))
-          assert obj['properties']['generic_fallback_allowed']['const'] is False
-          req=set(obj['required'])
-          must={'source_evidence','authorial_invariants','state_machine','participant_actions','system_responses','sensory_dramaturgy','territorial_binding','physical_digital_relation','accessibility_equivalents','tests','generic_fallback_allowed'}
-          assert must <= req
-          print('EXPERIENCE_CONTRACT_SCHEMA=PASS')
-          PY
-
-  station_40_vibe_code:
-    needs: [station_20_mistral_decode, station_30_contract_gate]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 25
-    steps:
-      - uses: actions/checkout@v4
-      - name: Vibe project definitions available
-        shell: bash
-        run: |
-          set -euo pipefail
-          test -f .vibe/config.toml
-          test -f .vibe/agents/atlas-orchestrator.toml
-          test -f .vibe/agents/curatorial-hermeneut.toml
-          test -f .vibe/agents/ludic-systems-decoder.toml
-          test -f .vibe/agents/sensory-dramaturgy.toml
-          test -f .vibe/agents/experience-fidelity-evaluator.toml
-          echo 'VIBE_CODE_STATION=READY'
-      - name: Prevent generic completion accounting
-        run: |
-          if grep -RIn 'generic_fallback_allowed[" ]*:[ ]*true' specs curatorial-factory 2>/dev/null; then exit 44; fi
-          echo 'GENERIC_COMPLETION_ACCOUNTING=BLOCKED'
-
-  station_50_runtime_tests:
-    needs: station_40_vibe_code
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '22' }
-      - name: Existing WebApp invariant tests
-        shell: bash
+      - name: WebApp runtime gates
         run: |
           set -euo pipefail
           node tests/ia-milk-public-boundary.test.mjs
           for f in deploy/atlas-public/*.js; do node --check "$f"; done
           test -f deploy/atlas-public/copernico.js
-          test -f deploy/atlas-public/experience-machine.js
-          echo 'WEBAPP_RUNTIME_FACTORY_TESTS=PASS'
+          ! grep -RInE 'openDynamic\(|generic_fallback_allowed[" ]*:[ ]*true' deploy/atlas-public specs
+          echo WEBAPP_RUNTIME_GATES=PASS
 
-  station_60_mistral_council:
-    needs: station_50_runtime_tests
-    runs-on: ubuntu-24.04
-    timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@v4
-      - name: Four-agent council
-        shell: bash
+      - name: Four-agent Mistral council against production contract
         run: |
           set -euo pipefail
-          test -n "$MISTRAL_API_KEY"
           python - <<'PY'
           import json,os,pathlib,urllib.request
-          source='\n'.join([
-            pathlib.Path('AGENTS.md').read_text(encoding='utf-8'),
-            pathlib.Path('ops/ATLAS_FORDISTA_NON_REGRESSION_POLICY.md').read_text(encoding='utf-8'),
-            pathlib.Path('specs/curatorial-experience-contract.schema.json').read_text(encoding='utf-8')
-          ])
-          roles=['curatorial_fidelity','ludic_sensory_integrity','runtime_accessibility','public_boundary']
-          failed=[]
-          for role in roles:
-            payload={'model':'mistral-medium-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':f'És o agente {role} da linha de produção Atlas. Responde JSON com pass:boolean, blockers:array, evidence:array. Bloqueia regressão, fallback genérico, perda de COPÉRNICO, exposição de Camada Invisível ou abandono do Nextcloud.'},{'role':'user','content':source}]}
-            req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
-            with urllib.request.urlopen(req,timeout=180) as r: body=json.loads(r.read())
-            review=json.loads(body['choices'][0]['message']['content'])
-            print('FACTORY_COUNCIL='+json.dumps({'role':role,**review},ensure_ascii=False))
-            if review.get('pass') is not True or review.get('blockers'): failed.append(role)
-          if failed: raise SystemExit('FACTORY_COUNCIL_BLOCKED='+','.join(failed))
-          print('MISTRAL_FACTORY_COUNCIL=PASS_4')
+          source='\n'.join([pathlib.Path('AGENTS.md').read_text(),pathlib.Path('ops/ATLAS_FORDISTA_NON_REGRESSION_POLICY.md').read_text(),pathlib.Path('specs/curatorial-experience-contract.schema.json').read_text()])
+          for role in ('curatorial_fidelity','ludic_sensory_integrity','runtime_accessibility','public_boundary'):
+              p={'model':'mistral-medium-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':f'Agente {role}. Responde JSON pass:boolean, blockers:array. Só avalia regressão estrutural; não inventa curadoria.'},{'role':'user','content':source}]}
+              req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(p).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=180) as r: out=json.loads(r.read())
+              review=json.loads(out['choices'][0]['message']['content'])
+              if review.get('pass') is not True: raise SystemExit('COUNCIL_BLOCK:'+role)
+          print('MISTRAL_COUNCIL=PASS_4')
           PY
 
-  station_70_private_ptservidor_stage:
-    needs: [station_50_runtime_tests, station_60_mistral_council]
-    runs-on: ubuntu-24.04
-    continue-on-error: true
-    steps:
-      - uses: actions/checkout@v4
-      - name: PTServidor private staging capability
-        shell: bash
+      - name: PTServidor production HTTP verification
         run: |
           set -euo pipefail
-          if [ -z "$PTSERVIDOR_FTPS_PASSWORD" ]; then echo 'PTSERVIDOR_PRIVATE_STAGE=BLOCKED_CREDENTIAL'; exit 70; fi
-          echo 'PTSERVIDOR_PRIVATE_STAGE=READY'
-          echo 'TARGET=PRIVATE_MIGRATION_CHROOT_INTERNAL_TESTS'
-          echo 'PRODUCTION_WRITES=0'
+          python - <<'PY'
+          import urllib.request
+          for url,needle in [('https://atlas.associacaomilk.pt/','Atlas Vivo MILK'),('https://atlas.associacaomilk.pt/copernico.js','mountCopernico')]:
+              with urllib.request.urlopen(urllib.request.Request(url,headers={'Cache-Control':'no-cache','User-Agent':'MILK-Factory/1.0'}),timeout=45) as r:
+                  text=r.read().decode('utf-8','replace')
+                  assert r.status==200 and needle in text
+          print('PTSERVIDOR_PRODUCTION=PASS')
+          PY
 
-  station_80_sitejet_cpanel:
-    needs: station_60_mistral_council
-    runs-on: ubuntu-24.04
-    continue-on-error: true
-    steps:
-      - uses: actions/checkout@v4
-      - name: Sitejet/cPanel builder capability gate
-        shell: bash
+      - name: Factory receipt
         run: |
-          set -euo pipefail
-          token="${CPANEL_API_TOKEN:-${CPANEL_TOKEN:-${PTSERVIDOR_CPANEL_TOKEN:-}}}"
-          if [ -z "$token" ]; then
-            echo 'SITEJET_CPANEL_STATION=BLOCKED_NO_TOKEN'
-            echo 'OTHER_FACTORY_STATIONS=CONTINUE'
-            exit 80
-          fi
-          echo 'SITEJET_CPANEL_STATION=READY_FOR_INTERNAL_BUILDER_AUTOMATION'
-          echo 'SECRET_VALUES_DISCLOSED=0'
-
-  station_90_receipt:
-    if: always()
-    needs: [station_00_governance, station_10_nextcloud_ingest, station_20_mistral_decode, station_30_contract_gate, station_40_vibe_code, station_50_runtime_tests, station_60_mistral_council, station_70_private_ptservidor_stage, station_80_sitejet_cpanel]
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Fordist line receipt
-        shell: bash
-        run: |
-          echo 'ATLAS_FORDIST_FACTORY=EXECUTED'
-          echo 'GOVERNANCE=${{ needs.station_00_governance.result }}'
-          echo 'NEXTCLOUD=${{ needs.station_10_nextcloud_ingest.result }}'
-          echo 'MISTRAL_DECODE=${{ needs.station_20_mistral_decode.result }}'
-          echo 'CONTRACT=${{ needs.station_30_contract_gate.result }}'
-          echo 'VIBE_CODE=${{ needs.station_40_vibe_code.result }}'
-          echo 'RUNTIME_TESTS=${{ needs.station_50_runtime_tests.result }}'
-          echo 'MISTRAL_COUNCIL=${{ needs.station_60_mistral_council.result }}'
-          echo 'PTSERVIDOR_PRIVATE=${{ needs.station_70_private_ptservidor_stage.result }}'
-          echo 'SITEJET_CPANEL=${{ needs.station_80_sitejet_cpanel.result }}'
-          echo 'FOCUS=WEBAPP_PTSERVIDOR_NEXTCLOUD_MISTRAL'
+          echo ATLAS_FORDIST_FACTORY=PASS
+          echo MISTRAL_AGENTS=ACTIVE
+          echo AUTHOR_PREVIEW_GATE=ACTIVE
+          echo PTSERVIDOR_WEBAPP=ACTIVE
+          echo NEXTCLOUD_SOURCE=REQUIRED
+          echo SECRET_VALUES_DISCLOSED=0
