@@ -1,0 +1,38 @@
+name: MILK alternate Drive secret safe probe
+on:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths: ['.github/workflows/drive-somostodos-safe-shape-probe.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    env:
+      S: ${{ secrets.DRIVE_SOMOSTODOSPOSSIVEIS }}
+    steps:
+      - name: Classify only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os
+          s=os.environ.get('S','').strip()
+          if not s: print('ALT_DRIVE_SHAPE=EMPTY'); raise SystemExit
+          try: x=json.loads(s)
+          except Exception:
+            print('ALT_DRIVE_SHAPE=' + ('ACCESS_TOKEN' if s.startswith('ya29.') else 'JWT_LIKE' if s.count('.')==2 else 'OPAQUE_NONJSON'))
+            raise SystemExit
+          print('ALT_DRIVE_LEVEL1_TYPE='+type(x).__name__)
+          if isinstance(x,dict):
+            safe={'access_token','refresh_token','client_id','client_secret','token_uri','type','project_id','private_key','private_key_id','installed','web','token','expiry','expires_at'}
+            print('ALT_DRIVE_KEYS='+','.join(sorted(k for k in x if k in safe)))
+          elif isinstance(x,str):
+            try: y=json.loads(x)
+            except Exception: print('ALT_DRIVE_LEVEL2_PARSE=NO')
+            else:
+              print('ALT_DRIVE_LEVEL2_TYPE='+type(y).__name__)
+              if isinstance(y,dict):
+                safe={'access_token','refresh_token','client_id','client_secret','token_uri','type','project_id','private_key','private_key_id','installed','web','token','expiry','expires_at'}
+                print('ALT_DRIVE_LEVEL2_KEYS='+','.join(sorted(k for k in y if k in safe)))
+          PY
