@@ -56,8 +56,8 @@ jobs:
           set -euo pipefail
           test -n "$MISTRAL_API_KEY" || { echo '::error::MISTRAL_API_KEY missing'; exit 2; }
           vibe --trust --agent atlas-plan \
-            --prompt "Analisa a implementação real da Web App em deploy/atlas-public e as integrações relevantes do repositório. Faz uma auditoria de arquitectura, UX curatorial, desempenho, acessibilidade, estrutura de dados e capacidade de evolução. Não edites ficheiros, não publiques e não uses segredos. Produz um plano de construção priorizado com ficheiros exactos e testes de aceitação." \
-            --max-turns 10 --output json > /tmp/vibe-atlas-audit.json
+            --prompt "Analisa prioritariamente deploy/atlas-public como implementação real da Web App Atlas Vivo MILK. Lê apenas os ficheiros necessários para mapear arquitectura, UX curatorial, desempenho, acessibilidade, estrutura de dados e capacidade de evolução. Não edites, não publiques e não uses segredos. Fecha a análise com lotes de construção priorizados, ficheiros exactos e testes de aceitação; evita exploração lateral desnecessária." \
+            --max-turns 30 --output json > /tmp/vibe-atlas-audit.json
           test -s /tmp/vibe-atlas-audit.json
           echo "VIBE_CODE_AUDIT_BYTES=$(wc -c < /tmp/vibe-atlas-audit.json)"
 
@@ -69,7 +69,6 @@ jobs:
 
           key=os.environ['MISTRAL_API_KEY'].strip()
           report=pathlib.Path('/tmp/vibe-atlas-audit.json').read_text(encoding='utf-8')
-          # Bound context while preserving the complete audit whenever practical.
           if len(report) > 90000:
               report=report[:90000] + '\n[TRUNCATED_FOR_REVIEW]'
 
