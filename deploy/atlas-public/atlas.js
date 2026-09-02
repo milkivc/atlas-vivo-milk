@@ -8,6 +8,7 @@ import {
   loadValidatedTerritories,
   mountTerritorialMilks
 } from './territory-data.js';
+import { openAuthorialPortal } from './authorial-portals.js';
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const opening = document.querySelector('#opening');
@@ -129,13 +130,7 @@ const closeBackdrop = dialog => dialog.addEventListener('click', event => {
 
 const ticket = document.querySelector('#ticket');
 const ticketResponse = document.querySelector('#ticket-response');
-let catalogue = [];
 let activeTerritory = null;
-
-fetch('catalogo-curatorial.json', {cache: 'no-store'})
-  .then(response => response.ok ? response.json() : Promise.reject())
-  .then(data => catalogue = Array.isArray(data.entradas) ? data.entradas : [])
-  .catch(() => catalogue = []);
 
 const territorialPoints = [...document.querySelectorAll('[data-ticket]')];
 territorialPoints.forEach(point => {
@@ -210,26 +205,23 @@ document.querySelectorAll('[data-ticket-action]').forEach(button => {
   });
 });
 
-function focusCuradoria(id, family) {
-  const locate = attempts => {
-    const card = document.querySelector(`[data-curadoria="${CSS.escape(id)}"]`);
-    if (!card && attempts > 0) return setTimeout(() => locate(attempts - 1), 120);
-    if (!card) return;
-    document.querySelector(`[data-family="${CSS.escape(family)}"]`)?.click();
-    card.scrollIntoView({behavior: reduced ? 'auto' : 'smooth', block: 'center'});
-    setTimeout(() => card.querySelector('[data-curadoria]')?.click(), reduced ? 20 : 500);
-  };
-  locate(20);
-}
-
 document.querySelectorAll('[data-focus-id]').forEach(portal => {
   portal.addEventListener('click', () => {
     const portalId = portal.dataset.focusId;
-    if (experience.state === PUBLIC_STATES.TERRITORIAL_MILKS && experience.can('open_portal')) {
-      experience.send('open_portal', {portalId, deviceId: portalId});
+    if (experience.state !== PUBLIC_STATES.TERRITORIAL_MILKS) return;
+    if (!experience.can('open_portal')) return;
+    if (!experience.send('open_portal', {portalId, deviceId: portalId})) return;
+    if (!openAuthorialPortal(portalId) && experience.can('return_territory')) {
+      experience.send('return_territory');
     }
-    focusCuradoria(portalId, portal.dataset.focusFamily);
   });
+});
+
+window.addEventListener('atlas:authorial-portal-close', () => {
+  if (experience.state === PUBLIC_STATES.CURATORIAL_DEVICE && experience.can('return_territory')) {
+    experience.send('return_territory');
+  }
+  copernicoView.focus({ preventScroll: true });
 });
 
 document.querySelector('#engine')?.addEventListener('close', () => {
