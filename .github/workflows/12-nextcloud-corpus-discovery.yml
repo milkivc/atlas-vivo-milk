@@ -33,14 +33,12 @@ jobs:
           import os
           base=os.environ.get('NEXTCLOUD_BASE_URL','').strip()
           atlas=os.environ.get('NEXTCLOUD_ATLAS','').strip()
-          user=os.environ.get('NEXTCLOUD_USER','').strip()
+          user=os.environ.get('NEXTCLOUD_USER','').strip() or 'admin'
           password=os.environ.get('NEXTCLOUD_APP_PASSWORD','').strip() or os.environ.get('NEXTCLOUD_KEY','').strip()
           if not base:
               base = atlas if atlas.startswith('http') else 'https://associacaomilk.pt/nextcloud'
-          if not user:
-              user = atlas if atlas and not atlas.startswith('http') else 'admin'
           print('NEXTCLOUD_BASE_RESOLVED=' + ('YES' if base else 'NO'))
-          print('NEXTCLOUD_USER_RESOLVED=' + ('YES' if user else 'NO'))
+          print('NEXTCLOUD_USER_MODE=' + ('EXPLICIT' if os.environ.get('NEXTCLOUD_USER','').strip() else 'ADMIN_DEFAULT'))
           print('NEXTCLOUD_PASSWORD_PRESENT=' + ('YES' if password else 'NO'))
           print('NEXTCLOUD_SECRET_VALUES_DISCLOSED=0')
           if not base or not user or not password:
@@ -56,12 +54,10 @@ jobs:
 
           base=os.environ.get('NEXTCLOUD_BASE_URL','').strip()
           atlas=os.environ.get('NEXTCLOUD_ATLAS','').strip()
-          user=os.environ.get('NEXTCLOUD_USER','').strip()
+          user=os.environ.get('NEXTCLOUD_USER','').strip() or 'admin'
           password=os.environ.get('NEXTCLOUD_APP_PASSWORD','').strip() or os.environ.get('NEXTCLOUD_KEY','').strip()
           if not base:
               base = atlas if atlas.startswith('http') else 'https://associacaomilk.pt/nextcloud'
-          if not user:
-              user = atlas if atlas and not atlas.startswith('http') else 'admin'
           base=base.rstrip('/')
           root=f"{base}/remote.php/dav/files/{urllib.parse.quote(user, safe='')}"
           auth=base64.b64encode(f'{user}:{password}'.encode()).decode()
@@ -73,7 +69,7 @@ jobs:
                   'Authorization':'Basic '+auth,
                   'Depth':'1',
                   'Content-Type':'application/xml; charset=utf-8',
-                  'User-Agent':'MILK-Atlas-ReadOnly-Inventory/1.0'
+                  'User-Agent':'MILK-Atlas-ReadOnly-Inventory/1.1'
               })
               try:
                   with urllib.request.urlopen(req, timeout=60) as r:
@@ -139,7 +135,7 @@ jobs:
         run: |
           set -euo pipefail
           python - <<'PY'
-          import json, pathlib, re
+          import json, pathlib
           inv=json.load(open('/tmp/nextcloud_inventory.json',encoding='utf-8'))
           supported={'.pdf','.docx','.doc','.md','.txt','.html','.htm','.xlsx','.xls','.csv','.json','.zip','.pptx','.ppt'}
           signals=('curadoria','dinamica','dinâmica','atlas','milk','festa','lenda','folclore','toponim','falarte','palavra','cubo','dado','galeria','fuco','fucô','reizinho','cosmicox','perceptio','absurdo','deriva','ritual','nos','nós','arteria','artéria','simplicidade')
@@ -163,4 +159,4 @@ jobs:
             /tmp/curatorial_queue.json
           retention-days: 14
 
-# credential-refresh-probe: 2026-09-02T10:26+01:00
+# credential-refresh-probe: 2026-09-02T10:29+01:00 admin-bound
