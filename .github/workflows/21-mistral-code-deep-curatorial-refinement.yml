@@ -2,16 +2,10 @@ name: 21 MILK Mistral territorial multisensory refinement
 
 on:
   workflow_dispatch:
-  push:
-    branches: [work/copernico-recovery-webapp-20260902]
-    paths:
-      - 'deploy/atlas-public/experiences/**'
-      - 'curatorial-factory/sensory-blueprints/**'
-      - 'curatorial-factory/EXPERIENCE_RESEARCH_MATRIX_20260902.md'
-      - '.github/workflows/21-mistral-code-deep-curatorial-refinement.yml'
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: milk-mistral-territorial-multisensory-refinement
@@ -79,6 +73,7 @@ jobs:
           idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text(encoding='utf-8'))
           root=pathlib.Path('deploy/atlas-public/experiences')
           bp_root=pathlib.Path('curatorial-factory/sensory-blueprints')
+          sovereign=pathlib.Path('curatorial-factory/CONSTITUICAO_EXPERIENCIAL_SOBERANA_ATLAS_VIVO_MILK_20260902.md').read_text(encoding='utf-8')
           roles={
             'territorial_embodiment':'Avalia se a experiência nasce de território vivido e pode produzir relação, memória, deslocamento perceptivo ou devolução territorial sem reduzir território a coordenadas, agenda ou turismo.',
             'multisensory_dramaturgy':'Avalia cruzamento real entre sentidos, gesto, som, visualidade, tactilidade/háptica quando disponível, espaço, silêncio, ritmo e tempo. Som ou partículas decorativas não contam.',
@@ -97,9 +92,10 @@ jobs:
                   system=(f'És o agente {role} do Atlas Vivo MILK. {rule} '
                           'A ordem soberana é texto/invariante autoral > curadoria > dinâmica/brincadeira > experiência > dispositivo/código. '
                           'Não imponhas tecnologia por preferência. Não inventes requisitos. '
-                          'Responde APENAS JSON com reviews:[{id,scores:{territoriality,sensory_crossing,embodied_gesture,temporal_dramaturgy,distinctness,authorial_fidelity,accessible_equivalence},invented_content:boolean,repair_targets:array}]. '
+                          'Aplica integralmente a Constituição Experiencial Soberana: singularidade; fenómeno antes da explicação; encontro que transborda em conto; canal vivo; relação micelial; retenção e protensão; escuta causal, semântica e identitária; devolução territorial; acessibilidade poética; e o circuito percepção→gesto→resposta→retenção→protensão→encontro→conto→rasto→nova percepção. '
+                          'Responde APENAS JSON com reviews:[{id,scores:{territoriality,sensory_crossing,embodied_gesture,temporal_dramaturgy,distinctness,authorial_fidelity,accessible_equivalence,singularity,phenomenon_before_explanation,retention_protention,living_contribution,micelial_relation,territorial_return,causal_nexus_reopening},invented_content:boolean,repair_targets:array}]. '
                           'Scores 0..5; 5 é excepcional. repair_targets deve ser concreto e ligado ao blueprint.')
-                  payload={'model':'mistral-small-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':system},{'role':'user','content':json.dumps(chunk,ensure_ascii=False)}]}
+                  payload={'model':'mistral-small-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':system},{'role':'user','content':json.dumps({'sovereign_constitution':sovereign,'experiences':chunk},ensure_ascii=False)}]}
                   req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload,ensure_ascii=False).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
                   with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
                   obj=json.loads(body['choices'][0]['message']['content'])
@@ -132,7 +128,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          vibe --trust --max-turns 180 --output json --prompt "EXECUÇÃO AUTORIZADA DE OFICINA CURATORIAL TERRITORIAL MULTISSENSORIAL. EDITA O CÓDIGO REAL; NÃO ESCREVAS RELATÓRIO. Lê AGENTS.md; curatorial-factory/SOURCE_CORPUS_20260902.md; curatorial-factory/DIGITAL_MULTISENSORY_EXPERIENCE_CONSTITUTION_20260902.md; curatorial-factory/EXPERIENCE_RESEARCH_MATRIX_20260902.md; os 49 blueprints; os 49 runtimes; e /tmp/atlas-territorial-multisensory-audit.json. Trabalha prioritariamente a repair_queue. Regra soberana: invariantes/texto autoral > curadoria > dinâmica/brincadeira > experiência > decisão técnica. Não troques a curadoria por tecnologia. Uma experiência territorial deve fazer a pessoa sentir, perceber, lembrar, mover, escutar, escolher, esperar, relacionar ou devolver algo de modo coerente com a fonte. A multissensorialidade deve ser dramática e cruzada: um sentido transforma outro; tempo e silêncio podem ser matéria; gesto deve ter consequência perceptiva. Elimina templates, cards, quiz, formulários, chatbots, click-modal e som/partículas decorativos. Preserva COPÉRNICO, a entrada COSMICOXES e runtimes autorais canónicos; não os recries nem substituas. Não inventes factos, textos, memórias, fotografias ou áudio. Microfone/câmara/geolocalização são opcionais e nunca condição de entrada. Touch, teclado e prefers-reduced-motion precisam de equivalência poética. Limpa listeners, timers, RAF e AudioContext em destroy(). Faz reparações específicas, não uniformização. Termina apenas depois de reinspeccionar os 49." > /tmp/vibe-territorial-refinement.json
+          vibe --trust --max-turns 180 --output json --prompt "EXECUÇÃO AUTORIZADA DE OFICINA CURATORIAL TERRITORIAL MULTISSENSORIAL. EDITA O CÓDIGO REAL; NÃO ESCREVAS RELATÓRIO. Lê AGENTS.md; curatorial-factory/SOURCE_CORPUS_20260902.md; curatorial-factory/DIGITAL_MULTISENSORY_EXPERIENCE_CONSTITUTION_20260902.md; curatorial-factory/CONSTITUICAO_EXPERIENCIAL_SOBERANA_ATLAS_VIVO_MILK_20260902.md; curatorial-factory/EXPERIENCE_RESEARCH_MATRIX_20260902.md; os 49 blueprints; os 49 runtimes; e /tmp/atlas-territorial-multisensory-audit.json. Trabalha prioritariamente a repair_queue. Regra soberana: invariantes/texto autoral > curadoria > dinâmica/brincadeira > experiência > decisão técnica. Não troques a curadoria por tecnologia. Uma experiência territorial deve fazer a pessoa sentir, perceber, lembrar, mover, escutar, escolher, esperar, relacionar ou devolver algo de modo coerente com a fonte. A multissensorialidade deve ser dramática e cruzada: um sentido transforma outro; tempo e silêncio podem ser matéria; gesto deve ter consequência perceptiva. O nexo causal renasce de onde nasce: percepção→gesto→resposta→retenção→protensão→encontro→conto→rasto→nova percepção. O encontro devolve tudo ao território e reabre o nexo causal. Elimina templates, cards, quiz, formulários, chatbots, click-modal e som/partículas decorativos. Preserva COPÉRNICO, a entrada COSMICOXES e runtimes autorais canónicos; não os recries nem substituas. Não inventes factos, textos, memórias, fotografias ou áudio. Microfone/câmara/geolocalização são opcionais e nunca condição de entrada. Touch, teclado e prefers-reduced-motion precisam de equivalência poética. Limpa listeners, timers, RAF e AudioContext em destroy(). Faz reparações específicas, não uniformização. Termina apenas depois de reinspeccionar os 49." > /tmp/vibe-territorial-refinement.json
           echo MISTRAL_CODE_TERRITORIAL_REFINEMENT_EXECUTED=1
 
       - name: Deterministic integrity and anti-template gates
@@ -176,3 +172,18 @@ jobs:
           git pull --rebase origin work/copernico-recovery-webapp-20260902
           git push origin HEAD:work/copernico-recovery-webapp-20260902
           echo TERRITORIAL_MULTISENSORY_REFINEMENT_PUSHED=1
+
+      - name: Dispatch private PTServidor staging after verified refinement
+        if: steps.runtime_gate.outputs.ready == '1' && steps.mistral_gate.outputs.available == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsS -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H 'Accept: application/vnd.github+json' \
+            -H 'X-GitHub-Api-Version: 2022-11-28' \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/ptservidor-private-webapp-staging.yml/dispatches" \
+            -d '{"ref":"work/copernico-recovery-webapp-20260902"}'
+          echo PTSERVIDOR_PRIVATE_STAGING_DISPATCHED=1
