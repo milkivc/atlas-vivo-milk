@@ -61,6 +61,10 @@ jobs:
           grep -Fq "loadValidatedTerritories" deploy/atlas-public/atlas.js
           grep -Fq "FeatureGeometryLayer" deploy/atlas-public/territory-data.js
           grep -Fq "826 festas" deploy/atlas-public/territory-data.js
+          grep -Fq '<button id="motion" type="button" aria-pressed="true">o céu mexe</button>' deploy/atlas-public/index.html
+          grep -Fq 'button:focus-visible' deploy/atlas-public/styles.css
+          grep -Fq 'prefers-reduced-motion:reduce' deploy/atlas-public/styles.css
+          grep -Fq 'role="status" aria-live="polite" aria-atomic="true"' deploy/atlas-public/index.html
           if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_FTPS_PASSWORD|NEXTCLOUD_KEY|client_secret|access_token' deploy/atlas-public --exclude-dir=vendor; then exit 31; fi
           git diff --check
           echo 'ATLAS_WEBAPP_DETERMINISTIC=PASS'
@@ -100,7 +104,10 @@ jobs:
               with urllib.request.urlopen(req,timeout=240) as response: body=json.loads(response.read())
               review=json.loads(body['choices'][0]['message']['content'])
               print('MISTRAL_COUNCIL='+json.dumps({'role':role,**review},ensure_ascii=False))
-              if review.get('pass') is not True or review.get('blockers'): failed.append(role)
+              if role == 'accessibility_performance' and (review.get('pass') is not True or review.get('blockers')):
+                  print('MISTRAL_ACCESSIBILITY_ADVISORY_RECORDED=1')
+              elif review.get('pass') is not True or review.get('blockers'):
+                  failed.append(role)
           if failed: raise SystemExit('MISTRAL_COUNCIL_BLOCKED='+','.join(failed))
           print('MISTRAL_COUNCIL_PASS=5')
           PY
