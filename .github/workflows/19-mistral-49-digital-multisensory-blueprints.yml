@@ -81,3 +81,5 @@ jobs:
           git pull --rebase origin work/copernico-recovery-webapp-20260902
           git push origin HEAD:work/copernico-recovery-webapp-20260902
           echo MULTISENSORY_BLUEPRINTS_COMMITTED=1
+
+# production-trigger: 2026-09-02T12:10Z
