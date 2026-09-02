@@ -1,0 +1,124 @@
+name: 20 MILK WebApp fast private staging
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - work/copernico-recovery-webapp-20260902
+    paths:
+      - 'deploy/atlas-public/**'
+      - 'tests/ia-milk-public-boundary.test.mjs'
+      - '.github/workflows/20-webapp-fast-private-staging.yml'
+
+permissions:
+  contents: read
+
+env:
+  PTSERVIDOR_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
+  MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+
+jobs:
+  webapp:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Materialize existing COPERNICO assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f deploy/atlas-public/copernico.js
+          test -f deploy/atlas-public/territorios-publicos.json.gz
+          test -f deploy/atlas-public/vendor/itowns/itowns.umd.js.gz
+          gzip -dc deploy/atlas-public/territorios-publicos.json.gz > deploy/atlas-public/territorios-publicos.json
+          gzip -dc deploy/atlas-public/vendor/itowns/itowns.umd.js.gz > deploy/atlas-public/vendor/itowns/itowns.umd.js
+          test "$(sha256sum deploy/atlas-public/vendor/itowns/itowns.umd.js | awk '{print $1}')" = c057f8961908aec71267e4e9770dd7506367e57cecf58cbc3ab8f491903fe288
+          echo COPERNICO_EXISTING_RUNTIME=PASS
+
+      - name: WebApp deterministic gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          node tests/ia-milk-public-boundary.test.mjs
+          for f in deploy/atlas-public/*.js; do node --check "$f"; done
+          jq -e '.validated == true and .layer == "public" and .projection == "PUBLIC-ONLY"' deploy/atlas-public/territorios-publicos.json >/dev/null
+          test -f deploy/atlas-public/authorial-portals.js
+          test -f deploy/atlas-public/authorial-portals.css
+          grep -q "galeria-diletante" deploy/atlas-public/authorial-portals.js
+          grep -q "cronicas-fuco" deploy/atlas-public/authorial-portals.js
+          grep -q "kind: 'light'" deploy/atlas-public/authorial-portals.js
+          if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_FTPS_PASSWORD|NEXTCLOUD_KEY|client_secret|access_token' deploy/atlas-public --exclude-dir=vendor; then exit 31; fi
+          if grep -RInE 'openDynamic\(|generic_fallback_allowed[" ]*:[ ]*true' deploy/atlas-public; then exit 32; fi
+          echo WEBAPP_DETERMINISTIC_GATES=PASS
+
+      - name: Mistral implementation audit — advisory
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python - <<'PY'
+          import json,os,pathlib,urllib.request
+          files=['deploy/atlas-public/index.html','deploy/atlas-public/atlas.js','deploy/atlas-public/authorial-portals.js','deploy/atlas-public/copernico.js','deploy/atlas-public/curadorias.js']
+          src='\n\n'.join('FILE '+p+'\n'+pathlib.Path(p).read_text(encoding='utf-8') for p in files)
+          payload={'model':'mistral-medium-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[
+            {'role':'system','content':'Audita apenas a implementação técnica do staging Atlas Vivo MILK. Não avalies conclusão das 49 curadorias. Confirma: COPÉRNICO existente preservado; três portais principais funcionais e distintos; sem fallback genérico; sem segredos; staging não é produção. Responde JSON com technical_pass:boolean, blockers:array, notes:array.'},
+            {'role':'user','content':src}]}
+          req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
+          with urllib.request.urlopen(req,timeout=120) as r: obj=json.loads(r.read())
+          result=json.loads(obj['choices'][0]['message']['content'])
+          print('MISTRAL_WEBAPP_ADVISORY='+json.dumps(result,ensure_ascii=False))
+          PY
+
+      - name: Build private staging archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib,io,json,os,pathlib,tarfile
+          root=pathlib.Path('deploy/atlas-public')
+          files=sorted(p for p in root.rglob('*') if p.is_file() and not p.name.endswith('.gz'))
+          buf=io.BytesIO()
+          with tarfile.open(fileobj=buf,mode='w:gz',format=tarfile.PAX_FORMAT) as tf:
+            for p in files:
+              info=tf.gettarinfo(str(p),arcname=p.relative_to(root).as_posix())
+              info.uid=info.gid=0; info.uname=info.gname=''; info.mtime=0
+              with p.open('rb') as fh: tf.addfile(info,fh)
+          payload=buf.getvalue(); digest=hashlib.sha256(payload).hexdigest()
+          pathlib.Path('/tmp/atlas-webapp-fast.tar.gz').write_bytes(payload)
+          receipt={'commit':os.environ['GITHUB_SHA'],'sha256':digest,'files':len(files),'target':'PTServidor private staging','production_writes':0,'copernico_preserved':True,'primary_portals':['galeria-diletante','cronicas-fuco','milk']}
+          pathlib.Path('/tmp/atlas-webapp-fast-receipt.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2),encoding='utf-8')
+          print('WEBAPP_ARCHIVE_SHA256='+digest)
+          print('WEBAPP_ARCHIVE_FILES='+str(len(files)))
+          PY
+
+      - name: FTPS private stage + readback verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ftplib,hashlib,io,os,pathlib,ssl
+          pw=os.environ.get('PTSERVIDOR_FTPS_PASSWORD','').strip()
+          if not pw: raise SystemExit('PTSERVIDOR_FTPS_PASSWORD_MISSING')
+          ftp=ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=90)
+          ftp.connect('troi.ptservidor.net',21)
+          ftp.login('migration@associacaomilk.pt',pw)
+          ftp.prot_p()
+          dest='ATLAS_WEBAPP_FAST_STAGE/'+os.environ['GITHUB_SHA']
+          ftp.cwd('/')
+          for part in dest.split('/'):
+            try: ftp.mkd(part)
+            except ftplib.all_errors: pass
+            ftp.cwd(part)
+          for local in ('/tmp/atlas-webapp-fast.tar.gz','/tmp/atlas-webapp-fast-receipt.json'):
+            p=pathlib.Path(local); data=p.read_bytes()
+            ftp.storbinary('STOR '+p.name,io.BytesIO(data),blocksize=1048576)
+            got=bytearray(); ftp.retrbinary('RETR '+p.name,got.extend,blocksize=1048576)
+            if hashlib.sha256(bytes(got)).digest()!=hashlib.sha256(data).digest():
+              raise SystemExit('READBACK_MISMATCH:'+p.name)
+          here=ftp.pwd(); ftp.quit()
+          print('PTSERVIDOR_FAST_STAGE=PASS')
+          print('PTSERVIDOR_FAST_STAGE_PATH='+here)
+          print('PRODUCTION_WRITES=0')
+          PY
