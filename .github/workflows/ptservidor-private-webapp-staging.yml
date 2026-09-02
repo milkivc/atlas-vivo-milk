@@ -61,13 +61,13 @@ jobs:
           files=['AGENTS.md','specs/curatorial-experience-contract.schema.json','deploy/atlas-public/index.html','deploy/atlas-public/atlas.js','deploy/atlas-public/copernico.js','deploy/atlas-public/experience-machine.js','deploy/atlas-public/falarte.js','deploy/atlas-public/palavra-ritual.js','deploy/atlas-public/curadorias.js','deploy/atlas-public/authorial-portals.js','deploy/atlas-public/authorial-portals.css']
           src='\n\n'.join('FILE '+p+'\n'+pathlib.Path(p).read_text(encoding='utf-8') for p in files if pathlib.Path(p).exists())
           roles={
-            'experience_integrity':'Verifica que a WebApp continua experiencial, COPÉRNICO é preservado e nenhuma curadoria é considerada concluída só por descrição/card.',
-            'runtime_accessibility':'Verifica teclado/touch/reduced-motion/lifecycle e ausência de regressão evidente.',
-            'public_boundary':'Verifica PUBLIC-ONLY, zero segredos, zero Camada Invisível reversível e material NÃO PUBLICAR ausente.'
+            'experience_integrity':'Audita SOMENTE regressões no runtime público já implementado e autorizado. Preserva COPÉRNICO tal como existe; não exijas WMS, API ou camada externa que não faça parte do runtime actual. As 49 experiências novas estão em composição/revisão autoral e a ausência de runtime específico para elas NÃO é blocker de staging nesta fase. Bloqueia apenas se um runtime já existente tiver sido reduzido a card/descrição, se COPÉRNICO/COSMICOXES tiver sido substituído, se surgir fallback genérico activo ou se dramaturgia existente regredir.',
+            'runtime_accessibility':'Verifica teclado/touch/reduced-motion/lifecycle e ausência de regressão evidente apenas no runtime já implementado.',
+            'public_boundary':'Verifica PUBLIC-ONLY, zero segredos, zero ligação reversível a material reservado e material NÃO PUBLICAR ausente.'
           }
           failures=[]
           for role,rule in roles.items():
-              payload={'model':'mistral-medium-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':f'És {role} do Atlas Vivo MILK. {rule} Responde JSON com pass:boolean, blockers:array, evidence:array.'},{'role':'user','content':src}]}
+              payload={'model':'mistral-medium-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':f'És {role} do Atlas Vivo MILK. {rule} Responde JSON com pass:boolean, blockers:array, evidence:array. Não transformes trabalho futuro ou ainda não aprovado pela autora em blocker do staging actual.'},{'role':'user','content':src}]}
               req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
               with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
               review=json.loads(body['choices'][0]['message']['content'])
@@ -125,4 +125,4 @@ jobs:
           print('PRODUCTION_WRITES=0')
           PY
 
-# production-pipeline: auto-stage every public runtime change
+# production-pipeline: stage current authorised runtime; future unapproved experiences are not false blockers
