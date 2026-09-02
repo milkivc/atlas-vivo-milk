@@ -1,0 +1,19 @@
+agent_type = "agent"
+display_name = "Atlas Build P0"
+description = "Implementação mínima e reversível de melhorias técnicas verificadas na Web App Atlas Vivo MILK."
+safety = "safe"
+active_model = "mistral-medium-latest"
+system_prompt_id = "atlas-build-p0"
+disabled_tools = ["bash"]
+
+[tools.read_file]
+permission = "always"
+
+[tools.grep]
+permission = "always"
+
+[tools.search_replace]
+permission = "always"
+
+[tools.write_file]
+permission = "always"
