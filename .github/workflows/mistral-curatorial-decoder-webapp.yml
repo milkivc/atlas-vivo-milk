@@ -45,7 +45,7 @@ jobs:
           printf '.mistral-private/\n' >> .git/info/exclude
           python - <<'PY'
           import asyncio, json, os, pathlib, hashlib
-          from mistralai import Mistral
+          from mistralai.client import Mistral
 
           OUT = pathlib.Path('.mistral-private')
           key = os.environ['MISTRAL_API_KEY'].strip()
@@ -117,7 +117,7 @@ jobs:
                 connector_id_or_name='google_drive_mcp', page=1, page_size=100, refresh=False, pretty=False
               )
               print('MISTRAL_GOOGLE_DRIVE_CONNECTOR=DISCOVERED')
-            except Exception as e:
+            except Exception:
               print('MISTRAL_GOOGLE_DRIVE_CONNECTOR=DISCOVERY_FAILED')
               raise
 
@@ -153,7 +153,6 @@ jobs:
             )
             (OUT/'03-ritual-spatial.json').write_text(ritual,encoding='utf-8')
 
-            # Synthesis agent uses the three private outputs as explicit evidence, with Code Interpreter for structural checks.
             synthesis_prompt = (
               'You are the MILK WebApp experience architect. Use ONLY the three evidence JSON blocks below. '
               'Do not add mechanics absent from them. Produce STRICT JSON with a code-facing contract: runtime_modules, state_machine_extensions, shared_primitives, required_assets, data_dependencies, accessibility_tests, privacy_tests, source_fidelity_tests, and coverage_gaps. '
@@ -222,7 +221,7 @@ jobs:
           git diff > .mistral-private/candidate.diff
           python - <<'PY'
           import asyncio,json,os,pathlib
-          from mistralai import Mistral
+          from mistralai.client import Mistral
           client=Mistral(api_key=os.environ['MISTRAL_API_KEY'])
           diff=pathlib.Path('.mistral-private/candidate.diff').read_text(encoding='utf-8')
           specs='\n'.join(pathlib.Path('.mistral-private/'+n).read_text(encoding='utf-8') for n in ['01-hermeneut.json','02-ludic.json','03-ritual-spatial.json','04-webapp-contract.json'])
