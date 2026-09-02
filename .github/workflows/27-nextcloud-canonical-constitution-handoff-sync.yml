@@ -1,10 +1,6 @@
 name: 27 MILK Nextcloud canonical constitution + handoff sync
 
 on:
-  push:
-    branches: [work/copernico-recovery-webapp-20260902]
-    paths:
-      - '.github/workflows/27-nextcloud-canonical-constitution-handoff-sync.yml'
   workflow_dispatch:
 
 permissions:
@@ -29,7 +25,7 @@ jobs:
           set -euo pipefail
           test -n "$NEXTCLOUD_PASSWORD"
           python - <<'PY'
-          import base64, hashlib, os, pathlib, urllib.error, urllib.request
+          import base64, hashlib, os, pathlib, urllib.error, urllib.parse, urllib.request
 
           user=os.environ['NEXTCLOUD_USER']
           password=os.environ['NEXTCLOUD_PASSWORD']
