@@ -3,14 +3,19 @@ import {
   PUBLIC_STATES,
   COSMIC_WORDS_SEED
 } from './experience-machine.js';
+import { mountCopernico } from './copernico.js';
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const opening = document.querySelector('#opening');
+const copernicoStage = document.querySelector('#copernico-stage');
+const copernicoView = document.querySelector('#copernico-view');
+const copernicoStatus = document.querySelector('#copernico-status');
 const territory = document.querySelector('#territory');
 const topbar = document.querySelector('.topbar');
 const enter = document.querySelector('#enterAtlas');
 const openingWord = document.querySelector('.opening-word');
 const experience = new AtlasExperienceMachine();
+let copernicoController = null;
 
 experience.setReducedMotion(reduced);
 document.documentElement.dataset.atlasState = experience.state;
@@ -19,6 +24,18 @@ experience.addEventListener('atlas:state', event => {
 });
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, reduced ? 0 : ms));
+
+function setCopernicoStatus(message, mode = 'status') {
+  copernicoStatus.textContent = message;
+  copernicoStatus.setAttribute('aria-atomic', 'true');
+  if (mode === 'alert') {
+    copernicoStatus.setAttribute('role', 'alert');
+    copernicoStatus.setAttribute('aria-live', 'assertive');
+  } else {
+    copernicoStatus.setAttribute('role', 'status');
+    copernicoStatus.setAttribute('aria-live', 'polite');
+  }
+}
 
 async function enterTerritory() {
   if (enter.disabled) return;
@@ -47,17 +64,44 @@ async function enterTerritory() {
   opening.classList.add('leaving');
   await wait(620);
 
-  experience.send(reduced ? 'reduce_motion' : 'globe_ready');
-  await wait(80);
-  experience.send('territory_ready');
-
   opening.hidden = true;
   topbar.hidden = false;
-  territory.hidden = false;
-  document.querySelector('.author-portal')?.focus();
+  copernicoStage.hidden = false;
+  setCopernicoStatus('A preparar o globo Copérnico.');
+  document.documentElement.dataset.globeStatus = 'mounting';
+
+  try {
+    copernicoController = await mountCopernico({
+      container: copernicoView,
+      statusElement: copernicoStatus,
+      reducedMotion: reduced,
+      copernicusWmsUrl: null,
+    });
+
+    const globeEvent = reduced ? 'reduce_motion' : 'globe_ready';
+    if (!experience.send(globeEvent)) throw new Error('COPERNICO_STATE_TRANSITION_BLOCKED');
+    document.documentElement.dataset.globeStatus = 'ready';
+    copernicoView.focus({ preventScroll: true });
+  } catch {
+    document.documentElement.dataset.globeStatus = 'fail-closed';
+    setCopernicoStatus('O globo Copérnico não ficou disponível. O Atlas não avançou para dados territoriais.', 'alert');
+  }
 }
 
 enter.addEventListener('click', enterTerritory);
+
+window.addEventListener('atlas:validated-territories-ready', event => {
+  if (experience.state !== PUBLIC_STATES.GLOBE) return;
+  if (event.detail?.validated !== true) return;
+  if (!experience.send('territory_ready')) return;
+
+  copernicoController?.destroy();
+  copernicoController = null;
+  copernicoStage.hidden = true;
+  territory.hidden = false;
+  document.documentElement.dataset.territorial = 'validated-materialized';
+  document.querySelector('.author-portal')?.focus();
+});
 
 const closeBackdrop = dialog => dialog.addEventListener('click', event => {
   if (event.target === dialog) dialog.close();
@@ -73,9 +117,6 @@ fetch('catalogo-curatorial.json', {cache: 'no-store'})
   .then(data => catalogue = Array.isArray(data.entradas) ? data.entradas : [])
   .catch(() => catalogue = []);
 
-// A branch ainda não contém a materialização territorial validada.
-// Regra pública: sem evidência territorial concreta não há MILK fictícia,
-// bilhete genérico nem escolha aleatória de festa/dinâmica.
 const territorialPoints = [...document.querySelectorAll('[data-ticket]')];
 territorialPoints.forEach(point => {
   point.hidden = true;
@@ -94,8 +135,6 @@ function openTicket(record) {
   return true;
 }
 
-// Ponto de integração futuro: apenas um módulo territorial materializado e
-// validado pode chamar este evento. Não cria coordenadas nem conteúdos.
 window.addEventListener('atlas:validated-territory-request', event => {
   openTicket(event.detail?.territory ?? null);
 });
