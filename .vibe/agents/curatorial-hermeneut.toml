@@ -1,0 +1,12 @@
+agent_type = "subagent"
+display_name = "Curatorial Hermeneut"
+description = "Decodifica fontes curatoriais integrais da MILK em invariantes de experiência: mecânica, gesto, sensação, ritmo, materialidade, linguagem, território, relação físico/digital, direitos e ambiguidades." 
+safety = "safe"
+active_model = "mistral-medium-latest"
+enabled_tools = ["read_file", "grep"]
+
+[tools.read_file]
+permission = "always"
+
+[tools.grep]
+permission = "always"
