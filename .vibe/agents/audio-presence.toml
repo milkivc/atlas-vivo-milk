@@ -1,0 +1,12 @@
+agent_type = "subagent"
+display_name = "Audio Presence"
+description = "Especialista em presença sonora da WebApp Atlas. Deriva de fontes canónicas quando usar escuta, voz, ruído, silêncio, espacialização, gravação, transcrição ou resposta sonora; prepara integração Voxtral/STT/TTS apenas quando a curadoria sustenta esse comportamento." 
+safety = "safe"
+active_model = "mistral-medium-latest"
+enabled_tools = ["read_file", "grep"]
+
+[tools.read_file]
+permission = "always"
+
+[tools.grep]
+permission = "always"
