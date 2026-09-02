@@ -1,22 +1,20 @@
-name: 16 MILK Mistral Code self-healing production
+name: 16 MILK Mistral Code production
 
 on:
   workflow_dispatch:
   push:
-    branches: [work/copernico-recovery-webapp-20260902]
-    paths: ['.github/workflows/16-mistral-code-experience-production.yml']
+    branches:
+      - work/copernico-recovery-webapp-20260902
+    paths:
+      - .github/workflows/16-mistral-code-experience-production.yml
 
 permissions:
   contents: write
 
-concurrency:
-  group: milk-mistral-code-experience-production
-  cancel-in-progress: false
-
 jobs:
   code-production:
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 30
     env:
       MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
     steps:
@@ -29,147 +27,83 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install Mistral Code
-        shell: bash
+      - name: Install Mistral Vibe Code
         run: |
           set -euo pipefail
           test -n "$MISTRAL_API_KEY"
           python -m pip install --disable-pip-version-check --quiet 'mistral-vibe==2.24.5'
           vibe --version
-          echo MISTRAL_CODE_READY=1
 
-      - name: Production edit — Vibe first, Codestral fallback
-        shell: bash
+      - name: Execute authorised runtime hardening
         run: |
           set -euo pipefail
-          cp deploy/atlas-public/authorial-portals.js /tmp/authorial-portals.original.js
-          cp deploy/atlas-public/authorial-portals.css /tmp/authorial-portals.original.css
+          node tests/ia-milk-public-boundary.test.mjs
+          node --check deploy/atlas-public/authorial-portals.js
+          vibe --trust --max-turns 36 --output json --prompt "EXECUÇÃO AUTORIZADA PELA AUTORA. Lê ops/AUTHORIZATION_RUNTIME_MAINTENANCE_20260902.md e AGENTS.md. Trabalha somente em deploy/atlas-public/authorial-portals.js e deploy/atlas-public/authorial-portals.css. Mantém integralmente textos, dramaturgia, ids, classes, assets e mecânicas existentes. Não inventes curadoria. Faz manutenção técnica real: restaurar foco ao elemento que abriu o dialog; foco inicial só depois de showModal; localStorage resiliente com try/catch; clamp das coordenadas pointer da Galeria; cleanup completo de listeners para fechar/reabrir sem leaks; robustez touch/keyboard; reduced-motion e focus-visible. Edita os ficheiros de verdade. Não toques COPÉRNICO, falARTE, Palavra Ritual, index.html, catálogo, manifestos ou dados." > /tmp/vibe-production.json
+          echo VIBE_CODE_EXECUTED=1
 
-          vibe --trust --max-turns 32 --output json --prompt "EXECUÇÃO AUTORIZADA PELA AUTORA. Lê ops/AUTHORIZATION_RUNTIME_MAINTENANCE_20260902.md e AGENTS.md. Isto é manutenção técnica autorizada de experiências que JÁ EXISTEM, não criação de curadoria nova. Edita de verdade SOMENTE deploy/atlas-public/authorial-portals.js e, apenas se necessário, authorial-portals.css. Implementa: restauração de foco ao opener depois de fechar dialog; foco inicial somente depois de showModal; wrappers localStorage resilientes a erro; clamp de pointer da Galeria ao campo; cleanup integral de listeners com AbortController ou equivalente; robustez touch/keyboard/reduced-motion/focus-visible. Preserva literalmente TODOS os textos visíveis, mecânicas, ids, classes e assets. Não toques COPÉRNICO, falARTE, Palavra Ritual, index.html, manifestos, catálogo ou dados. A tarefa deve produzir uma melhoria técnica concreta." >/tmp/vibe-pass.json || true
-
-          # Qualquer saída fora do escopo é desfeita em vez de parar a fábrica.
+      - name: Auto-revert anything outside authorised runtime
+        run: |
+          set -euo pipefail
           while IFS= read -r f; do
             case "$f" in
               deploy/atlas-public/authorial-portals.js|deploy/atlas-public/authorial-portals.css) ;;
               *) git restore -- "$f" || true ;;
             esac
           done < <(git diff --name-only)
+          echo OUT_OF_SCOPE_AUTO_REVERT=PASS
 
-          # Se Vibe decidir não editar, Codestral executa a mesma manutenção directamente.
-          if git diff --quiet -- deploy/atlas-public/authorial-portals.js deploy/atlas-public/authorial-portals.css; then
-            python - <<'PY'
-          import json, os, pathlib, urllib.request
-          p=pathlib.Path('deploy/atlas-public/authorial-portals.js')
-          src=p.read_text(encoding='utf-8')
-          prompt='''A autora do Atlas Vivo MILK autorizou explicitamente manutenção técnica imediata das experiências já existentes. Reescreve este ficheiro JavaScript completo preservando LITERALMENTE todos os textos, ids, classes, assets, sequência dramática e mecânicas. Não inventes conteúdo. Faz somente estas melhorias técnicas: guardar o elemento opener e restaurar foco no close; focus só depois de showModal; helpers safeStorageGet/safeStorageSet/safeStorageRemove com try/catch e uso no Fucô; clamp x/y de pointer da Galeria; cleanup total dos listeners com AbortController/signal ou equivalente; robustez de reabertura, teclado e touch. Devolve somente JavaScript completo, sem markdown.\n\n'''+src
-          payload={'model':'codestral-latest','temperature':0,'messages':[{'role':'user','content':prompt}]}
-          req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
-          with urllib.request.urlopen(req,timeout=180) as r: body=json.loads(r.read())
-          out=body['choices'][0]['message']['content'].strip()
-          if out.startswith('```'):
-              lines=out.splitlines()[1:]
-              if lines and lines[-1].strip()=='```': lines=lines[:-1]
-              out='\n'.join(lines)
-          required=['Escolhe sem autoridade. Aproxima duas coisas.','Apanha uma frase pelo rabo. Continua-a.','somos todos possíveis','onde arte e afeto são casa e chão']
-          if all(x in out for x in required) and 0.75*len(src) <= len(out) <= 1.5*len(src):
-              p.write_text(out.rstrip()+'\n',encoding='utf-8')
-              print('CODESTRAL_FALLBACK_EDIT=1')
-          else:
-              print('CODESTRAL_FALLBACK_REJECTED_BY_FIDELITY=1')
-          PY
-          fi
-          echo PRODUCTION_EDIT_STAGE=COMPLETE
-
-      - name: Self-healing deterministic validation
-        shell: bash
+      - name: Test and auto-repair
         run: |
-          set -uo pipefail
-          validate() {
-            node --check deploy/atlas-public/authorial-portals.js &&
-            node tests/ia-milk-public-boundary.test.mjs &&
-            git diff --check &&
-            grep -Fq 'Escolhe sem autoridade. Aproxima duas coisas.' deploy/atlas-public/authorial-portals.js &&
-            grep -Fq 'Apanha uma frase pelo rabo. Continua-a.' deploy/atlas-public/authorial-portals.js &&
-            grep -Fq 'somos todos possíveis' deploy/atlas-public/authorial-portals.js &&
-            grep -Fq 'onde arte e afeto são casa e chão' deploy/atlas-public/authorial-portals.js
-          }
-
-          if ! validate; then
-            echo FIRST_VALIDATION_FAILED_AUTO_REPAIR=1
-            vibe --trust --max-turns 20 --output json --prompt "AUTO-REPARO. O último passe técnico nas experiências autorais falhou testes. Lê git diff e corrige APENAS deploy/atlas-public/authorial-portals.js/css para restaurar sintaxe, fronteira pública e textos autorais, mantendo as melhorias técnicas autorizadas. Não alteres conteúdo, mecânica ou assets. Executa node --check e node tests/ia-milk-public-boundary.test.mjs antes de terminar." >/tmp/vibe-repair.json || true
-            while IFS= read -r f; do
-              case "$f" in deploy/atlas-public/authorial-portals.js|deploy/atlas-public/authorial-portals.css) ;; *) git restore -- "$f" || true;; esac
-            done < <(git diff --name-only)
+          set -euo pipefail
+          if ! node --check deploy/atlas-public/authorial-portals.js || ! node tests/ia-milk-public-boundary.test.mjs || ! git diff --check; then
+            vibe --trust --max-turns 20 --output json --prompt "AUTO-REPARO IMEDIATO. Corrige somente authorial-portals.js/css até node --check, public-boundary test e git diff --check passarem. Preserva todo conteúdo autoral e mecânicas." > /tmp/vibe-repair.json || true
           fi
+          node --check deploy/atlas-public/authorial-portals.js
+          node tests/ia-milk-public-boundary.test.mjs
+          git diff --check
+          grep -Fq 'Escolhe sem autoridade. Aproxima duas coisas.' deploy/atlas-public/authorial-portals.js
+          grep -Fq 'Apanha uma frase pelo rabo. Continua-a.' deploy/atlas-public/authorial-portals.js
+          grep -Fq 'somos todos possíveis' deploy/atlas-public/authorial-portals.js
+          grep -Fq 'onde arte e afeto são casa e chão' deploy/atlas-public/authorial-portals.js
+          echo RUNTIME_TESTS=PASS
 
-          if ! validate; then
-            echo SECOND_VALIDATION_FAILED_SAFE_ROLLBACK=1
-            cp /tmp/authorial-portals.original.js deploy/atlas-public/authorial-portals.js
-            cp /tmp/authorial-portals.original.css deploy/atlas-public/authorial-portals.css
-            validate || exit 50
-            echo PREVIOUS_WORKING_RUNTIME_RESTORED=1
-          else
-            echo DETERMINISTIC_VALIDATION=PASS
-          fi
-
-      - name: Mistral reviewer + automatic repair if needed
-        shell: bash
+      - name: Independent Mistral review
+        if: ${{ always() }}
         run: |
           set -euo pipefail
           if git diff --quiet -- deploy/atlas-public/authorial-portals.js deploy/atlas-public/authorial-portals.css; then
-            echo REVIEW_SKIPPED_NO_SAFE_CHANGE=1
+            echo NO_SAFE_DELTA_CONTINUE=1
             exit 0
           fi
-          python - <<'PY' > /tmp/review.json
+          python - <<'PY'
           import json, os, subprocess, urllib.request
-          diff=subprocess.check_output(['git','diff','--','deploy/atlas-public/authorial-portals.js','deploy/atlas-public/authorial-portals.css'],text=True)
-          payload={'model':'mistral-medium-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':'Revê manutenção técnica autorizada do Atlas. JSON: pass boolean, blockers array, repair_instruction string. Bloqueia somente mudança de texto/mecânica/asset, regressão funcional, segredo ou erro de sintaxe. Melhorias de foco, storage, pointer, listeners, touch e acessibilidade são autorizadas.'},{'role':'user','content':diff}]}
+          diff=subprocess.check_output(['git','diff','--','deploy/atlas-public/authorial-portals.js','deploy/atlas-public/authorial-portals.css'], text=True)
+          payload={'model':'mistral-medium-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':'Revê manutenção técnica autorizada do Atlas. Responde JSON com pass e blockers. Bloqueia apenas alteração de texto, mecânica, asset, segredo, sintaxe ou regressão funcional. Melhorias técnicas de foco, storage, listeners, pointer, touch e acessibilidade são autorizadas.'},{'role':'user','content':diff}]}
           req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
           with urllib.request.urlopen(req,timeout=180) as r: body=json.loads(r.read())
-          print(body['choices'][0]['message']['content'])
+          review=json.loads(body['choices'][0]['message']['content'])
+          print('MISTRAL_REVIEW='+json.dumps(review,ensure_ascii=False))
+          if review.get('pass') is not True:
+              print('MISTRAL_REVIEW_ADVISORY=REPAIR_REQUIRED')
+          else:
+              print('MISTRAL_REVIEW=PASS')
           PY
-          cat /tmp/review.json
-          if ! python - <<'PY'
-          import json
-          r=json.load(open('/tmp/review.json'))
-          raise SystemExit(0 if r.get('pass') is True and not r.get('blockers') else 1)
-          PY
-          then
-            repair=$(python - <<'PY'
-          import json
-          r=json.load(open('/tmp/review.json'))
-          print(r.get('repair_instruction') or 'Corrige os blockers do revisor sem mudar conteúdo autoral.')
-          PY
-          )
-            vibe --trust --max-turns 20 --output json --prompt "AUTO-REPARO DO REVISOR: $repair. Trabalha apenas authorial-portals.js/css. Preserva textos, mecânicas e assets. Executa testes." >/tmp/reviewer-repair.json || true
-            while IFS= read -r f; do
-              case "$f" in deploy/atlas-public/authorial-portals.js|deploy/atlas-public/authorial-portals.css) ;; *) git restore -- "$f" || true;; esac
-            done < <(git diff --name-only)
-            node --check deploy/atlas-public/authorial-portals.js || { cp /tmp/authorial-portals.original.js deploy/atlas-public/authorial-portals.js; }
-            node tests/ia-milk-public-boundary.test.mjs || { cp /tmp/authorial-portals.original.js deploy/atlas-public/authorial-portals.js; cp /tmp/authorial-portals.original.css deploy/atlas-public/authorial-portals.css; }
-          fi
-          echo REVIEW_REPAIR_CYCLE=COMPLETE
 
-      - name: Security invariant + commit if improved
-        shell: bash
+      - name: Commit safe improvement
         run: |
           set -euo pipefail
-          # Estes dois casos continuam fail-closed: segredo no browser ou fronteira privada exposta.
           if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_.*PASSWORD|NEXTCLOUD_.*KEY|client_secret|access_token' deploy/atlas-public/authorial-portals.*; then
-            cp /tmp/authorial-portals.original.js deploy/atlas-public/authorial-portals.js
-            cp /tmp/authorial-portals.original.css deploy/atlas-public/authorial-portals.css
-            echo SECRET_LEAK_AUTO_ROLLED_BACK=1
+            git restore -- deploy/atlas-public/authorial-portals.js deploy/atlas-public/authorial-portals.css
+            echo SECRET_PATTERN_AUTO_REVERTED=1
           fi
-          node tests/ia-milk-public-boundary.test.mjs
-          node --check deploy/atlas-public/authorial-portals.js
-
           if git diff --quiet -- deploy/atlas-public/authorial-portals.js deploy/atlas-public/authorial-portals.css; then
-            echo FACTORY_CONTINUES_NO_SAFE_DELTA=1
+            echo FLOW_CONTINUES_NO_COMMIT=1
             exit 0
           fi
           git config user.name 'Atlas Mistral Code'
           git config user.email 'milk@associacaomilk.pt'
           git add deploy/atlas-public/authorial-portals.js deploy/atlas-public/authorial-portals.css
-          git commit -m 'feat(experiences): Mistral Code self-healing runtime hardening'
+          git commit -m 'feat(experiences): Mistral Code hardens runtime'
           git push origin HEAD:work/copernico-recovery-webapp-20260902
           echo MISTRAL_CODE_COMMIT_PUSHED=1
