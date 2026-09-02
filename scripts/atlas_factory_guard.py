@@ -81,7 +81,7 @@ if transformation_rule.exists():
         'regra canónica de transformação curatorial pública',
         'camada pública experiencial',
         'não existe correspondência rígida 1:1',
-        'possível materialização física',
+        'possibilidade de materialização',
         'necessidade, potência ou desejo territorial',
         'validação humana'
     ):
@@ -153,7 +153,7 @@ if registry.exists():
 
 if policy.exists():
     pt=policy.read_text(encoding='utf-8', errors='replace').lower()
-    for token in ('experience_preview','author_hash_approval','sha-256','nenhuma curadoria entra em código sem experiência previamente mostrada'):
+    for token in ('experience_preview','author_hash_approval','sha-256','nenhuma curadoria pode chegar ao vibe code'):
         if token.lower() not in pt:
             errors.append('AUTHOR_GATE_POLICY_MISSING:'+token)
 
