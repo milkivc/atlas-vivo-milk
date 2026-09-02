@@ -1,4 +1,4 @@
-name: 25 MILK Mistral in-account model failover probe
+name: 25 MILK validate refreshed MISTRAL_API_KEY
 
 on:
   push:
@@ -12,49 +12,33 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-24.04
-    timeout-minutes: 8
+    timeout-minutes: 6
     env:
-      KEY_A: ${{ secrets.MISTRAL_API_KEY }}
-      KEY_B: ${{ secrets.MISTRALAPI_KEY }}
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
     steps:
-      - name: Diagnose Mistral 402 and test in-account failover
+      - name: Validate refreshed primary Mistral credential
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
           import json,os,re,urllib.error,urllib.request
-          keys=[]
-          for label,name in [('A','KEY_A'),('B','KEY_B')]:
-              v=os.environ.get(name,'').strip()
-              if v and all(v!=x[1] for x in keys): keys.append((label,v))
-          if not keys: raise SystemExit('NO_MISTRAL_KEYS')
-          models=['codestral-latest','devstral-small-latest','mistral-small-latest','ministral-3b-latest']
-          chosen=None; reasons=[]
-          for label,key in keys:
-              for model in models:
-                  payload={'model':model,'temperature':0,'max_tokens':24,'messages':[{'role':'user','content':'Return only OK'}]}
-                  req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+          key=os.environ.get('MISTRAL_API_KEY','').strip()
+          if not key: raise SystemExit('MISTRAL_API_KEY_MISSING')
+          models=['codestral-latest','devstral-small-latest','mistral-small-latest']
+          for model in models:
+              payload={'model':model,'temperature':0,'max_tokens':24,'messages':[{'role':'user','content':'Return only OK'}]}
+              req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+              try:
+                  with urllib.request.urlopen(req,timeout=45) as r: r.read()
+                  print('MISTRAL_REFRESHED_KEY=PASS')
+                  print('MISTRAL_MODEL='+model)
+                  raise SystemExit(0)
+              except urllib.error.HTTPError as e:
+                  raw=e.read().decode('utf-8','replace')[:800]
                   try:
-                      with urllib.request.urlopen(req,timeout=45) as r: r.read()
-                      print(f'MISTRAL_MODEL_PROBE=PASS key={label} model={model}')
-                      chosen=(label,model); break
-                  except urllib.error.HTTPError as e:
-                      raw=e.read().decode('utf-8','replace')[:1200]
-                      try:
-                          obj=json.loads(raw); reason=str(obj.get('message') or obj.get('detail') or obj.get('error') or raw)
-                      except Exception: reason=raw
-                      reason=re.sub(r'(sk-[A-Za-z0-9_-]+|Bearer\s+\S+)','[REDACTED]',reason)
-                      reason=' '.join(reason.split())[:500]
-                      print(f'MISTRAL_MODEL_PROBE=FAIL key={label} model={model} http={e.code}')
-                      if e.code==402 and reason not in reasons:
-                          reasons.append(reason)
-                          print('MISTRAL_402_REASON='+reason)
-                  if chosen: break
-              if chosen: break
-          if not chosen:
-              print('MISTRAL_IN_ACCOUNT_MODEL_FAILOVER=NONE')
-              raise SystemExit(42)
-          print('MISTRAL_IN_ACCOUNT_MODEL_FAILOVER=PASS')
-          print('SELECTED_KEY_SLOT='+chosen[0])
-          print('SELECTED_MODEL='+chosen[1])
+                      obj=json.loads(raw); reason=str(obj.get('message') or obj.get('detail') or obj.get('error') or raw)
+                  except Exception: reason=raw
+                  reason=re.sub(r'(sk-[A-Za-z0-9_-]+|Bearer\s+\S+)','[REDACTED]',reason)
+                  print(f'MISTRAL_MODEL_FAIL={model}:HTTP_{e.code}:{" ".join(reason.split())[:300]}')
+          raise SystemExit('MISTRAL_REFRESHED_KEY_NO_USABLE_MODEL')
           PY
