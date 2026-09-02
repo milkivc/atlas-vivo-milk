@@ -1,0 +1,35 @@
+name: 02 MILK Mistral persistent curatorial foundry
+
+on:
+  push:
+    branches:
+      - work/copernico-recovery-webapp-20260902
+    paths:
+      - 'scripts/provision_mistral_curatorial_foundry.py'
+      - '.github/workflows/02-mistral-curatorial-foundry.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+
+jobs:
+  provision:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install current Mistral SDK
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python -m pip install --disable-pip-version-check -q 'mistralai>=2.9,<3'
+      - name: Provision Library + persistent specialist agents + handoffs
+        run: python scripts/provision_mistral_curatorial_foundry.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mistral-curatorial-foundry-receipt
+          path: /tmp/mistral-curatorial-foundry-receipt.json
+          retention-days: 30
