@@ -56,20 +56,19 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p /tmp/itowns-release deploy/atlas-public/vendor/itowns
-          curl -fsSL --retry 3 -o /tmp/itowns-bundles.zip \
-            https://github.com/iTowns/itowns/releases/download/v2.46.0/bundles.zip
+          curl -fsSL --retry 3 -o /tmp/itowns-bundles.zip https://github.com/iTowns/itowns/releases/download/v2.46.0/bundles.zip
           echo "$ITOWNS_BUNDLE_SHA256  /tmp/itowns-bundles.zip" | sha256sum -c -
           unzip -q /tmp/itowns-bundles.zip -d /tmp/itowns-release
-          bundle="$(find /tmp/itowns-release -type f \( -name 'itowns.umd.js' -o -name 'itowns.js' \) | head -n 1)"
+          bundle="$(find /tmp/itowns-release -type f -name 'itowns.umd.js' | head -n 1)"
           test -n "$bundle"
           cp "$bundle" deploy/atlas-public/vendor/itowns/itowns.umd.js
-          cat > deploy/atlas-public/vendor/itowns/NOTICE.txt <<'EOF'
-          iTowns v2.46.0
-          Upstream project: iTowns, original work of French IGN; maintained by IGN and CIRIL Group.
-          Upstream licence: dual CeCILL-B v1.0 OR MIT. Incorporated dependencies retain their original licences.
-          Vendored for self-hosting by the Atlas Vivo MILK WebApp; no public CDN dependency.
-          Upstream release bundle SHA-256: caa9e3c8a981c9328d3fbf9bbeaca84edd39d2fbaf28defccb36c461e45925b4
-          EOF
+          printf '%s\n' \
+            'iTowns v2.46.0' \
+            'Original work: French IGN; maintained by IGN and CIRIL Group.' \
+            'Licence: CeCILL-B v1.0 OR MIT; incorporated dependencies retain original licences.' \
+            'Self-hosted by Atlas Vivo MILK; no public CDN dependency.' \
+            'Release bundle SHA-256: caa9e3c8a981c9328d3fbf9bbeaca84edd39d2fbaf28defccb36c461e45925b4' \
+            > deploy/atlas-public/vendor/itowns/NOTICE.txt
           test -s deploy/atlas-public/vendor/itowns/itowns.umd.js
           echo "ITOWNS_VENDORED_BYTES=$(wc -c < deploy/atlas-public/vendor/itowns/itowns.umd.js)"
 
@@ -83,9 +82,9 @@ jobs:
       - name: Mistral Code integrates recovered COPERNICO into WebApp
         run: |
           set -euo pipefail
-          vibe --trust \
+          vibe --trust --max-turns 24 --output json \
             --prompt "Trabalhas SOMENTE na WebApp pública do Atlas Vivo MILK desta branch. Lê primeiro recovery/COPERNICO_EU_SOURCE_EXTRACT.md, deploy/atlas-public/experience-machine.js, deploy/atlas-public/atlas.js, deploy/atlas-public/index.html e deploy/atlas-public/styles.css. O COPÉRNICO já foi definido pelo corpus: não inventes outro globo. Implementa o estado GLOBE usando o bundle local vendor/itowns/itowns.umd.js (iTowns v2.46.0) e cria deploy/atlas-public/copernico.js como módulo separado. Integra um container real do Globo COPÉRNICO na dramaturgia existente DISSOLVE -> GLOBE. NÃO avances automaticamente para TERRITORIAL_MILKS enquanto nenhum dataset público validado estiver carregado. NÃO cries pontos, coordenadas, festas, MILKs, hifas ou exemplos fictícios. NÃO incluas client secret, token, INSTANCE_ID inventado ou URL com credencial. A camada Copernicus WMS deve ser opcional e aceitar apenas uma URL pública segura fornecida por configuração local futura; o globo iTowns deve iniciar sem WMS. Preserva COSMICOXES, palavras, segundo gesto, bilhetes, portais autorais, Nuno-contribuição, Livro Cubo e catálogo. Mantém CSP self-only por agora. Modifica somente deploy/atlas-public/copernico.js (novo), index.html, atlas.js e styles.css. Não alteres experience-machine.js, app.js, curadorias.js, catálogo, assets, manifest, recovery ou produção. A experiência deve ser acessível: container com nome acessível, mensagem de estado em aria-live, teclado não bloqueado, reduced-motion respeitado. Não faças commit nem publiques." \
-            --max-turns 24 --output json > /tmp/mistral-copernico-build.json
+            > /tmp/mistral-copernico-build.json
           test -s /tmp/mistral-copernico-build.json
 
       - name: Hard source-fidelity and boundary gates
@@ -93,14 +92,13 @@ jobs:
           set -euo pipefail
           changed="$(git status --porcelain | awk '{print $2}' | sort)"
           printf '%s\n' "$changed"
-          allowed='deploy/atlas-public/atlas.js
-deploy/atlas-public/copernico.js
-deploy/atlas-public/index.html
-deploy/atlas-public/styles.css
-deploy/atlas-public/vendor/itowns/NOTICE.txt
-deploy/atlas-public/vendor/itowns/itowns.umd.js'
-          comm -23 <(printf '%s\n' "$changed") <(printf '%b\n' "$allowed" | sort) | tee /tmp/forbidden-changes.txt
-          test ! -s /tmp/forbidden-changes.txt
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            case "$file" in
+              deploy/atlas-public/atlas.js|deploy/atlas-public/copernico.js|deploy/atlas-public/index.html|deploy/atlas-public/styles.css|deploy/atlas-public/vendor/itowns/NOTICE.txt|deploy/atlas-public/vendor/itowns/itowns.umd.js) ;;
+              *) echo "::error::Forbidden changed file: $file"; exit 30 ;;
+            esac
+          done <<< "$changed"
           cmp -s deploy/atlas-public/experience-machine.js /tmp/experience-machine.baseline.js
           cmp -s deploy/atlas-public/catalogo-curatorial.json /tmp/catalogo.baseline.json
           test -s deploy/atlas-public/copernico.js
@@ -127,21 +125,17 @@ deploy/atlas-public/vendor/itowns/itowns.umd.js'
           diff=pathlib.Path('/tmp/copernico.diff').read_text(encoding='utf-8')
           source=pathlib.Path('recovery/COPERNICO_EU_SOURCE_EXTRACT.md').read_text(encoding='utf-8')
           machine=pathlib.Path('deploy/atlas-public/experience-machine.js').read_text(encoding='utf-8')
-          candidate='\n\n'.join(pathlib.Path(p).read_text(encoding='utf-8') for p in [
-            'deploy/atlas-public/copernico.js','deploy/atlas-public/atlas.js','deploy/atlas-public/index.html','deploy/atlas-public/styles.css'])
+          candidate='\n\n'.join(pathlib.Path(p).read_text(encoding='utf-8') for p in ['deploy/atlas-public/copernico.js','deploy/atlas-public/atlas.js','deploy/atlas-public/index.html','deploy/atlas-public/styles.css'])
           roles={
             'source_fidelity':'Bloqueia qualquer globo substituto, dado inventado, retorno à versão DAT.Globe/Three.js histórica ou alteração da dramaturgia canónica.',
-            'itowns_runtime':'Revisa o uso concreto de iTowns GlobeView v2.46.0, inicialização/destruição, resize e erros. Não exijas camada WMS para o globo base.',
+            'itowns_runtime':'Revisa uso concreto de iTowns GlobeView v2.46.0, inicialização, resize, lifecycle e erro. Não exijas WMS para o globo base.',
             'public_boundary':'Bloqueia Camada Invisível, hifas internas, segredos, PII, tokens, heurísticas privadas ou dados não-publicados.',
-            'accessibility_performance':'Revisa reduced-motion, teclado, aria-live, resize e custo de lifecycle sem exigir uma homepage ou cards.',
-            'state_machine_guard':'Confirma que DISSOLVE -> GLOBE é materializado e que TERRITORIAL_MILKS não é disparado sem dataset público validado.'
+            'accessibility_performance':'Revisa reduced-motion, teclado, aria-live, resize e custo de lifecycle.',
+            'state_machine_guard':'Confirma DISSOLVE -> GLOBE e que TERRITORIAL_MILKS não dispara sem dataset público validado.'
           }
           reviews=[]
           for role,rule in roles.items():
-              payload={'model':'mistral-medium-latest','temperature':0.0,'response_format':{'type':'json_object'},'messages':[
-                {'role':'system','content':f'És o agente MILK {role}. {rule} Baseia blockers em evidência literal do diff/código. Responde JSON estrito: pass(boolean), blockers(array), evidence(array), tests(array).'},
-                {'role':'user','content':'FONTE CANÓNICA RECUPERADA:\n'+source+'\n\nMÁQUINA PRESERVADA:\n'+machine+'\n\nDIFF:\n'+diff+'\n\nCANDIDATO:\n'+candidate}
-              ]}
+              payload={'model':'mistral-medium-latest','temperature':0.0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':f'És o agente MILK {role}. {rule} Cada blocker deve ter evidência literal no diff/código. Responde JSON estrito: pass(boolean), blockers(array), evidence(array), tests(array).'},{'role':'user','content':'FONTE:\n'+source+'\n\nMÁQUINA:\n'+machine+'\n\nDIFF:\n'+diff+'\n\nCANDIDATO:\n'+candidate}]}
               req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
               with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
               review=json.loads(body['choices'][0]['message']['content']); review['role']=role; reviews.append(review)
