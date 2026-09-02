@@ -5,6 +5,16 @@
   "target": "atlas.associacaomilk.pt",
   "mistral_agents": "PERSISTENT_FOUNDRY",
   "queue": "CURATORIA_BY_CURATORIA",
+  "production_precedence": [
+    "CURATORIA",
+    "DINAMICAS_BRINCADEIRAS_JOGOS_CONVITES_RITUAIS",
+    "EXPERIENCIA",
+    "DISPOSITIVO_DERIVADO",
+    "CODIGO"
+  ],
+  "device_first_allowed": false,
+  "device_policy": "DERIVE_ONLY_AFTER_EXPERIENCE_IS_COMPOSED_AND_REVIEWED",
+  "error_learning_policy": "RETURN_TO_CURATORIAL_EXPERIENCE_BEFORE_TECHNICAL_DEVICE_REDESIGN",
   "author_preview_before_code": true,
   "generic_fallback_allowed": false,
   "preserve_copernico": true,
