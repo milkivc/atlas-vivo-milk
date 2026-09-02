@@ -73,7 +73,6 @@ jobs:
           release={p.relative_to(ROOT).as_posix():p.read_bytes() for p in sorted(ROOT.rglob('*')) if p.is_file() and not p.name.endswith('.gz')}
           if 'index.html' not in release: raise RuntimeError('INDEX_MISSING')
 
-          # Only files that this release can overwrite need rollback copies.
           previous={}; absent=[]
           for rel in sorted(release):
               data=bytearray()
@@ -154,3 +153,5 @@ jobs:
           print('ATLAS_PUBLIC_RELEASE_FILES='+str(len(release)))
           print('SECRET_VALUES_DISCLOSED=0')
           PY
+
+# production sync 2026-09-02 latest branch runtime
