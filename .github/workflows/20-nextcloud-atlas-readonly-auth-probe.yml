@@ -1,0 +1,61 @@
+name: 20 Nextcloud Atlas read-only auth probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths:
+      - '.github/workflows/20-nextcloud-atlas-readonly-auth-probe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      NEXTCLOUD_ATLAS: ${{ secrets.NEXTCLOUD_ATLAS }}
+      NEXTCLOUD_KEY: ${{ secrets.NEXTCLOUD_KEY }}
+      PTSERVIDOR_FTP_WEBDAV: ${{ secrets.PTSERVIDOR_FTP_WEBDAV }}
+    steps:
+      - name: Probe Nextcloud WebDAV credentials without writes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64, os, ssl, urllib.parse, urllib.request, urllib.error
+          base='https://associacaomilk.pt/nextcloud'
+          users=['admin','milk','associ16','migration@associacaomilk.pt']
+          routes=[]
+          for label in ('NEXTCLOUD_ATLAS','NEXTCLOUD_KEY','PTSERVIDOR_FTP_WEBDAV'):
+              value=os.environ.get(label,'').strip()
+              if value and all(value != v for _,v in routes):
+                  routes.append((label,value))
+          if not routes:
+              raise SystemExit('NEXTCLOUD_EXISTING_CREDENTIALS_MISSING')
+          ctx=ssl.create_default_context(); winner=None; statuses=[]
+          for label,password in routes:
+              for user in users:
+                  endpoint=base.rstrip('/')+'/remote.php/dav/files/'+urllib.parse.quote(user,safe='')+'/'
+                  raw=base64.b64encode((user+':'+password).encode()).decode()
+                  req=urllib.request.Request(endpoint,method='PROPFIND',headers={'Authorization':'Basic '+raw,'Depth':'0','Accept':'application/xml'})
+                  try:
+                      with urllib.request.urlopen(req,timeout=25,context=ctx) as r:
+                          status=r.status
+                      ok=status in (200,207)
+                  except urllib.error.HTTPError as e:
+                      status=e.code; ok=False
+                  except Exception as e:
+                      status=type(e).__name__; ok=False
+                  statuses.append(f'{label}:{user}:{status}')
+                  if ok:
+                      winner=(label,user,status); break
+              if winner: break
+          if winner:
+              label,user,status=winner
+              print(f'NEXTCLOUD_AUTH=PASS route={label} user={user} http={status} writes=0')
+          else:
+              print('NEXTCLOUD_AUTH=BLOCKED '+';'.join(statuses)+' writes=0')
+              raise SystemExit(1)
+          PY
