@@ -1,0 +1,101 @@
+name: 23 Atlas repo vs PTServidor read-only diff
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths:
+      - '.github/workflows/23-atlas-repo-vs-ptservidor-readonly-diff.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      ATLAS_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_ATLAS_FTPS_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+
+      - name: Compare repository public bundle with PTServidor without writes
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$ATLAS_FTPS_PASSWORD"
+          python - <<'PY'
+          import ftplib, hashlib, json, os, pathlib, posixpath, ssl
+
+          local_root=pathlib.Path('deploy/atlas-public')
+          if not local_root.is_dir(): raise SystemExit('LOCAL_PUBLIC_BUNDLE_MISSING')
+
+          def sha_file(path):
+              h=hashlib.sha256()
+              with path.open('rb') as f:
+                  for block in iter(lambda:f.read(1024*1024),b''): h.update(block)
+              return h.hexdigest()
+
+          local={}
+          for p in local_root.rglob('*'):
+              if p.is_file():
+                  rel=p.relative_to(local_root).as_posix()
+                  local[rel]={'size':p.stat().st_size,'sha256':sha_file(p)}
+
+          ftp=ftplib.FTP_TLS(context=ssl.create_default_context(), timeout=90)
+          ftp.connect('troi.ptservidor.net',21)
+          ftp.login('atlas@associacaomilk.pt',os.environ['ATLAS_FTPS_PASSWORD'])
+          ftp.prot_p()
+          remote={}; seen=set()
+
+          def walk(path='/',depth=0):
+              if depth>10 or path in seen: return
+              seen.add(path)
+              try: entries=list(ftp.mlsd(path,facts=['type','size']))
+              except Exception: return
+              for name,facts in entries:
+                  if name in ('.','..'): continue
+                  full=posixpath.join(path.rstrip('/'),name) or '/'
+                  rel=full.lstrip('/')
+                  typ=facts.get('type','')
+                  if typ=='dir': walk(full,depth+1)
+                  elif typ=='file':
+                      size=int(facts.get('size','0') or 0)
+                      h=hashlib.sha256()
+                      ftp.retrbinary('RETR '+full,h.update,blocksize=262144)
+                      remote[rel]={'size':size,'sha256':h.hexdigest()}
+          walk('/')
+          ftp.quit()
+
+          common=sorted(set(local)&set(remote))
+          identical=[p for p in common if local[p]['sha256']==remote[p]['sha256']]
+          changed=[p for p in common if local[p]['sha256']!=remote[p]['sha256']]
+          repo_only=sorted(set(local)-set(remote))
+          server_only=sorted(set(remote)-set(local))
+          report={
+              'read_only':True,'writes_performed':0,
+              'repo_files':len(local),'server_files':len(remote),
+              'identical_count':len(identical),'changed_count':len(changed),
+              'repo_only_count':len(repo_only),'server_only_count':len(server_only),
+              'identical':identical,'changed':changed,'repo_only':repo_only,'server_only':server_only,
+              'local':local,'remote':remote
+          }
+          pathlib.Path('atlas-repo-vs-ptservidor.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('ATLAS_REPO_SERVER_DIFF=PASS')
+          print('REPO_FILES='+str(len(local)))
+          print('SERVER_FILES='+str(len(remote)))
+          print('IDENTICAL='+str(len(identical)))
+          print('CHANGED='+str(len(changed)))
+          print('REPO_ONLY='+str(len(repo_only)))
+          print('SERVER_ONLY='+str(len(server_only)))
+          print('WRITES=0')
+          PY
+
+      - name: Upload read-only comparison receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: atlas-repo-vs-ptservidor-readonly-diff
+          path: atlas-repo-vs-ptservidor.json
+          retention-days: 7
