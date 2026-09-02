@@ -19,25 +19,63 @@ const PORTALS = Object.freeze({
 let dialog;
 let body;
 let cleanup = () => {};
+let openerElement = null;
+let controller = new AbortController();
+
+function safeStorageGet(key) {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function safeStorageSet(key, value) {
+  try {
+    localStorage.setItem(key, value);
+  } catch {}
+}
+
+function safeStorageRemove(key) {
+  try {
+    localStorage.removeItem(key);
+  } catch {}
+}
 
 function ensureDialog() {
   if (dialog) return dialog;
+
   dialog = document.createElement('dialog');
   dialog.className = 'authorial-experience';
   dialog.setAttribute('aria-labelledby', 'authorial-experience-title');
   dialog.innerHTML = `
     <button class="authorial-close" type="button" aria-label="Fechar">×</button>
     <div class="authorial-body"></div>`;
+
   body = dialog.querySelector('.authorial-body');
-  dialog.querySelector('.authorial-close').addEventListener('click', () => dialog.close());
+  const closeButton = dialog.querySelector('.authorial-close');
+
+  const handleClose = () => {
+    if (openerElement) {
+      openerElement.focus();
+      openerElement = null;
+    }
+    dialog.close();
+  };
+
+  closeButton.addEventListener('click', handleClose, { signal: controller.signal });
   dialog.addEventListener('click', event => {
-    if (event.target === dialog) dialog.close();
-  });
+    if (event.target === dialog) handleClose();
+  }, { signal: controller.signal });
+
   dialog.addEventListener('close', () => {
     cleanup();
     cleanup = () => {};
+    controller.abort();
+    controller = new AbortController();
     window.dispatchEvent(new CustomEvent('atlas:authorial-portal-close'));
-  });
+  }, { signal: controller.signal });
+
   document.body.append(dialog);
   return dialog;
 }
@@ -68,6 +106,8 @@ function mountPair(config) {
   const result = body.querySelector('.diletante-result');
   let points = [];
 
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
   const place = (x, y) => {
     if (points.length === 2) points = [];
     points.push({x, y});
@@ -88,18 +128,26 @@ function mountPair(config) {
 
   const onPointer = event => {
     const rect = field.getBoundingClientRect();
-    place(event.clientX - rect.left, event.clientY - rect.top);
+    const x = clamp(event.clientX - rect.left, 0, rect.width);
+    const y = clamp(event.clientY - rect.top, 0, rect.height);
+    place(x, y);
   };
-  field.addEventListener('pointerdown', onPointer);
+
+  field.addEventListener('pointerdown', onPointer, { signal: controller.signal });
   field.addEventListener('keydown', event => {
     if (event.key !== 'Enter' && event.key !== ' ') return;
     event.preventDefault();
     const rect = field.getBoundingClientRect();
     const offset = points.length === 0 ? .32 : .68;
     place(rect.width * offset, rect.height * (points.length === 0 ? .42 : .58));
-  });
-  field.focus({preventScroll: true});
-  cleanup = () => field.removeEventListener('pointerdown', onPointer);
+  }, { signal: controller.signal });
+
+  cleanup = () => {
+    controller.abort();
+    controller = new AbortController();
+  };
+
+  setTimeout(() => field.focus({ preventScroll: true }), 0);
 }
 
 function mountTail(config) {
@@ -115,22 +163,34 @@ function mountTail(config) {
       </div>
       <p class="fuco-status" aria-live="polite">nenhum envio externo</p>
     </div>`;
+
   const input = body.querySelector('#fuco-continuacao');
   const status = body.querySelector('.fuco-status');
-  input.value = localStorage.getItem(storageKey) || '';
-  body.querySelector('[data-fuco-save]').addEventListener('click', () => {
+  input.value = safeStorageGet(storageKey) || '';
+
+  const saveHandler = () => {
     const value = input.value.trim();
-    if (value) localStorage.setItem(storageKey, value);
-    else localStorage.removeItem(storageKey);
+    if (value) safeStorageSet(storageKey, value);
+    else safeStorageRemove(storageKey);
     status.textContent = value ? 'a cauda da frase ficou neste aparelho' : 'nenhum vestígio guardado';
-  });
-  body.querySelector('[data-fuco-clear]').addEventListener('click', () => {
-    localStorage.removeItem(storageKey);
+  };
+
+  const clearHandler = () => {
+    safeStorageRemove(storageKey);
     input.value = '';
     status.textContent = 'a frase foi solta';
     input.focus();
-  });
-  input.focus({preventScroll: true});
+  };
+
+  body.querySelector('[data-fuco-save]').addEventListener('click', saveHandler, { signal: controller.signal });
+  body.querySelector('[data-fuco-clear]').addEventListener('click', clearHandler, { signal: controller.signal });
+
+  cleanup = () => {
+    controller.abort();
+    controller = new AbortController();
+  };
+
+  setTimeout(() => input.focus({ preventScroll: true }), 0);
 }
 
 function mountLight(config) {
@@ -139,8 +199,10 @@ function mountLight(config) {
       <img src="assets/logo-milk.png" alt="MILK" class="milk-light-logo">
       <p class="milk-light-ground">onde arte e afeto são casa e chão</p>
     </div>`;
+
   const field = body.querySelector('.milk-light-field');
   const setLight = value => field.style.setProperty('--presence', String(Math.max(.08, Math.min(1, value))));
+
   const onPointer = event => {
     const rect = field.getBoundingClientRect();
     const dx = event.clientX - (rect.left + rect.width / 2);
@@ -149,33 +211,52 @@ function mountLight(config) {
     const max = Math.hypot(rect.width / 2, rect.height / 2) || 1;
     setLight(1 - distance / max);
   };
+
   const onLeave = () => setLight(.12);
-  field.addEventListener('pointermove', onPointer);
-  field.addEventListener('pointerleave', onLeave);
+
+  field.addEventListener('pointermove', onPointer, { signal: controller.signal });
+  field.addEventListener('pointerleave', onLeave, { signal: controller.signal });
   field.addEventListener('keydown', event => {
     if (!['ArrowUp','ArrowRight','Enter',' '].includes(event.key)) return;
     event.preventDefault();
     setLight(1);
-  });
-  field.focus({preventScroll: true});
+  }, { signal: controller.signal });
+
   cleanup = () => {
-    field.removeEventListener('pointermove', onPointer);
-    field.removeEventListener('pointerleave', onLeave);
+    controller.abort();
+    controller = new AbortController();
   };
+
+  setTimeout(() => field.focus({ preventScroll: true }), 0);
 }
 
-export function openAuthorialPortal(portalId) {
+export function openAuthorialPortal(portalId, triggerElement = null) {
   const config = PORTALS[portalId];
   if (!config) return false;
+
+  openerElement = triggerElement;
   ensureDialog();
   cleanup();
   cleanup = () => {};
   body.replaceChildren();
   dialog.dataset.portal = portalId;
+
   if (config.kind === 'pair') mountPair(config);
   if (config.kind === 'tail') mountTail(config);
   if (config.kind === 'light') mountLight(config);
-  if (!dialog.open) dialog.showModal();
+
+  if (!dialog.open) {
+    dialog.showModal();
+    dialog.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        if (openerElement) {
+          openerElement.focus();
+          openerElement = null;
+        }
+      }
+    }, { once: true, signal: controller.signal });
+  }
+
   return true;
 }
 
