@@ -1,0 +1,149 @@
+name: MILK Mistral falARTE production port v4
+
+on:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths: ['.github/workflows/mistral-falarte-production-port-v4.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: milk-mistral-falarte-production-port-v4
+  cancel-in-progress: false
+
+jobs:
+  build-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 70
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      BRANCH: work/copernico-recovery-webapp-20260902
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 1
+
+      - name: Install Mistral Vibe Code
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python -m pip install --disable-pip-version-check mistral-vibe==2.24.5
+          vibe --version
+          mkdir -p .mistral-private
+          printf '.mistral-private/\n' >> .git/info/exclude
+
+      - name: Mistral Vibe Code — build falARTE PHP intake only
+        shell: bash
+        run: |
+          set -euo pipefail
+          vibe --agent auto-approve --trust --max-turns 24 --output json --prompt "ATLAS VIVO MILK — FALARTE BACKEND SOMENTE. Trabalha exclusivamente em deploy/atlas-public/api/curadoria/falarte/. Não alteres frontend, catálogo nem outras áreas. Cria submit.php e withdraw.php em PHP sem dependências externas. Contrato obrigatório: submit aceita apenas POST multipart/form-data; campos mechanic_id permitido em lugar-escondido,trinta-dias,antigo-novo,embalagem-conta,som-local,ainda-resiste,palavras-desapareceram,nao-apagado,so-memoria,remetente-ausente; age13 deve ser verdadeiro; consent_curatorial verdadeiro; author_mode em nome_real,nome_inventado,anonimo; publication_scope em integral,trechos,nao_publicar; integral/trechos exigem consent_public verdadeiro. Aceita campos textuais de forma limitada e ficheiro opcional. Upload: valida UPLOAD_ERR_OK, tamanho conservador máximo 12 MiB, MIME real via finfo; permite apenas image/jpeg,image/png,image/webp,audio/mpeg,audio/ogg,audio/wav,audio/webm,application/pdf; rejeita executáveis/SVG/HTML. Nunca usa filename original para paths. Gera receipt_id e nome de ficheiro com random_bytes. Calcula SHA-256 do original e preserva-o intacto via move_uploaded_file. Storage privado deve ficar FORA de DOCUMENT_ROOT, preferencialmente dirname(realpath(DOCUMENT_ROOT))/atlas-private/falarte-intake; se DOCUMENT_ROOT ausente ou não resolvível no request real, falha fechado. Nunca cria storage dentro da webroot. Metadata JSON: schema_version, receipt_id, status PENDENTE_CURADORIA, received_at UTC, mechanic_id, consent_curatorial, consent_public, author_mode, publication_scope, campos textuais sanitizados, MIME/tamanho/SHA-256 e stored_name aleatório; NÃO guardar IP, user-agent, cookies, session ids, headers de rede ou filename original. Gera withdrawal_code aleatório e devolve uma única vez; guarda apenas hash SHA-256 salgado/peppered de código suficiente para verificação segura, nunca plaintext. withdraw.php aceita somente POST JSON ou form data com receipt_id+withdrawal_code; resolve somente receipts dentro do storage privado; compara hash com hash_equals; se correcto grava evento auditável RETIRADA_SOLICITADA com timestamp UTC no metadata, sem apagar original, sem publicar, sem mover para webroot. Respostas sempre JSON com Content-Type; sem stack traces. Adiciona helpers.php apenas se necessário. Executa php -l em todos os PHP criados. Não faças commit." > .mistral-private/backend-vibe.json
+          php -l deploy/atlas-public/api/curadoria/falarte/submit.php
+          php -l deploy/atlas-public/api/curadoria/falarte/withdraw.php
+
+      - name: Backend deterministic gate before frontend
+        shell: bash
+        run: |
+          set -euo pipefail
+          for f in deploy/atlas-public/api/curadoria/falarte/*.php; do php -l "$f"; done
+          grep -Fq 'PENDENTE_CURADORIA' deploy/atlas-public/api/curadoria/falarte/submit.php
+          grep -Fq 'RETIRADA_SOLICITADA' deploy/atlas-public/api/curadoria/falarte/withdraw.php
+          grep -Eq 'finfo|finfo_file' deploy/atlas-public/api/curadoria/falarte/submit.php
+          grep -Fq 'move_uploaded_file' deploy/atlas-public/api/curadoria/falarte/submit.php
+          grep -Eq 'random_bytes|bin2hex' deploy/atlas-public/api/curadoria/falarte/submit.php
+          grep -Eq 'hash_equals' deploy/atlas-public/api/curadoria/falarte/withdraw.php
+          grep -Eq 'sha256|hash_file' deploy/atlas-public/api/curadoria/falarte/submit.php
+          grep -Eq 'DOCUMENT_ROOT' deploy/atlas-public/api/curadoria/falarte/submit.php deploy/atlas-public/api/curadoria/falarte/*.php
+          ! grep -Eiq 'REMOTE_ADDR|HTTP_USER_AGENT|HTTP_COOKIE|analytics|telemetry' deploy/atlas-public/api/curadoria/falarte/*.php
+          echo 'FALARTE_BACKEND_GATE=PASS'
+
+      - name: Mistral Vibe Code — wire falARTE frontend to real intake
+        shell: bash
+        run: |
+          set -euo pipefail
+          vibe --agent auto-approve --trust --max-turns 26 --output json --prompt "ATLAS VIVO MILK — FALARTE FRONTEND SOMENTE. Lê o backend que já existe em deploy/atlas-public/api/curadoria/falarte/ e o frontend actual deploy/atlas-public/falarte.js + falarte.css + catalogo-curatorial.json. Mantém as dez experiências e IDs existentes sem as fundir: lugar-escondido,trinta-dias,antigo-novo,embalagem-conta,som-local,ainda-resiste,palavras-desapareceram,nao-apagado,so-memoria,remetente-ausente. Trabalha apenas em falarte.js, falarte.css e catalogo-curatorial.json. Substitui mensagens/local-only de envio por um fluxo REAL de POST FormData same-origin para /api/curadoria/falarte/submit.php. FormData envia mechanic_id, age13, consent_curatorial, author_mode, publication_scope, consent_public e os campos da mecânica; ficheiro apenas da sessão, nunca bytes/base64/nome/path em localStorage. Age13 e consent_curatorial obrigatórios no UI; opções nome_real,nome_inventado,anonimo; publicação integral,trechos,nao_publicar; se integral/trechos, mostra/exige consentimento público separado. Mantém rascunhos textuais locais apenas. Após HTTP 2xx, guarda localmente receipt_id e withdrawal_code para o utilizador e mostra-os de modo claro; cria UI acessível para solicitar retirada via POST /api/curadoria/falarte/withdraw.php. Não envia automaticamente retirada. Remetente Ausente: partículas/Cosmic Flow apenas depois de submissão 2xx; texto deve dizer que entrou no Atlas para curadoria, nunca que foi fisicamente lançado ao espaço. Fragmentação em cinco é puramente visual e não altera o original. Mantém 10 mecânicas distintas, teclado/touch, ArrowLeft/ArrowRight/Home/End onde já existe navegação, foco após mudança, aria-live status, prefers-reduced-motion, estados busy/erro/sucesso e prevenção de duplo envio. Sem fetch para terceiros, sem bibliotecas externas, sem trackers, sem API keys, sem biometria. Actualiza SOMENTE a entrada id=falarte para estado implementado_especifico quando integração estiver completa; não alteres outros itens. Executa node --check. Não faças commit." > .mistral-private/frontend-vibe.json
+          node --check deploy/atlas-public/falarte.js
+
+      - name: Full deterministic falARTE gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check deploy/atlas-public/falarte.js
+          for f in deploy/atlas-public/api/curadoria/falarte/*.php; do php -l "$f"; done
+          for s in lugar-escondido trinta-dias antigo-novo embalagem-conta som-local ainda-resiste palavras-desapareceram nao-apagado so-memoria remetente-ausente; do grep -Fq "$s" deploy/atlas-public/falarte.js || { echo "::error::MISSING_MECHANIC:$s"; exit 20; }; done
+          test "$(grep -c "^    id: '" deploy/atlas-public/falarte.js)" -eq 10
+          grep -Fq '/api/curadoria/falarte/submit.php' deploy/atlas-public/falarte.js
+          grep -Fq '/api/curadoria/falarte/withdraw.php' deploy/atlas-public/falarte.js
+          grep -Fq 'FormData' deploy/atlas-public/falarte.js
+          grep -Eq 'consent_public|consentPublic' deploy/atlas-public/falarte.js
+          grep -Eq 'receipt_id|receiptId' deploy/atlas-public/falarte.js
+          grep -Eq 'withdrawal_code|withdrawalCode' deploy/atlas-public/falarte.js
+          grep -Fq 'PENDENTE_CURADORIA' deploy/atlas-public/api/curadoria/falarte/submit.php
+          grep -Fq 'RETIRADA_SOLICITADA' deploy/atlas-public/api/curadoria/falarte/withdraw.php
+          grep -Eq 'finfo|finfo_file' deploy/atlas-public/api/curadoria/falarte/submit.php
+          grep -Fq 'move_uploaded_file' deploy/atlas-public/api/curadoria/falarte/submit.php
+          grep -Eq 'random_bytes|bin2hex' deploy/atlas-public/api/curadoria/falarte/*.php
+          grep -Fq 'hash_equals' deploy/atlas-public/api/curadoria/falarte/withdraw.php
+          grep -Eq 'sha256|hash_file' deploy/atlas-public/api/curadoria/falarte/submit.php
+          ! grep -Eiq 'REMOTE_ADDR|HTTP_USER_AGENT|HTTP_COOKIE|analytics|telemetry' deploy/atlas-public/api/curadoria/falarte/*.php deploy/atlas-public/falarte.js
+          grep -Eq 'aria-live|role=.status.|role.*status' deploy/atlas-public/falarte.js
+          grep -Eq 'prefers-reduced-motion|reducedMotion' deploy/atlas-public/falarte.js deploy/atlas-public/falarte.css
+          python - <<'PY'
+          import json
+          d=json.load(open('deploy/atlas-public/catalogo-curatorial.json',encoding='utf-8'))
+          r=next(x for x in d['entradas'] if x['id']=='falarte')
+          assert r['estado']=='implementado_especifico', r
+          print('FALARTE_CATALOG_GATE=PASS')
+          PY
+          git diff --check
+          mapfile -t changed < <(git status --porcelain -uall | awk '{print $2}' | sort -u)
+          test ${#changed[@]} -gt 0
+          for f in "${changed[@]}"; do
+            case "$f" in
+              deploy/atlas-public/falarte.js|deploy/atlas-public/falarte.css|deploy/atlas-public/catalogo-curatorial.json|deploy/atlas-public/api/curadoria/falarte/*) ;;
+              *) echo "::error::OUTSIDE_FALARTE_BOUNDARY:$f"; exit 21;;
+            esac
+          done
+          echo 'FALARTE_FULL_DETERMINISTIC_GATE=PASS'
+
+      - name: Three Mistral independent reviews
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff > .mistral-private/candidate.diff
+          python - <<'PY'
+          import json, os, pathlib, urllib.request
+          key=os.environ['MISTRAL_API_KEY'].strip()
+          diff=pathlib.Path('.mistral-private/candidate.diff').read_text(encoding='utf-8')
+          contract='''falARTE has exactly ten distinct authored mechanics. Intake is real same-origin only, human-curated before publication, 13+, explicit curatorial consent, authorship real/invented/anonymous, publication full/excerpts/do-not-publish with separate public consent for publicable scopes. Files never enter localStorage. Server stores immutable originals outside document root with PENDENTE_CURADORIA, no IP/user-agent/cookies/telemetry. Withdrawal requires receipt+secret and records RETIRADA_SOLICITADA without automatic deletion/publication. Remetente Ausente cosmic response starts only after successful intake and never claims physical space launch. Accessibility includes keyboard, focus, aria-live and reduced motion.'''
+          roles={
+            'source_fidelity':'Block if mechanics are merged/lost, semantics invented, or human-curation/publication choices are contradicted.',
+            'intake_security':'Block public/path-traversable uploads, executable MIME, filename-controlled paths, plaintext withdrawal secret at rest, under-13 intake, network metadata logging, auto publication/deletion, or missing separate public consent.',
+            'experience_accessibility':'Block generic-form flattening, files persisted locally, Cosmic Flow before success, false space-launch claim, or keyboard/focus/aria-live/reduced-motion regression.'
+          }
+          for role,rule in roles.items():
+            payload={'model':'mistral-medium-latest','temperature':0.0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':rule+' Return JSON {pass:boolean, blockers:array, evidence:array, tests:array}. Judge only literal contract and diff.'},{'role':'user','content':contract+'\n\nDIFF\n'+diff}]}
+            req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+            with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
+            review=json.loads(body['choices'][0]['message']['content'])
+            ok=bool(review.get('pass')) and not review.get('blockers')
+            print('MISTRAL_FALARTE_'+role.upper()+'='+('PASS' if ok else 'BLOCK'))
+            if not ok: raise SystemExit('BLOCKED:'+role+':'+json.dumps(review.get('blockers'),ensure_ascii=False))
+          print('MISTRAL_FALARTE_COUNCIL=PASS')
+          PY
+
+      - name: Commit validated falARTE runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Associação MILK - Mistral Vibe Code'
+          git config user.email 'milk@associacaomilk.pt'
+          git add deploy/atlas-public/falarte.js deploy/atlas-public/falarte.css deploy/atlas-public/catalogo-curatorial.json deploy/atlas-public/api/curadoria/falarte
+          git diff --cached --quiet && { echo '::error::NO_FALARTE_DELTA'; exit 50; }
+          git diff --cached --check
+          git commit -m 'feat(webapp): activate canonical falARTE intake runtime'
+          git push origin HEAD:$BRANCH
+          echo "MISTRAL_FALARTE_COMMIT=$(git rev-parse HEAD)"
+          echo 'MISTRAL_FALARTE_PRODUCTION_V4=VALIDATED'
