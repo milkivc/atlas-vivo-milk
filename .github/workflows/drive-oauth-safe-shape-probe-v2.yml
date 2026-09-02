@@ -1,0 +1,42 @@
+name: MILK Drive OAuth nested shape probe
+on:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths: ['.github/workflows/drive-oauth-safe-shape-probe-v2.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    env:
+      DRIVE_OAUTH: ${{ secrets.DRIVE_OAUTH }}
+    steps:
+      - name: Classify nested secret without values
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os
+          s=os.environ.get('DRIVE_OAUTH','').strip()
+          x=json.loads(s)
+          print('LEVEL1_TYPE='+type(x).__name__)
+          if isinstance(x,str):
+              try:
+                  y=json.loads(x)
+              except Exception:
+                  print('LEVEL2_PARSE=NO')
+              else:
+                  print('LEVEL2_PARSE=YES')
+                  print('LEVEL2_TYPE='+type(y).__name__)
+                  if isinstance(y,dict):
+                      safe={'access_token','refresh_token','client_id','client_secret','token_uri','type','project_id','private_key','private_key_id','installed','web','token','expiry','expires_at'}
+                      print('LEVEL2_KEYS='+','.join(sorted(k for k in y if k in safe)))
+                  elif isinstance(y,list):
+                      print('LEVEL2_LIST_ITEM_TYPES='+','.join(sorted({type(v).__name__ for v in y})))
+          elif isinstance(x,list):
+              print('LEVEL1_LIST_LENGTH_BUCKET=' + ('0' if not x else '1-5' if len(x)<=5 else '6+'))
+              print('LEVEL1_LIST_ITEM_TYPES='+','.join(sorted({type(v).__name__ for v in x})))
+              if x and isinstance(x[0],dict):
+                  safe={'access_token','refresh_token','client_id','client_secret','token_uri','type','project_id','private_key','private_key_id','installed','web','token','expiry','expires_at'}
+                  print('FIRST_ITEM_KEYS='+','.join(sorted(k for k in x[0] if k in safe)))
+          PY
