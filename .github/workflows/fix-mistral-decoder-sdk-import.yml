@@ -1,0 +1,32 @@
+name: Repair Mistral decoder SDK import
+
+on:
+  push:
+    branches:
+      - work/copernico-recovery-webapp-20260902
+    paths:
+      - '.github/workflows/fix-mistral-decoder-sdk-import.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+      - name: Patch Mistral SDK import compatibly with Vibe 2.24.5
+        shell: bash
+        run: |
+          set -euo pipefail
+          f=.github/workflows/mistral-curatorial-decoder-webapp.yml
+          sed -i 's/from mistralai import Mistral/from mistralai.client import Mistral/g' "$f"
+          grep -Fq 'from mistralai.client import Mistral' "$f"
+          git config user.name 'Associação MILK - Mistral CI Repair'
+          git config user.email 'milk@associacaomilk.pt'
+          git add "$f"
+          git diff --cached --quiet && exit 0
+          git commit -m 'fix(ci): use Mistral client import compatible with Vibe SDK'
+          git push origin HEAD:work/copernico-recovery-webapp-20260902
