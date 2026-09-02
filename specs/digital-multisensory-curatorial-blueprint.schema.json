@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atlas.associacaomilk.pt/schemas/digital-multisensory-curatorial-blueprint.schema.json",
+  "title": "Atlas Vivo MILK — Digital Multisensory Curatorial Blueprint",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "canonical_name",
+    "source_evidence",
+    "authorial_invariants",
+    "perceptual_intent",
+    "threshold",
+    "dramaturgical_arc",
+    "participant_verbs",
+    "system_responses",
+    "sensory_signature_id",
+    "sensory_channels",
+    "cross_sensory_translation",
+    "silence_or_absence",
+    "surprise_or_indeterminacy",
+    "session_variation",
+    "territorial_binding",
+    "trace_and_return",
+    "accessibility_equivalents",
+    "optional_permissions",
+    "overstimulation_risk",
+    "distinctiveness",
+    "questions_for_eduardo",
+    "improvement_proposals",
+    "generic_fallback_allowed",
+    "approved_for_code"
+  ],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "canonical_name": {"type": "string", "minLength": 1},
+    "source_evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source", "evidence"],
+        "properties": {
+          "source": {"type": "string", "minLength": 1},
+          "evidence": {"type": "string", "minLength": 1},
+          "location": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "authorial_invariants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "perceptual_intent": {"type": "string", "minLength": 1},
+    "threshold": {"type": "string", "minLength": 1},
+    "dramaturgical_arc": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["threshold", "call", "first_gesture", "living_response", "deviation", "sensory_deepening", "choice_chance_or_silence", "apparition", "return", "latency"],
+      "properties": {
+        "threshold": {"type": "string"},
+        "call": {"type": "string"},
+        "first_gesture": {"type": "string"},
+        "living_response": {"type": "string"},
+        "deviation": {"type": "string"},
+        "sensory_deepening": {"type": "string"},
+        "choice_chance_or_silence": {"type": "string"},
+        "apparition": {"type": "string"},
+        "return": {"type": "string"},
+        "latency": {"type": "string"}
+      }
+    },
+    "participant_verbs": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 7,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "system_responses": {
+      "type": "array",
+      "minItems": 3,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "sensory_signature_id": {"type": "string", "minLength": 3},
+    "sensory_channels": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["visual", "auditory", "haptic", "kinesthetic", "proprioceptive", "temporal_interoceptive", "spatial", "olfactory_evocation", "gustatory_evocation", "social_presence"],
+      "properties": {
+        "visual": {"type": "array", "items": {"type": "string"}},
+        "auditory": {"type": "array", "items": {"type": "string"}},
+        "haptic": {"type": "array", "items": {"type": "string"}},
+        "kinesthetic": {"type": "array", "items": {"type": "string"}},
+        "proprioceptive": {"type": "array", "items": {"type": "string"}},
+        "temporal_interoceptive": {"type": "array", "items": {"type": "string"}},
+        "spatial": {"type": "array", "items": {"type": "string"}},
+        "olfactory_evocation": {"type": "array", "items": {"type": "string"}},
+        "gustatory_evocation": {"type": "array", "items": {"type": "string"}},
+        "social_presence": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "cross_sensory_translation": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "silence_or_absence": {"type": "string", "minLength": 1},
+    "surprise_or_indeterminacy": {"type": "string", "minLength": 1},
+    "session_variation": {
+      "type": "array",
+      "minItems": 4,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "territorial_binding": {"type": "string", "minLength": 1},
+    "trace_and_return": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["trace", "return"],
+      "properties": {
+        "trace": {"type": "string"},
+        "return": {"type": "string"}
+      }
+    },
+    "accessibility_equivalents": {
+      "type": "array",
+      "minItems": 3,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "optional_permissions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": ["none", "microphone", "camera", "motion_orientation", "geolocation"]
+      }
+    },
+    "overstimulation_risk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["risk", "mitigation"],
+      "properties": {
+        "risk": {"type": "string"},
+        "mitigation": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+      }
+    },
+    "distinctiveness": {"type": "string", "minLength": 1},
+    "questions_for_eduardo": {"type": "array", "items": {"type": "string"}},
+    "improvement_proposals": {"type": "array", "items": {"type": "string"}},
+    "generic_fallback_allowed": {"const": false},
+    "approved_for_code": {"const": false}
+  }
+}
