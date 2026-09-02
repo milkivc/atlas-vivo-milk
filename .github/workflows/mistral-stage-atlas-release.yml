@@ -1,0 +1,80 @@
+name: MILK stage Atlas release privately
+
+on:
+  push:
+    branches:
+      - codex/milk-curadorias-ia-webapp-20260821
+    paths:
+      - '.github/workflows/mistral-stage-atlas-release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      PTSERVIDOR_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate package
+        working-directory: deploy/atlas-public
+        run: |
+          set -euo pipefail
+          sha256sum -c manifest.sha256
+          node --check app.js
+          node --check curadorias.js
+
+      - name: Mistral release gate and private FTPS staging
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ftplib,hashlib,io,json,os,pathlib,ssl,tarfile,urllib.request
+          root=pathlib.Path('deploy/atlas-public')
+          key=os.environ.get('MISTRAL_API_KEY','').strip()
+          pwd=os.environ.get('PTSERVIDOR_FTPS_PASSWORD','').strip()
+          run=os.environ.get('RUN_ID','unknown')
+          gh=os.environ.get('GH_TOKEN','').strip(); repo=os.environ.get('REPO','milkivc/atlas-vivo-milk')
+          if not key or not pwd: raise SystemExit('REQUIRED_SECRET_MISSING')
+
+          manifest=(root/'manifest.sha256').read_text(encoding='utf-8')
+          payload={'model':'mistral-small-latest','temperature':0.0,'response_format':{'type':'json_object'},'messages':[
+            {'role':'system','content':'És o agente Mistral release_guard da MILK. Verifica apenas integridade, isolamento da camada pública e necessidade de rollback. Não inventes resultados. Responde JSON.'},
+            {'role':'user','content':json.dumps({'target':'atlas.associacaomilk.pt','manifest':manifest,'policy':'staging privado; sem publicação; sem tocar associacaomilk.pt'},ensure_ascii=False)}]}
+          req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+          with urllib.request.urlopen(req,timeout=180) as r: result=json.loads(r.read())
+          json.loads(result['choices'][0]['message']['content'])
+
+          buf=io.BytesIO()
+          with tarfile.open(fileobj=buf,mode='w:gz') as tf:
+              for p in sorted(root.rglob('*')):
+                  if p.is_file(): tf.add(p,arcname=str(p.relative_to(root)))
+          data=buf.getvalue(); sha=hashlib.sha256(data).hexdigest(); name=f'atlas-public-ready-{run}.tar.gz'
+
+          ftp=ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=120)
+          ftp.connect('troi.ptservidor.net',21); ftp.login('migration@associacaomilk.pt',pwd); ftp.prot_p(); ftp.voidcmd('TYPE I')
+          for part in ('atlas-public-ready',run):
+              try: ftp.mkd(part)
+              except ftplib.all_errors: pass
+              ftp.cwd(part)
+          ftp.storbinary('STOR '+name,io.BytesIO(data),blocksize=1048576)
+          back=bytearray(); ftp.retrbinary('RETR '+name,back.extend,blocksize=1048576)
+          receipt=json.dumps({'run':run,'file':name,'sha256':sha,'bytes':len(data),'publication':False,'main_site_writes':0},sort_keys=True).encode()
+          ftp.storbinary('STOR receipt.json',io.BytesIO(receipt),blocksize=262144)
+          ftp.quit()
+          if hashlib.sha256(back).hexdigest()!=sha: raise RuntimeError('FTPS_STAGE_READBACK_MISMATCH')
+
+          msg=f'ATLAS_PUBLIC_RELEASE_STAGED run={run} bytes={len(data)} sha256={sha} storage=private_ftps publication=no main_site_writes=0 mistral_release_guard=ok secret_values_disclosed=0'
+          q=urllib.request.Request(f'https://api.github.com/repos/{repo}/issues/35/comments',data=json.dumps({'body':msg}).encode(),method='POST',headers={'Authorization':'Bearer '+gh,'Content-Type':'application/json','Accept':'application/vnd.github+json'})
+          urllib.request.urlopen(q,timeout=30).read()
+          print(msg)
+          PY
