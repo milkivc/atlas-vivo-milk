@@ -6,6 +6,7 @@ on:
     branches: [work/copernico-recovery-webapp-20260902]
     paths:
       - 'curatorial-factory/SOURCE_CORPUS_20260902.md'
+      - 'curatorial-factory/PUBLIC_DYNAMIC_TRANSFORMATION_RULE_20260902.md'
       - '.github/workflows/18-mistral-curatorial-source-first-previews.yml'
 
 permissions:
@@ -34,23 +35,34 @@ jobs:
           test -n "$MISTRAL_API_KEY"
           mkdir -p curatorial-factory/previews
           python - <<'PY'
-          import json, os, pathlib, time, urllib.request, urllib.error
+          import json, os, pathlib, time, urllib.request
 
-          source = pathlib.Path('curatorial-factory/SOURCE_CORPUS_20260902.md').read_text(encoding='utf-8')
-          base_system = '''Trabalhas para o Atlas Vivo MILK como especialista curatorial. A ORDEM É SOBERANA: CURADORIA -> DINÂMICAS/BRINCADEIRAS/JOGOS/CONVITES/RITUAIS -> EXPERIÊNCIA -> DISPOSITIVO DERIVADO -> CÓDIGO. NÃO desenhes interface, componente, modal, card, botão, API ou arquitectura técnica antes de compor a experiência. Não inventes. Se a fonte não decide algo, escreve DÚVIDA PARA EDUARDO. Se houver melhoria, escreve MELHORIA_PROPOSTA separadamente. Distingue AUTORIAL, INTERPRETAÇÃO e MELHORIA_PROPOSTA. Nenhuma saída fica aprovada para código. Usa português europeu, preservando literalmente nomes e frases autorais relevantes.'''
+          corpus = pathlib.Path('curatorial-factory/SOURCE_CORPUS_20260902.md').read_text(encoding='utf-8')
+          transformation = pathlib.Path('curatorial-factory/PUBLIC_DYNAMIC_TRANSFORMATION_RULE_20260902.md').read_text(encoding='utf-8')
+          source = corpus + '\n\n---\n\n' + transformation
+
+          base_system = '''Trabalhas para o Atlas Vivo MILK como especialista curatorial. A ORDEM É SOBERANA: CURADORIA -> DINÂMICAS/BRINCADEIRAS/JOGOS/CONVITES/RITUAIS -> EXPERIÊNCIA PÚBLICA -> DEVOLUÇÃO TERRITORIAL -> POSSÍVEL MATERIALIZAÇÃO FÍSICA -> DISPOSITIVO DERIVADO -> CÓDIGO. Tudo o que for brincadeira, jogo ou dinâmica interactiva deve ser tratado como matéria potencial da Camada Pública experiencial. NÃO significa publicar dados pessoais, critérios internos ou materiais não autorizados. Não congeles uma curadoria no formato de origem: a forma pode transformar-se conforme território, necessidade e potência, preservando autoria, proveniência, direitos, consentimento e verdade factual. NÃO desenhes interface, componente, modal, card, botão, API ou arquitectura técnica antes de compor a experiência. Não inventes. Se a fonte não decide algo, escreve DÚVIDA PARA EDUARDO. Se houver melhoria, escreve MELHORIA_PROPOSTA separadamente. Distingue AUTORIAL, INTERPRETAÇÃO e MELHORIA_PROPOSTA. Nenhuma saída fica aprovada para código nem para obra física sem validação humana. Usa português europeu, preservando literalmente nomes e frases autorais relevantes.'''
+
+          common = '''Para cada unidade, procura a transformação sem clausura: o que a pessoa faz; o que o território faz à experiência; o que fica como rasto; como volta à pessoa/comunidade; que outras formas digitais, presenciais ou físicas são POSSÍVEIS sem as impor; e qual evidência territorial seria necessária antes de qualquer materialização física.'''
 
           tasks = [
-            ('01_FALARTE_NOS_10_MECANICAS.md', 'Reconstrói FALArte/NÓS a partir das 10 mecânicas. Para CADA uma das 10, mostra: núcleo curatorial, regra da dinâmica, gesto humano, ritmo/tempo, acaso/silêncio se houver, experiência completa vivida pela pessoa, rasto/devolução, território/toponímia, relação físico-digital SEM escolher tecnologia, acessibilidade, dúvidas, melhorias propostas. No fim mostra como as dez convivem sem virar abas ou formulário burocrático.'),
-            ('02_LIVRO_CUBO_7_DINAMICAS.md', 'Reconstrói o LIVRO CUBO partindo do Manual Invertido, SOMOSTODOSPOSSIVEIS, seis faces/vazio e das 7 dinâmicas. Para CADA D1-D7 descreve a experiência antes do dispositivo: chegada, gesto, corpo, relação, ritmo, ruptura/espera, resposta do outro/sistema, fim/retorno, relação presencial-digital, acessibilidade, dúvidas e melhorias. Preserva anti-regras, riso, silêncio, erro e vazio central.'),
-            ('03_CAMADA_PUBLICA_ECOLOGIA_CURATORIAL.md', 'Reconstrói a ecologia da Camada Pública: entrada/selo/constelação, Galeria Diletante, Nuno/Escuta, FUCO, Dado Sem Lado, Reizinho e festas/vaquinhas. Não os trates primeiro como dispositivos: começa pela função curatorial, dinâmica/brincadeira e experiência. Explica as relações entre eles sem os fundir. Inclui os rastos que a pessoa pode querer deixar, humor/absurdo/oralidade/intergeracionalidade, e como festa se torna experiência territorial. Marca claramente o que é autoral e o que é proposta.'),
-            ('04_DERIVA_TERRITORIAL.md', 'Reconstrói A Deriva do Sentido como experiência territorial própria. Parte da textura/azulejo, sentipensar, corpo inteiro, psicogeografia, Cultural Probes, tacto/paladar/escuta/aroma/pátina, encontro local, criação e devolução. Não assumes que IIIF/GeoJSON/Web Annotation são a experiência; são apenas possíveis suportes posteriores. Mostra o que a pessoa vive antes de desenhar tecnologia.'),
+            ('01_FALARTE_NOS_10_MECANICAS.md', 'Reconstrói FALArte/NÓS a partir das 10 mecânicas. Para CADA uma das 10, mostra: núcleo curatorial, regra da dinâmica, gesto humano, ritmo/tempo, acaso/silêncio se houver, experiência completa vivida pela pessoa, rasto/devolução, território/toponímia, relação físico-digital SEM escolher tecnologia, acessibilidade, dúvidas, melhorias propostas. No fim mostra como as dez convivem sem virar abas ou formulário burocrático. '+common),
+            ('02_LIVRO_CUBO_7_DINAMICAS.md', 'Reconstrói o LIVRO CUBO partindo do Manual Invertido, SOMOSTODOSPOSSIVEIS, seis faces/vazio e das 7 dinâmicas. Para CADA D1-D7 descreve a experiência antes do dispositivo: chegada, gesto, corpo, relação, ritmo, ruptura/espera, resposta do outro/sistema, fim/retorno, relação presencial-digital, acessibilidade, dúvidas e melhorias. Preserva anti-regras, riso, silêncio, erro e vazio central. '+common),
+            ('03_CAMADA_PUBLICA_ECOLOGIA_CURATORIAL.md', 'Reconstrói a ecologia da Camada Pública: entrada/selo/constelação, Galeria Diletante, Nuno/Escuta, FUCO, Dado Sem Lado, Reizinho e festas/vaquinhas. Não os trates primeiro como dispositivos: começa pela função curatorial, dinâmica/brincadeira e experiência. Explica as relações entre eles sem os fundir. Inclui os rastos que a pessoa pode querer deixar, humor/absurdo/oralidade/intergeracionalidade, e como festa se torna experiência territorial. Marca claramente o que é autoral e o que é proposta. '+common),
+            ('04_DERIVA_TERRITORIAL.md', 'Reconstrói A Deriva do Sentido como experiência territorial própria. Parte da textura/azulejo, sentipensar, corpo inteiro, psicogeografia, Cultural Probes, tacto/paladar/escuta/aroma/pátina, encontro local, criação e devolução. Não assumes que IIIF/GeoJSON/Web Annotation são a experiência; são apenas possíveis suportes posteriores. Mostra o que a pessoa vive antes de desenhar tecnologia. '+common),
+            ('05_CASA_QUE_NAO_EXISTE_TRANSFORMACOES.md', 'Reconstrói A Casa que Não Existe como programa de reaparição territorial. Trabalha pedras, paredes, destroços, ruínas, planta impossível, cartas, coisas pequenas, sabores, vozes/rumores, janelas e cartografia das ausências. Para cada família mostra como pode existir publicamente e como uma ausência pode, APENAS QUANDO sustentada por leitura territorial e validação humana, converter-se em programa ou infraestrutura física. Não romantizar abandono. '+common),
+            ('06_FOLCLORE_LINGUA_TOPONIMIA_INTERACTIVA.md', 'Cria uma matriz curatorial SOURCE-FIRST para transformar folclore, lendas, gírias, variações linguísticas, criptolectos, topónimos e tecnologias ancestrais de transmissão em experiências públicas participativas. Não inventes factos etnográficos. Distingue conteúdo documental de operação lúdica. Explora voz, som, enigma, código, gesto, percurso, memória, comida, festa e comparação territorial quando sustentados. '+common),
+            ('07_FESTAS_827_MOTOR_ADAPTATIVO.md', 'Define como as festas canónicas entram numa fábrica adaptativa sem virar agenda nem atribuir aleatoriamente mecânicas. Preserva a relação Festa -> Local -> Freguesia -> Junta -> leitura territorial -> cuidado -> convite. Mostra critérios para escolher entre dinâmica autoral existente, dinâmica territorial documentada, combinação curatorial ou necessidade de decisão autoral. As 14 sem código não podem receber invenção automática. '+common),
+            ('08_JOGUINHOS_LUDICO_HERMENEUTICA.md', 'Reinterpreta os dois eixos públicos Caminhar/Ver/Sentir/Descobrir e Observar/Propor/Validar/Devolver, cruzando-os com o corpus ludo-hermenêutico. Brincar é linguagem cultural, não clínica. Fucô, Dado, Galeria, Casa e PERCEPTIO atravessam os eixos sem perder autonomia. Evita XP, badges ou gamificação como finalidade. Mostra como gesto, objecto, cena, recusa e silêncio podem produzir experiência pública e rasto territorial prudente. '+common),
+            ('09_MATRIZ_TRANSFORMACAO_DIGITAL_FISICA.md', 'Produz uma matriz NÃO PRESCRITIVA de transformação para a fábrica: rasto/necessidade territorial -> curadoria(s) possíveis -> experiência pública -> devolução -> possíveis materializações físicas. Inclui exemplos com sombra, banco/descanso, encontro, memória, festa, água, infância/brincadeira, escuta, falares, lenda, receita, ofício e ruína. Cada exemplo deve dizer qual evidência humana/territorial falta antes de materializar. '+common),
           ]
 
           def call(prompt, model='mistral-medium-latest'):
               payload={'model':model,'temperature':0.15,'messages':[{'role':'system','content':base_system},{'role':'user','content':'CORPUS OPERATIVO:\n\n'+source+'\n\nTAREFA:\n'+prompt}]}
-              req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions', data=json.dumps(payload).encode(), method='POST', headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
+              data=json.dumps(payload).encode()
               last=None
               for attempt in range(3):
+                  req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions', data=data, method='POST', headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
                   try:
                       with urllib.request.urlopen(req,timeout=180) as r:
                           body=json.loads(r.read())
@@ -62,19 +74,20 @@ jobs:
           generated=[]
           for filename,prompt in tasks:
               text=call(prompt)
-              header='# PREVIEW CURATORIAL — NÃO APROVADO PARA CÓDIGO\n\nEstado: PARA REVISÃO DE EDUARDO MAUER\n\n'
+              header='# PREVIEW CURATORIAL — NÃO APROVADO PARA CÓDIGO OU MATERIALIZAÇÃO FÍSICA\n\nEstado: PARA REVISÃO DE EDUARDO MAUER\n\n'
               pathlib.Path('curatorial-factory/previews',filename).write_text(header+text+'\n',encoding='utf-8')
               generated.append(filename)
               print('PREVIEW_GENERATED='+filename)
 
           bundle='\n\n---\n\n'.join(pathlib.Path('curatorial-factory/previews',f).read_text(encoding='utf-8') for f in generated)
-          council_system='''És o Conselho de Fidelidade Curatorial do Atlas Vivo MILK. Não reescrevas experiências. Faz auditoria: (1) detecta device-first/interface-first; (2) detecta invenções sem fonte; (3) detecta omissões autorais; (4) detecta mistura indevida entre Galeria/Nuno/FUCO/Dado/Reizinho; (5) detecta redução de brincadeira a formulário; (6) detecta teoria decorativa sem operação. Devolve um parecer curto por ficheiro e uma lista de perguntas materiais para Eduardo. Não bloqueies trabalho independente: problemas devem voltar à experiência para reparo.'''
+          council_system='''És o Conselho de Fidelidade Curatorial do Atlas Vivo MILK. Não reescrevas experiências. Faz auditoria: (1) detecta device-first/interface-first; (2) detecta invenções sem fonte; (3) detecta omissões autorais; (4) detecta mistura indevida entre Galeria/Nuno/FUCO/Dado/Reizinho; (5) detecta redução de brincadeira a formulário; (6) detecta teoria decorativa sem operação; (7) detecta brincadeira/dinâmica interactiva indevidamente empurrada para camada interna; (8) detecta curadoria congelada num formato único; (9) detecta materialização física automática sem evidência territorial e validação humana; (10) detecta festa reduzida a agenda/pin. Devolve um parecer curto por ficheiro e uma lista de perguntas materiais para Eduardo. Não bloqueies trabalho independente: problemas devem voltar à experiência para reparo.'''
           payload={'model':'mistral-medium-latest','temperature':0,'messages':[{'role':'system','content':council_system},{'role':'user','content':bundle}]}
           req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
           with urllib.request.urlopen(req,timeout=180) as r: body=json.loads(r.read())
           council=body['choices'][0]['message']['content'].strip()
           pathlib.Path('curatorial-factory/previews/00_CONSELHO_FIDELIDADE.md').write_text('# CONSELHO MISTRAL — FIDELIDADE CURATORIAL\n\n'+council+'\n',encoding='utf-8')
           print('CURATORIAL_COUNCIL=PASS')
+          print('PUBLIC_DYNAMIC_TRANSFORMATION_RULE=ACTIVE')
           print('SECRET_VALUES_SENT=0')
           PY
 
@@ -82,14 +95,24 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -s curatorial-factory/previews/01_FALARTE_NOS_10_MECANICAS.md
-          test -s curatorial-factory/previews/02_LIVRO_CUBO_7_DINAMICAS.md
-          test -s curatorial-factory/previews/03_CAMADA_PUBLICA_ECOLOGIA_CURATORIAL.md
-          test -s curatorial-factory/previews/04_DERIVA_TERRITORIAL.md
-          test -s curatorial-factory/previews/00_CONSELHO_FIDELIDADE.md
-          grep -Fq 'NÃO APROVADO PARA CÓDIGO' curatorial-factory/previews/01_FALARTE_NOS_10_MECANICAS.md
+          for f in \
+            01_FALARTE_NOS_10_MECANICAS.md \
+            02_LIVRO_CUBO_7_DINAMICAS.md \
+            03_CAMADA_PUBLICA_ECOLOGIA_CURATORIAL.md \
+            04_DERIVA_TERRITORIAL.md \
+            05_CASA_QUE_NAO_EXISTE_TRANSFORMACOES.md \
+            06_FOLCLORE_LINGUA_TOPONIMIA_INTERACTIVA.md \
+            07_FESTAS_827_MOTOR_ADAPTATIVO.md \
+            08_JOGUINHOS_LUDICO_HERMENEUTICA.md \
+            09_MATRIZ_TRANSFORMACAO_DIGITAL_FISICA.md \
+            00_CONSELHO_FIDELIDADE.md; do
+              test -s "curatorial-factory/previews/$f"
+          done
+          grep -Fq 'NÃO APROVADO PARA CÓDIGO OU MATERIALIZAÇÃO FÍSICA' curatorial-factory/previews/01_FALARTE_NOS_10_MECANICAS.md
           if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_.*PASSWORD|NEXTCLOUD_.*KEY' curatorial-factory/previews; then exit 33; fi
+          grep -Fq 'REGRA CANÓNICA DE TRANSFORMAÇÃO CURATORIAL PÚBLICA' curatorial-factory/PUBLIC_DYNAMIC_TRANSFORMATION_RULE_20260902.md
           echo CURATORIAL_FIRST_PREVIEWS=PASS
+          echo PUBLIC_DYNAMIC_TRANSFORMATION_RULE=PASS
 
       - name: Commit previews for author review
         shell: bash
@@ -99,6 +122,6 @@ jobs:
           git config user.email 'milk@associacaomilk.pt'
           git add curatorial-factory/previews
           if git diff --cached --quiet; then echo PREVIEWS_ALREADY_CURRENT=1; exit 0; fi
-          git commit -m 'feat(curadoria): Mistral composes source-first experience previews'
+          git commit -m 'feat(curadoria): Mistral composes adaptive public experiences'
           git push origin HEAD:work/copernico-recovery-webapp-20260902
           echo CURATORIAL_PREVIEWS_COMMITTED=1
