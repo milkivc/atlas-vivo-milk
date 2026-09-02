@@ -25,6 +25,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install tolerant XML parser
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check -q 'lxml>=5,<7'
+
       - name: Resolve Nextcloud route without printing credentials
         shell: bash
         run: |
@@ -50,7 +56,9 @@ jobs:
         run: |
           set -euo pipefail
           python - <<'PY'
-          import base64, collections, json, os, pathlib, urllib.error, urllib.parse, urllib.request, xml.etree.ElementTree as ET
+          import base64, collections, hashlib, json, os, pathlib, urllib.error, urllib.parse, urllib.request
+          import xml.etree.ElementTree as ET
+          from lxml import etree as LET
 
           base=os.environ.get('NEXTCLOUD_BASE_URL','').strip()
           atlas=os.environ.get('NEXTCLOUD_ATLAS','').strip()
@@ -59,57 +67,88 @@ jobs:
           if not base:
               base = atlas if atlas.startswith('http') else 'https://associacaomilk.pt/nextcloud'
           base=base.rstrip('/')
+          parsed_base=urllib.parse.urlsplit(base)
+          origin=f'{parsed_base.scheme}://{parsed_base.netloc}'
           root=f"{base}/remote.php/dav/files/{urllib.parse.quote(user, safe='')}"
           auth=base64.b64encode(f'{user}:{password}'.encode()).decode()
           ns={'d':'DAV:'}
           body=b'''<?xml version="1.0"?><d:propfind xmlns:d="DAV:"><d:prop><d:resourcetype/><d:getcontentlength/><d:getcontenttype/><d:getlastmodified/><d:getetag/></d:prop></d:propfind>'''
+          recover_count=0
+          response_content_types=set()
+
+          def parse_dav(raw):
+              global recover_count
+              try:
+                  tree=ET.fromstring(raw)
+                  if tree.tag != '{DAV:}multistatus':
+                      raise ValueError('NEXTCLOUD_WEBDAV_NOT_MULTISTATUS')
+                  return tree
+              except (ET.ParseError, ValueError):
+                  parser=LET.XMLParser(recover=True, resolve_entities=False, no_network=True, huge_tree=False)
+                  tree=LET.fromstring(raw, parser=parser)
+                  if tree is None or tree.tag != '{DAV:}multistatus':
+                      raise SystemExit('NEXTCLOUD_WEBDAV_XML_INVALID_AFTER_RECOVERY')
+                  recover_count += 1
+                  return tree
 
           def propfind(url):
               req=urllib.request.Request(url, data=body, method='PROPFIND', headers={
                   'Authorization':'Basic '+auth,
                   'Depth':'1',
                   'Content-Type':'application/xml; charset=utf-8',
-                  'User-Agent':'MILK-Atlas-ReadOnly-Inventory/1.1'
+                  'Accept':'application/xml,text/xml;q=0.9,*/*;q=0.1',
+                  'User-Agent':'MILK-Atlas-ReadOnly-Inventory/1.2'
               })
               try:
                   with urllib.request.urlopen(req, timeout=60) as r:
                       raw=r.read(); status=r.status
+                      response_content_types.add((r.headers.get('Content-Type') or '').split(';',1)[0].strip().lower())
               except urllib.error.HTTPError as e:
                   print('NEXTCLOUD_WEBDAV_HTTP_STATUS='+str(e.code))
                   raise SystemExit('NEXTCLOUD_WEBDAV_AUTH_OR_ROUTE_BLOCKED')
               if status not in (200,207):
                   raise SystemExit('NEXTCLOUD_WEBDAV_UNEXPECTED_STATUS:'+str(status))
-              return ET.fromstring(raw)
+              if not raw:
+                  raise SystemExit('NEXTCLOUD_WEBDAV_EMPTY_RESPONSE')
+              return parse_dav(raw)
 
           q=collections.deque([root+'/'])
           seen_dirs=set(); inventory=[]; requests=0
           while q:
               url=q.popleft()
-              if url in seen_dirs: continue
+              if url in seen_dirs:
+                  continue
               seen_dirs.add(url); requests+=1
               tree=propfind(url)
-              for resp in tree.findall('d:response',ns):
+              for resp in tree.findall('d:response', namespaces=ns):
                   href=resp.findtext('d:href', default='', namespaces=ns)
-                  if not href: continue
+                  if not href:
+                      continue
                   decoded=urllib.parse.unquote(href)
-                  prop=resp.find('.//d:prop',ns)
-                  if prop is None: continue
-                  rtype=prop.find('d:resourcetype',ns)
-                  is_dir=rtype is not None and rtype.find('d:collection',ns) is not None
+                  prop=resp.find('.//d:prop', namespaces=ns)
+                  if prop is None:
+                      continue
+                  rtype=prop.find('d:resourcetype', namespaces=ns)
+                  is_dir=rtype is not None and rtype.find('d:collection', namespaces=ns) is not None
+                  size_text=prop.findtext('d:getcontentlength', default='0', namespaces=ns) or '0'
+                  try:
+                      size=int(size_text)
+                  except ValueError:
+                      size=0
                   entry={
                       'href': href,
                       'path': decoded,
                       'is_dir': is_dir,
-                      'size': int(prop.findtext('d:getcontentlength', default='0', namespaces=ns) or 0),
-                      'content_type': prop.findtext('d:getcontenttype', default='', namespaces=ns),
-                      'modified': prop.findtext('d:getlastmodified', default='', namespaces=ns),
-                      'etag': prop.findtext('d:getetag', default='', namespaces=ns),
+                      'size': size,
+                      'content_type': prop.findtext('d:getcontenttype', default='', namespaces=ns) or '',
+                      'modified': prop.findtext('d:getlastmodified', default='', namespaces=ns) or '',
+                      'etag': prop.findtext('d:getetag', default='', namespaces=ns) or '',
                   }
                   if href.rstrip('/') == urllib.parse.urlparse(url).path.rstrip('/'):
                       continue
                   inventory.append(entry)
                   if is_dir:
-                      absolute=urllib.parse.urljoin(base+'/', href.lstrip('/'))
+                      absolute=urllib.parse.urljoin(origin+'/', href)
                       q.append(absolute.rstrip('/')+'/')
               if len(inventory)>20000 or requests>2000:
                   raise SystemExit('NEXTCLOUD_INVENTORY_SAFETY_LIMIT')
@@ -120,9 +159,16 @@ jobs:
           for x in files:
               suffix=pathlib.PurePosixPath(x['path']).suffix.lower() or '<none>'
               exts[suffix]=exts.get(suffix,0)+1
-          out={'source':'NEXTCLOUD','read_only':True,'base':base,'user_label':'configured','requests':requests,'files':files,'directories':dirs,'extension_counts':dict(sorted(exts.items()))}
-          pathlib.Path('/tmp/nextcloud_inventory.json').write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding='utf-8')
+          out={
+              'source':'NEXTCLOUD','read_only':True,'base_label':'configured','user_label':'configured',
+              'requests':requests,'files':files,'directories':dirs,'extension_counts':dict(sorted(exts.items()))
+          }
+          raw_inventory=json.dumps(out,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode('utf-8')
+          pathlib.Path('/tmp/nextcloud_inventory.json').write_bytes(raw_inventory)
+          pathlib.Path('/tmp/nextcloud_inventory.sha256').write_text(hashlib.sha256(raw_inventory).hexdigest(),encoding='ascii')
           print('NEXTCLOUD_WEBDAV_AUTH=PASS')
+          print('NEXTCLOUD_WEBDAV_XML_RECOVERIES='+str(recover_count))
+          print('NEXTCLOUD_WEBDAV_CONTENT_TYPES='+','.join(sorted(x for x in response_content_types if x)))
           print('NEXTCLOUD_INVENTORY_FILES='+str(len(files)))
           print('NEXTCLOUD_INVENTORY_DIRS='+str(len(dirs)))
           print('NEXTCLOUD_INVENTORY_REQUESTS='+str(requests))
@@ -130,33 +176,54 @@ jobs:
           print('NEXTCLOUD_SECRET_VALUES_DISCLOSED=0')
           PY
 
-      - name: Build curatorial candidate queue from all documents
+      - name: Build curatorial candidate queue and safe receipt
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
-          import json, pathlib
+          import hashlib, json, pathlib
           inv=json.load(open('/tmp/nextcloud_inventory.json',encoding='utf-8'))
           supported={'.pdf','.docx','.doc','.md','.txt','.html','.htm','.xlsx','.xls','.csv','.json','.zip','.pptx','.ppt'}
           signals=('curadoria','dinamica','dinâmica','atlas','milk','festa','lenda','folclore','toponim','falarte','palavra','cubo','dado','galeria','fuco','fucô','reizinho','cosmicox','perceptio','absurdo','deriva','ritual','nos','nós','arteria','artéria','simplicidade')
           queue=[]
           for f in inv['files']:
               p=f['path']; low=p.lower(); ext=pathlib.PurePosixPath(low).suffix
-              if ext not in supported: continue
+              if ext not in supported:
+                  continue
               score=sum(1 for s in signals if s in low)
               queue.append({'path':p,'href':f['href'],'size':f['size'],'modified':f['modified'],'ext':ext,'curatorial_signal_score':score})
           queue.sort(key=lambda x:(-x['curatorial_signal_score'],x['path']))
-          pathlib.Path('/tmp/curatorial_queue.json').write_text(json.dumps({'source':'NEXTCLOUD','total':len(queue),'items':queue},ensure_ascii=False,indent=2),encoding='utf-8')
+          qraw=json.dumps({'source':'NEXTCLOUD','total':len(queue),'items':queue},ensure_ascii=False,sort_keys=True,separators=(',',':')).encode('utf-8')
+          pathlib.Path('/tmp/curatorial_queue.json').write_bytes(qraw)
+          inventory_sha=pathlib.Path('/tmp/nextcloud_inventory.sha256').read_text(encoding='ascii').strip()
+          receipt={
+              'source':'NEXTCLOUD',
+              'read_only':True,
+              'authenticated':True,
+              'files_count':len(inv['files']),
+              'directories_count':len(inv['directories']),
+              'requests_count':inv['requests'],
+              'supported_documents_count':len(queue),
+              'curatorial_signal_documents_count':sum(1 for x in queue if x['curatorial_signal_score']>0),
+              'extension_counts':inv['extension_counts'],
+              'inventory_sha256':inventory_sha,
+              'queue_sha256':hashlib.sha256(qraw).hexdigest(),
+              'writes':0,
+              'secret_values_disclosed':0,
+              'raw_inventory_published':False,
+              'raw_queue_published':False
+          }
+          pathlib.Path('/tmp/nextcloud_discovery_receipt.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2),encoding='utf-8')
           print('NEXTCLOUD_SUPPORTED_DOCUMENTS='+str(len(queue)))
-          print('NEXTCLOUD_CURATORIAL_SIGNAL_DOCUMENTS='+str(sum(1 for x in queue if x['curatorial_signal_score']>0)))
+          print('NEXTCLOUD_CURATORIAL_SIGNAL_DOCUMENTS='+str(receipt['curatorial_signal_documents_count']))
+          print('NEXTCLOUD_PRIVATE_INDEX_PUBLISHED=NO')
+          print('NEXTCLOUD_DISCOVERY_RECEIPT=READY')
           PY
 
       - uses: actions/upload-artifact@v4
         with:
-          name: nextcloud-corpus-discovery
-          path: |
-            /tmp/nextcloud_inventory.json
-            /tmp/curatorial_queue.json
+          name: nextcloud-corpus-discovery-safe-receipt
+          path: /tmp/nextcloud_discovery_receipt.json
           retention-days: 14
 
-# credential-refresh-probe: 2026-09-02T10:29+01:00 admin-bound
+# parser-hardening: 2026-09-02 tolerant DAV + no private inventory artifact
