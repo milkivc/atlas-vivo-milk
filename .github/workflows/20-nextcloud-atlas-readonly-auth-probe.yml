@@ -34,12 +34,22 @@ jobs:
                   routes.append((label,value))
           if not routes:
               raise SystemExit('NEXTCLOUD_EXISTING_CREDENTIALS_MISSING')
+
+          body=b'''<?xml version="1.0" encoding="utf-8" ?>
+          <d:propfind xmlns:d="DAV:">
+            <d:prop><d:resourcetype/><d:getetag/></d:prop>
+          </d:propfind>'''
           ctx=ssl.create_default_context(); winner=None; statuses=[]
           for label,password in routes:
               for user in users:
                   endpoint=base.rstrip('/')+'/remote.php/dav/files/'+urllib.parse.quote(user,safe='')+'/'
                   raw=base64.b64encode((user+':'+password).encode()).decode()
-                  req=urllib.request.Request(endpoint,method='PROPFIND',headers={'Authorization':'Basic '+raw,'Depth':'0','Accept':'application/xml'})
+                  req=urllib.request.Request(endpoint,data=body,method='PROPFIND',headers={
+                      'Authorization':'Basic '+raw,
+                      'Depth':'0',
+                      'Content-Type':'application/xml; charset=utf-8',
+                      'Accept':'application/xml'
+                  })
                   try:
                       with urllib.request.urlopen(req,timeout=25,context=ctx) as r:
                           status=r.status
