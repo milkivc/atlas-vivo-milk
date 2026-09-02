@@ -1,0 +1,263 @@
+name: MILK Mistral Curatorial Decoder WebApp
+
+on:
+  push:
+    branches:
+      - work/copernico-recovery-webapp-20260902
+    paths:
+      - '.github/workflows/mistral-curatorial-decoder-webapp.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: milk-mistral-curatorial-decoder-webapp
+  cancel-in-progress: false
+
+jobs:
+  decode-build-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      BRANCH: work/copernico-recovery-webapp-20260902
+    steps:
+      - name: Checkout WebApp branch
+        uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 1
+
+      - name: Install Mistral Studio SDK and Vibe Code
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python -m pip install --disable-pip-version-check -U mistralai mistral-vibe
+          vibe --version
+
+      - name: Mistral Studio Agents — decode canonical curatorial corpus from Google Drive
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .mistral-private
+          printf '.mistral-private/\n' >> .git/info/exclude
+          python - <<'PY'
+          import asyncio, json, os, pathlib, hashlib
+          from mistralai import Mistral
+
+          OUT = pathlib.Path('.mistral-private')
+          key = os.environ['MISTRAL_API_KEY'].strip()
+          client = Mistral(api_key=key)
+
+          source_titles = [
+            'Curadoria Cultural e Existencialismo Profundo.pdf',
+            'Curadoria Cultural e Existencialismo Profundo (1).pdf',
+            'PROPOSTAS_ESPETACULARES_ATLAS_VIVO_MILK__CURADORIAS_PUBLICAS.docx',
+            'PUBLICO__CURADORIA_NOS_FALARTE_RESIDUAL.pdf',
+            'PUBLICO_TERRITORIAL__CURADORIA_NOS_FALARTE_RESIDUAL.pdf',
+            'ATLAS VIVO — Arquitetura Toponomástica da Memória Viva Ritual, Tecnologia e Curadoria de Freguesias.pdf',
+            'Atlas-Vivo-Arquitectura-Curadoria-Ritual.pdf',
+            'Atlas-Vivo-Arquitectura-Curadoria-Ritual (1).pdf',
+            'curadoria entrada freguesias.xlsx',
+            'HISTÓRICO — Atlas Público — Festas Publicadas e Convites Curatoriais Georreferenciados.xlsx — NÃO PUBLICAR',
+            'CURADORIAS__DOSSIE_CATALOGO_PROPOSTAS_OFERECIVEIS_MILK_SEM_FERRAMENTAS_TECNICAS',
+            'propostas-espetaculares-MILK.md',
+            'A Deriva do Sentido_ Cartografia Psicogeográfica e...(1).docx',
+            'CASA_PERCEPTIO__PROGRAMA_CURATORIAL_A_CASA_QUE_NAO_EXISTE',
+            'A Palavra Ritual.docx',
+            'Cópia de DOC-FUNDACIONAL-ATLAS-CURADORIA-ABSURDO-MUSEOLOGICO-2026-05-08',
+            'Dinâmicas para Atlas Cultural Português(2).pdf',
+            'Atlas Vivo MILK — Infraestrutura de Escuta, Brincadeira e Governança Territorial — Registo 2026-04-24',
+            'FOLCLORE_LENDAS__Mapeamento_Girias_Variantes_Linguisticas_Regionais',
+            'folclore_corpus_integral_auditado_138_entradas_NORMALIZADO_METODOLOGIA_30P(1).zip'
+          ]
+
+          def text_from_response(resp):
+            parts=[]
+            for o in getattr(resp,'outputs',[]) or []:
+              if getattr(o,'type',None)=='message.output':
+                c=getattr(o,'content','')
+                if isinstance(c,str): parts.append(c)
+                else:
+                  for x in c or []:
+                    t=getattr(x,'text',None)
+                    if t: parts.append(t)
+            return '\n'.join(parts).strip()
+
+          async def create_and_run(name, description, instructions, request):
+            agent = await client.beta.agents.create_async(
+              name=name,
+              description=description,
+              model='mistral-medium-latest',
+              instructions=instructions,
+              tools=[
+                {'type':'connector','connector_id':'google_drive_mcp'},
+                {'type':'code_interpreter'}
+              ],
+              completion_args={'temperature':0.0}
+            )
+            try:
+              resp = await client.beta.conversations.start_async(
+                agent_id=agent.id,
+                inputs=[{'role':'user','content':request}],
+                timeout_ms=600000
+              )
+              txt=text_from_response(resp)
+              if not txt:
+                raise RuntimeError(name+': empty response')
+              return txt
+            finally:
+              await client.beta.agents.delete_async(agent_id=agent.id)
+
+          async def main():
+            try:
+              tools = await client.beta.connectors.list_tools_async(
+                connector_id_or_name='google_drive_mcp', page=1, page_size=100, refresh=False, pretty=False
+              )
+              print('MISTRAL_GOOGLE_DRIVE_CONNECTOR=DISCOVERED')
+            except Exception as e:
+              print('MISTRAL_GOOGLE_DRIVE_CONNECTOR=DISCOVERY_FAILED')
+              raise
+
+            titles='\n'.join('- '+x for x in source_titles)
+            common=(
+              'Use the Google Drive connector to SEARCH and READ the actual source files named below. '
+              'Never infer a mechanic from a title alone. Preserve authorial terminology, contradictions, genealogy, physical/digital relations and publication boundaries. '
+              'The file marked NÃO PUBLICAR is evidence-only: do not propose exposing its rows/content publicly. '
+              'Return STRICT JSON only. If a file cannot be read, list it under missing_sources; do not fill gaps.\n\nSOURCES:\n'+titles
+            )
+
+            herm = await create_and_run(
+              'MILK Curatorial Hermeneut',
+              'Reads the Atlas Vivo MILK curatorial corpus and extracts authorial mechanics without flattening it.',
+              'You are the canonical-source hermeneut for Atlas Vivo MILK. Search/read sources before conclusions. Distinguish concept, mechanic, ritual, spatial gesture, game rule, object, invitation, sensory cue, territory dependency, rights/publication gate and unresolved ambiguity. No generic UX translation.',
+              common + '\n\nTASK: Build JSON {sources_read, missing_sources, curatorial_families:[{name, source_evidence, authorial_mechanics, sensory_logic, physical_digital_relation, territory_relation, invariants, prohibitions_from_source, unresolved}]}. Include all supported curatorial families, not only the current seven runtimes.'
+            )
+            (OUT/'01-hermeneut.json').write_text(herm,encoding='utf-8')
+
+            ludic = await create_and_run(
+              'MILK Ludic Systems Decoder',
+              'Decodes games, brincadeiras, invitations, chance mechanics and participatory rhythms from the canonical corpus.',
+              'You are a ludic-systems specialist. Search/read actual sources. Extract exact rules, gestures, timing, chance, repetition, collective/singular modes, materials, age/consent constraints and what makes each brincadeira distinct. Never turn a title into a rule. Never invent missing rules.',
+              common + '\n\nTASK: Build JSON {sources_read, missing_sources, ludic_mechanics:[{canonical_name, source_evidence, trigger, player_action, system_response, rhythm, chance_or_uncertainty, collective_mode, materials_or_assets, territorial_binding, accessibility_constraints, privacy_constraints, completion_or_latenct_state, unresolved}]}. Explicitly distinguish brincar, convite and tentar a sorte whenever supported.'
+            )
+            (OUT/'02-ludic.json').write_text(ludic,encoding='utf-8')
+
+            ritual = await create_and_run(
+              'MILK Ritual Spatial Decoder',
+              'Decodes ritual, toponymy, psychogeography, memory and spatial dramaturgy for the WebApp.',
+              'You read the actual Atlas sources to recover ritual/spatial dramaturgy. Preserve place, absence, memory, language, toponymy, dérive, absurd and existential depth. Translate only into interaction contracts supported by source evidence.',
+              common + '\n\nTASK: Build JSON {sources_read, missing_sources, spatial_rituals:[{canonical_name, source_evidence, entry_condition, spatial_operation, temporal_operation, language_operation, memory_operation, sensory_cues, relation_to_copernico, relation_to_freguesia, safe_public_outputs, private_or_human_gate, unresolved}] }.'
+            )
+            (OUT/'03-ritual-spatial.json').write_text(ritual,encoding='utf-8')
+
+            # Synthesis agent uses the three private outputs as explicit evidence, with Code Interpreter for structural checks.
+            synthesis_prompt = (
+              'You are the MILK WebApp experience architect. Use ONLY the three evidence JSON blocks below. '
+              'Do not add mechanics absent from them. Produce STRICT JSON with a code-facing contract: runtime_modules, state_machine_extensions, shared_primitives, required_assets, data_dependencies, accessibility_tests, privacy_tests, source_fidelity_tests, and coverage_gaps. '
+              'Every runtime_modules item must cite source evidence identifiers/names from the evidence. The goal is to replace generic fallbacks with distinct authorial experiences while preserving COPERNICO as territorial orchestration.\n\n'
+              'HERMENEUT:\n'+herm+'\n\nLUDIC:\n'+ludic+'\n\nRITUAL_SPATIAL:\n'+ritual
+            )
+            synth_agent = await client.beta.agents.create_async(
+              name='MILK WebApp Experience Architect',
+              description='Synthesizes source-grounded curatorial mechanics into implementation contracts.',
+              model='mistral-medium-latest',
+              instructions='Be source-bound. Use code_interpreter for JSON consistency and coverage checks. Return strict JSON only.',
+              tools=[{'type':'code_interpreter'}],
+              completion_args={'temperature':0.0}
+            )
+            try:
+              resp=await client.beta.conversations.start_async(agent_id=synth_agent.id,inputs=[{'role':'user','content':synthesis_prompt}],timeout_ms=600000)
+              synth=text_from_response(resp)
+              if not synth: raise RuntimeError('synthesis empty')
+              (OUT/'04-webapp-contract.json').write_text(synth,encoding='utf-8')
+            finally:
+              await client.beta.agents.delete_async(agent_id=synth_agent.id)
+
+            for p in sorted(OUT.glob('*.json')):
+              h=hashlib.sha256(p.read_bytes()).hexdigest()
+              print(f'MISTRAL_PRIVATE_SPEC={p.name} sha256={h} bytes={p.stat().st_size}')
+            print('MISTRAL_CURATORIAL_DECODING=READY')
+
+          asyncio.run(main())
+          PY
+
+      - name: Mistral Vibe Code — implement source-grounded WebApp increment
+        shell: bash
+        run: |
+          set -euo pipefail
+          BEFORE="$(git rev-parse HEAD)"
+          vibe --agent auto-approve --trust --max-turns 40 --output json --prompt "ATLAS VIVO MILK — IMPLEMENTAÇÃO CURATORIAL. Lê primeiro .mistral-private/01-hermeneut.json, 02-ludic.json, 03-ritual-spatial.json e 04-webapp-contract.json. Depois lê deploy/atlas-public/catalogo-curatorial.json, curadorias.js, atlas.js, copernico.js, app.js e runtimes existentes. Implementa um incremento real da WebApp que substitua fallbacks genéricos SOMENTE para famílias cuja mecânica esteja suficientemente suportada pelos specs privados. Preserva COPÉRNICO e a dramaturgia canónica. Não inventes regras, textos, assets, coordenadas ou conteúdos. Não publiques o ficheiro marcado NÃO PUBLICAR nem qualquer conteúdo privado. Mantém fronteira PUBLIC-ONLY. Cria módulos específicos em deploy/atlas-public/ e liga-os por IDs canónicos; actualiza CSS/HTML apenas quando necessário. Acessibilidade WCAG 2.2 AA, reduced-motion, teclado/touch. Sem API keys no frontend, sem chamadas externas novas, sem telemetria. Não faças commit. No fim executa node --check em cada JS alterado e deixa o working tree apenas com alterações da WebApp." > .mistral-private/05-vibe-code.json
+          echo "MISTRAL_VIBE_BASE=$BEFORE"
+          git status --porcelain -uall
+
+      - name: Deterministic WebApp safety and syntax gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t changed < <(git status --porcelain -uall | awk '{print $2}' | sort -u)
+          test ${#changed[@]} -gt 0 || { echo '::error::MISTRAL_NO_WEBAPP_DELTA'; exit 30; }
+          for f in "${changed[@]}"; do
+            case "$f" in
+              deploy/atlas-public/*) ;;
+              *) echo "::error::OUTSIDE_WEBAPP:$f"; exit 31 ;;
+            esac
+            case "$f" in *.js) node --check "$f" ;; esac
+          done
+          git diff --check
+          if git diff -- . ':!deploy/atlas-public/**' | grep -q .; then
+            echo '::error::OUTSIDE_PUBLIC_WEBAPP_DIFF'; exit 32
+          fi
+          if grep -REn 'MISTRAL_API_KEY|PTSERVIDOR_FTPS_PASSWORD|client_secret|access_token|DRIVE_OAUTH|Camada Invisível' deploy/atlas-public --include='*.js' --include='*.json' --include='*.html'; then
+            echo '::error::PRIVATE_OR_SECRET_MARKER_IN_PUBLIC_RUNTIME'; exit 33
+          fi
+          echo 'MISTRAL_WEBAPP_DETERMINISTIC_GATES=PASS'
+
+      - name: Mistral Studio review council — fidelity, ludic integrity, runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff > .mistral-private/candidate.diff
+          python - <<'PY'
+          import asyncio,json,os,pathlib
+          from mistralai import Mistral
+          client=Mistral(api_key=os.environ['MISTRAL_API_KEY'])
+          diff=pathlib.Path('.mistral-private/candidate.diff').read_text(encoding='utf-8')
+          specs='\n'.join(pathlib.Path('.mistral-private/'+n).read_text(encoding='utf-8') for n in ['01-hermeneut.json','02-ludic.json','03-ritual-spatial.json','04-webapp-contract.json'])
+          roles=[
+            ('source_fidelity','Check that every new mechanic is traceable to evidence; block invention or flattening.'),
+            ('ludic_integrity','Check games/brincadeiras/rituals keep distinct rules, rhythm, uncertainty and collective/singular modes.'),
+            ('runtime_accessibility','Check WebApp state, keyboard/touch, reduced-motion, privacy, no network/secret leakage, and COPERNICO continuity.')
+          ]
+          async def run(role,inst):
+            a=await client.beta.agents.create_async(name='MILK '+role,description=inst,model='mistral-medium-latest',instructions=inst+' Return strict JSON {pass, blockers, evidence, tests}.',tools=[{'type':'code_interpreter'}],completion_args={'temperature':0.0})
+            try:
+              r=await client.beta.conversations.start_async(agent_id=a.id,inputs=[{'role':'user','content':'EVIDENCE SPECS:\n'+specs+'\n\nCANDIDATE DIFF:\n'+diff}],timeout_ms=600000)
+              txt=''.join((o.content if isinstance(o.content,str) else ''.join(getattr(x,'text','') for x in o.content)) for o in r.outputs if getattr(o,'type',None)=='message.output')
+              obj=json.loads(txt)
+              print('MISTRAL_REVIEW_'+role.upper()+'='+('PASS' if obj.get('pass') and not obj.get('blockers') else 'BLOCK'))
+              if not obj.get('pass') or obj.get('blockers'):
+                raise RuntimeError(role+' blockers: '+json.dumps(obj.get('blockers'),ensure_ascii=False))
+            finally:
+              await client.beta.agents.delete_async(agent_id=a.id)
+          async def main():
+            for role,inst in roles: await run(role,inst)
+          asyncio.run(main())
+          PY
+          echo 'MISTRAL_REVIEW_COUNCIL=PASS'
+
+      - name: Commit Mistral-generated WebApp increment
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Associação MILK - Mistral Agents'
+          git config user.email 'milk@associacaomilk.pt'
+          git add deploy/atlas-public
+          git diff --cached --quiet && { echo '::error::NO_COMMITTABLE_WEBAPP_DELTA'; exit 50; }
+          git diff --cached --check
+          git commit -m 'feat(webapp): materialize source-grounded curatorial experiences with Mistral agents'
+          git push origin HEAD:$BRANCH
+          echo "MISTRAL_CURATORIAL_WEBAPP_COMMIT=$(git rev-parse HEAD)"
+          echo 'MISTRAL_CURATORIAL_WEBAPP=VALIDATED'
