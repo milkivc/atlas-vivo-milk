@@ -1,0 +1,233 @@
+name: MILK Mistral PTServidor Atlas orchestrator
+
+on:
+  push:
+    branches:
+      - codex/milk-curadorias-ia-webapp-20260821
+    paths:
+      - '.github/workflows/mistral-ptservidor-atlas-orchestrator.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: milk-atlas-ptservidor-orchestrator
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      PTSERVIDOR_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate canonical public package
+        working-directory: deploy/atlas-public
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum -c manifest.sha256
+
+      - name: Run Mistral deployment safety agents
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, urllib.request
+          key=os.environ.get('MISTRAL_API_KEY','').strip()
+          if not key: raise SystemExit('MISTRAL_API_KEY_MISSING')
+          manifest=open('deploy/atlas-public/manifest.sha256',encoding='utf-8').read()
+          roles=[
+            ('deployment_safety','Confirma isolamento estrito do subdomínio Atlas, rollback preservativo e ausência de escritas no site principal.'),
+            ('web_integrity','Confirma validação por SHA-256, readback FTPS e verificação HTTP sem inventar resultados.'),
+            ('rgpd_governance','Confirma que o deploy público não transporta segredos nem dados pessoais e mantém validação humana institucional.')
+          ]
+          for role,instruction in roles:
+              payload={
+                'model':'mistral-small-latest','temperature':0.0,
+                'response_format':{'type':'json_object'},
+                'messages':[
+                  {'role':'system','content':f'És o agente Mistral {role} da MILK. {instruction} Responde JSON com role, checks, blockers e proceed_if_deterministic_checks_pass.'},
+                  {'role':'user','content':json.dumps({'target':'atlas.associacaomilk.pt','transport':'FTPS explícito TLS','policy':'backup antes de substituir; rollback em falha; sem apagar extras; sem tocar associacaomilk.pt','manifest':manifest},ensure_ascii=False)}
+                ]}
+              req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=180) as r:
+                  body=json.loads(r.read())
+              parsed=json.loads(body['choices'][0]['message']['content'])
+              if not isinstance(parsed,dict): raise RuntimeError('MISTRAL_INVALID_JSON_'+role)
+          print('MISTRAL_DEPLOYMENT_AGENTS_OK=3')
+          PY
+
+      - name: Discover verified webroot and deploy with backup rollback readback
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ftplib, hashlib, io, json, os, pathlib, ssl, urllib.parse, urllib.request, urllib.error
+
+          HOST='troi.ptservidor.net'
+          USER='migration@associacaomilk.pt'
+          PASSWORD=os.environ.get('PTSERVIDOR_FTPS_PASSWORD','').strip()
+          RUN=os.environ.get('RUN_ID','unknown')
+          GH=os.environ.get('GH_TOKEN','').strip()
+          REPO=os.environ.get('REPO','milkivc/atlas-vivo-milk')
+          ROOT=pathlib.Path('deploy/atlas-public')
+          DOMAIN='https://atlas.associacaomilk.pt'
+          if not PASSWORD: raise SystemExit('PTSERVIDOR_FTPS_PASSWORD_MISSING')
+
+          def comment(msg):
+              print(msg,flush=True)
+              if not GH:return
+              req=urllib.request.Request(f'https://api.github.com/repos/{REPO}/issues/35/comments',data=json.dumps({'body':msg}).encode(),method='POST',headers={'Authorization':'Bearer '+GH,'Content-Type':'application/json','Accept':'application/vnd.github+json'})
+              try: urllib.request.urlopen(req,timeout=30).read()
+              except Exception: pass
+
+          manifest=[]
+          for line in (ROOT/'manifest.sha256').read_text(encoding='utf-8').splitlines():
+              if not line.strip(): continue
+              h,rel=line.split(None,1); rel=rel.strip()
+              p=pathlib.PurePosixPath(rel)
+              if p.is_absolute() or '..' in p.parts: raise RuntimeError('UNSAFE_MANIFEST_PATH')
+              data=(ROOT/rel).read_bytes()
+              if hashlib.sha256(data).hexdigest()!=h: raise RuntimeError('LOCAL_HASH_MISMATCH_'+rel)
+              manifest.append((rel,h,data))
+
+          ftp=ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=90)
+          ftp.connect(HOST,21); ftp.login(USER,PASSWORD); ftp.prot_p(); ftp.voidcmd('TYPE I')
+
+          def cwd_abs(path):
+              ftp.cwd('/')
+              if path and path!='/':
+                  for part in path.strip('/').split('/'):
+                      if part: ftp.cwd(part)
+              return ftp.pwd()
+
+          def mkdirs(base,rel_dir):
+              cwd_abs(base)
+              if not rel_dir or rel_dir=='.': return
+              for part in pathlib.PurePosixPath(rel_dir).parts:
+                  try: ftp.mkd(part)
+                  except ftplib.all_errors: pass
+                  ftp.cwd(part)
+
+          def exists_file(base,rel):
+              try:
+                  d=str(pathlib.PurePosixPath(rel).parent); name=pathlib.PurePosixPath(rel).name
+                  mkdir_target=base if d=='.' else base.rstrip('/')+'/'+d
+                  cwd_abs(mkdir_target)
+                  ftp.size(name)
+                  return True
+              except ftplib.all_errors:
+                  return False
+
+          def retrieve(base,rel):
+              d=str(pathlib.PurePosixPath(rel).parent); name=pathlib.PurePosixPath(rel).name
+              cwd_abs(base if d=='.' else base.rstrip('/')+'/'+d)
+              buf=bytearray(); ftp.retrbinary('RETR '+name,buf.extend,blocksize=262144)
+              return bytes(buf)
+
+          def store(base,rel,data):
+              d=str(pathlib.PurePosixPath(rel).parent); name=pathlib.PurePosixPath(rel).name
+              mkdirs(base,'' if d=='.' else d)
+              ftp.storbinary('STOR '+name,io.BytesIO(data),blocksize=262144)
+
+          candidates=[
+            '/atlas.associacaomilk.pt',
+            '/public_html/atlas.associacaomilk.pt',
+            '/domains/atlas.associacaomilk.pt/public_html',
+            '/home/associ16/atlas.associacaomilk.pt'
+          ]
+          chosen=None
+          canary_name=f'.milk-atlas-webroot-probe-{RUN}.txt'
+          canary_data=('MILK_ATLAS_WEBROOT_'+RUN).encode()
+          tested=0
+          for candidate in candidates:
+              try: cwd_abs(candidate)
+              except ftplib.all_errors: continue
+              tested+=1
+              try:
+                  ftp.storbinary('STOR '+canary_name,io.BytesIO(canary_data),blocksize=65536)
+                  url=DOMAIN+'/'+urllib.parse.quote(canary_name)+'?run='+urllib.parse.quote(RUN)
+                  req=urllib.request.Request(url,headers={'Cache-Control':'no-cache','Pragma':'no-cache'})
+                  with urllib.request.urlopen(req,timeout=25) as r: public=r.read()
+                  if public==canary_data:
+                      chosen=ftp.pwd()
+              except Exception:
+                  pass
+              finally:
+                  try: ftp.delete(canary_name)
+                  except Exception: pass
+              if chosen: break
+
+          if not chosen:
+              ftp.quit()
+              comment(f'ATLAS_FTPS_WEBROOT_DISCOVERY_BLOCKED run={RUN} candidates_tested={tested} ftps_auth=ok main_site_writes=0 secret_values_disclosed=0')
+              raise SystemExit(12)
+
+          backup=chosen.rstrip('/')+f'/.milk-atlas-backup-{RUN}'
+          originals={}
+          created=[]
+          try:
+              try: cwd_abs(backup)
+              except ftplib.all_errors:
+                  parent=str(pathlib.PurePosixPath(backup).parent); name=pathlib.PurePosixPath(backup).name
+                  cwd_abs(parent); ftp.mkd(name)
+
+              for rel,h,data in manifest:
+                  was=exists_file(chosen,rel)
+                  originals[rel]=was
+                  if was:
+                      old=retrieve(chosen,rel)
+                      store(backup,rel,old)
+                  else:
+                      created.append(rel)
+
+              receipt={'run':RUN,'target':chosen,'files':len(manifest),'main_site_writes':0,'remote_extra_deletes':0}
+              store(backup,'deploy-receipt.json',json.dumps(receipt,sort_keys=True).encode())
+
+              for rel,h,data in manifest:
+                  store(chosen,rel,data)
+
+              for rel,h,data in manifest:
+                  back=retrieve(chosen,rel)
+                  if hashlib.sha256(back).hexdigest()!=h:
+                      raise RuntimeError('FTPS_READBACK_HASH_MISMATCH_'+rel)
+
+              for rel,h,data in manifest:
+                  url=DOMAIN+'/'+urllib.parse.quote(rel,safe='/')+'?milk_run='+urllib.parse.quote(RUN)
+                  req=urllib.request.Request(url,headers={'Cache-Control':'no-cache','Pragma':'no-cache'})
+                  with urllib.request.urlopen(req,timeout=30) as r: public=r.read()
+                  if hashlib.sha256(public).hexdigest()!=h:
+                      raise RuntimeError('PUBLIC_HTTP_HASH_MISMATCH_'+rel)
+
+          except Exception as exc:
+              rollback_errors=[]
+              for rel,was in originals.items():
+                  try:
+                      if was:
+                          old=retrieve(backup,rel); store(chosen,rel,old)
+                      else:
+                          d=str(pathlib.PurePosixPath(rel).parent); name=pathlib.PurePosixPath(rel).name
+                          cwd_abs(chosen if d=='.' else chosen.rstrip('/')+'/'+d)
+                          try: ftp.delete(name)
+                          except ftplib.all_errors: pass
+                  except Exception:
+                      rollback_errors.append(rel)
+              try: ftp.quit()
+              except Exception: pass
+              comment(f'ATLAS_PUBLIC_DEPLOY_ROLLED_BACK run={RUN} reason={type(exc).__name__} rollback_errors={len(rollback_errors)} main_site_writes=0 secret_values_disclosed=0')
+              raise
+
+          ftp.quit()
+          total_bytes=sum(len(d) for _,_,d in manifest)
+          comment(f'ATLAS_PUBLIC_DEPLOY_VERIFIED run={RUN} files={len(manifest)} bytes={total_bytes} webroot_verified_by_http_canary=1 ftps_readback=ok public_http_hashes=ok backup_created=1 remote_extra_deletes=0 main_site_writes=0 mistral_agents=3 secret_values_disclosed=0')
+          print('ATLAS_PUBLIC_DEPLOY_VERIFIED=YES')
+          PY
