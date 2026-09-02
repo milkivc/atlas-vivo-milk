@@ -15,6 +15,12 @@ function deterministicPosition(index) {
   };
 }
 
+function preserveOriginalWord(token) {
+  const original = token.dataset.originalWord || '';
+  if (token.textContent !== original) token.textContent = original;
+  return original;
+}
+
 function renderTokens(field, text, reduced) {
   field.replaceChildren();
   const words = text.trim().split(/\s+/).filter(Boolean).slice(0, 48);
@@ -22,25 +28,33 @@ function renderTokens(field, text, reduced) {
     field.append(el('p', 'ritual-empty', 'o silêncio também pode ficar aqui'));
     return [];
   }
+
   return words.map((word, index) => {
     const token = el('button', 'ritual-token', word);
     token.type = 'button';
+    token.dataset.originalWord = word;
     token.dataset.state = STATES[index % STATES.length];
     const pos = deterministicPosition(index);
     token.style.setProperty('--x', `${pos.x}%`);
     token.style.setProperty('--y', `${pos.y}%`);
     token.style.setProperty('--r', `${reduced ? 0 : pos.angle}deg`);
     token.setAttribute('aria-label', `${word}. Palavra móvel. Use as setas para deslocar.`);
+
     let dx = 0;
     let dy = 0;
     const applyOffset = () => {
+      preserveOriginalWord(token);
       token.style.setProperty('--dx', `${dx}px`);
       token.style.setProperty('--dy', `${dy}px`);
     };
+
     token.addEventListener('click', () => {
+      preserveOriginalWord(token);
       const current = STATES.indexOf(token.dataset.state);
       token.dataset.state = STATES[(current + 1) % STATES.length];
+      preserveOriginalWord(token);
     });
+
     token.addEventListener('keydown', event => {
       const step = event.shiftKey ? 16 : 8;
       if (event.key === 'ArrowLeft') dx -= step;
@@ -51,6 +65,7 @@ function renderTokens(field, text, reduced) {
       event.preventDefault();
       applyOffset();
     });
+
     field.append(token);
     return token;
   });
@@ -67,7 +82,7 @@ export function openPalavraRitual({ container, reducedMotion = false } = {}) {
   const title = el('h2', 'ritual-title', 'A Palavra Ritual');
   title.id = 'ritual-title';
   shell.append(title);
-  shell.append(el('p', 'ritual-intro', 'A palavra ritual não entra na linha. Ela encosta primeiro. Aqui a frase deixa de ser corredor e passa a ser campo.'));
+  shell.append(el('p', 'ritual-intro', 'A palavra ritual não entra na linha. Ela encosta primeiro. Aqui a frase deixa de ser corredor e passa a ser campo. Cada palavra permanece literalmente a mesma; só muda a sua relação com o espaço.'));
 
   const inputLabel = el('label', 'ritual-input-label');
   inputLabel.append(el('span', 'ritual-label', 'Escreve uma palavra, uma frase ou um fragmento'));
@@ -103,29 +118,40 @@ export function openPalavraRitual({ container, reducedMotion = false } = {}) {
   shell.append(field);
   let tokens = [];
 
+  const verifyWords = () => {
+    tokens.forEach(token => preserveOriginalWord(token));
+  };
+
   const build = () => {
     tokens = renderTokens(field, input.value, reduced);
+    verifyWords();
     status.textContent = tokens.length
-      ? `${tokens.length} fragmentos em campo · usa setas para mover uma palavra focada`
+      ? `${tokens.length} fragmentos em campo · as palavras permanecem intactas · usa setas para mover uma palavra focada`
       : 'silêncio em campo · nada foi guardado';
     silence.setAttribute('aria-pressed', 'false');
     field.dataset.silence = 'false';
   };
 
   touch.addEventListener('click', build);
+
   divert.addEventListener('click', () => {
     if (!tokens.length) build();
     tokens.forEach((token, index) => {
+      preserveOriginalWord(token);
       token.dataset.state = STATES[(STATES.indexOf(token.dataset.state) + 1 + (index % 2)) % STATES.length];
+      preserveOriginalWord(token);
     });
-    status.textContent = 'o fragmento desviou sem perder as palavras';
+    status.textContent = 'o fragmento desviou no espaço sem perder ou reescrever nenhuma palavra';
   });
+
   silence.addEventListener('click', () => {
     const active = silence.getAttribute('aria-pressed') !== 'true';
     silence.setAttribute('aria-pressed', String(active));
     field.dataset.silence = String(active);
-    status.textContent = active ? 'silêncio: as palavras continuam presentes, mas recuam' : 'as palavras reabrem';
+    verifyWords();
+    status.textContent = active ? 'silêncio: as palavras continuam presentes e intactas, mas recuam' : 'as palavras reabrem intactas';
   });
+
   speak.addEventListener('click', () => {
     const text = input.value.trim();
     if (!text) {
@@ -136,6 +162,7 @@ export function openPalavraRitual({ container, reducedMotion = false } = {}) {
       status.textContent = 'voz do navegador indisponível neste aparelho';
       return;
     }
+    verifyWords();
     speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text.slice(0, 560));
     utterance.lang = 'pt-PT';
