@@ -1,6 +1,9 @@
+import { openFalarte } from './falarte.js';
+
 const deck = document.querySelector('#dinamicas');
 const dialog = document.querySelector('#engine');
 const body = document.querySelector('#engineBody');
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const known = new Set([
   'inventario-meu-mundo','catastrofe-produtiva','ponto-kusama','corpo-percebe',
   'escutar-silencio','rizoma-interior','cubo-interior'
@@ -13,6 +16,15 @@ function el(tag, cls, text) {
   if (cls) node.className = cls;
   if (text !== undefined) node.textContent = text;
   return node;
+}
+
+function ensureFalarteStyles() {
+  if (document.querySelector('link[data-atlas-style="falarte"]')) return;
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'falarte.css';
+  link.dataset.atlasStyle = 'falarte';
+  document.head.append(link);
 }
 
 function renderCatalogue(entries) {
@@ -36,7 +48,7 @@ function renderCatalogue(entries) {
     card.append(el('span', 'tag', item.familia));
     card.append(el('h2', '', item.nome));
     card.append(el('p', '', item.convite));
-    const button = el('button', 'open', 'brincar');
+    const button = el('button', 'open', item.id === 'falarte' ? 'entrar em falARTE' : 'brincar');
     button.type = 'button';
     button.dataset.curadoria = item.id;
     card.append(button);
@@ -129,11 +141,21 @@ function openDynamic(item) {
   dialog.showModal();
 }
 
+function openSpecific(item) {
+  if (item.id !== 'falarte') return false;
+  ensureFalarteStyles();
+  body.replaceChildren();
+  openFalarte({ container: body, reducedMotion: reduced });
+  dialog.showModal();
+  return true;
+}
+
 deck.addEventListener('click', event => {
   const button = event.target.closest('[data-curadoria]');
   if (!button) return;
   const item = catalogue.find(candidate => candidate.id === button.dataset.curadoria);
-  if (item) openDynamic(item);
+  if (!item) return;
+  if (!openSpecific(item)) openDynamic(item);
 });
 
 fetch('catalogo-curatorial.json', { cache: 'no-store' })
