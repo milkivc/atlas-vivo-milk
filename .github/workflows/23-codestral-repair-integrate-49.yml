@@ -27,7 +27,8 @@ jobs:
           - { batch: 2, start: 8, end: 14 }
           - { batch: 6, start: 36, end: 42 }
     env:
-      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      MISTRAL_PRIMARY_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      MISTRAL_SECONDARY_API_KEY: ${{ secrets.MISTRALAPI_KEY }}
       START: ${{ matrix.start }}
       END: ${{ matrix.end }}
       BATCH: ${{ matrix.batch }}
@@ -41,10 +42,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -n "$MISTRAL_API_KEY"
+          test -n "$MISTRAL_PRIMARY_API_KEY$MISTRAL_SECONDARY_API_KEY"
           python - <<'PY'
           import concurrent.futures,json,os,pathlib,random,re,subprocess,time,urllib.error,urllib.request
-          API='https://api.mistral.ai/v1/chat/completions'; MODEL='codestral-latest'; key=os.environ['MISTRAL_API_KEY']
+          API='https://api.mistral.ai/v1/chat/completions'; MODEL='codestral-latest'
+          keys=[('primary',os.environ.get('MISTRAL_PRIMARY_API_KEY','').strip()),('secondary',os.environ.get('MISTRAL_SECONDARY_API_KEY','').strip())]
           start,end=int(os.environ['START']),int(os.environ['END']); batch=os.environ['BATCH']
           idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text(encoding='utf-8'))
           existing={p.name for p in pathlib.Path('deploy/atlas-public/experiences').glob('*.js') if p.name!='registry.js'}
@@ -55,11 +57,23 @@ jobs:
           system='''És Codestral, engenheiro de experiências digitais do Atlas Vivo MILK. Produz APENAS JavaScript ES completo. O blueprint é soberano. Implementa uma experiência browser real, específica, multissensorial e lúdica; nunca card, quiz, formulário, chatbot ou click->modal genérico. A interacção principal deve alterar estado perceptivo. Tempo, espera, gesto, silêncio, acaso e cruzamento sensorial só quando coerentes com o blueprint. Sem fetch, CDN, trackers, cookies, localStorage ou sessionStorage. Touch e teclado equivalentes; prefers-reduced-motion preserva significado. Som apenas após gesto. Não inventes factos, fotografias, áudios, memórias ou texto territorial. Não recries COPÉRNICO nem a entrada COSMICOXES. CONTRATO LITERAL: export function mountCuratorialExperience({ root, context = {}, onClose = () => {} }) { ... function destroy() { ... } ... return { destroy }; }'''
           def call(msgs):
               payload={'model':MODEL,'temperature':0.12,'max_tokens':10000,'messages':msgs}
-              req=urllib.request.Request(API,data=json.dumps(payload,ensure_ascii=False).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
-              with urllib.request.urlopen(req,timeout=300) as r: body=json.loads(r.read())
-              c=body['choices'][0]['message']['content']
-              if isinstance(c,list): c=''.join(str(x.get('text','')) if isinstance(x,dict) else str(x) for x in c)
-              return str(c).strip()
+              last=None
+              for label,key in keys:
+                  if not key: continue
+                  req=urllib.request.Request(API,data=json.dumps(payload,ensure_ascii=False).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+                  try:
+                      with urllib.request.urlopen(req,timeout=300) as r: body=json.loads(r.read())
+                      c=body['choices'][0]['message']['content']
+                      if isinstance(c,list): c=''.join(str(x.get('text','')) if isinstance(x,dict) else str(x) for x in c)
+                      print('MISTRAL_CREDENTIAL_ROUTE='+label,flush=True)
+                      return str(c).strip()
+                  except urllib.error.HTTPError as e:
+                      last=e
+                      if label=='primary' and e.code in (401,402,403) and keys[1][1]:
+                          continue
+                      raise
+              if last: raise last
+              raise RuntimeError('NO_MISTRAL_CREDENTIAL_AVAILABLE')
           def clean(t):
               t=re.sub(r'^```(?:javascript|js)?\s*','',t.strip(),flags=re.I); return re.sub(r'\s*```$','',t).strip()
           def validate(code,path):
