@@ -1,7 +1,13 @@
 name: Mistral audit — Atlas 7 dynamics
 on:
+  workflow_dispatch:
   pull_request:
     paths: ["deploy/atlas-public/**"]
+  push:
+    branches: ["codex/milk-curadorias-ia-webapp-20260821"]
+    paths:
+      - "deploy/atlas-public/**"
+      - ".github/workflows/mistral-atlas-production-audit.yml"
 permissions:
   contents: read
 jobs:
