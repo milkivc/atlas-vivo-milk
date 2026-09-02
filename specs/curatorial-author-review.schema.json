@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atlas.associacaomilk.pt/schemas/curatorial-author-review.schema.json",
+  "title": "Atlas Vivo MILK — Curatorial Author Review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "curatorial_slug",
+    "source_evidence_sha256",
+    "experience_preview_sha256",
+    "description_coverage",
+    "experience_preview",
+    "ambiguities",
+    "improvement_proposals",
+    "author_review_status",
+    "approved_for_code"
+  ],
+  "properties": {
+    "curatorial_slug": {"type": "string", "minLength": 1},
+    "source_evidence_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "experience_preview_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "description_coverage": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_locator", "authorial_element", "experience_manifestation", "coverage_status"],
+        "properties": {
+          "source_locator": {"type": "string", "minLength": 1},
+          "authorial_element": {"type": "string", "minLength": 1},
+          "experience_manifestation": {"type": "string", "minLength": 1},
+          "coverage_status": {"enum": ["covered", "needs_clarification", "not_yet_covered"]}
+        }
+      }
+    },
+    "experience_preview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "participant_arrival",
+        "participant_actions",
+        "system_responses",
+        "sensory_sequence",
+        "timing_and_rhythm",
+        "territorial_relation",
+        "physical_digital_relation",
+        "ending_or_return",
+        "accessibility_equivalents"
+      ],
+      "properties": {
+        "participant_arrival": {"type": "string", "minLength": 1},
+        "participant_actions": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "system_responses": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "sensory_sequence": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "timing_and_rhythm": {"type": "string", "minLength": 1},
+        "territorial_relation": {"type": "string", "minLength": 1},
+        "physical_digital_relation": {"type": "string", "minLength": 1},
+        "ending_or_return": {"type": "string", "minLength": 1},
+        "accessibility_equivalents": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "ambiguities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["question", "why_it_matters", "blocks_code"],
+        "properties": {
+          "question": {"type": "string", "minLength": 1},
+          "why_it_matters": {"type": "string", "minLength": 1},
+          "blocks_code": {"type": "boolean"}
+        }
+      }
+    },
+    "improvement_proposals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["proposal", "basis", "changes_authored_meaning", "author_decision"],
+        "properties": {
+          "proposal": {"type": "string", "minLength": 1},
+          "basis": {"type": "string", "minLength": 1},
+          "changes_authored_meaning": {"type": "boolean"},
+          "author_decision": {"enum": ["pending", "accept", "reject", "modify"]}
+        }
+      }
+    },
+    "author_review_status": {
+      "enum": ["pending", "needs_clarification", "revise", "approved", "rejected"]
+    },
+    "approved_for_code": {"const": false}
+  }
+}
