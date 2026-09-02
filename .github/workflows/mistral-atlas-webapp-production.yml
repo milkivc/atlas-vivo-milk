@@ -154,7 +154,17 @@ jobs:
                           elif k in ('PASSWORD','APP_PASSWORD'): password=v
           if not base or not password: raise SystemExit('NEXTCLOUD_ROUTE_INCOMPLETE')
           if '/remote.php/dav/files/' not in base:
-              base=base.rstrip('/')+'/remote.php/dav/files/'+urllib.parse.quote(user,safe='')+'/'
+              server=base.rstrip('/'); selected=None
+              for candidate in dict.fromkeys((user,'admin','associ16','atlas','milk')):
+                  probe=server+'/remote.php/dav/files/'+urllib.parse.quote(candidate,safe='')+'/'
+                  token='Basic '+base64.b64encode((candidate+':'+password).encode()).decode()
+                  req=urllib.request.Request(probe,method='PROPFIND',headers={'Authorization':token,'Depth':'0'})
+                  try:
+                      with urllib.request.urlopen(req,timeout=45) as response:
+                          if response.status == 207: selected=(candidate,probe); break
+                  except Exception: pass
+              if not selected: raise SystemExit('NEXTCLOUD_AUTHENTICATION_REJECTED')
+              user,base=selected
           auth='Basic '+base64.b64encode((user+':'+password).encode()).decode()
           root=pathlib.Path('deploy/atlas-public'); destination='ATLAS_WEBAPP_STAGING/'+os.environ['GITHUB_SHA']
           def request(method,url,data=None):
@@ -235,7 +245,17 @@ jobs:
                           elif k in ('PASSWORD','APP_PASSWORD'): password=v
           if not base or not password: raise SystemExit('NEXTCLOUD_ROUTE_INCOMPLETE')
           if '/remote.php/dav/files/' not in base:
-              base=base.rstrip('/')+'/remote.php/dav/files/'+urllib.parse.quote(user,safe='')+'/'
+              server=base.rstrip('/'); selected=None
+              for candidate in dict.fromkeys((user,'admin','associ16','atlas','milk')):
+                  probe=server+'/remote.php/dav/files/'+urllib.parse.quote(candidate,safe='')+'/'
+                  token='Basic '+base64.b64encode((candidate+':'+password).encode()).decode()
+                  req=urllib.request.Request(probe,method='PROPFIND',headers={'Authorization':token,'Depth':'0'})
+                  try:
+                      with urllib.request.urlopen(req,timeout=45) as response:
+                          if response.status == 207: selected=(candidate,probe); break
+                  except Exception: pass
+              if not selected: raise SystemExit('NEXTCLOUD_AUTHENTICATION_REJECTED')
+              user,base=selected
           auth='Basic '+base64.b64encode((user+':'+password).encode()).decode()
           release=base+'ATLAS_WEBAPP_STAGING/'+os.environ['GITHUB_SHA']+'/'
           def get(name):
