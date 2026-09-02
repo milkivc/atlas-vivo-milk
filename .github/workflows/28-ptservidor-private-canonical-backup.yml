@@ -1,0 +1,56 @@
+name: 28 MILK PTServidor private canonical backup
+
+on:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths:
+      - '.github/workflows/28-ptservidor-private-canonical-backup.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  backup:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      PTSERVIDOR_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+
+      - name: Upload canonical files to private PTServidor area with readback
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ftplib,hashlib,io,os,pathlib,ssl
+          password=os.environ.get('PTSERVIDOR_FTPS_PASSWORD','').strip()
+          if not password: raise SystemExit('PTSERVIDOR_FTPS_PASSWORD_MISSING')
+          files=[
+            pathlib.Path('curatorial-factory/CONSTITUICAO_EXPERIENCIAL_SOBERANA_ATLAS_VIVO_MILK_20260902.md'),
+            pathlib.Path('ops/HANDOFF_PROXIMO_CHAT_ATLAS_VIVO_MILK_20260902.md'),
+          ]
+          ftp=ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=90)
+          ftp.connect('troi.ptservidor.net',21)
+          ftp.login('migration@associacaomilk.pt',password)
+          ftp.prot_p()
+          ftp.cwd('/')
+          for part in ('ATLAS_CANONICAL_HANDOFFS','2026-09-02'):
+              try: ftp.mkd(part)
+              except ftplib.all_errors: pass
+              ftp.cwd(part)
+          for p in files:
+              data=p.read_bytes(); digest=hashlib.sha256(data).hexdigest()
+              remote=p.name
+              ftp.storbinary('STOR '+remote,io.BytesIO(data),blocksize=1048576)
+              got=bytearray(); ftp.retrbinary('RETR '+remote,got.extend,blocksize=1048576)
+              if hashlib.sha256(bytes(got)).hexdigest()!=digest:
+                  raise SystemExit('PTSERVIDOR_CANONICAL_READBACK_MISMATCH:'+remote)
+              print('PTSERVIDOR_CANONICAL_FILE=PASS name='+remote+' sha256='+digest)
+          print('PTSERVIDOR_CANONICAL_PATH='+ftp.pwd())
+          ftp.quit()
+          print('PTSERVIDOR_CANONICAL_BACKUP=PASS_2')
+          PY
