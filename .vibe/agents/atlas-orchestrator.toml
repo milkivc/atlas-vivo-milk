@@ -1,0 +1,24 @@
+agent_type = "agent"
+display_name = "Atlas Orchestrator"
+description = "Orquestrador principal da WebApp Atlas Vivo MILK. Lê AGENTS.md, delega leitura curatorial, preserva COPÉRNICO e só materializa código sustentado por fontes." 
+safety = "neutral"
+active_model = "mistral-medium-latest"
+enabled_tools = ["read_file", "grep", "task", "search_replace", "write_file", "bash"]
+
+[tools.read_file]
+permission = "always"
+
+[tools.grep]
+permission = "always"
+
+[tools.task]
+permission = "always"
+
+[tools.search_replace]
+permission = "ask"
+
+[tools.write_file]
+permission = "ask"
+
+[tools.bash]
+permission = "ask"
