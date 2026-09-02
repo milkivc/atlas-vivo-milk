@@ -1,4 +1,4 @@
-name: 21 MILK Mistral Code deep curatorial refinement
+name: 21 MILK Mistral territorial multisensory refinement
 
 on:
   workflow_dispatch:
@@ -6,6 +6,7 @@ on:
     branches: [work/copernico-recovery-webapp-20260902]
     paths:
       - 'deploy/atlas-public/experiences/**'
+      - 'curatorial-factory/sensory-blueprints/**'
       - 'curatorial-factory/EXPERIENCE_RESEARCH_MATRIX_20260902.md'
       - '.github/workflows/21-mistral-code-deep-curatorial-refinement.yml'
 
@@ -13,13 +14,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: milk-mistral-code-deep-refinement
-  cancel-in-progress: true
+  group: milk-mistral-territorial-multisensory-refinement
+  cancel-in-progress: false
 
 jobs:
   refine:
     runs-on: ubuntu-24.04
-    timeout-minutes: 55
+    timeout-minutes: 90
     env:
       MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
     steps:
@@ -32,63 +33,146 @@ jobs:
         id: runtime_gate
         shell: bash
         run: |
+          set -euo pipefail
           python - <<'PY'
           import json,pathlib,os
-          idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text())
+          idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text(encoding='utf-8'))
           root=pathlib.Path('deploy/atlas-public/experiences')
-          present=sum((root/(x['id']+'.js')).is_file() for x in idx['entries'])
-          print('RUNTIMES_PRESENT='+str(present))
-          with open(os.environ['GITHUB_OUTPUT'],'a') as f: f.write('ready='+('1' if present==49 else '0')+'\n')
+          present=[x['id'] for x in idx['entries'] if (root/(x['id']+'.js')).is_file()]
+          print('RUNTIMES_PRESENT='+str(len(present)))
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+              f.write('ready='+('1' if len(present)==49 else '0')+'\n')
           PY
 
-      - name: Probe Mistral account availability
+      - name: Probe refreshed Mistral account
         id: mistral_gate
         if: steps.runtime_gate.outputs.ready == '1'
         shell: bash
         run: |
+          set -euo pipefail
           python - <<'PY'
-          import os,urllib.error,urllib.request
-          key=os.environ.get('MISTRAL_API_KEY','').strip(); available='0'; code='missing'
-          if key:
-              try:
-                  req=urllib.request.Request('https://api.mistral.ai/v1/models',headers={'Authorization':'Bearer '+key})
-                  with urllib.request.urlopen(req,timeout=30): pass
-                  available='1'; code='200'
-              except urllib.error.HTTPError as e: code=str(e.code)
-              except Exception as e: code=type(e).__name__
-          print('MISTRAL_DEEP_REFINEMENT_ACCOUNT_HTTP='+code)
-          if code=='402': print('MISTRAL_DEEP_REFINEMENT_DEFERRED_BILLING=1')
-          with open(os.environ['GITHUB_OUTPUT'],'a') as f: f.write('available='+available+'\n')
+          import json,os,urllib.request
+          key=os.environ.get('MISTRAL_API_KEY','').strip()
+          if not key: raise SystemExit('MISTRAL_API_KEY_MISSING')
+          payload={'model':'codestral-latest','temperature':0,'max_tokens':16,'messages':[{'role':'user','content':'Return only OK'}]}
+          req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+          with urllib.request.urlopen(req,timeout=45) as r: r.read()
+          print('MISTRAL_ACCOUNT=PASS')
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f: f.write('available=1\n')
           PY
 
       - name: Install Mistral Vibe Code
         if: steps.runtime_gate.outputs.ready == '1' && steps.mistral_gate.outputs.available == '1'
         run: |
+          set -euo pipefail
           python -m pip install --disable-pip-version-check --quiet 'mistral-vibe==2.24.5'
           vibe --version
 
-      - name: Deep curatorial interaction refinement
+      - name: Four-agent territorial multisensory jury
         if: steps.runtime_gate.outputs.ready == '1' && steps.mistral_gate.outputs.available == '1'
+        shell: bash
         run: |
           set -euo pipefail
-          vibe --trust --max-turns 120 --output json --prompt "EXECUÇÃO AUTORIZADA DE SEGUNDA PASSAGEM CURATORIAL. EDITA O CÓDIGO REAL, não escrevas relatório. Lê AGENTS.md, curatorial-factory/SOURCE_CORPUS_20260902.md, curatorial-factory/DIGITAL_MULTISENSORY_EXPERIENCE_CONSTITUTION_20260902.md, curatorial-factory/EXPERIENCE_RESEARCH_MATRIX_20260902.md, os 49 blueprints e os 49 runtimes. Blueprint/texto autoral > dinâmica/brincadeira > investigação > decisão técnica. Elimina template, click-modal, quiz, card, formulário e decoração sensorial rasa. Aprofunda gesto, tempo, silêncio, acaso, espaço, contaminação entre sentidos e devolução apenas quando sustentados. Preserva COPÉRNICO e COSMICOXES. Não inventes conteúdo. Sem fetch/CDN/tracker. Teclado/touch/reduced-motion têm equivalência poética. Inspecciona lifecycle e destroy() dos 49." > /tmp/vibe-deep-refinement.json
+          python - <<'PY'
+          import json,os,pathlib,urllib.request
+          key=os.environ['MISTRAL_API_KEY']
+          idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text(encoding='utf-8'))
+          root=pathlib.Path('deploy/atlas-public/experiences')
+          bp_root=pathlib.Path('curatorial-factory/sensory-blueprints')
+          roles={
+            'territorial_embodiment':'Avalia se a experiência nasce de território vivido e pode produzir relação, memória, deslocamento perceptivo ou devolução territorial sem reduzir território a coordenadas, agenda ou turismo.',
+            'multisensory_dramaturgy':'Avalia cruzamento real entre sentidos, gesto, som, visualidade, tactilidade/háptica quando disponível, espaço, silêncio, ritmo e tempo. Som ou partículas decorativas não contam.',
+            'curatorial_fidelity':'Avalia fidelidade aos invariantes autorais e à dinâmica/brincadeira. Detecta invenção de texto, facto territorial, memória, fotografia, áudio ou mecânica não sustentada.',
+            'experiential_distinctness':'Avalia se a experiência tem gramática própria e consequência perceptiva; detecta template, card, quiz, formulário, chatbot, click-modal ou repetição estrutural disfarçada.'
+          }
+          all_reviews=[]
+          entries=[]
+          for x in idx['entries']:
+              bp=json.loads((bp_root/x['file']).read_text(encoding='utf-8'))
+              code=(root/(x['id']+'.js')).read_text(encoding='utf-8')
+              entries.append({'id':x['id'],'blueprint':bp,'code':code[:16000]})
+          for role,rule in roles.items():
+              for i in range(0,len(entries),7):
+                  chunk=entries[i:i+7]
+                  system=(f'És o agente {role} do Atlas Vivo MILK. {rule} '
+                          'A ordem soberana é texto/invariante autoral > curadoria > dinâmica/brincadeira > experiência > dispositivo/código. '
+                          'Não imponhas tecnologia por preferência. Não inventes requisitos. '
+                          'Responde APENAS JSON com reviews:[{id,scores:{territoriality,sensory_crossing,embodied_gesture,temporal_dramaturgy,distinctness,authorial_fidelity,accessible_equivalence},invented_content:boolean,repair_targets:array}]. '
+                          'Scores 0..5; 5 é excepcional. repair_targets deve ser concreto e ligado ao blueprint.')
+                  payload={'model':'mistral-small-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':system},{'role':'user','content':json.dumps(chunk,ensure_ascii=False)}]}
+                  req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload,ensure_ascii=False).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+                  with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
+                  obj=json.loads(body['choices'][0]['message']['content'])
+                  for review in obj.get('reviews',[]):
+                      review['role']=role
+                      all_reviews.append(review)
+          by_id={x['id']:[] for x in idx['entries']}
+          for r in all_reviews:
+              if r.get('id') in by_id: by_id[r['id']].append(r)
+          repair=[]
+          for cid,reviews in by_id.items():
+              if not reviews:
+                  repair.append({'id':cid,'reason':'missing_review','targets':['Rever integralmente contra o blueprint.']}); continue
+              scores=[]; targets=[]; invented=False
+              for r in reviews:
+                  scores.extend(v for v in (r.get('scores') or {}).values() if isinstance(v,(int,float)))
+                  targets += [str(x) for x in r.get('repair_targets',[]) if str(x).strip()]
+                  invented = invented or bool(r.get('invented_content'))
+              low=min(scores) if scores else 0
+              if invented or low < 4 or targets:
+                  repair.append({'id':cid,'lowest_score':low,'invented_content':invented,'targets':list(dict.fromkeys(targets))[:20]})
+          report={'schema':'atlas-milk-territorial-multisensory-audit-v1','experiences':49,'repair_queue':repair,'reviews':all_reviews}
+          pathlib.Path('/tmp/atlas-territorial-multisensory-audit.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+          print('MISTRAL_TERRITORIAL_JURY=PASS')
+          print('REPAIR_QUEUE_COUNT='+str(len(repair)))
+          PY
 
-      - name: Deterministic gate after refinement
+      - name: Mistral Code repairs experience depth from jury evidence
         if: steps.runtime_gate.outputs.ready == '1' && steps.mistral_gate.outputs.available == '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          vibe --trust --max-turns 180 --output json --prompt "EXECUÇÃO AUTORIZADA DE OFICINA CURATORIAL TERRITORIAL MULTISSENSORIAL. EDITA O CÓDIGO REAL; NÃO ESCREVAS RELATÓRIO. Lê AGENTS.md; curatorial-factory/SOURCE_CORPUS_20260902.md; curatorial-factory/DIGITAL_MULTISENSORY_EXPERIENCE_CONSTITUTION_20260902.md; curatorial-factory/EXPERIENCE_RESEARCH_MATRIX_20260902.md; os 49 blueprints; os 49 runtimes; e /tmp/atlas-territorial-multisensory-audit.json. Trabalha prioritariamente a repair_queue. Regra soberana: invariantes/texto autoral > curadoria > dinâmica/brincadeira > experiência > decisão técnica. Não troques a curadoria por tecnologia. Uma experiência territorial deve fazer a pessoa sentir, perceber, lembrar, mover, escutar, escolher, esperar, relacionar ou devolver algo de modo coerente com a fonte. A multissensorialidade deve ser dramática e cruzada: um sentido transforma outro; tempo e silêncio podem ser matéria; gesto deve ter consequência perceptiva. Elimina templates, cards, quiz, formulários, chatbots, click-modal e som/partículas decorativos. Preserva COPÉRNICO, a entrada COSMICOXES e runtimes autorais canónicos; não os recries nem substituas. Não inventes factos, textos, memórias, fotografias ou áudio. Microfone/câmara/geolocalização são opcionais e nunca condição de entrada. Touch, teclado e prefers-reduced-motion precisam de equivalência poética. Limpa listeners, timers, RAF e AudioContext em destroy(). Faz reparações específicas, não uniformização. Termina apenas depois de reinspeccionar os 49." > /tmp/vibe-territorial-refinement.json
+          echo MISTRAL_CODE_TERRITORIAL_REFINEMENT_EXECUTED=1
+
+      - name: Deterministic integrity and anti-template gates
+        if: steps.runtime_gate.outputs.ready == '1' && steps.mistral_gate.outputs.available == '1'
+        shell: bash
         run: |
           set -euo pipefail
           node tests/ia-milk-public-boundary.test.mjs
           for f in deploy/atlas-public/experiences/*.js deploy/atlas-public/*.js; do node --check "$f"; done
           git diff --check
-          test "$(find deploy/atlas-public/experiences -maxdepth 1 -name '*.js' ! -name 'registry.js' | wc -l)" -eq 49
+          python - <<'PY'
+          import hashlib,json,pathlib,re
+          idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text())
+          root=pathlib.Path('deploy/atlas-public/experiences')
+          files=[root/(x['id']+'.js') for x in idx['entries']]
+          assert len(files)==49 and all(p.is_file() for p in files)
+          hashes={}
+          bad=[]
+          for p in files:
+              code=p.read_text(encoding='utf-8')
+              if 'mountCuratorialExperience' not in code or 'function destroy' not in code or 'fetch(' in code: bad.append(p.stem)
+              h=hashlib.sha256(code.encode()).hexdigest(); hashes.setdefault(h,[]).append(p.stem)
+          dup=[v for v in hashes.values() if len(v)>1]
+          assert not bad,('RUNTIME_CONTRACT_FAIL',bad)
+          assert not dup,('EXACT_RUNTIME_DUPLICATES',dup)
+          print('RUNTIME_DISTINCT_49=PASS')
+          PY
+          if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_.*PASSWORD|NEXTCLOUD_.*KEY|client_secret|access_token' deploy/atlas-public/experiences; then exit 31; fi
+          echo TERRITORIAL_MULTISENSORY_DETERMINISTIC=PASS
 
-      - name: Commit deep refinements
+      - name: Commit only verified curatorial refinements
         if: steps.runtime_gate.outputs.ready == '1' && steps.mistral_gate.outputs.available == '1'
+        shell: bash
         run: |
+          set -euo pipefail
           git config user.name 'Atlas Mistral Code'
           git config user.email 'milk@associacaomilk.pt'
           git add deploy/atlas-public/experiences deploy/atlas-public/curadorias.js deploy/atlas-public/experience-machine.js deploy/atlas-public/index.html deploy/atlas-public/*.css 2>/dev/null || true
-          if git diff --cached --quiet; then echo NO_DEEP_REFINEMENT_DELTA=1; exit 0; fi
-          git commit -m 'feat(experiences): deepen 49 curatorial interactions with Mistral Code'
+          if git diff --cached --quiet; then echo NO_TERRITORIAL_REFINEMENT_DELTA=1; exit 0; fi
+          git commit -m 'feat(experiences): deepen territorial multisensory dramaturgy'
           git pull --rebase origin work/copernico-recovery-webapp-20260902
           git push origin HEAD:work/copernico-recovery-webapp-20260902
+          echo TERRITORIAL_MULTISENSORY_REFINEMENT_PUSHED=1
