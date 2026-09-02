@@ -1,0 +1,207 @@
+name: 19 MILK 49 digital multisensory curatorial blueprints
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths:
+      - 'curatorial-factory/DIGITAL_MULTISENSORY_EXPERIENCE_CONSTITUTION_20260902.md'
+      - 'specs/digital-multisensory-curatorial-blueprint.schema.json'
+      - '.github/workflows/19-mistral-49-digital-multisensory-blueprints.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: milk-49-digital-multisensory-blueprints
+  cancel-in-progress: false
+
+jobs:
+  blueprints:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 0
+
+      - name: Generate 49 distinct multisensory experience blueprints
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          rm -rf curatorial-factory/sensory-blueprints
+          mkdir -p curatorial-factory/sensory-blueprints
+          python - <<'PY'
+          import concurrent.futures, json, os, pathlib, random, time, urllib.request, urllib.error
+
+          ROOT=pathlib.Path('.')
+          catalog=json.loads((ROOT/'deploy/atlas-public/catalogo-curatorial.json').read_text(encoding='utf-8'))
+          entries=catalog['entradas']
+          if len(entries) != 49:
+              raise SystemExit(f'EXPECTED_49_CURATORIAL_ENTRIES_GOT_{len(entries)}')
+
+          constitution=(ROOT/'curatorial-factory/DIGITAL_MULTISENSORY_EXPERIENCE_CONSTITUTION_20260902.md').read_text(encoding='utf-8')
+          corpus=(ROOT/'curatorial-factory/SOURCE_CORPUS_20260902.md').read_text(encoding='utf-8')
+          schema=json.loads((ROOT/'specs/digital-multisensory-curatorial-blueprint.schema.json').read_text(encoding='utf-8'))
+
+          system='''És um compositor de experiências digitais curatoriais para o Atlas Vivo MILK. O foco desta estação é EXCLUSIVAMENTE criar a dinâmica da experiência digital da WebApp antes de código. Cada experiência deve parecer viva, responder à presença da pessoa, convocar vários sentidos, misturar canais, usar silêncio/ausência, surpresa, ritmo, corpo, território e devolução. Não faças cards, menus, quizzes genéricos, chatbots genéricos, páginas explicativas, dashboards, pontos/XP/badges ou animação decorativa. Não inventes factos autorais. Se a fonte não sustenta um detalhe, coloca-o em questions_for_eduardo ou improvement_proposals. Olfacto e paladar só podem ser evocados digitalmente, nunca fingidos como output do browser. Microfone/câmara/movimento/geolocalização são opcionais e a experiência deve funcionar sem permissões. Acessibilidade preserva a poesia, não é versão inferior. Não escrevas código. Responde APENAS JSON válido compatível com o schema fornecido. generic_fallback_allowed=false e approved_for_code=false são obrigatórios.'''
+
+          def compact_schema():
+              return {
+                'required': schema['required'],
+                'sensory_channels_required': schema['properties']['sensory_channels']['required'],
+                'participant_verbs': {'minItems':3,'maxItems':7,'unique':True},
+                'session_variation_minItems':4,
+                'generic_fallback_allowed':False,
+                'approved_for_code':False
+              }
+
+          def validate(bp, expected):
+              required=schema['required']
+              missing=[k for k in required if k not in bp]
+              if missing: raise ValueError('missing:'+','.join(missing))
+              if bp.get('id') != expected['id']: raise ValueError('id_mismatch')
+              if bp.get('generic_fallback_allowed') is not False: raise ValueError('generic_fallback')
+              if bp.get('approved_for_code') is not False: raise ValueError('approved_for_code')
+              verbs=bp.get('participant_verbs') or []
+              if len(verbs)<3 or len(verbs)>7 or len(set(map(str.lower,verbs)))!=len(verbs): raise ValueError('participant_verbs')
+              if len(bp.get('session_variation') or [])<4: raise ValueError('session_variation')
+              channels=bp.get('sensory_channels') or {}
+              for k in schema['properties']['sensory_channels']['required']:
+                  if k not in channels: raise ValueError('sensory_channel:'+k)
+              if not bp.get('sensory_signature_id'): raise ValueError('sensory_signature_id')
+              return bp
+
+          def call(entry):
+              evidence_hint='''Usa o CORPUS como fonte de autoridade. O catálogo fornece apenas nome/família/mecânica/convite e NÃO autoriza inventar uma experiência inteira. Se a entrada tiver fonte autoral forte no corpus, preserva-a. Se tiver apenas pista de catálogo, marca as lacunas.'''
+              user={
+                'task':'Criar UM blueprint digital multissensorial excepcional e específico desta curadoria, antes de código.',
+                'catalog_entry':entry,
+                'constitution':constitution,
+                'source_corpus':corpus,
+                'schema_contract':compact_schema(),
+                'extra_requirements':[
+                  'Desenha limiar -> chamada -> gesto -> resposta viva -> desvio -> aprofundamento sensorial -> escolha/acaso/silêncio -> aparição -> devolução -> latência.',
+                  'Usa pelo menos 4 canais sensoriais de modo significativo; olfacto/paladar podem ficar vazios quando não forem curatoriais, ou surgir apenas como evocação.',
+                  'Define pelo menos uma tradução cruzada entre sentidos.',
+                  'Define quatro ou mais variações entre sessões sem perfil psicológico nem vigilância.',
+                  'Explica distinctiveness: por que esta experiência não pode ser confundida com as outras 48.',
+                  'Não escolhas tecnologia, biblioteca, API ou componente.',
+                  evidence_hint
+                ]
+              }
+              payload={'model':'mistral-medium-latest','temperature':0.35,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':system},{'role':'user','content':json.dumps(user,ensure_ascii=False)}]}
+              data=json.dumps(payload).encode()
+              last=None
+              for attempt in range(6):
+                  req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=data,method='POST',headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
+                  try:
+                      with urllib.request.urlopen(req,timeout=180) as r:
+                          body=json.loads(r.read())
+                      text=body['choices'][0]['message']['content']
+                      bp=json.loads(text)
+                      return validate(bp,entry)
+                  except Exception as exc:
+                      last=exc
+                      time.sleep(min(30, 2**attempt + random.random()*2))
+              raise RuntimeError(f"{entry['id']}:{type(last).__name__}:{last}")
+
+          results={}
+          failures=[]
+          with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
+              futs={ex.submit(call,e):e for e in entries}
+              for fut in concurrent.futures.as_completed(futs):
+                  e=futs[fut]
+                  try:
+                      bp=fut.result()
+                      results[e['id']]=bp
+                      out=ROOT/'curatorial-factory/sensory-blueprints'/f"{int(e['ordem']):02d}_{e['id']}.json"
+                      out.write_text(json.dumps(bp,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+                      print('BLUEPRINT_GENERATED='+e['id'])
+                  except Exception as exc:
+                      failures.append(str(exc))
+                      print('BLUEPRINT_FAILED='+e['id']+' '+str(exc))
+
+          if failures:
+              (ROOT/'curatorial-factory/sensory-blueprints/FAILURES.txt').write_text('\n'.join(failures)+'\n',encoding='utf-8')
+              raise SystemExit('BLUEPRINT_FAILURES='+str(len(failures)))
+
+          signatures=[bp['sensory_signature_id'] for bp in results.values()]
+          if len(set(signatures)) != 49:
+              raise SystemExit('SENSORY_SIGNATURE_COLLISION')
+
+          # Conselho compara apenas a impressão digital de cada experiência para detectar repetição estrutural.
+          fingerprints=[]
+          for e in entries:
+              bp=results[e['id']]
+              fingerprints.append({
+                'id':bp['id'],
+                'canonical_name':bp['canonical_name'],
+                'sensory_signature_id':bp['sensory_signature_id'],
+                'participant_verbs':bp['participant_verbs'],
+                'cross_sensory_translation':bp['cross_sensory_translation'],
+                'silence_or_absence':bp['silence_or_absence'],
+                'surprise_or_indeterminacy':bp['surprise_or_indeterminacy'],
+                'distinctiveness':bp['distinctiveness']
+              })
+
+          council_system='''És o Conselho de Diferenciação Sensorial MILK. Audita 49 impressões digitais de experiências. Detecta repetições de mecânica disfarçadas por texto, excesso de click/drag/tap, som decorativo, ausência de corpo, ausência de silêncio, falta de território quando esperado, experiência reduzida a formulário/quiz/chat, e qualquer par que pareça a mesma interface com copy diferente. NÃO reescrevas os blueprints. Responde JSON com status PASS ou REVIEW, duplicate_risks, weak_sensory_risks e author_questions.'''
+          payload={'model':'mistral-medium-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':council_system},{'role':'user','content':json.dumps(fingerprints,ensure_ascii=False)}]}
+          req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
+          with urllib.request.urlopen(req,timeout=180) as r: body=json.loads(r.read())
+          council=json.loads(body['choices'][0]['message']['content'])
+          (ROOT/'curatorial-factory/sensory-blueprints/00_SENSORY_COUNCIL.json').write_text(json.dumps(council,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          index={
+            'state':'AUTHOR_REVIEW_REQUIRED',
+            'approved_for_code':False,
+            'count':49,
+            'unique_sensory_signatures':len(set(signatures)),
+            'council_status':council.get('status'),
+            'entries':[{'ordem':e['ordem'],'id':e['id'],'nome':e['nome'],'file':f"{int(e['ordem']):02d}_{e['id']}.json"} for e in entries]
+          }
+          (ROOT/'curatorial-factory/sensory-blueprints/00_INDEX.json').write_text(json.dumps(index,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('MULTISENSORY_BLUEPRINTS=49')
+          print('UNIQUE_SENSORY_SIGNATURES=49')
+          print('APPROVED_FOR_CODE=0')
+          PY
+
+      - name: Validate 49-blueprint gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          COUNT=$(find curatorial-factory/sensory-blueprints -maxdepth 1 -type f -name '[0-9][0-9]_*.json' | wc -l | tr -d ' ')
+          test "$COUNT" = "49"
+          test -s curatorial-factory/sensory-blueprints/00_INDEX.json
+          test -s curatorial-factory/sensory-blueprints/00_SENSORY_COUNCIL.json
+          test ! -e curatorial-factory/sensory-blueprints/FAILURES.txt
+          python - <<'PY'
+          import json, pathlib
+          p=pathlib.Path('curatorial-factory/sensory-blueprints')
+          sig=[]
+          for f in sorted(p.glob('[0-9][0-9]_*.json')):
+              x=json.loads(f.read_text(encoding='utf-8'))
+              assert x['generic_fallback_allowed'] is False
+              assert x['approved_for_code'] is False
+              assert 3 <= len(x['participant_verbs']) <= 7
+              assert len(x['session_variation']) >= 4
+              sig.append(x['sensory_signature_id'])
+          assert len(sig)==49 and len(set(sig))==49
+          print('FORTY_NINE_BLUEPRINT_GATE=PASS')
+          PY
+
+      - name: Commit multisensory blueprints for author review
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Atlas Mistral Sensory Foundry'
+          git config user.email 'milk@associacaomilk.pt'
+          git add curatorial-factory/sensory-blueprints
+          if git diff --cached --quiet; then echo BLUEPRINTS_ALREADY_CURRENT=1; exit 0; fi
+          git commit -m 'feat(curadoria): compose 49 multisensory digital experience blueprints'
+          git push origin HEAD:work/copernico-recovery-webapp-20260902
+          echo MULTISENSORY_BLUEPRINTS_COMMITTED=1
