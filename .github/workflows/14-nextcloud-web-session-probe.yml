@@ -1,0 +1,91 @@
+name: 14 MILK Nextcloud web-session probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths: ['.github/workflows/14-nextcloud-web-session-probe.yml']
+
+permissions:
+  contents: read
+
+env:
+  ADMIN_NEXTCLOUD: ${{ secrets.ADMIN_NEXTCLOUD }}
+
+jobs:
+  web-session:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Install Playwright Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$ADMIN_NEXTCLOUD"
+          python -m pip install --disable-pip-version-check -q playwright
+          python -m playwright install --with-deps chromium >/dev/null
+          echo PLAYWRIGHT_READY=YES
+
+      - name: Login as admin and probe session-authenticated WebDAV read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os,ssl,urllib.error,urllib.parse,urllib.request
+          from playwright.sync_api import sync_playwright
+
+          base='https://associacaomilk.pt/nextcloud'
+          password=os.environ['ADMIN_NEXTCLOUD'].strip()
+          assert password and not password.lower().startswith(('http://','https://'))
+
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              context=browser.new_context(ignore_https_errors=False)
+              page=context.new_page()
+              page.goto(base+'/login',wait_until='domcontentloaded',timeout=90000)
+              user=page.locator('input[name="user"], input#user').first
+              pwd=page.locator('input[name="password"], input#password').first
+              user.fill('admin')
+              pwd.fill(password)
+              button=page.locator('button[type="submit"], input[type="submit"]').first
+              button.click()
+              try:
+                  page.wait_for_url(lambda u: '/login' not in u,timeout=60000)
+              except Exception:
+                  pass
+              current=page.url
+              logged='/login' not in urllib.parse.urlsplit(current).path
+              print('NEXTCLOUD_WEB_LOGIN='+('PASS' if logged else 'BLOCKED'))
+              print('NEXTCLOUD_LOGIN_URL_CHANGED='+('YES' if logged else 'NO'))
+              print('SECRET_VALUES_DISCLOSED=0')
+              if not logged:
+                  # Never print DOM text because it can contain account details.
+                  raise SystemExit(42)
+
+              cookies=context.cookies()
+              cookie_header='; '.join(c['name']+'='+c['value'] for c in cookies if 'associacaomilk.pt' in c.get('domain',''))
+              print('NEXTCLOUD_SESSION_COOKIES_PRESENT='+('YES' if cookie_header else 'NO'))
+              if not cookie_header: raise SystemExit(43)
+
+              ctx=ssl.create_default_context()
+              body=b'<?xml version="1.0"?><d:propfind xmlns:d="DAV:"><d:prop><d:resourcetype/><d:getetag/><d:getcontentlength/></d:prop></d:propfind>'
+              endpoint=base+'/remote.php/dav/files/admin/'
+              req=urllib.request.Request(endpoint,data=body,method='PROPFIND',headers={
+                  'Cookie':cookie_header,
+                  'Depth':'1',
+                  'Content-Type':'application/xml; charset=utf-8',
+                  'Accept':'application/xml',
+                  'User-Agent':'MILK-Nextcloud-WebSession/1.0'})
+              try:
+                  with urllib.request.urlopen(req,timeout=60,context=ctx) as r:
+                      raw=r.read(); status=r.status
+              except urllib.error.HTTPError as e:
+                  status=e.code; raw=b''
+              print('NEXTCLOUD_SESSION_DAV_HTTP='+str(status))
+              print('NEXTCLOUD_SESSION_DAV_BYTES='+str(len(raw)))
+              print('NEXTCLOUD_WRITES=0')
+              print('SECRET_VALUES_DISCLOSED=0')
+              browser.close()
+              if status not in (200,207): raise SystemExit(44)
+              print('NEXTCLOUD_SESSION_DAV=PASS')
+          PY
