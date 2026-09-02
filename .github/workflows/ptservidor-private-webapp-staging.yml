@@ -118,3 +118,5 @@ jobs:
           print('PTSERVIDOR_PRIVATE_STAGE_PATH='+here)
           print('PRODUCTION_WRITES=0')
           PY
+
+# infrastructure-revalidation: 2026-09-02T10:35+01:00 — private staging only, no production writes
