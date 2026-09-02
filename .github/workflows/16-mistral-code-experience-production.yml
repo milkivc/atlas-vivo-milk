@@ -105,5 +105,8 @@ jobs:
           git config user.email 'milk@associacaomilk.pt'
           git add deploy/atlas-public/authorial-portals.js deploy/atlas-public/authorial-portals.css
           git commit -m 'feat(experiences): Mistral Code hardens runtime'
+          git pull --rebase origin work/copernico-recovery-webapp-20260902
           git push origin HEAD:work/copernico-recovery-webapp-20260902
           echo MISTRAL_CODE_COMMIT_PUSHED=1
+
+# production-trigger: 2026-09-02T12:11Z
