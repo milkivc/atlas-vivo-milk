@@ -1,0 +1,12 @@
+agent_type = "subagent"
+display_name = "Embodied Interaction"
+description = "Especialista em transformar gestos curatoriais em interação web corporal e espacial: toque, arrasto, orientação, proximidade simulada, tempo de permanência, escolha, acaso, repetição, microfone/câmara quando sustentados, resposta háptica disponível e fallback acessível." 
+safety = "safe"
+active_model = "mistral-medium-latest"
+enabled_tools = ["read_file", "grep"]
+
+[tools.read_file]
+permission = "always"
+
+[tools.grep]
+permission = "always"
