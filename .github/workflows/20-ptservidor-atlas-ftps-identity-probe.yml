@@ -1,0 +1,47 @@
+name: 20 PTServidor Atlas FTPS identity probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths:
+      - '.github/workflows/20-ptservidor-atlas-ftps-identity-probe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  atlas-ftps-identity-probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      PTSERVIDOR_ATLAS_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_ATLAS_FTPS_PASSWORD }}
+    steps:
+      - name: Validate dedicated Atlas FTPS login and chroot boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$PTSERVIDOR_ATLAS_FTPS_PASSWORD"
+          python - <<'PY'
+          import ftplib, os, ssl
+
+          password=os.environ['PTSERVIDOR_ATLAS_FTPS_PASSWORD'].strip()
+          if not password:
+              raise SystemExit('PTSERVIDOR_ATLAS_FTPS_PASSWORD_MISSING')
+
+          ftp=ftplib.FTP_TLS(context=ssl.create_default_context(), timeout=60)
+          ftp.connect('troi.ptservidor.net', 21)
+          ftp.login('atlas@associacaomilk.pt', password)
+          ftp.prot_p()
+
+          pwd=ftp.pwd()
+          entries=[]
+          ftp.retrlines('NLST', entries.append)
+          ftp.quit()
+
+          print('ATLAS_FTPS_AUTH=PASS')
+          print('ATLAS_FTPS_IDENTITY=atlas@associacaomilk.pt')
+          print('ATLAS_FTPS_PWD='+pwd)
+          print('ATLAS_FTPS_VISIBLE_ENTRIES='+str(len(entries)))
+          print('ATLAS_FTPS_WRITES=0')
+          PY
