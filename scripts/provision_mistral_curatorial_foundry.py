@@ -11,7 +11,7 @@ API_KEY = os.environ.get('MISTRAL_API_KEY', '').strip()
 if not API_KEY:
     raise SystemExit('MISTRAL_API_KEY_MISSING')
 
-client = Mistral(api_key=API_KEY, server='eu')
+client = Mistral(api_key=API_KEY, server='global')
 LIBRARY_NAME = 'MILK Atlas Curatorial Corpus'
 LIBRARY_DESCRIPTION = (
     'Fonte de conhecimento persistente do Atlas Vivo MILK. Corpus operacional proveniente do Nextcloud. '
@@ -226,7 +226,7 @@ receipt = {
     'author_gate': 'EXPERIENCE_PREVIEW_BEFORE_CODE',
     'source': 'NEXTCLOUD_TO_LIBRARY',
     'generic_fallback_allowed': False,
-    'mistral_server': 'eu',
+    'mistral_platform_endpoint': 'global_beta_metadata_only_until_corpus_gate',
     'secret_values_disclosed': 0,
 }
 Path('/tmp/mistral-curatorial-foundry-receipt.json').write_text(
@@ -236,6 +236,7 @@ print('MISTRAL_CURATORIAL_FOUNDRY=PASS')
 print('MISTRAL_LIBRARY=READY')
 print('MISTRAL_PERSISTENT_AGENTS='+str(len(agent_ids)))
 print('MISTRAL_HANDOFF_GRAPH=READY')
-print('MISTRAL_SERVER=EU')
+print('MISTRAL_PLATFORM_ENDPOINT=GLOBAL_BETA_METADATA_ONLY')
+print('CORPUS_UPLOAD=BLOCKED_UNTIL_NEXTCLOUD_AND_DATA_GATE')
 print('AUTHOR_EXPERIENCE_PREVIEW_GATE=ENFORCED_BY_INSTRUCTIONS')
 print('SECRET_VALUES_DISCLOSED=0')
