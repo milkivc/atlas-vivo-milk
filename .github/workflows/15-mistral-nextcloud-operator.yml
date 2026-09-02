@@ -1,0 +1,92 @@
+name: 15 MILK Mistral Nextcloud operator
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths: ['.github/workflows/15-mistral-nextcloud-operator.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  mistral-nextcloud-operator:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - name: Run persistent Mistral Nextcloud operator
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python -m pip install -q --disable-pip-version-check 'mistralai==2.8.0'
+          python - <<'PY'
+          import os
+          from mistralai.client import Mistral
+
+          api_key=os.environ['MISTRAL_API_KEY']
+          client=Mistral(api_key=api_key)
+          target_name='Atlas Nextcloud Operator'
+
+          # Reuse the persistent operator when possible; otherwise create it.
+          agent=None
+          try:
+              agents=client.beta.agents.list(page=0,page_size=100)
+              items=agents if isinstance(agents,list) else getattr(agents,'data',None) or getattr(agents,'items',None) or []
+              for a in items:
+                  if getattr(a,'name',None)==target_name:
+                      agent=a; break
+          except Exception:
+              pass
+
+          if agent is None:
+              agent=client.beta.agents.create(
+                  model='mistral-medium-latest',
+                  name=target_name,
+                  description='Operador técnico persistente do Nextcloud do Atlas Vivo MILK, especializado em occ, WebDAV e autenticação segura.',
+                  instructions=(
+                      'Trabalha apenas com procedimentos oficiais Nextcloud. Nunca peças, mostres, infiras ou repitas passwords/tokens. '
+                      'Não alteres dados, configuração, 2FA ou contas sem instrução expressa. '
+                      'Para esta tarefa, valida a criação de uma app-password dedicada para o utilizador admin via occ. '
+                      'Distingue claramente comando validado de execução no servidor. '
+                      'Responde em PT-PT de forma curta, com: COMANDO_VALIDADO, EFEITO, RISCO, EXECUCAO_REQUERIDA.'
+                  ),
+                  tools=[{'type':'web_search'}]
+              )
+              print('MISTRAL_NEXTCLOUD_OPERATOR=CREATED')
+          else:
+              print('MISTRAL_NEXTCLOUD_OPERATOR=REUSED')
+
+          prompt='''
+          Contexto factual:
+          - Nextcloud 34 instalado em https://associacaomilk.pt/nextcloud
+          - utilizador administrativo existente: admin
+          - PTServidor confirmou que o Terminal cPanel pode executar php occ
+          - precisamos de uma app-password dedicada chamada "Atlas WebDAV Automation"
+          - finalidade: WebDAV read-only para ingestão do corpus Atlas
+          - proibido: reset da password principal, alteração de 2FA, ficheiros, base de dados ou configuração
+          - nenhuma password pode aparecer em output/log
+          Valida, por documentação oficial Nextcloud, o comando occ exacto mais seguro. Não inventes caminho de instalação nem utilizador do processo PHP; se isso depender do alojamento, explicita.
+          '''
+          resp=client.beta.conversations.start(agent_id=agent.id,inputs=prompt,store=True)
+          texts=[]
+          for out in getattr(resp,'outputs',[]) or []:
+              if getattr(out,'type',None)=='message.output':
+                  content=getattr(out,'content','')
+                  if isinstance(content,str): texts.append(content)
+                  elif isinstance(content,list):
+                      for x in content:
+                          t=getattr(x,'text',None)
+                          if t: texts.append(t)
+          result='\n'.join(texts).strip()
+          if not result:
+              raise SystemExit('MISTRAL_OPERATOR_EMPTY_RESPONSE')
+          # Safety: no secret values are supplied to this agent.
+          print('MISTRAL_NEXTCLOUD_OPERATOR_AGENT_ID_PRESENT=YES')
+          print('MISTRAL_SECRET_VALUES_SENT_TO_AGENT=0')
+          print('---MISTRAL_OPERATOR_OUTPUT---')
+          print(result)
+          print('---END_MISTRAL_OPERATOR_OUTPUT---')
+          PY
