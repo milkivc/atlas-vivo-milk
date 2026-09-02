@@ -21,7 +21,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-24.04
-    timeout-minutes: 55
+    timeout-minutes: 45
     env:
       MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
       CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
@@ -65,26 +65,28 @@ jobs:
           HOST="${CPANEL_HOST:-troi.ptservidor.net}"
           [ -n "${MISTRAL_API_KEY:-}" ] && echo 'MISTRAL_API_KEY_PRESENT=YES' || echo 'MISTRAL_API_KEY_PRESENT=NO'
           [ -n "$TOKEN" ] && echo 'CPANEL_API_TOKEN_PRESENT=YES' || echo 'CPANEL_API_TOKEN_PRESENT=NO'
-          if [ -n "$TOKEN" ]; then
-            echo '::add-mask::'$TOKEN
-            STATUS="$(curl -sS --max-time 25 -o /tmp/cpanel-features.json -w '%{http_code}' -H "Authorization: cpanel ${USER}:${TOKEN}" "https://${HOST}:2083/execute/Features/list_features" || true)"
-            echo "CPANEL_UAPI_HTTP=$STATUS"
-            if [ "$STATUS" = "200" ]; then
-              python - <<'PY'
+          if [ -z "$TOKEN" ]; then
+            echo 'CPANEL_SITEJET_PROBE=SKIPPED_NO_TOKEN'
+            exit 0
+          fi
+          echo '::add-mask::'$TOKEN
+          auth=(-H "Authorization: cpanel ${USER}:${TOKEN}")
+          STATUS="$(curl -sS --max-time 25 -o /tmp/cpanel-features.json -w '%{http_code}' "${auth[@]}" "https://${HOST}:2083/execute/Features/list_features" || true)"
+          echo "CPANEL_FEATURES_HTTP=$STATUS"
+          SITEJET_STATUS="$(curl -sS --max-time 25 -o /tmp/sitejet-info.json -w '%{http_code}' "${auth[@]}" "https://${HOST}:2083/execute/Sitejet/get_all_user_sitejet_info?domain=atlas.associacaomilk.pt" || true)"
+          echo "CPANEL_SITEJET_INFO_HTTP=$SITEJET_STATUS"
+          if [ "$SITEJET_STATUS" = "200" ]; then
+            python - <<'PY'
           import json
-          p='/tmp/cpanel-features.json'
           try:
-              data=json.load(open(p,encoding='utf-8'))
-              text=json.dumps(data,ensure_ascii=False).lower()
-              print('SITEJET_FEATURE_DISCOVERED='+('YES' if 'sitejet' in text else 'NO'))
+              d=json.load(open('/tmp/sitejet-info.json',encoding='utf-8'))
+              result=d.get('result') or {}
+              rows=result.get('data') or []
+              print('SITEJET_ATLAS_RECORDS='+str(len(rows) if isinstance(rows,list) else 0))
+              print('SITEJET_API_ERRORS='+('YES' if result.get('errors') else 'NO'))
           except Exception:
-              print('SITEJET_FEATURE_DISCOVERED=UNKNOWN')
+              print('SITEJET_ATLAS_RECORDS=UNKNOWN')
           PY
-            else
-              echo 'SITEJET_FEATURE_DISCOVERED=UNKNOWN'
-            fi
-          else
-            echo 'CPANEL_UAPI_PROBE=SKIPPED_NO_TOKEN'
           fi
 
       - name: Install Mistral Vibe Code
@@ -99,13 +101,13 @@ jobs:
           cp .vibe/prompts/*.md "$VIBE_HOME/prompts/"
           echo "VIBE_HOME=$VIBE_HOME" >> "$GITHUB_ENV"
 
-      - name: Mistral Vibe Code reads corpus and builds guarded increment
+      - name: Mistral Vibe Code materializes one bounded canonical increment
         shell: bash
         run: |
           set -euo pipefail
           vibe --trust --agent atlas-orchestrator \
-            --prompt "Executa a missão definida no teu system prompt. Lê primeiro todas as fontes canónicas e o execution pack. Usa os quatro subagentes do projecto. Implementa um primeiro incremento funcional da experiência canónica no código existente, sem publicar e sem tocar em ficheiros fora de deploy/atlas-public e tests. No fim executa os testes." \
-            --max-turns 42 --output json > /tmp/mistral-vibe-corpus-build.json
+            --prompt "Lê AGENTS.md, docs/agent-input/ATLAS_EXECUTION_PACK_20260902.md, docs/ATLAS_CAMADA_PUBLICA_EXPERIENCIA_CANONICA_20260829.md, docs/ATLAS_PUBLIC_SURFACE_CANONICAL_CONTRACT_20260827.md, deploy/atlas-public/public-runtime-config.json e o código público existente. NÃO uses subagentes nesta fase: os revisores Mistral independentes correm depois. Escolhe UMA única discrepância concreta, de alto impacto e comprovada entre o contrato canónico e a implementação actual; implementa apenas a correcção mínima dessa discrepância em deploy/atlas-public e/ou tests. Não inventes conteúdo, dados territoriais, coordenadas, festivais, assets, perguntas ou dinâmicas. Não publiques. Não alteres catálogo curatorial nem fontes canónicas. Executa apenas os testes necessários para essa alteração e termina a missão assim que a alteração e os testes estiverem completos." \
+            --max-turns 22 --output json > /tmp/mistral-vibe-corpus-build.json
           test -s /tmp/mistral-vibe-corpus-build.json
 
       - name: Deterministic non-regression gate
@@ -171,7 +173,7 @@ jobs:
           git config user.name 'Associação MILK - Mistral Vibe Code'
           git config user.email 'milk@associacaomilk.pt'
           git add deploy/atlas-public tests
-          git commit -m 'feat(atlas): materialize canonical public experience from corpus'
+          git commit -m 'feat(atlas): materialize bounded canonical public increment'
           git push origin HEAD:work/mistral-sitejet-orchestration-20260902
           echo "MISTRAL_CORPUS_COMMIT=$(git rev-parse HEAD)"
           echo 'PRODUCTION_PUBLISH=NO'
