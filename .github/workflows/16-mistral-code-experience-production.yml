@@ -1,0 +1,126 @@
+name: 16 MILK Mistral Code experience production
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths: ['.github/workflows/16-mistral-code-experience-production.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: milk-mistral-code-experience-production
+  cancel-in-progress: false
+
+jobs:
+  code-production:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Baseline gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          node tests/ia-milk-public-boundary.test.mjs
+          node --check deploy/atlas-public/authorial-portals.js
+          node --check deploy/atlas-public/experience-machine.js
+          git diff --check
+          grep -Fq 'Escolhe sem autoridade. Aproxima duas coisas.' deploy/atlas-public/authorial-portals.js
+          grep -Fq 'Apanha uma frase pelo rabo. Continua-a.' deploy/atlas-public/authorial-portals.js
+          grep -Fq 'somos todos possíveis' deploy/atlas-public/authorial-portals.js
+          grep -Fq 'onde arte e afeto são casa e chão' deploy/atlas-public/authorial-portals.js
+          echo BASELINE_AUTHORIAL_PORTALS=PASS
+
+      - name: Mistral Vibe Code — production engineering pass
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python -m pip install --disable-pip-version-check --quiet mistral-vibe
+          vibe --version
+          vibe --trust --max-turns 24 --output json --prompt "IMPLEMENTAÇÃO REAL NA BRANCH ACTUAL. Lê primeiro AGENTS.md. Trabalha APENAS em deploy/atlas-public/authorial-portals.js e deploy/atlas-public/authorial-portals.css. Estas três experiências já existem no runtime: Galeria Diletante, Crónicas Cãotadas por Fucô e MILK. Não inventes novas mecânicas, não alteres nenhum texto visível, não alteres assets, não toques COPÉRNICO, falARTE, Palavra Ritual, index.html, catálogo, manifestos ou dados. Faz melhorias concretas apenas de engenharia: ciclo de vida de listeners, limpeza completa ao fechar/reabrir, restauração de foco ao elemento que abriu o diálogo, robustez de localStorage sem crash, coordenadas de pointer limitadas ao campo, teclado coerente, reduced-motion, focus-visible, touch/pointer e prevenção de leaks. Preserva exactamente estas frases: 'Escolhe sem autoridade. Aproxima duas coisas.'; 'Apanha uma frase pelo rabo. Continua-a.'; 'somos todos possíveis'; 'onde arte e afeto são casa e chão'. Não transformes experiências em cards/tabs nem motor genérico. Edita os ficheiros de verdade. No final, revê o diff e deixa apenas mudanças que melhoram robustez sem mudar dramaturgia." > /tmp/vibe-code-production.json
+          test -s /tmp/vibe-code-production.json
+          echo MISTRAL_VIBE_CODE_PRODUCTION=EXECUTED
+
+      - name: Scope + authorial fidelity gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t changed < <(git diff --name-only)
+          printf 'CHANGED=%s\n' "${changed[*]:-NONE}"
+          for f in "${changed[@]}"; do
+            case "$f" in
+              deploy/atlas-public/authorial-portals.js|deploy/atlas-public/authorial-portals.css) ;;
+              *) echo "OUT_OF_SCOPE_CHANGE=$f"; exit 31;;
+            esac
+          done
+          test "${#changed[@]}" -gt 0
+          grep -Fq 'Escolhe sem autoridade. Aproxima duas coisas.' deploy/atlas-public/authorial-portals.js
+          grep -Fq 'Apanha uma frase pelo rabo. Continua-a.' deploy/atlas-public/authorial-portals.js
+          grep -Fq 'somos todos possíveis' deploy/atlas-public/authorial-portals.js
+          grep -Fq 'onde arte e afeto são casa e chão' deploy/atlas-public/authorial-portals.js
+          if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_.*PASSWORD|NEXTCLOUD_.*KEY|client_secret|access_token' deploy/atlas-public/authorial-portals.*; then exit 32; fi
+          echo AUTHORIAL_TEXT_LOCK=PASS
+          echo SCOPE_LOCK=PASS
+
+      - name: Deterministic post-code tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          node tests/ia-milk-public-boundary.test.mjs
+          node --check deploy/atlas-public/authorial-portals.js
+          for file in deploy/atlas-public/*.js; do node --check "$file"; done
+          git diff --check
+          grep -Fq '@media(prefers-reduced-motion:reduce)' deploy/atlas-public/authorial-portals.css
+          echo POST_CODE_TESTS=PASS
+
+      - name: Mistral fidelity reviewer
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, subprocess, urllib.request
+          diff=subprocess.check_output(['git','diff','--','deploy/atlas-public/authorial-portals.js','deploy/atlas-public/authorial-portals.css'],text=True)
+          payload={
+            'model':'mistral-medium-latest','temperature':0,
+            'response_format':{'type':'json_object'},
+            'messages':[
+              {'role':'system','content':'És o revisor de fidelidade do Atlas Vivo MILK. Aprova apenas alterações técnicas que preservem integralmente as três mecânicas e textos existentes. Bloqueia invenção, alteração de dramaturgia, genericização, regressão de acessibilidade, fuga de segredo ou alteração de assets. Responde JSON estrito: pass:boolean, blockers:array, evidence:array.'},
+              {'role':'user','content':diff}
+            ]
+          }
+          req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['MISTRAL_API_KEY'],'Content-Type':'application/json'})
+          with urllib.request.urlopen(req,timeout=180) as r: body=json.loads(r.read())
+          review=json.loads(body['choices'][0]['message']['content'])
+          print('MISTRAL_FIDELITY_REVIEW='+json.dumps(review,ensure_ascii=False))
+          if review.get('pass') is not True or review.get('blockers'):
+              raise SystemExit('MISTRAL_FIDELITY_BLOCKED')
+          print('MISTRAL_FIDELITY_REVIEW=PASS')
+          PY
+
+      - name: Commit Code Mistral changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet; then
+            echo CODE_MISTRAL_NO_CHANGE=1
+            exit 0
+          fi
+          git config user.name 'Atlas Mistral Code'
+          git config user.email 'milk@associacaomilk.pt'
+          git add deploy/atlas-public/authorial-portals.js deploy/atlas-public/authorial-portals.css
+          git commit -m 'feat(experiences): Mistral Code hardens authorial portal runtime'
+          git push origin HEAD:work/copernico-recovery-webapp-20260902
+          echo CODE_MISTRAL_COMMIT_PUSHED=1
