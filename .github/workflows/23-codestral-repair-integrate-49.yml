@@ -47,7 +47,8 @@ jobs:
           API='https://api.mistral.ai/v1/chat/completions'; MODEL='codestral-latest'; key=os.environ['MISTRAL_API_KEY']
           start,end=int(os.environ['START']),int(os.environ['END']); batch=os.environ['BATCH']
           idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text(encoding='utf-8'))
-          rows=[x for x in idx['entries'] if start<=int(x['ordem'])<=end]
+          existing={p.name for p in pathlib.Path('deploy/atlas-public/experiences').glob('*.js') if p.name!='registry.js'}
+          rows=[x for x in idx['entries'] if start<=int(x['ordem'])<=end and x['id']+'.js' not in existing]
           matrix=pathlib.Path('curatorial-factory/EXPERIENCE_RESEARCH_MATRIX_20260902.md').read_text(encoding='utf-8')
           constitution=pathlib.Path('curatorial-factory/DIGITAL_MULTISENSORY_EXPERIENCE_CONSTITUTION_20260902.md').read_text(encoding='utf-8')
           out=pathlib.Path('generated')/('repair-'+batch); out.mkdir(parents=True,exist_ok=True)
@@ -66,9 +67,14 @@ jobs:
               if not re.search(r'function\s+destroy\s*\(',code): return 'missing destroy'
               if not re.search(r'return\s*\{\s*destroy\s*\}',code): return 'missing return destroy'
               if any(x in code for x in ('fetch(','localStorage','sessionStorage')): return 'forbidden network/storage'
-              path.write_text(code+'\n',encoding='utf-8')
-              p=subprocess.run(['node','--check',str(path)],capture_output=True,text=True)
-              return None if p.returncode==0 else (p.stderr or p.stdout)[-2200:]
+              tmp=path.with_suffix('.tmp.js')
+              tmp.write_text(code+'\n',encoding='utf-8')
+              p=subprocess.run(['node','--check',str(tmp)],capture_output=True,text=True)
+              if p.returncode:
+                  tmp.unlink(missing_ok=True)
+                  return (p.stderr or p.stdout)[-2200:]
+              tmp.replace(path)
+              return None
           def build(row):
               bp=json.loads((pathlib.Path('curatorial-factory/sensory-blueprints')/row['file']).read_text(encoding='utf-8'))
               user=json.dumps({'id':row['id'],'blueprint':bp,'research_lenses':matrix,'constitution':constitution},ensure_ascii=False)
@@ -82,7 +88,8 @@ jobs:
                           print('CODESTRAL_REPAIR_PASS='+row['id'],flush=True); return
                   except urllib.error.HTTPError as e:
                       err='HTTP '+str(e.code)
-                      if e.code not in (408,409,429,500,502,503,504): raise
+                      if e.code not in (408,409,429,500,502,503,504):
+                          raise RuntimeError(row['id']+':'+err)
                   except Exception as e: err=type(e).__name__+':'+str(e)
                   time.sleep(min(30,2**attempt+random.random()*2))
               raise RuntimeError(row['id']+':'+err)
@@ -92,16 +99,17 @@ jobs:
               for fut,row in futs.items():
                   try: fut.result()
                   except Exception as e: failures.append(str(e))
+          status={'batch':batch,'requested':[x['id'] for x in rows],'generated':sorted(p.stem for p in out.glob('*.js')),'failures':failures}
+          (out/('status-'+batch+'.json')).write_text(json.dumps(status,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           if failures:
-              print('\n'.join('CODESTRAL_REPAIR_FAIL='+x for x in failures)); raise SystemExit('CODESTRAL_REPAIR_FAILURES='+str(len(failures)))
-          assert {p.name for p in out.glob('*.js')}=={x['id']+'.js' for x in rows}
-          print('CODESTRAL_REPAIR_BATCH_PASS='+batch)
+              print('\n'.join('CODESTRAL_REPAIR_FAIL='+x for x in failures))
+          print('CODESTRAL_REPAIR_BATCH_CHECKPOINT='+batch+':'+str(len(status['generated']))+'/'+str(len(rows)))
           PY
 
       - uses: actions/upload-artifact@v4
         with:
           name: codestral-repair-batch-${{ matrix.batch }}
-          path: generated/repair-${{ matrix.batch }}/*.js
+          path: generated/repair-${{ matrix.batch }}/
           if-no-files-found: error
           retention-days: 3
 
@@ -130,34 +138,50 @@ jobs:
           import json,pathlib,shutil,subprocess
           idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text(encoding='utf-8'))
           dst=pathlib.Path('deploy/atlas-public/experiences'); dst.mkdir(parents=True,exist_ok=True)
+          expected={x['id']+'.js' for x in idx['entries']}
           repair=list(pathlib.Path('generated/repair').glob('*.js'))
-          assert len(repair)==14, f'EXPECTED_REPAIR_14_GOT_{len(repair)}'
           for p in repair:
-              subprocess.run(['node','--check',str(p)],check=True); shutil.copy2(p,dst/p.name)
-          expected={x['id']+'.js' for x in idx['entries']}; actual={p.name for p in dst.glob('*.js') if p.name!='registry.js'}
-          assert actual==expected,(len(actual),sorted(expected-actual),sorted(actual-expected))
-          lines=['// Exact 49 Atlas Vivo MILK curatorial runtime loaders','export const CURATORIAL_EXPERIENCE_LOADERS = {']
-          for x in idx['entries']: lines.append(f"  {json.dumps(x['id'])}: () => import('./{x['id']}.js'),")
-          lines += ['};','','export async function loadCuratorialExperience(id) {','  const loader = CURATORIAL_EXPERIENCE_LOADERS[id];',"  if (!loader) throw new Error('CURATORIAL_RUNTIME_NOT_FOUND:'+id);",'  return loader();','}','']
-          (dst/'registry.js').write_text('\n'.join(lines),encoding='utf-8')
+              assert p.name in expected, 'UNEXPECTED_RUNTIME:'+p.name
+              subprocess.run(['node','--check',str(p)],check=True)
+              shutil.copy2(p,dst/p.name)
+          actual={p.name for p in dst.glob('*.js') if p.name!='registry.js'}
+          extra=sorted(actual-expected); assert not extra,extra
+          missing=sorted(expected-actual)
+          pathlib.Path('generated/repair/missing_after.txt').write_text('\n'.join(missing)+('\n' if missing else ''),encoding='utf-8')
+          if not missing:
+              lines=['// Exact 49 Atlas Vivo MILK curatorial runtime loaders','export const CURATORIAL_EXPERIENCE_LOADERS = {']
+              for x in idx['entries']: lines.append(f"  {json.dumps(x['id'])}: () => import('./{x['id']}.js'),")
+              lines += ['};','','export async function loadCuratorialExperience(id) {','  const loader = CURATORIAL_EXPERIENCE_LOADERS[id];',"  if (!loader) throw new Error('CURATORIAL_RUNTIME_NOT_FOUND:'+id);",'  return loader();','}','']
+              (dst/'registry.js').write_text('\n'.join(lines),encoding='utf-8')
           for p in dst.glob('*.js'): subprocess.run(['node','--check',str(p)],check=True)
-          print('CODESTRAL_EXACT_49_ASSEMBLED=PASS')
+          print('CODESTRAL_RUNTIME_CHECKPOINT='+str(len(actual))+'/49')
+          print('CODESTRAL_MISSING='+','.join(x.removesuffix('.js') for x in missing))
           PY
-          node tests/ia-milk-public-boundary.test.mjs
           git diff --check
-          if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_.*PASSWORD|NEXTCLOUD_.*KEY|client_secret|access_token' deploy/atlas-public/experiences; then exit 31; fi
-          echo CODESTRAL_49_RUNTIME_GATE=PASS
 
-      - name: Commit exact 49 runtimes
+      - name: Commit preserved runtime checkpoint
         run: |
           set -euo pipefail
           git config user.name 'Atlas Mistral Code'
           git config user.email 'milk@associacaomilk.pt'
           git add deploy/atlas-public/experiences
-          git commit -m 'feat(experiences): complete exact 49 Codestral curatorial runtimes'
-          git pull --rebase origin work/copernico-recovery-webapp-20260902
-          git push origin HEAD:work/copernico-recovery-webapp-20260902
-          echo CODESTRAL_49_COMMIT_PUSHED=1
+          if git diff --cached --quiet; then
+            echo CODESTRAL_CHECKPOINT_NO_CHANGE=1
+          else
+            git commit -m 'feat(experiences): preserve validated Codestral runtime checkpoint'
+            git pull --rebase origin work/copernico-recovery-webapp-20260902
+            git push origin HEAD:work/copernico-recovery-webapp-20260902
+            echo CODESTRAL_CHECKPOINT_PUSHED=1
+          fi
+
+      - name: Enforce exact 49 runtime gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -s generated/repair/missing_after.txt
+          node tests/ia-milk-public-boundary.test.mjs
+          if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_.*PASSWORD|NEXTCLOUD_.*KEY|client_secret|access_token' deploy/atlas-public/experiences; then exit 31; fi
+          echo CODESTRAL_49_RUNTIME_GATE=PASS
 
       - name: Dispatch deep refinement and private PTServidor staging
         env:
