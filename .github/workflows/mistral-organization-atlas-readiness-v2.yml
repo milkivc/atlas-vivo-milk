@@ -2,11 +2,6 @@ name: MILK Mistral Organization + Vibe readiness v2
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - work/copernico-recovery-webapp-20260902
-    paths:
-      - '.github/workflows/mistral-organization-atlas-readiness-v2.yml'
 
 permissions:
   contents: read
