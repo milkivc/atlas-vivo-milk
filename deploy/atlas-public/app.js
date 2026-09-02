@@ -18,7 +18,7 @@ faceNav.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End
 renderFace(0);
 const bookNote=document.querySelector('#book-note'),registerStatus=document.querySelector('#register-status');
 document.querySelector('#save-note').onclick=()=>{bookState.note=bookNote.value.trim();registerStatus.textContent=bookState.note?'ficou aqui':'ainda vazio'};
-const dlg=document.querySelector('#engine'),body=document.querySelector('#engineBody');dlg.querySelector('.close').onclick=()=>{stopMedia();dlg.close()};dlg.onclick=e=>{if(e.target===dlg){stopMedia();dlg.close()}};
+const dlg=document.querySelector('#engine'),body=document.querySelector('#engineBody');dlg.querySelector('.close').onclick=()=>{stopMedia();dlg.close()};dlg.onclick=e=>{if(e.target===dlg){stopMedia();dlg.close()}};dlg.addEventListener('close',()=>stopMedia());
 let audio,stream,raf,cosRaf;const state={inventory:[],catastrophe:'',points:0,body:'',silence:'',rizoma:[]};
 function stopMedia(){if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;if(raf)cancelAnimationFrame(raf);raf=0;if(audio){const ctx=audio;audio=null;if(ctx.state!=='closed')ctx.close().catch(()=>{})}}
 function wrap(i,content){return `<section class="engine"><span class="tag">jogo ${i+1} · fica aqui</span><h2>${D[i][0]}</h2><p class="invitation">${D[i][1]}</p>${content}</section>`}
