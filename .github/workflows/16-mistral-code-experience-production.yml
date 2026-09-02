@@ -43,14 +43,14 @@ jobs:
           grep -Fq 'onde arte e afeto são casa e chão' deploy/atlas-public/authorial-portals.js
           echo BASELINE_AUTHORIAL_PORTALS=PASS
 
-      - name: Mistral Vibe Code — production engineering pass
+      - name: Mistral Vibe Code — concrete production engineering pass
         shell: bash
         run: |
           set -euo pipefail
           test -n "$MISTRAL_API_KEY"
           python -m pip install --disable-pip-version-check --quiet mistral-vibe
           vibe --version
-          vibe --trust --max-turns 24 --output json --prompt "IMPLEMENTAÇÃO REAL NA BRANCH ACTUAL. Lê primeiro AGENTS.md. Trabalha APENAS em deploy/atlas-public/authorial-portals.js e deploy/atlas-public/authorial-portals.css. Estas três experiências já existem no runtime: Galeria Diletante, Crónicas Cãotadas por Fucô e MILK. Não inventes novas mecânicas, não alteres nenhum texto visível, não alteres assets, não toques COPÉRNICO, falARTE, Palavra Ritual, index.html, catálogo, manifestos ou dados. Faz melhorias concretas apenas de engenharia: ciclo de vida de listeners, limpeza completa ao fechar/reabrir, restauração de foco ao elemento que abriu o diálogo, robustez de localStorage sem crash, coordenadas de pointer limitadas ao campo, teclado coerente, reduced-motion, focus-visible, touch/pointer e prevenção de leaks. Preserva exactamente estas frases: 'Escolhe sem autoridade. Aproxima duas coisas.'; 'Apanha uma frase pelo rabo. Continua-a.'; 'somos todos possíveis'; 'onde arte e afeto são casa e chão'. Não transformes experiências em cards/tabs nem motor genérico. Edita os ficheiros de verdade. No final, revê o diff e deixa apenas mudanças que melhoram robustez sem mudar dramaturgia." > /tmp/vibe-code-production.json
+          vibe --trust --max-turns 32 --output json --prompt "IMPLEMENTAÇÃO REAL OBRIGATÓRIA NA BRANCH ACTUAL. Lê AGENTS.md e depois deploy/atlas-public/authorial-portals.js e deploy/atlas-public/authorial-portals.css. Trabalha EXCLUSIVAMENTE nesses dois ficheiros. NÃO inventes mecânicas, NÃO alteres nenhum texto visível, NÃO alteres assets, NÃO toques COPÉRNICO, falARTE, Palavra Ritual, index.html, catálogo, manifestos ou dados. Implementa concretamente estas correcções técnicas, porque o código actual não as tem de forma completa: (1) guardar o elemento que abriu a experiência e restaurar-lhe o foco quando o dialog fecha, somente se ainda estiver ligado ao DOM; (2) garantir que o foco inicial do campo/textarea acontece depois de showModal(), nunca antes; (3) criar helpers seguros para localStorage get/set/remove com try/catch, para a experiência Fucô não quebrar quando storage estiver indisponível; (4) limitar/clamp x e y do pointer da Galeria aos limites reais do campo; (5) centralizar a limpeza de TODOS os listeners criados por cada experiência, por AbortController/signal ou cleanup explícito completo, para fechar/reabrir sem listeners órfãos; (6) manter reduced-motion e acrescentar focus-visible técnico onde faltar, sem alterar estética autoral; (7) preservar exactamente estas frases: 'Escolhe sem autoridade. Aproxima duas coisas.'; 'Apanha uma frase pelo rabo. Continua-a.'; 'somos todos possíveis'; 'onde arte e afeto são casa e chão'. A tarefa NÃO está concluída se git diff ficar vazio. Edita os ficheiros de verdade e revê o diff. Se uma correcção já existir, implementa as restantes. Nenhuma mudança fora de robustez, acessibilidade e ciclo de vida é permitida." > /tmp/vibe-code-production.json
           test -s /tmp/vibe-code-production.json
           echo MISTRAL_VIBE_CODE_PRODUCTION=EXECUTED
 
@@ -71,6 +71,7 @@ jobs:
           grep -Fq 'Apanha uma frase pelo rabo. Continua-a.' deploy/atlas-public/authorial-portals.js
           grep -Fq 'somos todos possíveis' deploy/atlas-public/authorial-portals.js
           grep -Fq 'onde arte e afeto são casa e chão' deploy/atlas-public/authorial-portals.js
+          grep -Fq 'localStorage' deploy/atlas-public/authorial-portals.js
           if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_.*PASSWORD|NEXTCLOUD_.*KEY|client_secret|access_token' deploy/atlas-public/authorial-portals.*; then exit 32; fi
           echo AUTHORIAL_TEXT_LOCK=PASS
           echo SCOPE_LOCK=PASS
@@ -84,6 +85,7 @@ jobs:
           for file in deploy/atlas-public/*.js; do node --check "$file"; done
           git diff --check
           grep -Fq '@media(prefers-reduced-motion:reduce)' deploy/atlas-public/authorial-portals.css
+          grep -Fq 'focus' deploy/atlas-public/authorial-portals.js
           echo POST_CODE_TESTS=PASS
 
       - name: Mistral fidelity reviewer
@@ -97,7 +99,7 @@ jobs:
             'model':'mistral-medium-latest','temperature':0,
             'response_format':{'type':'json_object'},
             'messages':[
-              {'role':'system','content':'És o revisor de fidelidade do Atlas Vivo MILK. Aprova apenas alterações técnicas que preservem integralmente as três mecânicas e textos existentes. Bloqueia invenção, alteração de dramaturgia, genericização, regressão de acessibilidade, fuga de segredo ou alteração de assets. Responde JSON estrito: pass:boolean, blockers:array, evidence:array.'},
+              {'role':'system','content':'És o revisor de fidelidade do Atlas Vivo MILK. Aprova apenas alterações técnicas que preservem integralmente as três mecânicas e textos existentes. Bloqueia invenção, alteração de dramaturgia, genericização, regressão de acessibilidade, fuga de segredo ou alteração de assets. Melhorias permitidas: foco, lifecycle, storage resiliente, clamp de pointer, cleanup, reduced-motion e focus-visible. Responde JSON estrito: pass:boolean, blockers:array, evidence:array.'},
               {'role':'user','content':diff}
             ]
           }
@@ -116,7 +118,7 @@ jobs:
           set -euo pipefail
           if git diff --quiet; then
             echo CODE_MISTRAL_NO_CHANGE=1
-            exit 0
+            exit 41
           fi
           git config user.name 'Atlas Mistral Code'
           git config user.email 'milk@associacaomilk.pt'
