@@ -1,0 +1,143 @@
+name: MILK Vibe Code — Atlas Web App audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - codex/milk-curadorias-ia-webapp-20260821
+    paths:
+      - 'AGENTS.md'
+      - '.vibe/**'
+      - '.github/workflows/mistral-vibe-code-atlas-audit.yml'
+      - 'deploy/atlas-public/**'
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: milk-vibe-code-atlas-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      PTSERVIDOR_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.run_id }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate Atlas package before analysis
+        working-directory: deploy/atlas-public
+        run: |
+          set -euo pipefail
+          sha256sum -c manifest.sha256
+          node --check app.js
+          node --check curadorias.js
+
+      - name: Install Mistral Vibe Code CLI
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check mistral-vibe
+          vibe --version
+
+      - name: Run Vibe Code read-only architecture audit
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY" || { echo '::error::MISTRAL_API_KEY missing'; exit 2; }
+          vibe --trust --agent atlas-plan \
+            --prompt "Analisa a implementação real da Web App em deploy/atlas-public e as integrações relevantes do repositório. Faz uma auditoria de arquitectura, UX curatorial, desempenho, acessibilidade, estrutura de dados e capacidade de evolução. Não edites ficheiros, não publiques e não uses segredos. Produz um plano de construção priorizado com ficheiros exactos e testes de aceitação." \
+            --max-turns 10 --output json > /tmp/vibe-atlas-audit.json
+          test -s /tmp/vibe-atlas-audit.json
+          echo "VIBE_CODE_AUDIT_BYTES=$(wc -c < /tmp/vibe-atlas-audit.json)"
+
+      - name: Mistral agents review Vibe Code audit
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, urllib.request, hashlib, pathlib
+
+          key=os.environ['MISTRAL_API_KEY'].strip()
+          report=pathlib.Path('/tmp/vibe-atlas-audit.json').read_text(encoding='utf-8')
+          # Bound context while preserving the complete audit whenever practical.
+          if len(report) > 90000:
+              report=report[:90000] + '\n[TRUNCATED_FOR_REVIEW]'
+
+          roles=[
+            ('web_architect', 'Transforma a auditoria em arquitectura alvo incremental para uma Web App real, sem regressão e sem transformar o Atlas numa página explicativa.'),
+            ('experiential_engineer', 'Explora como os dispositivos curatoriais podem tornar-se experiências sensoriais, lúdicas e territoriais no browser, preservando autoria, WCAG 2.2 AA, desempenho e privacidade.'),
+            ('delivery_guard', 'Converte os achados num plano executável de lotes pequenos, reversíveis e testáveis. Separa construção, validação e publicação; não assumes deploy concluído.')
+          ]
+
+          outputs=[]
+          for role,instruction in roles:
+              payload={
+                'model':'mistral-medium-latest',
+                'temperature':0.1,
+                'response_format':{'type':'json_object'},
+                'messages':[
+                  {'role':'system','content':f'És o agente Mistral {role} da Associação MILK. {instruction} Responde JSON com role, observed_state, opportunities, prioritized_batches, acceptance_tests, blockers, human_review_required.'},
+                  {'role':'user','content':'Regras do projecto: preservar autoria; PT-PT; camada pública separada da invisível; não tocar associacaomilk.pt; não inventar conteúdo; mudanças pequenas e reversíveis.\n\nRelatório Vibe Code:\n'+report}
+                ]
+              }
+              req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=240) as r:
+                  body=json.loads(r.read())
+              parsed=json.loads(body['choices'][0]['message']['content'])
+              parsed['role']=role
+              outputs.append(parsed)
+
+          aggregate={
+            'schema_version':'1.0.0',
+            'run_id':os.environ['RUN_ID'],
+            'source':'mistral-vibe-code-readonly-audit',
+            'branch':os.environ.get('GITHUB_REF_NAME'),
+            'human_review_required':True,
+            'vibe_audit':json.loads(pathlib.Path('/tmp/vibe-atlas-audit.json').read_text(encoding='utf-8')),
+            'review_agents':outputs
+          }
+          raw=json.dumps(aggregate,ensure_ascii=False,sort_keys=True,indent=2).encode()
+          pathlib.Path('/tmp/atlas-vibe-code-review.json').write_bytes(raw)
+          print('MISTRAL_VIBE_REVIEW_AGENTS_OK='+str(len(outputs)))
+          print('MISTRAL_VIBE_REVIEW_SHA256='+hashlib.sha256(raw).hexdigest())
+          print('MISTRAL_VIBE_REVIEW_BYTES='+str(len(raw)))
+          for item in outputs:
+              print('MISTRAL_REVIEW_ROLE='+item['role'])
+              print(json.dumps(item,ensure_ascii=False)[:12000])
+          PY
+
+      - name: Store analysis privately on PTServidor with readback
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ftplib, hashlib, io, json, os, pathlib, ssl, urllib.request
+          pwd=os.environ.get('PTSERVIDOR_FTPS_PASSWORD','').strip()
+          if not pwd:
+              raise SystemExit('PTSERVIDOR_FTPS_PASSWORD_MISSING')
+          run=os.environ['RUN_ID']; data=pathlib.Path('/tmp/atlas-vibe-code-review.json').read_bytes()
+          sha=hashlib.sha256(data).hexdigest(); name=f'atlas-vibe-code-review-{run}.json'
+          ftp=ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=120)
+          ftp.connect('troi.ptservidor.net',21); ftp.login('migration@associacaomilk.pt',pwd); ftp.prot_p()
+          for part in ('atlas-vibe-code-analysis','runs',run):
+              try: ftp.mkd(part)
+              except ftplib.all_errors: pass
+              ftp.cwd(part)
+          ftp.storbinary('STOR '+name,io.BytesIO(data),blocksize=1048576)
+          back=bytearray(); ftp.retrbinary('RETR '+name,back.extend,blocksize=1048576); ftp.quit()
+          if hashlib.sha256(back).hexdigest()!=sha:
+              raise RuntimeError('VIBE_CODE_PRIVATE_READBACK_MISMATCH')
+          msg=f'MILK_VIBE_CODE_AUDIT_VERIFIED run={run} bytes={len(data)} sha256={sha} storage=private_ftps publication=no repo_writes=configuration_only human_review_required=yes'
+          print(msg)
+          req=urllib.request.Request(f'https://api.github.com/repos/{os.environ["REPO"]}/issues/35/comments',data=json.dumps({'body':msg}).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Content-Type':'application/json','Accept':'application/vnd.github+json'})
+          urllib.request.urlopen(req,timeout=30).read()
+          PY
