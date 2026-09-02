@@ -1,4 +1,5 @@
 import { openFalarte } from './falarte.js';
+import { openPalavraRitual } from './palavra-ritual.js';
 
 const deck = document.querySelector('#dinamicas');
 const dialog = document.querySelector('#engine');
@@ -18,12 +19,12 @@ function el(tag, cls, text) {
   return node;
 }
 
-function ensureFalarteStyles() {
-  if (document.querySelector('link[data-atlas-style="falarte"]')) return;
+function ensureStyle(name) {
+  if (document.querySelector(`link[data-atlas-style="${name}"]`)) return;
   const link = document.createElement('link');
   link.rel = 'stylesheet';
-  link.href = 'falarte.css';
-  link.dataset.atlasStyle = 'falarte';
+  link.href = `${name}.css`;
+  link.dataset.atlasStyle = name;
   document.head.append(link);
 }
 
@@ -48,7 +49,10 @@ function renderCatalogue(entries) {
     card.append(el('span', 'tag', item.familia));
     card.append(el('h2', '', item.nome));
     card.append(el('p', '', item.convite));
-    const button = el('button', 'open', item.id === 'falarte' ? 'entrar em falARTE' : 'brincar');
+    const specificLabel = item.id === 'falarte' ? 'entrar em falARTE'
+      : item.id === 'palavra-ritual' ? 'tocar a palavra'
+      : 'brincar';
+    const button = el('button', 'open', specificLabel);
     button.type = 'button';
     button.dataset.curadoria = item.id;
     card.append(button);
@@ -142,12 +146,20 @@ function openDynamic(item) {
 }
 
 function openSpecific(item) {
-  if (item.id !== 'falarte') return false;
-  ensureFalarteStyles();
   body.replaceChildren();
-  openFalarte({ container: body, reducedMotion: reduced });
-  dialog.showModal();
-  return true;
+  if (item.id === 'falarte') {
+    ensureStyle('falarte');
+    openFalarte({ container: body, reducedMotion: reduced });
+    dialog.showModal();
+    return true;
+  }
+  if (item.id === 'palavra-ritual') {
+    ensureStyle('palavra-ritual');
+    openPalavraRitual({ container: body, reducedMotion: reduced });
+    dialog.showModal();
+    return true;
+  }
+  return false;
 }
 
 deck.addEventListener('click', event => {
