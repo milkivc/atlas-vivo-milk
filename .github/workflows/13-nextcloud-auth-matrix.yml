@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - name: Authenticate admin read-only using dedicated secret
+      - name: Verify dedicated admin secret without disclosure
         shell: bash
         run: |
           set -euo pipefail
@@ -27,34 +27,41 @@ jobs:
           base='https://associacaomilk.pt/nextcloud'
           user='admin'
           password=os.environ['ADMIN_NEXTCLOUD'].strip()
-          endpoint=base+'/remote.php/dav/files/'+urllib.parse.quote(user,safe='')+'/'
+          print('ADMIN_NEXTCLOUD_PRESENT=YES')
+          print('ADMIN_NEXTCLOUD_SHAPE=' + ('URL' if password.lower().startswith(('http://','https://')) else 'PASSWORD_VALUE'))
+          print('SECRET_VALUES_DISCLOSED=0')
+          if password.lower().startswith(('http://','https://')):
+              raise SystemExit('ADMIN_NEXTCLOUD_CONTAINS_URL_NOT_PASSWORD')
           auth=base64.b64encode((user+':'+password).encode()).decode()
+          ctx=ssl.create_default_context()
           body=b'<?xml version="1.0"?><d:propfind xmlns:d="DAV:"><d:prop><d:resourcetype/><d:getetag/></d:prop></d:propfind>'
-          def attempt():
-              req=urllib.request.Request(endpoint,data=body,method='PROPFIND',headers={
-                  'Authorization':'Basic '+auth,
-                  'Depth':'1',
-                  'Content-Type':'application/xml; charset=utf-8',
-                  'Accept':'application/xml',
-                  'User-Agent':'MILK-Nextcloud-Admin-Probe/2.0'})
+          tests=[
+              ('DAV_CURRENT',base+'/remote.php/dav/files/'+urllib.parse.quote(user,safe='')+'/', 'PROPFIND', body, {'Depth':'0','Content-Type':'application/xml; charset=utf-8'}),
+              ('OCS_USER',base+'/ocs/v2.php/cloud/user?format=json','GET',None,{'OCS-APIRequest':'true','Accept':'application/json'}),
+              ('DAV_LEGACY',base+'/remote.php/webdav/','PROPFIND',body,{'Depth':'0','Content-Type':'application/xml; charset=utf-8'})
+          ]
+          statuses=[]
+          for i,(label,url,method,data,extra) in enumerate(tests):
+              if i: time.sleep(8)
+              headers={'Authorization':'Basic '+auth,'User-Agent':'MILK-Nextcloud-Admin-Probe/3.0'}; headers.update(extra)
+              req=urllib.request.Request(url,data=data,method=method,headers=headers)
               try:
-                  with urllib.request.urlopen(req,timeout=45,context=ssl.create_default_context()) as r:
-                      data=r.read()
-                      return r.status,len(data),None
+                  with urllib.request.urlopen(req,timeout=45,context=ctx) as r:
+                      status=r.status; r.read(512)
               except urllib.error.HTTPError as e:
-                  return e.code,0,e.headers.get('Retry-After')
-          status,size,retry=attempt()
-          if status==429:
-              delay=60
-              try: delay=max(30,min(180,int(retry or '60')))
-              except Exception: pass
-              print('NEXTCLOUD_RATE_LIMIT_RETRY_SECONDS='+str(delay))
-              time.sleep(delay)
-              status,size,retry=attempt()
-          print('NEXTCLOUD_ADMIN_HTTP='+str(status))
-          if status not in (200,207): raise SystemExit('NEXTCLOUD_ADMIN_AUTH_BLOCKED')
-          print('NEXTCLOUD_ADMIN_AUTH=PASS')
-          print('NEXTCLOUD_ADMIN_RESPONSE_BYTES='+str(size))
+                  status=e.code
+              except Exception:
+                  status='ERR'
+              statuses.append((label,status))
+              print(label+'_HTTP='+str(status))
+              if status in (200,207):
+                  print('NEXTCLOUD_ADMIN_AUTH=PASS')
+                  print('NEXTCLOUD_AUTH_ENDPOINT='+label)
+                  print('NEXTCLOUD_WRITES=0')
+                  print('SECRET_VALUES_DISCLOSED=0')
+                  raise SystemExit(0)
+          print('NEXTCLOUD_ADMIN_AUTH=BLOCKED')
           print('NEXTCLOUD_WRITES=0')
           print('SECRET_VALUES_DISCLOSED=0')
+          raise SystemExit(41)
           PY
