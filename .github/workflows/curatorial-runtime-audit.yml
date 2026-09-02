@@ -40,7 +40,7 @@ jobs:
           grep -Fq "id: 'remetente-ausente'" deploy/atlas-public/falarte.js
           test "$(grep -c "^    id: '" deploy/atlas-public/falarte.js)" -eq 10
           grep -Fq "localStorage" deploy/atlas-public/falarte.js
-          grep -Fq "não existe envio externo activo" deploy/atlas-public/falarte.js
+          grep -Fiq "não existe envio externo activo" deploy/atlas-public/falarte.js
           grep -Fq "nada escrito aqui é guardado ou enviado" deploy/atlas-public/palavra-ritual.js
           ! grep -Fq "localStorage" deploy/atlas-public/palavra-ritual.js
           grep -Fq "openFalarte" deploy/atlas-public/curadorias.js
