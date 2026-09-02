@@ -12,58 +12,47 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-24.04
-    timeout-minutes: 12
+    timeout-minutes: 8
     env:
       KEY_A: ${{ secrets.MISTRAL_API_KEY }}
       KEY_B: ${{ secrets.MISTRALAPI_KEY }}
     steps:
-      - name: Discover and probe available Mistral code-capable models
+      - name: Diagnose Mistral 402 and test in-account failover
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
-          import json,os,urllib.error,urllib.request
+          import json,os,re,urllib.error,urllib.request
           keys=[]
           for label,name in [('A','KEY_A'),('B','KEY_B')]:
               v=os.environ.get(name,'').strip()
               if v and all(v!=x[1] for x in keys): keys.append((label,v))
           if not keys: raise SystemExit('NO_MISTRAL_KEYS')
-          preferred=['codestral-latest','devstral-latest','devstral-small-latest','mistral-small-latest','ministral-8b-latest','ministral-3b-latest','open-mistral-nemo']
-          results=[]; chosen=None
+          models=['codestral-latest','devstral-small-latest','mistral-small-latest','ministral-3b-latest']
+          chosen=None; reasons=[]
           for label,key in keys:
-              models=[]
-              try:
-                  req=urllib.request.Request('https://api.mistral.ai/v1/models',headers={'Authorization':'Bearer '+key})
-                  with urllib.request.urlopen(req,timeout=45) as r: body=json.loads(r.read())
-                  models=[m.get('id') for m in body.get('data',[]) if m.get('id')]
-                  print(f'MISTRAL_KEY_{label}_MODEL_LIST=PASS count={len(models)}')
-              except urllib.error.HTTPError as e:
-                  print(f'MISTRAL_KEY_{label}_MODEL_LIST=HTTP_{e.code}')
-              candidates=[]
-              for p in preferred:
-                  if p in models or not models: candidates.append(p)
-              for m in models:
-                  low=m.lower()
-                  if any(k in low for k in ('code','devstral','ministral','mistral-small')) and m not in candidates: candidates.append(m)
-              for model in candidates[:18]:
-                  payload={'model':model,'temperature':0,'max_tokens':32,'messages':[{'role':'user','content':'Return only: export function ok(){return 1}'}]}
+              for model in models:
+                  payload={'model':model,'temperature':0,'max_tokens':24,'messages':[{'role':'user','content':'Return only OK'}]}
                   req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
                   try:
-                      with urllib.request.urlopen(req,timeout=60) as r:
-                          body=json.loads(r.read()); text=str(body['choices'][0]['message']['content'])
+                      with urllib.request.urlopen(req,timeout=45) as r: r.read()
                       print(f'MISTRAL_MODEL_PROBE=PASS key={label} model={model}')
                       chosen=(label,model); break
                   except urllib.error.HTTPError as e:
+                      raw=e.read().decode('utf-8','replace')[:1200]
+                      try:
+                          obj=json.loads(raw); reason=str(obj.get('message') or obj.get('detail') or obj.get('error') or raw)
+                      except Exception: reason=raw
+                      reason=re.sub(r'(sk-[A-Za-z0-9_-]+|Bearer\s+\S+)','[REDACTED]',reason)
+                      reason=' '.join(reason.split())[:500]
                       print(f'MISTRAL_MODEL_PROBE=FAIL key={label} model={model} http={e.code}')
-                      results.append((label,model,e.code))
-                  except Exception as e:
-                      print(f'MISTRAL_MODEL_PROBE=FAIL key={label} model={model} error={type(e).__name__}')
+                      if e.code==402 and reason not in reasons:
+                          reasons.append(reason)
+                          print('MISTRAL_402_REASON='+reason)
                   if chosen: break
               if chosen: break
           if not chosen:
-              codes={r[2] for r in results}
               print('MISTRAL_IN_ACCOUNT_MODEL_FAILOVER=NONE')
-              print('HTTP_CODES='+','.join(map(str,sorted(codes))))
               raise SystemExit(42)
           print('MISTRAL_IN_ACCOUNT_MODEL_FAILOVER=PASS')
           print('SELECTED_KEY_SLOT='+chosen[0])
