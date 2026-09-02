@@ -48,7 +48,14 @@ jobs:
           start,end=int(os.environ['START']),int(os.environ['END']); batch=os.environ['BATCH']
           idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text(encoding='utf-8'))
           existing={p.name for p in pathlib.Path('deploy/atlas-public/experiences').glob('*.js') if p.name!='registry.js'}
-          rows=[x for x in idx['entries'] if start<=int(x['ordem'])<=end and x['id']+'.js' not in existing]
+          candidates=[x for x in idx['entries'] if start<=int(x['ordem'])<=end and x['id']+'.js' not in existing]
+          rows=[]; blocked_unapproved=[]
+          for x in candidates:
+              bp=json.loads((pathlib.Path('curatorial-factory/sensory-blueprints')/x['file']).read_text(encoding='utf-8'))
+              if bp.get('approved_for_code') is True: rows.append(x)
+              else: blocked_unapproved.append(x['id'])
+          print('AUTHORIAL_GATE_APPROVED_FOR_CODE='+','.join(x['id'] for x in rows))
+          print('AUTHORIAL_GATE_BLOCKED='+','.join(blocked_unapproved))
           matrix=pathlib.Path('curatorial-factory/EXPERIENCE_RESEARCH_MATRIX_20260902.md').read_text(encoding='utf-8')
           constitution=pathlib.Path('curatorial-factory/DIGITAL_MULTISENSORY_EXPERIENCE_CONSTITUTION_20260902.md').read_text(encoding='utf-8')
           out=pathlib.Path('generated')/('repair-'+batch); out.mkdir(parents=True,exist_ok=True)
@@ -99,7 +106,7 @@ jobs:
               for fut,row in futs.items():
                   try: fut.result()
                   except Exception as e: failures.append(str(e))
-          status={'batch':batch,'requested':[x['id'] for x in rows],'generated':sorted(p.stem for p in out.glob('*.js')),'failures':failures}
+          status={'batch':batch,'requested':[x['id'] for x in rows],'blocked_unapproved':blocked_unapproved,'generated':sorted(p.stem for p in out.glob('*.js')),'failures':failures}
           (out/('status-'+batch+'.json')).write_text(json.dumps(status,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           if failures:
               print('\n'.join('CODESTRAL_REPAIR_FAIL='+x for x in failures))
@@ -179,6 +186,16 @@ jobs:
         run: |
           set -euo pipefail
           test ! -s generated/repair/missing_after.txt
+          python - <<'PY'
+          import json,pathlib
+          idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text(encoding='utf-8'))
+          blocked=[]
+          for row in idx['entries']:
+              bp=json.loads((pathlib.Path('curatorial-factory/sensory-blueprints')/row['file']).read_text(encoding='utf-8'))
+              if bp.get('approved_for_code') is not True: blocked.append(row['id'])
+          if blocked: raise SystemExit('AUTHORIAL_GATE_BLOCKED:'+','.join(blocked))
+          print('AUTHORIAL_GATE_49_APPROVED=PASS')
+          PY
           node tests/ia-milk-public-boundary.test.mjs
           if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_.*PASSWORD|NEXTCLOUD_.*KEY|client_secret|access_token' deploy/atlas-public/experiences; then exit 31; fi
           echo CODESTRAL_49_RUNTIME_GATE=PASS
