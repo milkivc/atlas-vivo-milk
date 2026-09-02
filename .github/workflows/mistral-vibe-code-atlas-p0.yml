@@ -63,7 +63,7 @@ jobs:
           set -euo pipefail
           test -n "$MISTRAL_API_KEY"
           vibe --trust \
-            --prompt "Lê AGENTS.md, .vibe/prompts/atlas-build-p0.md e deploy/atlas-public/app.js. Implementa exactamente duas melhorias técnicas: (1) o RAF do Cosmos não deve consumir frames quando document.hidden e deve retomar sem criar loops duplicados nem contrariar #motion; (2) stopMedia deve fechar com segurança o AudioContext e permitir recriá-lo depois. Altera SOMENTE deploy/atlas-public/app.js. Não alteres texto curatorial, D, BOOK_FACES, motores, catálogo, HTML, CSS ou assets. Não publiques, não cries PR, não faças commit." \
+            --prompt "Lê AGENTS.md, .vibe/prompts/atlas-build-p0.md e deploy/atlas-public/app.js. Implementa exactamente as duas melhorias técnicas definidas no prompt do projecto. Altera SOMENTE deploy/atlas-public/app.js. Não alteres texto curatorial, D, BOOK_FACES, motores, catálogo, HTML, CSS ou assets. Não publiques, não cries PR, não faças commit." \
             --max-turns 18 --output json > /tmp/vibe-p0-output.json
           test -s /tmp/vibe-p0-output.json
 
@@ -73,19 +73,19 @@ jobs:
           changed="$(git diff --name-only)"
           test "$changed" = "deploy/atlas-public/app.js" || { echo "::error::Forbidden changed files: $changed"; exit 20; }
           node --check deploy/atlas-public/app.js
+          git diff --unified=0 -- deploy/atlas-public/app.js > /tmp/atlas-p0.diff
+          test -s /tmp/atlas-p0.diff
+          echo "P0_DIFF_BYTES=$(wc -c < /tmp/atlas-p0.diff)"
+          cat /tmp/atlas-p0.diff
           grep -Fq 'document.hidden' deploy/atlas-public/app.js
           grep -Fq 'visibilitychange' deploy/atlas-public/app.js
-          grep -Fq 'audio.close' deploy/atlas-public/app.js
+          grep -Eq '\.close\(' deploy/atlas-public/app.js
           for text in 'Inventário do Meu Mundo' 'Catástrofe Produtiva' 'O Ponto de Kusama' 'O Corpo que Percebe' 'Escutar o Silêncio' 'O Rizoma Interior' 'O Cubo Interior'; do
             grep -Fq "$text" deploy/atlas-public/app.js
           done
-          git diff --unified=0 -- deploy/atlas-public/app.js > /tmp/atlas-p0.diff
-          test -s /tmp/atlas-p0.diff
           if grep -E '^[+-].*(Inventário do Meu Mundo|Catástrofe Produtiva|O Ponto de Kusama|O Corpo que Percebe|Escutar o Silêncio|O Rizoma Interior|O Cubo Interior|BOOK_FACES|const D=)' /tmp/atlas-p0.diff; then
             echo '::error::Curatorial invariant touched'; exit 22
           fi
-          echo "P0_DIFF_BYTES=$(wc -c < /tmp/atlas-p0.diff)"
-          cat /tmp/atlas-p0.diff
 
       - name: Three Mistral agents review only the exact changed lines
         run: |
@@ -96,14 +96,14 @@ jobs:
           diff=pathlib.Path('/tmp/atlas-p0.diff').read_text(encoding='utf-8')
           roles=[
             ('regression_guard','Bloqueia mudança curatorial, dados, rede, armazenamento ou alteração funcional dos sete motores.'),
-            ('browser_runtime','Analisa apenas lifecycle RAF/Page Visibility e AudioContext; procura corridas, loops duplicados e close/recreate inválidos.'),
+            ('browser_runtime','Analisa apenas lifecycle RAF/Page Visibility e AudioContext; procura corridas, IDs RAF obsoletos, impossibilidade de retomar, loops duplicados e close/recreate inválidos. Não exijas ligar o Cosmos a stopMedia: são lifecycles diferentes.'),
             ('accessibility_performance','Confirma redução de trabalho em background sem contrariar o botão manual de movimento nem degradar a experiência.')
           ]
           reviews=[]
           for role,instruction in roles:
               payload={'model':'mistral-medium-latest','temperature':0.0,'response_format':{'type':'json_object'},'messages':[
                 {'role':'system','content':f'És o agente Mistral {role} da MILK. {instruction} Responde JSON estrito com pass(boolean), blockers(array), regressions(array), tests(array).'},
-                {'role':'user','content':'Este é um git diff com contexto ZERO. SOMENTE linhas iniciadas por + ou - (excepto cabeçalhos +++/---) são alterações. Não atribuas ao candidato código que não esteja nessas linhas. O objectivo autorizado é apenas lifecycle do Cosmos RAF e libertação do AudioContext. Avalia:\n'+diff}
+                {'role':'user','content':'Este é um git diff com contexto ZERO. SOMENTE linhas iniciadas por + ou - (excepto cabeçalhos +++/---) são alterações. Não atribuas ao candidato código que não esteja nessas linhas. O objectivo autorizado é apenas lifecycle do Cosmos RAF e libertação/recriação do AudioContext. Avalia:\n'+diff}
               ]}
               req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
               with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
@@ -149,7 +149,7 @@ jobs:
         run: |
           set -euo pipefail
           python - <<'PY'
-          import ftplib, hashlib, io, json, os, pathlib, ssl, tarfile, urllib.request, subprocess
+          import ftplib, hashlib, io, json, os, ssl, tarfile, urllib.request, subprocess
           pwd=os.environ.get('PTSERVIDOR_FTPS_PASSWORD','').strip(); run=os.environ['RUN_ID']
           commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
           meta={'run':run,'commit':commit,'publication':False,'branch':'codex/milk-curadorias-ia-webapp-20260821','reviews_passed':3,'changed_files':['deploy/atlas-public/app.js','deploy/atlas-public/manifest.sha256']}
