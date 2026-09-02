@@ -1,0 +1,45 @@
+name: MILK Drive OAuth safe shape probe
+on:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths: ['.github/workflows/drive-oauth-safe-shape-probe.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    env:
+      DRIVE_OAUTH: ${{ secrets.DRIVE_OAUTH }}
+    steps:
+      - name: Classify secret without exposing values
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os
+          s=os.environ.get('DRIVE_OAUTH','').strip()
+          if not s:
+              print('DRIVE_OAUTH_SHAPE=EMPTY')
+              raise SystemExit(0)
+          try:
+              o=json.loads(s)
+          except Exception:
+              if s.startswith('ya29.'):
+                  print('DRIVE_OAUTH_SHAPE=ACCESS_TOKEN')
+              elif s.count('.')==2:
+                  print('DRIVE_OAUTH_SHAPE=JWT_LIKE')
+              else:
+                  print('DRIVE_OAUTH_SHAPE=OPAQUE_NONJSON')
+              raise SystemExit(0)
+          if isinstance(o,dict):
+              keys=sorted(k for k in o.keys() if k in {'access_token','refresh_token','client_id','client_secret','token_uri','type','project_id','private_key','private_key_id','installed','web','token','expiry','expires_at'})
+              nested=[]
+              for nk in ('installed','web'):
+                  if isinstance(o.get(nk),dict):
+                      nested += [nk+'.'+k for k in sorted(o[nk]) if k in {'client_id','client_secret','token_uri','auth_uri','redirect_uris'}]
+              print('DRIVE_OAUTH_SHAPE=JSON')
+              print('DRIVE_OAUTH_KEYS='+','.join(keys+nested))
+          else:
+              print('DRIVE_OAUTH_SHAPE=JSON_NONOBJECT')
+          PY
