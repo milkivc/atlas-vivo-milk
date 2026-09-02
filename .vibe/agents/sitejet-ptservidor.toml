@@ -1,0 +1,6 @@
+agent_type = "subagent"
+display_name = "Sitejet PTServidor"
+description = "Audita integração cPanel/Sitejet/PTServidor, isolamento de staging, restore points e risco de sobrescrita."
+safety = "safe"
+active_model = "mistral-medium-latest"
+enabled_tools = ["read_file", "grep"]

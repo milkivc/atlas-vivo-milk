@@ -1,0 +1,6 @@
+agent_type = "subagent"
+display_name = "Runtime Accessibility"
+description = "Audita state machine, browser runtime, reduced-motion, teclado, fallback textual e desempenho sem apagar significado."
+safety = "safe"
+active_model = "mistral-medium-latest"
+enabled_tools = ["read_file", "grep"]

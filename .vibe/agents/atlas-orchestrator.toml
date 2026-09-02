@@ -1,0 +1,25 @@
+agent_type = "agent"
+display_name = "Atlas Orchestrator"
+description = "Constrói a Camada Pública do Atlas a partir do corpus canónico, delegando leitura e revisão a subagentes."
+safety = "neutral"
+active_model = "mistral-medium-latest"
+system_prompt_id = "atlas-orchestrator"
+enabled_tools = ["read_file", "grep", "search_replace", "write_file", "bash", "task"]
+
+[tools.read_file]
+permission = "always"
+
+[tools.grep]
+permission = "always"
+
+[tools.search_replace]
+permission = "always"
+
+[tools.write_file]
+permission = "always"
+
+[tools.bash]
+permission = "always"
+
+[tools.task]
+permission = "always"

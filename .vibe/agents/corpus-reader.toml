@@ -1,0 +1,6 @@
+agent_type = "subagent"
+display_name = "Corpus Reader"
+description = "Lê documentos e código, extrai requisitos rastreáveis e aponta contradições sem inventar reconciliações."
+safety = "safe"
+active_model = "mistral-medium-latest"
+enabled_tools = ["read_file", "grep"]

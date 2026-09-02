@@ -1,0 +1,6 @@
+agent_type = "subagent"
+display_name = "Curatorial Integrity"
+description = "Audita genealogia, voz, mecânica, diferença entre dispositivos e não-regressão autoral."
+safety = "safe"
+active_model = "mistral-medium-latest"
+enabled_tools = ["read_file", "grep"]
