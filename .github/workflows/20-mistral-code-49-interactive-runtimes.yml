@@ -1,0 +1,215 @@
+name: 20 MILK Mistral Code 49 interactive runtimes
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths:
+      - 'ops/AUTHORIZATION_MISTRAL_CODE_49_INTERACTIVITIES_20260902.md'
+      - 'curatorial-factory/sensory-blueprints/**'
+      - '.github/workflows/20-mistral-code-49-interactive-runtimes.yml'
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: milk-mistral-code-49-runtimes
+  cancel-in-progress: false
+
+jobs:
+  code-batches:
+    name: Mistral Code batch ${{ matrix.batch }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    strategy:
+      fail-fast: false
+      max-parallel: 7
+      matrix:
+        include:
+          - { batch: 1, start: 1, end: 7 }
+          - { batch: 2, start: 8, end: 14 }
+          - { batch: 3, start: 15, end: 21 }
+          - { batch: 4, start: 22, end: 28 }
+          - { batch: 5, start: 29, end: 35 }
+          - { batch: 6, start: 36, end: 42 }
+          - { batch: 7, start: 43, end: 49 }
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      BATCH: ${{ matrix.batch }}
+      START: ${{ matrix.start }}
+      END: ${{ matrix.end }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 0
+
+      - name: Install Mistral Vibe Code
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python -m pip install --disable-pip-version-check --quiet 'mistral-vibe==2.24.5'
+          vibe --version
+
+      - name: Prepare exact batch contract
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, pathlib
+          idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text(encoding='utf-8'))
+          start,end=int(os.environ['START']),int(os.environ['END'])
+          rows=[x for x in idx['entries'] if start <= int(x['ordem']) <= end]
+          assert len(rows)==end-start+1
+          payload=[]
+          for row in rows:
+              p=pathlib.Path('curatorial-factory/sensory-blueprints')/row['file']
+              bp=json.loads(p.read_text(encoding='utf-8'))
+              payload.append({'index':row,'blueprint':bp})
+          pathlib.Path('/tmp/mistral-code-batch.json').write_text(json.dumps(payload,ensure_ascii=False),encoding='utf-8')
+          pathlib.Path(f"generated/batch-{os.environ['BATCH']}").mkdir(parents=True,exist_ok=True)
+          print('MISTRAL_CODE_BATCH_ITEMS='+str(len(payload)))
+          PY
+
+      - name: Mistral Code builds real interactivities
+        run: |
+          set -euo pipefail
+          vibe --trust --max-turns 80 --output json --prompt "AUTORIZAÇÃO AUTORAL ACTIVA: lê ops/AUTHORIZATION_MISTRAL_CODE_49_INTERACTIVITIES_20260902.md, AGENTS.md e /tmp/mistral-code-batch.json. TU ÉS O MOTOR DE IMPLEMENTAÇÃO, não um revisor. Cria interactividade browser REAL para cada blueprint deste lote. Para cada id cria exactamente generated/batch-${BATCH}/<id>.js como módulo ES autónomo. Cada módulo exporta mountCuratorialExperience({root, context={}, onClose=()=>{}}) e devolve {destroy()}. A experiência deve materializar o arco dramaturgico, participant_verbs, system_responses, sensory_channels, cross_sensory_translation, silence_or_absence, surprise_or_indeterminacy, session_variation e accessibility_equivalents do blueprint. Usa DOM/SVG/Canvas/Web Audio/CSS via JS quando servirem a experiência; som apenas depois de gesto do utilizador; vibração apenas feature-detected; microfone/câmara/geolocalização nunca obrigatórios. Touch e teclado têm equivalência. Respeita prefers-reduced-motion. Não uses fetch, CDN, trackers, bibliotecas externas ou dados inventados. Não cries quiz/card/dashboard/chatbot genérico. Não transformes cheiro/sabor em output físico: apenas evocação. Se já existe runtime autoral específico no repo, preserva-o e cria adaptador/composição em vez de o substituir. COPÉRNICO e COSMICOXES não podem ser recriados. Toda string territorial factual deve vir do blueprint/context, nunca inventada. Isola estilos por id ou injecção scoped. Implementa de verdade os ficheiros; não escrevas relatório." > "/tmp/vibe-batch-${BATCH}.json"
+          echo MISTRAL_CODE_INTERACTIVITY_BATCH_EXECUTED=$BATCH
+
+      - name: Validate generated modules
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, pathlib, subprocess
+          rows=json.loads(pathlib.Path('/tmp/mistral-code-batch.json').read_text())
+          root=pathlib.Path('generated')/('batch-'+os.environ['BATCH'])
+          expected={x['index']['id']+'.js' for x in rows}
+          actual={p.name for p in root.glob('*.js')}
+          assert actual==expected,(expected-actual,actual-expected)
+          for p in sorted(root.glob('*.js')):
+              text=p.read_text(encoding='utf-8')
+              assert 'mountCuratorialExperience' in text, p
+              assert 'destroy' in text, p
+              assert 'fetch(' not in text, p
+              subprocess.run(['node','--check',str(p)],check=True)
+          print('MISTRAL_CODE_BATCH_VALIDATION=PASS')
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mistral-code-batch-${{ matrix.batch }}
+          path: generated/batch-${{ matrix.batch }}/*.js
+          if-no-files-found: error
+          retention-days: 2
+
+  integrate:
+    name: Integrate 49 Mistral Code runtimes
+    needs: code-batches
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: mistral-code-batch-*
+          path: generated/all
+          merge-multiple: true
+
+      - name: Assemble exact 49 module set
+        run: |
+          set -euo pipefail
+          mkdir -p deploy/atlas-public/experiences
+          python - <<'PY'
+          import json,pathlib,shutil
+          idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text(encoding='utf-8'))
+          expected={x['id']+'.js' for x in idx['entries']}
+          src=pathlib.Path('generated/all')
+          actual={p.name for p in src.glob('*.js')}
+          assert actual==expected,(len(actual),len(expected),sorted(expected-actual),sorted(actual-expected))
+          dst=pathlib.Path('deploy/atlas-public/experiences')
+          for p in src.glob('*.js'): shutil.copy2(p,dst/p.name)
+          lines=['// Generated registry: 49 distinct Mistral Code curatorial runtimes.','export const CURATORIAL_EXPERIENCE_LOADERS = {']
+          for x in idx['entries']:
+              lines.append(f"  {json.dumps(x['id'])}: () => import('./{x['id']}.js'),")
+          lines += ['};','', 'export async function loadCuratorialExperience(id) {', '  const loader = CURATORIAL_EXPERIENCE_LOADERS[id];', "  if (!loader) throw new Error('CURATORIAL_RUNTIME_NOT_FOUND:'+id);", '  return loader();', '}', '']
+          (dst/'registry.js').write_text('\n'.join(lines),encoding='utf-8')
+          print('MISTRAL_CODE_49_MODULES_ASSEMBLED=PASS')
+          PY
+          for f in deploy/atlas-public/experiences/*.js; do node --check "$f"; done
+
+      - name: Install Mistral Vibe Code for integration
+        run: |
+          python -m pip install --disable-pip-version-check --quiet 'mistral-vibe==2.24.5'
+          vibe --version
+
+      - name: Mistral Code wires experiences into WebApp
+        run: |
+          set -euo pipefail
+          vibe --trust --max-turns 64 --output json --prompt "EXECUÇÃO DE INTEGRAÇÃO AUTORIZADA. Lê ops/AUTHORIZATION_MISTRAL_CODE_49_INTERACTIVITIES_20260902.md, deploy/atlas-public/experiences/registry.js, deploy/atlas-public/curadorias.js, deploy/atlas-public/experience-machine.js e os runtimes existentes. Liga os 49 módulos de deploy/atlas-public/experiences à superfície curatorial real da WebApp. Usa lazy import por id e mountCuratorialExperience. Preserva integralmente a entrada COSMICOXES -> COPÉRNICO -> MILKs -> bilhete/descoberta. Não substituas runtimes autorais existentes; quando uma experiência já tiver runtime canónico específico, mantém a precedência desse runtime e usa o módulo Mistral apenas como composição/adaptação quando não houver conflito. Remove qualquer apresentação card-only para experiências que agora têm runtime. Não inventes conteúdo. Faz as alterações reais mínimas em curadorias.js/experience-machine.js/index.html/CSS se necessárias." > /tmp/vibe-integrate-49.json
+          echo MISTRAL_CODE_WEBAPP_INTEGRATION_EXECUTED=1
+
+      - name: Deterministic 49 runtime gates
+        run: |
+          set -euo pipefail
+          node tests/ia-milk-public-boundary.test.mjs
+          for f in deploy/atlas-public/*.js deploy/atlas-public/experiences/*.js; do node --check "$f"; done
+          git diff --check
+          python - <<'PY'
+          import json,pathlib
+          idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text())
+          root=pathlib.Path('deploy/atlas-public/experiences')
+          missing=[x['id'] for x in idx['entries'] if not (root/(x['id']+'.js')).is_file()]
+          assert not missing,missing
+          registry=(root/'registry.js').read_text()
+          for x in idx['entries']: assert x['id'] in registry
+          print('FORTY_NINE_INTERACTIVE_RUNTIME_FILES=PASS')
+          PY
+          if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_.*PASSWORD|NEXTCLOUD_.*KEY|client_secret|access_token' deploy/atlas-public --exclude-dir=vendor; then exit 31; fi
+          echo MISTRAL_CODE_49_RUNTIME_GATE=PASS
+
+      - name: Mistral interaction council
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os,pathlib,urllib.request
+          key=os.environ['MISTRAL_API_KEY']
+          idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text())
+          manifest=[]
+          for x in idx['entries']:
+              bp=json.loads((pathlib.Path('curatorial-factory/sensory-blueprints')/x['file']).read_text())
+              code=(pathlib.Path('deploy/atlas-public/experiences')/(x['id']+'.js')).read_text()
+              manifest.append({'id':x['id'],'signature':bp['sensory_signature_id'],'verbs':bp['participant_verbs'],'code':code[:14000]})
+          payload={'model':'mistral-medium-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':'És o Conselho de Interactividade do Atlas Vivo MILK. Audita se os 49 módulos são runtimes interactivos reais e distintos, não cards/quizzes/templates, e se preservam acessibilidade, silêncio/acaso e assinatura sensorial. Não reproves por trabalho físico futuro nem por ausência de permissões opcionais. Responde JSON com pass:boolean, blockers:array, warnings:array.'},{'role':'user','content':json.dumps(manifest,ensure_ascii=False)}]}
+          req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+          with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
+          review=json.loads(body['choices'][0]['message']['content'])
+          print('MISTRAL_INTERACTION_COUNCIL='+json.dumps(review,ensure_ascii=False))
+          if review.get('pass') is not True: raise SystemExit('MISTRAL_INTERACTION_COUNCIL_BLOCKED')
+          PY
+
+      - name: Commit 49 interactive runtimes
+        run: |
+          set -euo pipefail
+          git config user.name 'Atlas Mistral Code'
+          git config user.email 'milk@associacaomilk.pt'
+          git add deploy/atlas-public/experiences deploy/atlas-public/curadorias.js deploy/atlas-public/experience-machine.js deploy/atlas-public/index.html deploy/atlas-public/*.css 2>/dev/null || true
+          if git diff --cached --quiet; then echo NO_RUNTIME_DELTA=1; exit 0; fi
+          git commit -m 'feat(experiences): Mistral Code implements 49 interactive curatorial runtimes'
+          git pull --rebase origin work/copernico-recovery-webapp-20260902
+          git push origin HEAD:work/copernico-recovery-webapp-20260902
+          echo MISTRAL_CODE_49_COMMIT_PUSHED=1
+
+      - name: Dispatch PTServidor private staging
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh workflow run ptservidor-private-webapp-staging.yml --ref work/copernico-recovery-webapp-20260902
+          echo PTSERVIDOR_STAGING_DISPATCHED=1
