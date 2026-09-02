@@ -1,0 +1,8 @@
+# Atlas Vivo MILK — project-level Mistral Vibe Code configuration
+# Loaded only when this repository is trusted by Vibe Code.
+
+default_agent = "atlas-orchestrator"
+active_model = "mistral-medium-latest"
+enable_auto_update = true
+enable_notifications = true
+enable_telemetry = false
