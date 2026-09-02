@@ -3,337 +3,379 @@
   "canonical_name": "Provérbios ao Avesso",
   "source_evidence": {
     "primary": [
-      "catalog_entry.mecanica: 'virar'",
-      "catalog_entry.convite: 'Vira o provérbio do avesso.'"
+      {
+        "source": "catalog_entry",
+        "authority": "high",
+        "quote": "Vira o provérbio do avesso.",
+        "mechanics": "virar"
+      },
+      {
+        "source": "constitution",
+        "authority": "high",
+        "quote": "A experiência deve ser uma situação viva em que a pessoa entra, percebe uma alteração do ambiente, faz alguma coisa com o corpo/atenção/voz/gesto/escolha, recebe uma resposta não trivial do sistema, atravessa uma transformação perceptiva e sai deixando ou levando um rasto."
+      }
     ],
     "secondary": [
-      "source_corpus: 'família folclore'",
-      "source_corpus: '16 seres folclóricos em Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf'"
-    ],
-    "authorial_anchors": [
-      "familia: folclore",
-      "mecanica: virar",
-      "convite: Vira o provérbio do avesso."
+      {
+        "source": "source_corpus",
+        "authority": "medium",
+        "context": "folclore como família sensorial; provérbios como parte do corpus tradicional e oral."
+      }
     ]
   },
   "authorial_invariants": [
-    "O convite é literal: 'Vira o provérbio do avesso'.",
-    "A mecânica central é o ato de 'virar' (inversão, subversão, revelação de camada oculta).",
-    "Pertence à família 'folclore', com foco em sabedoria popular e linguagem viva.",
-    "Deve preservar a oralidade, o ritmo e a musicalidade dos provérbios.",
-    "Não é um quiz, nem um catálogo de provérbios estáticos."
+    "O convite é 'Vira o provérbio do avesso'.",
+    "A mecânica central é 'virar' (inversão, subversão, revelação de camadas ocultas).",
+    "Pertence à família 'folclore'.",
+    "Deve preservar a oralidade, a sabedoria popular e a ambiguidade dos provérbios.",
+    "Não pode ser reduzido a um quiz ou exercício de preenchimento."
   ],
-  "perceptual_intent": "Transformar a sabedoria popular em uma experiência viva onde o provérbio não é lido, mas *descoberto* através de um gesto de inversão. A pessoa deve sentir que o provérbio a observa, a desafia e se revela de forma inesperada, como se a linguagem tivesse peso, textura e movimento próprio.",
+  "perceptual_intent": "Transformar a sabedoria popular estática em uma experiência viva onde o provérbio se desdobra, inverte e revela camadas ocultas de significado, som e imagem. A pessoa deve sentir que está a 'desvirar' uma verdade, não a ler.",
   "threshold": {
-    "description": "A pessoa entra num espaço escuro, onde flutuam sombras de palavras soltas (substantivos, verbos, adjetivos) em movimento lento, como se fossem folhas ao vento. O ambiente sonoro é um murmúrio baixo de vozes sobrepostas, como um coral de avós a contar histórias em uníssono, mas ininteligível. Não há instruções visíveis.",
-    "sensory_triggers": [
-      "Visual: sombras de palavras em movimento (baixo contraste, alta transparência).",
-      "Auditory: murmúrio de vozes em loop suave, com eco e reverberação (volume < 20%).",
-      "Spatial: profundidade simulada (paralaxe suave nas palavras)."
-    ]
+    "description": "A pessoa entra num espaço onde provérbios aparecem como sombras projetadas em paredes invisíveis, ou como fios de voz suspensos no ar. O ambiente está em silêncio, mas há uma tensão de algo prestes a revelar-se. Um provérbio surge lentamente, escrito em tipografia orgânica que parece respirar, como se estivesse vivo. A luz é difusa, como através de um tecido fino.",
+    "sensory_trigger": "A primeira palavra do provérbio pisca uma vez, como um convite para tocar/interagir."
   },
-  "dramaturgical_arc": {
-    "1_limiar": "O ambiente escuro com palavras flutuantes e murmúrio cria uma sensação de entrada num espaço de memória coletiva. A pessoa percebe que algo está *presente*, mas não identifica o quê.",
-    "2_chamada": "Uma das sombras de palavras (ex: 'CÃO') pára subitamente e brilha levemente, como se fosse tocada por uma luz invisível. O murmúrio cessa por 1 segundo, criando um vazio sonoro que convida à ação.",
-    "3_primeiro_gesto": "A pessoa é convidada a *virar* a palavra (arrastar com o dedo/rato ou pressionar uma tecla). O gesto é simples, mas a palavra resiste levemente (feedback háptico suave em dispositivos compatíveis).",
-    "4_resposta_viva": "Ao virar a palavra, esta revela o seu avesso: não uma definição, mas um provérbio completo que a contém (ex: 'CÃO' vira-se para revelar 'CÃO QUE LADRA NÃO MORDE'). A palavra original desaparece, e o provérbio surge em letras que *crescem* como se estivessem a ser tecidas no ar, com um som de fio a ser puxado (auditory feedback).",
-    "5_desvio": "O provérbio não aparece completo de imediato. Em vez disso, as letras surgem uma a uma, mas *fora de ordem*, como se estivessem a ser costuradas por uma mão invisível. O som do fio é substituído por um *tique-taque* de agulha (ritmo irregular).",
-    "6_aprofundamento_sensorial": "À medida que as letras se organizam, o ambiente sonoro muda: o murmúrio inicial transforma-se em vozes que *pronunciam* o provérbio em diferentes sotaques (ex: Alentejo, Minho, Madeira), sobrepostas mas sincronizadas com o aparecimento das letras. O fundo visual ganha textura: as palavras agora têm *peso* (sombra projetada) e *material* (como tecido ou papel envelhecido).",
-    "7_escolha_acaso_silencio": "A pessoa pode: (a) *tocar* uma letra para ouvir apenas um sotaque (escolha); (b) *esperar* que o provérbio se complete sozinho (acaso: o sistema escolhe um sotaque aleatório); ou (c) *fazer silêncio* (não interagir por 5 segundos), o que faz com que o provérbio se *desfaça* em fios soltos, voltando ao estado inicial (silêncio).",
-    "8_aparicao": "Se a pessoa interagir (a ou b), o provérbio completa-se e *ganha vida*: as letras começam a dançar (movimento orgânico, como folhas ao vento), e o som dos sotaques funde-se num *coral* que repete o provérbio 3 vezes, cada vez mais rápido, até se tornar um *zumbido* (como um enxame de abelhas). Este zumbido é a *assinatura sonora* do provérbio.",
-    "9_devolucao": "O sistema devolve à pessoa: (1) o provérbio escrito em *caligrafia manual* (como se fosse copiado de um caderno antigo), com a assinatura do sotaque escolhido/aleatório; (2) um *objeto simbólico* associado ao provérbio (ex: para 'CÃO QUE LADRA NÃO MORDE', uma imagem de um cão de barro ou um som de latido distorcido); (3) um *convite* para virar outro provérbio ou sair.",
-    "10_rasto_latencia": "O provérbio virado e o seu objeto simbólico ficam *gravados* no ambiente como uma *constelação* (pontos de luz fraca no fundo). Se a pessoa regressar, verá as suas contribuições anteriores como *estrelas* que brilham ao passar o cursor por cima. Estas constelações são visíveis para todos, mas anónimas."
-  },
+  "dramaturgical_arc": [
+    {
+      "stage": "limiar",
+      "action": "O provérbio aparece como uma sombra ou fio de voz, com tipografia que respira. O ambiente está em silêncio ativo (não vazio)."
+    },
+    {
+      "stage": "chamada",
+      "action": "O provérbio convida implicitamente: 'Vira-me do avesso.' (sem texto explícito, apenas pela sua presença e pelo pisca da primeira palavra)."
+    },
+    {
+      "stage": "primeiro_gesto",
+      "action": "A pessoa toca, arrasta ou sopra (via microfone opcional) o provérbio. O gesto pode ser: arrastar com o dedo, clicar, pressionar uma tecla, ou soprar no microfone (se permitido)."
+    },
+    {
+      "stage": "resposta_viva",
+      "action": "O provérbio inverte-se visualmente (como um tecido a virar) e o som de uma voz ancestral (ou uma voz sintetizada com textura de terra/vento) lê o provérbio ao contrário, mas com um ritmo que sugere um novo significado. A tipografia ganha peso e profundidade, como se fosse esculpida em pedra."
+    },
+    {
+      "stage": "desvio",
+      "action": "O provérbio invertido revela uma segunda camada: uma imagem ou som associado ao seu significado oculto (ex: um provérbio sobre chuva pode revelar o som de gotas ou uma fotografia de um rio). Esta camada não é literal, mas poética."
+    },
+    {
+      "stage": "aprofundamento_sensorial",
+      "action": "O som da voz e a imagem começam a interagir: a voz modula a cor da imagem, e a imagem altera o timbre da voz. A pessoa pode mover o cursor para explorar esta contaminação."
+    },
+    {
+      "stage": "escolha_acaso_silencio",
+      "action": "A pessoa pode: (1) escolher um fragmento do provérbio para aprofundar (clicando nele), (2) esperar em silêncio para que o sistema revelasse uma conexão territorial (ex: um topónimo relacionado), ou (3) soprar no microfone para 'desfazer' o provérbio e começar de novo."
+    },
+    {
+      "stage": "aparição",
+      "action": "Surge uma 'constelação de provérbios' relacionados, organizados como um mapa de fios entrelaçados. Cada fio é um provérbio que partilha uma palavra ou tema com o original. A pessoa pode 'puxar' um fio para explorar."
+    },
+    {
+      "stage": "devolução",
+      "action": "O sistema devolve um 'provérbio pessoal': uma frase gerada a partir das interações da pessoa (ex: palavras clicadas, tempo gasto, gestos). Esta frase é apresentada como um 'rascunho' em papel envelhecido, com a assinatura 'Atlas Vivo MILK' e a data. A pessoa pode guardá-lo (download) ou deixá-lo no sistema como rasto."
+    },
+    {
+      "stage": "rasto_latencia",
+      "action": "O provérbio pessoal fica disponível na constelação COSMICOXES como uma 'estrela' efémera, visível para outros durante 24 horas. Depois, desaparece, mas pode ser reencontrado pela pessoa que o criou."
+    }
+  ],
   "participant_verbs": [
-    "virar",
     "tocar",
+    "arrastar",
+    "soprar",
     "escutar",
     "esperar",
-    "costurar",
-    "dançar",
-    "silenciar"
+    "puxar",
+    "explorar"
   ],
-  "system_responses": {
-    "to_gesture_virar": {
-      "visual": "Palavra vira-se como uma página, revelando o provérbio em letras que crescem e se organizam.",
-      "auditory": "Som de fio a ser puxado, seguido de tique-taque de agulha.",
-      "haptic": "Feedback de resistência leve (se dispositivo compatível)."
+  "system_responses": [
+    {
+      "trigger": "toque/arrasto no provérbio",
+      "response": "Inversão visual e sonora do provérbio, com revelação de camada oculta (imagem/som)."
     },
-    "to_gesture_tocar_letra": {
-      "visual": "Letra tocada brilha e amplifica-se temporariamente.",
-      "auditory": "Sotaque específico pronuncia a letra/sílaba em loop suave."
+    {
+      "trigger": "sopro no microfone (opcional)",
+      "response": "O provérbio 'desfaz-se' em partículas sonoras e visuais, como folhas ao vento, e recompõe-se de forma diferente."
     },
-    "to_gesture_esperar": {
-      "visual": "Provérbio completa-se sozinho, com letras a dançar.",
-      "auditory": "Coral de sotaques repete o provérbio 3 vezes, acelerando."
+    {
+      "trigger": "espera em silêncio",
+      "response": "O sistema revela uma conexão territorial (ex: topónimo ou som ambiente relacionado com o provérbio)."
     },
-    "to_gesture_silenciar": {
-      "visual": "Provérbio desmancha-se em fios soltos, voltando ao estado inicial.",
-      "auditory": "Murmúrio inicial regressa, mais baixo."
+    {
+      "trigger": "clique num fragmento do provérbio",
+      "response": "Aprofundamento da camada associada a esse fragmento (ex: som, imagem, ou outro provérbio relacionado)."
+    },
+    {
+      "trigger": "movimento do cursor sobre a constelação",
+      "response": "Os fios da constelação reagem ao cursor, emitindo sons ou alterando a sua cor/intensidade."
+    },
+    {
+      "trigger": "puxar um fio da constelação",
+      "response": "O provérbio associado ao fio é 'puxado' para o centro, revelando as suas camadas ocultas."
     }
-  },
-  "sensory_signature_id": "PROVERBIOS_AO_AVESSO_036",
+  ],
+  "sensory_signature_id": "PROVERBIOS_AO_AVESSO_36",
   "sensory_channels": {
     "visual": {
-      "primary": [
-        "sombras de palavras em movimento",
-        "letras que crescem e se organizam",
-        "textura de tecido/papel envelhecido",
-        "constelações de provérbios virados"
+      "elements": [
+        "tipografia orgânica e respirante",
+        "sombras projetadas",
+        "fios de voz suspensos",
+        "inversão visual do provérbio (como tecido a virar)",
+        "imagens poéticas associadas",
+        "constelação de provérbios como fios entrelaçados",
+        "rascunho em papel envelhecido para devolução"
       ],
-      "secondary": [
-        "profundidade simulada (paralaxe)",
-        "brilho suave em interação",
-        "dança orgânica das letras"
+      "dynamics": [
+        "transparência e profundidade variáveis",
+        "cor modulada pelo som",
+        "movimento sutil (respiração, vento)"
       ]
     },
     "auditory": {
-      "primary": [
-        "murmúrio de vozes sobrepostas",
-        "som de fio/agulha",
-        "coral de sotaques",
-        "zumbido final"
+      "elements": [
+        "voz ancestral ou sintetizada com textura de terra/vento",
+        "leitura do provérbio ao contrário com ritmo poético",
+        "sons ambientais (ex: gotas de chuva, vento)",
+        "partículas sonoras do provérbio a desfazer-se",
+        "sons emitidos pelos fios da constelação"
       ],
-      "secondary": [
-        "eco e reverberação",
-        "tique-taque irregular",
-        "ritmo acelerado"
+      "dynamics": [
+        "modulação do timbre pela imagem",
+        "espacialização do som (proximidade/distância do cursor)",
+        "silêncio ativo como parte da experiência"
       ]
     },
     "haptic": {
-      "primary": [
-        "feedback de resistência ao virar (opcional)"
+      "elements": [
+        "vibração sutil em dispositivos compatíveis (opcional) quando o provérbio inverte"
       ],
-      "secondary": [
-        "vibração suave em dispositivos compatíveis (opcional)"
+      "dynamics": [
+        "feedback háptico apenas como reforço da inversão, nunca como requisito"
       ]
     },
     "kinesthetic": {
-      "primary": [
-        "arrastar para virar",
-        "tocar para selecionar sotaque"
+      "elements": [
+        "arrasto do provérbio",
+        "movimento do cursor sobre a constelação",
+        "puxar fios"
       ],
-      "secondary": [
-        "movimento do cursor altera a intensidade do brilho das letras"
+      "dynamics": [
+        "resposta visual e sonora ao gesto",
+        "velocidade e trajectória do gesto alteram a intensidade da resposta"
       ]
     },
     "proprioceptive": {
-      "primary": [
-        "instrução implícita de pausa (silêncio de 5 segundos)"
+      "elements": [
+        "instrução implícita para mover o cursor ou a mão de forma lenta/precisa",
+        "sensação de 'peso' ao puxar um fio da constelação"
       ],
-      "secondary": [
-        "ritmo de interação influencia a velocidade da dança das letras"
+      "dynamics": [
+        "resistência visual/sônica ao gesto"
       ]
     },
     "temporal_interoceptive": {
-      "primary": [
-        "espera ativa (5 segundos para desmanchar o provérbio)",
-        "aceleração do coral"
+      "elements": [
+        "respiração percebida do provérbio (tipografia)",
+        "espera como parte ativa da experiência",
+        "ritmo da voz e do som"
       ],
-      "secondary": [
-        "ritmo irregular do tique-taque"
+      "dynamics": [
+        "aceleração/desaceleração do tempo percebido",
+        "pausas estratégicas"
       ]
     },
     "spatial": {
-      "primary": [
-        "profundidade visual (paralaxe)",
-        "constelações no fundo"
+      "elements": [
+        "projeção de sombras em 'paredes invisíveis'",
+        "constelação de provérbios como um espaço 2D/3D explorável",
+        "profundidade visual do provérbio invertido"
       ],
-      "secondary": [
-        "posição do cursor afeta o volume do sotaque (mais próximo = mais alto)"
+      "dynamics": [
+        "alteração da perspectiva com o movimento do cursor"
       ]
     },
     "olfactory_evocation": {
-      "evocation": [
-        "cheiro a papel velho",
-        "aroma a ervas secas (como em feiras populares)"
+      "elements": [
+        "evocação de cheiros através de linguagem (ex: 'cheiro a terra molhada' associado a um provérbio sobre chuva)",
+        "memória olfativa sugerida por sons (ex: som de pão a ser assado)"
       ],
-      "trigger": "Visual: textura de papel envelhecido; Auditory: murmúrio de vozes."
+      "dynamics": [
+        "nunca fingir output olfativo direto"
+      ]
     },
     "gustatory_evocation": {
-      "evocation": [
-        "sabor a pão caseiro",
-        "gosto a mel de ervas"
+      "elements": [
+        "evocação de sabores através de metáforas visuais ou sonoras (ex: 'doce como mel' associado a um provérbio sobre amizade)"
       ],
-      "trigger": "Auditory: zumbido final (associado a colmeias)."
+      "dynamics": [
+        "nunca fingir output gustativo direto"
+      ]
     },
     "social_presence": {
-      "primary": [
-        "coral de vozes (sotaques) como presença coletiva",
-        "constelações anónimas de provérbios virados por outros"
+      "elements": [
+        "constelação COSMICOXES com provérbios pessoais de outros participantes (efémeros)",
+        "sensação de partilha de sabedoria coletiva"
       ],
-      "secondary": [
-        "murmúrio inicial como voz da comunidade"
+      "dynamics": [
+        "rasto visível por 24 horas"
       ]
     }
   },
   "cross_sensory_translation": {
-    "from": "palavra (visual/textual)",
-    "to": "som (auditory) + movimento (visual/kinesthetic)",
-    "mechanism": "A palavra 'virada' transforma-se em provérbio, que por sua vez *soa* como um coral de sotaques e *dança* como folhas ao vento. O gesto de virar (kinesthetic) altera a textura visual (tecido/papel) e o som (fio/agulha)."
+    "primary": "A voz (auditory) modula a cor e a textura da imagem (visual), e a imagem altera o timbre e a espacialização do som (auditory).",
+    "secondary": "O gesto de arrastar (kinesthetic) altera a profundidade visual do provérbio e a intensidade do som associado."
   },
   "silence_or_absence": {
-    "mechanism": "O silêncio de 5 segundos (ausência de interação) é o *gestor* da experiência: desmancha o provérbio e regressa ao limiar. O murmúrio inicial também é uma forma de silêncio *ativo* (vozes ininteligíveis que criam expectativa).",
-    "purpose": "Criar tensão e convite à ação; permitir à pessoa *escolher* não interagir como forma de participação."
+    "use": [
+      "Silêncio ativo no limiar, como um convite para prestar atenção.",
+      "Pausas estratégicas entre a leitura do provérbio e a sua inversão.",
+      "Ausência de som durante a espera, que revela conexões territoriais.",
+      "Silêncio como 'material' na constelação de provérbios (fios que não emitem som)."
+    ],
+    "effect": "O silêncio não é vazio; é um elemento ativo que convida à reflexão e à descoberta."
   },
   "surprise_or_indeterminacy": {
-    "mechanism": [
-      "As letras do provérbio aparecem *fora de ordem* e organizam-se sozinhas.",
-      "O sotaque escolhido aleatoriamente (se a pessoa esperar) é uma surpresa auditiva.",
-      "O zumbido final (coral acelerado) é uma transformação inesperada do som.",
-      "O objeto simbólico devolve algo *concreto* (imagem/som) associado ao provérbio, não apenas texto."
-    ],
-    "purpose": "Quebrar a expectativa de linearidade e controle; revelar a vitalidade do provérbio como entidade viva."
+    "mechanisms": [
+      {
+        "type": "acaso_controlado",
+        "description": "A camada oculta revelada pelo provérbio invertido é escolhida aleatoriamente entre um conjunto de opções poéticas (ex: imagem, som, ou outro provérbio relacionado)."
+      },
+      {
+        "type": "resposta_a_ritmo",
+        "description": "A velocidade do gesto de arrastar altera a forma como o provérbio se inverte (ex: lento = inversão suave; rápido = inversão abrupta com partículas)."
+      },
+      {
+        "type": "combinação_de_fragmentos",
+        "description": "O provérbio pessoal devolve uma frase gerada a partir de fragmentos aleatórios das interações da pessoa."
+      },
+      {
+        "type": "temporalidade_real",
+        "description": "A constelação de provérbios pode variar consoante a hora do dia ou a estação do ano (ex: provérbios sobre chuva mais presentes em dias chuvosos)."
+      }
+    ]
   },
   "session_variation": [
     {
       "type": "acaso_controlado",
-      "description": "O provérbio inicial (palavra solta) é escolhido aleatoriamente de um conjunto de 10-15 palavras-chave de provérbios populares (ex: CÃO, GATO, SOL, ÁGUA)."
+      "description": "A camada oculta (imagem/som) associada ao provérbio invertido é aleatória dentro de um conjunto curado."
     },
     {
-      "type": "ordem_mutavel",
-      "description": "A ordem das letras ao surgirem no provérbio é aleatória, mas sempre a mesma para o mesmo provérbio (consistência dentro da sessão)."
+      "type": "ordem_mutável",
+      "description": "A ordem dos provérbios na constelação é diferente em cada sessão."
     },
     {
       "type": "resposta_a_ritmo",
-      "description": "A velocidade da dança das letras e do coral de sotaques ajusta-se ao ritmo de interação da pessoa (mais rápido se a pessoa interagir rapidamente, mais lento se hesitar)."
-    },
-    {
-      "type": "resposta_a_posicao",
-      "description": "A posição do cursor afeta o volume dos sotaques: mais próximo de uma letra = sotaque mais alto."
+      "description": "A intensidade da inversão do provérbio depende da velocidade do gesto da pessoa."
     },
     {
       "type": "temporalidade_real",
-      "description": "Em dias de feira popular (ex: 13 de cada mês, ou datas locais), o murmúrio inicial inclui sons de feira (sinos, vozes de vendedores) em volume muito baixo."
+      "description": "A seleção de provérbios na constelação pode ser influenciada pela hora do dia ou estação do ano."
     },
     {
-      "type": "constelacao_cosmicoxes",
-      "description": "Se houver provérbios virados por outros utilizadores, as suas constelações aparecem no fundo, criando um *céu de sabedoria* dinâmico."
+      "type": "presença_de_rasto",
+      "description": "Provérbios pessoais de outras pessoas (efémeros) podem aparecer na constelação, se autorizados."
     }
   ],
   "territorial_binding": {
-    "binding": "Os provérbios e sotaques são *territorializados*: cada provérbio está associado a uma região de Portugal (ex: 'CÃO QUE LADRA NÃO MORDE' = Alentejo; 'EM BOCA FECHADA NÃO ENTRAM MOSCAS' = Minho).",
-    "evidence": "source_corpus: '16 seres folclóricos' e 'toponímia' em Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
-    "mechanism": "O objeto simbólico devolve algo específico da região (ex: para Alentejo, som de sino de igreja ou imagem de azulejo tradicional).",
-    "optional": true,
-    "questions_for_eduardo": [
-      "Confirmar se a territorialização dos provérbios deve ser explícita (ex: mostrar o nome da região) ou apenas implícita (através de sotaques/objetos)."
-    ]
+    "relation": "Os provérbios estão ligados a topónimos, práticas ou memórias territoriais específicas. Por exemplo, um provérbio sobre 'água' pode estar associado a um rio ou fonte de uma freguesia.",
+    "evidence": {
+      "source": "source_corpus",
+      "authority": "medium",
+      "note": "A ligação territorial é sugerida pelo corpus, mas não está explicitamente detalhada para cada provérbio. Requer validação autoral."
+    },
+    "implementation": "A conexão territorial é revelada durante a espera em silêncio ou ao explorar a constelação."
   },
   "trace_and_return": {
     "trace": {
-      "type": "constelacao_anonima",
-      "description": "Provérbios virados pela pessoa aparecem como pontos de luz fraca no fundo, formando uma constelação pessoal. Estas constelações são visíveis para todos, mas sem identificação do autor.",
-      "persistence": "Permanente, até a pessoa apagar os seus dados (opção de 'esquecer' no final)."
+      "type": "provérbio_pessoal",
+      "description": "Frase gerada a partir das interações da pessoa, apresentada como um rascunho em papel envelhecido.",
+      "persistence": "Disponível para download e visível na constelação COSMICOXES por 24 horas."
     },
     "return": {
-      "immediate": [
-        "Provérbio em caligrafia manual + assinatura do sotaque.",
-        "Objeto simbólico (imagem/som) associado ao provérbio e região.",
-        "Convite para virar outro provérbio ou sair."
-      ],
-      "latent": "A constelação de provérbios virados pela pessoa pode ser *reencontrada* em sessões futuras, criando um *mapa de sabedoria pessoal*."
+      "type": "devolução_poética",
+      "description": "A pessoa recebe o seu provérbio pessoal como um objeto digital (imagem + texto) que pode guardar ou partilhar."
+    },
+    "latency": {
+      "type": "rasto_efémero",
+      "description": "O provérbio pessoal desaparece da constelação após 24 horas, mas permanece acessível para a pessoa que o criou."
     }
   },
   "accessibility_equivalents": {
-    "visual_impairment": {
-      "alternative": [
-        "Todas as palavras e provérbios são lidos em voz alta por um narrador (voz neutra, ritmo pausado).",
-        "O murmúrio inicial é substituído por uma descrição auditiva: 'Estás num espaço escuro com palavras a flutuar como folhas ao vento.'",
-        "As constelações são descritas auditivamente: 'Há 3 provérbios virados à tua frente, como estrelas no céu.'"
-      ],
-      "preservation": "A experiência de *descoberta* e *surpresa* é mantida: o narrador não revela o provérbio completo de imediato, mas sim letra a letra, como na versão visual."
+    "visual": {
+      "for_blind": "Todos os elementos visuais têm descrições sonoras detalhadas (ex: 'Um provérbio escrito em letra trémula, como se fosse tecido, inverte-se agora para revelar uma imagem de um rio').",
+      "for_low_vision": "Contraste ajustável, tipografia escalável, e opção para desativar animações visuais complexas."
     },
-    "auditory_impairment": {
-      "alternative": [
-        "O murmúrio e os sotaques são substituídos por *vibrações visuais*: as palavras tremem ou mudam de cor conforme o som que representam.",
-        "O zumbido final é substituído por um *pulsar* visual (letras a piscar em ritmo acelerado).",
-        "Legendas para todos os sons (ex: '[murmúrio de vozes]', '[som de fio]')."
-      ],
-      "preservation": "A *textura* do provérbio (tecido/papel) e a dança das letras são mantidas como elementos visuais centrais."
+    "auditory": {
+      "for_deaf": "Legendas visuais para todos os sons, com indicação de ritmo e intensidade (ex: '[som de gotas de chuva, ritmo lento]').",
+      "for_hard_of_hearing": "Volume ajustável e opção para ativação de legendas."
     },
-    "motor_impairment": {
-      "alternative": [
-        "Virar a palavra pode ser feito com: (a) tecla de espaço; (b) comando de voz ('vira'); (c) toque prolongado (em dispositivos tácteis).",
-        "Tocar uma letra pode ser feito com: (a) setas do teclado; (b) comando de voz ('letra X').",
-        "O gesto de *esperar* (silêncio) é preservado como opção padrão."
-      ],
-      "preservation": "A *resistência* ao virar (feedback háptico) é substituída por um *delay* visual (a palavra demora 1 segundo a virar)."
+    "haptic": {
+      "for_no_vibration": "Feedback visual (ex: pulso de cor) substitui a vibração."
     },
-    "cognitive_load": {
-      "alternative": [
-        "Modo 'lento': as letras aparecem em ordem correta e o coral de sotaques é substituído por um único sotaque (escolhido aleatoriamente).",
-        "Opção para *pausar* a experiência a qualquer momento (botão 'pausa' sempre visível)."
-      ],
-      "preservation": "A *surpresa* é mantida: no modo lento, o provérbio ainda aparece letra a letra, e o objeto simbólico é sempre devolve."
+    "kinesthetic": {
+      "for_no_mouse": "Todos os gestos podem ser reproduzidos via teclado (ex: setas para arrastar, Enter para selecionar).",
+      "for_no_touch": "Controles via teclado ou voz (opcional)."
     },
-    "reduced_motion": {
-      "alternative": [
-        "As palavras flutuantes são estáticas, mas com *sombra* para sugerir profundidade.",
-        "As letras do provérbio aparecem em ordem correta, sem dança.",
-        "O zumbido final é substituído por um *brilho* estático nas letras."
-      ],
-      "preservation": "A *textura* (tecido/papel) e o *som* (murmúrio, fio, coral) são mantidos."
+    "temporal": {
+      "for_no_pressure": "Modo 'sem pressão' onde a experiência avança automaticamente após um tempo pré-definido, sem exigir interação rápida."
+    },
+    "cognitive": {
+      "for_reduced_motion": "Opção para desativar todas as animações e transições, mantendo a experiência estática mas funcional.",
+      "for_simplicity": "Modo 'simplificado' onde a constelação de provérbios é apresentada como uma lista linear."
     }
   },
   "optional_permissions": {
-    "none": {
-      "description": "A experiência funciona completamente sem permissões. Todos os gestos (virar, tocar, esperar) são feitos com rato/teclado/voz (opcional)."
-    },
     "microphone": {
-      "optional": true,
-      "trigger": "Se a pessoa quiser usar voz para interagir (ex: 'vira', 'letra X').",
-      "benefit": "Permite interação mais natural, mas não é necessário.",
-      "fallback": "Comandos de teclado/rato."
+      "purpose": "Permitir que a pessoa sopre no microfone para 'desfazer' o provérbio e recomeçar.",
+      "fallback": "Botão ou gesto alternativo (ex: tecla 'S' para soprar)."
     },
     "geolocation": {
-      "optional": true,
-      "trigger": "Se a pessoa quiser ver provérbios associados à sua região atual.",
-      "benefit": "Personalização territorial (ex: provérbios do Alentejo se a pessoa estiver no Alentejo).",
-      "fallback": "Provérbios aleatórios ou baseados em preferências guardadas."
+      "purpose": "Associar provérbios a topónimos ou práticas territoriais da localização atual da pessoa.",
+      "fallback": "Provérbios associados a um território genérico ou aleatório."
     }
   },
   "overstimulation_risk": {
     "risks": [
-      "Flashing: O zumbido final (pulsar das letras) pode ser intenso para pessoas com epilepsia fotosensível.",
-      "Auditory overload: O coral de sotaques sobrepostos pode ser esmagador para pessoas com sensibilidade auditiva.",
-      "Visual clutter: Muitas palavras flutuantes podem causar ansiedade em pessoas com TDAH ou autismo."
+      "Animações visuais complexas (inversão do provérbio, partículas) podem causar desconforto em pessoas com sensibilidade visual.",
+      "Sons sobrepostos (voz + sons ambientais) podem ser intensos para pessoas com sensibilidade auditiva.",
+      "Ritmo rápido da experiência pode ser stressante para pessoas com ansiedade ou dificuldade de processamento."
     ],
     "mitigations": [
-      "Flashing: O zumbido final é *opcional* (a pessoa pode sair antes). Alternativa: brilho estático.",
-      "Auditory overload: Volume máximo do coral é limitado a 50%. Opção para *reduzir* o volume dos sotaques (controle de volume sempre visível).",
-      "Visual clutter: Número máximo de palavras flutuantes é 10. Opção para *esconder* as palavras não interativas (modo 'foco')."
+      "Opção para reduzir ou desativar animações visuais.",
+      "Controle de volume e opção para desativar sons ambientais.",
+      "Modo 'sem pressão' com ritmo mais lento e pausas automáticas.",
+      "Aviso prévio sobre a intensidade da experiência e opção para saír a qualquer momento."
     ]
   },
   "distinctiveness": {
-    "unique_elements": [
-      "A *inversão física* do provérbio (virar a palavra como um objeto).",
-      "O *coral de sotaques* como tradução auditiva do provérbio.",
-      "A *dança das letras* como aprofundamento sensorial (visual + kinesthetic).",
-      "O *zumbido final* como transformação inesperada do som.",
-      "A *constelação de provérbios virados* como rasto coletivo.",
-      "A *territorialização* dos provérbios (sotaques + objetos simbólicos regionais)."
+    "unique_aspects": [
+      "A inversão do provérbio como gesto central, que revela camadas ocultas de significado, som e imagem.",
+      "A tradução cruzada entre voz e imagem, onde um modula o outro.",
+      "A constelação de provérbios como um espaço explorável, onde os fios reagem ao cursor.",
+      "A devolução de um 'provérbio pessoal' gerado a partir das interações da pessoa.",
+      "A evocação territorial através de conexões poéticas (topónimos, sons, memórias).",
+      "O uso do silêncio como material ativo na experiência."
     ],
-    "comparison": "Nenhuma outra experiência no Atlas usa: (1) a mecânica de *virar* como gesto central; (2) a tradução de texto em *coral de sotaques*; (3) a combinação de *textura visual* (tecido/papel) com *som de fio/agulha*; (4) a devolução de um *objeto simbólico territorial*."
+    "comparison": "Nenhuma outra experiência no Atlas usa a mecânica de 'virar' um provérbio para revelar camadas ocultas, nem a tradução cruzada entre voz e imagem de forma tão integrada. A devolução de um provérbio pessoal também é única."
   },
   "questions_for_eduardo": [
-    "Confirmar se a territorialização dos provérbios (associação a regiões) é desejada e como deve ser implementada (ex: base de dados de provérbios por região).",
-    "Validar se o zumbido final (coral acelerado) é alinhado com a intenção autoral ou se deve ser substituído por outro tipo de transformação sonora.",
-    "Clarificar se os objetos simbólicos (ex: cão de barro) devem ser *imagens* ou *sons* (ou ambos), e se devem ser *reais* (fotografados) ou *abstratos* (desenhados).",
-    "Confirmar se a constelação de provérbios virados deve ser *visível para todos* (anónima) ou apenas para a pessoa que os virou."
+    "A ligação territorial dos provérbios (ex: associação a topónimos ou práticas específicas) está validada? Se sim, existe um mapeamento pré-definido ou deve ser gerado dinamicamente?",
+    "O som da 'voz ancestral' deve ser uma voz humana gravada, sintetizada, ou uma combinação de sons ambientais (ex: vento, terra)?",
+    "A constelação de provérbios deve incluir apenas provérbios do corpus autoral, ou pode incluir contribuições públicas validadas?",
+    "O 'provérbio pessoal' deve ser gerado apenas a partir das interações da sessão atual, ou pode incluir dados de sessões anteriores (com consentimento)?",
+    "A duração de 24 horas para o rasto efémero na constelação COSMICOXES está alinhada com a dramaturgia autoral?"
   ],
   "improvement_proposals": [
     {
-      "proposal": "Incluir uma *opção de gravar* o provérbio na voz da pessoa, que depois é misturada com os sotaques no coral final. Isso adicionaria uma camada de *participação ativa* e *memória pessoal*.",
-      "impact": "Aumentaria a imersão e o rasto pessoal, mas requer permissão de microfone e moderação para evitar abusos."
+      "proposal": "Incluir uma opção para a pessoa 'falar' um provérbio (via microfone) e ver a sua voz ser transformada na voz ancestral, como parte da experiência de inversão.",
+      "justification": "Aprofundaria a conexão entre a voz da pessoa e a voz do provérbio, reforçando a tradução cruzada entre som e identidade."
     },
     {
-      "proposal": "Adicionar uma *camada de 'provérbios esquecidos'*: provérbios em desuso ou de regiões específicas que só aparecem se a pessoa *procurar* ativamente (ex: clicar num botão 'descobrir mais').",
-      "impact": "Enriqueceria a dimensão territorial e histórica, mas pode sobrecarregar a experiência."
+      "proposal": "Adicionar uma camada de 'memória coletiva' onde provérbios pessoais de outras pessoas (anónimos) possam ser explorados como parte da constelação, com moderação humana.",
+      "justification": "Reforçaria o aspecto comunitário e intergeracional do folclore, alinhado com os princípios do Atlas."
     },
     {
-      "proposal": "Permitir que a pessoa *crie o seu próprio provérbio* a partir das palavras soltas, que depois é adicionado à constelação como um 'provérbio anónimo'.",
-      "impact": "Aumentaria a dimensão criativa e comunitária, mas requer moderação para evitar conteúdo inadequado."
+      "proposal": "Integração com o Livro Cubo: permitir que o provérbio pessoal seja 'guardado' numa das faces do Cubo Interior como um objeto simbólico.",
+      "justification": "Criaria uma ponte entre as curadorias de 'Provérbios' e 'Livro Cubo', enriquecendo a experiência de rasto."
     }
   ],
   "generic_fallback_allowed": false,

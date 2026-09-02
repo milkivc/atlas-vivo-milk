@@ -6,12 +6,12 @@
       {
         "source": "catalog_entry",
         "authority": "high",
-        "details": "mecânica: 'rasgar'; convite: 'Parte uma frase. Faz duas entradas.'; camada: 'publica'; estado: 'operavel_motor_comum'"
+        "details": "mecânica: 'rasgar', convite: 'Parte uma frase. Faz duas entradas.'"
       },
       {
         "source": "constitution",
         "authority": "high",
-        "details": "Princípios de tradução cruzada, arco dramatúrgico, assinatura sensorial única e uso de silêncio/ausência como matéria."
+        "details": "Princípios de tradução cruzada, arco dramatúrgico, assinatura sensorial única, e uso de silêncio/ausência como matéria."
       },
       {
         "source": "source_corpus",
@@ -23,345 +23,353 @@
       {
         "source": "source_corpus",
         "authority": "low",
-        "details": "Rasto desejado: 'memória, palavra, gesto, folclore, fábula'."
+        "details": "Famílias sensoriais: 'rasgo / colagem / recomposição'."
       }
     ]
   },
   "authorial_invariants": [
-    "A mecânica central é 'rasgar' como gesto de fragmentação e recomposição.",
+    "A mecânica central é 'rasgar' uma frase para criar duas entradas.",
     "O convite é literal: 'Parte uma frase. Faz duas entradas.'",
-    "A experiência deve preservar a estética de caderno rasgado, assimetria orgânica e bagunça com ordem.",
-    "A curadoria pertence à camada pública e é operável pelo motor comum."
+    "A estética deve evocar caderno, folha rasgada, assimetria orgânica e bagunça com ordem.",
+    "A experiência deve ser pública e operável pelo motor comum."
   ],
-  "perceptual_intent": "Transformar a acção de rasgar uma frase num ritual digital que convoca a materialidade do papel, o som do rasgo, a fragmentação do sentido e a recomposição como acto poético. A pessoa deve sentir que está a manipular uma folha viva, onde cada rasgo revelar camadas ocultas de memória, território ou linguagem.",
+  "perceptual_intent": "Transformar a acção de rasgar uma frase num acto sensorial e poético que convoca a atenção para o gesto, o som, a textura e a recomposição do significado. A pessoa deve sentir que está a manipular matéria viva (papel, tinta, som) e não apenas texto digital.",
   "threshold": {
-    "description": "A tela começa em branco, com uma textura de papel envelhecido e uma sombra de folha rasgada no canto inferior direito. Um som suave de vento ou folhas a mover-se é audível, mas não intrusivo. A pessoa percebe que algo está 'escondido' sob a superfície, como se a folha fosse uma camada sobre outra.",
-    "sensory_trigger": {
-      "visual": "Textura de papel com veios e manchas de tinta, sombra de rasgo visível.",
-      "auditory": "Paisagem sonora de papel a ser manuseado (ruído de folha a ser virada, vento leve).",
-      "haptic": "Feedback visual de 'peso' ao mover o cursor (sombra alongada, como se o cursor fosse uma mão a tocar o papel)."
-    }
+    "description": "A pessoa entra numa página onde uma folha de caderno digital aparece em primeiro plano, semi-transparente, com uma frase escrita à mão (ex: 'O rio carrega as memórias que a cidade esqueceu'). A folha tremula levemente, como se fosse real, e o cursor se transforma num dedo que parece tocar a superfície do papel. Não há instruções visíveis, apenas o som ambiente de um lápis a riscar papel ao fundo, muito suave.",
+    "sensory_trigger": "O tremor da folha e o som do lápis criam uma expectativa táctil e auditiva, como se o papel estivesse vivo."
   },
   "dramaturgical_arc": [
     {
       "stage": "limiar",
-      "action": "A tela exibe uma folha de caderno digital com uma frase escrita à mão (ex: 'O rio que não tem margens'). A frase está intacta, mas a sombra de um rasgo cruza-a diagonalmente. O som ambiente é de papel a ser manuseado."
+      "description": "A folha de caderno aparece com uma frase escrita à mão. O som ambiente de lápis a riscar papel é audível, mas não intrusivo. A folha tremula como se fosse real."
     },
     {
       "stage": "chamada",
-      "action": "O convite aparece em letra trémula, como se escrito à pressa: 'Parte uma frase. Faz duas entradas.' A frase na folha começa a tremer levemente, como se fosse rasgada por uma mão invisível."
+      "description": "O convite 'Parte uma frase. Faz duas entradas.' aparece em letra manuscrita, como se fosse escrito a lápis na margem da folha, e desaparece lentamente."
     },
     {
       "stage": "primeiro_gesto",
-      "action": "A pessoa arrasta o cursor sobre a frase. O cursor transforma-se numa tesoura ou numa mão que 'puxa' a frase, criando um rasgo visual e sonoro. O som do rasgo é amplificado e misturado com o som ambiente."
+      "description": "A pessoa é convidada a arrastar o dedo (ou cursor) sobre a frase, como se estivesse a rasgar o papel. O gesto é simples: clicar e arrastar sobre a frase."
     },
     {
       "stage": "resposta_viva",
-      "action": "A frase parte-se em dois fragmentos, que se afastam lentamente. Cada fragmento ganha uma sombra de profundidade, como se fossem camadas de papel sobrepostas. O som do rasgo ecoa e transforma-se num murmúrio de vozes ou em sons de água (se a frase for territorial)."
+      "description": "Ao arrastar, a frase divide-se em duas partes, como se o papel fosse rasgado. O som do rasgo é audível (papel a rasgar), e as duas partes da frase afundam-se levemente na folha, como se tivessem peso. A folha agora tem um rasgo visível no local do gesto."
     },
     {
       "stage": "desvio",
-      "action": "Um dos fragmentos inverte-se ou gira, revelando uma palavra ou imagem oculta por trás (ex: um mapa, uma receita, um nome de rua). O outro fragmento pode desaparecer temporariamente ou ganhar uma textura diferente (ex: tinta fresca, mancha de café)."
+      "description": "As duas partes da frase começam a mover-se lentamente em direcções opostas, como se fossem puxadas por uma corrente invisível. O som do lápis para, e um novo som (de água a correr ou vento) substitui-o, sugerindo uma transição para outro ambiente."
     },
     {
       "stage": "aprofundamento_sensorial",
-      "action": "Os fragmentos começam a interagir entre si: um pode 'puxar' o outro, criando um som de atrito (como papel a ser esfregado). A cor da tela muda subtamente (ex: do branco para um tom de terra ou azul, dependendo do território evocado)."
+      "description": "As duas partes da frase ganham texturas diferentes: uma parece mais áspera (como papel velho), a outra mais lisa (como papel novo). O som ambiente agora mistura o rasgo do papel com o som de água. A pessoa pode interagir com cada parte separadamente."
     },
     {
-      "stage": "escolha_acaso_silêncio",
-      "action": "A pessoa pode: (1) arrastar um fragmento para recompor a frase original; (2) sobrepor os fragmentos para criar uma nova frase; ou (3) esperar em silêncio. Se escolher esperar, os fragmentos começam a mover-se sozinhos, como se empurrados pelo vento."
+      "stage": "escolha_acaso_silencio",
+      "description": "A pessoa pode escolher: (1) arrastar uma das partes para um lado da folha, (2) deixar as partes onde estão, ou (3) clicar no rasgo para 'costurar' a frase de volta. Se não fizer nada, as partes começam a flutuar lentamente, como se estivessem em água."
     },
     {
       "stage": "aparição",
-      "action": "Se a pessoa recompor a frase, aparece uma nova camada de papel por baixo, com uma frase ou imagem relacionada (ex: uma fotografia de um rio, uma receita de pão). Se criar uma nova frase, esta ganha vida: as letras tremem, mudam de cor ou emitem sons. Se esperar, os fragmentos revelam uma constelação de palavras ou imagens ligadas ao território da frase original."
+      "description": "Se a pessoa arrastar uma das partes para a margem, uma nova frase aparece na margem oposta, escrita em tinta que parece molhada. Se costurar o rasgo, a frase original volta, mas com uma palavra alterada (ex: 'O rio carrega as memórias que a cidade *lembrou*'). Se não interagir, as partes afundam-se na folha, e uma nova frase emerge do rasgo, como se fosse escrita por baixo do papel."
     },
     {
       "stage": "devolução",
-      "action": "A pessoa recebe de volta: (1) a frase recomposta com uma anotação à mão (ex: 'Esta frase já foi rasgada 12 vezes'); (2) a nova frase criada, que pode ser guardada como 'rasgo' no cosmos da curadoria; ou (3) um fragmento sonoro ou visual que pode ser partilhado (ex: o som do rasgo misturado com o murmúrio)."
+      "description": "A pessoa recebe de volta uma 'página' com as duas entradas criadas (ou a frase alterada). Esta página pode ser guardada como imagem ou partilhada como um 'rasgo' no Atlas. A página tem a textura do papel rasgado e a assinatura sensorial da experiência."
     },
     {
-      "stage": "rasto_latência",
-      "action": "O rasgo criado pela pessoa fica gravado como uma 'cicatriz' na folha digital. Em sessões futuras, outras pessoas podem encontrar esta cicatriz e interagir com ela (ex: arrastar o cursor sobre ela para ouvir o som do rasgo original). A folha nunca volta a ser completamente intacta."
+      "stage": "rasto_latencia",
+      "description": "O rasgo e as entradas criadas ficam registados no 'caderno' do Atlas como um vestígio. Em sessões futuras, a pessoa pode encontrar os seus rasgos ou os de outros, que aparecem como folhas rasgadas flutuando no espaço da curadoria."
     }
   ],
   "participant_verbs": [
-    "arrastar",
     "rasgar",
-    "espera",
-    "sobrepor",
-    "recompor",
+    "arrastar",
+    "escolher",
+    "costurar",
+    "flutuar",
     "escutar",
     "observar"
   ],
-  "system_responses": {
-    "to_arrastar": {
-      "visual": "O cursor transforma-se numa tesoura ou mão; a frase parte-se em fragmentos com som de rasgo.",
-      "auditory": "Som de papel a rasgar, misturado com murmúrios ou sons territoriais (ex: água, vento).",
-      "haptic": "Feedback visual de resistência (sombra alongada, como se o papel fosse físico)."
+  "system_responses": [
+    {
+      "action": "rasgar_frase",
+      "response": {
+        "visual": "A frase divide-se em duas partes, com um rasgo visível no papel. As partes afundam-se levemente.",
+        "auditory": "Som de papel a rasgar, seguido de um som ambiente que muda (ex: lápis → água).",
+        "haptic": "Vibração sutil (opcional) no dispositivo, como feedback do rasgo.",
+        "kinesthetic": "As partes da frase movem-se em direcções opostas, como se fossem puxadas."
+      }
     },
-    "to_rasgar": {
-      "visual": "Fragmentos da frase afastam-se, revelando camadas ocultas (imagens, palavras, texturas).",
-      "auditory": "Som do rasgo ecoa e transforma-se em sons ambientais (ex: vozes, água).",
-      "spatial": "Os fragmentos ganham profundidade, como se fossem camadas de papel sobrepostas."
+    {
+      "action": "arrastar_parte",
+      "response": {
+        "visual": "A parte arrastada ganha uma textura diferente (áspera ou lisa) e move-se com a pessoa.",
+        "auditory": "Som de papel a ser arrastado ou água a mover-se.",
+        "spatial": "A parte arrastada parece ter peso, como se estivesse a ser puxada por uma força invisível."
+      }
     },
-    "to_espera": {
-      "visual": "Fragmentos movem-se sozinhos, como empurrados pelo vento; a tela escurece ou clareia subtamente.",
-      "auditory": "Som ambiente intensifica-se (ex: vento mais forte, murmúrios mais audíveis).",
-      "temporal_interoceptive": "A espera é marcada por uma respiração percebida (pulsação visual ou sonora)."
+    {
+      "action": "costurar_rasgo",
+      "response": {
+        "visual": "O rasgo fecha-se, mas a frase volta com uma palavra alterada.",
+        "auditory": "Som de agulha a costurar papel.",
+        "temporal_interoceptive": "Pausa breve antes da frase reaparecer, como se o sistema estivesse a 'pensar'."
+      }
     },
-    "to_sobrepor": {
-      "visual": "Fragmentos sobrepõem-se, criando uma nova frase ou imagem; as letras podem tremular ou mudar de cor.",
-      "auditory": "Som de atrito (papel a esfregar-se) ou de colisão suave.",
-      "haptic": "Feedback visual de 'colagem' (sombra de cola ou fita adesiva)."
+    {
+      "action": "deixar_flutuar",
+      "response": {
+        "visual": "As partes da frase flutuam lentamente, como se estivessem em água.",
+        "auditory": "Som de água a mover-se ou vento.",
+        "spatial": "As partes movem-se em direcções aleatórias, criando um padrão orgânico."
+      }
     },
-    "to_recompor": {
-      "visual": "Fragmentos voltam à posição original, revelando uma nova camada de papel por baixo.",
-      "auditory": "Som de papel a ser colado ou de um suspiro.",
-      "spatial": "A folha ganha uma nova textura (ex: manchas de tinta, dobras)."
+    {
+      "action": "guardar_pagina",
+      "response": {
+        "visual": "A página com as entradas criadas aparece como uma imagem com textura de papel rasgado.",
+        "trace_and_return": "A página é guardada no 'caderno' do Atlas como um rasgo único."
+      }
     }
-  },
-  "sensory_signature_id": "rasgo-poetico-021",
+  ],
+  "sensory_signature_id": "caderno-rasgado-21-2026",
   "sensory_channels": {
     "visual": {
       "elements": [
-        "textura de papel envelhecido",
-        "sombras de rasgo e profundidade",
-        "fragmentos de frase com movimento orgânico",
-        "camadas ocultas (imagens, palavras, mapas)",
-        "pulsação visual (respiração da folha)",
-        "mudança de cor subtânea (território evocado)"
+        "Folha de caderno digital com textura realista (papel envelhecido, manchas de tinta).",
+        "Frase escrita à mão, com traços irregulares.",
+        "Rasgo visível no papel, com bordas irregulares.",
+        "Texturas diferenciadas nas partes rasgadas (áspera vs. lisa).",
+        "Movimento orgânico das partes da frase (flutuação, afundamento).",
+        "Sombra e profundidade para simular papel 3D."
       ],
-      "intensity": "medium-high"
+      "purpose": "Criar a ilusão de manipular papel real, com peso, textura e movimento."
     },
     "auditory": {
       "elements": [
-        "som de papel a rasgar",
-        "murmúrios de vozes ou sons territoriais (água, vento)",
-        "eco do rasgo transformado em sons ambientais",
-        "som de atrito (papel a esfregar-se)",
-        "paisagem sonora de papel a ser manuseado",
-        "silêncio como matéria (ausência de som entre rasgos)"
+        "Som ambiente de lápis a riscar papel (baixo volume).",
+        "Som de papel a rasgar (realista, mas não agressivo).",
+        "Som de água a correr ou vento (transição entre ambientes).",
+        "Som de agulha a costurar papel (quando a pessoa costura o rasgo).",
+        "Silêncio controlado entre sons para criar expectativa."
       ],
-      "spatialization": "Os sons vêm de diferentes 'camadas' da folha (ex: fragmento da esquerda emite som à esquerda, fragmento da direita à direita).",
-      "intensity": "medium"
+      "purpose": "Reforçar a sensação táctil e o gesto do rasgo, bem como a transição entre estados."
     },
     "haptic": {
       "elements": [
-        "feedback visual de resistência ao arrastar (sombra alongada)",
-        "feedback visual de 'peso' do papel",
-        "vibração opcional em dispositivos compatíveis (somente se permitido)"
+        "Vibração sutil no dispositivo (opcional) quando a pessoa rasga ou arrasta uma parte da frase."
       ],
-      "intensity": "low"
+      "purpose": "Feedback táctil para reforçar a acção do rasgo."
     },
     "kinesthetic": {
       "elements": [
-        "movimento do cursor como 'mão' ou 'tesoura'",
-        "trajectória do arrasto afeta a direção do rasgo",
-        "velocidade do gesto afeta a intensidade do som e da fragmentação"
+        "Movimento das partes da frase em resposta ao gesto da pessoa (arrastar, soltar).",
+        "Sensação de peso nas partes da frase (afundamento, flutuação)."
       ],
-      "intensity": "medium"
+      "purpose": "Convocar a sensação de manipular objectos físicos."
     },
     "proprioceptive": {
       "elements": [
-        "instruções opcionais de postura (ex: 'Segura o rato como se fosse uma tesoura')",
-        "ritmo da respiração percebido através de pulsação visual/sonora"
+        "Instruções implícitas para usar o dedo ou cursor como se fosse uma mão a tocar papel.",
+        "Sensação de espaço 3D na folha (profundidade, sombra)."
       ],
-      "intensity": "low"
+      "purpose": "Encorajar a pessoa a sentir o corpo como parte da experiência."
     },
     "temporal_interoceptive": {
       "elements": [
-        "espera como parte ativa da experiência",
-        "aceleração/desaceleração do movimento dos fragmentos",
-        "pulsação rítmica (respiração da folha)"
+        "Pausas entre acções (ex: depois de rasgar, antes de a frase reaparecer).",
+        "Ritmo lento e orgânico dos movimentos (flutuação, afundamento).",
+        "Silêncio como matéria (ex: quando a pessoa não interage, o som para)."
       ],
-      "intensity": "medium"
+      "purpose": "Criar uma sensação de tempo vivo e respirável."
     },
     "spatial": {
       "elements": [
-        "profundidade visual das camadas de papel",
-        "posicionamento dos fragmentos no espaço 2D/3D",
-        "território evocado através de cores, sons e imagens"
+        "Folha de caderno como espaço central, com margens que sugerem profundidade.",
+        "Partes da frase movem-se em direcções opostas, criando um eixo espacial.",
+        "Rasgo no papel como um portal para novo conteúdo."
       ],
-      "intensity": "medium"
+      "purpose": "Usar o espaço digital como um ambiente físico."
     },
     "olfactory_evocation": {
       "elements": [
-        "evocação de cheiro de papel velho ou tinta fresca através de linguagem e imagem",
-        "associação a memórias olfativas (ex: 'Cheira a caderno novo?')"
+        "Sugestão visual de cheiro a papel velho ou tinta fresca (através de texturas e cores).",
+        "Descrição textual opcional: 'Cheira a caderno novo.' ou 'O papel tem cheiro a memórias.'"
       ],
-      "intensity": "low"
+      "purpose": "Evocar o olfacto sem fingir output físico."
     },
     "gustatory_evocation": {
       "elements": [
-        "evocação de sabores através de memórias ou receitas (ex: 'Esta frase sabe a pão quente')"
+        "Sugestão visual de sabor (ex: mancha de tinta que lembra café ou mel).",
+        "Descrição textual opcional: 'A tinta tem sabor a infância.'"
       ],
-      "intensity": "low"
+      "purpose": "Evocar o paladar sem fingir output físico."
     },
     "social_presence": {
       "elements": [
-        "rasgos de outras pessoas visíveis como 'cicatrizes' na folha",
-        "sons ou fragmentos de outras sessões misturados com a experiência atual (opcional e anónimo)"
+        "Rastos de outras pessoas (folhas rasgadas flutuando) aparecem no espaço da curadoria.",
+        "A pessoa pode encontrar entradas criadas por outros, como se fossem páginas de um caderno partilhado."
       ],
-      "intensity": "low"
+      "purpose": "Criar uma sensação de comunidade e devolução colectiva."
     }
   },
   "cross_sensory_translation": {
     "primary": {
-      "from": "gesto (arrastar/rasgar)",
-      "to": "som (rasgo) + visual (fragmentação) + espacial (profundidade)",
-      "description": "O gesto de arrastar o cursor transforma-se num som de rasgo e numa fragmentação visual que revela camadas ocultas, como se o papel fosse físico."
+      "from": "gestual (rasgar)",
+      "to": "auditivo (som de papel a rasgar) + visual (rasgo no papel) + táctil (vibração opcional)",
+      "description": "O gesto de rasgar é traduzido em som, imagem e feedback táctil, criando uma experiência multissensorial do acto de rasgar."
     },
     "secondary": {
-      "from": "palavra (frase escrita)",
-      "to": "imagem (território evocado) + som (murmúrios/água)",
-      "description": "A frase rasgada revela imagens ou sons ligados ao seu significado territorial ou poético."
+      "from": "visual (textura do papel)",
+      "to": "auditivo (som de água ou vento) + olfacto (evocação de cheiro a papel)",
+      "description": "A textura visual do papel evoca sons e cheiros associados a memórias de cadernos e papel."
     }
   },
   "silence_or_absence": {
-    "mechanism": "O silêncio é usado como matéria ativa: entre rasgos, os fragmentos podem ficar imóveis e o som ambiente reduzir-se a zero, criando uma pausa que convida à observação ou à espera.",
-    "effect": "O silêncio amplifica a perceção das camadas ocultas e da materialidade do papel. Também pode ser um 'gesto' da pessoa (escolher não interagir)."
+    "use": [
+      "O som ambiente (lápis a riscar) para quando a pessoa interage, criando um momento de silêncio que destaca a acção.",
+      "Se a pessoa não interagir, o som para completamente, e as partes da frase começam a flutuar em silêncio.",
+      "O rasgo no papel é uma ausência visual que se torna um portal para novo conteúdo."
+    ],
+    "purpose": "Usar o silêncio e a ausência como matéria para criar expectativa, transição e profundidade."
   },
   "surprise_or_indeterminacy": {
-    "mechanism": [
+    "mechanisms": [
       {
         "type": "acaso_controlado",
-        "description": "A frase inicial é selecionada aleatoriamente de um conjunto de frases autorais ou territoriais. Cada frase tem uma 'camada oculta' única (imagem, som, palavra)."
+        "description": "As partes da frase movem-se em direcções aleatórias quando não são arrastadas, criando padrões orgânicos e imprevisíveis."
       },
       {
         "type": "resposta_a_ritmo",
-        "description": "A velocidade do gesto afeta a intensidade do som e a fragmentação visual (ex: rasgo rápido = som agudo e fragmentos menores)."
+        "description": "Se a pessoa rasgar rapidamente, o som do rasgo é mais agudo e as partes movem-se mais depressa. Se rasgar devagar, o som é mais grave e os movimentos são mais lentos."
       },
       {
         "type": "combinação_de_fragmentos",
-        "description": "Os fragmentos podem combinar-se de formas inesperadas, criando novas frases ou imagens (ex: sobrepor 'rio' e 'pão' pode revelar uma receita de pão de água)."
+        "description": "A frase que reaparece depois de costurar o rasgo tem uma palavra alterada, escolhida aleatoriamente de um conjunto de sinónimos ou antónimos."
       },
       {
-        "type": "território_escolhido",
-        "description": "Se a frase inicial for territorial (ex: nome de uma rua), os fragmentos revelam elementos ligados a esse território (fotografias, sons, memórias)."
+        "type": "memória_de_outros",
+        "description": "Em sessões futuras, a pessoa pode encontrar folhas rasgadas criadas por outros, que aparecem como rastos no espaço da curadoria."
       }
     ]
   },
   "session_variation": [
     {
-      "type": "frase_inicial",
-      "description": "A frase inicial muda entre sessões, selecionada de um conjunto de frases autorais ou territoriais."
+      "type": "ordem_mutável",
+      "description": "A frase inicial é escolhida aleatoriamente de um conjunto de frases autorais, com base em critérios como a hora do dia ou a localização (se permitida)."
     },
     {
-      "type": "camadas_ocultas",
-      "description": "As camadas ocultas por trás dos fragmentos variam (imagens, sons, palavras diferentes)."
+      "type": "resposta_a_ritmo",
+      "description": "A velocidade do gesto de rasgar afecta o som e o movimento das partes da frase."
     },
     {
-      "type": "comportamento_dos_fragmentos",
-      "description": "Os fragmentos podem mover-se sozinhos, reagir ao cursor de formas diferentes ou revelar camadas em ordens distintas."
+      "type": "combinação_de_fragmentos",
+      "description": "A palavra alterada na frase costurada é escolhida aleatoriamente de um conjunto pré-definido."
     },
     {
-      "type": "paisagem_sonora",
-      "description": "A paisagem sonora de fundo (vento, murmúrios) varia subtamente entre sessões."
+      "type": "presença_de_outros_rastos",
+      "description": "Folhas rasgadas de outras sessões aparecem no espaço da curadoria, criando uma sensação de comunidade."
     },
     {
-      "type": "cicatrizes_anteriore",
-      "description": "Rasgos de sessões anteriores aparecem como 'cicatrizes' na folha, interagíveis."
+      "type": "temporalidade_real",
+      "description": "A frase inicial pode variar com a hora do dia (ex: frases mais 'matinais' de manhã, mais 'noturnas' à noite)."
     }
   ],
   "territorial_binding": {
-    "relation": "A experiência pode ser ligada a um território específico se a frase inicial for um topónimo, nome de rua ou referência territorial (ex: 'Rua da Madalena'). Os fragmentos revelam elementos ligados a esse território (fotografias, sons, memórias).",
-    "sustainability": "A ligação territorial é opcional e depende da frase inicial. Se a frase não for territorial, a experiência mantém-se abstrata ou poética.",
-    "evidence": {
-      "source": "source_corpus",
-      "authority": "medium",
-      "details": "Rasto desejado inclui 'memória, rua, bairro, lugar desaparecido'."
-    }
+    "relation": "A experiência evoca o território através de frases que podem ser inspiradas em lugares reais (ex: 'O rio carrega as memórias que a cidade esqueceu').",
+    "sustainability": "As frases são baseadas em contribuições autorais ou territoriais existentes, sem inventar factos. A relação com o território é poética e evocativa, não literal.",
+    "questions_for_eduardo": [
+      "As frases iniciais devem ser baseadas em contribuições reais do Atlas ou podem ser criadas especificamente para esta experiência?"
+    ]
   },
   "trace_and_return": {
     "trace": {
-      "mechanism": "Cada rasgo criado pela pessoa fica gravado como uma 'cicatriz' na folha digital. Estas cicatrizes são visíveis em sessões futuras e podem ser interagidas (ex: arrastar o cursor sobre uma cicatriz para ouvir o som do rasgo original).",
-      "persistence": "As cicatrizes persistem na folha, mas não são associadas a identidades. São anónimas e coletivas."
+      "description": "Cada rasgo e entrada criada é guardado como uma 'página' no 'caderno' do Atlas. Estas páginas têm a textura do papel rasgado e a assinatura sensorial da experiência.",
+      "format": "Imagem com textura de papel rasgado, contendo as duas entradas ou a frase alterada."
     },
     "return": {
-      "to_participant": [
-        "A frase recomposta com uma anotação à mão (ex: 'Esta frase já foi rasgada 12 vezes').",
-        "A nova frase criada, que pode ser guardada como 'rasgo' no cosmos da curadoria.",
-        "Um fragmento sonoro ou visual (ex: o som do rasgo misturado com murmúrios) que pode ser partilhado."
-      ],
-      "to_system": "Os rasgos e cicatrizes alimentam a 'memória' da folha, que pode ser usada para gerar novas combinações de fragmentos em sessões futuras."
+      "immediate": "A pessoa recebe a sua página como devolução imediata, que pode guardar ou partilhar.",
+      "latent": "As páginas criadas aparecem como folhas rasgadas flutuando no espaço da curadoria, para a pessoa ou outros reencontrarem em sessões futuras."
     }
   },
   "accessibility_equivalents": {
-    "visual_impairment": {
-      "alternative": "Todas as interações visuais têm descrições sonoras (ex: 'Fragmento da esquerda: palavra 'rio', som de água ao toque'). Os fragmentos podem ser navegados com teclado (setas para mover, Enter para rasgar).",
-      "poetic_preservation": "As descrições sonoras usam linguagem poética e evocações sensoriais (ex: 'Este fragmento cheira a papel velho e sabe a sal')."
+    "visual": {
+      "alternative": "Descrição textual detalhada de cada estado da folha (ex: 'A folha tem um rasgo no centro. A frase está dividida em duas partes: [parte 1] e [parte 2].').",
+      "enhancement": "Contraste ajustável para a folha e o texto, e opção para desativar animções de movimento."
     },
-    "auditory_impairment": {
-      "alternative": "Todos os sons são acompanhados por feedback visual (ex: pulsação de cor quando um som é emitido). Os murmúrios e sons territoriais são transcritos em legendas opcionais.",
-      "poetic_preservation": "As legendas usam linguagem evocativa (ex: '[murmúrio de vozes distantes, como um coro de memórias]')."
+    "auditory": {
+      "alternative": "Legendas para todos os sons (ex: 'Som de papel a rasgar.').",
+      "enhancement": "Opção para desativar sons ou ajustar volume."
     },
-    "motor_impairment": {
-      "alternative": "A experiência pode ser controlada com teclado (setas para mover o cursor, Enter para rasgar, Espaço para sobrepor). O gesto de rasgar pode ser substituído por um comando de voz (ex: 'Rasga').",
-      "poetic_preservation": "Os comandos de voz são integrados na narrativa (ex: a voz da pessoa é misturada com os murmúrios da folha)."
+    "haptic": {
+      "alternative": "Feedback visual (ex: a parte da frase tremula quando arrastada) para substituir a vibração."
     },
-    "cognitive_impairment": {
-      "alternative": "Modo simplificado: os fragmentos movem-se mais lentamente e as camadas ocultas são reveladas automaticamente após um tempo de espera. O convite é repetido em intervalos regulares.",
-      "poetic_preservation": "A simplificação mantém a estética de caderno rasgado e a sensação de descoberta."
+    "kinesthetic": {
+      "alternative": "Controlo por teclado: setas para mover as partes da frase, Enter para rasgar, Espaço para costurar.",
+      "enhancement": "Modo 'reduced-motion' para desativar animções de flutuação e afundamento."
     },
-    "reduced_motion": {
-      "alternative": "Os fragmentos não se movem automaticamente; a pessoa controla todo o movimento. As transições são suaves e sem animações rápidas.",
-      "poetic_preservation": "A estática dos fragmentos é compensada por feedback sonoro e visual mais intenso (ex: som de papel a ser manuseado quando o cursor passa sobre um fragmento)."
+    "proprioceptive": {
+      "alternative": "Instruções claras em texto para guiar a interacção (ex: 'Arraste o cursor sobre a frase para rasgar.')."
+    },
+    "temporal_interoceptive": {
+      "alternative": "Opção para desativar pausas e acelerar a experiência."
+    },
+    "olfactory_evocation": {
+      "alternative": "Descrição textual das evocações olfactivas (ex: 'O papel cheira a memórias antigas.')."
+    },
+    "gustatory_evocation": {
+      "alternative": "Descrição textual das evocações gustativas (ex: 'A tinta tem sabor a café.')."
     }
   },
   "optional_permissions": {
-    "none": {
-      "description": "A experiência funciona completamente sem microfone, câmara, geolocalização ou sensores de movimento. Todos os gestos podem ser feitos com rato/teclado."
-    },
-    "microphone": {
-      "optional": true,
-      "purpose": "Permite usar a voz para rasgar (comando 'Rasga') ou para gravar um fragmento sonoro que pode ser partilhado como devolução.",
-      "fallback": "Comandos de teclado ou rato."
-    },
-    "geolocation": {
-      "optional": true,
-      "purpose": "Se a frase inicial for territorial, a geolocalização pode ser usada para sugerir frases ou imagens ligadas ao território da pessoa. Nunca é obrigatória.",
-      "fallback": "Frases e imagens genéricas ou aleatórias."
-    }
+    "required": [],
+    "optional": [
+      {
+        "permission": "geolocation",
+        "purpose": "Seleccionar frases iniciais com base na localização da pessoa (ex: frases inspiradas na freguesia onde está).",
+        "fallback": "Frases aleatórias de um conjunto pré-definido."
+      }
+    ]
   },
   "overstimulation_risk": {
-    "visual": {
-      "risk": "Animações rápidas ou fragmentação visual excessiva podem causar desconforto.",
-      "mitigation": "Limitar a velocidade dos fragmentos; oferecer modo reduzido de movimento; usar cores suaves e contrastes acessíveis."
-    },
-    "auditory": {
-      "risk": "Sons súbitos ou sobreposição de murmúrios podem ser intrusivos.",
-      "mitigation": "Controlar o volume dos sons; oferecer opção para desligar a paisagem sonora; usar sons naturais (vento, água) em vez de sons artificiais."
-    },
-    "cognitive": {
-      "risk": "A fragmentação da frase e a revelação de camadas ocultas podem ser confuses.",
-      "mitigation": "Oferecer modo simplificado com menos fragmentos e camadas; repetir o convite em intervalos regulares."
-    }
+    "risks": [
+      "Som súbito de papel a rasgar pode ser inesperado para pessoas sensíveis a sons agudos.",
+      "Animações de flutuação e afundamento podem causar desconforto em pessoas com sensibilidade a movimento."
+    ],
+    "mitigations": [
+      "Volume dos sons é baixo por defeito e ajustável.",
+      "Opção para desativar sons e animações de movimento.",
+      "Modo 'reduced-motion' disponível para desativar todas as animações.",
+      "Pausas entre acções para permitir respiração."
+    ]
   },
-  "distinctiveness": [
-    "A assinatura sensorial única combina o gesto de rasgar com a materialidade do papel, o som do rasgo e a revelação de camadas ocultas, criando uma experiência táctil e poética que não pode ser confundida com outras curadorias.",
-    "A tradução cruzada entre gesto (rasgar), som (rasgo) e visual (fragmentação) é específica desta experiência e não é replicada em outras.",
-    "O uso do silêncio como matéria ativa (pausas entre rasgos) e a persistência das 'cicatrizes' na folha são únicos.",
-    "A estética de caderno rasgado, assimetria orgânica e bagunça com ordem é exclusiva desta curadoria e alinhada com a fonte autoral.",
-    "A devolução sob a forma de anotações à mão, fragmentos sonoros ou visuais partilháveis é distinta de outras experiências."
-  ],
+  "distinctiveness": {
+    "unique_elements": [
+      "A mecânica central de rasgar uma frase para criar duas entradas é única e não é repetida em outras curadorias.",
+      "A assinatura sensorial combina som realista de papel, texturas visuais de caderno e movimento orgânico das partes da frase.",
+      "A tradução cruzada entre gesto (rasgar), som (papel a rasgar) e visual (rasgo no papel) é específica desta experiência.",
+      "O uso do silêncio e da ausência (rasgo como portal) é central para a dramaturgia.",
+      "A devolução é uma 'página' com textura de papel rasgado, que evoca a materialidade do caderno."
+    ],
+    "comparison": "Esta experiência não pode ser confundida com outras porque: (1) a mecânica de rasgar é única; (2) a assinatura sensorial é baseada em papel e caderno; (3) a devolução é uma página física digital; (4) o arco dramatúrgico é centrado na transformação de uma frase em duas entradas."
+  },
   "questions_for_eduardo": [
-    "A frase inicial deve ser sempre territorial (ex: nome de uma rua) ou pode ser abstrata/poética (ex: 'O rio que não tem margens')?",
-    "As camadas ocultas por trás dos fragmentos devem ser pré-definidas (imagens, sons, palavras fixas) ou podem ser geradas dinamicamente com base em contribuições públicas (ex: fotos de outras pessoas)?",
-    "O som do rasgo deve ser sempre o mesmo ou pode variar com base no território ou na frase inicial?",
-    "As 'cicatrizes' dos rasgos anteriores devem ser visíveis apenas na folha atual ou podem ser acessíveis em outras curadorias (ex: COSMICOXES)?"
+    "As frases iniciais devem ser baseadas em contribuições reais do Atlas ou podem ser criadas especificamente para esta experiência?",
+    "A frase alterada depois de costurar o rasgo deve ser gerada aleatoriamente ou seguir uma regra autoral específica?",
+    "Os rastos de outras pessoas (folhas rasgadas) devem ser visíveis por defeito ou apenas se a pessoa optar por partilhar as suas entradas?",
+    "A textura do papel deve ser sempre a mesma ou pode variar entre sessões (ex: papel velho vs. novo)?"
   ],
   "improvement_proposals": [
     {
-      "proposal": "Integração com a curadoria 'Fucô': os murmúrios ouvidos durante o rasgo poderiam ser vozes de Fucô a comentar a frase ou o gesto, criando uma camada de diálogo.",
-      "justification": "Fucô é um mediador vivo e afetuoso, e sua presença poderia enriquecer a experiência com humor e profundidade, sem quebrar a assinatura sensorial."
+      "proposal": "Incluir uma opção para a pessoa 'assinar' a sua página com um nome ou pseudónimo, que aparece como uma assinatura manuscrita na margem.",
+      "justification": "Reforça a sensação de autoria e comunidade."
     },
     {
-      "proposal": "Ligação territorial mais forte: se a frase inicial for um topónimo, os fragmentos poderiam revelar uma 'deriva' por esse território (ex: fotografias, sons, memórias de outras pessoas ligadas a esse lugar).",
-      "justification": "Isto alinharia a experiência com o princípio de 'sentipensar' e configuração relacional do corpus autoral."
+      "proposal": "Adicionar um modo 'caderno vazio', onde a pessoa pode começar com uma folha em branco e escrever a sua própria frase para rasgar.",
+      "justification": "Aumenta a agência da pessoa e a variedade de entradas."
     },
     {
-      "proposal": "Devolução em forma de 'rasgo' no cosmos: a nova frase criada pela pessoa poderia ser adicionada a uma constelação de frases rasgadas, visível em COSMICOXES ou em outras curadorias.",
-      "justification": "Isto criaria uma ligação entre curadorias e reforçaria a ideia de rasto e latência."
+      "proposal": "Integração com a curadoria 'Escutar o Silêncio': quando a pessoa não interage, o som ambiente pode transicionar para o silêncio da outra curadoria.",
+      "justification": "Cria uma ponte entre experiências e reforça o uso do silêncio como matéria."
     }
   ],
   "generic_fallback_allowed": false,

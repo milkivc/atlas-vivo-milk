@@ -5,452 +5,371 @@
     "primary": [
       {
         "source": "catalog_entry",
-        "authority": "curatorial",
-        "excerpt": "Escolhe uma palavra local. Muda-a de lugar."
+        "line": "ordem: 45, id: palavra-da-freguesia, nome: Palavra da Freguesia, familia: girias, mecanica: situar, convite: Escolhe uma palavra local. Muda-a de lugar.",
+        "authority": "catalog"
       },
       {
         "source": "source_corpus",
-        "authority": "authorial",
-        "excerpt": "FALARTE / NÓS — 10 MECÂNICAS AUTORAIS: 7. Palavras que desapareceram — gírias, alcunhas e modos de dizer em desaparecimento."
+        "section": "FALARTE / NÓS — 10 MECÂNICAS AUTORAIS",
+        "line": "7. Palavras que desapareceram — gírias, alcunhas e modos de dizer em desaparecimento.",
+        "authority": "authorial"
       }
     ],
     "secondary": [
       {
         "source": "source_corpus",
-        "authority": "interpretive",
-        "excerpt": "Livro Cubo: O Corpo que Percebe — percepção incorporada; digital quase ausente; corpo não é dado."
-      },
-      {
-        "source": "source_corpus",
-        "authority": "interpretive",
-        "excerpt": "Museu da Língua Portuguesa: língua como património vivo, oralidade, interacção sensorial, sotaques, pluralidade."
+        "section": "ÂNCORAS AUTORAIS — CAMADA PÚBLICA",
+        "line": "Rasto desejado: [...] palavra, som, gesto, folclore, fábula.",
+        "authority": "interpretative"
       }
     ]
   },
   "authorial_invariants": [
-    "A palavra deve ser local, territorial e viva (gíria, alcunha, modo de dizer).",
-    "A palavra deve ser deslocada, não apenas repetida ou explicada.",
-    "A experiência deve convocar a memória oral e a identidade toponímica.",
-    "A dinâmica deve preservar a oralidade e a intergeracionalidade sem reduzir a formulário.",
-    "A palavra não é um objecto estático; é um gesto, um som, um ritmo."
+    "A curadoria pertence à família 'gírias' e à mecânica 'situar'.",
+    "O convite autoral é: 'Escolhe uma palavra local. Muda-a de lugar.'",
+    "A experiência deve focar-se em palavras locais, gírias ou modos de dizer em desaparecimento ou transformação.",
+    "A dinâmica deve permitir que a palavra 'mude de lugar' — não apenas de contexto, mas de significado, som, ou presença física no território digital.",
+    "A devolução deve ser um rasto que persiste ou se transforma no território da WebApp."
   ],
-  "perceptual_intent": "Transformar uma palavra local num acto de deslocamento sensorial e territorial, onde o som, o ritmo e o gesto a tornam viva, móvel e capaz de contaminar o ambiente digital como um eco da freguesia. A pessoa deve sentir que a palavra tem peso, textura e história, e que ao movê-la, está a alterar uma constelação invisível de significados.",
+  "perceptual_intent": "Transformar uma palavra local num objecto vivo que migra, ganha peso, ecoa e se reinventa no espaço digital, como se a gíria fosse um ser com agência própria. A pessoa deve sentir que a palavra a observa, responde e se deslocou de um lugar para outro — não como texto, mas como presença sensorial.",
   "threshold": {
-    "description": "A pessoa entra num espaço digital onde o fundo é uma textura de papel envelhecido, com manchas de tinta e marcas de lápis, como se fosse uma página de caderno rasgada. No centro, uma palavra local (ex: 'chibata', 'tachada', 'bica') aparece escrita à mão, com traços irregulares, como se fosse um rascunho. A palavra tremula levemente, como se respirasse. O som ambiente é um murmúrio distante, como vozes de uma feira ou mercado, mas tão baixo que quase não se distingue.",
-    "sensory_trigger": "O murmúrio sobe de volume por 2 segundos e depois desce, como se a palavra tivesse sido pronunciada por alguém fora do ecrã. A palavra ganha um contorno luminoso ténue, como se fosse iluminada por uma luz interior."
+    "description": "A pessoa entra num espaço vazio, escuro e silencioso, onde uma única palavra local (ex: 'chulo', 'tacho', 'bairrista') paira no ar como um objecto tridimensional translúcido, levemente vibrante. A palavra não está escrita num ecrã: está suspensa no espaço, como se fosse um objecto físico com densidade e sombra. O fundo é um gradiente de cinzentos profundos, como um nevoeiro territorial.",
+    "sensory_trigger": "A ausência de interface tradicional (sem botões, menus ou instruções visíveis) e a presença da palavra como objecto vivo criam uma quebra imediata de expectativa."
   },
-  "dramaturgical_arc": {
-    "1_limiar": "A palavra no centro do ecrã tremula e ganha um contorno luminoso. O murmúrio ambiente sobe e desce, como se a palavra estivesse a ser chamada.",
-    "2_chamada": "Um convite subtítulo aparece em letras desalinhadas: 'Escolhe uma palavra local. Muda-a de lugar.' A palavra central continua a tremular, como se esperasse.",
-    "3_primeiro_gesto": "A pessoa pode: (a) tocar/arrastar a palavra com o dedo/rato; (b) pronunciar a palavra em voz alta (opcional, com permissão de microfone); (c) digitar a palavra num campo oculto (aparece apenas se o dispositivo não suportar toque).",
-    "4_resposta_viva": {
-      "gesture_drag": "Ao arrastar a palavra, esta deforma-se como se fosse de borracha, esticando-se na direção do movimento. O som ambiente transforma-se num eco da palavra arrastada, distorcido como se fosse falado num túnel. A textura do fundo ganha relevos, como se a palavra estivesse a esculpir o papel.",
-      "gesture_voice": "Ao pronunciar a palavra, esta vibra no ecrã como uma onda sonora visível (linhas concêntricas que se expandem e desaparecem). O eco da voz da pessoa mistura-se com o murmúrio ambiente, criando uma camada sonora única. A palavra escrita ganha um brilho intermitente, como se estivesse a ser 'carregada' com a voz.",
-      "gesture_type": "Ao digitar a palavra, cada letra aparece com um atraso de 100ms, como se estivesse a ser escrita à mão. A palavra final ganha um som de lápis a riscar papel, e o fundo ganha uma mancha de tinta que se expande lentamente."
+  "dramaturgical_arc": [
+    {
+      "stage": 1,
+      "name": "LIMIAR",
+      "description": "A palavra aparece sozinha, flutuando no centro do ecrã. O som ambiente é um murmúrio distorcido de vozes que pronunciam a palavra em diferentes entoações, como se fosse um coral de memórias. A pessoa sente que algo está 'fora do lugar' antes de perceber o que é."
     },
-    "5_desvio": "Quando a palavra é solta ou a voz termina, ela não volta ao centro. Em vez disso, (a) se arrastada, ela 'cai' como um objecto pesado, criando uma onda de choque visual (linhas radiais) e um som de impacto; (b) se pronunciada, ela 'flutua' para um canto aleatório do ecrã, como se fosse levada pelo vento; (c) se digitada, ela 'afunda' no papel, como se fosse absorvida pela textura, deixando um rasto de tinta.",
-    "6_aprofundamento_sensorial": {
-      "visual": "A palavra começa a interagir com o fundo: (a) se arrastada, o papel ganha dobras onde a palavra passou, como se fosse amassado; (b) se pronunciada, a palavra projecta uma sombra que se move independentemente, como se fosse um eco visual; (c) se digitada, a mancha de tinta espalha-se e forma novas palavras relacionadas (ex: sinónimos, antónimos, palavras da mesma família etimológica).",
-      "auditory": "O eco da palavra mistura-se com sons territoriais (ex: sino de igreja, buzina de eléctrico, risos de crianças) que surgem aleatoriamente, como se a palavra estivesse a 'chamar' a freguesia. O volume e a distorção variam com a distância do cursor à palavra.",
-      "haptic": "Se o dispositivo suportar vibração, um pulso curto é emitido quando a palavra é solta ou a voz termina, como um feedback táctil de 'impacto' ou 'libertação'."
+    {
+      "stage": 2,
+      "name": "CHAMADA",
+      "description": "A palavra começa a pulsar levemente, e o murmúrio das vozes aumenta de volume. Uma voz sutil (sintética, mas com textura humana) sussurra: 'Esta não é a sua palavra. Mas pode sê-lo.'"
     },
-    "7_escolha_acaso_silencio": {
-      "escolha": "A pessoa pode: (a) arrastar a palavra para um 'buraco' no canto do ecrã (um círculo escuro que parece um poço), onde ela desaparece com um som de queda; (b) deixar a palavra onde está, onde ela começa a 'crescer' lentamente, como uma planta, até preencher parte do ecrã; (c) clicar num botão 'Silêncio' (que aparece apenas depois do primeiro gesto), onde a palavra e o som desaparecem, deixando apenas o murmúrio ambiente.",
-      "acaso": "Se a pessoa não interagir por 10 segundos, a palavra começa a 'evaporar-se', com as letras a desvanecerem-se uma a uma, acompanhadas por um som de ventoinha. Depois, uma nova palavra local aparece no centro, como se fosse uma sugestão.",
-      "silencio": "Se a pessoa escolher o 'Silêncio', o ecrã escurece gradualmente, o murmúrio pára e a palavra desaparece. Depois de 3 segundos, um novo murmúrio começa, mais baixo, e uma palavra diferente aparece, como se a freguesia estivesse a 'respirar'."
+    {
+      "stage": 3,
+      "name": "PRIMEIRO GESTO",
+      "description": "A pessoa é convidada a tocar/arrastar a palavra com o cursor ou dedo. Ao fazer isso, a palavra emite um som de 'rasgo' (como papel a ser descolado) e ganha cor, como se fosse preenchida por tinta invisível."
     },
-    "8_aparição": {
-      "gesture_drag": "Ao soltar a palavra no 'buraco', esta desaparece e, após 2 segundos, uma constelação de palavras relacionadas (sinónimos, antónimos, palavras da mesma família) aparece no ecrã, como se fosse um mapa de significados. Cada palavra tem um som único (ex: 'chibata' soa como um chicote, 'bica' soa como água a cair).",
-      "gesture_voice": "Ao pronunciar a palavra, esta flutua para um canto e, após 3 segundos, uma imagem de arquivo (fotografia antiga da freguesia) aparece por trás da palavra, como se fosse um contexto histórico. A imagem tem um filtro de 'papel velho' e está levemente desfocada.",
-      "gesture_type": "Ao digitar a palavra, a mancha de tinta espalha-se e forma uma nuvem de palavras relacionadas. Depois, uma voz (sintética, mas com entoação natural) lê uma das palavras em voz alta, como se fosse um eco da freguesia.",
-      "silencio": "No modo 'Silêncio', após 5 segundos, uma palavra nova aparece no centro, acompanhada por um som de sino ou campainha, como se fosse um convite para começar de novo."
+    {
+      "stage": 4,
+      "name": "RESPOSTA VIVA",
+      "description": "A palavra reage ao toque: se arrastada para a esquerda, distorce-se como se fosse esticada; se arrastada para cima, ganha altura e peso; se solta, cai lentamente como um objecto físico, emitindo um eco sonoro que imita a pronúncia local da palavra."
     },
-    "9_devolução": {
-      "gesture_drag": "A constelação de palavras pode ser 'apanhada' pela pessoa (arrastando o dedo/rato sobre elas). Ao fazê-lo, as palavras seleccionadas são guardadas num 'inventário' (acessível via ícone no canto do ecrã). A pessoa recebe um 'rasto' visual: um selo com a palavra original e as palavras seleccionadas, que pode ser partilhado ou guardado.",
-      "gesture_voice": "A imagem de arquivo e a palavra flutuante são guardadas como um 'par' no inventário. A pessoa recebe um 'rasto' sonoro: um áudio curto (5-10 segundos) que mistura a voz da pessoa com sons territoriais, que pode ser ouvido ou partilhado.",
-      "gesture_type": "A nuvem de palavras e a voz sintética são guardadas como um 'diálogo' no inventário. A pessoa recebe um 'rasto' textual: um poema curto gerado a partir das palavras, que pode ser lido ou partilhado.",
-      "silencio": "A palavra nova é guardada no inventário como um 'eco'. A pessoa recebe um 'rasto' de silêncio: um espaço em branco no inventário, com a data e hora da interacção, como se fosse um momento de reflexão."
+    {
+      "stage": 5,
+      "name": "DESVIO",
+      "description": "De repente, a palavra divide-se em duas: uma cópia idêntica aparece do lado oposto do ecrã. As duas palavras começam a 'conversar' entre si, emitindo sons que se sobrepõem e criam um ritmo. A pessoa percebe que a palavra original não é estática: está a ser recriada em tempo real."
     },
-    "10_rasto_latencia": {
-      "immediate": "O inventário (ícone no canto do ecrã) guarda todos os rastos da sessão. Os rastos podem ser revistos, ouvidos ou lidos a qualquer momento.",
-      "latent": "Se a pessoa regressar à experiência num outro dia, as palavras guardadas no inventário podem 'reaparecer' no ecrã, como se estivessem a ser 'lembradas' pela freguesia. Por exemplo, uma palavra arrastada para o 'buraco' pode reaparecer como uma sombra no fundo do ecrã.",
-      "cosmic": "As palavras e rastos da pessoa podem ser misturados com os de outros participantes (anónimos) em constelações aleatórias, como se fosse um 'cosmos' de palavras da freguesia. Estas constelações aparecem como fundos opcionais em sessões futuras."
+    {
+      "stage": 6,
+      "name": "APROFUNDAMENTO SENSORIAL",
+      "description": "As palavras começam a interagir com o espaço: uma projeta uma sombra que se move independentemente; a outra emite partículas que se transformam em letras de outras gírias relacionadas. O som evolui para uma paisagem sonora de ruas, mercados ou cafés da freguesia associada à palavra. A pessoa pode 'escutar' a palavra como se fosse um lugar."
+    },
+    {
+      "stage": 7,
+      "name": "ESCOLHA / ACASO / SILÊNCIO",
+      "description": "A pessoa pode: (a) fundir as duas palavras num único objecto; (b) separá-las ainda mais; ou (c) deixar o sistema decidir. Se escolher (c), as palavras colidem e explodem em fragmentos de letras, que caem como chuva. O som pára abruptamente, criando um silêncio carregado."
+    },
+    {
+      "stage": 8,
+      "name": "APARIÇÃO",
+      "description": "No silêncio, uma nova palavra emerge do centro do ecrã — uma gíria relacionada, mas transformada. Esta nova palavra tem uma textura diferente (ex: metálica, orgânica) e emite um som único quando tocada. Ao lado, aparece uma sombra de um mapa da freguesia, com a localização aproximada de onde a palavra original 'vivia'."
+    },
+    {
+      "stage": 9,
+      "name": "DEVOLUÇÃO",
+      "description": "A pessoa recebe a nova palavra como um 'objecto de bolso': um ícone miniatura que pode guardar (como um favorito) ou partilhar. O ícone tem a forma da letra inicial da palavra e emite um som quando clicado. A palavra original desaparece do espaço, mas o seu rasto (a sombra do mapa e o som) permanece como parte da constelação da WebApp."
+    },
+    {
+      "stage": 10,
+      "name": "RASTO / LATÊNCIA",
+      "description": "A palavra transformada passa a fazer parte de um 'dicionário vivo' invisível da WebApp. Em sessões futuras, pode reaparecer como: (a) um eco sonoro em outras experiências; (b) uma sombra em fundos de outras curadorias; ou (c) uma sugestão sutil quando a pessoa interage com palavras relacionadas. O rasto nunca é explicado: é apenas sentido."
     }
-  },
+  ],
   "participant_verbs": [
     "tocar",
     "arrastar",
-    "pronunciar",
     "escutar",
-    "soltar",
-    "escolher",
-    "silenciar"
+    "fundir",
+    "separar",
+    "deixar cair",
+    "guardar"
   ],
-  "system_responses": {
-    "to_gesture": {
-      "drag": [
-        "deformar a palavra como borracha",
-        "criar eco sonoro distorcido",
-        "esculpir o fundo com relevos",
-        "criar onda de choque visual ao soltar",
-        "gerar som de impacto"
-      ],
-      "voice": [
-        "vibrar a palavra como onda sonora",
-        "misturar eco da voz com murmúrio ambiente",
-        "iluminar a palavra intermitentemente",
-        "flutuar a palavra para canto aleatório"
-      ],
-      "type": [
-        "escrever a palavra letra a letra com atraso",
-        "emitir som de lápis a riscar papel",
-        "expandir mancha de tinta no fundo"
-      ]
+  "system_responses": [
+    {
+      "trigger": "Toque inicial na palavra",
+      "response": "A palavra ganha cor e emite um som de 'rasgo' (textura de papel)."
     },
-    "to_choice": {
-      "buraco": [
-        "fazer a palavra desaparecer com som de queda",
-        "gerar constelação de palavras relacionadas",
-        "emitir sons únicos para cada palavra"
-      ],
-      "crescer": [
-        "fazer a palavra crescer como planta",
-        "preencher parte do ecrã com a palavra"
-      ],
-      "silencio": [
-        "escurecer o ecrã gradualmente",
-        "parar o murmúrio",
-        "fazer a palavra desaparecer",
-        "reiniciar com nova palavra e murmúrio"
-      ]
+    {
+      "trigger": "Arrastar a palavra",
+      "response": "A palavra distorce-se fisicamente (esticamento, compressão) e emite um eco sonoro da sua pronúncia local, com pitch alterado pela direção do arrasto."
     },
-    "to_return": {
-      "inventario": [
-        "guardar palavras seleccionadas",
-        "gerar selo visual com palavras",
-        "gerar áudio misto com voz e sons territoriais",
-        "gerar poema a partir de palavras"
-      ],
-      "eco": [
-        "guardar palavra nova no inventário",
-        "criar espaço em branco com data/hora"
-      ]
+    {
+      "trigger": "Soltar a palavra",
+      "response": "A palavra cai lentamente com inércia física, emitindo um som de impacto suave quando atinge o 'chão' do ecrã."
+    },
+    {
+      "trigger": "Duas palavras colidem",
+      "response": "As palavras explodem em fragmentos de letras, que caem como chuva. O som pára, criando um silêncio abrupto."
+    },
+    {
+      "trigger": "Fusão das palavras",
+      "response": "As palavras fundem-se num único objecto com textura híbrida (ex: metade metálica, metade orgânica), emitindo um som harmónico das duas pronúncias."
+    },
+    {
+      "trigger": "Escolha de 'deixar decidir'",
+      "response": "O sistema decide aleatoriamente entre fundir, separar ou fazer as palavras dançarem em órbita uma da outra, com sons que se entrelaçam."
+    },
+    {
+      "trigger": "Guarda da nova palavra",
+      "response": "A palavra é miniaturizada num ícone guardado na 'bolsa' da pessoa (área invisível da WebApp). O ícone emite um som único quando seleccionado."
     }
-  },
-  "sensory_signature_id": "palavra-da-freguesia_045",
+  ],
+  "sensory_signature_id": "girias_em_migracao",
   "sensory_channels": {
     "visual": {
       "elements": [
-        "textura de papel envelhecido",
-        "palavra escrita à mão com traços irregulares",
-        "contorno luminoso na palavra",
-        "deformação elástica da palavra",
-        "relevos no fundo",
-        "onda de choque visual",
-        "constelação de palavras",
-        "imagem de arquivo com filtro 'papel velho'",
-        "nuvem de palavras",
-        "selo visual",
-        "espaço em branco no inventário"
+        "Palavra como objecto 3D translúcido e vibrante",
+        "Sombra da palavra que se move independentemente",
+        "Partículas de letras que se transformam em outras gírias",
+        "Gradiente de cinzentos profundos como fundo (nevoeiro territorial)",
+        "Mapa da freguesia como sombra projetada",
+        "Texturas híbridas nas palavras fundidas (metálica, orgânica, líquida)",
+        "Fragmentos de letras a cair como chuva"
       ],
       "dynamics": [
-        "tremulação da palavra",
-        "expansão de mancha de tinta",
-        "movimento de sombra independentemente da palavra",
-        "crescimento da palavra como planta",
-        "desvanecimento de letras",
-        "aparecimento de nova palavra"
+        "Pulsação da palavra",
+        "Distorsão física ao arrastar",
+        "Transição de texturas",
+        "Aparecimento/disparência gradual"
       ]
     },
     "auditory": {
       "elements": [
-        "murmúrio distante (vozes de feira/mercado)",
-        "eco da palavra arrastada (distorcido)",
-        "som de lápis a riscar papel",
-        "som de impacto ao soltar a palavra",
-        "eco da voz da pessoa misturado com murmúrio",
-        "som de ventoinha ao evaporar a palavra",
-        "sons únicos para cada palavra (ex: 'chibata' = chicote)",
-        "som de sino ou campainha",
-        "áudio curto misto (voz + sons territoriais)",
-        "poema lido por voz sintética"
+        "Murmúrio de vozes distorcidas a pronunciar a palavra",
+        "Som de 'rasgo' ao tocar a palavra",
+        "Eco da pronúncia local da palavra (pitch alterado pelo gesto)",
+        "Paisagem sonora de ruas/mercados/cafés da freguesia",
+        "Som de impacto ao soltar a palavra",
+        "Silêncio abrupto após colisão das palavras",
+        "Som harmónico das pronúncias fundidas",
+        "Som único do ícone guardado"
       ],
       "dynamics": [
-        "subida e descida de volume do murmúrio",
-        "variação de volume e distorção com distância do cursor",
-        "mistura de sons territoriais aleatórios",
-        "paragem gradual do murmúrio"
+        "Sobreposição de sons",
+        "Alteração de pitch/volume com o gesto",
+        "Transições suaves entre sons ambientais"
       ]
     },
     "haptic": {
       "elements": [
-        "pulso curto de vibração ao soltar a palavra ou terminar a voz"
+        "Vibração sutil do dispositivo ao tocar a palavra (opcional, se suportado)"
       ],
       "dynamics": [
-        "feedback táctil de 'impacto' ou 'libertação'"
+        "Feedback táctil proporcional à força do toque (se aplicável)"
       ]
     },
     "kinesthetic": {
       "elements": [
-        "arrastar a palavra com o dedo/rato",
-        "movimento do cursor para interagir com a palavra"
+        "Arrastar a palavra com cursor/dedo",
+        "Movimento da sombra da palavra independentemente do cursor",
+        "Inércia física ao soltar a palavra"
       ],
       "dynamics": [
-        "deformação da palavra na direção do movimento",
-        "variação da distorção do eco com a velocidade do arrasto"
+        "Resistência/elasticidade ao arrastar",
+        "Trajectória parabólica ao soltar"
       ]
     },
     "proprioceptive": {
       "elements": [
-        "postura de espera (mão sobre o rato/teclado)",
-        "ritmo da respiração (sugerido pelo murmúrio)",
-        "atenção ao som ambiente"
+        "Instrução implícita para usar a mão dominante ou não dominante (opcional)",
+        "Sensação de peso/leveza da palavra ao arrastar"
       ],
       "dynamics": [
-        "convite a pronunciar a palavra em voz alta",
-        "convite a escutar o eco da voz"
+        "Alteração da sensação de peso com a distância do cursor"
       ]
     },
     "temporal_interoceptive": {
       "elements": [
-        "tempo de espera (10 segundos sem interacção)",
-        "ritmo de aparecimento das letras (100ms de atraso)",
-        "duração do eco sonoro",
-        "tempo de crescimento da palavra"
+        "Espera pelo aparecimento da nova palavra",
+        "Silêncio carregado após a colisão",
+        "Ritmo da queda dos fragmentos de letras"
       ],
       "dynamics": [
-        "aceleração do desvanecimento das letras",
-        "variação da duração do eco com a distância do cursor"
+        "Aceleração/desaceleração do tempo percebido"
       ]
     },
     "spatial": {
       "elements": [
-        "posição da palavra no ecrã",
-        "distância do cursor à palavra",
-        "canto aleatório do ecrã para a palavra flutuar",
-        "buraco (círculo escuro) no canto do ecrã"
+        "Palavra como objecto no espaço 3D",
+        "Sombra projetada no 'chão' do ecrã",
+        "Mapa da freguesia como camada de fundo",
+        "Órbita das palavras uma em volta da outra"
       ],
       "dynamics": [
-        "movimento da palavra para o canto aleatório",
-        "movimento da sombra independentemente da palavra",
-        "aparecimento de constelação de palavras no ecrã"
+        "Profundidade percebida ao mover a palavra",
+        "Perspectiva forçada"
       ]
     },
     "olfactory_evocation": {
       "elements": [
-        "memória de cheiros da freguesia (ex: pão quente, café, peixe frito)"
+        "Memória olfactiva evocada pela paisagem sonora (ex: cheiro a café, pão, mar)"
       ],
       "dynamics": [
-        "evocação de cheiros através de descrições textuais ou sons associados (ex: som de forno a assar pão)"
+        "Associação implícita entre som e cheiro"
       ]
     },
     "gustatory_evocation": {
       "elements": [
-        "memória de sabores da freguesia (ex: pastel de nata, ginjinha, caldo verde)"
+        "Memória gustativa evocada pela palavra (ex: 'tacho' → cheiro/sabor a comida caseira)"
       ],
       "dynamics": [
-        "evocação de sabores através de descrições textuais ou sons associados (ex: som de colher a mexer caldo)"
+        "Sugestão sutil de sabores através de descrições sonoras"
       ]
     },
     "social_presence": {
       "elements": [
-        "murmúrio de vozes da freguesia",
-        "eco da voz da pessoa misturado com sons territoriais",
-        "constelação de palavras de outros participantes (anónimos)"
+        "Murmúrio de vozes como presença de uma comunidade invisível",
+        "Sugestão de que outras pessoas já interagiram com a palavra (através do rasto)"
       ],
       "dynamics": [
-        "mistura de rastos de diferentes pessoas em constelações aleatórias"
+        "Sensação de partilha sem interação directa"
       ]
     }
   },
   "cross_sensory_translation": {
-    "primary": {
-      "from": "auditory",
-      "to": "visual",
-      "mechanism": "O som da voz da pessoa (ou o eco da palavra arrastada) transforma-se em ondas visíveis que deformam a palavra e o fundo, como se o som estivesse a esculpir o espaço digital."
-    },
-    "secondary": {
-      "from": "kinesthetic",
-      "to": "auditory",
-      "mechanism": "O movimento do cursor (velocidade, trajectória) altera a distorção e o volume do eco sonoro, como se o gesto estivesse a modular o som."
-    },
-    "tertiary": {
-      "from": "visual",
-      "to": "temporal_interoceptive",
-      "mechanism": "A deformação da palavra e do fundo (relevos, manchas de tinta) cria uma sensação de tempo suspenso ou acelerado, como se o ambiente digital estivesse a respirar com a interacção."
-    }
+    "primary": "O som da pronúncia local da palavra altera a sua textura visual (ex: uma pronúncia gutural torna a palavra mais escura e rugosa; uma pronúncia aguda a torna mais clara e lisa).",
+    "secondary": "O movimento da palavra no espaço (arrastar/soltar) altera o pitch e o volume do som emitido, como se a palavra fosse um instrumento musical."
   },
   "silence_or_absence": {
-    "mechanism": "O 'Silêncio' é uma opção activa: ao escolher silenciar, a palavra e o som desaparecem, deixando apenas o murmúrio ambiente. Este momento de ausência é marcado por um escurecimento gradual do ecrã e uma pausa no murmúrio, como se a freguesia estivesse a 'respirar'. O silêncio não é vazio; é um convite para escutar o que não está a ser dito.",
-    "purpose": "Criar um contraste com a intensidade sensorial da interacção, permitindo à pessoa um momento de reflexão e conexão com a ausência como parte da experiência territorial."
+    "mechanism": "O silêncio abrupto após a colisão das palavras cria um vazio sonoro que 'revela' a nova palavra. A ausência de som é tão importante quanto a presença: é o momento em que a transformação acontece.",
+    "effect": "O silêncio convida a pessoa a prestar atenção ao que emerge (a nova palavra) e reforça a sensação de que algo de importante acabou de acontecer."
   },
   "surprise_or_indeterminacy": {
-    "mechanism": [
-      "A palavra pode 'evaporar-se' se não houver interacção por 10 segundos, aparecendo uma nova palavra como sugestão.",
-      "Ao arrastar a palavra para o 'buraco', uma constelação de palavras relacionadas aparece, com sons únicos para cada uma.",
-      "Ao pronunciar a palavra, uma imagem de arquivo da freguesia aparece por trás dela, como um contexto histórico inesperado.",
-      "As palavras guardadas no inventário podem 'reaparecer' em sessões futuras, como se estivessem a ser 'lembradas' pela freguesia."
-    ],
-    "purpose": "Quebrar a expectativa de linearidade, introduzindo elementos de acaso controlado e memória territorial que tornam cada sessão única."
+    "mechanism": "A palavra divide-se espontaneamente em duas cópias, que começam a interagir entre si de forma imprevisível (conversar, dançar, colidir). A pessoa não controla este momento: é uma surpresa do sistema.",
+    "effect": "Quebra a expectativa de que a palavra é um objecto passivo. A pessoa percebe que a palavra tem agência própria."
   },
   "session_variation": [
     {
       "type": "acaso_controlado",
-      "description": "A palavra inicial é seleccionada aleatoriamente de um conjunto de palavras locais da freguesia, com base em dados territoriais (ex: palavras mais usadas, palavras em desaparecimento)."
+      "description": "A palavra inicial é seleccionada aleatoriamente de um conjunto de gírias da freguesia associada ao território da pessoa (se geolocalização for permitida) ou de um conjunto pré-definido."
     },
     {
       "type": "ordem_mutavel",
-      "description": "A constelação de palavras relacionadas que aparece ao soltar a palavra no 'buraco' tem uma ordem aleatória, que muda em cada sessão."
+      "description": "A ordem de aparecimento das palavras relacionadas (após a colisão) é aleatória e pode variar entre sessões."
     },
     {
       "type": "resposta_a_ritmo",
-      "description": "A distorção do eco sonoro e a deformação visual da palavra variam com a velocidade e trajectória do gesto da pessoa."
+      "description": "A velocidade com que a pessoa arrasta a palavra altera a intensidade da distorsão visual e do som emitido (arrasto rápido = distorsão e pitch mais altos)."
     },
     {
       "type": "resposta_a_posicao",
-      "description": "O volume e a distorção do eco sonoro variam com a distância do cursor à palavra."
+      "description": "A posição onde a palavra é solta no ecrã afecta a forma como a sombra projetada se move (ex: soltar no canto superior esquerdo faz a sombra mover-se em diagonal)."
     },
     {
       "type": "temporalidade_real",
-      "description": "As palavras e sons territoriais podem variar com a hora do dia (ex: sons de manhã vs. sons de noite) ou a estação do ano, se a experiência for acessada em dispositivos com acesso a essa informação (opcional, sem rastreio)."
-    },
-    {
-      "type": "memoria_deixada",
-      "description": "As palavras guardadas no inventário da pessoa podem reaparecer em sessões futuras, misturadas com palavras de outros participantes (anónimos)."
+      "description": "Em sessões noturnas, as palavras têm tons mais escuros e sons mais graves; em sessões diurnas, tons mais claros e sons mais agudos (se a hora do dispositivo for acessível)."
     }
   ],
   "territorial_binding": {
-    "mechanism": "A experiência está ancorada a uma freguesia específica, com palavras, sons e imagens de arquivo territoriais. A palavra inicial é sempre local (ex: 'chibata' para Alfama, 'tachada' para Graça), e os sons territoriais (ex: sino de igreja, buzina de eléctrico) são específicos da freguesia. As imagens de arquivo são fotografias antigas da freguesia, com filtros que evocam a memória.",
-    "purpose": "Reforçar a identidade toponímica e a conexão com o território, tornando a experiência única para cada freguesia."
+    "relation": "A palavra inicial está associada a uma freguesia específica (ex: 'chulo' → Alfama; 'tacho' → Graça). O mapa que aparece na fase de aparição é da freguesia correspondente à palavra original.",
+    "evidence": "A curadoria pertence à família 'gírias', que está intrinsecamente ligada ao território e à oralidade local (fonte: source_corpus, secção FALARTE/NÓS).",
+    "constraint": "A associação entre palavra e freguesia deve ser baseada em dados reais do corpus territorial. Se não houver dados, a palavra é associada a uma freguesia genérica ou o mapa não aparece."
   },
   "trace_and_return": {
-    "immediate": {
-      "type": "inventario",
-      "description": "Todos os rastos da sessão (palavras seleccionadas, áudios, poemas, selos) são guardados num inventário acessível via ícone no canto do ecrã. O inventário pode ser revisto, ouvido ou lido a qualquer momento."
+    "trace": {
+      "immediate": "A sombra do mapa da freguesia e o som da pronúncia local da palavra permanecem como rasto na constelação da WebApp.",
+      "latent": "A nova palavra guardada pode reaparecer em outras experiências como: (a) um eco sonoro; (b) uma sombra visual; ou (c) uma sugestão sutil em curadorias relacionadas com gírias ou território."
     },
-    "latent": {
-      "type": "reaparecimento",
-      "description": "As palavras guardadas no inventário podem reaparecer em sessões futuras, como sombras ou ecos no fundo do ecrã, como se estivessem a ser 'lembradas' pela freguesia."
-    },
-    "cosmic": {
-      "type": "constelacao",
-      "description": "Os rastos da pessoa (palavras, áudios, poemas) podem ser misturados com os de outros participantes (anónimos) em constelações aleatórias, que aparecem como fundos opcionais em sessões futuras, como um 'cosmos' de palavras da freguesia."
+    "return": {
+      "to_participant": "A pessoa recebe a nova palavra como um ícone guardado, que pode ser reutilizado em outras experiências ou partilhado.",
+      "to_system": "A palavra transformada é adicionada a um 'dicionário vivo' invisível da WebApp, que alimenta futuras interações."
     }
   },
   "accessibility_equivalents": {
-    "gesture_drag": {
-      "alternative": "Teclado: usar as setas para mover a palavra (setas direccionais) e a tecla 'Enter' para soltar. A palavra move-se na direção da seta pressionada, com a mesma deformação e eco sonoro.",
-      "preservation": "A deformação visual e o eco sonoro são preservados, bem como a interacção com o fundo."
+    "visual_impairment": {
+      "description": "Todas as interações visuais são acompanhadas por sons distintos. A palavra é descrita em voz alta quando tocada (ex: 'Palavra: chulo. Textura: rugosa. Som: gutural.'). O mapa é descrito como 'Sombra de um mapa da freguesia de Alfama'.",
+      "preserves_poetry": "Os sons e descrições mantêm a sensação de agência da palavra e a sua ligação ao território."
     },
-    "gesture_voice": {
-      "alternative": "Teclado: digitar a palavra num campo de texto. A palavra digitada ganha o mesmo brilho e eco sonoro que a palavra pronunciada.",
-      "preservation": "A vibração visual e o eco sonoro são preservados."
+    "auditory_impairment": {
+      "description": "Os sons são substituídos por vibrações (se suportado) e por animações visuais exageradas (ex: a palavra pulsa com intensidade quando emitiria um som). As descrições textuais aparecem em legendas opcionais.",
+      "preserves_poetry": "As vibrações e animações transmitem a mesma sensação de movimento e transformação."
     },
-    "visual": {
-      "alternative": "Descrição em áudio: todas as interacções visuais (deformação da palavra, relevos no fundo, constelação de palavras) são descritas em tempo real por uma voz sintética, com entoação natural.",
-      "preservation": "A experiência auditiva e a interacção com o som são preservadas."
+    "motor_impairment": {
+      "description": "A palavra pode ser movida com teclas (setas para arrastar, Enter para soltar). O gesto de 'fundir' ou 'separar' é feito com teclas específicas (ex: F para fundir, S para separar).",
+      "preserves_poetry": "A interação por teclado mantém a sensação de peso e inércia da palavra."
     },
-    "auditory": {
-      "alternative": "Legendas: todos os sons (murmúrio, eco, sons territoriais) são transcritos em tempo real como texto, com indicação de volume e distorção (ex: 'murmúrio baixo', 'eco distorcido').",
-      "preservation": "A experiência visual e a interacção com a palavra são preservadas."
-    },
-    "haptic": {
-      "alternative": "Pulso visual: em dispositivos sem vibração, um círculo concêntrico aparece no ecrã quando a palavra é solta ou a voz termina, como feedback visual de 'impacto' ou 'libertação'.",
-      "preservation": "A sensação de feedback é preservada, embora de forma visual."
+    "cognitive_load": {
+      "description": "Modo 'lento': a palavra move-se mais devagar, os sons são mais suaves e as transições visuais são mais gradual. Opção para desativar a divisão espontânea da palavra.",
+      "preserves_poetry": "A experiência mantém a sua essência sensorial, mas com menos estímulos simultâneos."
     },
     "reduced_motion": {
-      "alternative": "Modo estático: a palavra não tremula nem se deforma. Em vez disso, a interacção é baseada em cliques ou teclas, com feedback sonoro e textual (ex: 'Palavra seleccionada: chibata').",
-      "preservation": "A experiência auditiva, a interacção com a palavra e a devolução são preservadas."
-    },
-    "color_blind": {
-      "alternative": "Alto contraste: a palavra e o fundo têm cores de alto contraste (ex: palavra branca em fundo preto), com contornos grossos para facilitar a leitura. Os relevos e manchas de tinta são representados por padrões texturados (ex: linhas, pontos).",
-      "preservation": "A experiência táctil (através do som e da interacção) e a devolução são preservadas."
+      "description": "As animações são substituídas por transições instantâneas ou suaves. A palavra não pulsa, mas a sua cor e textura mudam para indicar interatividade.",
+      "preserves_poetry": "A ausência de movimento é compensada por contrastes visuais e sonoros mais marcados."
     }
   },
   "optional_permissions": {
-    "microphone": {
-      "purpose": "Permitir à pessoa pronunciar a palavra em voz alta, para que esta vibre no ecrã e se misture com o murmúrio ambiente.",
-      "fallback": "A pessoa pode digitar a palavra num campo de texto, com o mesmo efeito visual e sonoro (eco distorcido).",
-      "request_timing": "A permissão é pedida apenas quando a pessoa clica num botão 'Pronunciar' que aparece após o primeiro gesto (arrastar ou digitar)."
+    "geolocation": {
+      "purpose": "Seleccionar uma palavra local associada à freguesia da pessoa, se disponível.",
+      "fallback": "Se não for permitida, a palavra é seleccionada aleatoriamente de um conjunto pré-definido de gírias de Lisboa."
     },
-    "camera": {
-      "purpose": "Não aplicável para esta experiência.",
+    "microphone": {
+      "purpose": "Nenhuma. A experiência não requer microfone.",
       "fallback": "N/A"
     },
-    "geolocation": {
-      "purpose": "Permitir a selecção automática de palavras, sons e imagens territoriais com base na freguesia onde a pessoa se encontra.",
-      "fallback": "A pessoa pode seleccionar manualmente a freguesia a partir de uma lista ou mapa estático.",
-      "request_timing": "A permissão é pedida apenas quando a pessoa clica num botão 'Usar a minha localização' que aparece no início da experiência."
+    "camera": {
+      "purpose": "Nenhuma. A experiência não requer câmara.",
+      "fallback": "N/A"
     },
-    "device_motion": {
-      "purpose": "Não aplicável para esta experiência.",
+    "motion_sensors": {
+      "purpose": "Nenhuma. A experiência não requer sensores de movimento.",
       "fallback": "N/A"
     }
   },
   "overstimulation_risk": {
-    "visual": {
-      "risk": "Flashing ou movimento rápido da palavra e do fundo pode causar desconforto em pessoas com sensibilidade visual.",
-      "mitigation": [
-        "Limitar a velocidade de deformação da palavra e do fundo.",
-        "Oferecer modo 'reduced-motion' onde a palavra não se deforma nem tremula.",
-        "Usar cores e contrastes suaves, sem padrões repetitivos ou piscantes."
-      ]
-    },
-    "auditory": {
-      "risk": "Eco distorcido ou sons territoriais súbitos podem causar desconforto em pessoas com sensibilidade auditiva.",
-      "mitigation": [
-        "Limitar o volume máximo do eco e dos sons territoriais.",
-        "Oferecer controlo de volume independentemente para o murmúrio, o eco e os sons territoriais.",
-        "Incluir opção para desactivar completamente o som."
-      ]
-    },
-    "haptic": {
-      "risk": "Vibração insistente pode causar desconforto em pessoas com sensibilidade táctil.",
-      "mitigation": [
-        "Limitar a duração e a intensidade da vibração (pulso curto).",
-        "Oferecer opção para desactivar a vibração."
-      ]
-    },
-    "cognitive": {
-      "risk": "Complexidade da interacção (múltiplas opções, constelações de palavras) pode causar sobrecarga cognitiva.",
-      "mitigation": [
-        "Simplificar a interface: mostrar apenas uma opção de cada vez (ex: arrastar, pronunciar ou digitar).",
-        "Oferecer modo 'guia' onde a experiência explica cada passo em voz alta ou texto.",
-        "Permitir à pessoa pausar a experiência a qualquer momento."
-      ]
-    }
+    "potential_risks": [
+      "Sobreposição de sons (murmúrio + eco + paisagem sonora) pode ser esmagadora para pessoas sensíveis a estímulos auditivos.",
+      "Animações rápidas (fragmentos de letras a cair) podem causar desconforto visual.",
+      "Silêncio abrupto pode ser desconcertante para algumas pessoas."
+    ],
+    "mitigation": [
+      "Controlo de volume global e por elemento sonoro (ex: desligar o murmúrio ou a paisagem sonora).",
+      "Modo 'reduced motion' para desativar animações rápidas.",
+      "Aviso prévio de que o silêncio abrupto é parte da experiência, com opção para pular essa fase.",
+      "Limite de duração para a fase de queda dos fragmentos (máximo 10 segundos)."
+    ]
   },
   "distinctiveness": {
-    "unique_elements": [
-      "A palavra local como acto de deslocamento sensorial e territorial, onde o som, o ritmo e o gesto a tornam viva.",
-      "A tradução cruzada entre o som da voz e a deformação visual da palavra e do fundo.",
-      "O 'buraco' como mecanismo de desaparecimento e aparição de constelações de palavras relacionadas.",
-      "O 'Silêncio' como opção activa que convida à reflexão e à ausência como parte da experiência.",
-      "A devolução sob a forma de inventário, selo visual, áudio misto ou poema, que pode ser partilhado ou guardado.",
-      "A latência dos rastos, que podem reaparecer em sessões futuras como memórias da freguesia.",
-      "A ancoragem territorial, com palavras, sons e imagens específicos de cada freguesia."
+    "unique_traits": [
+      "A palavra é tratada como um objecto físico com agência própria, não como texto estático.",
+      "A tradução cruzada entre som (pronúncia) e textura visual é específica desta curadoria.",
+      "A palavra 'muda de lugar' literalmente no espaço digital, não apenas de contexto.",
+      "O uso do silêncio como momento de transformação é central e não decorativo.",
+      "A devolução é um objecto guardado que persiste e pode reaparecer em outras experiências.",
+      "A associação com o território é evocada através de som e sombra, não de mapas interativos."
     ],
-    "comparison": "Esta experiência não pode ser confundida com outras porque: (1) não é um quiz ou formulário; (2) não é uma animação decorativa; (3) não é um jogo de pontos ou badges; (4) não é um chatbot genérico; (5) não é uma página explicativa. É uma situação viva onde a palavra local ganha corpo, som e movimento, e a pessoa é convidada a deslocá-la, transformá-la e deixar um rasto que pode regressar como memória territorial."
+    "comparison": "Nenhuma outra curadoria no Atlas trata uma palavra como um objecto vivo que migra e se transforma fisicamente no espaço. Outras curadorias podem usar palavras (ex: Palavra Ritual), mas não com esta dinâmica de deslocamento e agência."
   },
   "questions_for_eduardo": [
-    "A palavra inicial deve ser sempre aleatória ou pode ser seleccionada pela pessoa a partir de uma lista de palavras locais da freguesia?",
-    "As imagens de arquivo da freguesia devem ser estáticas ou podem ser animadas (ex: transição suave entre fotografias)?",
-    "O inventário deve ser visível apenas durante a sessão ou deve persistir entre sessões (com opção para limpar)?",
-    "As constelações de palavras de outros participantes devem ser sempre anónimas ou pode haver opção para ver o nome do autor (com consentimento)?",
-    "O 'buraco' deve ter um design específico (ex: círculo escuro) ou pode ser um elemento mais abstrato (ex: uma mancha de tinta)?"
+    "A associação entre gírias específicas e freguesias está documentada no corpus territorial? Se não, como deve ser tratada a seleção da palavra inicial?",
+    "A fase de 'divisão espontânea da palavra em duas' deve ser sempre aleatória, ou pode ser desencadeada por um gesto específico da pessoa (ex: tocar duas vezes)?",
+    "O 'dicionário vivo' de palavras transformadas deve ser visível em alguma parte da WebApp (ex: uma secção 'Palavras em Migração'), ou deve permanecer completamente invisível?",
+    "A sombra do mapa da freguesia deve ser interativa (ex: clicável para ver mais detalhes), ou deve permanecer como um elemento estático de fundo?"
   ],
   "improvement_proposals": [
     {
-      "proposal": "Incluir uma opção para a pessoa gravar um áudio curto (5-10 segundos) a explicar o significado da palavra para si, que pode ser guardado no inventário e misturado com os sons territoriais.",
-      "justification": "Reforçar a oralidade e a conexão pessoal com a palavra, alinhando com o princípio de 'língua viva' do Museu da Língua Portuguesa."
+      "proposal": "Incluir uma camada de 'memória colectiva' onde as palavras transformadas por outras pessoas aparecem como sombras ou ecos no fundo do ecrã, criando uma sensação de comunidade.",
+      "justification": "Reforçaria o aspecto social e territorial da curadoria, alinhando com o princípio de 'encontro' do Atlas."
     },
     {
-      "proposal": "Adicionar uma camada de 'memória colectiva', onde as palavras mais deslocadas ou pronunciadas pela comunidade aparecem como um 'top 5' no final da sessão, com um design que evoca um 'muro de palavras' da freguesia.",
-      "justification": "Criar um sentido de comunidade e partilha, alinhando com o princípio de 'encontro' do Livro Cubo."
+      "proposal": "Adicionar uma fase opcional onde a pessoa pode 'devolver' a palavra transformada à sua freguesia de origem, criando um rasto geolocalizado (se permissões forem concedidas).",
+      "justification": "Aprofundaria a ligação ao território e a devolução comunitária, mas requereria validação de Eduardo sobre a mecânica de geolocalização."
     },
     {
-      "proposal": "Permitir à pessoa 'emprestar' uma palavra de outro participante (anónimo) e deslocá-la, criando uma cadeia de deslocamentos.",
-      "justification": "Explorar a ideia de 'rizoma' e 'co-criação não hierárquica' do Livro Cubo, onde as palavras circulam e se transformam entre participantes."
+      "proposal": "Permitir que a pessoa 'converse' com a palavra através de voz (opcional), onde a palavra responde com sons ou distorções visuais baseadas na entoação da voz da pessoa.",
+      "justification": "Adicionaria uma camada de interação mais pessoal, mas deve ser opcional e não depender de permissões de microfone."
     }
   ],
   "generic_fallback_allowed": false,

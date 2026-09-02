@@ -5,330 +5,417 @@
     "primary": [
       {
         "source": "catalog_entry",
-        "authority": "high",
-        "details": "Convite: 'Troca uma letra. Guarda o novo sentido.'; Mecânica: 'transformar'; Família: 'girias'; Camada: 'pública'; Estado: 'operavel_motor_comum'."
+        "quote": "Troca uma letra. Guarda o novo sentido.",
+        "authority": "authorial"
       },
       {
         "source": "constitution",
-        "authority": "high",
-        "details": "Regra canónica: experiências digitais devem ser situações vivas, com arco dramatúrgico, tradução cruzada de sentidos, e assinatura sensorial única."
+        "section": "11. EXEMPLOS DE DIRECÇÃO — NÃO SÃO SOLUÇÕES FINAIS",
+        "relevance": "contextual"
       }
     ],
     "secondary": [
       {
         "source": "source_corpus",
-        "authority": "medium",
-        "details": "Família 'girias' e mecânica 'transformar' alinhadas com dinâmicas de linguagem viva, oralidade e memória territorial (ex: 'Palavras que desapareceram' em FALARTE)."
+        "section": "FALARTE / NÓS — 10 MECÂNICAS AUTORAIS",
+        "note": "Mecânica 7: 'Palavras que desapareceram — gírias, alcunhas e modos de dizer em desaparecimento.'",
+        "authority": "authorial"
       }
     ]
   },
   "authorial_invariants": [
-    "A ação central é trocar uma letra de uma palavra (gíria, topónimo, ou termo do corpus MILK).",
-    "O resultado deve gerar um 'novo sentido' — não apenas um erro ortográfico, mas uma transformação poética ou semântica.",
-    "A experiência deve preservar a oralidade e a memória das girias (ex: 'Palavras que desapareceram' em FALARTE).",
-    "O sistema deve 'guardar' o novo sentido, sugerindo persistência ou rasto."
+    "Transformação de palavras por substituição de letras",
+    "Preservação do 'novo sentido' gerado",
+    "Foco em gírias, linguagens mutantes e modos de dizer",
+    "Dinâmica de jogo linguístico vivo, não estático",
+    "Ausência de explicações burocráticas ou interfaces genéricas"
   ],
-  "perceptual_intent": "Transformar a linguagem em ato vivo, onde uma simples troca de letra revelar camadas ocultas de sentido, memória e território. A pessoa deve sentir que a palavra é um organismo que respira, muta e guarda rastos de quem a toca.",
+  "perceptual_intent": "Criar uma experiência onde a linguagem se torna um organismo vivo, mutável e sensível ao gesto. A pessoa deve sentir que está a brincar com as palavras como se fossem objectos maleáveis, onde cada alteração tem consequências sonoras, visuais e territoriais. O objectivo é evocar a sensação de que a língua é um território em constante transformação, onde o erro é uma porta de entrada para novos sentidos.",
   "threshold": {
-    "description": "A tela começa vazia, com um murmúrio sonoro de vozes sobrepostas (gírias, topónimos, ou fragmentos do corpus MILK) que se desvanecem em eco. Um único ponto de luz pulsante (como um cursor ou partícula) aparece no centro, como se aguardasse um gesto. O som diminui até um silêncio expectante quando o cursor se aproxima.",
-    "sensory_trigger": "O murmúrio e o ponto de luz são o limiar: a pessoa percebe que algo está vivo, mas não sabe o quê."
+    "description": "A pessoa entra num espaço vazio, onde uma única palavra (gíria ou termo em desuso) aparece no centro do ecrã, suspensa como um objecto frágil. A palavra está escrita em tipografia orgânica, que parece respirar levemente. O fundo é um gradiente de cinzentos quentes, como papel envelhecido. Um som ambiente de murmúrios distantes (vozes sobrepostas a pronunciar a palavra em diferentes entoações) preenche o espaço, mas é quase inaudível, como um eco de memórias linguísticas.",
+    "sensory_trigger": "A palavra central pulsa subtamente em tamanho (1-2%) e o som ambiente aumenta de volume em 5% a cada 3 segundos, até a pessoa interagir ou até um limite de 20 segundos."
   },
   "dramaturgical_arc": [
     {
-      "stage": "limiar",
-      "action": "Murmúrio sonoro de vozes e ponto de luz pulsante. Silêncio cresce à medida que o cursor se aproxima."
+      "stage": "LIMIAR",
+      "action": "A palavra inicial aparece sozinha, com o som ambiente a crescer. A pessoa percebe que algo está vivo, mas não sabe o quê.",
+      "sensory_focus": [
+        "visual (palavra pulsante)",
+        "auditory (murmúrios crescentes)"
+      ]
     },
     {
-      "stage": "chamada",
-      "action": "O ponto de luz expande-se em uma palavra solta (ex: 'tchán' ou 'bairro'), escrita em tipografia irregular, como se fosse um recorte de jornal ou pichação. A palavra tremula levemente, como se respirasse."
+      "stage": "CHAMADA",
+      "action": "A palavra é apresentada com um convite subtítulo: 'Troca uma letra. Guarda o novo sentido.' O texto aparece como se fosse escrito à mão, com tinta que escorre levemente.",
+      "sensory_focus": [
+        "visual (texto orgânico)",
+        "auditory (som de caneta a riscar papel)"
+      ]
     },
     {
-      "stage": "primeiro_gesto",
-      "action": "A pessoa é convidada a trocar uma letra da palavra (clique/toque ou voz, ex: 'tchán' → 'chán'). O gesto é simples: selecionar uma letra e substituí-la por outra."
+      "stage": "PRIMEIRO GESTO",
+      "action": "A pessoa clica ou toca na palavra. Esta desintegra-se em letras flutuantes, como se fosse um cardápio de opções. Cada letra tem um peso visual diferente (gírias mais usadas são mais brilhantes).",
+      "sensory_focus": [
+        "visual (letras flutuantes)",
+        "haptic (vibração leve em dispositivos compatíveis)"
+      ]
     },
     {
-      "stage": "resposta_viva",
-      "action": "A palavra transformada ganha peso: a tipografia distorce-se levemente (como se a letra nova a empurrasse), e um som curto (ex: estalo, suspiro, ou fragmento de voz) confirma a mudança. A palavra original desaparece, substituída pela nova."
+      "stage": "RESPOSTA VIVA",
+      "action": "Ao substituir uma letra, a nova palavra forma-se instantaneamente, mas com uma textura visual que reflete o seu 'novo sentido': palavras com som forte (ex: 'tropeço') ganham bordas irregulares; palavras suaves (ex: 'murmúrio') tornam-se translúcidas. Um som único é gerado para a nova palavra, baseado na sua sonoridade (ex: 'z' produz um zumbido, 'r' um rolar de tambor).",
+      "sensory_focus": [
+        "visual (textura dinâmica)",
+        "auditory (som gerado pela palavra)",
+        "kinesthetic (resposta ao gesto)"
+      ]
     },
     {
-      "stage": "desvio",
-      "action": "A palavra transformada pode: (a) revelar um significado oculto (ex: 'chán' → 'chão'), (b) gerar uma palavra inexistente mas sonoramente familiar (ex: 'tchán' → 'tchan'), ou (c) desintegrar-se em partículas que formam uma imagem ou som associado (ex: 'bairro' → 'barro' → som de lama)."
+      "stage": "DESVIO",
+      "action": "Se a nova palavra não existir no dicionário tradicional, o sistema não a rejeita. Em vez disso, a palavra 'inventada' ganha uma aura de cor quente (laranja/vermelho) e o som torna-se mais agudo. Se a palavra existir, a aura é fria (azul/verde) e o som é grave. A pessoa percebe que o sistema não julga, apenas responde.",
+      "sensory_focus": [
+        "visual (aura de cor)",
+        "auditory (tom do som)"
+      ]
     },
     {
-      "stage": "aprofundamento_sensorial",
-      "action": "A palavra transformada passa a interagir com o ambiente: (1) o som do murmúrio inicial retorna, mas agora modificado pela nova palavra (ex: eco de 'chão' soa como passos); (2) a cor de fundo muda para um tom associado ao novo sentido (ex: 'barro' → tons terrosos); (3) a tipografia ganha textura (ex: 'chão' parece esculpida em pedra)."
+      "stage": "APROFUNDAMENTO SENSORIAL",
+      "action": "A pessoa pode continuar a trocar letras. Cada substituição altera não só a palavra, mas também o ambiente: o fundo passa a incluir manchas de cor que evocam o território associado à gíria (ex: 'bairro' pode trazer tons de azulejo; 'maralha' pode trazer tons de mar). O som ambiente mistura-se com o som da palavra, criando uma paisagem sonora única.",
+      "sensory_focus": [
+        "visual (fundo territorial)",
+        "auditory (paisagem sonora dinâmica)",
+        "spatial (profundidade visual)"
+      ]
     },
     {
-      "stage": "escolha_acaso_silencio",
-      "action": "A pessoa pode: (a) repetir o gesto com a nova palavra, (b) esperar em silêncio (a palavra começa a desbotar, como se fosse apagada pelo tempo), ou (c) clicar num botão 'guardar' (opcional, sem pressão)."
+      "stage": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "A qualquer momento, a pessoa pode: (1) 'Guardar o novo sentido' (clicando num ícone de livro aberto), o que faz a palavra atual fixar-se no canto inferior direito como um 'rasto'; (2) 'Deixar a palavra voar' (clicando num ícone de pássaro), o que faz a palavra desaparecer com um som de vento e o ambiente regressar ao estado inicial com uma nova palavra aleatória; (3) 'Silenciar', o que pausar todos os sons e faz as letras tremular como folhas ao vento.",
+      "sensory_focus": [
+        "auditory (escolha de som)",
+        "visual (animação de transição)",
+        "temporal_interoceptive (pausa)"
+      ]
     },
     {
-      "stage": "aparição",
-      "action": "Se a pessoa escolher 'guardar', a palavra transformada é adicionada a uma 'constelação de sentidos' (visualização abstrata de palavras ligadas por linhas finas, como um mapa de estrelas). Se escolher esperar, a palavra desaparece, mas deixa um rasto sonoro (ex: um suspiro ou fragmento de voz) que se mistura ao murmúrio inicial."
+      "stage": "APARIÇÃO",
+      "action": "Se a pessoa guardar 3 palavras, uma 'constelação de sentidos' aparece: as palavras guardadas formam um círculo no ecrã, ligadas por linhas finas que vibram como cordas de um instrumento. Cada linha emite um som quando tocada, criando uma melodia baseada nas palavras. Se a pessoa tocar nas linhas, a melodia altera-se.",
+      "sensory_focus": [
+        "visual (constelação)",
+        "auditory (melodia dinâmica)",
+        "kinesthetic (interação com linhas)"
+      ]
     },
     {
-      "stage": "devolução",
-      "action": "A pessoa recebe de volta: (1) a palavra transformada em formato de 'bilhete' (imagem gerada com textura de papel rasgado, como os cadernos do Atlas), (2) um som único associado à palavra (ex: 'chão' → som de passos em pedra), ou (3) uma sugestão de território (ex: 'barro' → 'Alcântara, onde o Tejo ainda cheira a lama')."
+      "stage": "DEVOLUÇÃO",
+      "action": "Ao sair, a pessoa recebe um 'bilhete' digital: uma imagem gerada com as palavras guardadas, o som da constelação (se criada) e um mapa minimalista que localiza a gíria no território (ex: 'Esta palavra é do Bairro Alto'). O bilhete pode ser descarregado como imagem ou partilhado como link único (que, quando aberto, reproduz a constelação de sons).",
+      "sensory_focus": [
+        "visual (bilhete)",
+        "auditory (som incorporado)",
+        "social_presence (partilha)"
+      ]
     },
     {
-      "stage": "rasto_latencia",
-      "action": "A palavra guardada passa a fazer parte de um 'dicionário vivo' acessível em sessões futuras (como uma nuvem de palavras que flutuam no limite da tela). As palavras guardadas por outras pessoas (anónimas) podem aparecer como sombras ou ecos, mas nunca sobrepõem a experiência individual."
+      "stage": "RASTO / LATÊNCIA",
+      "action": "As palavras guardadas pela pessoa ficam disponíveis para outras sessões como 'sementes': se outra pessoa iniciar a experiência, pode encontrar uma das palavras guardadas anteriormente (com um ícone de 'semente' ao lado). Estas palavras têm um som e textura únicos, como se fossem 'emprestadas'. O rasto da pessoa original não é revelado.",
+      "sensory_focus": [
+        "visual (ícone de semente)",
+        "auditory (som único)",
+        "social_presence (contribuição anónima)"
+      ]
     }
   ],
   "participant_verbs": [
+    "tocar",
     "trocar",
     "escutar",
-    "respirar",
     "guardar",
-    "esperar",
-    "tocar",
-    "desaparecer"
+    "voar",
+    "silenciar",
+    "tecer"
   ],
-  "system_responses": [
-    {
-      "trigger": "primeiro_gesto (trocar letra)",
-      "response": "Palavra distorce-se, som de confirmação, palavra original desaparece."
-    },
-    {
-      "trigger": "aprofundamento_sensorial",
-      "response": "Murmúrio modificado, cor de fundo alterada, tipografia ganha textura."
-    },
-    {
-      "trigger": "escolha (guardar/esperar)",
-      "response": "Palavra adicionada à constelação ou desaparece com rasto sonoro."
-    },
-    {
-      "trigger": "devolução",
-      "response": "Bilhete visual, som único, ou sugestão territorial."
-    },
-    {
-      "trigger": "rasto_latencia",
-      "response": "Palavra integra dicionário vivo (nuvem de palavras no limite da tela)."
-    }
-  ],
-  "sensory_signature_id": "dicionario-mutante-girias-transformar-49",
+  "system_responses": {
+    "to_initial_gesture": "A palavra desintegra-se em letras flutuantes com pesos visuais diferentes.",
+    "to_letter_substitution": "A nova palavra forma-se com textura e som únicos, baseados na sua sonoridade e significado implícito.",
+    "to_guard_action": "A palavra fixa-se como um rasto no canto do ecrã e contribui para uma constelação de sentidos.",
+    "to_fly_action": "A palavra desaparece com um som de vento e uma nova palavra aleatória aparece.",
+    "to_silence_action": "Todos os sons pausam e as letras tremulam como folhas ao vento.",
+    "to_constellation_formation": "As palavras guardadas formam um círculo ligado por linhas sonoras, criando uma melodia dinâmica.",
+    "to_exit": "Um bilhete digital é gerado com as palavras, sons e um mapa territorial minimalista."
+  },
+  "sensory_signature_id": "SM-DM-49",
   "sensory_channels": {
     "visual": {
       "elements": [
-        "Ponto de luz pulsante (limiar).",
-        "Palavra com tipografia irregular e distorcida (resposta ao gesto).",
-        "Cor de fundo dinâmica (aprofundamento sensorial).",
-        "Textura na tipografia (ex: pedra, papel rasgado).",
-        "Constelação de palavras (rasto).",
-        "Bilhete gerado com textura de papel (devolução)."
+        "palavra central pulsante e orgânica",
+        "letras flutuantes com pesos visuais",
+        "texturas dinâmicas (bordas irregulares, transparência)",
+        "aura de cor (quente/fria) para palavras inventadas/existentes",
+        "fundo com manchas territoriais (azulejo, mar, etc.)",
+        "constelação de palavras com linhas vibráteis",
+        "bilhete digital com design de papel envelhecido"
       ],
-      "intensity": "medium-high (contraste e textura são centrais)"
+      "dynamics": [
+        "respiração da tipografia",
+        "transições suaves",
+        "profundidade visual"
+      ]
     },
     "auditory": {
       "elements": [
-        "Murmúrio de vozes sobrepostas (limiar).",
-        "Som de confirmação (estalo, suspiro, fragmento de voz).",
-        "Murmúrio modificado pela nova palavra (aprofundamento).",
-        "Rasto sonoro (suspiro, fragmento de voz) ao desaparecer.",
-        "Som único associado à palavra (devolução)."
+        "murmúrios distantes (vozes sobrepostas)",
+        "som de caneta a riscar papel",
+        "som único gerado por cada letra/palavra (zumbido, rolar de tambor, etc.)",
+        "paisagem sonora dinâmica (mistura de sons ambiente e da palavra)",
+        "melodia da constelação de palavras",
+        "som de vento ao 'voar' uma palavra"
       ],
-      "spatialization": "Mono ou estéreo (eco e distância sugeridos por volume).",
-      "intensity": "low-medium (nunca súbito ou agressivo)"
+      "dynamics": [
+        "crescimento gradual de volume",
+        "alteração de tom (agudo/grave)",
+        "espacialização sutil"
+      ]
     },
     "haptic": {
       "elements": [
-        "Vibração sutil (opcional, em dispositivos compatíveis) ao trocar letra.",
-        "Feedback táctil no clique/toque (resposta ao gesto)."
+        "vibração leve em dispositivos compatíveis ao tocar letras"
       ],
-      "intensity": "low (opcional e não intrusivo)"
+      "dynamics": [
+        "feedback tátil opcional"
+      ]
     },
     "kinesthetic": {
       "elements": [
-        "Gesto de clique/toque para trocar letra.",
-        "Movimento do cursor para explorar a palavra (opcional).",
-        "Espera (silêncio) como gesto ativo."
+        "arrasto de letras para substituição",
+        "toque em linhas da constelação para alterar melodia"
       ],
-      "intensity": "low-medium"
+      "dynamics": [
+        "resposta imediata ao gesto"
+      ]
     },
     "proprioceptive": {
       "elements": [
-        "Instrução implícita para focar na palavra (respiração percebida).",
-        "Sensação de peso na palavra transformada (metáfora visual)."
+        "instrução implícita para focar a atenção na palavra",
+        "sensação de 'peso' visual das letras"
       ],
-      "intensity": "low"
+      "dynamics": [
+        "atenção guiada pelo design"
+      ]
     },
     "temporal_interoceptive": {
       "elements": [
-        "Silêncio expectante (limiar).",
-        "Espera como parte da experiência (desaparecimento da palavra).",
-        "Ritmo do murmúrio (aceleração/desaceleração)."
+        "pulsação da palavra inicial",
+        "pausa ao silenciar",
+        "ritmo da melodia da constelação"
       ],
-      "intensity": "medium"
+      "dynamics": [
+        "controle do tempo pela pessoa"
+      ]
     },
     "spatial": {
       "elements": [
-        "Posição do cursor em relação à palavra (proximidade afeta som).",
-        "Constelação de palavras no limite da tela (rasto)."
+        "profundidade visual do fundo territorial",
+        "posicionamento das letras no ecrã",
+        "constelação circular de palavras"
       ],
-      "intensity": "low"
+      "dynamics": [
+        "movimento sutil no espaço 2D"
+      ]
     },
     "olfactory_evocation": {
       "elements": [
-        "Sugestão territorial (ex: 'barro' → 'Alcântara, onde o Tejo ainda cheira a lama').",
-        "Memória associada a girias (ex: 'tchán' → cheiro a café de botica)."
+        "evocação de cheiros territoriais através de cores e texturas (ex: azulejo evoca 'cheiro a cal', mar evoca 'salitre')"
       ],
-      "method": "linguagem e associação"
+      "dynamics": [
+        "associação visual-sensorial"
+      ]
     },
     "gustatory_evocation": {
       "elements": [
-        "Sugestão de sabor associado a palavras (ex: 'bairro' → 'pão com chouriço de Marvila')."
+        "evocação de sabores através de palavras (ex: 'marmelada' pode trazer tons laranja e um som doce; 'vinagre' tons ácidos e som azedo)"
       ],
-      "method": "linguagem e memória"
+      "dynamics": [
+        "associação linguístico-sensorial"
+      ]
     },
     "social_presence": {
       "elements": [
-        "Palavras guardadas por outras pessoas aparecem como sombras/ecos (anónimas).",
-        "Murmúrio inicial sugere presença de outras vozes."
+        "partilha do bilhete digital",
+        "sementes de palavras de outras sessões"
       ],
-      "intensity": "low (nunca intrusivo ou identificável)"
+      "dynamics": [
+        "contribuição anónima e não intrusiva"
+      ]
     }
   },
   "cross_sensory_translation": {
-    "primary": "A palavra (visual/textual) transforma-se em som (auditivo) e textura (visual/táctil), enquanto o som modula a cor (visual) e a tipografia (visual).",
-    "secondary": "O gesto (kinestésico) de trocar uma letra altera a paisagem sonora (auditivo) e a textura visual (visual)."
+    "primary": {
+      "from": "linguagem (palavra escrita)",
+      "to": [
+        "som (gerado pela sonoridade da palavra)",
+        "visual (textura e cor da palavra)"
+      ],
+      "mechanism": "Cada letra/palavra tem uma assinatura sonora e visual única, que se traduz em resposta imediata ao gesto de substituição."
+    },
+    "secondary": {
+      "from": "território (gíria associada a um lugar)",
+      "to": [
+        "visual (manchas de cor no fundo)",
+        "auditory (paisagem sonora territorial)"
+      ],
+      "mechanism": "O território evocado pela gíria influencia o ambiente visual e sonoro da experiência."
+    }
   },
   "silence_or_absence": {
-    "use": [
-      "Silêncio expectante no limiar (chama atenção para o gesto).",
-      "Desaparecimento da palavra se a pessoa esperar (ausência como parte da experiência).",
-      "Pausas entre murmúrios (respiração da experiência)."
-    ],
-    "intensity": "high (central para a dramaticidade)"
+    "mechanism": "O silêncio é usado como ferramenta ativa: (1) pausar todos os sons ao 'silenciar' faz as letras tremular, criando uma ausência que realça o visual; (2) a ausência de palavras 'corretas' não é penalizada — o sistema responde com auras e sons que celebram a invenção.",
+    "effect": "O silêncio não é vazio; é um estado onde a atenção se volta para o visual e o táctil, criando uma pausa reflexiva."
   },
   "surprise_or_indeterminacy": {
     "mechanisms": [
       {
-        "type": "semantic_surprise",
-        "description": "A palavra transformada pode revelar um sentido oculto, gerar uma palavra inexistente mas sonoramente familiar, ou desintegrar-se em partículas que formam uma imagem/som."
+        "type": "acaso controlado",
+        "description": "A palavra inicial é selecionada aleatoriamente de um conjunto de gírias e termos em desuso, com pesos baseados na sua raridade ou relevância territorial."
       },
       {
-        "type": "acaso_controlado",
-        "description": "A sugestão territorial ou o som associado à palavra são selecionados aleatoriamente de um conjunto curatorial (ex: girias de Lisboa)."
+        "type": "resposta não linear",
+        "description": "Palavras inventadas não são rejeitadas; em vez disso, ganham uma identidade visual e sonora única, como se fossem 'adotadas' pelo sistema."
       },
       {
-        "type": "temporal_indeterminacy",
-        "description": "O tempo de desaparecimento da palavra (se a pessoa esperar) varia entre sessões."
+        "type": "constelação emergente",
+        "description": "A constelação de sons só aparece após guardar 3 palavras, criando um momento de surpresa e descoberta."
+      },
+      {
+        "type": "sementes de outras sessões",
+        "description": "Palavras guardadas por outras pessoas aparecem como 'sementes', adicionando uma camada de indeterminação e conexão social."
       }
     ]
   },
   "session_variation": [
     {
-      "type": "palavra_inicial",
-      "description": "A palavra inicial (ex: 'tchán', 'bairro') é selecionada aleatoriamente de um conjunto de girias/topónimos do corpus MILK."
+      "type": "palavra inicial aleatória",
+      "description": "A palavra inicial é diferente em cada sessão, baseada em gírias territoriais ou em desuso."
     },
     {
-      "type": "resposta_sonora",
-      "description": "O som de confirmação (estalo, suspiro, fragmento de voz) varia entre sessões (ex: voz masculina/feminina, idades diferentes)."
+      "type": "ordem das letras flutuantes",
+      "description": "A ordem e o peso visual das letras flutuantes variam subtamente entre sessões."
     },
     {
-      "type": "cor_de_fundo",
-      "description": "A cor de fundo associada ao novo sentido é gerada dinâmicamente (ex: tons terrosos para 'barro', tons metálicos para 'chão')."
+      "type": "paisagem sonora ambiente",
+      "description": "O som ambiente inicial (murmúrios) tem variações subtis de entoação e volume."
     },
     {
-      "type": "sugestao_territorial",
-      "description": "A sugestão territorial (ex: 'Alcântara') é selecionada aleatoriamente de um conjunto de lugares associados à palavra."
+      "type": "sementes de outras sessões",
+      "description": "A presença de palavras 'semente' de outras sessões adicona variação orgânica."
     },
     {
-      "type": "constelacao_de_sentidos",
-      "description": "A posição das palavras na constelação (rasto) varia entre sessões, criando um mapa único para cada pessoa."
+      "type": "territorial binding",
+      "description": "Se a geolocalização for permitida (opcional), a palavra inicial pode ser uma gíria associada à freguesia ou região da pessoa."
     }
   ],
   "territorial_binding": {
-    "relation": "A experiência está ligada ao território através de: (1) girias e topónimos do corpus MILK (ex: 'tchán', 'bairro'), (2) sugestões territoriais associadas às palavras (ex: 'barro' → Alcântara), (3) murmúrio de vozes com sotaques e pronúncias locais.",
-    "sustainability": "As girias e topónimos são extraídos do corpus autoral (FALARTE, curadoria territorial). As sugestões territoriais são baseadas em dados reais do Atlas Vivo MILK."
+    "mechanism": "As gírias e termos usados na experiência estão associados a territórios específicos (ex: 'bairro', 'maralha', 'tropeço'). O fundo visual e a paisagem sonora adaptam-se para evocar o território da gíria atual. Se a geolocalização for permitida, a palavra inicial pode ser uma gíria local.",
+    "evidence": {
+      "source": "source_corpus",
+      "section": "FALARTE / NÓS — 10 MECÂNICAS AUTORAIS",
+      "note": "Mecânica 7: 'Palavras que desapareceram — gírias, alcunhas e modos de dizer em desaparecimento.' associadas a território."
+    },
+    "optional": true
   },
   "trace_and_return": {
-    "trace": {
-      "digital": "Palavras guardadas integram uma 'constelação de sentidos' (nuvem de palavras no limite da tela).",
-      "social": "Palavras guardadas por outras pessoas aparecem como sombras/ecos (anónimas).",
-      "territorial": "Sugestões territoriais associadas às palavras (ex: 'barro' → Alcântara)."
+    "immediate": {
+      "type": "rasto visual e sonoro",
+      "description": "As palavras guardadas fixam-se no canto do ecrã e contribuem para uma constelação de sons."
     },
-    "return": {
-      "immediate": "Bilhete visual com a palavra transformada (textura de papel rasgado).",
-      "delayed": "Som único associado à palavra (ex: 'chão' → passos em pedra).",
-      "latent": "A constelação de sentidos persiste entre sessões, permitindo reencontros com palavras guardadas."
+    "latent": {
+      "type": "sementes para outras sessões",
+      "description": "As palavras guardadas tornam-se 'sementes' disponíveis para outras pessoas, sem revelar a autoria."
+    },
+    "final": {
+      "type": "bilhete digital",
+      "description": "Um bilhete com as palavras, sons e um mapa territorial minimalista é gerado e pode ser partilhado."
     }
   },
   "accessibility_equivalents": {
-    "visual": {
-      "alternative": "Descrição textual dinâmica: (1) 'Um ponto de luz pulsante no centro da tela. Murmúrio de vozes ao fundo.', (2) 'A palavra [X] aparece com tipografia irregular. Troque uma letra.', (3) 'A palavra transformada [Y] ganha textura de [material]. Cor de fundo muda para [cor].'.",
-      "reduced_motion": "Desativar distorções na tipografia e transições suaves. Palavras aparecem/desaparecem instantaneamente."
+    "visual_impairment": {
+      "description": "Todas as interações visuais têm equivalentes sonoros: (1) a palavra inicial é lida em voz alta com entoação que reflete o seu 'peso' (ex: gíria forte é lida com mais intensidade); (2) as letras flutuantes são anunciadas em ordem alfabética ou por peso sonoro; (3) a textura visual é descrita em áudio (ex: 'palavra com bordas irregulares'); (4) a constelação de sons é descrita como uma 'rede de palavras que cantam juntas'.",
+      "preserves_poetry": true
     },
-    "auditory": {
-      "alternative": "Legendas para sons: (1) 'Murmúrio de vozes sobrepostas.', (2) '[Som de estalo/suspiro] ao trocar letra.', (3) 'Eco de [palavra] ao fundir-se com o ambiente.'.",
-      "silence_mode": "Substituir sons por vibração (opcional) ou descrição textual."
+    "auditory_impairment": {
+      "description": "Todas as interações sonoras têm equivalentes visuais: (1) os murmúrios são representados por ondas sonoras animadas no fundo; (2) o som único de cada palavra é representado por uma animação de partículas que saem da palavra; (3) a melodia da constelação é representada por cores que mudam de intensidade ao ritmo da música.",
+      "preserves_poetry": true
     },
-    "haptic": {
-      "alternative": "Feedback visual (ex: pulso na palavra) substitui vibração."
+    "motor_impairment": {
+      "description": "Todas as interações por gesto têm equivalentes por teclado/voz: (1) navegar entre letras com as setas do teclado; (2) substituir uma letra com a tecla 'Enter'; (3) guardar uma palavra com a tecla 'G'; (4) voar uma palavra com a tecla 'V'; (5) silenciar com a tecla 'S'; (6) usar comandos de voz para as mesmas ações (ex: 'troca a letra R por um S').",
+      "preserves_poetry": true
     },
-    "kinesthetic": {
-      "alternative": "Teclado: setas para navegar entre letras da palavra; Enter para trocar. Voz: comando 'trocar [letra] por [letra]'."
+    "cognitive_load": {
+      "description": "Modo 'sem pressão': (1) a pulsação da palavra inicial é mais lenta; (2) os sons ambiente são mais suaves; (3) as letras flutuantes aparecem em grupos menores; (4) a constelação de sons é simplificada para 2 palavras.",
+      "preserves_poetry": true
     },
-    "proprioceptive": {
-      "alternative": "Instruções textuais: 'Respire e observe a palavra.'."
-    },
-    "temporal_interoceptive": {
-      "alternative": "Modo sem pressão: a palavra não desaparece se a pessoa esperar."
-    },
-    "olfactory_evocation": {
-      "alternative": "Descrição textual: 'Esta palavra evoca o cheiro a [descrição].'."
-    },
-    "gustatory_evocation": {
-      "alternative": "Descrição textual: 'Esta palavra evoca o sabor de [descrição].'."
+    "reduced_motion": {
+      "description": "Todas as animações são substituídas por transições suaves ou estáticas: (1) a palavra inicial não pulsa; (2) as letras flutuantes aparecem em linha reta; (3) a constelação de sons é representada por uma lista estática de palavras com ícones de som.",
+      "preserves_poetry": true
     }
   },
   "optional_permissions": {
-    "required": false,
-    "requested": [],
-    "justification": "A experiência funciona completamente sem microfone, câmara, geolocalização ou sensores de movimento. A voz é opcional para o gesto de trocar letra (alternativa: teclado)."
+    "geolocation": {
+      "purpose": "Selecionar uma gíria inicial associada ao território da pessoa.",
+      "fallback": "A palavra inicial é selecionada aleatoriamente de um conjunto global de gírias.",
+      "request_timing": "No início da experiência, com explicação clara: 'Permitir localização para começar com uma gíria do teu território?'"
+    },
+    "microphone": {
+      "purpose": "N/A — não é necessário para a experiência.",
+      "fallback": "Todas as interações são possíveis sem microfone."
+    },
+    "camera": {
+      "purpose": "N/A — não é necessário para a experiência.",
+      "fallback": "Todas as interações são possíveis sem câmara."
+    }
   },
   "overstimulation_risk": {
-    "potential": [
-      "Flashing: Nenhum (evitado por design).",
-      "Sound: Murmúrio contínuo pode ser cansativo em sessões longas.",
-      "Visual: Distorções na tipografia podem ser desconfortáveis para algumas pessoas."
+    "potential_risks": [
+      "Volume de som crescente pode ser incómodo para pessoas sensíveis a estímulos auditivos.",
+      "Animações rápidas (letras flutuantes, tremular) podem causar desconforto visual.",
+      "Múltiplas camadas de som (murmúrios + som da palavra + paisagem sonora) podem ser excessivas."
     ],
     "mitigation": [
-      "Limitar duração do murmúrio (máximo 30 segundos sem interação).",
-      "Permitir pausar/desativar sons a qualquer momento.",
-      "Oferecer modo 'reduced_motion' para desativar distorções visuais.",
-      "Incluir botão 'sair' sempre visível."
+      "O volume dos sons aumenta gradualmente e tem um limite máximo (50% do volume do dispositivo).",
+      "As animações são suaves e podem ser desativadas no modo 'reduced_motion'.",
+      "A pessoa pode silenciar todos os sons a qualquer momento com um gesto ou tecla.",
+      "O modo 'sem pressão' reduz a intensidade de todos os estímulos."
     ]
   },
   "distinctiveness": {
     "unique_elements": [
-      "A mecânica de trocar uma letra para gerar um 'novo sentido' (não apenas um erro ortográfico).",
-      "A tradução cruzada entre palavra (visual), som (auditivo) e textura (visual/táctil).",
-      "O uso do silêncio e da ausência como parte ativa da experiência (desaparecimento da palavra).",
-      "A constelação de sentidos como rasto persistente e não intrusivo.",
-      "A associação entre girias/topónimos e território (sugestões territoriais).",
-      "A devolução em formato de 'bilhete' com textura de papel rasgado (assinatura visual do Atlas)."
+      "A tradução cruzada entre linguagem, som e visual é específica para cada palavra, com base na sua sonoridade e significado implícito.",
+      "O uso de gírias e termos em desuso como matéria-prima, associados a territórios reais.",
+      "A constelação de sons que emerge após guardar 3 palavras, criando uma melodia dinâmica e interativa.",
+      "As 'sementes' de palavras de outras sessões, que adicionam uma camada social e indeterminada sem revelar autoria.",
+      "O bilhete digital final, que combina palavras, sons e um mapa territorial minimalista, como um objeto de memória."
     ],
-    "comparison": "Diferente de todas as outras 48 experiências por: (1) foco exclusivo na transformação de palavras (gírias/topónimos), (2) uso de murmúrio sonoro como limiar, (3) devolução em formato de bilhete físico (metáfora digital)."
+    "comparison": "Nenhuma outra experiência no Atlas usa a linguagem como um organismo vivo que se transforma visual e sonoramente em tempo real, com uma assinatura única para cada palavra. Outras experiências podem usar som ou visual de forma dinâmica, mas não a tradução cruzada entre linguagem, território e sentidos de forma tão integrada e poética."
   },
   "questions_for_eduardo": [
-    "O corpus de girias/topónimos para a palavra inicial deve ser extraído de qual fonte específica? (Ex: FALARTE, curadoria territorial, ou outro documento autoral?)",
-    "A sugestão territorial associada à palavra (ex: 'barro' → Alcântara) deve ser baseada em dados reais do Atlas ou pode ser gerada livremente a partir do sentido da palavra?",
-    "O 'dicionário vivo' (constelação de sentidos) deve ser visível apenas para a pessoa que guardou as palavras, ou pode incluir palavras de outras pessoas (anónimas)?",
-    "O som de confirmação (estalo, suspiro, fragmento de voz) deve ser gravado a partir de vozes reais do território ou pode ser sintético?"
+    "Qual é o conjunto exato de gírias e termos em desuso a usar como palavra inicial? Deve ser um subconjunto do corpus FALARTE (mecânica 7) ou pode incluir outras fontes?",
+    "Há preferência por gírias associadas a territórios específicos (ex: Lisboa, Porto) ou deve ser um conjunto mais amplo?",
+    "O bilhete digital final deve incluir um link para a constelação de sons (reproduzível por outras pessoas) ou deve ser apenas um objeto estático (imagem + texto)?",
+    "As 'sementes' de palavras de outras sessões devem ser visíveis apenas para a pessoa que as guardou ou para todas as sessões?",
+    "Há um limite máximo de palavras que podem ser guardadas numa sessão? Se sim, qual?"
   ],
   "improvement_proposals": [
     {
-      "type": "territorial_enrichment",
-      "description": "Integração com o corpus de 'Palavras que desapareceram' (FALARTE) para enriquecer o conjunto de girias/topónimos iniciais."
+      "type": "territorial_deepening",
+      "description": "Integração com o corpus de topónimos e falares do Atlas para enriquecer a associação territorial das gírias. Por exemplo, se a pessoa estiver em Lisboa, a palavra inicial pode ser uma gíria específica do bairro (ex: 'Alfama' → 'chulo')."
     },
     {
-      "type": "social_presence",
-      "description": "Permitir que a pessoa veja (opcionalmente) palavras guardadas por outras pessoas da mesma freguesia/território, com consentimento explícito."
+      "type": "social_layer",
+      "description": "Adicionar uma camada opcional onde a pessoa pode 'adotar' uma palavra inventada e dar-lhe um nome ou significado, que depois aparece como 'semente' com uma assinatura visual única (ex: cor ou símbolo associado)."
     },
     {
-      "type": "sensory_layer",
-      "description": "Adicionar uma camada de 'peso' à palavra transformada: quanto mais a pessoa interage com ela, mais 'pesada' (em termos visuais/sonoros) ela se torna, como se ganhasse história."
+      "type": "tactile_evocation",
+      "description": "Evocar a textura táctil das gírias através de vibrações ou feedback háptico mais detalhado (ex: 'tropeço' → vibração irregular; 'murmúrio' → vibração suave e contínua)."
+    },
+    {
+      "type": "historical_layer",
+      "description": "Incluir uma camada opcional que mostre a evolução histórica de uma gíria (ex: origem, uso ao longo do tempo) após a pessoa guardar 5 palavras. Esta camada seria visual e sonora, sem texto explicativo."
     }
   ],
   "generic_fallback_allowed": false,

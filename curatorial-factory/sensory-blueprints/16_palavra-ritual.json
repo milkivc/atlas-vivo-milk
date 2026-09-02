@@ -3,331 +3,355 @@
   "canonical_name": "Palavra Ritual",
   "source_evidence": {
     "primary": [
-      "catalog_entry.convite",
-      "constitution.11.EXEMPLOS DE DIRECÇÃO — Palavra Ritual"
+      {
+        "source": "catalog_entry",
+        "quote": "Repete até a palavra mudar de corpo.",
+        "authority": "autoral"
+      },
+      {
+        "source": "constitution",
+        "quote": "Palavra Ritual: A palavra deve ganhar corpo, ritmo, peso, eco e desgaste. Repetir não é preencher campo; é transformar a palavra até ela deixar de ser apenas palavra.",
+        "authority": "autoral"
+      }
     ],
     "secondary": [
-      "source_corpus.ÂNCORAS AUTORAIS — CAMADA PÚBLICA",
-      "source_corpus.LIVRO CUBO — Sete dinâmicas recuperadas (D5 Escutar o Silêncio, D3 Ponto de Kusama)"
+      {
+        "source": "source_corpus",
+        "quote": "Livro Cubo: O Corpo que Percebe — percepção incorporada; digital quase ausente; corpo não é dado.",
+        "authority": "interpretative"
+      },
+      {
+        "source": "source_corpus",
+        "quote": "FALArte: linguagem viva, território, oralidade e rasto.",
+        "authority": "interpretative"
+      }
     ]
   },
   "authorial_invariants": [
-    "A palavra deve ganhar corpo, ritmo, peso, eco e desgaste.",
-    "Repetir não é preencher campo; é transformar a palavra até ela deixar de ser apenas palavra.",
-    "Convite: 'Repete até a palavra mudar de corpo.'",
-    "Mecânica: 'repetir' (do catálogo)."
+    "A palavra deve ser repetida até transformar-se.",
+    "A repetição não é mecânica; é um acto de transformação sensorial e corporal.",
+    "A palavra ganha corpo, ritmo, peso, eco e desgaste.",
+    "A experiência deve convocar o corpo e a atenção, não apenas a mente.",
+    "A devolução deve ser uma alteração perceptiva, não um objecto ou badge."
   ],
-  "perceptual_intent": "Transformar a palavra num ritual vivo onde a repetição a desmaterializa e reencarna em som, gesto, textura e território, até que a sua forma original se dissolva em algo outro — uma vibração, um traço, um eco ou um vazio que devolve à pessoa a sensação de ter tocado a linguagem como matéria maleável.",
+  "perceptual_intent": "Transformar a palavra num objecto vivo que se desdobra em som, movimento e textura, até que a sua forma original se dissolva e surja algo novo — uma aparição que já não é apenas palavra, mas sim um corpo sensorial partilhado entre a pessoa e o sistema.",
   "threshold": {
-    "description": "A tela está em branco, exceto por uma única palavra central (ex: 'água', 'pão', 'rua'), escrita em tipografia orgânica que parece respirar levemente. O fundo é um gradiente de cinza quente, como papel envelhecido, com textura sutil de grão. Não há instruções visíveis. Um som ambiente de respiração lenta e irregular (como se a palavra estivesse a inalar/exalar) preenche o espaço, com volume tão baixo que é quase subliminar.",
-    "sensory_trigger": "O primeiro contacto visual com a palavra isolada e o som de respiração criam uma tensão entre estaticidade e vida latente."
+    "description": "A pessoa entra num espaço vazio, escuro ou de cor uniforme (ex: preto profundo ou branco queimado). Um único ponto de luz ou som mínimo (ex: um pulso de luz fraca ou um zumbido quase inaudível) convida à atenção. Nenhum texto ou instrução explícita é mostrado. O ambiente sugere que algo está prestes a emergir, mas não revela o quê.",
+    "sensory_trigger": "A ausência de estímulos visuais dominantes e a presença de um ritmo subliminar (luz/som) criam uma expectativa de que a pessoa deve agir para revelar o que está oculto."
   },
   "dramaturgical_arc": [
     {
-      "phase": "LIMIAR",
-      "action": "A pessoa entra na tela e nota a palavra central e o som de respiração. A palavra parece pulsar em sincronia com o som, como se fosse um ser vivo adormecido."
+      "stage": 1,
+      "name": "Limiar",
+      "description": "Espaço vazio com um pulso mínimo (luz ou som). A pessoa sente que algo está prestes a acontecer, mas não sabe o quê.",
+      "sensory_focus": [
+        "visual (ausência/presença mínima)",
+        "auditory (pulso subliminar)"
+      ]
     },
     {
-      "phase": "CHAMADA",
-      "action": "Aparece, em letras minúsculas e desalinhadas, o convite: 'Repete até a palavra mudar de corpo.' A frase surge como se fosse escrita à mão, com tinta que escorre levemente. O som de respiração aumenta de volume por 2 segundos e depois volta ao mínimo."
+      "stage": 2,
+      "name": "Chamada",
+      "description": "Uma palavra solta (ex: 'ÁGUA', 'TERRA', 'SOMBRA') aparece no centro do ecrã, escrita em tipografia orgânica que parece respirar. A palavra não é clicável. O sistema não explica o que fazer.",
+      "sensory_focus": [
+        "visual (palavra pulsante)",
+        "auditory (eco da pronúncia da palavra, se a pessoa a disser em voz alta)"
+      ]
     },
     {
-      "phase": "PRIMEIRO GESTO",
-      "action": "A pessoa é convidada a repetir a palavra em voz alta (opcional) ou a clicar/tocar na palavra. Se usar voz, o sistema detecta o ritmo e a entoação (sem gravar). Se clicar, a palavra treme como se fosse tocada."
+      "stage": 3,
+      "name": "Primeiro Gesto",
+      "description": "A pessoa é convocada a repetir a palavra, seja em voz alta (opcional, com microfone) ou mentalmente. O sistema detecta a intenção (ex: movimento do cursor, toque, ou simples espera atenta). Se a pessoa usar voz, o som da sua pronúncia é capturado e transformado em tempo real.",
+      "sensory_focus": [
+        "kinesthetic (movimento do cursor/toque)",
+        "auditory (voz ou silêncio atento)",
+        "proprioceptive (atenção corporal)"
+      ]
     },
     {
-      "phase": "RESPOSTA VIVA",
-      "action": "A palavra reage: se repetida em voz alta, o som da voz da pessoa mistura-se com o som ambiente, criando um eco que distorce a palavra original (ex: 'água' → 'áááguuaaa'). Se clicada, a palavra ganha peso visual (sombra mais escura, contorno borrado) e o som de respiração acelera. A cada repetição (voz ou clique), a palavra perde nitidez: letras tremem, deslocam-se ou sobrepõem-se."
+      "stage": 4,
+      "name": "Resposta Viva",
+      "description": "A palavra começa a ganhar corpo: a tipografia distorce-se levemente com cada repetição (ex: as letras ganham peso, inclinação ou textura). Se a pessoa usou voz, o som da palavra é repetido com um eco que se alonga ou fragmenta. O ambiente visual e sonoro responde à intensidade e ritmo da repetição.",
+      "sensory_focus": [
+        "visual (transformação tipográfica)",
+        "auditory (eco e fragmentação sonora)",
+        "haptic (vibração sutil em dispositivos compatíveis, opcional)"
+      ]
     },
     {
-      "phase": "DESVIO",
-      "action": "Após 3-5 repetições, a palavra começa a 'sangrar' para os lados: letras caem como gotas de tinta no ecrã, ou o som da voz da pessoa é invertido e misturado com um ruído de água/vento (dependendo da palavra inicial). O fundo ganha uma camada de textura que lembra o material evocado pela palavra (ex: 'pão' → farinha; 'rua' → asfalto rachado)."
+      "stage": 5,
+      "name": "Desvio",
+      "description": "Numa das repetições, a palavra inverte-se, fragmenta-se ou sobrepõe-se a si mesma. O som, se presente, distorce-se ou silencia subitamente. A pessoa é forçada a adaptar o seu gesto (ex: repetir mais devagar, mudando o ritmo ou a entoação).",
+      "sensory_focus": [
+        "visual (quebra da forma)",
+        "auditory (silêncio ou distorção)",
+        "temporal_interoceptive (surpresa e adaptação)"
+      ]
     },
     {
-      "phase": "APROFUNDAMENTO SENSORIAL",
-      "action": "A palavra original desaparece. Restam fragmentos: sons distorcidos (auditivo), manchas de cor (visual), ou vibração (háptica, se dispositivo permitir). O som ambiente agora é uma paisagem sonora construída a partir da palavra (ex: 'água' → gotas, correnteza; 'pão' → forno, mastigação). O cursor da pessoa, ao mover-se, altera o volume e a espacialização do som (mais alto à esquerda, mais grave à direita)."
+      "stage": 6,
+      "name": "Aprofundamento Sensorial",
+      "description": "A palavra agora é uma entidade viva: as letras ganham profundidade (3D sutil), sombras ou texturas que respondem ao movimento do cursor ou à voz. O som da palavra mistura-se com uma paisagem sonora minimalista (ex: vento, água, ou um ruído territorial evocado). A repetição passa a afectar o ambiente: o ecrã pode tremular, a cor de fundo pode mudando para tons associados à palavra (ex: azul para 'ÁGUA', castanho para 'TERRA').",
+      "sensory_focus": [
+        "visual (3D, textura, cor)",
+        "auditory (paisagem sonora + voz transformada)",
+        "kinesthetic (resposta ao movimento)"
+      ]
     },
     {
-      "phase": "ESCOLHA / ACASO / SILÊNCIO",
-      "action": "A pessoa pode: (1) parar e esperar (o sistema entra em silêncio por 10 segundos, e a tela escurece lentamente); (2) mover o cursor para 'recolher' os fragmentos sonoros/visuais; ou (3) clicar num ponto aleatório para 'sementar' a palavra num novo lugar. Se não fizer nada, o sistema escolhe aleatoriamente uma das opções após 15 segundos."
+      "stage": 7,
+      "name": "Escolha / Acaso / Silêncio",
+      "description": "A pessoa pode escolher: continuar a repetir a palavra (acelerando a transformação), fazer um gesto diferente (ex: arrastar a palavra, tocar noutro sítio do ecrã), ou parar e esperar. Se parar, o sistema introduz um silêncio prolongado. Durante o silêncio, a palavra pode começar a desvanecer-se ou a ganhar uma nova forma.",
+      "sensory_focus": [
+        "temporal_interoceptive (escolha e espera)",
+        "visual (desvanecimento ou transformação)",
+        "auditory (silêncio ativo)"
+      ]
     },
     {
-      "phase": "APARIÇÃO",
-      "action": "Se a pessoa escolheu esperar: a palavra original reaparece, mas agora é uma sombra ou negativo (branco sobre preto). Se recolheu fragmentos: eles formam uma nova palavra ou símbolo (ex: 'água' → 'rio'). Se sementou: a palavra original cresce como uma planta ou raiz no ponto clicado, com som de brotar. Em todos os casos, um novo som emerge: um murmúrio ou voz que diz a nova palavra/símbolo em ritmo lento e solene."
+      "stage": 8,
+      "name": "Aparição",
+      "description": "Algo novo emerge: a palavra transforma-se num símbolo, numa imagem abstracta, ou num objecto sonoro (ex: a palavra 'ÁGUA' pode tornar-se o som de uma gota a cair, ou uma onda visual). Alternativamente, a palavra pode revelar uma camada oculta: uma memória, um topónimo, ou uma relação territorial (ex: 'TERRA' pode revelar um mapa minimalista de uma freguesia ou um som associado a um lugar real). A aparição é única para cada sessão.",
+      "sensory_focus": [
+        "visual (símbolo/imagem)",
+        "auditory (objecto sonoro)",
+        "spatial (relação territorial evocada)"
+      ]
     },
     {
-      "phase": "DEVOLUÇÃO",
-      "action": "A tela devolve à pessoa: (1) a nova palavra/símbolo como um 'objeto' digital (imagem ou áudio) que pode ser guardado (download opcional); (2) um convite para 'deixar um rasto': a pessoa pode gravar um áudio curto (3-10 segundos) a repetir a nova palavra, ou desenhar com o cursor uma forma associada a ela. Este rasto é adicionado a uma constelação invisível de contribuições públicas (sem identificação)."
+      "stage": 9,
+      "name": "Devolução",
+      "description": "O sistema devolve à pessoa um rasto da sua interacção: uma frase gerada a partir das transformações da palavra (ex: 'A tua voz fez a terra tremer'), uma imagem estática da palavra no seu estado final, ou um som que capturou a essência da sua repetição. A devolução é efémera: desaparece após alguns segundos ou pode ser guardada como 'partícula' no COSMICOXES, se a pessoa autorizar.",
+      "sensory_focus": [
+        "visual (imagem ou texto)",
+        "auditory (som devolvido)",
+        "social_presence (rasto partilhado opcionalmente)"
+      ]
     },
     {
-      "phase": "RASTO / LATÊNCIA",
-      "action": "A experiência termina com a tela a desvanecer-se para um fundo neutro, onde apenas um ponto minúsculo (a 'semente' da palavra) permanece visível. Este ponto pode ser clicado para regressar à experiência mais tarde, ou ignorado. A palavra transformada e o rasto da pessoa (se criado) ficam latentes no sistema, podendo reaparecer em sessões futuras como: (a) parte de uma paisagem sonora colectiva; (b) um fragmento visual em outras experiências (ex: 'Galeria Diletante'); ou (c) um eco em 'Escutar o Silêncio'."
+      "stage": 10,
+      "name": "Rasto / Latência",
+      "description": "A experiência termina, mas a palavra transformada pode deixar um vestígio no sistema: uma partícula no COSMICOXES, uma alteração sutil na constelação de palavras do Atlas, ou uma memória que poderá ser reencontrada em sessões futuras. O espaço volta ao limiar inicial, mas com uma subtileza diferente (ex: o pulso de luz é agora um pouco mais rápido ou tem uma cor diferente).",
+      "sensory_focus": [
+        "visual (vestígio no COSMICOXES)",
+        "temporal_interoceptive (latência e regresso)"
+      ]
     }
   ],
   "participant_verbs": [
     "repetir",
     "escutar",
+    "respirar",
     "tocar",
     "esperar",
-    "recolher",
-    "sementar",
-    "deixar"
+    "adaptar",
+    "observar"
   ],
   "system_responses": [
-    "A palavra pulsa em sincronia com o som de respiração.",
-    "A palavra perde nitidez a cada repetição (letra a letra).",
-    "Fragmentos da palavra caem como tinta ou transformam-se em textura.",
-    "O som da voz da pessoa é distorcido e misturado com sons ambientais.",
-    "O cursor altera a espacialização do som (volume, tom, direcção).",
-    "A palavra desaparece e reaparece transformada (sombra, símbolo, planta).",
-    "Um murmúrio ou voz devolve a nova palavra em ritmo solene.",
-    "O sistema guarda o rasto (áudio ou desenho) na constelação pública."
+    {
+      "trigger": "Primeira repetição (voz ou gesto)",
+      "response": "A palavra ganha peso visual (sombra, espessura) e um eco sonoro mínimo."
+    },
+    {
+      "trigger": "Repetição acelerada",
+      "response": "A palavra fragmenta-se em letras que se movem independentemente; o som distorce-se em camadas."
+    },
+    {
+      "trigger": "Repetição lenta e intencional",
+      "response": "A palavra alonga-se verticalmente; o som ganha reverberação profunda."
+    },
+    {
+      "trigger": "Silêncio prolongado",
+      "response": "A palavra desvanece-se e uma nova forma (símbolo ou imagem) emerge no seu lugar."
+    },
+    {
+      "trigger": "Gesto de arrastar a palavra",
+      "response": "A palavra deforma-se como se fosse um objecto maleável; o som acompanha o movimento com um tom contínuo."
+    },
+    {
+      "trigger": "Toque em zona vazia do ecrã",
+      "response": "O ambiente reage com um pulso de luz ou som, como se a palavra fosse um campo de energia."
+    },
+    {
+      "trigger": "Fim da sessão",
+      "response": "Devolução de um rasto efémero (frase, imagem ou som) e vestígio no COSMICOXES."
+    }
   ],
-  "sensory_signature_id": "PR-2026-RITUAL-VERBAL",
+  "sensory_signature_id": "SR-PR-016",
   "sensory_channels": {
     "visual": {
-      "elements": [
-        "palavra central pulsante",
-        "tipografia orgânica com grão",
-        "fragmentos de letras a cair",
-        "textura de material evocado (farinha, asfalto, etc.)",
-        "sombra/negativo da palavra",
-        "planta/raiz digital",
-        "ponto latente final"
-      ],
-      "dynamics": [
-        "desfocagem progressiva",
-        "sobreposição de camadas",
-        "transição para negativo",
-        "crescimento orgânico"
-      ]
+      "description": "Transformação tipográfica (peso, textura, 3D, fragmentação), cor de fundo dinâmica, aparição de símbolos ou imagens abstractas, pulso de luz como limiar.",
+      "intensity": "high"
     },
     "auditory": {
-      "elements": [
-        "respiração lenta e irregular",
-        "eco da voz da pessoa",
-        "paisagem sonora baseada na palavra",
-        "murmúrio ou voz solene",
-        "som de brotar (se sementar)",
-        "silêncio controlado"
-      ],
-      "dynamics": [
-        "distorsão do som da voz",
-        "espacialização dinâmica (cursor)",
-        "camadas sobrepostas",
-        "ritmo solene"
-      ]
+      "description": "Echo, fragmentação e transformação da voz da pessoa; paisagem sonora minimalista (vento, água, ruídos territoriais evocados); som como objecto (ex: gota de água, onda).",
+      "intensity": "high"
     },
     "haptic": {
-      "elements": [
-        "vibração sutil (se dispositivo permitir)",
-        "feedback de toque na palavra"
-      ],
-      "dynamics": [
-        "vibração sincronizada com o som",
-        "resposta táctil à interacção"
-      ]
+      "description": "Vibração sutil em dispositivos compatíveis (opcional) para enfatizar momentos de transformação da palavra.",
+      "intensity": "low"
     },
     "kinesthetic": {
-      "elements": [
-        "movimento do cursor",
-        "pressão/velocidade do gesto"
-      ],
-      "dynamics": [
-        "alteração do som com trajectória do cursor",
-        "resposta à velocidade do clique"
-      ]
+      "description": "Resposta ao movimento do cursor, toque ou gesto; a palavra e o ambiente reagem à velocidade, trajectória e pressão.",
+      "intensity": "medium"
     },
     "proprioceptive": {
-      "elements": [
-        "instrução implícita de ritmo (repetir em sincronia com a respiração)",
-        "postura de espera (silêncio)"
-      ],
-      "dynamics": [
-        "convite à repetição corporal (voz ou gesto)",
-        "pausa para escuta interna"
-      ]
+      "description": "Convite à atenção corporal: respiração, ritmo da repetição, postura. A experiência adapta-se ao ritmo da pessoa.",
+      "intensity": "medium"
     },
     "temporal_interoceptive": {
-      "elements": [
-        "ritmo da respiração",
-        "pausa de 10 segundos",
-        "aceleração/desaceleração do som"
-      ],
-      "dynamics": [
-        "sincronia entre som e gesto",
-        "espera como parte da experiência"
-      ]
+      "description": "Silêncio ativo, espera, aceleração/desaceleração do tempo perceptivo, suspensão entre repetições.",
+      "intensity": "high"
     },
     "spatial": {
-      "elements": [
-        "espacialização do som (esquerda/direita)",
-        "profundidade visual (camadas de textura)"
-      ],
-      "dynamics": [
-        "movimento do cursor altera a posição do som",
-        "profundidade percebida pela sobreposição"
-      ]
+      "description": "A palavra ocupa o espaço do ecrã como um objecto físico; a sua transformação altera a perceção de profundidade e escala.",
+      "intensity": "medium"
     },
     "olfactory_evocation": {
-      "elements": [
-        "cheiro de pão (se palavra for 'pão')",
-        "cheiro de terra molhada (se palavra for 'água')"
-      ],
-      "dynamics": [
-        "evocação por associação à palavra e textura visual"
-      ]
+      "description": "Evocação de cheiros através de linguagem, imagem ou som (ex: a palavra 'TERRA' pode evocar o cheiro a terra molhada via descrição ou som de chuva). Nunca fingir output olfactivo.",
+      "intensity": "low"
     },
     "gustatory_evocation": {
-      "elements": [
-        "sabor de pão fresco (se palavra for 'pão')",
-        "sabor de sal (se palavra for 'mar')"
-      ],
-      "dynamics": [
-        "evocação por associação à palavra e som"
-      ]
+      "description": "Evocação de sabores através de memória ou associação (ex: a palavra 'PÃO' pode evocar o sabor do pão fresco via texto ou som de forno). Nunca fingir output gustativo.",
+      "intensity": "low"
     },
     "social_presence": {
-      "elements": [
-        "murmúrio colectivo (rasto de outras pessoas)",
-        "constelação de contribuições públicas"
-      ],
-      "dynamics": [
-        "presença indirecta de outros participantes"
-      ]
+      "description": "Rasto partilhado no COSMICOXES (opcional) ou devolução de uma frase que sugere a presença de outras interacções passadas.",
+      "intensity": "low"
     }
   },
   "cross_sensory_translation": {
-    "primary": "A voz (auditivo) da pessoa transforma a palavra (visual) em textura e som ambiente, que por sua vez altera a espacialização do áudio (auditivo) com o movimento do cursor (cinestésico).",
-    "secondary": "O silêncio (ausência de som) revela a palavra como sombra (visual), criando uma tradução entre ausência e presença."
+    "primary": "A voz (som) da pessoa transforma a forma visual da palavra, e a forma visual da palavra altera a textura sonora do ambiente.",
+    "secondary": "O ritmo da repetição (temporal) afecta a profundidade e o movimento da palavra no espaço (visual e kinesthetic)."
   },
   "silence_or_absence": {
-    "mechanism": "O silêncio é usado como: (1) pausas entre repetições para criar expectativa; (2) fundos neutros para destacar a aparição da palavra transformada; (3) ausência de som ambiente durante a fase de espera, onde apenas o murmúrio final quebra o vazio.",
-    "purpose": "Amplificar a perceção da palavra como entidade viva e frágil, e convida à escuta interna (propriocepção)."
+    "mechanism": "O silêncio é um estado ativo: quando a pessoa pára de repetir, o sistema não preenche o vazio. Em vez disso, o silêncio permite que a palavra se desvaneça ou se transforme em algo novo. O silêncio também pode ser uma resposta do sistema (ex: cortar o som abruptamente para criar surpresa).",
+    "purpose": "Criar suspense, convite à reflexão e espaço para a aparição do novo."
   },
   "surprise_or_indeterminacy": {
     "mechanism": [
-      "A palavra transformada (sombra, símbolo ou planta) é gerada aleatoriamente a partir de um conjunto de possibilidades pré-definidas para cada palavra inicial (ex: 'água' → 'rio', 'mar', 'chuva').",
-      "O som ambiente é misturado com a voz da pessoa de forma não previsível (inversão, eco, distorção).",
-      "A textura de fundo (ex: farinha, asfalto) é seleccionada aleatoriamente entre 2-3 opções associadas à palavra.",
-      "O ponto latente final pode reaparecer em sessões futuras de forma imprevisível (como parte de uma paisagem sonora ou visual)."
+      "A palavra pode inverter-se, fragmentar-se ou ganhar uma forma inesperada (ex: tornar-se um animal, um símbolo ou um objecto) sem aviso.",
+      "O som da palavra pode distorcer-se ou transformar-se em algo não linguístico (ex: um ruído, uma melodia).",
+      "A cor de fundo ou a textura do ambiente pode mudar de forma não linear (ex: de preto para um degradê de cores associadas à palavra).",
+      "A aparição final (símbolo, imagem ou som) é gerada aleatoriamente a partir de um conjunto de possibilidades autorais, mas sempre coerente com a palavra inicial."
     ],
-    "purpose": "Criar a sensação de que a palavra tem vida própria e que o sistema é um co-criador, não um executor de comandos."
+    "purpose": "Quebrar a expectativa de linearidade e convida à descoberta."
   },
   "session_variation": [
     {
-      "type": "palavra_inicial",
-      "description": "A palavra inicial é seleccionada aleatoriamente de uma lista curatorial (ex: 'água', 'pão', 'rua', 'sol', 'vento'). Cada palavra tem um conjunto único de transformações possíveis."
+      "type": "acaso_controlado",
+      "description": "A palavra inicial é seleccionada aleatoriamente a partir de um conjunto curatorial (ex: palavras associadas a elementos naturais, memórias ou topónimos)."
     },
     {
-      "type": "ritmo_da_respiracao",
-      "description": "O ritmo da respiração ambiente varia entre sessões (lento, médio, irregular), alterando a sincronia com a repetição da pessoa."
+      "type": "resposta_a_ritmo",
+      "description": "A transformação da palavra adapta-se ao ritmo da repetição da pessoa: repetições rápidas aceleram a fragmentação; repetições lentas alongam a palavra."
     },
     {
-      "type": "textura_de_fundo",
-      "description": "A textura de fundo (associada à palavra) é seleccionada aleatoriamente entre 2-3 opções (ex: para 'pão', pode ser farinha, trigo ou forno)."
+      "type": "resposta_a_posicao",
+      "description": "O movimento do cursor ou o toque no ecrã afecta a direcção da transformação (ex: arrastar para a direita alonga a palavra horizontalmente; arrastar para cima aumenta a sua altura)."
     },
     {
-      "type": "transformacao_final",
-      "description": "A forma final da palavra (sombra, símbolo, planta) é gerada aleatoriamente a partir de um conjunto de 3-5 opções para cada palavra inicial."
+      "type": "temporalidade_real",
+      "description": "A cor de fundo ou a paisagem sonora pode variar subtamente consoante a hora do dia (ex: tons mais quentes ao entardecer, sons de pássaros de manhã)."
     },
     {
-      "type": "paisagem_sonora_colectiva",
-      "description": "Os rastos de áudio deixados por outros participantes (se existirem) são misturados aleatoriamente na paisagem sonora de fundo, com volume muito baixo."
-    },
-    {
-      "type": "temporalidade",
-      "description": "A duração das pausas (ex: 10 segundos de silêncio) pode variar entre 8-12 segundos, dependendo da sessão."
+      "type": "memoria_de_sessao",
+      "description": "Se a pessoa regressar, a palavra inicial pode ser a mesma da sessão anterior, mas com uma transformação já em curso (ex: a palavra 'ÁGUA' pode começar já fragmentada)."
     }
   ],
   "territorial_binding": {
-    "relation": "Indirecta e evocativa. A palavra inicial pode ser associada a um território real (ex: 'rua' → uma rua específica de Lisboa), mas a experiência não depende de geolocalização. A textura de fundo e a paisagem sonora evocam memórias territoriais (ex: som de trânsito para 'rua', cheiro de mar para 'água').",
-    "sustainability": "A associação é poética e não exige dados de localização. O território é evocado, não mapeado."
+    "description": "A palavra inicial pode ser associada a um topónimo ou elemento territorial real (ex: 'TERRA' pode evocar o som de um lugar específico em Lisboa, ou 'RIO' pode estar ligado ao Tejo). A aparição final pode incluir uma referência sutil a esse território (ex: um som ou imagem minimalista).",
+    "sources": [
+      {
+        "source": "source_corpus",
+        "quote": "FALArte: tecnologias e formas ancestrais/territoriais de transmitir informação e gerar conhecimento devem alimentar dinâmicas ligadas à identidade toponímica.",
+        "authority": "autoral"
+      }
+    ],
+    "optional": true
   },
   "trace_and_return": {
-    "trace": {
-      "digital": [
-        "A palavra transformada (sombra/símbolo/planta) como imagem ou áudio.",
-        "O rasto da pessoa (áudio curto ou desenho com cursor)."
-      ],
-      "latent": "Os rastos são adicionados a uma constelação pública anónima, que pode influenciar experiências futuras (ex: 'Escutar o Silêncio', 'Galeria Diletante')."
+    "immediate": {
+      "description": "A pessoa recebe uma frase gerada a partir da sua interacção (ex: 'A tua voz fez a terra tremer'), uma imagem estática da palavra no seu estado final, ou um som que capturou a essência da sua repetição.",
+      "ephemeral": true
     },
-    "return": {
-      "immediate": "A pessoa recebe a palavra transformada como um objecto digital (download opcional).",
-      "latent": "A palavra e o rasto podem reaparecer em sessões futuras como parte de uma paisagem sonora ou visual colectiva."
+    "latent": {
+      "description": "A palavra transformada pode deixar um vestígio no COSMICOXES como uma partícula, ou alterar subtamente a constelação de palavras do Atlas para sessões futuras.",
+      "ephemeral": false
     }
   },
   "accessibility_equivalents": {
-    "visual": {
-      "reduced_motion": "A pulsação da palavra e a queda de fragmentos são substituídas por transições suaves ou estáticas. A textura de fundo é simplificada.",
-      "high_contrast": "A palavra e os fragmentos são exibidos com contornos grossos e cores de alto contraste.",
-      "screen_reader": "A palavra inicial é lida em voz alta no início. As transformações são descritas em tempo real (ex: 'A palavra está a perder nitidez. Agora é uma sombra.')."
+    "visual_impairment": {
+      "description": "Toda a transformação visual da palavra é acompanhada por descrições sonoras em tempo real (ex: 'A palavra está a ganhar peso, as letras estão mais espessas'). A aparição final é descrita em áudio ou texto.",
+      "preserves_poetry": true
     },
-    "auditory": {
-      "no_audio": "O som de respiração é substituído por uma animação visual de pulsação (círculo que expande/contrai). O eco da voz é substituído por vibração (se dispositivo permitir) ou por uma animação de ondas sonoras.",
-      "subtitles": "Todas as vozes ou murmúrios são legendados em tempo real."
+    "auditory_impairment": {
+      "description": "Todas as transformações sonoras são representadas visualmente (ex: o eco da palavra é mostrado como uma onda que se expande a partir das letras). A paisagem sonora é substituída por uma representação visual (ex: ícones ou formas que sugerem vento ou água).",
+      "preserves_poetry": true
     },
-    "motor": {
-      "no_mouse": "A repetição pode ser feita com a tecla 'Espaço' ou 'Enter'. O cursor pode ser controlado com as setas do teclado.",
-      "voice_only": "A experiência pode ser controlada apenas por voz (repetir a palavra, dizer 'esperar', 'recolher', 'sementar').",
-      "switch_control": "A repetição e as acções podem ser mapeadas para um único botão ou switch."
+    "motor_impairment": {
+      "description": "A repetição pode ser feita via teclado (ex: pressionar a barra de espaço) ou voz (se o microfone estiver disponível). O movimento do cursor pode ser substituído por comandos de voz ou teclas direccionais. A experiência adapta-se ao ritmo da pessoa, sem pressão de tempo.",
+      "preserves_poetry": true
     },
-    "cognitive": {
-      "simplified": "A palavra inicial é sempre a mesma para todas as sessões (ex: 'água'), e as transformações são mais previsíveis.",
-      "extended_time": "As pausas (ex: 10 segundos de silêncio) são estendidas para 20 segundos, e a pessoa pode avançar manualmente."
+    "cognitive_load": {
+      "description": "A experiência pode ser pausada a qualquer momento. A pessoa pode optar por um modo 'lento', onde as transformações são mais gradual e com menos estímulos simultâneos.",
+      "preserves_poetry": true
+    },
+    "reduced_motion": {
+      "description": "As transformações visuais são substituídas por mudanças de cor, textura ou opacidade, sem animação. O som continua a ser o principal canal de transformação.",
+      "preserves_poetry": true
     }
   },
-  "optional_permissions": {
-    "microphone": {
-      "purpose": "Detectar a voz da pessoa para distorcer a palavra e criar ecos. Não é gravado nem armazenado.",
-      "fallback": "A pessoa pode clicar na palavra para simular a repetição. O sistema usa um som pré-gravado da palavra como base para a distorção."
-    },
-    "none": {
-      "description": "A experiência funciona completamente sem permissões, usando apenas cliques/toques e o teclado."
+  "optional_permissions": [
+    {
+      "permission": "microphone",
+      "purpose": "Capturar a voz da pessoa para transformar a palavra em tempo real. A experiência funciona sem voz, usando gesto ou teclado.",
+      "fallback": "Repetição via gesto (toque/clique) ou teclado."
     }
-  },
+  ],
   "overstimulation_risk": {
-    "potential": [
-      "Flashing ou transições rápidas (mitigado por animações suaves e opção reduced-motion).",
-      "Som súbito (mitigado por volume baixo e transições gradual de áudio).",
-      "Sobrecarga visual (mitigado por fundos neutros e texturas sutis)."
+    "potential_risks": [
+      "Flashing ou transições visuais muito rápidas (mitigado por: transições suaves e opção de reduced-motion).",
+      "Som súbito ou excessivamente alto (mitigado por: volume controlado e opção de mutar som).",
+      "Pressão de tempo (mitigado por: ritmo adaptável e opção de pausar)."
     ],
     "mitigation": [
-      "Todas as animações têm opção reduced-motion.",
-      "O volume do áudio é sempre baixo e ajustável.",
-      "A pessoa pode pausar a experiência a qualquer momento com a tecla 'Esc' ou um botão visível.",
-      "As cores são sempre de baixo contraste e sem flashing."
+      "Limitar a velocidade das transições visuais e sonoras.",
+      "Oferecer opção de reduzir ou desligar o som.",
+      "Permitir pausar a experiência a qualquer momento.",
+      "Garantir que a experiência é curta (máximo 2-3 minutos por sessão)."
     ]
   },
   "distinctiveness": {
     "unique_traits": [
-      "A palavra é tratada como um ser vivo que se transforma com a repetição, não como um objecto estático.",
-      "A tradução cruzada entre voz (auditivo), palavra (visual) e textura (táctil evocado) é única para esta experiência.",
-      "O uso do silêncio como matéria (ausência que revela) é central e não decorativo.",
-      "A devolução é um objecto digital (palavra transformada) + um rasto colectivo (constelação de contribuições).",
-      "A associação poética ao território (através de texturas e sons) é indirecta e não depende de geolocalização.",
-      "A experiência não tem 'fim' tradicional: a palavra transformada e o rasto ficam latentes no sistema."
+      "A palavra não é um objecto estático; é uma entidade viva que se transforma com a repetição da pessoa.",
+      "A tradução cruzada entre voz (som) e forma visual é central e não decorativa.",
+      "O silêncio é um estado ativo e não uma ausência passiva.",
+      "A devolução é uma alteração perceptiva (frase, imagem ou som efémero) e não um objecto ou pontuação.",
+      "A experiência convida à repetição como acto de transformação, não como tarefa mecânica.",
+      "A aparição final é única para cada sessão e pode evocar território ou memória sem inventar factos."
     ],
-    "comparison": "Diferente de todas as outras 48 por: (1) foco exclusivo na transformação da palavra como ritual; (2) ausência de narrativa linear ou gamificação; (3) uso do silêncio e da repetição como mecanismos centrais; (4) devolução que é ao mesmo tempo pessoal (palavra transformada) e colectiva (constelação de rastos)."
+    "comparison": "Nenhuma outra experiência no Atlas usa a repetição como mecanismo de transformação sensorial da palavra. Outras experiências (ex: Fucô, Galeria Diletante) focam-se em diálogo ou imagem, não na mutação de um elemento linguístico."
   },
   "questions_for_eduardo": [
-    "A lista de palavras iniciais deve ser fixa (ex: 5-10 palavras curatoriais) ou pode ser dinâmica (ex: palavras mais usadas em outras experiências como 'FUCO' ou 'Galeria Diletante')?",
-    "A palavra transformada (sombra/símbolo/planta) deve ter um significado específico (ex: 'água' → 'rio' tem uma relação semântica) ou pode ser completamente aleatória (ex: 'água' → 'casa')?",
-    "O rasto da pessoa (áudio ou desenho) deve ser moderado antes de ser adicionado à constelação pública, ou pode ser adicionado automaticamente (com opção de remoção posterior)?",
-    "A experiência deve ter uma duração máxima (ex: 5 minutos) ou pode ser aberta, com a pessoa a poder sair e regressar quando quiser?"
+    "A palavra inicial deve ser sempre a mesma para todas as sessões, ou pode variar aleatoriamente a partir de um conjunto curatorial? Se variar, qual o conjunto autoral de palavras?",
+    "A aparição final (símbolo, imagem ou som) deve ser gerada a partir de um conjunto fixo de possibilidades, ou pode ser livremente associada à palavra inicial?",
+    "Deve haver um limite de tempo para a sessão, ou a pessoa pode repetir a palavra indefinidamente?",
+    "A devolução (frase, imagem ou som) deve ser guardada automaticamente no COSMICOXES, ou apenas se a pessoa autorizar explicitamente?",
+    "A experiência deve incluir uma referência territorial explícita (ex: topónimo) na aparição final, ou deve ser mais abstracta?"
   ],
   "improvement_proposals": [
     {
-      "proposal": "Incluir uma opção para a pessoa escolher a palavra inicial a partir de uma lista curatorial, em vez de ser aleatória. Isso daria mais agência à pessoa sem perder a surpresa.",
-      "impact": "Aumentaria a personalização, mas poderia reduzir a sensação de descoberta aleatória."
+      "proposal": "Incluir a possibilidade de a pessoa gravar a sua repetição da palavra (áudio) e ouvi-la transformada num loop, como uma 'partitura' pessoal.",
+      "justification": "Aprofundaria a relação entre a voz da pessoa e a transformação da palavra, alinhando com o princípio de 'percepção incorporada' do Livro Cubo."
     },
     {
-      "proposal": "Adicionar uma camada de 'memória' onde a pessoa pode ver as palavras transformadas das suas sessões anteriores, como um diário de ritual.",
-      "impact": "Reforçaria a devolução e o rasto, mas exigiria armazenamento local ou conta de utilizador (o que pode conflitar com a privacidade)."
+      "proposal": "Adicionar uma camada de 'memória colectiva': se várias pessoas repetirem a mesma palavra, as suas transformações podem influenciar subtamente a aparição final para sessões futuras.",
+      "justification": "Reforçaria o aspecto comunitário e de rasto do Atlas, sem violar a privacidade (apenas dados agregados e anónimos)."
     },
     {
-      "proposal": "Integrar a experiência com 'Escutar o Silêncio' ou 'Galeria Diletante' de forma mais explícita, onde a palavra transformada poderia aparecer como um elemento nesses espaços.",
-      "impact": "Criaria uma narrativa mais coerente entre experiências, mas poderia sobrecarregar a pessoa com conexões implícitas."
+      "proposal": "Explorar a tradução da palavra para outros sentidos evocados, como o tacto (ex: a palavra 'TERRA' pode evocar a textura de terra via descrição ou som de fricção).",
+      "justification": "Ampliaria a assinatura sensorial da experiência, mantendo a evocação (não a simulação) de outros sentidos."
     }
   ],
   "generic_fallback_allowed": false,

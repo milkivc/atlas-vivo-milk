@@ -4,339 +4,403 @@
   "source_evidence": {
     "primary": [
       {
-        "source": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
-        "authority": "autoral",
-        "excerpt": "16 seres folclóricos; jogos tradicionais, trava-línguas e adivinhas.",
-        "relevance": "Pregões como parte do folclore oral tradicional, associado a chamamentos e convites."
+        "id": "catalog_entry",
+        "type": "curatorial_catalog",
+        "authority": "high",
+        "details": "Mecânica: 'chamar'; Convite: 'Chama uma coisa que ainda não chegou.'; Família: 'folclore'; Camada: 'pública'; Estado: 'operavel_motor_comum'."
       },
       {
-        "source": "Cópia de Fica registado neste dossiê…",
-        "authority": "autoral",
-        "excerpt": "oralidade e intergeracionalidade como princípios centrais.",
-        "relevance": "Pregões como prática oral, intergeracional e territorial."
+        "id": "constitution_11_examples",
+        "type": "authorial_example",
+        "authority": "high",
+        "details": "Exemplo de direcção: 'ritmo oral / trava-língua / pregão / lengalenga' como família sensorial."
+      },
+      {
+        "id": "source_corpus_folclore",
+        "type": "authorial_corpus",
+        "authority": "high",
+        "details": "16 seres folclóricos; jogos tradicionais, trava-línguas e adivinhas como parte da camada pública."
       }
     ],
     "secondary": [
       {
-        "source": "Curadoria Cultural e Existencialismo Profundo.pdf",
-        "authority": "interpretativa",
-        "excerpt": "língua viva, oralidade, interacção sensorial, sotaques, pluralidade.",
-        "relevance": "Pregões como expressão de oralidade e pluralidade linguística."
+        "id": "falARTE_mecanicas",
+        "type": "authorial_mechanics",
+        "authority": "medium",
+        "details": "Mecânica 7: 'Palavras que desapareceram' (gírias, alcunhas, modos de dizer em desaparecimento)."
+      },
+      {
+        "id": "livro_cubo_dinamicas",
+        "type": "authorial_dynamics",
+        "authority": "medium",
+        "details": "D5: 'Escutar o Silêncio' (camadas de escuta, ambiente, corpo, silêncio)."
       }
     ]
   },
   "authorial_invariants": [
-    "Pregões são chamamentos orais, rítmicos e repetitivos, usados para vender, anunciar ou convocar.",
-    "Devem preservar a musicalidade, o ritmo e a função social de convite ou anúncio.",
-    "São parte do folclore e da memória territorial, ligados a mercados, ruas e festas.",
-    "A oralidade é central, mas deve ser traduzida para uma experiência digital sem perder a essência do chamamento."
+    "O pregão é uma forma de chamar, convocar ou anunciar algo que ainda não chegou.",
+    "Pertence à família do folclore, com raiz em práticas orais, rítmicas e territoriais.",
+    "Deve preservar a oralidade, o ritmo e a função de convocação pública.",
+    "Não é um quiz, menu ou página explicativa.",
+    "Deve ser operável no motor comum da camada pública."
   ],
-  "perceptual_intent": "Convocar a presença da pessoa através de um chamamento vivo, que ecoa no corpo, no ritmo e no território, como se o pregão fosse uma entidade que a procura e a desafia a responder. A experiência deve fazer a pessoa sentir que está a ser chamada para algo que ainda não chegou, mas que está iminente.",
+  "perceptual_intent": "Criar uma experiência imersiva onde a pessoa é convocada a participar num ritual de chamamento oral, sentindo que o seu gesto (voz, ritmo ou silenciamento) altera o ambiente digital como se fosse um pregão vivo. A intenção é evocar a memória coletiva dos pregões de rua, transformando a WebApp num espaço onde o som, o ritmo e a ausência se misturam para fazer surgir algo que ainda não existe — ou que só existe no momento da convocação.",
   "threshold": {
-    "description": "A pessoa entra num espaço digital onde o silêncio é quebrado por um murmúrio distorcido, como um eco de vozes longínquas. A tela está escura, mas um ponto de luz pulsante (como uma vela ou lanterna) aparece no centro, a oscilar ritmicamente. O som de passos distantes e o ruído de um mercado ao longe começam a crescer em volume, como se algo se aproximasse.",
-    "sensory_trigger": "O ponto de luz e o som crescente criam uma expectativa de que algo está a chegar, sem revelar o quê."
+    "description": "A pessoa entra num espaço digital onde o ecrã está inicialmente vazio, exceto por uma mancha de cor terrosa (como um mercado ou praça) que pulsa levemente ao ritmo de uma respiração impercetível. Um som ambiente de murmúrios distantes (como vozes de feira) surge em volume muito baixo, quase subliminar. A mancha de cor expande-se lentamente, como se algo estivesse a ser preparado para aparecer.",
+    "sensory_trigger": "A mancha de cor e o som ambiente são os únicos elementos presentes, criando uma expectativa de que algo está prestes a acontecer. A ausência de texto ou instruções explícitas convida à exploração sensorial."
   },
   "dramaturgical_arc": [
     {
-      "stage": "limiar",
-      "description": "O ambiente digital está em silêncio ativo. Um ponto de luz pulsante e sons distantes (passos, murmúrios) criam a sensação de que algo está a aproximar-se."
+      "stage": 1,
+      "name": "LIMIAR",
+      "description": "O ambiente digital está em estado de 'preparação': a mancha terrosa pulsa, o som de murmúrios distantes flutua em volume. A pessoa sente que algo está iminente, mas não sabe o quê."
     },
     {
-      "stage": "chamada",
-      "description": "O pregão surge como uma voz distorcida e fragmentada, a repetir um chamamento rítmico: *'Ó gente, ó gente, quem quer o que ainda não veio?'* A voz não é clara, mas o ritmo é inconfundível. A tela vibra levemente com a cadência da voz."
+      "stage": 2,
+      "name": "CHAMADA",
+      "description": "Um texto curto e fragmentado aparece no centro da mancha, como se fosse escrito à mão: *'Chama uma coisa que ainda não chegou.'* O texto desaparece lentamente, como se fosse absorvido pela mancha."
     },
     {
-      "stage": "primeiro gesto",
-      "description": "A pessoa é convidada a responder ao chamamento, seja através de um gesto (clique, arrasto, toque), de voz (se permitir microfone) ou de escrita (digitando uma palavra ou frase). O sistema reage ao ritmo do gesto: se for rápido, a voz do pregão acelera; se for lento, a voz abrandará."
+      "stage": 3,
+      "name": "PRIMEIRO GESTO",
+      "description": "A pessoa é convidada a interagir: pode clicar, tocar ou (opcionalmente) usar o microfone para dizer uma palavra ou frase. Se não houver permissão para microfone, um campo de texto minimalista aparece, mas sem pressionar a pessoa a preenchê-lo."
     },
     {
-      "stage": "resposta viva",
-      "description": "O pregão responde ao gesto da pessoa com uma variação do seu chamamento, agora mais claro e direccionado: *'Ó tu, que ouviste, o que trazes para o mercado?'* A tela começa a revelar silhuetas de objectos ou pessoas em movimento, como se um mercado estivesse a formar-se à volta."
+      "stage": 4,
+      "name": "RESPOSTA VIVA",
+      "description": "Assim que a pessoa faz o primeiro gesto (clique, toque, voz ou texto), o ambiente responde: a mancha terrosa fragmenta-se em linhas que se movem como se fossem cordas de um instrumento. O som de murmúrios transforma-se num ritmo percussivo (como um pregão a ser batido em metal ou madeira), e a palavra ou frase introduzida pela pessoa aparece no centro, mas distorcida, como se estivesse a ser gritada por uma multidão."
     },
     {
-      "stage": "desvio",
-      "description": "De repente, o pregão cala-se. O som de passos pára. A tela escurece novamente, mas agora com um brilho intermitente, como se algo tivesse sido interrompido. Um novo som surge: o de um sino ou um apito, a marcar uma pausa."
+      "stage": 5,
+      "name": "DESVIO",
+      "description": "O ritmo percussivo acelera e a palavra distorcida começa a fragmentar-se em sílabas, que se espalham pelo ecrã como se fossem sementes. De repente, o som para abruptamente, e as sílabas congelam no ar. Um silêncio repentino toma conta do ambiente."
     },
     {
-      "stage": "aprofundamento sensorial",
-      "description": "O pregão regressa, mas agora a sua voz está misturada com sons ambientais (ruído de panelas, risos, animais). A tela mostra uma constelação de pontos de luz que se movem como se fossem pessoas num mercado. O ritmo da voz do pregão sincroniza-se com o movimento dos pontos, criando uma tradução cruzada entre som e visual."
+      "stage": 6,
+      "name": "APROFUNDAMENTO SENSORIAL",
+      "description": "As sílabas congeladas começam a vibrar levemente, e um novo som surge: o de um pregão real (gravado ou gerado) a chamar a palavra ou frase introduzida pela pessoa. O som é espacializado: parece vir de diferentes pontos do ecrã, como se várias vozes estivessem a repetir o chamamento. A mancha terrosa agora parece uma praça cheia de gente, e as sílabas transformam-se em sombras de pessoas em movimento."
     },
     {
-      "stage": "escolha / acaso / silêncio",
-      "description": "A pessoa é convidada a escolher um dos pontos de luz (clicando ou tocando) ou a esperar em silêncio. Se escolher um ponto, o pregão responde com um novo chamamento, específico para esse ponto. Se esperar, o pregão desaparece lentamente, e o som ambiente reduz-se a um murmúrio."
+      "stage": 7,
+      "name": "ESCOLHA / ACASO / SILÊNCIO",
+      "description": "A pessoa pode: (a) repetir o chamamento (clicando ou falando novamente), (b) esperar em silêncio, ou (c) mover o cursor/rato ou dedo para 'perseguir' uma das sombras. Cada escolha altera o ritmo e a intensidade do pregão. Se a pessoa não fizer nada, o pregão desvanece-se lentamente, como se a chamada não tivesse sido ouvida."
     },
     {
-      "stage": "aparição",
-      "description": "Se a pessoa interagiu com um ponto, surge uma imagem ou palavra associada a um objecto ou prática tradicional (ex: um pão, um tecido, uma ferramenta). Se esperou, aparece uma frase: *'O que não foi chamado, não veio.'* Em ambos os casos, o pregão volta a chamar, agora com uma voz mais clara e próxima."
+      "stage": 8,
+      "name": "APARIÇÃO",
+      "description": "Se a pessoa interagir ativamente, uma imagem ou objeto simbólico (ex.: um cesto de peixe, um pão, uma flor) aparece no centro do ecrã, como se tivesse sido 'chamado' pelo pregão. A imagem é estática, mas o som do pregão continua, agora mais suave, como se a coisa chamada tivesse finalmente chegado. Se a pessoa não interagir, a imagem aparece de qualquer forma, mas em tons mais desbotados, como uma memória."
     },
     {
-      "stage": "devolução",
-      "description": "O pregão devolve à pessoa uma frase ou som que combina o seu gesto inicial com o chamamento. Por exemplo, se a pessoa escreveu *'pão'*, o pregão pode devolver: *'Ó gente, ó gente, quem quer o pão que ainda não assou?'* A devolução é única para cada sessão e pode ser guardada como um rasto (ex: uma frase ou áudio que a pessoa pode levar consigo)."
+      "stage": 9,
+      "name": "DEVOLUÇÃO",
+      "description": "A imagem ou objeto simbólico começa a dissolver-se em partículas que se espalham pelo ecrã. As partículas formam um padrão que lembra um mapa ou um traçado de rua, e um texto aparece: *'O que chamaste deixou um rasto.'* O som do pregão transformou-se num zumbido suave, como o de uma feira a fechar."
     },
     {
-      "stage": "rasto / latência",
-      "description": "A experiência termina com o pregão a desaparecer lentamente, mas a frase ou som devolvido permanece visível/audível por alguns segundos. A pessoa pode copiar ou guardar a devolução. O pregão pode regressar em sessões futuras, com um novo chamamento, como se a conversa nunca tivesse terminado."
+      "stage": 10,
+      "name": "RASTO / LATÊNCIA",
+      "description": "As partículas do objeto chamado permanecem no ecrã como um rasto, mas agora são interativas: a pessoa pode clicar nelas para ouví-las (cada partícula emite um som único, como um fragmento do pregão original). O rasto permanece visível por alguns segundos antes de desaparecer, mas a pessoa pode regressar mais tarde e encontrar o mesmo padrão, agora como parte de uma constelação maior de chamamentos públicos."
     }
   ],
   "participant_verbs": [
-    "ouvir",
-    "responder",
-    "escolher",
+    "chamar",
     "esperar",
-    "segurar",
+    "perseguir",
     "repetir",
-    "deixar-se chamar"
+    "ouvir",
+    "silenciar",
+    "observar"
   ],
-  "system_responses": [
-    {
-      "trigger": "primeiro gesto (clique, toque, voz ou escrita)",
-      "response": "O pregão ajusta o ritmo da sua voz ao gesto da pessoa (rápido/lento) e repete o chamamento com mais clareza."
+  "system_responses": {
+    "to_call": {
+      "visual": "A mancha terrosa fragmenta-se em linhas rítmicas; a palavra introduzida aparece distorcida e depois fragmentada em sílabas.",
+      "auditory": "O som de murmúrios transforma-se num ritmo percussivo, depois num pregão espacializado.",
+      "haptic": "Vibração sutil (se suportado) no momento em que a palavra é 'gritada' pelo sistema.",
+      "kinesthetic": "As sílabas movem-se como se fossem empurradas pelo gesto da pessoa (clique, toque ou movimento do cursor)."
     },
-    {
-      "trigger": "escolha de um ponto de luz",
-      "response": "O pregão direcciona o chamamento para esse ponto, revelando uma imagem ou palavra associada."
+    "to_wait": {
+      "visual": "As sílabas congelam e depois vibram; sombras de pessoas aparecem e desaparecem.",
+      "auditory": "O pregão desvanece-se lentamente, dando lugar a um zumbido suave.",
+      "temporal_interoceptive": "O ambiente entra num estado de suspensão, como se o tempo tivesse abrandado."
     },
-    {
-      "trigger": "silêncio ou espera",
-      "response": "O pregão desaparece lentamente, e o som ambiente reduz-se a um murmúrio. Uma frase aparece: *'O que não foi chamado, não veio.'*"
+    "to_pursue": {
+      "visual": "As sombras movem-se em resposta ao cursor/rato ou dedo, como se estivessem a fugir ou a aproximar-se.",
+      "auditory": "O pregão acelera ou abrandar conforme a pessoa se aproxima ou afasta das sombras.",
+      "spatial": "O som parece vir da direção da sombra que a pessoa está a perseguir."
     },
-    {
-      "trigger": "repetição do gesto inicial",
-      "response": "O pregão devolve uma frase ou som único, combinando o gesto da pessoa com o chamamento."
+    "to_repeat": {
+      "visual": "As sílabas recombinam-se em novas formas, como se estivessem a ser reescritas.",
+      "auditory": "O pregão repete a palavra introduzida, mas com variações de tom e ritmo.",
+      "social_presence": "Parece que mais vozes se juntam ao chamamento."
+    },
+    "to_silence": {
+      "visual": "Tudo congela: sílabas, sombras e mancha terrosa param de se mover.",
+      "auditory": "O som do pregão desaparece, dando lugar a um silêncio pesado.",
+      "temporal_interoceptive": "O ambiente entra num estado de espera, como se algo estivesse prestes a acontecer."
     }
-  ],
-  "sensory_signature_id": "PREGOES_RITMO_VOZ_LUZ_MERCADO",
+  },
+  "sensory_signature_id": "PREGOES_VIVO_037",
   "sensory_channels": {
     "visual": {
-      "elements": [
-        "ponto de luz pulsante",
-        "silhuetas de objectos/pessoas em movimento",
-        "constelação de pontos de luz",
-        "tela escura com brilho intermitente",
-        "imagens ou palavras associadas a objectos tradicionais"
+      "primary": [
+        "mancha terrosa pulsante",
+        "linhas rítmicas (como cordas de instrumento)",
+        "sílabas fragmentadas",
+        "sombras de pessoas em movimento",
+        "objeto simbólico (cesto, pão, flor)",
+        "partículas interativas"
       ],
-      "dynamics": [
-        "oscilação rítmica da luz",
-        "movimento sincronizado com o som",
-        "aparição/disparição gradual de elementos"
+      "secondary": [
+        "textura de mercado/praça",
+        "padrões de mapa ou traçado de rua",
+        "distorção tipográfica (como se a palavra fosse gritada)"
       ]
     },
     "auditory": {
-      "elements": [
-        "voz distorcida e fragmentada do pregão",
-        "sons ambientais de mercado (passos, murmúrios, panelas, risos, animais)",
-        "som de sino ou apito",
-        "murmúrio reduzido"
+      "primary": [
+        "murmúrios distantes",
+        "ritmo percussivo (como pregão batido em metal/madeira)",
+        "pregão espacializado (várias vozes)",
+        "zumbido suave (feira a fechar)",
+        "fragmentos sonoros únicos (partículas)"
       ],
-      "dynamics": [
-        "ritmo variável da voz do pregão",
-        "sincronização com gestos da pessoa",
-        "camadas sonoras sobrepostas",
-        "silêncio ativo"
+      "secondary": [
+        "silêncio repentino",
+        "eco do chamamento da pessoa"
       ]
     },
     "haptic": {
-      "elements": [
-        "vibração leve da tela (se suportado)",
-        "feedback táctil ao clicar ou tocar"
+      "primary": [
+        "vibração sutil (se suportado) no momento do chamamento"
       ],
-      "dynamics": [
-        "vibração sincronizada com o ritmo da voz"
-      ]
+      "secondary": []
     },
     "kinesthetic": {
-      "elements": [
-        "gesto de clique, toque ou arrasto",
-        "movimento do cursor ou dedo"
+      "primary": [
+        "movimento das sílabas em resposta ao gesto",
+        "sombras que reagem ao cursor/rato ou dedo"
       ],
-      "dynamics": [
-        "ritmo do gesto influencia o ritmo da voz do pregão"
-      ]
+      "secondary": []
     },
     "proprioceptive": {
-      "elements": [
-        "percepção do ritmo corporal",
-        "atenção à cadência da voz"
+      "primary": [
+        "instrução implícita para ajustar a postura ou ritmo de respiração (ex.: 'espera como se estivesses numa feira')"
       ],
-      "dynamics": [
-        "convite a sincronizar o corpo com o ritmo do pregão"
-      ]
+      "secondary": []
     },
     "temporal_interoceptive": {
-      "elements": [
-        "espera",
-        "pausa",
-        "aceleração/abrandamento do ritmo"
+      "primary": [
+        "respiração percebida (pulsação da mancha terrosa)",
+        "suspensão do tempo (silêncio repentino)",
+        "aceleração/abrandamento do pregão"
       ],
-      "dynamics": [
-        "tempo de resposta influencia a devolução do sistema"
-      ]
+      "secondary": []
     },
     "spatial": {
-      "elements": [
-        "proximidade/distância dos sons",
-        "posicionamento dos pontos de luz na tela"
+      "primary": [
+        "espacialização do som (pregão vindo de diferentes pontos)",
+        "movimento das sombras em relação ao cursor"
       ],
-      "dynamics": [
-        "sons e visuais criam a ilusão de um espaço de mercado"
-      ]
+      "secondary": []
     },
     "olfactory_evocation": {
-      "elements": [
-        "memória de cheiros de mercado (pão, especiarias, comida de rua)"
+      "primary": [
+        "evocação de cheiros de feira (especiarias, pão, peixe) através de descrições textuais ou sonoras (ex.: 'o cheiro a pão quente mistura-se com o som do pregão')"
       ],
-      "dynamics": [
-        "evocação através de descrições ou sons associados"
-      ]
+      "secondary": []
     },
     "gustatory_evocation": {
-      "elements": [
-        "memória de sabores tradicionais (pão, fruta, doces)"
+      "primary": [
+        "evocação de sabores através de memórias ou descrições (ex.: 'o sabor do pão que acabaste de chamar')"
       ],
-      "dynamics": [
-        "evocação através de palavras ou imagens"
-      ]
+      "secondary": []
     },
     "social_presence": {
-      "elements": [
-        "sensação de estar num mercado com outras pessoas",
-        "voz do pregão como uma entidade social"
+      "primary": [
+        "sensação de multidão (sombras, vozes sobrepostas)",
+        "convite implícito para participar num ritual coletivo"
       ],
-      "dynamics": [
-        "interacção com uma voz que parece viva e reactiva"
-      ]
+      "secondary": []
     }
   },
   "cross_sensory_translation": {
-    "primary": "O ritmo da voz do pregão traduz-se em movimento visual (pontos de luz que se movem em sincronia com a cadência sonora).",
-    "secondary": "O gesto da pessoa (rápido/lento) traduz-se em alterações no ritmo da voz do pregão e na velocidade dos pontos de luz."
+    "primary": {
+      "description": "A palavra ou frase introduzida pela pessoa é transformada em ritmo percussivo (auditory → kinesthetic) e depois em sombras de pessoas em movimento (auditory → visual).",
+      "mechanism": "O som do pregão altera a forma como as sílabas se movem e fragmentam no ecrã, e o movimento das sílabas afeta a espacialização do som."
+    },
+    "secondary": {
+      "description": "O silêncio repentino (auditory) congela as sílabas e sombras (visual), criando uma pausa dramática que convida à reflexão.",
+      "mechanism": "A ausência de som é traduzida em imobilidade visual e suspensão temporal."
+    }
   },
   "silence_or_absence": {
-    "use": "O silêncio é usado como um elemento ativo: o pregão cala-se repentinamente, criando uma pausa dramática que convida a pessoa a reflectir ou a agir. O silêncio também é usado para revelar a ausência do que ainda não chegou (ex: a frase *'O que não foi chamado, não veio.'*).",
-    "effect": "Cria expectativa, suspense e um espaço para a pessoa sentir a sua própria presença na experiência."
+    "mechanism": "O silêncio é usado como ferramenta dramática: (1) silêncio repentino após o desvio para criar suspense; (2) silêncio prolongado se a pessoa não interagir, como se o chamamento não tivesse sido ouvido; (3) zumbido suave no final, como o de uma feira a fechar, para marcar o fim da experiência.",
+    "purpose": "O silêncio não é vazio: é um convite para escutar o que não está a ser dito, para sentir a ausência do que ainda não chegou."
   },
   "surprise_or_indeterminacy": {
-    "mechanism": "O pregão pode desaparecer repentinamente, interrompendo o chamamento. A devolução final é única para cada sessão, combinando o gesto inicial da pessoa com o chamamento do pregão. A aparição de imagens ou palavras associadas a objectos tradicionais é aleatória, mas contextualizada pelo gesto da pessoa.",
-    "effect": "Quebra a expectativa de um fluxo linear e introduz um elemento de surpresa e personalização."
+    "mechanism": [
+      {
+        "type": "acaso_controlado",
+        "description": "O objeto simbólico que aparece (cesto, pão, flor, etc.) é escolhido aleatoriamente a partir de um conjunto pré-definido, mas sempre relacionado com o folclore ou com a palavra introduzida pela pessoa."
+      },
+      {
+        "type": "resposta_a_ritmo",
+        "description": "O ritmo do pregão acelera ou abrandar conforme a velocidade com que a pessoa interage (cliques rápidos vs. lentos)."
+      },
+      {
+        "type": "resposta_a_posicao",
+        "description": "A espacialização do som do pregão muda conforme a posição do cursor/rato ou dedo no ecrã."
+      },
+      {
+        "type": "combinação_de_fragmentos",
+        "description": "As sílabas fragmentadas podem recombinar-se de formas diferentes em cada sessão, criando novas palavras ou sons."
+      }
+    ],
+    "purpose": "Criar a sensação de que o pregão é um ser vivo, imprevisível, que responde de forma única a cada pessoa."
   },
   "session_variation": [
     {
-      "type": "acaso controlado",
-      "description": "A voz do pregão pode variar entre diferentes chamamentos tradicionais (ex: *'Ó gente, ó pão quente!'*, *'Ó gente, ó peixe fresco!'*), seleccionados aleatoriamente em cada sessão."
+      "type": "acaso_controlado",
+      "description": "O objeto simbólico final (cesto, pão, flor, etc.) é escolhido aleatoriamente."
     },
     {
-      "type": "resposta a ritmo/velocidade do gesto",
-      "description": "O ritmo da voz do pregão e o movimento dos pontos de luz ajustam-se à velocidade do gesto inicial da pessoa."
+      "type": "ordem_mutável",
+      "description": "A ordem em que as sílabas fragmentadas aparecem ou se movem pode variar entre sessões."
     },
     {
-      "type": "combinação de fragmentos curatoriais",
-      "description": "As imagens ou palavras devolvidas são seleccionadas aleatoriamente a partir de um conjunto de objectos ou práticas tradicionais associadas a pregões."
+      "type": "resposta_a_ritmo",
+      "description": "O ritmo do pregão adapta-se à velocidade de interação da pessoa (cliques rápidos vs. lentos)."
     },
     {
-      "type": "silêncio/espera",
-      "description": "Se a pessoa optar por não interagir durante um período, o pregão desaparece e a experiência evolui para um estado de silêncio ativo, com uma frase final diferente."
+      "type": "resposta_a_posicao",
+      "description": "A espacialização do som do pregão muda conforme a posição do cursor/rato ou dedo."
     },
     {
-      "type": "território escolhido",
-      "description": "Se a pessoa permitir geolocalização (opcional), o pregão pode adaptar o chamamento a uma prática ou objecto tradicional da sua região (ex: *'Ó gente, ó vinho da ribeira!'* para uma pessoa em Trás-os-Montes)."
+      "type": "temporalidade_real",
+      "description": "O volume e a intensidade do pregão podem variar conforme a hora do dia (ex.: mais intenso de manhã, como uma feira a começar)."
     }
   ],
   "territorial_binding": {
-    "relation": "Os pregões são uma prática folclórica profundamente ligada a mercados, ruas e festas territoriais. A experiência evoca a memória colectiva de chamamentos que convocam a comunidade para um lugar ou evento específico.",
-    "evocation": "Através de sons, palavras e imagens, a experiência transporta a pessoa para um mercado tradicional, onde o pregão é uma voz que pertence ao território e à sua história.",
-    "optional_geolocation": "Se a pessoa permitir, o pregão pode adaptar o chamamento a práticas ou objectos tradicionais da sua região, reforçando a ligação territorial."
+    "description": "A experiência evoca o território de uma feira ou mercado tradicional, com sons, ritmos e objetos simbólicos que remetem para práticas folclóricas locais. Se a pessoa permitir geolocalização (opcional), o pregão pode incorporar sons ou referências específicas da sua freguesia ou região, mas a experiência funciona plenamente sem esta permissão.",
+    "evocation": "A mancha terrosa e os murmúrios distantes são inspirados em praças e feiras reais, como a Feira da Ladra (Lisboa) ou mercados de província. Os objetos simbólicos (cesto, pão, flor) são escolhas que remetem para o comércio e a cultura material do folclore português."
   },
   "trace_and_return": {
-    "trace": "A frase ou som devolvido pelo pregão pode ser guardado pela pessoa como um rasto da experiência (ex: copiar para a área de transferência ou guardar como ficheiro de áudio).",
-    "return": "O pregão pode regressar em sessões futuras, com um novo chamamento, como se a conversa nunca tivesse terminado. A devolução é única para cada sessão e pode ser partilhada ou guardada como memória.",
-    "latency": "A experiência pode permanecer incompleta, com o pregão a desaparecer sem uma resolução clara, convidando a pessoa a regressar mais tarde."
+    "trace": {
+      "description": "As partículas do objeto chamado permanecem no ecrã como um rasto interativo. Cada partícula emite um som único quando clicada, como um fragmento do pregão original.",
+      "persistence": "O rasto permanece visível por alguns segundos e pode ser reencontrado mais tarde como parte de uma constelação de chamamentos públicos."
+    },
+    "return": {
+      "description": "A pessoa recebe de volta: (1) a sensação de ter participado num ritual coletivo; (2) a memória do objeto chamado, que pode ser partilhado ou guardado como um fragmento da experiência; (3) a certeza de que o seu chamamento deixou um rasto no sistema.",
+      "form": "O texto *'O que chamaste deixou um rasto.'* aparece no final, acompanhado pelo zumbido suave da feira a fechar."
+    }
   },
   "accessibility_equivalents": {
     "visual": {
-      "alternative": "Todas as imagens ou pontos de luz são acompanhados por descrições sonoras ou textuais (ex: *'Um ponto de luz move-se lentamente para a esquerda, como uma pessoa a caminhar no mercado.'*).",
-      "reduced_motion": "A opção de reduzir movimento está disponível, substituindo a constelação de pontos de luz por uma lista estática de objectos ou palavras."
+      "for_blind_or_low_vision": {
+        "description": "Todas as interações visuais (mancha terrosa, sílabas, sombras, objeto simbólico) são acompanhadas por descrições sonoras detalhadas. Exemplo: *'Uma mancha terrosa pulsa no centro do ecrã, como uma praça de feira. Sílabas da tua palavra voam como pássaros.'*",
+        "alternative": "Modo de alto contraste para as sílabas e sombras, com opção para aumentar o tamanho do texto."
+      }
     },
     "auditory": {
-      "alternative": "Todas as vozes e sons são acompanhados por legendas textuais em tempo real. A pessoa pode ajustar o volume ou desactivar o som.",
-      "silence_mode": "A experiência pode ser vivida em modo silencioso, com todas as interacções a serem comunicadas visualmente."
+      "for_deaf_or_hard_of_hearing": {
+        "description": "Todos os sons (murmúrios, pregão, zumbido) são traduzidos em vibrações táteis (se suportado) ou em animações visuais (ex.: ondas de som que se propagam a partir do centro do ecrã). O ritmo percussivo é representado por pulsações visuais sincronizadas.",
+        "alternative": "Legendas em tempo real para o pregão, com opção para ajustar a velocidade."
+      }
     },
     "haptic": {
-      "alternative": "A vibração é opcional e pode ser substituída por um pulso visual (ex: um círculo a expandir e contrair na tela)."
+      "for_no_vibration_support": {
+        "description": "A vibração sutil é substituída por um pulso visual (ex.: um círculo que se expande e contrai no ponto de interação)."
+      }
     },
     "kinesthetic": {
-      "alternative": "Todos os gestos (clique, toque, arrasto) têm equivalentes no teclado (ex: setas para mover, barra de espaço para seleccionar)."
-    },
-    "proprioceptive": {
-      "alternative": "A experiência pode ser vivida sem movimento, com todas as interacções a serem comunicadas através de texto ou som."
+      "for_motor_impairments": {
+        "description": "Todas as interações baseadas em movimento (clique, toque, perseguição) têm alternativas: (1) teclado (setas para mover o cursor, Enter para clicar); (2) voz (comandos como 'chamar', 'esperar', 'repetir'); (3) tempo (espera automática para avançar).",
+        "alternative": "Modo 'sem pressão', onde a experiência avança automaticamente com pausas mais longas."
+      }
     },
     "temporal_interoceptive": {
-      "alternative": "A pessoa pode ajustar o ritmo da experiência (ex: modo lento para quem prefere não ser pressionado pelo tempo)."
+      "for_anxiety_or_sensory_overload": {
+        "description": "Modo 'respiração calma', onde os ritmos e sons são abrandados, e as pausas entre interações são mais longas. O silêncio repentino é substituído por um desvanecimento gradual.",
+        "alternative": "Opção para desativar completamente os sons e focar apenas nas interações visuais."
+      }
     },
-    "olfactory_evocation": {
-      "alternative": "As evocações olfativas são sempre comunicadas através de texto ou som, nunca como output físico."
-    },
-    "gustatory_evocation": {
-      "alternative": "As evocações gustativas são sempre comunicadas através de texto ou imagem, nunca como output físico."
-    },
-    "social_presence": {
-      "alternative": "A sensação de presença social é mantida através de descrições textuais ou sonoras (ex: *'O pregão parece estar a falar directamente contigo.'*)."
+    "cognitive": {
+      "for_reduced_motion": {
+        "description": "Modo 'estático', onde as sílabas e sombras não se movem, mas mudam de cor ou opacidade para indicar interatividade. O pregão é representado por texto que aparece e desaparece em vez de som.",
+        "alternative": "Descrições textuais detalhadas de todas as interações, para quem prefere ler em vez de interagir."
+      }
     }
   },
   "optional_permissions": {
     "microphone": {
-      "purpose": "Permitir à pessoa responder ao pregão com a sua voz, que pode ser usada para ajustar o ritmo ou o conteúdo do chamamento.",
-      "fallback": "A pessoa pode digitar uma resposta ou usar gestos (clique, toque)."
+      "purpose": "Permitir que a pessoa use a voz para chamar, em vez de digitar ou clicar. O som da voz é usado para gerar o pregão, mas não é gravado ou armazenado.",
+      "fallback": "Campo de texto minimalista ou botão de clique para introduzir a palavra."
     },
     "geolocation": {
-      "purpose": "Adaptar o chamamento do pregão a práticas ou objectos tradicionais da região da pessoa.",
-      "fallback": "O pregão usa chamamentos genéricos, não ligados a um território específico."
+      "purpose": "Incorporar sons ou referências específicas da freguesia ou região da pessoa, para personalizar o pregão.",
+      "fallback": "O pregão usa sons e referências genéricas de feiras e mercados tradicionais."
     },
-    "motion": {
-      "purpose": "Usar o movimento do dispositivo para influenciar o ritmo ou a direcção dos pontos de luz.",
-      "fallback": "A experiência funciona sem movimento, com interacções baseadas em clique ou toque."
+    "device_motion": {
+      "purpose": "Permitir que o movimento do dispositivo (ex.: inclinação) afete a espacialização do som do pregão.",
+      "fallback": "A espacialização do som é baseada na posição do cursor/rato ou dedo."
     }
   },
   "overstimulation_risk": {
     "risks": [
-      "Som súbito ou repetitivo pode ser incómodo para pessoas com sensibilidade auditiva.",
-      "Movimento rápido dos pontos de luz pode causar desconforto visual.",
-      "Vibração contínua pode ser incómoda para algumas pessoas."
+      {
+        "type": "auditory",
+        "description": "O pregão espacializado pode ser intenso se várias vozes sobrepuserem-se, especialmente com auscultadores.",
+        "mitigation": "Volume ajustável; modo 'respiração calma' com sons abrandados; opção para desativar sons."
+      },
+      {
+        "type": "visual",
+        "description": "O movimento rápido das sílabas e sombras pode causar desconforto em pessoas sensíveis a movimento.",
+        "mitigation": "Modo 'reduced-motion' com animações estáticas ou mais lentas; opção para desativar animações."
+      },
+      {
+        "type": "cognitive",
+        "description": "A fragmentação das sílabas e a sobreposição de sons podem ser confuses para pessoas com dificuldades de processamento sensorial.",
+        "mitigation": "Modo 'simplificado', onde as interações são mais lineares e menos sobrepostas; descrições textuais claras."
+      }
     ],
-    "mitigations": [
-      "O volume do som é ajustável e pode ser desactivado.",
-      "A opção de reduzir movimento está sempre disponível.",
-      "A vibração é opcional e pode ser substituída por feedback visual.",
-      "A experiência inclui pausas e momentos de silêncio para evitar sobre-estímulo contínuo."
-    ]
+    "general_mitigation": "A experiência inclui pausas naturais (silêncio repentino, zumbido suave) e permite à pessoa controlar o ritmo de interação."
   },
   "distinctiveness": {
     "unique_elements": [
-      "O pregão como uma entidade viva e reactiva, que convida a pessoa a interagir com um chamamento folclórico.",
-      "A tradução cruzada entre o ritmo da voz do pregão e o movimento visual dos pontos de luz.",
-      "A devolução personalizada, que combina o gesto inicial da pessoa com o chamamento do pregão.",
-      "A evocação de um mercado tradicional através de sons, imagens e palavras, sem recorrer a elementos genéricos ou decorativos.",
-      "A utilização do silêncio como um elemento ativo, que quebra a expectativa e convida à reflexão."
+      "A tradução cruzada entre a palavra introduzida e o pregão espacializado (auditory → visual/kinesthetic).",
+      "O uso do silêncio como ferramenta dramática para criar suspense e convite à reflexão.",
+      "A evocação do folclore através de sons, ritmos e objetos simbólicos que remetem para práticas de pregão tradicional.",
+      "A devolução de um rasto interativo (partículas sonoras) que pode ser reencontrado mais tarde.",
+      "A combinação de oralidade, ritmo e territorialidade sem depender de permissões ou vigilância."
     ],
-    "comparison": "Esta experiência é única porque não se limita a reproduzir um pregão como um áudio estático. Em vez disso, transforma o pregão numa entidade interativa que responde à presença e aos gestos da pessoa, criando uma dinâmica de chamamento e resposta que é ao mesmo tempo folclórica e digital. Nenhuma outra experiência no Atlas usa esta combinação de oralidade, ritmo, movimento e devolução personalizada."
+    "comparison": "Esta experiência não pode ser confundida com outras porque: (1) é a única que usa o pregão como mecânica central; (2) a tradução cruzada entre som e movimento é única (palavra → pregão → sílabas em movimento); (3) o silêncio é usado de forma ativa e não passiva; (4) a devolução é um rasto sonoro interativo, não um objeto estático ou texto."
   },
   "questions_for_eduardo": [
-    "O pregão deve ter uma voz específica (ex: gravada por um actor ou gerada por IA) ou deve ser uma voz genérica e distorcida para preservar a universalidade do folclore?",
-    "Deve haver um conjunto fixo de chamamentos tradicionais (ex: baseados em pregões reais de mercados portugueses) ou podem ser gerados dinâmicamente?",
-    "A devolução final (frase ou som) deve ser guardada automaticamente como um rasto no Atlas, ou deve ser opcional e controlada pela pessoa?",
-    "A experiência deve incluir um convite explícito para a pessoa regressar mais tarde, ou deve deixar essa decisão implícita?"
+    "A mancha terrosa inicial deve ter uma cor específica (ex.: ocre, castanho) ou pode variar conforme o território evocado?",
+    "Os objetos simbólicos (cesto, pão, flor) devem ser imagens reais ou ilustrações estilizadas? Existe um conjunto pré-definido de objetos para o folclore?",
+    "O pregão deve ser sempre em português ou pode incorporar sons ou palavras de outras línguas/regiões, conforme o território?",
+    "A fragmentação das sílabas deve seguir uma lógica fonética (ex.: separação por sílaba) ou pode ser mais abstrata (ex.: separação por letra)?",
+    "O zumbido suave no final deve ser um som específico (ex.: som de feira a fechar) ou pode ser genérico?"
   ],
   "improvement_proposals": [
     {
-      "proposal": "Incluir uma opção para a pessoa gravar a sua própria voz a responder ao pregão, criando um diálogo mais pessoal e intergeracional.",
-      "justification": "Reforçaria a oralidade e a ligação ao folclore, permitindo que a pessoa se sinta parte activa da tradição."
+      "id": "territorial_sounds",
+      "description": "Incorporar sons reais de pregões gravados em feiras e mercados tradicionais de Portugal, com permissão dos detentores dos direitos. Isso aumentaria a autenticidade territorial da experiência.",
+      "source": "Inspirado em 'A Deriva do Sentido' e no uso de fonografia do lugar."
     },
     {
-      "proposal": "Adicionar uma camada de memória territorial, onde o pregão menciona lugares ou práticas específicas da freguesia ou região da pessoa (se geolocalização for permitida).",
-      "justification": "Aprofundaria a ligação ao território e tornaria a experiência mais relevante para a pessoa."
+      "id": "intergenerational_voices",
+      "description": "Adicionar a possibilidade de o pregão incluir vozes de diferentes gerações (ex.: uma voz mais velha a chamar, seguida por uma voz mais jovem), para reforçar a dimensão intergeracional do folclore.",
+      "source": "Inspirado nos princípios de intergeracionalidade do Atlas Vivo MILK."
     },
     {
-      "proposal": "Incluir um modo 'mercado noturno', onde os sons e visuais são mais subtis e misteriosos, evocando a magia dos pregões à noite.",
-      "justification": "Adicionaria variedade e exploraria uma dimensão menos óbvia do folclore."
+      "id": "object_memory",
+      "description": "Permitir que o objeto simbólico final (cesto, pão, flor) seja associado a uma memória ou história pessoal da pessoa, que pode ser guardada e partilhada (opcionalmente) como parte do rasto.",
+      "source": "Inspirado na mecânica 'O que ainda resiste' do FALArte."
+    },
+    {
+      "id": "rhythmic_feedback",
+      "description": "Adicionar um feedback visual ou sonoro que mostre à pessoa como o seu ritmo de interação (cliques rápidos vs. lentos) está a afetar o pregão. Exemplo: uma barra de ritmo que se enche conforme a pessoa interage mais rapidamente.",
+      "source": "Inspirado na tradução cruzada entre kinesthetic e auditory."
     }
   ],
   "generic_fallback_allowed": false,

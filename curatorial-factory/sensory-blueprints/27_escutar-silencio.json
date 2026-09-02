@@ -3,520 +3,460 @@
   "canonical_name": "Escutar o Silêncio",
   "source_evidence": {
     "primary": [
-      {
-        "id": "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md",
-        "quote": "D5 Escutar o Silêncio — camadas de escuta, ambiente, corpo, silêncio; partitura pessoal.",
-        "authority": "autoral"
-      },
-      {
-        "id": "Cópia de Fica registado neste dossiê…",
-        "quote": "estética, rastos, humor, oralidade e intergeracionalidade",
-        "authority": "autoral"
-      },
-      {
-        "id": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
-        "quote": "princípios CARE, dissidência, anticolonialidade, intergeracionalidade e feminismo de dados",
-        "authority": "autoral"
-      }
+      "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md (D5: Escutar o Silêncio — camadas de escuta, ambiente, corpo, silêncio; partitura pessoal)",
+      "Cópia de Fica registado neste dossiê… (fonte autoral para estado-alvo da camada pública, estética, rastos, humor, oralidade e intergeracionalidade)"
     ],
     "secondary": [
-      {
-        "id": "Curadoria Cultural e Existencialismo Profundo.pdf",
-        "quote": "escuta/paisagem sonora (Murray Schafer), língua viva, saberes tradicionais",
-        "authority": "interpretativa"
-      }
-    ]
+      "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf (princípios CARE, dissidência, anticolonialidade, intergeracionalidade e feminismo de dados)",
+      "Curadoria Cultural e Existencialismo Profundo.pdf (sentipensar, configuração relacional, psicogeografia activa)"
+    ],
+    "territorial": []
   },
   "authorial_invariants": [
-    "O silêncio é matéria ativa, não ausência de som.",
-    "Camadas de escuta: ambiente, corpo, memória, território.",
-    "Partitura pessoal: a pessoa compõe uma escuta única, não passiva.",
-    "A experiência deve ser não-intrusiva e não-vigilante.",
-    "O corpo é convocado, mas nunca forçado.",
-    "A devolução é um rasto sonoro ou visual que persiste ou desaparece como eco."
+    "O silêncio é matéria, não ausência de som.",
+    "Camadas de escuta: ambiente, corpo, silêncio.",
+    "Partitura pessoal (ritmo, pausa, respiração) como estrutura.",
+    "A experiência deve alterar-se em resposta à escuta (ou à sua ausência).",
+    "Nunca reduzir a botão 'play' ou áudio estático.",
+    "A escuta deve ser activa, não passiva.",
+    "O corpo é instrumento de escuta (mesmo sem movimento)."
   ],
-  "perceptual_intent": "Transformar o silêncio num campo vivo de perceção, onde a ausência de som se torna uma textura tangível, e a escuta ativa revela camadas ocultas do ambiente, do corpo e da memória. A pessoa deve sentir que o silêncio 'fala' e que a sua presença o altera.",
+  "perceptual_intent": "Transformar o silêncio num campo vivo onde a pessoa descobre que a ausência de som é também uma paisagem sensorial. Convocar a atenção para o que não é ouvido, mas pressentido: o peso do ar, a textura do vazio, a respiração como ritmo, e a memória de sons que já não estão lá. A experiência deve fazer a pessoa sentir que, ao escutar o silêncio, está a compor uma partitura única do território e do seu próprio corpo.",
   "threshold": {
-    "description": "A tela começa em negro profundo, com um único ponto de luz fraca e pulsante no centro (como uma estrela ou um fio de voz). O som ambiente do dispositivo (se permitido) é atenuado até um limiar de audibilidade, criando uma sensação de suspensão. O cursor, se presente, desaparece após 3 segundos de inatividade.",
-    "sensory_trigger": "A transição do ruído ambiente habitual para um vazio controlado, acompanhada por uma redução gradual da luminosidade visual."
+    "description": "A tela começa em negro profundo, com um único ponto de luz fraca e pulsante no centro (como uma vela ou luva-de-lobo). O som ambiente do dispositivo (se permitido) é progressivamente atenuado até um limiar audível, mas não intrusivo. A pessoa percebe que algo está a mudar, mas não sabe o quê. O cursor, se presente, desaparece após 3 segundos de inatividade.",
+    "sensory_trigger": "A transição do ruído ambiente para o silêncio não é abrupta; é uma redução gradual que convida à atenção."
   },
   "dramaturgical_arc": [
     {
-      "stage": "LIMIAR",
-      "action": "A tela escurece e o som ambiente é filtrado em tempo real (se microfone permitido) ou substituído por um ruído branco extremamente baixo. Um círculo de luz fraca expande-se lentamente no centro, como se o silêncio fosse uma substância visível.",
+      "stage": "limiar",
+      "action": "A tela está escura. Um ponto de luz fraca pulsa lentamente. O som ambiente (se captado) é reduzido a um murmúrio quase impercetível. A pessoa sente que algo está a acontecer, mas não há instruções.",
       "sensory_focus": [
-        "visual (escuridão + luz pulsante)",
-        "auditory (ruído branco mínimo ou ausência)"
+        "visual (luz fraca)",
+        "auditory (redução de som ambiente)",
+        "temporal_interoceptive (espera)"
       ]
     },
     {
-      "stage": "CHAMADA",
-      "action": "Aparece um convite textual mínimo, escrito em tipografia orgânica e tremida: *‘Respira. O silêncio também é um lugar.’* A frase surge e desaparece em 2 segundos, como um suspiro.",
+      "stage": "chamada",
+      "action": "Aparece, em letras quase transparentes e tremidas, a frase: *'Respira. O silêncio também é um lugar.'* A frase desaparece ao fim de 5 segundos, ou se a pessoa mexer o rato/teclado.",
       "sensory_focus": [
         "visual (texto efémero)",
-        "temporal_interoceptive (ritmo da respiração)"
+        "auditory (silêncio ativo)",
+        "proprioceptive (convite à respiração)"
       ]
     },
     {
-      "stage": "PRIMEIRO GESTO",
-      "action": "A pessoa é convidada a: 1) Clicar/tocar na tela (gesto mínimo), 2) Segurar a tecla de espaço (para quem não usa rato), ou 3) Fazer um gesto de respiração profunda (detetado por movimento do dispositivo, se permitido). Qualquer um dos gestos ativa a próxima fase.",
+      "stage": "primeiro_gesto",
+      "action": "A pessoa é convidada a: (1) fechar os olhos (detetado por inatividade do cursor/teclado), (2) segurar a respiração (detetado por ausência de som ambiente, se microfone permitido), ou (3) tocar na tela (se touchscreen). Qualquer um destes gestos aciona a próxima fase.",
       "sensory_focus": [
-        "kinesthetic (toque/tecla)",
-        "proprioceptive (respiração)"
+        "kinesthetic (gesto opcional)",
+        "proprioceptive (atenção ao corpo)",
+        "temporal_interoceptive (ritmo respiratório)"
       ]
     },
     {
-      "stage": "RESPOSTA VIVA",
-      "action": "O círculo de luz expande-se e fragmenta-se em partículas que se movem como poeira sonora. Cada partícula emite um som mínimo (sinos distantes, gotas de água, respirações) que só é audível quando o cursor/toque se aproxima. A intensidade do som varia com a distância e a velocidade do gesto.",
+      "stage": "resposta_viva",
+      "action": "O ponto de luz expande-se em círculos concêntricos, como ondas num lago. Cada círculo emite um som subliminar (frequências entre 20-50 Hz, inaudíveis para a maioria, mas sentidas como vibração se o dispositivo o permitir). A pessoa ouve (ou sente) que o seu gesto alterou o ambiente.",
       "sensory_focus": [
-        "visual (partículas em movimento)",
-        "auditory (sons mínimos espaciais)",
-        "kinesthetic (interação com cursor/toque)"
+        "visual (ondas de luz)",
+        "auditory (som subliminar)",
+        "haptic (vibração opcional)"
       ]
     },
     {
-      "stage": "DESVIO",
-      "action": "De repente, todas as partículas param e o som cessa. Um silêncio absoluto domina por 3-5 segundos. Durante este tempo, a tela exibe uma textura de 'neblina' que se move lentamente, como se o silêncio fosse uma paisagem.",
+      "stage": "desvio",
+      "action": "De repente, as ondas param. O ponto de luz contrai-se e divide-se em dois. Um dos pontos começa a mover-se lentamente em direção à borda da tela, como se fosse atraído por algo fora do ecrã. O som ambiente (se captado) é distorcido por um eco que parece vir de longe.",
       "sensory_focus": [
-        "auditory (silêncio absoluto)",
-        "visual (neblina em movimento)"
+        "visual (divisão da luz)",
+        "auditory (eco distorcido)",
+        "spatial (movimento direcional)"
       ]
     },
     {
-      "stage": "APROFUNDAMENTO SENSORIAL",
-      "action": "A neblina dissolve-se e revela uma 'partitura visual' do silêncio: linhas finas e orgânicas traçadas no ecrã, que representam as camadas de escuta (ambiente, corpo, memória). A pessoa pode 'tocar' estas linhas com o cursor/toque, e cada uma emite um som único (ex: vento para ambiente, batimento cardíaco para corpo, eco para memória).",
+      "stage": "aprofundamento_sensorial",
+      "action": "A pessoa é convidada a 'seguir' o ponto em movimento com o olhar, o cursor ou o dedo. Conforme o faz, o som ecoado transforma-se em vozes murmúrias (amostras de topónimos, palavras em desaparecimento ou sons territoriais do corpus FALArte, misturados com silêncios). A luz do ponto em movimento ganha cor, correspondente à frequência do som que 'traz' consigo.",
       "sensory_focus": [
-        "visual (partitura orgânica)",
-        "auditory (sons camada-específicos)",
-        "kinesthetic (interação com linhas)"
+        "visual (cor dinâmica)",
+        "auditory (vozes e silêncios entrelaçados)",
+        "kinesthetic (seguimento opcional)",
+        "social_presence (vozes evocadas)"
       ]
     },
     {
-      "stage": "ESCOLHA / ACASO / SILÊNCIO",
-      "action": "A pessoa pode: 1) Escolher uma camada para 'amplificar' (clicando nela), 2) Deixar o sistema escolher aleatoriamente uma camada, ou 3) Permitir que o silêncio 'escolha' por ela (neste caso, a tela fica em suspenso por 10 segundos e uma camada é selecionada automaticamente).",
+      "stage": "escolha_acaso_silencio",
+      "action": "O segundo ponto (estático) começa a piscar. A pessoa pode: (1) tocar nele para 'ancorar' o som, (2) ignorá-lo e continuar a seguir o ponto em movimento, ou (3) fechar os olhos e esperar. Cada escolha altera o percurso: (1) fixa uma camada sonora; (2) aprofunda o eco; (3) revela uma nova camada de silêncio (ex.: o som da sua própria respiração, se microfone permitido).",
       "sensory_focus": [
-        "temporal_interoceptive (espera)",
-        "auditory (silêncio ou som da camada)"
+        "auditory (camadas sonoras)",
+        "visual (escolha visual)",
+        "temporal_interoceptive (espera)"
       ]
     },
     {
-      "stage": "APARIÇÃO",
-      "action": "A camada selecionada 'explode' em fragmento: se for ambiente, aparece uma paisagem sonora mínima (ex: som de uma fonte em Lisboa); se for corpo, um gráfico de batimento cardíaco imaginário; se for memória, uma palavra ou imagem efémera relacionada com o território (ex: um topónimo ou objeto simbólico). O fragmento aparece e desaparece em 5 segundos.",
+      "stage": "aparição",
+      "action": "Emergem, em sobreposição, fragmentos de: (a) uma fotografia em negativo de um lugar vazio (do corpus territorial), (b) uma palavra escrita à mão (de uma contribuição FALArte ou do Livro Cubo), ou (c) um símbolo gráfico que representa o 'rasto' da sua escuta (ex.: uma onda, um círculo, uma linha quebrada). Os fragmentos aparecem e desaparecem como se fossem revelados pelo movimento do ponto de luz.",
       "sensory_focus": [
-        "auditory (paisagem sonora ou som simbólico)",
-        "visual (fragmento efémero)"
+        "visual (fragmentos efémeros)",
+        "social_presence (contribuições evocadas)",
+        "spatial (sobreposição)"
       ]
     },
     {
-      "stage": "DEVOLUÇÃO",
-      "action": "A experiência devolve um 'rasto sonoro': um ficheiro de áudio gerado em tempo real (ou uma representação visual do mesmo) que captura os sons mínimos criados pela interação da pessoa. Este rasto pode ser: 1) Guardado localmente (com opção de download), 2) Enviado para o COSMICOXES como partícula sonora (se a pessoa autorizar), ou 3) Deixado como eco na tela, que desaparece lentamente.",
+      "stage": "devolução",
+      "action": "A experiência devolve à pessoa: (1) um 'mapa' sonoro minimalista (uma sequência de 3-5 sons ou silêncios que representam a sua partitura de escuta), (2) uma frase gerada a partir das palavras que 'apareceram' durante a sessão (ex.: *'O silêncio que trouxeste tem o peso de uma pedra e o voo de um pássaro.'*), ou (3) um convite para 'deixar um rasto': gravar um som ambiente (opcional, com consentimento) ou escrever uma palavra que define o seu silêncio. O rasto é guardado como partícula no COSMICOXES, sem identificação pessoal.",
       "sensory_focus": [
-        "auditory (rasto sonoro)",
-        "visual (representação do rasto)"
+        "auditory (mapa sonoro)",
+        "visual (frase ou convite)",
+        "social_presence (rasto anónimo)"
       ]
     },
     {
-      "stage": "RASTO / LATÊNCIA",
-      "action": "Se a pessoa optar por não guardar o rasto, este dissolve-se na tela como poeira. Se optar por guardá-lo, o rasto permanece como uma 'estrela' no COSMICOXES, visível em futuras sessões. A tela volta ao limiar inicial, mas com uma subtileza: o ponto de luz central agora pulsa no ritmo da última camada selecionada.",
+      "stage": "rasto_latencia",
+      "action": "A tela volta ao negro, mas o ponto de luz inicial permanece, agora com a cor da última camada sonora que a pessoa 'ancorou'. Se a pessoa regressar à experiência, o ponto de luz terá a cor do seu último rasto. O som ambiente (se captado) é restaurado gradualmente, como se a experiência 'respirasse' com o território.",
       "sensory_focus": [
-        "visual (estrela no COSMICOXES)",
-        "temporal_interoceptive (ritmo da luz)"
+        "visual (ponto de luz persistente)",
+        "auditory (restauração do som ambiente)",
+        "temporal_interoceptive (latência)"
       ]
     }
   ],
   "participant_verbs": [
     "respirar",
     "escutar",
-    "tocar",
-    "escolher",
+    "seguir",
+    "ancorar",
     "esperar",
-    "amplificar",
-    "deixar"
+    "deixar",
+    "regressar"
   ],
   "system_responses": [
     {
-      "trigger": "Gesto inicial (clique/toque/tecla)",
-      "response": "Expansão do círculo de luz e aparecimento de partículas sonoras."
+      "trigger": "Inatividade (olhos fechados ou ausência de gesto)",
+      "response": "Redução progressiva do som ambiente + expansão da luz em ondas concêntricas.",
+      "sensory_output": [
+        "visual",
+        "auditory"
+      ]
     },
     {
-      "trigger": "Interação com partículas",
-      "response": "Sons mínimos espaciais, com intensidade variável conforme a distância e velocidade do gesto."
+      "trigger": "Gesto de seguimento (cursor/dedo/olhar)",
+      "response": "Movimento do ponto de luz + transformação do som ecoado em vozes murmúrias + alteração da cor da luz.",
+      "sensory_output": [
+        "visual",
+        "auditory",
+        "kinesthetic"
+      ]
     },
     {
-      "trigger": "Silêncio absoluto (desvio)",
-      "response": "Neblina visual em movimento lento, sem som."
+      "trigger": "Toque no ponto estático",
+      "response": "Fixação de uma camada sonora (ex.: voz ou som territorial) + piscar do ponto.",
+      "sensory_output": [
+        "auditory",
+        "visual"
+      ]
     },
     {
-      "trigger": "Interação com partitura visual",
-      "response": "Sons únicos por camada (ambiente, corpo, memória)."
+      "trigger": "Espera (fechar olhos ou inatividade prolongada)",
+      "response": "Revelação de uma camada de silêncio (ex.: som da respiração ou ausência total) + aparição de fragmentos visuais.",
+      "sensory_output": [
+        "auditory",
+        "visual",
+        "temporal_interoceptive"
+      ]
     },
     {
-      "trigger": "Escolha de camada",
-      "response": "Fragmento sonoro ou visual efémero relacionado com a camada."
-    },
-    {
-      "trigger": "Fim da experiência",
-      "response": "Devolução de rasto sonoro ou visual, com opção de guardar ou dissolver."
+      "trigger": "Devolução (escolha de deixar rasto)",
+      "response": "Geração de um mapa sonoro ou frase poética + convite para contribuição anónima.",
+      "sensory_output": [
+        "auditory",
+        "visual",
+        "social_presence"
+      ]
     }
   ],
-  "sensory_signature_id": "SS_ESCUTAR_SILENCIO_027",
+  "sensory_signature_id": "ESCUTAR_SILENCIO_027_V1",
   "sensory_channels": {
     "visual": {
-      "elements": [
-        "negro profundo com ponto de luz pulsante",
-        "partículas sonoras em movimento orgânico",
-        "neblina dinâmica como textura do silêncio",
-        "partitura visual de camadas de escuta",
-        "fragmentos efémeros (paisagem, gráfico, palavra)",
-        "estrela no COSMICOXES como rasto"
+      "primary": [
+        "luz pulsante",
+        "ondas concêntricas",
+        "fragmentos efémeros (foto/negativo, palavra, símbolo)",
+        "cor dinâmica",
+        "negro profundo"
       ],
-      "intensity": "subtle to moderate",
-      "rhythm": "slow, pulsating, organic"
+      "secondary": [
+        "texto tremido/transparente",
+        "sobreposição de camadas",
+        "movimento direcional"
+      ]
     },
     "auditory": {
-      "elements": [
-        "ruído branco mínimo ou ausência",
-        "sons mínimos espaciais (sinos, gotas, respirações)",
-        "paisagem sonora territorial (ex: fonte em Lisboa)",
-        "batimento cardíaco imaginário",
-        "eco ou palavra efémera",
-        "rasto sonoro gerado"
+      "primary": [
+        "silêncio ativo",
+        "som subliminar (20-50 Hz)",
+        "eco distorcido",
+        "vozes murmúrias (topónimos/palavras)",
+        "mapa sonoro minimalista"
       ],
-      "spatialization": "mono or stereo (depending on device)",
-      "intensity": "barely audible to moderate"
+      "secondary": [
+        "redução gradual do som ambiente",
+        "restauração progressiva do som ambiente"
+      ]
     },
     "haptic": {
-      "elements": [
-        "vibração sutil (opcional, em dispositivos compatíveis)"
+      "primary": [
+        "vibração opcional (se dispositivo permitir)"
       ],
-      "intensity": "minimal",
-      "trigger": "interação com partículas ou partitura"
+      "secondary": []
     },
     "kinesthetic": {
-      "elements": [
-        "cursor/toque como extensão do corpo",
-        "velocidade e trajetória do gesto alteram intensidade sonora",
-        "respiração como gesto (detetado por movimento, se permitido)"
+      "primary": [
+        "seguimento com cursor/dedo/olhar",
+        "toque opcional"
       ],
-      "intensity": "light to moderate"
+      "secondary": []
     },
     "proprioceptive": {
-      "elements": [
-        "conscientização da respiração",
-        "postura do corpo (opcional, via instruções textuais)",
-        "ritmo da interação (lento/rápido)"
+      "primary": [
+        "atenção à respiração",
+        "postura de escuta ativa"
       ],
-      "intensity": "subtle"
+      "secondary": []
     },
     "temporal_interoceptive": {
-      "elements": [
-        "espera controlada (3-10 segundos)",
-        "ritmo da luz pulsante",
-        "suspensão do tempo durante o silêncio absoluto"
+      "primary": [
+        "espera",
+        "ritmo respiratório",
+        "latência",
+        "suspensão"
       ],
-      "intensity": "moderate"
+      "secondary": []
     },
     "spatial": {
-      "elements": [
-        "profundidade visual (partículas em camadas)",
-        "distância do cursor/toque altera intimidade sonora",
-        "território evocado (ex: som de uma fonte em Lisboa)"
+      "primary": [
+        "movimento direcional (ponto de luz)",
+        "sobreposição de camadas visuais/sonoras"
       ],
-      "intensity": "subtle"
+      "secondary": []
     },
     "olfactory_evocation": {
-      "elements": [
-        "memória de cheiros associados a lugares (ex: pão quente, mar, terra molhada)",
-        "palavras ou imagens que evocam aromas territoriais"
+      "primary": [
+        "memória de cheiros associados a lugares (ex.: 'o cheiro a maresia que o silêncio trouxe' — evocado por texto ou som)"
       ],
-      "method": "association, memory, language"
+      "secondary": []
     },
     "gustatory_evocation": {
-      "elements": [
-        "memória de sabores (ex: pão, café, fruta da época)",
-        "palavras ou imagens que evocam gostos territoriais"
+      "primary": [
+        "memória de sabores associados a palavras ou lugares (ex.: 'o gosto a sal que a palavra 'mar' deixou' — evocado por texto)"
       ],
-      "method": "association, memory, language"
+      "secondary": []
     },
     "social_presence": {
-      "elements": [
-        "rasto sonoro partilhado no COSMICOXES (opcional)",
-        "eco de interações anteriores (se autorizado)"
+      "primary": [
+        "vozes murmúrias (contribuições FALArte ou corpus territorial)",
+        "rasto anónimo no COSMICOXES",
+        "frase gerada a partir de contribuições"
       ],
-      "intensity": "subtle"
+      "secondary": []
     }
   },
   "cross_sensory_translation": {
-    "primary": {
-      "from": "auditory (silêncio)",
-      "to": "visual (neblina, partículas, partitura)",
-      "description": "O silêncio é traduzido em texturas visuais dinâmicas, onde a ausência de som se torna uma presença tangível."
-    },
-    "secondary": {
-      "from": "kinesthetic (gesto do cursor/toque)",
-      "to": "auditory (intensidade e timbre do som)",
-      "description": "O movimento do corpo (via cursor/toque) altera a paisagem sonora mínima, criando uma relação direta entre gesto e som."
-    },
-    "tertiary": {
-      "from": "temporal_interoceptive (respiração)",
-      "to": "visual (pulsação da luz)",
-      "description": "O ritmo da respiração (detetado ou imaginado) sincroniza com a pulsação da luz central, ligando o corpo ao ambiente digital."
-    }
+    "description": "O som (ou a sua ausência) altera a forma e o movimento da luz: frequências sonoras subliminares criam ondas visuais concêntricas, e o eco distorcido move o ponto de luz. A cor da luz traduz a 'altura' do som que a pessoa 'ancorou'. A respiração (propriocepção) é convertida em silêncios rítmicos que revelam fragmentos visuais.",
+    "mechanism": "som → forma/movimento/cor; respiração → ritmo/silêncio → aparição visual."
   },
   "silence_or_absence": {
-    "role": "matéria ativa",
+    "role": "Matéria central da experiência. O silêncio não é vazio, mas um campo ativo que: (1) revela camadas ocultas (ex.: sons distorcidos, vozes murmúrias), (2) altera a perceção visual (ex.: luz que se expande ou contrai), e (3) convida à escuta do corpo (respiração, batimento cardíaco imaginado).",
     "mechanisms": [
-      {
-        "type": "absolute silence",
-        "duration": "3-5 seconds",
-        "purpose": "Criar um vazio controlado que convida à escuta ativa do ambiente físico da pessoa."
-      },
-      {
-        "type": "visual absence",
-        "elements": [
-          "cursor desaparece",
-          "texto efémero"
-        ],
-        "purpose": "Reduzir estímulos visuais para focar na audição e na propriocepção."
-      },
-      {
-        "type": "sonic absence",
-        "elements": [
-          "ruído branco mínimo",
-          "sons mínimos espaciais"
-        ],
-        "purpose": "Transformar a ausência de som em uma textura audível."
-      }
-    ],
-    "deviation_use": "O silêncio absoluto é usado como desvio para quebrar a expectativa de interação contínua, forçando a pessoa a perceber o ambiente à sua volta."
+      "Redução gradual do som ambiente para criar um limiar de atenção.",
+      "Uso de silêncios rítmicos para revelar fragmentos visuais ou sonoros.",
+      "Ausência de instruções explícitas para forçar a descoberta."
+    ]
   },
   "surprise_or_indeterminacy": {
     "mechanisms": [
       {
-        "type": "random selection",
-        "description": "A camada de escuta (ambiente, corpo, memória) é selecionada aleatoriamente se a pessoa optar por 'deixar o silêncio escolher'.",
-        "variation": "A seleção aleatória é ponderada pelo histórico de interações da sessão (ex: se a pessoa interagiu mais com a camada 'corpo', esta tem maior probabilidade)."
+        "type": "acaso_controlado",
+        "description": "A cor do ponto de luz e os sons murmúrios são selecionados aleatoriamente a partir do corpus territorial ou FALArte, mas sempre coerentes com o território evocado (ex.: sons de uma freguesia específica)."
       },
       {
-        "type": "fragment appearance",
-        "description": "O fragmento sonoro ou visual que aparece é único para cada sessão, baseado em: 1) hora do dia, 2) localização aproximada (se permitido), 3) interações anteriores no COSMICOXES.",
-        "variation": "O fragmento pode ser uma paisagem sonora territorial, um gráfico de batimento cardíaco imaginário ou uma palavra/imagem efémera."
+        "type": "resposta_a_ritmo",
+        "description": "A velocidade do seguimento do ponto de luz altera a densidade das vozes murmúrias (mais rápido = mais sobreposições; mais lento = vozes mais distintas)."
       },
       {
-        "type": "particle behavior",
-        "description": "As partículas sonoras movem-se de forma orgânica e imprevisível, como se fossem afetadas por uma 'gravidade' invisível.",
-        "variation": "A trajetória das partículas é influenciada pela posição do cursor/toque, mas nunca de forma determinística."
+        "type": "resposta_a_posicao",
+        "description": "A posição do cursor/dedo altera a direção do eco sonoro (ex.: cursor à esquerda = eco vindo da esquerda)."
       },
       {
-        "type": "rasto generation",
-        "description": "O rasto sonoro gerado é único para cada sessão, baseado nos sons mínimos criados pela interação da pessoa.",
-        "variation": "O rasto pode ser uma composição de sons mínimos ou uma representação visual dos mesmos."
+        "type": "combinação_de_fragmentos",
+        "description": "Os fragmentos visuais (foto, palavra, símbolo) são combinados de forma única em cada sessão, com base nas escolhas da pessoa."
+      },
+      {
+        "type": "temporalidade_real",
+        "description": "Se a experiência for acessada à noite, os sons murmúrios podem incluir amostras noturnas (ex.: grilos, ventos)."
       }
     ]
   },
   "session_variation": [
     {
-      "type": "time of day",
-      "description": "O fragmento sonoro ou visual que aparece na fase de 'APARIÇÃO' varia conforme a hora do dia (ex: som de uma fonte de manhã, som de uma rua à noite)."
+      "factor": "acaso_controlado",
+      "effect": "Seleção aleatória de sons murmúrios e fragmentos visuais do corpus territorial ou FALArte."
     },
     {
-      "type": "territorial binding",
-      "description": "Se a localização for permitida, o fragmento sonoro ou visual é relacionado com a freguesia ou lugar mais próximo (ex: som de um mercado em Alfama, palavra em mirandês para um lugar no Nordeste).",
-      "fallback": "Se a localização não for permitida, o fragmento é selecionado aleatoriamente a partir de um conjunto pré-definido de sons/palavras territoriais."
+      "factor": "ordem_mutável",
+      "effect": "A ordem de aparição dos fragmentos visuais (foto, palavra, símbolo) varia em cada sessão."
     },
     {
-      "type": "interaction history",
-      "description": "A camada de escuta mais interagida na sessão tem maior probabilidade de ser selecionada na fase de 'ESCOLHA / ACASO / SILÊNCIO'."
+      "factor": "resposta_a_ritmo",
+      "effect": "A densidade das vozes murmúrias e a velocidade das ondas de luz adaptam-se ao ritmo do gesto da pessoa."
     },
     {
-      "type": "COSMICOXES state",
-      "description": "Se houver partículas sonoras no COSMICOXES de outras sessões, estas podem influenciar o comportamento das partículas na sessão atual (ex: partículas mais densas ou sons mais complexos)."
+      "factor": "resposta_a_posicao",
+      "effect": "A direção do eco sonoro e o movimento do ponto de luz respondem à posição do cursor/dedo."
     },
     {
-      "type": "random seed",
-      "description": "A semente aleatória para a geração de fragmentos e comportamentos é baseada no timestamp da sessão, garantindo variação entre sessões."
+      "factor": "temporalidade_real",
+      "effect": "Sons e cores adaptam-se à hora do dia (ex.: tons mais quentes de manhã, mais frios à noite)."
+    },
+    {
+      "factor": "silencio_espera",
+      "effect": "A duração dos silêncios entre camadas sonoras varia aleatoriamente, criando suspense."
     }
   ],
   "territorial_binding": {
-    "primary": {
-      "type": "sonic memory",
-      "description": "Fragmentos sonoros territoriais (ex: som de uma fonte em Lisboa, voz de um vendedor de castanhas, sinos de uma igreja) são usados para evocar lugares específicos.",
-      "source": "Corpus territorial do Atlas Vivo MILK (ex: 198 dinâmicas territoriais documentais)."
-    },
-    "secondary": {
-      "type": "linguistic memory",
-      "description": "Palavras ou expressões em línguas ou dialetos territoriais (ex: mirandês, barranquenho, gírias locais) aparecem como fragmentos efémeros.",
-      "source": "Corpus de topónimos e falares do Atlas Vivo MILK."
-    },
-    "fallback": "Se a localização não for permitida ou não houver dados territoriais, os fragmentos são selecionados aleatoriamente a partir de um conjunto genérico de sons/palavras."
+    "connection": "Os sons murmúrios e fragmentos visuais são extraídos do corpus territorial (FALArte, topónimos, festas) e associados a lugares reais. A cor do ponto de luz pode evocar uma freguesia específica (ex.: azul para o Tejo, verde para Monsanto).",
+    "sources": [
+      "FALArte (10 mecânicas territoriais)",
+      "corpus de topónimos e sons territoriais",
+      "fotografias de lugares vazios (Nuno A)"
+    ],
+    "evocation": "A experiência convida à escuta do território como se a pessoa estivesse fisicamente lá, mesmo que o som seja apenas evocado."
   },
   "trace_and_return": {
-    "rasto": {
-      "types": [
-        {
-          "type": "sonic trace",
-          "description": "Um ficheiro de áudio gerado em tempo real que captura os sons mínimos criados pela interação da pessoa.",
-          "persistence": "Local (download opcional) ou COSMICOXES (partícula sonora, se autorizado)."
-        },
-        {
-          "type": "visual trace",
-          "description": "Uma representação visual do rasto sonoro (ex: onda de som, partitura orgânica).",
-          "persistence": "Efémera (desaparece após 10 segundos) ou COSMICOXES (estrela, se autorizado)."
-        }
-      ],
-      "latency": "O rasto pode permanecer no COSMICOXES como uma partícula ou estrela, visível em futuras sessões, ou dissolver-se lentamente na tela."
+    "trace": {
+      "type": "partícula_no_COSMICOXES",
+      "description": "O 'mapa sonoro' ou a frase gerada na devolução é guardado como uma partícula anónima no COSMICOXES, com uma assinatura única (ex.: cor + sequência de sons).",
+      "persistence": "A partícula permanece no cosmos e pode ser 'reencontrada' em sessões futuras por outras pessoas, sem identificação."
     },
     "return": {
-      "types": [
-        {
-          "type": "immediate",
-          "description": "O rasto é devolvido no final da experiência, como um presente da interação."
-        },
-        {
-          "type": "latent",
-          "description": "O rasto é adicionado ao COSMICOXES e pode ser reencontrado em sessões futuras, como um eco da presença da pessoa."
-        }
-      ],
-      "purpose": "Devolver à pessoa uma prova tangível da sua interação com o silêncio, transformando a ausência em presença."
+      "type": "devolução_pessoal",
+      "description": "A pessoa recebe: (1) um mapa sonoro minimalista (sequência de sons/silêncios), (2) uma frase poética gerada a partir da sua sessão, ou (3) um convite para contribuir com um som ou palavra (opcional)."
+    },
+    "latency": {
+      "description": "O ponto de luz inicial mantém a cor do último rasto da pessoa. Se a pessoa regressar, a experiência 'lembra-se' da sua última escuta."
     }
   },
   "accessibility_equivalents": {
-    "visual_impairment": {
-      "description": "Toda a informação visual é acompanhada por descrições sonoras ou textuais. As partículas sonoras são descritas em tempo real (ex: 'partícula à esquerda, som de sino'). A partitura visual é traduzida em uma descrição auditiva das camadas de escuta.",
-      "alternatives": [
-        "Narração em voz sintética (opcional, com controlo de velocidade).",
-        "Descrições textuais em braille digital (se dispositivo compatível).",
-        "Modo de alto contraste para partículas e texto."
-      ]
+    "visual": {
+      "reduced_motion": "As ondas de luz e o movimento do ponto são substituídos por transições suaves ou estáticas. A cor é mantida como informação primária.",
+      "high_contrast": "O texto e os fragmentos visuais usam cores de alto contraste. O ponto de luz é substituído por um círculo preenchido.",
+      "screen_reader": "Descrições sonoras detalhadas de cada fase (ex.: 'Um ponto de luz pulsa no centro da tela. À sua volta, círculos concêntricos expandem-se como ondas.')."
     },
-    "auditory_impairment": {
-      "description": "Todos os sons são acompanhados por representações visuais ou hápticas. As partículas sonoras são representadas por formas e cores únicas. O rasto sonoro é traduzido em uma partitura visual ou vibração (opcional).",
-      "alternatives": [
-        "Legendas para sons mínimos (ex: 'sino', 'gota de água').",
-        "Vibração sutil para sons (opcional, em dispositivos compatíveis).",
-        "Modo 'silêncio visual', onde os sons são representados por formas e movimentos."
-      ]
+    "auditory": {
+      "no_audio": "As camadas sonoras são substituídas por vibrações (se dispositivo permitir) ou por descrições visuais (ex.: 'Um som profundo ressoa, como um eco longínquo.').",
+      "subtitles": "Legendas para as vozes murmúrias (ex.: '[voz distorcida: 'Alcântara']').",
+      "volume_control": "Controlo de volume para o som subliminar e as vozes murmúrias."
     },
-    "motor_impairment": {
-      "description": "Todas as interações via cursor/toque têm alternativas via teclado, voz ou tempo. A pessoa pode usar: 1) Teclas de seta para mover um cursor virtual, 2) Tecla de espaço para interagir, 3) Comando de voz (ex: 'escolher ambiente'), 4) Espera (ex: 5 segundos de inatividade ativa a próxima fase).",
-      "alternatives": [
-        "Navegação por teclado (tab, setas, espaço).",
-        "Comandos de voz (opcional, com microfone).",
-        "Modo 'respiração' (detetado por movimento do dispositivo, se permitido).",
-        "Modo 'tempo' (interações baseadas em espera)."
-      ]
+    "haptic": {
+      "no_vibration": "A vibração é substituída por um pulso visual (ex.: círculo que pulsa uma vez)."
     },
-    "cognitive_load": {
-      "description": "A experiência é projetada para ser intuitiva e sem pressão de tempo. As instruções são mínimas e repetidas. A pessoa pode pausar a qualquer momento.",
-      "alternatives": [
-        "Modo 'lento' (todas as transições e sons são mais lentos).",
-        "Instruções textuais simplificadas (opcional).",
-        "Opção de repetir a última fase."
-      ]
+    "kinesthetic": {
+      "no_movement": "O seguimento do ponto de luz é substituído por: (1) pressionar uma tecla (ex.: seta para a direita) para 'mover' o ponto, ou (2) usar o teclado numérico para selecionar direções.",
+      "no_touch": "O toque é substituído por cliques do rato ou teclas."
     },
-    "reduced_motion": {
-      "description": "Todas as animações são substituídas por transições suaves ou estáticas. As partículas sonoras são representadas por formas estáticas com contornos pulsantes.",
-      "alternatives": [
-        "Modo 'estático' (partículas e neblina são representadas por formas fixas).",
-        "Transições instantâneas (sem animação)."
-      ]
+    "proprioceptive": {
+      "no_respiration": "A respiração é substituída por: (1) pressionar uma tecla para 'inspirar/expirar', ou (2) usar um temporizador visual para guiar o ritmo."
+    },
+    "temporal_interoceptive": {
+      "no_wait": "A espera é substituída por um botão 'Continuar' que aparece após um tempo mínimo (ex.: 3 segundos)."
+    },
+    "cognitive": {
+      "simplified": "Instruções mais diretas (ex.: 'Feche os olhos e escute. Toque na tela quando quiser continuar.')."
     }
   },
   "optional_permissions": {
     "microphone": {
-      "purpose": "Detetar o nível sonoro ambiente para atenuar ou filtrar o som durante a experiência. Nunca gravar ou armazenar áudio.",
-      "fallback": "Se o microfone não for permitido, o som ambiente é substituído por um ruído branco mínimo ou ausência."
+      "purpose": "Captar o som ambiente para reduzi-lo gradualmente e detetar a respiração (opcional).",
+      "fallback": "A experiência funciona sem microfone: o som ambiente é simulado com amostras genéricas, e a respiração é detetada por inatividade ou tecla.",
+      "request_timing": "Apenas quando a pessoa clica num botão 'Permitir som ambiente' (aparece após o limiar)."
+    },
+    "camera": {
+      "purpose": "Não aplicável.",
+      "fallback": "N/A"
     },
     "geolocation": {
-      "purpose": "Selecionar fragmentos sonoros ou visuais territoriais baseados na localização aproximada da pessoa.",
-      "fallback": "Se a localização não for permitida, os fragmentos são selecionados aleatoriamente a partir de um conjunto genérico."
+      "purpose": "Associar a experiência a uma freguesia específica (opcional).",
+      "fallback": "A experiência usa sons e fragmentos visuais genéricos do corpus territorial.",
+      "request_timing": "Apenas se a pessoa clicar em 'Usar a minha localização' (aparece na devolução)."
     },
-    "device_motion": {
-      "purpose": "Detetar a respiração ou movimento do dispositivo para sincronizar com a pulsação da luz ou interações.",
-      "fallback": "Se o movimento não for permitido, a respiração é imaginada e a pulsação da luz segue um ritmo pré-definido."
+    "motion": {
+      "purpose": "Detetar o movimento do dispositivo para ajustar a direção do eco sonoro (opcional).",
+      "fallback": "A direção do eco é controlada pelo cursor ou teclado.",
+      "request_timing": "Apenas quando a pessoa clica num botão 'Permitir movimento' (aparece após o primeiro gesto)."
     }
   },
   "overstimulation_risk": {
-    "potential_triggers": [
-      "Silêncio absoluto prolongado (mais de 10 segundos).",
-      "Sons mínimos repetitivos (ex: gotas de água em loop).",
-      "Animações visuais rápidas ou complexas (ex: partículas em movimento caótico)."
+    "risks": [
+      "Flashing ou luzes pulsantes podem causar desconforto em pessoas com epilepsia fotossensível.",
+      "Sons subliminares (20-50 Hz) podem ser incómodos para pessoas com sensibilidade auditiva.",
+      "Eco distorcido e vozes murmúrias podem ser perturbadores para pessoas com ansiedade ou sensibilidade ao som.",
+      "Espera prolongada pode causar frustração em pessoas com dificuldade em gerir a inatividade."
     ],
-    "mitigation": [
+    "mitigations": [
       {
-        "trigger": "Silêncio absoluto prolongado",
-        "action": "Limitar o silêncio absoluto a 5 segundos máximo. Adicionar um som mínimo (ex: respiração) após esse tempo."
+        "risk": "Flashing/luzes pulsantes",
+        "solution": "Opção 'reduced_motion' desativa as ondas de luz e substitui por transições suaves. O ponto de luz pulsa a uma frequência segura (<3 Hz)."
       },
       {
-        "trigger": "Sons mínimos repetitivos",
-        "action": "Variar os sons mínimos (ex: alternar entre sino, gota, respiração) para evitar monotonia."
+        "risk": "Sons subliminares",
+        "solution": "Opção para desativar sons subliminares. Substituídos por descrições visuais ou vibrações (se dispositivo permitir)."
       },
       {
-        "trigger": "Animações visuais rápidas",
-        "action": "Limitar o número de partículas em movimento (máximo 20). Oferecer modo 'reduced motion' com partículas estáticas."
+        "risk": "Eco distorcido/vozes murmúrias",
+        "solution": "Controlo de volume independentemente ajustável. Opção para substituir por texto (legendas)."
       },
       {
-        "trigger": "Sobrecarga sensorial",
-        "action": "Permitir que a pessoa pause a experiência a qualquer momento (tecla 'P' ou botão de pausa)."
+        "risk": "Espera prolongada",
+        "solution": "Botão 'Pular espera' aparece após 10 segundos de inatividade. Tempo mínimo de espera reduzido para 3 segundos."
+      },
+      {
+        "risk": "Sobreposição de estímulos",
+        "solution": "Modo 'foco' que desativa todos os elementos exceto um (ex.: apenas luz ou apenas som)."
       }
     ]
   },
   "distinctiveness": {
     "unique_elements": [
-      "O silêncio como matéria ativa e não como ausência.",
-      "A tradução do silêncio em texturas visuais dinâmicas (neblina, partículas, partitura).",
-      "A partitura visual das camadas de escuta (ambiente, corpo, memória).",
-      "O rasto sonoro como devolução tangível da interação com o silêncio.",
-      "A integração com o COSMICOXES como espaço de latência e reencontro.",
-      "A variação territorial baseada em sons e palavras de lugares específicos.",
-      "A acessibilidade preserva a poesia: o modo 'silêncio visual' ou 'sonoro' mantém a intenção curatorial."
+      "O silêncio como matéria ativa e não como ausência passiva.",
+      "A tradução cruzada entre som subliminar e luz em movimento (frequência → cor → forma).",
+      "A devolução de uma 'partitura de escuta' (mapa sonoro ou frase poética) como rasto.",
+      "A integração de contribuições territoriais (FALArte, topónimos) como vozes murmúrias e fragmentos visuais.",
+      "A latência do ponto de luz, que 'lembra' a última cor da sessão da pessoa.",
+      "A ausência de instruções explícitas, forçando a descoberta através da atenção ao corpo e ao ambiente."
     ],
-    "comparison": [
-      {
-        "experience": "Galeria Diletante",
-        "difference": "Enquanto a Galeria Diletante usa a palavra para contaminar luz e fotografia, 'Escutar o Silêncio' usa o silêncio para revelar camadas ocultas do ambiente e do corpo."
-      },
-      {
-        "experience": "FUCO",
-        "difference": "FUCO é um mediador vivo que conversa e fareja, enquanto 'Escutar o Silêncio' é uma experiência solitária de escuta ativa, sem diálogo."
-      },
-      {
-        "experience": "Dado Sem Lado",
-        "difference": "O Dado Sem Lado é um objeto que escapa e desafia, enquanto 'Escutar o Silêncio' é uma paisagem imersiva onde a pessoa explora o vazio."
-      },
-      {
-        "experience": "Reizinho",
-        "difference": "O Reizinho institui regras absurdas para quebrar, enquanto 'Escutar o Silêncio' não tem regras, apenas convites à perceção."
-      }
-    ]
+    "comparison": "Diferente de todas as outras 48 experiências porque: (1) não usa narrativa, jogo de regra ou interação social direta; (2) o foco é a escuta ativa do silêncio e do corpo, não a produção de conteúdo; (3) a tradução cruzada é entre som (ou ausência) e luz, não entre gesto e som ou imagem; (4) a devolução é uma 'partitura' abstrata, não um objeto ou texto narrativo."
   },
   "questions_for_eduardo": [
-    "A partitura visual das camadas de escuta (ambiente, corpo, memória) deve ser baseada em dados reais (ex: sons gravados em Lisboa) ou pode ser gerada proceduralmente com sons sintéticos?",
-    "O rasto sonoro deve ser um ficheiro de áudio descarregável ou apenas uma representação visual/sonora efémera?",
-    "A integração com o COSMICOXES deve ser opcional (apenas se a pessoa autorizar) ou pode ser automática para rastos não pessoais?",
-    "Os fragmentos sonoros territoriais (ex: som de uma fonte) devem ser gravados especificamente para o Atlas ou podem ser usados sons genéricos de bancos de dados públicos?",
-    "A experiência deve ter uma duração máxima pré-definida (ex: 5 minutos) ou pode ser aberta, permitindo que a pessoa saia a qualquer momento?"
+    "A experiência deve permitir que a pessoa 'guarde' a sua partitura de escuta (mapa sonoro ou frase) para regressar mais tarde? Se sim, como deve ser apresentada essa opção (ex.: botão 'Guardar', link para partilhar)?",
+    "Os sons murmúrios devem ser sempre extraídos do corpus territorial/FALArte, ou pode incluir sons gerados proceduralmente (ex.: frequências puras) para evitar repetições?",
+    "A cor do ponto de luz deve ser associada a uma freguesia específica (ex.: azul para o Tejo) ou pode ser aleatória, desde que coerente com o som?",
+    "Deve haver um limite de tempo para a experiência (ex.: 5 minutos) ou pode ser aberta, com a pessoa a decidir quando sair?",
+    "A devolução deve incluir um convite explícito para contribuir com um som ou palavra, ou deve ser opcional e subtil (ex.: 'Se quiseres, deixa um rasto.')?"
   ],
   "improvement_proposals": [
     {
-      "area": "territorial binding",
-      "proposal": "Incluir um modo 'deriva sonora' onde a pessoa pode 'caminhar' por um mapa sonoro de Lisboa ou de uma freguesia específica, com o silêncio a atuar como 'porta' entre lugares.",
-      "justification": "Aprofundaria a ligação territorial e a imersão, usando o corpus de 198 dinâmicas territoriais documentais."
+      "area": "territorial_binding",
+      "proposal": "Integração com o corpus de 'sons que só existem aqui' (FALArte, mecânica 5) para enriquecer as vozes murmúrias com amostras reais de lugares específicos."
     },
     {
-      "area": "cross-sensory translation",
-      "proposal": "Adicionar uma camada de 'toque' onde o silêncio é traduzido em vibrações hápticas (opcional, em dispositivos compatíveis), criando uma 'textura' do vazio.",
-      "justification": "Ampliaria a assinatura sensorial e a acessibilidade para pessoas com deficiência visual."
+      "area": "cross_sensory_translation",
+      "proposal": "Adicionar uma camada táctil opcional: se o dispositivo permitir vibração, associar a frequência do som subliminar a um padrão de vibração (ex.: 30 Hz = vibração curta e rápida; 20 Hz = vibração longa e lenta)."
     },
     {
-      "area": "rasto and return",
-      "proposal": "Permitir que o rasto sonoro seja partilhado com outras pessoas no COSMICOXES, criando uma 'constelação de silêncios' colaborativa.",
-      "justification": "Reforçaria o aspecto comunitário e intergeracional do Atlas, alinhado com os princípios CARE e feminismo de dados."
+      "area": "trace_and_return",
+      "proposal": "Permitir que a partícula no COSMICOXES seja 'ativada' por outras pessoas, revelando fragmentos da sessão original (ex.: a cor do ponto de luz ou um som murmúrio) sem identificar o autor."
     },
     {
       "area": "accessibility",
-      "proposal": "Desenvolver um modo 'táctil' onde toda a experiência é traduzida em vibrações e sons para dispositivos hápticos (ex: telemóveis com vibração).",
-      "justification": "Tornaria a experiência mais inclusiva para pessoas com deficiência visual ou auditiva."
+      "proposal": "Adicionar um modo 'descrição detalhada' para pessoas com deficiência visual, onde cada fase é narrada em tempo real por uma voz sintética (opcional)."
     }
   ],
   "generic_fallback_allowed": false,

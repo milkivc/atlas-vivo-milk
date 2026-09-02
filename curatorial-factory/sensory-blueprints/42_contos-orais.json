@@ -1,414 +1,443 @@
 {
   "id": "contos-orais",
-  "canonical_name": "Contos Orais: O Fio que Tece o Vazio",
+  "canonical_name": "Contos Orais: O Fio que Tece o Silêncio",
   "source_evidence": {
     "primary": [
       {
-        "id": "catalog_entry",
-        "type": "curatorial_catalog",
-        "quote": "Começa no meio. Entrega o fim a outra pessoa.",
-        "authority": "high"
+        "source": "Cópia de Fica registado neste dossiê…",
+        "authority": "autoral",
+        "relevant_excerpts": [
+          "Começa no meio. Entrega o fim a outra pessoa.",
+          "convite: oralidade, território, rasto, humor, intergeracionalidade",
+          "folclore como núcleo de brincadeira viva"
+        ]
       },
       {
-        "id": "constitution_11_examples",
-        "type": "methodological_guidance",
-        "quote": "Lendas / falares / topónimos: Não 'ler texto'. Voz, pronúncia, ritmo, mapa, enigma, som e desvio territorial podem transformar o corpus em brincadeira viva sem inventar factos etnográficos.",
-        "authority": "high"
+        "source": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
+        "authority": "autoral",
+        "relevant_excerpts": [
+          "16 seres folclóricos",
+          "jogos tradicionais, trava-línguas e adivinhas",
+          "língua viva, oralidade, interacção sensorial"
+        ]
       },
       {
-        "id": "source_corpus_falARTE",
-        "type": "authorial_mechanics",
-        "quote": "Palavras que desapareceram — gírias, alcunhas e modos de dizer em desaparecimento.",
-        "authority": "high"
+        "source": "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md",
+        "authority": "autoral",
+        "relevant_excerpts": [
+          "O Corpo que Percebe — percepção incorporada; digital quase ausente",
+          "Escutar o Silêncio — camadas de escuta, ambiente, corpo, silêncio"
+        ]
       }
     ],
     "secondary": [
       {
-        "id": "constitution_10_families",
-        "type": "sensory_families",
-        "quote": "ritmo oral / trava-língua / pregão / lengalenga; território / topónimo / pronúncia / distância; memória / cheiro imaginado / sabor lembrado.",
-        "authority": "medium"
-      },
-      {
-        "id": "source_corpus_deriva",
-        "type": "curatorial_approach",
-        "quote": "psicogeografia activa; tato, paladar, escuta, aroma, pátina, comércio e memória local.",
-        "authority": "medium"
+        "source": "Curadoria Cultural e Existencialismo Profundo.pdf",
+        "authority": "interpretativa",
+        "relevant_excerpts": [
+          "língua viva, absurdo/Camus, etnofísica, soberania da memória"
+        ]
       }
     ]
   },
   "authorial_invariants": [
-    "A experiência deve começar *no meio* de um conto, nunca no início.",
-    "O participante deve *entregar o fim* a outra pessoa (real ou imaginada).",
-    "Nunca inventar factos etnográficos ou autorais; usar apenas corpus existente.",
-    "Preservar a oralidade, o ritmo e a musicalidade das palavras.",
-    "Permitir que o conto se desdobre como brincadeira viva, não como texto estático."
+    "A experiência deve começar no meio de um conto, nunca no início.",
+    "O participante é convidado a 'entregar o fim a outra pessoa' — a conclusão é coletiva e aberta.",
+    "O folclore é tratado como matéria viva, não como arquivo estático.",
+    "A oralidade é central: ritmo, entoação, pausas e silêncios são parte ativa da experiência.",
+    "A brincadeira deve preservar a intergeracionalidade e o humor.",
+    "Nenhum facto folclórico pode ser inventado; apenas operado ou evocado."
   ],
-  "perceptual_intent": "Transformar a escuta de um conto oral em uma experiência corporal e territorial onde a voz, o silêncio e o gesto tecem uma rede invisível entre quem conta, quem ouve e o lugar. O participante deve sentir que está a *completar* algo em falta, não a consumir uma narrativa fechada.",
+  "perceptual_intent": "Criar uma experiência onde a pessoa sinta que está a tecer um fio invisível entre vozes, memórias e territórios, onde o conto oral ganha corpo através do silêncio, do gesto e da escuta ativa. A ausência (do início, do fim, da voz do outro) é tão presente quanto o som. O objetivo é que o participante saia com a sensação de ter sido parte de uma roda de contadores, onde a sua presença alterou o curso da narrativa.",
   "threshold": {
-    "description": "A tela está em branco, exceto por um fio fino e trémulo (visual) que se move como se fosse soprado por um vento invisível. Um som de respiração longínqua (auditivo) cresce e decresce em volume, como se alguém estivesse a aproximar-se e a afastar-se. O cursor, ao pairar sobre o fio, faz com que este vibre e emita um som de corda esticada (háptico/auditivo).",
-    "purpose": "Criar a sensação de que algo está prestes a ser revelado, mas ainda não está completo. O fio é o convite para entrar no meio da história."
+    "description": "A pessoa entra num espaço escuro, onde uma voz sussurra um fragmento de um conto tradicional (ex: '...e quando a porta se abriu, não havia ninguém, mas o cheiro a pão quente ainda pairava no ar...'). O fundo é um tecido sonoro de respirações, passos distantes e o som de uma roda a girar lentamente. A tela está quase vazia, exceto por um fio fino e brilhante que se move como se fosse puxado por uma mão invisível. O cursor da pessoa, ao aproximar-se, faz o fio tremer.",
+    "trigger": "A voz para abruptamente no meio da frase, deixando um silêncio carregado. O fio pende no ar, imóvel, como se esperasse algo."
   },
-  "dramaturgical_arc": {
-    "1_limiar": {
-      "action": "O fio trémulo e a respiração longínqua criam uma tensão de expectativa.",
+  "dramaturgical_arc": [
+    {
+      "stage": "LIMIAR",
+      "action": "O espaço escuro e o fio suspenso criam uma expectativa de que algo está prestes a acontecer. A voz quebra o silêncio, mas não explica nada.",
       "sensory_focus": [
-        "visual (fio)",
-        "auditory (respiração)"
+        "auditory (voz sussurrada)",
+        "visual (fio brilhante em escuridão)",
+        "spatial (profundidade do som da roda)"
       ]
     },
-    "2_chamada": {
-      "action": "O fio forma lentamente a silhueta de uma boca aberta (visual) e um murmúrio em língua desconhecida (auditivo) emerge, como se a boca estivesse a contar algo. O participante é convidado a *tocar* o fio com o cursor ou dedo.",
+    {
+      "stage": "CHAMADA",
+      "action": "A voz convida: 'Pega no fio. Ele sabe o caminho.' O fio começa a mover-se lentamente em direção ao cursor da pessoa, como se fosse magnetizado.",
       "sensory_focus": [
-        "visual (silhueta)",
-        "auditory (murmúrio)",
-        "kinesthetic (toque)"
+        "auditory (voz clara, mas sem pressa)",
+        "visual (movimento do fio)",
+        "kinesthetic (cursor como 'mão' que pode tocar o fio)"
       ]
     },
-    "3_primeiro_gesto": {
-      "action": "Ao tocar o fio, este parte-se em dois: um segmento permanece fixo, o outro segue o cursor/dedo (visual/kinesthetic). O murmúrio transforma-se em voz clara, mas *incompleta*: uma frase de um conto oral começa no meio (auditivo).",
+    {
+      "stage": "PRIMEIRO GESTO",
+      "action": "A pessoa move o cursor para 'agarrar' o fio. Ao tocar, o fio fixa-se à posição do cursor e emite um som de sino suave, como se confirmasse o contacto.",
       "sensory_focus": [
-        "visual (fio partido)",
-        "auditory (voz incompleta)",
-        "kinesthetic (arrasto)"
+        "haptic (feedback visual do contacto)",
+        "auditory (som de sino)",
+        "proprioceptive (sensação de 'segurar' algo imaterial)"
       ]
     },
-    "4_resposta_viva": {
-      "action": "O segmento do fio que segue o cursor/dedo *puxa* a voz, como se a história fosse um tecido que se desdobra à medida que o participante o segura. A voz ganha volume e clareza, mas pára abruptamente no meio de uma palavra (auditivo/visual).",
+    {
+      "stage": "RESPOSTA VIVA",
+      "action": "O fio começa a puxar o cursor da pessoa em direção a um ponto no ecrã. À medida que se move, a voz retoma o conto, mas agora a entoação muda: mais lenta, mais grave, como se fosse contada por uma avó. O tecido sonoro de fundo ganha camadas: risos de crianças, o som de uma porta a ranger.",
       "sensory_focus": [
-        "auditory (voz dinâmica)",
-        "visual (fio a desdobrar-se)"
+        "auditory (voz + sons ambientais)",
+        "visual (fio a guiar o cursor)",
+        "kinesthetic (resistência sutil do fio ao movimento)"
       ]
     },
-    "5_desvio": {
-      "action": "O fio que segue o cursor/dedo *enrosca-se* em si mesmo, formando um nó (visual). A voz pára e é substituída por um som de sino ou campainha (auditivo), como se algo tivesse sido *interrompido*. Uma palavra solta (ex: 'mas...') aparece no ecrã, flutuando (visual).",
+    {
+      "stage": "DESVIO",
+      "action": "De repente, o fio solta-se e voa para o canto oposto do ecrã, arrastando consigo um pedaço da tela como se fosse um tecido rasgado. A voz cala-se. No rasgo, aparece uma palavra escrita à mão: 'silêncio'.",
       "sensory_focus": [
-        "visual (nó)",
-        "auditory (sino)",
-        "visual (palavra flutuante)"
+        "visual (rasgo na tela + palavra)",
+        "auditory (silêncio repentino)",
+        "temporal_interoceptive (sensação de vazio)"
       ]
     },
-    "6_aprofundamento_sensorial": {
-      "action": "O nó começa a *pulsar* (visual/háptico) e a emitir um som de batimento cardíaco (auditivo). A palavra flutuante multiplica-se em várias versões da mesma palavra, cada uma com um tom de voz diferente (auditivo/visual). O participante pode *escolher* uma das palavras com o cursor/dedo, o que faz com que o nó se desfaça e a voz retome, mas agora com o tom da palavra selecionada.",
+    {
+      "stage": "APROFUNDAMENTO SENSORIAL",
+      "action": "A pessoa é convidada a 'costurar' o rasgo com o cursor. Ao fazê-lo, cada ponto que coloca emite um som diferente (ex: um 'tsc' de agulha, um suspiro, um riso abafado). O tecido sonoro de fundo agora inclui a voz da pessoa (se microfone permitido) ou sons gerados pelo ritmo dos seus cliques. A palavra 'silêncio' começa a desvanecer-se, revelando uma imagem borrada de uma roda de contadores (foto real ou ilustração).",
       "sensory_focus": [
-        "visual (pulsação)",
-        "auditory (batimento)",
-        "auditory (várias vozes)",
-        "kinesthetic (escolha)"
+        "auditory (sons de costura + voz opcional)",
+        "visual (imagem a surgir)",
+        "haptic (feedback dos cliques)",
+        "social_presence (sensação de estar num grupo)"
       ]
     },
-    "7_escolha_acaso_silencio": {
-      "action": "O participante pode: (a) *continuar a puxar o fio* para revelar mais da história; (b) *deixar o fio cair*, o que faz com que a voz se transforme em eco e desapareça; ou (c) *falar ou escrever* uma palavra (opcional, com permissão de microfone/teclado), que será *incorporada* na voz como se fosse parte do conto.",
+    {
+      "stage": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "A voz pergunta: 'E agora? Continua o conto ou deitas-o ao vento?' Duas opções aparecem como fios soltos no ecrã: um vermelho (continuar) e um azul (deitar ao vento). A pessoa pode escolher ou ignorar. Se não escolher, o fio azul começa a baloiçar como se fosse levado pelo vento.",
       "sensory_focus": [
-        "kinesthetic (arrasto)",
-        "auditory (eco)",
-        "auditory (voz do participante)"
+        "visual (fios coloridos)",
+        "auditory (voz + som do vento)",
+        "kinesthetic (escolha via cursor)"
       ]
     },
-    "8_aparição": {
-      "action": "Se o participante escolher (a), o fio desdobra-se até formar a silhueta de uma *outra boca* (visual), que *completa* a frase do conto com uma voz diferente (auditivo). Se escolher (b), o ecrã fica em silêncio e um *mapa territorial* (visual) aparece, com um ponto a piscar num lugar real associado ao conto (ex: uma freguesia de Lisboa). Se escolher (c), a palavra do participante é *tecida* no fio, que se transforma em um *padrão visual* único (ex: um bordado digital).",
+    {
+      "stage": "APARIÇÃO",
+      "action": "Se a pessoa escolher 'continuar', o fio vermelho guia o cursor para um novo fragmento do conto, agora contado em primeira pessoa ('...e eu, que estava ali, vi o pão a saír do forno...'). Se escolher 'deitar ao vento', o fio azul desaparece e a voz diz: 'Alguém mais o apanhará.' No ecrã, surgem silhuetas de outras pessoas (contornos borrados) que parecem pegar no fio solto. Em ambos os casos, uma nova palavra aparece no rasgo: 'fim' ou 'começo'.",
       "sensory_focus": [
-        "visual (silhueta/mapa/padrão)",
-        "auditory (voz diferente)"
+        "visual (silhuetas + palavra)",
+        "auditory (voz + som do vento ou do forno)",
+        "social_presence (sensação de continuidade coletiva)"
       ]
     },
-    "9_devolução": {
-      "action": "O participante recebe um *fio digital* (visual) que pode guardar como imagem ou partilhar. Este fio contém: (a) o segmento da história que ouviu; (b) o lugar do mapa (se aplicável); ou (c) a sua palavra tecida no padrão. O fio tem um *código único* (ex: um trava-língua gerado a partir do conto) que pode ser usado para *entregar o fim* a outra pessoa em sessões futuras.",
+    {
+      "stage": "DEVOLUÇÃO",
+      "action": "A experiência devolve à pessoa um 'fio de voz': um áudio gerado (ou texto, se sem áudio) com o fragmento do conto que ela 'teceu', misturado com sons do tecido sonoro da sessão. O fio no ecrã transforma-se num objeto digital (ex: um fio de lã virtual) que a pessoa pode 'guardar' (download) ou 'deixar' (adicionar à constelação COSMICOXES como partícula).",
       "sensory_focus": [
-        "visual (fio digital)",
-        "gustatory_evocation (memória de um sabor associado ao lugar, se aplicável)"
+        "auditory (áudio devolvedo)",
+        "visual (objeto digital)",
+        "olfactory_evocation (cheiro a pão ou lenha, sugerido pela voz)"
       ]
     },
-    "10_rasto_latencia": {
-      "action": "O fio guardado pelo participante *persiste* no sistema como um *rasto*. Se outra pessoa usar o código único, o fio original *reage*: o novo participante ouve a voz do primeiro a contar o segmento que falta, e o fio visualiza a *teia* de todos os que já interagiram com ele. O conto nunca é completado; apenas *tecido* entre várias pessoas.",
+    {
+      "stage": "RASTO / LATÊNCIA",
+      "action": "Se a pessoa deixar o fio, ele junta-se a outros fios na constelação COSMICOXES, formando uma teia visível no 'céu' do Atlas. Se guardar, o fio permanece como um objeto no seu inventário pessoal (visível em sessões futuras). O rasgo na tela fecha-se lentamente, mas a palavra ('fim' ou 'começo') permanece como uma marca sutil no fundo.",
       "sensory_focus": [
-        "visual (teia)",
-        "auditory (vozes sobrepostas)",
-        "social_presence (colaboração implícita)"
+        "visual (teia ou inventário)",
+        "spatial (constelação COSMICOXES)",
+        "temporal_interoceptive (sensação de permanência)"
       ]
     }
-  },
-  "participant_verbs": [
-    "tocar",
-    "puxar",
-    "escolher",
-    "deixar cair",
-    "falar",
-    "tecer",
-    "entregar"
   ],
-  "system_responses": {
-    "to_gesture": {
-      "touch": "O fio parte-se e a voz ganha clareza, como se o participante estivesse a *desdobrar* a história.",
-      "drag": "O fio segue o cursor/dedo, puxando a voz como um tecido sonoro.",
-      "release": "O fio enrosca-se ou cai, interrompendo a voz e criando um nó ou eco."
+  "participant_verbs": [
+    "agarrar",
+    "puxar",
+    "costurar",
+    "escolher",
+    "deixar",
+    "escutar",
+    "tecer"
+  ],
+  "system_responses": [
+    {
+      "trigger": "Cursor toca no fio",
+      "response": "Fio fixa-se ao cursor + som de sino suave. Voz retoma o conto com entoação alterada."
     },
-    "to_voice_input": {
-      "optional": "A palavra falada é incorporada na voz do conto, como se fosse uma *contribuição* à narrativa.",
-      "fallback": "Se não houver permissão, a palavra pode ser escrita e tecida visualmente no fio."
+    {
+      "trigger": "Cursor move o fio",
+      "response": "Fio guia o cursor em direção a um ponto no ecrã. Tecido sonoro ganha camadas (risos, portas, etc.)."
     },
-    "to_silence": {
-      "action": "O sistema responde com eco, respiração ou um mapa territorial, *convidando* o participante a preencher o vazio."
+    {
+      "trigger": "Fio solta-se (desvio)",
+      "response": "Rasgo na tela + palavra 'silêncio' aparece. Voz cala-se."
     },
-    "to_choice": {
-      "continue": "O fio desdobra-se, revelando mais da história.",
-      "drop": "A voz transforma-se em eco e um mapa aparece, associando o conto a um lugar real.",
-      "speak/write": "A palavra do participante é tecida no fio, criando um padrão único."
+    {
+      "trigger": "Cursor 'costura' o rasgo",
+      "response": "Cada ponto emite som único. Imagem de roda de contadores surge. Palavra 'silêncio' desvanece."
+    },
+    {
+      "trigger": "Escolha de fio (vermelho/azul)",
+      "response": "Voz pergunta 'E agora?'. Fio azul baloiça se não houver escolha. Novo fragmento de conto ou desaparecimento do fio."
+    },
+    {
+      "trigger": "Fim da experiência",
+      "response": "Devolve áudio/text do fragmento tecido + objeto digital (fio). Rasgo fecha-se, mas palavra permanente."
     }
-  },
-  "sensory_signature_id": "fio-que-tece-o-vazio-42",
+  ],
+  "sensory_signature_id": "contos-orais-fio-silencio-042",
   "sensory_channels": {
     "visual": {
       "elements": [
-        "fio trémulo e dinâmico",
-        "silhuetas de bocas",
-        "nós e padrões tecidos",
-        "mapas territoriais com pontos pulsantes",
-        "palavras flutuantes e multiplicadas",
-        "teia de fios colaborativa"
+        "fio brilhante e dinâmico",
+        "escuridão como pano de fundo",
+        "rasgo na tela como tecido",
+        "palavras escritas à mão",
+        "imagem borrada de roda de contadores",
+        "silhuetas de outras pessoas",
+        "teia de fios na constelação COSMICOXES",
+        "objeto digital (fio de lã virtual)"
       ],
-      "techniques": [
-        "transparência",
-        "movimento orgânico",
-        "sombra projetada",
-        "contraste mínimo"
+      "dynamics": [
+        "movimento do fio como resposta ao cursor",
+        "aparecimento gradual de imagens",
+        "transparência e desvanecimento de palavras",
+        "profundidade visual no tecido sonoro"
       ]
     },
     "auditory": {
       "elements": [
-        "respiração longínqua",
-        "murmúrios em línguas desconhecidas",
-        "vozes com tons e ritmos variados",
-        "sons de sino/campainha",
-        "batimento cardíaco",
-        "eco e reverberação",
-        "silêncio ativo"
+        "voz sussurrada e clara (entoações variadas)",
+        "tecido sonoro de respirações, passos, risos, portas",
+        "som de sino ao tocar no fio",
+        "sons de costura (tsc, suspiros, risos)",
+        "som do vento ou do forno",
+        "silêncio carregado"
       ],
-      "techniques": [
-        "espacialização sutil",
-        "variação de volume dinâmica",
-        "sobreposição de vozes"
+      "dynamics": [
+        "voz que retoma o conto com entoação alterada",
+        "camadas sonoras que se sobrepõem",
+        "silêncio como elemento ativo",
+        "áudio devolvedo misturado com sons da sessão"
       ]
     },
     "haptic": {
       "elements": [
-        "vibração do fio ao toque (opcional)",
-        "feedback de arrasto"
+        "feedback visual do contacto com o fio",
+        "resistência sutil do fio ao movimento do cursor",
+        "vibração opcional em dispositivos compatíveis (ex: ao 'costurar')"
       ],
-      "fallback": [
-        "pulso visual para vibração",
-        "som de fricção para arrasto"
+      "dynamics": [
+        "sensação de 'segurar' o fio",
+        "feedback tátil nos cliques de costura"
       ]
     },
     "kinesthetic": {
       "elements": [
-        "toque e arrasto do fio",
-        "movimento do cursor/dedo para desdobrar a história"
+        "movimento do cursor como 'mão'",
+        "trajetória do fio a guiar o cursor",
+        "escolha via cursor (fios vermelho/azul)"
       ],
-      "fallback": [
-        "setas ou teclas para simular arrasto"
+      "dynamics": [
+        "fio que puxa ou solta o cursor",
+        "movimento livre ou guiado"
       ]
     },
     "proprioceptive": {
       "elements": [
-        "instruções subtis para segurar o dispositivo com uma mão ou outra",
-        "ritmo de respiração sugerido pela voz"
+        "sensação de 'segurar' algo imaterial",
+        "ritmo do gesto de costura",
+        "postura de escuta ativa"
       ],
-      "fallback": [
-        "ritmo visual para guiar a respiração"
+      "dynamics": [
+        "atenção dividida entre som, visual e gesto",
+        "sensação de participação corporal na narrativa"
       ]
     },
     "temporal_interoceptive": {
       "elements": [
-        "espera ativa (o fio demora a desdobrar-se)",
-        "aceleração/desaceleração da voz",
-        "pausas estratégicas"
+        "espera pelo próximo fragmento",
+        "silêncio como pausa ativa",
+        "ritmo da voz e dos sons ambientais",
+        "sensação de permanência (rasto)"
       ],
-      "fallback": [
-        "contador visual para tempo de espera"
+      "dynamics": [
+        "aceleração/desaceleração do tecido sonoro",
+        "pausas estratégicas na voz"
       ]
     },
     "spatial": {
       "elements": [
-        "profundidade sugerida pelo fio (mais próximo = voz mais clara)",
-        "mapa territorial com distâncias relativas"
+        "profundidade do som da roda",
+        "posicionamento do fio no ecrã",
+        "constelação COSMICOXES como 'céu'",
+        "rasgo como portal para outro espaço"
       ],
-      "fallback": [
-        "escala visual para profundidade"
+      "dynamics": [
+        "movimento do fio em 2D/3D sutil",
+        "sensação de espaço imersivo"
       ]
     },
     "olfactory_evocation": {
       "elements": [
-        "memória de cheiros associados a lugares do conto (ex: pão quente, ervas, mar)"
+        "cheiro a pão quente (evocado pela voz)",
+        "cheiro a lenha ou terra (evocado pelo tecido sonoro)"
+      ],
+      "dynamics": [
+        "sugestão através de linguagem e som"
       ]
     },
     "gustatory_evocation": {
       "elements": [
-        "memória de sabores associados a palavras ou lugares (ex: mel, sal, café)"
+        "sabor do pão quente (evocado pela voz)",
+        "sabor da infância (evocado pelo conto)"
+      ],
+      "dynamics": [
+        "sugestão através de memória e associação"
       ]
     },
     "social_presence": {
       "elements": [
-        "vozes de outros participantes (anónimas) tecidas na história",
-        "teia visual de contribuições passadas"
+        "sensação de estar numa roda de contadores",
+        "silhuetas de outras pessoas",
+        "voz que parece responder à presença da pessoa",
+        "fios que conectam vozes e memórias"
+      ],
+      "dynamics": [
+        "interação implícita com outras 'presenças'",
+        "sensação de continuidade coletiva"
       ]
     }
   },
   "cross_sensory_translation": {
-    "primary": {
-      "from": "gestual (toque/arrasto do fio)",
-      "to": "sonoro (voz que se desdobra e ganha clareza)",
-      "description": "O movimento físico do participante *puxa* literalmente a voz, como se a história fosse um tecido sonoro que só se revela ao ser manipulado."
-    },
-    "secondary": {
-      "from": "sonoro (palavra falada pelo participante)",
-      "to": "visual (padrão tecido no fio)",
-      "description": "A voz do participante transforma-se em um padrão visual único, como se a palavra ganhasse forma física."
-    },
-    "tertiary": {
-      "from": "visual (fio enroscado)",
-      "to": "sonoro (batimento cardíaco)",
-      "description": "O nó visual no fio *pulsar* emite um som de batimento, como se o fio tivesse vida própria."
-    }
+    "primary": "O gesto de 'puxar o fio' (kinesthetic) altera a entoação da voz (auditory) e a profundidade visual do tecido sonoro (visual).",
+    "secondary": [
+      "O som de costura (auditory) cria uma textura visual no rasgo da tela (visual).",
+      "O silêncio (auditory) faz aparecer palavras escritas à mão (visual).",
+      "A palavra 'silêncio' (visual) evoca o cheiro a pão quente (olfactory_evocation)."
+    ]
   },
   "silence_or_absence": {
-    "mechanism": "O silêncio é um *personagem ativo*: (1) a voz pára no meio de uma frase, criando expectativa; (2) o eco substitui a voz quando o fio é largado; (3) o mapa territorial aparece em silêncio, associando o conto a um lugar real sem palavras.",
-    "purpose": "Convidar o participante a preencher o vazio com a sua própria voz, gesto ou imaginação."
+    "mechanism": "O silêncio é usado como: (1) pausas estratégicas na voz para criar expectativa; (2) ausência repentina de som para marcar o desvio; (3) tecido sonoro mínimo (respirações, passos) para evocar presença sem voz; (4) palavra 'silêncio' como objeto visual que desaparece.",
+    "purpose": "Convocar a atenção para o que não está dito, criar espaço para a imaginação e marcar transições na narrativa."
   },
   "surprise_or_indeterminacy": {
     "mechanism": [
-      {
-        "type": "acaso controlado",
-        "description": "A voz que completa a frase do conto é selecionada aleatoriamente entre várias versões do mesmo segmento, cada uma com um tom ou ritmo diferente."
-      },
-      {
-        "type": "resposta ao ritmo",
-        "description": "Se o participante arrastar o fio rapidamente, a voz acelera; se devagar, a voz abrandar. Se pararem, a voz pára."
-      },
-      {
-        "type": "combinação de fragmentos",
-        "description": "O segmento do conto que é revelado depende de onde o participante toca o fio inicialmente (ex: tocar na ponta vs. no meio)."
-      },
-      {
-        "type": "memória territorial",
-        "description": "O lugar associado ao conto no mapa é selecionado com base na localização aproximada do participante (se permitida) ou aleatoriamente entre lugares reais do corpus."
-      }
-    ]
+      "O fio solta-se inesperadamente, criando um rasgo na tela.",
+      "A voz altera a entoação e o ritmo sem aviso.",
+      "A escolha entre 'continuar' ou 'deitar ao vento' tem consequências visíveis (silhuetas de outras pessoas ou novo fragmento).",
+      "O fragmento do conto devolvedo é único para cada sessão, misturado com sons aleatórios do tecido sonoro."
+    ],
+    "purpose": "Quebrar a linearidade da narrativa e convocar a agência da pessoa."
   },
   "session_variation": [
     {
-      "type": "ordem_mutável",
-      "description": "O segmento do conto que é revelado primeiro varia entre sessões, sempre começando *no meio* mas em pontos diferentes."
+      "type": "acaso controlado",
+      "description": "O fragmento inicial do conto é selecionado aleatoriamente de um conjunto pré-definido de contos tradicionais (ex: 5-10 fragmentos)."
     },
     {
-      "type": "resposta_a_ritmo",
-      "description": "A velocidade com que o participante arrasta o fio altera o ritmo e o tom da voz."
+      "type": "resposta a ritmo/velocidade do gesto",
+      "description": "A entoação da voz e a densidade do tecido sonoro ajustam-se ao ritmo dos cliques de costura da pessoa (mais rápido = voz mais agitada; mais lento = voz mais calma)."
     },
     {
-      "type": "combinação_de_fragmentos",
-      "description": "O sistema combina aleatoriamente fragmentos de contos diferentes, mas sempre coerentes com o corpus autoral."
+      "type": "combinação de fragmentos curatoriais",
+      "description": "O fragmento final devolvedo é uma combinação única do fragmento inicial + sons da sessão + palavras que apareceram no rasgo."
     },
     {
-      "type": "memória_de_outros",
-      "description": "Se o participante usar um código único de um fio anterior, o sistema incorpora a voz ou palavra de quem o criou."
+      "type": "presença de outras contribuições públicas",
+      "description": "Se outras pessoas deixaram fios na constelação COSMICOXES, a teia visível no 'céu' do Atlas incluirá esses fios, criando uma paisagem dinâmica."
     },
     {
-      "type": "temporalidade_real",
-      "description": "O som da respiração longínqua no limiar varia entre dia/noite (ex: mais alto à noite, mais suave de dia)."
+      "type": "temporalidade real",
+      "description": "O tecido sonoro de fundo pode incluir sons associados à hora do dia (ex: pássaros de manhã, grilos à noite) ou à estação do ano (se a geolocalização for permitida)."
     }
   ],
   "territorial_binding": {
-    "real_world_anchor": "Os contos orais estão associados a lugares reais (freguesias, ruas, pontos de interesse) do corpus territorial do Atlas Vivo MILK. O mapa que aparece na fase de devolução mostra um lugar específico, com um ponto a piscar.",
-    "digital_territory": "O fio digital tecido pelo participante *persiste* no sistema como um rasto territorial, ligando pessoas que interagiram com o mesmo conto ou lugar.",
-    "source_sustainability": "Os lugares e contos são extraídos do corpus autoral (ex: 'curadoria entrada freguesias.xlsx'), sem invenção de dados."
+    "relation": "Os contos e o tecido sonoro são inspirados em tradições orais de freguesias específicas de Lisboa (ex: Alfama, Graça, Mouraria), com sons ambientais gravados nesses locais. A constelação COSMICOXES pode mapear os fios a territórios reais, mas sem exigir geolocalização.",
+    "sustainability": "Os fragmentos de contos e sons são baseados em material autoral ou de domínio público, sem invenção de factos folclóricos. A relação territorial é evocada, não fingida.",
+    "optional_geolocation": "Se a pessoa permitir geolocalização, o tecido sonoro pode incluir sons específicos da sua freguesia atual. Caso contrário, usa sons genéricos de Lisboa."
   },
   "trace_and_return": {
     "trace": {
-      "digital": "O fio tecido pelo participante, contendo o segmento da história, o lugar associado (se aplicável) e a sua contribuição (palavra ou voz).",
-      "physical_evocation": "O código único do fio pode ser partilhado fisicamente (ex: escrito num papel) para que outra pessoa o use na WebApp."
+      "digital": "O fio tecido pela pessoa pode ser guardado como objeto digital (ex: fio de lã virtual) ou deixado na constelação COSMICOXES como partícula.",
+      "physical_evocation": "A palavra final ('fim' ou 'começo') permanece como marca sutil no fundo do ecrã em sessões futuras."
     },
     "return": {
-      "immediate": "O participante recebe o fio digital como imagem ou link para partilhar.",
-      "latent": "O fio persiste no sistema e pode ser *reencontrado* por outros participantes, criando uma teia colaborativa de contos inacabados."
+      "immediate": "Áudio/text do fragmento do conto tecido pela pessoa, misturado com sons da sua sessão.",
+      "latent": "O fio na constelação COSMICOXES pode ser 'encontrado' por outras pessoas em sessões futuras, criando uma teia de narrativas interligadas."
     }
   },
   "accessibility_equivalents": {
-    "visual": {
-      "for_blind": "Todas as interações visuais (fio, silhuetas, padrões) são acompanhadas por descrições sonoras em tempo real (ex: 'O fio está a desdobrar-se para a direita').",
-      "for_low_vision": "Contraste ajustável, modo de alto contraste, e opção para aumentar o tamanho do fio e das palavras."
+    "visual_impairment": {
+      "description": "Toda a experiência é narrada em áudio. O fio é descrito como 'um fio brilhante que se move como se fosse puxado por uma mão invisível'. As escolhas (fios vermelho/azul) são anunciadas pela voz. O rasgo na tela é descrito como 'um tecido que se rasgou, revelando uma palavra'.",
+      "alternative_input": "Teclado: setas para mover o 'cursor' (fio); Enter para 'agarrar' ou 'costurar'; 1/2 para escolher fios vermelho/azul."
     },
-    "auditory": {
-      "for_deaf": "Todas as vozes e sons são transcritos em texto em tempo real, com indicação de tom e ritmo (ex: 'Voz feminina, ritmo acelerado: ...').",
-      "for_hard_of_hearing": "Legendas ajustáveis e opção para aumentar o volume dos sons ambientais (respiração, sino)."
+    "auditory_impairment": {
+      "description": "Toda a voz é legendada em tempo real, com descrição dos sons ambientais (ex: '[respiração] [passos distantes] [porta a ranger]'). O tecido sonoro é representado visualmente por ondas ou partículas que se movem no ecrã.",
+      "alternative_input": "O fio pode ser movido com o rato ou teclado, e os sons são substituídos por feedback visual (ex: vibração do fio ao 'costurar')."
     },
-    "haptic_kinesthetic": {
-      "for_motor_impairment": "Todas as interações de toque/arrasto têm equivalentes via teclado (ex: setas para mover o fio) ou voz (ex: comandos como 'puxar fio', 'deixar cair').",
-      "for_no_mouse": "Navegação completa via teclado, com foco visual claro."
+    "motor_impairment": {
+      "description": "O fio pode ser 'agarrado' com um clique único ou toque prolongado. A costura do rasgo pode ser feita com um único gesto (ex: arrastar o cursor uma vez para 'costurar' todo o rasgo).",
+      "alternative_input": "Voz: comandos como 'agarrar fio', 'puxar', 'costurar', 'escolher vermelho/azul'."
     },
-    "cognitive": {
-      "for_reduced_motion": "Modo 'estático' onde o fio não se move sozinho, mas pode ser manipulado pelo participante sem animações automáticas.",
-      "for_time_pressure": "Opção para desativar limites de tempo ou ritmo acelerado."
+    "cognitive_load": {
+      "description": "Modo 'sem pressa': o fio move-se mais devagar, as pausas são mais longas, e a voz repete as opções. A experiência pode ser pausada a qualquer momento.",
+      "alternative_input": "Botão de pausa visível e acessível por teclado."
     },
-    "poetic_preservation": "As descrições sonoras e transcrições mantêm a musicalidade e o ritmo do conto original, sem reduzir a experiência a uma versão 'funcional'."
+    "reduced_motion": {
+      "description": "O fio move-se em linhas retas e sem animações complexas. O rasgo na tela aparece como uma linha reta, sem distorções. O tecido sonoro é representado por barras de volume estáticas.",
+      "alternative_input": "Todas as interações são baseadas em cliques ou toques simples."
+    }
   },
   "optional_permissions": {
     "microphone": {
-      "when": "Quando o participante escolhe *falar* uma palavra para tecer no fio.",
-      "benefit": "A voz do participante é incorporada na narrativa como se fosse parte do conto, criando uma contribuição única.",
-      "fallback": "O participante pode *escrever* a palavra, que será tecida visualmente no fio."
+      "purpose": "Capturar a voz da pessoa para misturar com o tecido sonoro (ex: sons de costura podem incluir a voz da pessoa).",
+      "fallback": "Se não permitido, os sons de costura são gerados aleatoriamente ou baseados no ritmo dos cliques."
     },
     "geolocation": {
-      "when": "Para associar o conto a um lugar real próximo do participante (se aplicável).",
-      "benefit": "O mapa territorial mostra um lugar mais relevante para a localização do participante.",
-      "fallback": "O sistema seleciona aleatoriamente um lugar do corpus associado ao conto."
+      "purpose": "Personalizar o tecido sonoro com sons específicos da freguesia da pessoa.",
+      "fallback": "Usa sons genéricos de Lisboa ou de uma freguesia aleatória."
     }
   },
   "overstimulation_risk": {
     "potential_risks": [
-      "Som súbito (ex: sino ou batimento cardíaco) pode ser desconfortável para pessoas com sensibilidade auditiva.",
-      "Movimento constante do fio pode causar desconforto visual para pessoas com sensibilidade a movimento.",
-      "Várias vozes sobrepostas podem ser confuses ou sobrecarregantes."
+      "Flashing ou movimento rápido do fio (mitigado por: movimento suave e opção reduced-motion).",
+      "Som súbito excessivo (mitigado por: volume controlado e tecido sonoro gradual).",
+      "Pressão de tempo (mitigado por: modo 'sem pressa' e pausas longas).",
+      "Sobreposição de sons (mitigado por: camadas sonoras equilibradas e opção para reduzir volume)."
     ],
-    "mitigations": [
-      "Todos os sons têm volume ajustável e podem ser desativados individualmente.",
-      "Modo 'reduced motion' desativa todas as animações automáticas do fio.",
-      "Opção para limitar o número de vozes sobrepostas (ex: máximo de 2).",
-      "Pausas estratégicas na narrativa para permitir respiração.",
-      "Aviso prévio antes de sons ou movimentos intensos (ex: 'O fio vai pulsar agora')."
+    "mitigation": [
+      "Controles de volume e reduzir movimento sempre visíveis.",
+      "Modo 'sem pressa' ativo por padrão.",
+      "Feedback visual claro para todas as interações.",
+      "Possibilidade de pausar a experiência a qualquer momento."
     ]
   },
   "distinctiveness": {
     "unique_elements": [
-      "A experiência *começa no meio* do conto, nunca no início, e convida o participante a *entregar o fim* a outra pessoa.",
-      "O fio é ao mesmo tempo um *objeto visual*, um *tecido sonoro* e um *rasto territorial*, ligando gestos, vozes e lugares.",
-      "A voz do participante é *tecida* no fio, criando um padrão visual único que persiste no sistema.",
-      "O silêncio é um *personagem ativo* que convida à participação, não uma ausência passiva.",
-      "A teia colaborativa de fios *nunca completa* os contos, apenas os tece entre várias pessoas."
+      "A narrativa começa no meio e convida o participante a 'entregar o fim a outra pessoa', criando uma sensação de continuidade coletiva.",
+      "O fio como objeto interativo que guia, solta e tece a experiência, misturando gesto, som e visual.",
+      "O rasgo na tela como portal para a aparição de palavras e imagens, usando o silêncio como matéria ativa.",
+      "A devolução de um 'fio de voz' único, misturado com sons da sessão, como objeto digital ou partícula na constelação COSMICOXES.",
+      "A tradução cruzada entre o gesto de puxar o fio e a alteração da entoação da voz, criando uma relação corporal com a narrativa oral."
     ],
-    "comparison": "Nenhuma outra experiência no Atlas usa um *fio dinâmico* como metáfora central para a narrativa oral, nem convida o participante a *completar* uma história em falta. Outras experiências podem usar voz ou mapa, mas não a *tradução cruzada* entre gesto, som e tecido visual."
+    "comparison": "Esta experiência não pode ser confundida com outras porque: (1) não é um quiz, menu ou página estática; (2) não usa gamificação por pontos; (3) a narrativa é não-linear e coletiva; (4) o fio é um elemento central que mistura canais sensoriais de forma única; (5) o silêncio e a ausência são usados como ferramentas ativas, não como vazio passivo."
   },
   "questions_for_eduardo": [
-    "O corpus autoral contém contos orais específicos que possam ser usados como base para esta experiência? Se sim, quais são os invariantes (ex: frases, ritmos, lugares) que não podem ser alterados?",
-    "A associação entre contos e lugares territoriais (ex: freguesias) está definida no corpus? Se não, como deve ser feita esta ligação sem inventar dados?",
-    "A voz que narra os contos deve ser humana (gravada) ou pode ser sintética? Se humana, há gravações autorais disponíveis?",
-    "O código único do fio deve ser gerado automaticamente (ex: trava-língua) ou pode ser uma palavra ou frase escolhida pelo participante?",
-    "A teia colaborativa de fios deve ser visível para todos os participantes ou apenas para quem interagiu com o mesmo conto?"
+    "Os fragmentos de contos tradicionais a usar devem ser específicos de que freguesias ou regiões? Ou podem ser genéricos de Portugal?",
+    "A voz que narra os contos deve ser uma voz humana gravada ou sintetizada? Se gravada, há preferência por um estilo específico (ex: voz de idoso, criança, etc.)?",
+    "A constelação COSMICOXES deve ter uma representação visual específica (ex: teia, mapa, etc.) ou pode ser abstrata?",
+    "O 'fio de voz' devolvedo deve incluir apenas o fragmento do conto ou também sons ambientais da sessão?",
+    "Há restrições sobre o uso de sons ambientais gravados em locais reais (ex: direitos autorais, privacidade)?"
   ],
   "improvement_proposals": [
     {
-      "area": "territorial_binding",
-      "proposal": "Integração com o sistema COSMICOXES para visualizar a teia de fios como uma *constelação* de contos, onde cada fio é uma estrela e as ligações representam contribuições colaborativas.",
-      "justification": "Aprofundaria a metáfora do 'tecido' e ligaria esta experiência a outras do Atlas que usam constelações (ex: COSMICOXES)."
+      "proposal": "Incluir a opção de a pessoa gravar a sua própria voz a continuar o conto, que depois é misturada com o fragmento inicial e devolta como parte do 'fio de voz'.",
+      "justification": "Aumentaria a agência da pessoa e a sensação de co-criação, alinhando com o princípio de 'entregar o fim a outra pessoa'."
     },
     {
-      "area": "cross_sensory_translation",
-      "proposal": "Adicionar uma camada de *textura táctil* (háptica) ao fio, onde o participante sente a 'rugosidade' ou 'suavidade' do tecido sonoro ao arrastá-lo (em dispositivos compatíveis).",
-      "justification": "Aprofundaria a tradução cruzada entre gesto, som e tacto, mas requer testar a acessibilidade para quem não tem feedback háptico."
+      "proposal": "Adicionar uma camada de 'memória territorial' onde o fio, ao ser puxado, revela fotografias ou ilustrações de lugares mencionados no conto (ex: um forno, uma rua).",
+      "justification": "Reforçaria a relação com o território e a evocação de memórias, sem fingir output físico."
     },
     {
-      "area": "silence_or_absence",
-      "proposal": "Incluir um *modo de escuta profunda* onde o participante é convidado a fechar os olhos (ou reduzir o ecrã a um ponto de luz) e ouve apenas os sons do conto, com o fio a ser 'sentido' apenas através do som e do toque.",
-      "justification": "Aprofundaria o uso do silêncio e da ausência visual, mas requer cuidado com a acessibilidade para pessoas com deficiência visual."
+      "proposal": "Permitir que o fio, ao ser deixado na constelação COSMICOXES, possa ser 'encontrado' por outras pessoas em sessões futuras, que podem 'puxá-lo' para continuar a narrativa.",
+      "justification": "Criaria uma experiência verdadeiramente intergeracional e coletiva, onde os rastos têm vida própria."
     }
   ],
   "generic_fallback_allowed": false,

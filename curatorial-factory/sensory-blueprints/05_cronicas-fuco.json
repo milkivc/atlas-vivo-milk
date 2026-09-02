@@ -3,375 +3,426 @@
   "canonical_name": "Crónicas Cãotadas por Fucô",
   "source_evidence": {
     "primary": [
-      "Cópia de Fica registado neste dossiê… — FUCO como mediador vivo, afetuoso, perspicaz, curioso, levemente malandro; conversas geram Crónicas Cãotadas por FUCO; linguagem viva, território, oralidade e rasto.",
-      "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf — princípios de oralidade, intergeracionalidade e rasto."
+      "Cópia de Fica registado neste dossiê… (fonte autoral forte para FUCO, oralidade, rasto e humor)",
+      "Âncoras Autoral — CAMADA PÚBLICA (FUCO: mediador vivo, afetuoso, perspicaz, curioso, levemente malandro; das conversas nascem Crónicas Cãotadas por FUCO; linguagem viva, território, oralidade e rasto)"
     ],
     "secondary": [
-      "Curadoria Cultural e Existencialismo Profundo.pdf — oralidade, língua viva, absurdo/Camus."
+      "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf (princípios CARE, dissidência, intergeracionalidade)"
+    ],
+    "excluded": [
+      "Qualquer documento técnico legado (GAS/Sheets) ou soluções genéricas de chatbot"
     ]
   },
   "authorial_invariants": [
-    "Fucô é uma presença viva, não um chatbot genérico.",
-    "As Crónicas nascem de conversas espontâneas, não de formulários ou inputs burocráticos.",
-    "A linguagem deve ser afetuosa, perspicaz, curiosa e levemente malandra.",
-    "Fucô pode interromper, desaparecer, trazer um rasto, errar com humor ou conduzir a uma crónica.",
-    "A devolução deve incluir uma frase ou fragmento que fique a rondar (rasto poético).",
-    "A experiência deve preservar oralidade, território e memória."
+    "Fucô é um mediador vivo, afetuoso, perspicaz, curioso e levemente malandro.",
+    "A pessoa pode chamá-lo para conversar.",
+    "Das conversas nascem Crónicas Cãotadas por Fucô.",
+    "Linguagem viva, território, oralidade e rasto são centrais.",
+    "Fucô não é um formulário burocrático nem um chatbot genérico.",
+    "Fucô fareja pausas, palavras, território e oralidade no que a pessoa voluntariamente oferece.",
+    "Pode interromper, desaparecer, trazer um rasto, errar com humor ou conduzir a uma crónica.",
+    "Devolve uma frase que fica a rondar."
   ],
-  "perceptual_intent": "Convidar a pessoa a entrar num diálogo vivo com Fucô, onde a voz, o silêncio e o território se misturam para gerar crónicas efémeras e poéticas. A experiência deve sentir-se como um encontro inesperado, onde a linguagem ganha textura, ritmo e peso, e onde o rasto da conversa persiste como uma presença ausente.",
+  "perceptual_intent": "Criar um espaço de conversa viva onde a oralidade, o território e o humor se entrelaçam para gerar crónicas efémeras e poéticas. A pessoa deve sentir que está a ser ouvida por uma presença curiosa, que responde com inteligência afetuosa e uma pitada de malandragem, transformando o diálogo em rasto duradouro.",
   "threshold": {
-    "description": "A pessoa entra num espaço onde uma frase solta, escrita ou falada, parece flutuar no ar. O ambiente é minimalista, com um fundo que evoca papel envelhecido ou tecido gasto, e um som ambiente de murmúrios distantes (como uma feira ou mercado). A frase inicial não é explicada; é apenas uma presença que convida à interação.",
-    "sensory_trigger": "A frase aparece com uma tipografia irregular, como se fosse escrita à mão, e desvanece-se lentamente se não for apanhada. Um som de sineta ou riso abafado pode surgir como pano de fundo, mas nunca de forma agressiva."
+    "description": "O ecrã está quase vazio, com uma mancha de tinta ou uma sombra que se move lentamente, como se algo ou alguém estivesse a espreitar. Um murmúrio distorcido (som de voz abafada) surge por 2-3 segundos e desaparece. Nenhum texto ou botão é visível.",
+    "sensory_trigger": {
+      "visual": "Mancha orgânica em movimento lento (como tinta na água) que reage à posição do cursor (sem clique).",
+      "auditory": "Murmúrio distorcido (frequências baixas, como voz ao longe) que surge e some em loop irregular.",
+      "spatial": "A mancha parece vir de um ponto fora do ecrã, como se algo estivesse a aproximar-se."
+    }
   },
   "dramaturgical_arc": [
     {
-      "stage": "LIMIAR",
-      "action": "A frase solta (ex: 'Apanha uma frase pelo rabo.') aparece no ecrã, escrita como se fosse um rasto de tinta ou carvão. O som ambiente é de um espaço público (mercado, rua, feira), mas sem focar em nada específico. A pessoa sente que algo está a acontecer, mas não sabe o quê."
+      "phase": "limiar",
+      "description": "A mancha e o murmúrio criam uma sensação de presença oculta. A pessoa percebe que algo está a acontecer, mas não sabe o quê."
     },
     {
-      "stage": "CHAMADA",
-      "action": "Fucô 'aparece' indiretamente: a frase ganha uma sombra ou um eco sonoro (ex: um suspiro, um riso, um murmúrio). A pessoa é convidada a apanhar a frase pelo rabo, literalmente ou metaforicamente, arrastando-a ou clicando nela."
+      "phase": "chamada",
+      "description": "Aparece, em letras trémulas e como se estivessem a ser escritas à mão, as palavras: *'Fucô está por aí... Chama?'* (com um ponto de interrogação que oscila entre ? e um rabinho de cão)."
     },
     {
-      "stage": "PRIMEIRO GESTO",
-      "action": "A pessoa interage com a frase (arrasta, clica, toca ou diz algo em voz alta, se o microfone estiver ativo). A frase reage: estica-se, dobra-se ou divide-se em sílabas que se espalham como migalhas."
+      "phase": "primeiro_gesto",
+      "description": "A pessoa pode: (1) clicar/tocar na mancha, (2) digitar qualquer coisa (inclusive um espaço ou pontuação), (3) fazer um gesto circular com o cursor/dedo, ou (4) esperar em silêncio. Qualquer uma destas acções é válida."
     },
     {
-      "stage": "RESPOSTA VIVA",
-      "action": "Fucô responde de forma não linear: pode completar a frase da pessoa, interromper com uma pergunta absurda, ou trazer uma nova frase que parece vir de um lugar inesperado (ex: 'E se a frase fosse um cão?'). O som ambiente muda subtamente (ex: o murmúrio ganha um ritmo ou uma melodia)."
+      "phase": "resposta_viva",
+      "description": "Fucô responde de forma imediata e específica ao gesto: se clicou, a mancha expande-se e revela um focinho ou orelha de cão em traço rápido; se digitou, as letras caem como folhas e Fucô 'cheira' o texto (som de funfo nasal); se fez um círculo, a mancha gira e emite um latido curto; se esperou, Fucô suspira (som de respiração) e pergunta: *'Tás a ver-me ou não tás?'*"
     },
     {
-      "stage": "DESVIO",
-      "action": "Fucô desaparece por um momento, ou a frase que a pessoa escreveu ganha vida própria (ex: as palavras começam a dançar ou a colidir umas com as outras). Um silêncio repentino ou um som de passos a afastar-se pode marcar este momento."
+      "phase": "desvio",
+      "description": "Fucô interrompe a si próprio com um ruído de patas a arrastar (som) e a mancha divide-se em duas: uma parte segue o cursor, a outra foge para a borda do ecrã. A frase *'Vamos brincar ou não vamos?'* aparece, mas uma das palavras (aleatoriamente) está invertida ou cortada ao meio."
     },
     {
-      "stage": "APROFUNDAMENTO SENSORIAL",
-      "action": "A conversa mistura canais: a voz da pessoa (se ativa) altera a cor ou a textura do texto; o gesto de arrastar uma palavra pode fazer com que um som de sineta ou um riso surja. O território é evocado através de topónimos ou expressões locais que Fucô traz à conversa."
+      "phase": "aprofundamento_sensorial",
+      "description": "Se a pessoa interagir com a mancha que foge (clique/toque), Fucô responde com uma frase que mistura som e imagem: por exemplo, a palavra *'cheiro'* aparece escrita, mas o 'e' transformam-se em notas musicais (visualmente) e o som de um acorde é tocado. Se a pessoa digitar algo, Fucô repete a palavra em eco distorcido e a mancha ganha textura de pelo ou terra, dependendo do que foi escrito."
     },
     {
-      "stage": "ESCOLHA / ACASO / SILÊNCIO",
-      "action": "A pessoa pode escolher seguir uma das frases que surgiram, ignorá-las ou esperar. Se esperar, Fucô pode trazer uma crónica curta (ex: 'Há um homem em Alfama que coleciona silêncios.') ou um objeto simbólico (ex: uma chave, um pão, uma porta). O silêncio também é uma opção válida: se a pessoa não interagir, a frase pode desvanecer-se e Fucô pode murmurar algo como 'Ah, foste-te embora...' antes de desaparecer."
+      "phase": "escolha_acaso_silencio",
+      "description": "Fucô propõe: *'Diz uma coisa que só tu sabes, ou cala-te e eu adivinho.'* A pessoa pode: (1) digitar uma frase, (2) gravar voz (opcional, com permissão), (3) fazer um gesto (arrastar, circular, etc.), ou (4) esperar. Se não fizer nada, Fucô 'adivinha' algo absurdo mas poético (ex: *'Tu tens um segredo que cheira a pão quente de manhã cedo.'*)."
     },
     {
-      "stage": "APARIÇÃO",
-      "action": "Algo novo emerge: uma crónica completa (gerada a partir dos fragmentos da conversa), uma imagem de um lugar real (ex: uma rua de Lisboa), ou um objeto que parece pertencer ao território evocado. A crónica é escrita como se fosse um diário ou uma carta, com erros propositados ou expressões coloquiais."
-    },
-    {
-      "stage": "DEVOLUÇÃO",
-      "action": "Fucô devolve à pessoa uma frase ou um fragmento da conversa, agora transformado (ex: 'A frase que apanhaste pelo rabo virou um cão que late em Alcântara.'). Este fragmento fica visível no ecrã como um rasto, e a pessoa pode guardá-lo (copiar para a área de transferência) ou deixá-lo desaparecer."
-    },
-    {
-      "stage": "RASTO / LATÊNCIA",
-      "action": "A frase ou crónica gerada pode ser adicionada a um 'caderno de Fucô' (uma coleção invisível de crónicas públicas, acessível em sessões futuras). O rasto também pode ser um som ou uma imagem que persiste no ambiente por alguns segundos antes de se dissolver."
+      "phase": "rasto_latencia",
+      "description": "A frase guardada no 'caderno' pode ser revisitada em sessões futuras. Em cada regresso, a frase ganha uma camada nova: um som associado, uma mancha de cor, ou uma palavra adicionada por Fucô. Se a pessoa nunca regressar, a frase permanece no cosmos da experiência como um rasto anónimo.",
+      " mas ninguém ouviu.'*). A pontuação final da crónica é sempre um rabinho de cão (🐾) ou um traço que parece uma pegada.": {
+        "phase": "devolução",
+        "description": "Fucô devolve uma 'frase solta' que a pessoa pode 'apanhar pelo rabo'. A frase aparece como um fio de lã ou um rabo de cometa no ecrã, e a pessoa pode arrastá-la para um 'caderno' (área do ecrã). Se o fizer, a frase fica guardada como rasto. Se não, a frase desaparece lentamente, como se fosse levada pelo vento."
+      }
     }
   ],
   "participant_verbs": [
+    "chamar",
+    "conversar",
+    "cheirar",
+    "brincar",
+    "adivinhar",
     "apanhar",
-    "continuar",
-    "escutar",
-    "esperar",
-    "interromper",
-    "deixar",
-    "rondar"
+    "espreitar"
   ],
-  "system_responses": [
-    "Fucô completa, desvia ou interrompe a frase da pessoa com humor ou perspicácia.",
-    "As palavras ganham vida própria: dançam, colidem, esticam-se ou dividem-se.",
-    "O som ambiente muda subtamente (murmúrios, risos, passos, sinetas).",
-    "Fucô traz uma crónica, um objeto simbólico ou um topónimo do território.",
-    "A frase ou crónica gerada é devolvida como rasto poético.",
-    "Fucô desaparece ou erra propositadamente, criando um momento de surpresa.",
-    "O ambiente visual reage ao gesto ou à voz (cores, texturas, profundidade)."
-  ],
-  "sensory_signature_id": "fuco_oralidade_rasto",
+  "system_responses": {
+    "immediate": [
+      "Mancha orgânica que reage ao cursor (expande, contrai, divide-se).",
+      "Sons de Fucô: murmúrio, funfo nasal, latido, suspiro, patas a arrastar, respiração.",
+      "Texto escrito à mão que aparece e desaparece com oscilações (tremor, inversão, corte)."
+    ],
+    "adaptive": [
+      "Fucô repete ou distorce o que a pessoa disse/fez (ex: eco, inversão de sílabas, transformação em imagem).",
+      "A mancha ganha textura ou cor com base no input (ex: palavras 'quente' → tons laranja; 'cheiro' → textura de pelo).",
+      "Fucô interrompe-se a si próprio com ruídos ou gestos visuais (ex: patas a arrastar, rabo a abanar)."
+    ],
+    "emergent": [
+      "Crónica gerada a partir de fragmentos do diálogo + memórias territoriais (nunca inventadas, sempre baseadas em corpus autoral).",
+      "Frase solta que pode ser 'apanhada pelo rabo' e guardada no caderno.",
+      "Camadas adicionadas à frase guardada em sessões futuras (som, cor, palavra)."
+    ]
+  },
+  "sensory_signature_id": "fuco_oralidade_territorio_humor",
   "sensory_channels": {
     "visual": {
-      "elements": [
-        "tipografia irregular (como escrita à mão ou carvão)",
-        "fundo que evoca papel envelhecido ou tecido gasto",
-        "palavras que dançam, colidem ou se esticam",
-        "imagens de lugares reais (ruas, objetos simbólicos)",
-        "sombras e ecos visuais nas palavras"
+      "primary": [
+        "mancha orgânica em movimento",
+        "texto escrito à mão (tremulo, invertido)",
+        "traços de cão (focinho, orelha, rabo)",
+        "crónica como recado manual",
+        "fio de lã/rabo de cometa para a frase solta"
       ],
-      "dynamics": [
-        "transparência e opacidade variáveis",
-        "movimento orgânico (sem animações decorativas)",
-        "profundidade e camadas que se revelam com o gesto"
+      "secondary": [
+        "texturas (pelo, terra, pão)",
+        "sombras em movimento",
+        "oscilação de cor com base no input"
       ]
     },
     "auditory": {
-      "elements": [
-        "murmúrios distantes (feira, mercado, rua)",
-        "sons de sineta, risos ou passos",
-        "eco ou reverberação em frases",
-        "silêncio repentino como elemento ativo",
-        "ritmo sonoro que acompanha o gesto ou a voz"
+      "primary": [
+        "murmúrio distorcido",
+        "funfo nasal (cheirar)",
+        "latido curto",
+        "suspiro",
+        "patas a arrastar",
+        "respiração",
+        "eco distorcido de palavras"
       ],
-      "dynamics": [
-        "paisagem sonora que muda com a interação",
-        "espacialização sutil (som que parece vir de diferentes direções)",
-        "intensidade variável (de quase inaudível a claro)"
+      "secondary": [
+        "acordes musicais associados a letras",
+        "ruídos territoriais (ex: padaria, rua)",
+        "silêncio repentino"
       ]
     },
     "haptic": {
-      "elements": [
-        "vibração sutil em dispositivos compatíveis (opcional, apenas para enfatizar momentos-chave)",
-        "feedback tátil leve ao arrastar palavras"
+      "primary": [
+        "vibração sutil em dispositivos compatíveis (opcional) quando Fucô 'late' ou 'cheira'"
       ],
-      "dynamics": [
-        "resposta háptica apenas como reforço, nunca como dependência"
+      "secondary": [
+        "feedback táctil para gestos circulares ou arrastos (opcional)"
       ]
     },
     "kinesthetic": {
-      "elements": [
-        "arrastar palavras ou frases",
-        "gestos de toque ou clique",
-        "movimento do cursor que altera a profundidade ou o foco"
+      "primary": [
+        "reacção da mancha ao movimento do cursor/dedo",
+        "gestos circulares ou arrastos para interagir"
       ],
-      "dynamics": [
-        "resposta ao ritmo e velocidade do gesto",
-        "trajetória do gesto afeta a resposta do sistema"
+      "secondary": [
+        "velocidade do gesto afeta a resposta de Fucô (ex: rápido → latido agudo; lento → suspiro)"
       ]
     },
     "proprioceptive": {
-      "elements": [
-        "instruções opcionais para mudarem de postura ou ritmo (ex: 'Respira fundo antes de continuar.')",
-        "convite para usar a mão não dominante"
+      "primary": [
+        "instruções implícitas para alterar a postura (ex: 'Inclina-te para a frente se queres que eu conte um segredo')"
       ],
-      "dynamics": [
-        "sugestões corporais que não são obrigatórias"
+      "secondary": [
+        "ritmo da respiração percebido através de pausas sonoras"
       ]
     },
     "temporal_interoceptive": {
-      "elements": [
-        "espera como parte da experiência",
-        "ritmo da conversa (aceleração/desaceleração)",
-        "silêncio como momento ativo"
+      "primary": [
+        "espera como gesto válido",
+        "silêncio como resposta",
+        "ritmo irregular de aparecimento/desaparecimento de elementos"
       ],
-      "dynamics": [
-        "tempo de resposta variável do sistema",
-        "pausas propositadas"
+      "secondary": [
+        "aceleração/desaceleração da mancha com base no tempo de interacção"
       ]
     },
     "spatial": {
-      "elements": [
-        "profundidade visual que reage ao gesto",
-        "posicionamento das palavras no ecrã como se estivessem num espaço 3D",
-        "sensação de proximidade/distância nas frases"
+      "primary": [
+        "mancha que parece vir de fora do ecrã",
+        "divisão da mancha em partes que fogem para bordas",
+        "frase solta que pode ser arrastada para uma área específica"
       ],
-      "dynamics": [
-        "espaço que parece expandir ou contrair com a interação"
+      "secondary": [
+        "profundidade visual (sombras, sobreposição de camadas)"
       ]
     },
     "olfactory_evocation": {
-      "elements": [
-        "evocação de cheiros através de linguagem (ex: 'Cheira a pão quente em Alfama.')",
-        "referências a aromas territoriais (café, mar, especiarias)"
+      "primary": [
+        "palavras como 'cheiro', 'pão quente', 'terra molhada' para evocar memórias olfativas"
       ],
-      "dynamics": [
-        "cheiros são sempre sugeridos, nunca produzidos"
+      "secondary": [
+        "descrições textuais de aromas territoriais (ex: 'cheiro a café de manha cedo na Rua da Madalena')"
       ]
     },
     "gustatory_evocation": {
-      "elements": [
-        "evocação de sabores através de linguagem (ex: 'Sabe a azeite e a sal.')",
-        "referências a comidas ou receitas territoriais"
+      "primary": [
+        "palavras como 'pão', 'doce', 'salgado' para evocar memórias gustativas"
       ],
-      "dynamics": [
-        "sabores são sempre sugeridos, nunca produzidos"
+      "secondary": [
+        "receitas ou descrições de sabores territoriais (ex: 'o pão da padaria da esquina tem um gosto a...')"
       ]
     },
     "social_presence": {
-      "elements": [
-        "sensação de diálogo com Fucô (presença viva)",
-        "crónicas que parecem vir de outras pessoas ou lugares",
-        "objetos ou frases que evocam memórias coletivas"
+      "primary": [
+        "Fucô como presença afetuosa e malandra",
+        "crónicas que misturam input da pessoa com memórias territoriais"
       ],
-      "dynamics": [
-        "presença social implícita, nunca explícita ou invasiva"
+      "secondary": [
+        "frases soltas que podem ser partilhadas anonimamente no cosmos da experiência"
       ]
     }
   },
   "cross_sensory_translation": {
-    "primary": "A voz ou o gesto da pessoa altera a textura visual das palavras (ex: uma palavra falada em voz alta ganha peso ou brilho).",
-    "secondary": "O som ambiente (murmúrios, sinetas) afeta a profundidade ou o movimento das palavras no ecrã.",
-    "tertiary": "O silêncio da pessoa pode fazer com que as palavras ganhem som (ex: um eco ou um suspiro)."
+    "primary": {
+      "description": "Palavra escrita → som e textura visual. Exemplo: a palavra 'cheiro' aparece escrita, mas as letras transformam-se em notas musicais (visualmente) e o som de um acorde é tocado. Simultaneamente, a mancha ganha textura de pelo ou terra.",
+      "channels_involved": [
+        "visual",
+        "auditory",
+        "haptic"
+      ]
+    },
+    "secondary": {
+      "description": "Gesto circular do cursor → som de patas a arrastar e mancha que gira.",
+      "channels_involved": [
+        "kinesthetic",
+        "auditory",
+        "visual"
+      ]
+    }
   },
   "silence_or_absence": {
-    "use": "O silêncio é um elemento ativo: pode fazer com que Fucô desapareça temporariamente, que as palavras ganhem som ou que uma crónica surja de forma inesperada. O silêncio também é uma forma de interação válida (ex: a pessoa pode escolher não responder).",
-    "mechanism": "Silêncio prolongado pode desencadear uma resposta de Fucô (ex: 'Ah, foste-te embora...') ou revelar uma camada oculta da experiência (ex: uma crónica ou um objeto simbólico)."
+    "primary": {
+      "description": "O silêncio é um gesto válido. Se a pessoa não interagir, Fucô responde com uma adivinhação poética ou desaparece temporariamente, deixando apenas a mancha a mover-se lentamente.",
+      "effect": "Cria expectativa e profundiza a escuta. O silêncio da pessoa é tratado como uma resposta ativa."
+    },
+    "secondary": {
+      "description": "Pausas sonoras irregulares entre as respostas de Fucô, como se ele estivesse a pensar ou a farejar algo.",
+      "effect": "Humaniza Fucô e convida a pessoa a esperar, observando os detalhes visuais."
+    }
   },
   "surprise_or_indeterminacy": {
-    "mechanisms": [
-      "Fucô pode desaparecer ou errar propositadamente (ex: trazer uma frase sem sentido ou uma crónica incompleta).",
-      "As palavras podem ganhar vida própria e comportar-se de forma imprevisível (dançar, colidir, esticar-se).",
-      "O som ambiente pode mudar repentinamente (ex: de murmúrios para um silêncio absoluto).",
-      "A crónica gerada pode incluir elementos aleatórios (topónimos, objetos, expressões) que não estavam presentes na conversa inicial."
-    ]
+    "primary": {
+      "description": "Fucô interrompe-se a si próprio com ruídos ou gestos visuais inesperados (ex: patas a arrastar, rabo a abanar) e a mancha divide-se em partes que fogem para bordas do ecrã.",
+      "trigger": "Aleatório, mas com peso para momentos de transição ou quando a pessoa hesita."
+    },
+    "secondary": {
+      "description": "A crónica gerada mistura input da pessoa com memórias territoriais de forma não linear. Por exemplo, uma palavra escrita pode gerar uma frase que parece vir de um lugar específico (ex: 'A tua palavra 'cão' lembra-me o cão da padaria da Rua do Poço dos Negros').",
+      "trigger": "Baseado em corpus autoral, nunca inventado."
+    },
+    "tertiary": {
+      "description": "A frase solta que a pessoa pode apanhar pelo rabo tem uma pontuação final aleatória: rabinho de cão (🐾), pegada, ou traço que parece um fio de lã.",
+      "trigger": "Aleatório em cada sessão."
+    }
   },
   "session_variation": [
     {
       "type": "acaso_controlado",
-      "description": "Fucô pode trazer crónicas ou frases diferentes em cada sessão, baseadas num conjunto pré-definido de fragmentos autorais."
+      "description": "A mancha inicial tem uma forma e cor aleatórias (dentro de uma paleta territorial: tons de terra, pão, tinta)."
+    },
+    {
+      "type": "ordem_mutavel",
+      "description": "A sequência de respostas de Fucô (murmúrio → funfo → latido, etc.) é aleatorizada, mas sempre coerente com o gesto da pessoa."
     },
     {
       "type": "resposta_a_ritmo",
-      "description": "A velocidade e o ritmo da interação da pessoa afetam a resposta de Fucô (ex: uma interação rápida pode resultar em frases mais curtas e diretas; uma interação lenta pode trazer crónicas mais longas e poéticas)."
+      "description": "A velocidade do gesto da pessoa afeta a resposta de Fucô: rápido → latido agudo; lento → suspiro; pausado → murmúrio."
     },
     {
-      "type": "combinação_de_fragmentos",
-      "description": "As crónicas são geradas a partir de combinações aleatórias de fragmentos de conversas anteriores (públicas e validadas), topónimos e expressões territoriais."
+      "type": "resposta_a_posicao",
+      "description": "A posição do cursor/dedo no ecrã afeta a direcção para onde a mancha foge ou se expande."
+    },
+    {
+      "type": "combinacao_fragmentos",
+      "description": "A crónica gerada combina fragmentos do input da pessoa com memórias territoriais do corpus autoral, em ordens diferentes a cada sessão."
     },
     {
       "type": "temporalidade_real",
-      "description": "A experiência pode variar consoante a hora do dia ou a estação do ano (ex: de manhã, Fucô pode trazer crónicas relacionadas com o nascer do sol; à noite, com a lua ou o silêncio)."
-    },
-    {
-      "type": "presença_de_outra_contribuição",
-      "description": "Se houver crónicas públicas validadas de outras pessoas, Fucô pode incorporá-las na conversa (ex: 'Alguém em Graça disse que...')."
+      "description": "Se a sessão acontecer de manhã, Fucô pode mencionar 'cheiro a pão quente'; à noite, 'silêncio da rua'. (Opcional, sem rastreio indevido.)"
     }
   ],
   "territorial_binding": {
-    "relation": "A experiência evoca território através de topónimos, expressões locais, sons ambientais (ex: murmúrios de uma feira) e objetos simbólicos (ex: uma chave, um pão). As crónicas geradas podem incluir referências a lugares reais de Lisboa ou de outras freguesias, mas sempre de forma poética e não literal.",
-    "sources": [
-      "curadoria entrada freguesias.xlsx (pendente de parsing direto)",
-      "PUBLICO_TERRITORIAL__CURADORIA_NOS_FALARTE_RESIDUAL.pdf (10 propostas territoriais)"
-    ],
-    "evocation_methods": [
-      "linguagem (topónimos, expressões)",
-      "som (paisagem sonora territorial)",
-      "imagem (fotografias de lugares reais)",
-      "objetos simbólicos (chave, pão, porta)"
-    ]
+    "primary": {
+      "description": "Fucô evoca memórias e sons territoriais baseados no corpus autoral (ex: padarias, ruas, festas, topónimos).",
+      "source": "Âncoras Autoral — CAMADA PÚBLICA e corpus de festas/dinâmicas territoriais."
+    },
+    "secondary": {
+      "description": "A crónica gerada pode incluir referências a lugares reais (ex: 'Rua da Madalena', 'Padaria do Poço dos Negros'), mas apenas se sustentadas pelo corpus.",
+      "source": "curadoria entrada freguesias.xlsx e documentos territoriais autorais."
+    },
+    "note": "Nunca inventar factos territoriais. Se uma referência não for sustentada, registar em questions_for_eduardo."
   },
   "trace_and_return": {
-    "trace": {
-      "types": [
-        "A frase ou crónica gerada é guardada num 'caderno de Fucô' (coleção invisível de crónicas públicas).",
-        "A pessoa pode copiar a frase ou crónica para a área de transferência como rasto pessoal.",
-        "Um som ou uma imagem pode persistir no ambiente por alguns segundos antes de desaparecer."
-      ],
-      "persistence": "O rasto pode ser reencontrado em sessões futuras, mas nunca de forma intrusiva ou obrigatória."
+    "immediate": {
+      "description": "A frase solta que a pessoa apanha pelo rabo é guardada no 'caderno' (área do ecrã) e pode ser revisitada na mesma sessão."
     },
-    "return": {
-      "types": [
-        "Fucô devolve uma frase ou fragmento transformado da conversa (ex: 'A frase que apanhaste pelo rabo virou um cão que late em Alcântara.').",
-        "A pessoa recebe uma crónica completa, gerada a partir dos fragmentos da conversa."
-      ],
-      "mechanism": "A devolução é sempre poética e aberta à interpretação, nunca uma 'recompensa' ou 'prémio'."
+    "latent": {
+      "description": "Em sessões futuras, a frase guardada ganha camadas novas: um som associado, uma mancha de cor, ou uma palavra adicionada por Fucô. Se a pessoa nunca regressar, a frase permanece no cosmos da experiência como um rasto anónimo."
+    },
+    "cosmic": {
+      "description": "As frases soltas apanhadas por diferentes pessoas podem, ocasionalmente, 'encontrar-se' no cosmos da experiência, criando uma constelação de crónicas efémeras. (Moderação e consentimento implícitos na dinâmica.)"
     }
   },
   "accessibility_equivalents": {
     "visual": {
+      "description": "Todas as interacções visuais (mancha, texto escrito à mão) têm equivalentes sonoros e textuais. Exemplo: a mancha que se move pode ser descrita em tempo real ('A mancha está a aproximar-se do canto superior direito').",
       "alternatives": [
-        "Todas as interações visuais (ex: arrastar palavras) têm equivalentes via teclado (ex: setas para navegar, Enter para selecionar).",
-        "As cores e contrastes são ajustáveis para pessoas com daltonismo ou baixa visão.",
-        "O texto é sempre legível e escalável."
+        "Descrição em áudio de todos os elementos visuais dinâmicos.",
+        "Texto alternativo para a mancha (ex: 'Mancha escura em movimento lento').",
+        "Modo de alto contraste para o texto escrito à mão."
       ]
     },
     "auditory": {
+      "description": "Todos os sons têm legendas visuais e equivalentes tácteis (vibração opcional). Exemplo: o murmúrio distorcido pode ser legendado como '[Som de voz abafada ao longe]'.",
       "alternatives": [
-        "Todos os sons têm legendas ou descrições textuais (ex: 'Murmúrios de uma feira ao longe.').",
-        "A experiência funciona completamente sem som, com feedback visual equivalente (ex: uma onda ou pulso visual substitui o som)."
-      ]
-    },
-    "haptic": {
-      "alternatives": [
-        "A vibração é opcional e pode ser desativada. O feedback visual ou sonoro substitui a vibração."
+        "Legendas em tempo real para todos os sons.",
+        "Transcrição textual de diálogos ou sons (ex: 'Fucô funfa: ",
+        "').",
+        "Vibração sutil para sons importantes (opcional)."
       ]
     },
     "kinesthetic": {
+      "description": "Todos os gestos (clique, arrasto, circular) têm equivalentes via teclado, voz ou toque estático. Exemplo: gesto circular → tecla 'C'; arrasto → setas do teclado.",
       "alternatives": [
-        "Todas as interações baseadas em gesto (ex: arrastar) têm equivalentes via teclado ou voz (ex: comandos de voz para 'apanhar a frase').",
-        "A experiência funciona completamente sem movimento ou toque."
+        "Controlo via teclado para todas as interacções.",
+        "Comandos de voz para chamar Fucô ou interagir (ex: 'Fucô, está aí?').",
+        "Modo 'toque estático' para dispositivos sem movimento."
       ]
     },
-    "proprioceptive": {
+    "temporal": {
+      "description": "Todas as interacções baseadas em tempo (ex: espera) têm um modo sem pressão. Exemplo: se Fucô diz 'Espera um pouco', a pessoa pode pular a espera com um gesto ou tecla.",
       "alternatives": [
-        "As sugestões corporais (ex: 'Respira fundo.') são opcionais e podem ser ignoradas sem perder a experiência."
-      ]
-    },
-    "temporal_interoceptive": {
-      "alternatives": [
-        "A pessoa pode pausar ou acelerar a experiência a qualquer momento, sem pressão de tempo.",
-        "O modo 'sem pressão' desativa quaisquer limites de tempo ou ritmo."
+        "Botão/tecla para pular esperas longas.",
+        "Indicador visual de tempo restante para interacções temporizadas."
       ]
     },
     "cognitive": {
+      "description": "A linguagem de Fucô é simples e poética, sem jargão ou complexidade desnecessária. As crónicas geradas são curtas e com estrutura clara.",
       "alternatives": [
-        "A linguagem é clara e direta, sem metáforas complexas ou ambiguidades forçadas.",
-        "A pessoa pode pedir a Fucô para repetir ou simplificar uma frase."
+        "Modo 'linguagem simplificada' para texto gerado.",
+        "Opção para repetir a última frase de Fucô."
+      ]
+    },
+    "reduced_motion": {
+      "description": "Modo 'movimento reduzido' desativa animações da mancha e texto tremulo, substituindo por transições suaves ou estáticas.",
+      "alternatives": [
+        "Mancha estática com contorno visível.",
+        "Texto estável, sem tremores ou inversões."
       ]
     }
   },
   "optional_permissions": {
     "microphone": {
-      "purpose": "Permitir que a pessoa fale com Fucô em voz alta, alterando a resposta do sistema (ex: a voz pode fazer com que as palavras ganhem som ou movimento).",
-      "fallback": "A experiência funciona completamente com texto escrito ou gestos (clique/arrasto)."
-    },
-    "camera": {
-      "purpose": "Não aplicável para esta experiência.",
-      "fallback": "N/A"
+      "purpose": "Gravar voz da pessoa para Fucô 'cheirar' ou responder (ex: repetir a frase em eco distorcido).",
+      "fallback": "A pessoa pode digitar o que diria ou usar gestos/teclado.",
+      "trigger": "Apenas quando Fucô propõe: *'Diz uma coisa que só tu sabes, ou cala-te e eu adivinho.'*"
     },
     "geolocation": {
-      "purpose": "Evocar o território da pessoa (ex: Fucô pode trazer crónicas ou sons relacionados com a freguesia onde a pessoa está).",
-      "fallback": "A experiência funciona completamente sem geolocalização, usando topónimos e sons genéricos."
+      "purpose": "Personalizar crónicas com referências territoriais baseadas na localização da pessoa (ex: 'Aqui perto, na Rua X, havia um cão que...').",
+      "fallback": "Fucô usa referências territoriais genéricas do corpus autoral.",
+      "trigger": "Nunca automático. Apenas se a pessoa aceitar explicitamente."
     },
-    "motion": {
-      "purpose": "Detetar o movimento do dispositivo para ajustar a profundidade ou o foco visual (ex: inclinar o telemóvel pode fazer com que as palavras se aproximem ou afastem).",
-      "fallback": "A experiência funciona completamente sem movimento, com controlo via teclado ou toque."
+    "motion_orientation": {
+      "purpose": "Detectar movimento do dispositivo para afectar a mancha ou sons (ex: inclinar o telemóvel faz a mancha 'escorregar').",
+      "fallback": "A mancha reage apenas ao toque ou cursor.",
+      "trigger": "Opcional e apenas se a pessoa conceder permissão."
     }
   },
   "overstimulation_risk": {
-    "potential_risks": [
-      "Flashing ou movimento rápido das palavras pode causar desconforto em pessoas com epilepsia fotossensível.",
-      "Sons repentinos ou altos podem assustar ou incomodar.",
-      "Múltiplos estímulos sensoriais simultâneos (som, movimento, texto) podem ser esmagadores."
-    ],
-    "mitigation": [
-      "O movimento das palavras é sempre suave e orgânico, sem flashing ou transições bruscas.",
-      "O volume do som é sempre moderado e pode ser ajustado ou desativado.",
-      "A pessoa pode pausar ou reduzir a intensidade da experiência a qualquer momento.",
-      "Modo 'reduzido' desativa todos os elementos dinâmicos (movimento, som) e apresenta a experiência de forma estática e minimalista.",
-      "Acessibilidade: todas as opções de redução de estímulos estão sempre visíveis e acessíveis."
-    ]
+    "visual": {
+      "risk": "Animações rápidas ou tremores excessivos na mancha/texto podem causar desconforto.",
+      "mitigation": [
+        "Limitar a velocidade das animações.",
+        "Modo 'movimento reduzido' sempre disponível.",
+        "Evitar flashing ou padrões repetitivos."
+      ]
+    },
+    "auditory": {
+      "risk": "Sons súbitos (ex: latido) ou sobreposição de camadas sonoras podem ser agressivos.",
+      "mitigation": [
+        "Volume máximo controlado (nunca > 50% do volume do sistema).",
+        "Sons sempre introduzidos com um fade-in suave.",
+        "Opção para desligar som globalmente."
+      ]
+    },
+    "cognitive": {
+      "risk": "Múltiplas camadas de interacção (visual, sonora, gestual) podem sobrecarregar.",
+      "mitigation": [
+        "Fucô guia a pessoa com instruções claras e progressivas.",
+        "A pessoa pode pausar a experiência a qualquer momento.",
+        "Modo 'foco' que desativa todos os canais excepto um (ex: apenas visual ou apenas sonoro)."
+      ]
+    },
+    "temporal": {
+      "risk": "Esperas longas ou ritmo irregular podem causar ansiedade.",
+      "mitigation": [
+        "Indicador visual de tempo restante para esperas.",
+        "Opção para pular esperas com um gesto/tecla.",
+        "Ritmo adaptativo: se a pessoa interagir rapidamente, Fucô acelera; se for lenta, Fucô abrandar."
+      ]
+    }
   },
   "distinctiveness": {
     "unique_elements": [
-      "Fucô como presença viva e afetuosa, não como um chatbot genérico ou assistente virtual.",
-      "A dinâmica de 'apanhar uma frase pelo rabo' como gesto inicial, único e poético.",
-      "A geração de crónicas a partir de fragmentos de conversa, com erros propositados e expressões coloquiais.",
-      "A tradução cruzada entre voz/gesto e textura visual/som das palavras.",
-      "O uso do silêncio como elemento ativo e não como ausência passiva.",
-      "A devolução de um rasto poético (frase ou crónica) que persiste como presença ausente.",
-      "A evocação de território através de topónimos, sons e objetos simbólicos, sem depender de geolocalização."
+      "Fucô como mediador vivo com personalidade afetuosa e malandra, nunca um chatbot genérico.",
+      "A mancha orgânica como entidade viva que reage ao cursor e se divide/une com base na interacção.",
+      "Crónicas geradas a partir de fragmentos do diálogo + memórias territoriais autorais, nunca inventadas.",
+      "Frases soltas que podem ser 'apanhadas pelo rabo' e guardadas como rasto, com camadas adicionadas em sessões futuras.",
+      "Tradução cruzada entre palavra escrita, som e textura visual (ex: 'cheiro' → notas musicais + textura de pelo).",
+      "O silêncio e a espera como gestos válidos e ativos.",
+      "A pontuação final das crónicas como rabinho de cão (🐾) ou pegada, nunca um ponto final convencional."
     ],
-    "comparison": "Esta experiência não pode ser confundida com: um chatbot genérico (ex: assistentes virtuais), um quiz ou jogo de perguntas/respostas, uma página explicativa, ou uma animação decorativa. Também não é uma experiência de 'geração de texto' tradicional, pois o foco está na interação viva, multissensorial e territorial."
+    "why_not_confusable": "Nenhuma outra experiência no Atlas usa uma entidade viva como Fucô, que combina oralidade, território e humor de forma tão orgânica. A dinâmica de 'apanhar pelo rabo' e a geração de crónicas efémeras são exclusivas desta curadoria. Além disso, a assinatura sensorial (mancha + sons de cão + texto à mão) é única."
   },
   "questions_for_eduardo": [
-    "Há fragmentos autorais específicos de crónicas ou frases que Fucô deve usar como base para as respostas? Se sim, onde estão registados?",
-    "A interação com Fucô deve ser sempre em português, ou pode incluir outras línguas ou dialetos (ex: mirandês, crioulo)?",
-    "Como deve ser tratada a moderação de crónicas públicas geradas pela interação? Há um processo de validação humana antes de serem adicionadas ao 'caderno de Fucô'?",
-    "As crónicas geradas podem incluir referências a lugares ou pessoas reais? Se sim, como garantir o consentimento e a privacidade?",
-    "Há um limite de tempo ou de interações para cada sessão com Fucô, ou a experiência pode ser infinita?",
-    "Como deve ser a voz de Fucô, se o microfone estiver ativo? Deve ser uma voz sintetizada, uma gravação humana, ou apenas texto?"
+    "As crónicas geradas podem incluir referências a lugares específicos (ex: ruas, padarias) não mencionados explicitamente no corpus autoral? Se sim, qual o limite para evitar invenção de factos territoriais?",
+    "A frase solta que a pessoa apanha pelo rabo pode ser partilhada publicamente (anonimamente) no cosmos da experiência, ou deve permanecer privada?",
+    "Fucô pode mencionar o nome da pessoa (se fornecido) nas crónicas, ou deve manter-se anónimo?",
+    "Qual o tom ideal para as 'adivinhações' de Fucô quando a pessoa opta pelo silêncio? Devem ser sempre poéticas, ou podem incluir humor absurdo?",
+    "A mancha inicial deve ter sempre uma forma orgânica (ex: tinta na água), ou pode assumir outras formas (ex: sombra, nuvem) em algumas sessões?"
   ],
   "improvement_proposals": [
     {
-      "area": "territorial_binding",
-      "proposal": "Integração com o ficheiro 'curadoria entrada freguesias.xlsx' para evocar topónimos e sons específicos de cada freguesia, sem depender de geolocalização. Isso permitiria uma experiência mais rica e territorialmente precisa."
+      "description": "Incluir um 'modo territorial' opcional onde Fucô usa apenas referências do corpus autoral (ex: festas, ruas, memórias) para gerar crónicas, garantindo 100% de fidelidade à fonte.",
+      "justification": "Mitiga o risco de invenção de factos territoriais e reforça a autoria."
     },
     {
-      "area": "cross_sensory_translation",
-      "proposal": "Explorar a tradução de gesto para som de forma mais profunda: por exemplo, o ritmo do gesto (ex: arrastar uma palavra lentamente ou rapidamente) poderia alterar o timbre ou a altura de um som associado."
+      "description": "Adicionar uma camada de 'memória colectiva' onde frases soltas apanhadas por diferentes pessoas podem ser combinadas em crónicas colaborativas (com moderação).",
+      "justification": "Aprofunda o aspecto comunitário e intergeracional do Atlas, alinhado com os princípios CARE e feminismo de dados."
     },
     {
-      "area": "trace_and_return",
-      "proposal": "Criar um 'caderno de Fucô' visível e navegável, onde as crónicas públicas possam ser lidas ou ouvidas em sessões futuras. Isso reforçaria a sensação de comunidade e rasto coletivo."
+      "description": "Criar um 'caderno físico' derivado onde as frases soltas guardadas na WebApp podem ser impressas ou partilhadas como postais, com um design que imita rascunhos de caderno.",
+      "justification": "Estende a experiência para além do digital, mantendo a estética autoral (bilhetes/caixas como rascunho de caderno)."
     },
     {
-      "area": "accessibility",
-      "proposal": "Adicionar um modo 'alto contraste' e 'texto grande' como opções predefinidas, para facilitar a acessibilidade sem perder a estética poética."
+      "description": "Incluir sons ambientais territoriais (ex: ruídos de rua, padaria) como camada opcional, baseados em gravações autorais ou corpus sonoro validado.",
+      "justification": "Enriquece a evocações auditivas do território sem fingir capacidades do browser."
     }
   ],
   "generic_fallback_allowed": false,

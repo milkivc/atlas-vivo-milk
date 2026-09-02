@@ -3,312 +3,320 @@
   "canonical_name": "simpliCIDADE",
   "source_evidence": {
     "primary": [
-      "catalog_entry: ordem 13, id 'simplicidade', nome 'simpliCIDADE', familia 'curadoria', mecanica 'reduzir', convite 'Retira até sobrar um gesto habitável.'"
+      "catalog_entry (ordem 13, id: simplicidade)"
     ],
     "secondary": [
-      "constitution: §11 (exemplos de direção), §12 (saída obrigatória antes do código)"
-    ]
+      "constitution (seção 9: ASSINATURA SENSORIAL ÚNICA — 49/49)",
+      "source_corpus (ÂNCORAS AUTORAIS — CAMADA PÚBLICA: estética, rasto, jogo)"
+    ],
+    "notes": "A fonte primária define a curadoria como 'reduzir' com o convite 'Retira até sobrar um gesto habitável'. Não há detalhes autorais adicionais no corpus para esta curadoria específica."
   },
-  "authorial_invariants": [
-    "Mecânica central: reduzir até restar um gesto habitável.",
-    "Convite literal: 'Retira até sobrar um gesto habitável.'",
-    "Família: curadoria.",
-    "Camada: pública.",
-    "Estado: operável_motor_comum."
-  ],
-  "perceptual_intent": "Criar uma experiência onde a pessoa, ao remover camadas (visuais, sonoras, textuais ou gestuais), descobre que a essência de um gesto ou objeto não está na sua complexidade, mas na sua capacidade de ser habitado — ou seja, de se tornar um lugar de presença, memória ou ação. A simplicidade aqui não é ausência, mas revelação do que já lá estava, oculto sob o excesso.",
+  "authorial_invariants": {
+    "mechanics": "reduzir",
+    "invitation": "Retira até sobrar um gesto habitável.",
+    "family": "curadoria",
+    "layer": "publica",
+    "state": "operavel_motor_comum"
+  },
+  "perceptual_intent": "Convidar a pessoa a uma prática de subtração radical, onde o excesso é removido até restar apenas um gesto mínimo, puro e habitável. A experiência deve transmitir a sensação de alívio, clareza e presença que surge quando o supérfluo é eliminado, revelando a essência do movimento ou da intenção.",
   "threshold": {
-    "description": "A pessoa entra num espaço digital onde uma única forma geométrica (ex.: um quadrado preenchido com texturas sobrepostas) ocupa o ecrã. Não há instruções visíveis. O ambiente sonoro é um zumbido contínuo e uniforme, como um ruído branco suave, que preenche o espaço sem chamar atenção para si. A textura do quadrado pulsa levemente, como se respirasse.",
-    "sensory_trigger": "A ausência de texto ou botões visíveis, combinada com o som e a pulsação, convida à exploração táctil ou visual sem pressa."
+    "description": "A tela começa preenchida com uma camada densa de elementos visuais e sonoros sobrepostos: formas geométricas em movimento lento, sons de fundos sobrepostos (murmúrios, ventos, batidas distantes), e um texto central que se fragmenta em sílabas. Tudo parece caótico, mas não agressivo. A pessoa sente que algo está a mais, mas não sabe o que fazer.",
+    "trigger": "O primeiro movimento do cursor, toque ou tecla pressionada faz com que um dos elementos (aleatoriamente selecionado) desapareça com um som de 'puf' suave e uma vibração háptica (se disponível).",
+    "mood": "intriga silenciosa, como se o ambiente estivesse a respirar com peso."
   },
   "dramaturgical_arc": [
     {
-      "stage": "limiar",
-      "action": "O quadrado texturizado e o zumbido uniforme ocupam todo o ecrã. A pessoa percebe que algo está 'errado' ou incompleto — a textura parece ter camadas, como se fosse uma colagem de papéis ou tecidos sobrepostos."
+      "stage": 1,
+      "name": "LIMIAR",
+      "action": "A tela está sobrecarregada. A pessoa percebe que algo está errado, mas não há instruções explícitas."
     },
     {
-      "stage": "chamada",
-      "action": "Um cursor (ou dedo, em touch) ao pairar sobre a forma revela, por um segundo, uma sombra que sugere profundidade. Não há texto, mas a sombra move-se como se a forma fosse um objeto físico que pudesse ser 'descasado'."
+      "stage": 2,
+      "name": "CHAMADA",
+      "action": "Um texto minimalista aparece no canto inferior: 'Retira até sobrar um gesto habitável.' O texto tremula levemente, como se fosse uma folha ao vento."
     },
     {
-      "stage": "primeiro gesto",
-      "action": "A pessoa clica/arrasta ou faz um gesto de 'puxar' (em touch). A camada superior da textura descola-se levemente, revelando uma cor ou padrão diferente por baixo. O zumbido altera-se: um tom mais agudo ou grave surge, como se o som também tivesse camadas."
+      "stage": 3,
+      "name": "PRIMEIRO GESTO",
+      "action": "A pessoa clica, toca ou pressiona uma tecla. Um elemento desaparece com um som de evaporação e uma transição visual de desvanecimento."
     },
     {
-      "stage": "resposta viva",
-      "action": "O sistema responde removendo a camada superior. A forma agora tem uma nova textura e o som ganha uma nova camada (ex.: um harmónico ou um ruído que se mistura ao zumbido original). A remoção é acompanhada por uma vibração sutil (se permitido) ou um pulso visual (linha que se expande a partir do ponto de contacto)."
+      "stage": 4,
+      "name": "RESPOSTA VIVA",
+      "action": "O sistema responde removendo o elemento e ajustando o ambiente: os sons restantes tornam-se mais nítidos, as formas ganham mais espaço, e o texto central começa a reassumir uma forma legível."
     },
     {
-      "stage": "desvio",
-      "action": "Após remover 2-3 camadas, a pessoa descobre que a forma não é um quadrado, mas um círculo imperfeito. O som, agora, é uma nota sustentada que oscila entre dois tons. A textura revela-se como uma sobreposição de gestos manuais (pinceladas, riscos) em vez de padrões abstratos."
+      "stage": 5,
+      "name": "DESVIO",
+      "action": "Em um momento aleatório, um elemento que a pessoa não removeu desaparece sozinho, como se o sistema também estivesse a 'reduzir'. Um som de 'sopro' acompanha o desaparecimento."
     },
     {
-      "stage": "aprofundamento sensorial",
-      "action": "A remoção de camadas passa a afetar o som de forma mais direta: cada camada removida altera a frequência do zumbido, como se a forma fosse um instrumento musical. A textura, agora, responde ao movimento do cursor/dedo: arrastar horizontalmente distorce a imagem como se fosse um líquido, enquanto arrastar verticalmente a 'estica' como borracha."
+      "stage": 6,
+      "name": "APROFUNDAMENTO SENSORIAL",
+      "action": "Agora, os elementos restantes começam a interagir entre si: sons criam formas visuais (ex.: um murmúrio forma uma onda que se materializa em uma linha no ecrã), e o toque ou movimento do cursor altera a intensidade dos sons e a opacidade das formas."
     },
     {
-      "stage": "escolha / acaso / silêncio",
-      "action": "A pessoa pode escolher: (1) continuar a remover camadas até restar apenas uma cor sólida e um som puro, ou (2) parar e observar como a forma e o som 'respiram' em sincronia. Se não fizer nada por 10 segundos, o sistema remove automaticamente uma camada (acaso controlado)."
+      "stage": 7,
+      "name": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "A pessoa pode escolher continuar a remover elementos ou esperar. Se esperar, o sistema remove um elemento aleatoriamente a cada 10 segundos. Se remover, o ritmo de desaparecimento acelera levemente."
     },
     {
-      "stage": "aparição",
-      "action": "Quando resta apenas uma camada, a forma revela-se como um gesto: uma mão aberta, um passo, ou um traço que lembra um 'sim' ou um 'não'. O som torna-se um silêncio ativo (ex.: um 'shhh' prolongado que se desvanece). A cor final é sempre um tom terroso ou orgânico (ex.: ocre, verde musgo), evocando terra ou pele."
+      "stage": 8,
+      "name": "APARIÇÃO",
+      "action": "Quando apenas um elemento permanece (um som, uma forma ou uma palavra), ele expande-se para preencher o ecrã. Se for um som, ele torna-se uma paisagem sonora imersiva. Se for uma forma, ela ganha profundidade e textura. Se for uma palavra, ela é pronunciada em voz suave e repetida em eco."
     },
     {
-      "stage": "devolução",
-      "action": "O sistema devolve à pessoa o gesto que restou, transformado: (1) uma palavra aparece no ecrã (ex.: 'habitar', 'pousar', 'esperar'), escrita à mão e com a caligrafia a tremular como se fosse traçada no momento; (2) um som de respiração ou de passos é reproduzido uma vez; (3) a forma final (gesto) é guardada como um 'rasto' anónimo na constelação COSMICOXES, visível apenas como um ponto pulsante em futuras sessões."
+      "stage": 9,
+      "name": "DEVOLUÇÃO",
+      "action": "O elemento final é 'devolvido' à pessoa: se for um som, ele é gravado (opcionalmente, com permissão) como um ficheiro de áudio curto; se for uma forma, ela é convertida em uma imagem minimalista; se for uma palavra, ela é oferecida como um 'gesto habitável' para guardar ou partilhar. A tela fica em branco por 3 segundos, com um som de respiração profunda."
     },
     {
-      "stage": "rasto / latência",
-      "action": "O gesto final permanece no ecrã por 5 segundos, depois desvanece-se. A pessoa pode regressar à experiência em qualquer altura: o gesto que deixou na sessão anterior estará lá, mas agora com uma camada adicional (ex.: uma sombra ou um eco sonoro), como se o sistema 'lembrasse' da sua presença."
+      "stage": 10,
+      "name": "RASTO / LATÊNCIA",
+      "action": "O elemento final (som, forma ou palavra) é adicionado a uma 'constelação de gestos habitáveis' no COSMICOXES, visível apenas para a pessoa. A experiência pode ser retomada mais tarde, e o elemento final da sessão anterior será o primeiro a desaparecer na próxima vez."
     }
   ],
   "participant_verbs": [
     "remover",
-    "descascar",
+    "esperar",
     "escutar",
-    "puxar",
     "observar",
     "respirar",
-    "habitar"
+    "guardar",
+    "deixar"
   ],
-  "system_responses": [
-    "A forma geométrica perde camadas visuais e sonoras em resposta ao gesto.",
-    "O som evolui de zumbido para nota pura, depois para silêncio ativo.",
-    "A textura distorce-se de acordo com a direção do gesto (horizontal/vertical).",
-    "A forma revela-se como um gesto humano (mão, passo, traço) na camada final.",
-    "Devolve uma palavra escrita à mão e um som orgânico (respiração/passos).",
-    "Guarda o gesto final como rasto anónimo na constelação COSMICOXES.",
-    "Relembra o gesto anterior em sessões futuras, adicionando uma camada de memória."
-  ],
-  "sensory_signature_id": "SMPL_CIDD_013",
+  "system_responses": {
+    "to_remove": "Elementos desaparecem com sons de evaporação, sopro ou 'puf', e transições visuais de desvanecimento ou encolhimento.",
+    "to_wait": "O sistema remove um elemento aleatoriamente a cada 10 segundos, com um som de 'tique' suave antes do desaparecimento.",
+    "to_observe": "Os elementos restantes interagem entre si: sons criam formas, formas emitem sons, e o ambiente torna-se mais coerente à medida que a densidade diminui.",
+    "to_choose": "A pessoa pode acelerar ou abrandar o ritmo de remoção com gestos ou teclas.",
+    "to_return": "O elemento final é expandido e devolve algo tangível (áudio, imagem ou palavra) para a pessoa."
+  },
+  "sensory_signature_id": "simplicidade_reducao_gestual",
   "sensory_channels": {
     "visual": {
-      "primary": [
-        "textura sobreposta",
-        "formas geométricas em transformação",
-        "sombra e profundidade",
-        "caligrafia manual tremulante",
-        "cores terrosas/orgânicas"
+      "elements": [
+        "formas geométricas sobrepostas",
+        "texto fragmentado",
+        "transições de desvanecimento",
+        "expansão do elemento final",
+        "branco imersivo"
       ],
-      "secondary": [
-        "distorsão líquida",
-        "pulsação rítmica",
-        "aparição/desaparecimento gradual"
-      ]
+      "behavior": "As formas e o texto respondem à remoção com transições suaves e orgânicas, como se estivessem a 'respirar' à medida que desaparecem."
     },
     "auditory": {
-      "primary": [
-        "zumbido contínuo",
-        "nota sustentada com harmónicos",
-        "silêncio ativo ('shhh')",
-        "respiração",
-        "passos"
+      "elements": [
+        "murmúrios",
+        "ventos distantes",
+        "batidas",
+        "som de 'puf'",
+        "sopro",
+        "tique suave",
+        "paisagem sonora imersiva",
+        "eco de palavra"
       ],
-      "secondary": [
-        "eco sutil",
-        "variação de frequência"
-      ]
+      "behavior": "Os sons sobrepostos tornam-se mais nítidos à medida que outros desaparecem. O elemento final, se for um som, expande-se para uma paisagem sonora."
     },
     "haptic": {
-      "primary": [
-        "vibração sutil (opcional)",
-        "pulso visual como feedback táctil"
+      "elements": [
+        "vibração suave (opcional)"
       ],
-      "secondary": []
+      "behavior": "Vibração háptica leve ao remover um elemento, apenas em dispositivos compatíveis e com permissão."
     },
     "kinesthetic": {
-      "primary": [
-        "arrasto horizontal/vertical",
-        "gesto de 'puxar'",
-        "movimento do cursor/dedo"
+      "elements": [
+        "movimento do cursor",
+        "toque",
+        "pressão de tecla"
       ],
-      "secondary": [
-        "velocidade do gesto afeta distorção"
-      ]
+      "behavior": "O movimento do cursor ou toque altera a intensidade dos sons e a opacidade das formas. A velocidade do gesto pode acelerar ou abrandar o ritmo de remoção."
     },
     "proprioceptive": {
-      "primary": [
-        "instrução implícita de ritmo (respirar/pausar)",
-        "postura de observação atenta"
+      "elements": [
+        "postura de espera",
+        "respiração percebida"
       ],
-      "secondary": []
+      "behavior": "A experiência convida a uma postura de atenção e paciência, com a respiração a tornar-se parte do ritmo da remoção."
     },
     "temporal_interoceptive": {
-      "primary": [
-        "espera de 10 segundos para acaso controlado",
-        "ritmo de remoção de camadas",
-        "silêncio como fase ativa"
+      "elements": [
+        "ritmo de desaparecimento",
+        "pausas",
+        "aceleração/abrandamento"
       ],
-      "secondary": [
-        "aceleração/desaceleração do som"
-      ]
+      "behavior": "O tempo é manipulado para criar uma sensação de alívio ou urgência suave, dependendo das escolhas da pessoa."
     },
     "spatial": {
-      "primary": [
-        "profundidade sugerida por sombra",
-        "espaço do ecrã como 'superfície' a descascar"
+      "elements": [
+        "profundidade das formas",
+        "expansão do elemento final"
       ],
-      "secondary": []
+      "behavior": "As formas ganham profundidade à medida que o ambiente se simplifica, criando uma sensação de imersão no elemento final."
     },
     "olfactory_evocation": {
-      "primary": [
-        "memória de terra molhada",
-        "cheiro de papel velho"
+      "elements": [
+        "memória de cheiros associados a simplicidade (ex.: papel novo, ar puro)"
       ],
-      "secondary": []
+      "behavior": "Evoado através de descrições textuais ou sons que sugerem memórias olfativas (ex.: som de folhas a cair pode evocar o cheiro de terra molhada)."
     },
     "gustatory_evocation": {
-      "primary": [
-        "sabor terroso (ex.: argila, chá de ervas)"
+      "elements": [
+        "memória de sabores associados a pureza (ex.: água fresca, fruta madura)"
       ],
-      "secondary": []
+      "behavior": "Evoado através de palavras ou sons que sugerem memórias gustativas (ex.: a palavra 'limão' pode ser pronunciada com um eco que evoca acidez)."
     },
     "social_presence": {
-      "primary": [
-        "rasto anónimo na constelação COSMICOXES",
-        "sensação de que o gesto 'habita' o sistema"
+      "elements": [
+        "constelação de gestos habitáveis no COSMICOXES"
       ],
-      "secondary": []
+      "behavior": "A devolução é adicionada a uma constelação pessoal, criando um sentido de continuidade e presença social indireta."
     }
   },
   "cross_sensory_translation": {
-    "primary": "O gesto de remover camadas visuais (táctil/visual) traduz-se em alterações sonoras (auditivo) e na revelação de um gesto humano (visual/kinestésico).",
-    "secondary": "A distorção da textura (visual) em resposta ao movimento do cursor (kinestésico) evoca a sensação táctil de manipular um material físico (ex.: argila ou tecido)."
+    "primary": "Som que se materializa em forma visual: um murmúrio ou som ambiente cria uma onda ou linha no ecrã, que persiste até ser removida.",
+    "secondary": "Forma visual que emite som: ao tocar ou aproximar o cursor de uma forma, ela emite um som único, como se fosse um instrumento.",
+    "tertiary": "Palavra que ganha peso físico: a palavra final, quando pronunciada, parece 'cair' no ecrã como um objeto com textura e profundidade."
   },
   "silence_or_absence": {
-    "mechanism": "O silêncio ativo ('shhh') surge como uma camada final, substituindo o som. A ausência de texto inicial e a ausência de botões convencionais forçam a pessoa a explorar por intuição.",
-    "purpose": "Revelar que a simplicidade não é vazio, mas a essência do que resta quando o excesso é removido. O silêncio sonoro marca a transição para a devolução do gesto habitável."
+    "mechanism": "O silêncio é usado como ferramenta de redução. À medida que os elementos desaparecem, o silêncio entre os sons restantes torna-se mais presente e significativo. No estágio final, o silêncio é uma parte ativa da experiência, como se fosse um 'elemento' a ser preservado.",
+    "effect": "O silêncio não é vazio; é um espaço onde a pessoa pode ouvir a sua própria respiração ou os sons do ambiente real (se o dispositivo permitir)."
   },
   "surprise_or_indeterminacy": {
     "mechanism": [
-      "A forma geométrica inicial revela-se um círculo imperfeito (desvio da expectativa de quadrado).",
-      "A textura revela-se como gestos manuais (pinceladas) em vez de padrões abstratos.",
-      "Acaso controlado: se a pessoa não interagir por 10 segundos, o sistema remove uma camada automaticamente.",
-      "A palavra devolta é sempre diferente, mas pertence a um conjunto fixo de verbos de habitação (ex.: 'pousar', 'esperar', 'olhar')."
+      "O sistema remove um elemento aleatoriamente a cada 10 segundos se a pessoa não interagir, criando um ritmo de redução imprevisível.",
+      "O elemento final (som, forma ou palavra) é selecionado aleatoriamente entre os últimos três elementos, não necessariamente o último removido pela pessoa.",
+      "A forma como o elemento final é devolve (áudio, imagem ou palavra) é aleatória, mas sempre coerente com o tipo de elemento."
     ],
-    "purpose": "Quebrar a linearidade da remoção e introduzir a ideia de que a simplicidade tem camadas de significado não óbvias."
+    "effect": "A pessoa nunca tem controle total sobre o resultado, mas a experiência sempre parece intencional e significativa."
   },
   "session_variation": [
     {
-      "type": "acaso controlado",
-      "description": "Se a pessoa não interagir por 10 segundos, o sistema remove uma camada aleatoriamente (entre as camadas restantes)."
+      "type": "acaso_controlado",
+      "description": "O elemento inicial a desaparecer é selecionado aleatoriamente entre todos os elementos."
     },
     {
-      "type": "ordem mutável",
-      "description": "A ordem das camadas (texturas/sonoras) é aleatorizada em cada sessão, mas a camada final (gesto humano) é sempre a mesma."
+      "type": "ordem_mutavel",
+      "description": "A ordem de desaparecimento dos elementos é aleatória em cada sessão."
     },
     {
-      "type": "resposta a ritmo/velocidade",
-      "description": "Se a pessoa remover camadas rapidamente, o som evolui para tons mais agudos; se lentamente, para tons mais graves. A distorção da textura também varia com a velocidade do gesto."
+      "type": "resposta_a_ritmo",
+      "description": "O ritmo de desaparecimento acelera ou abrandar com base na velocidade dos gestos da pessoa."
     },
     {
-      "type": "rasto anterior",
-      "description": "Se a pessoa regressar à experiência, o gesto que deixou na sessão anterior estará presente, mas com uma camada adicional (ex.: sombra ou eco sonoro), como se o sistema 'lembrasse' da sua presença."
+      "type": "resposta_a_posicao",
+      "description": "A posição do cursor ou toque afeta qual elemento desaparece a seguir (ex.: elementos mais próximos do cursor têm maior probabilidade de desaparecer)."
     },
     {
-      "type": "temporalidade real",
-      "description": "A cor final (terrosa/orgânica) varia subtamente de acordo com a hora do dia (ex.: tons mais quentes de manhã, mais frios à noite)."
+      "type": "elemento_final_aleatorio",
+      "description": "O elemento final é selecionado aleatoriamente entre os últimos três elementos restantes."
+    },
+    {
+      "type": "devolucao_variada",
+      "description": "A forma de devolução (áudio, imagem ou palavra) é aleatória, mas sempre coerente com o tipo de elemento final."
     }
   ],
   "territorial_binding": {
-    "direct": false,
-    "evoked": true,
-    "description": "A experiência evoca território através de: (1) cores terrosas/orgânicas que remetem a solos ou materiais locais; (2) sons de respiração/passos que sugerem presença humana num lugar; (3) a palavra devolta (ex.: 'habitar') pode ser associada a topónimos ou práticas territoriais (ex.: 'habitar o Bairro').",
-    "source": "Inspirado nas dinâmicas do FALArte (ex.: 'O lugar escondido', 'Só existe na tua memória'), mas sem vinculação direta a um lugar específico."
+    "relation": "A experiência não está diretamente ligada a um território físico, mas a 'constelação de gestos habitáveis' no COSMICOXES pode ser associada a um lugar ou memória territorial se a pessoa optar por adicionar uma localização ou descrição durante a devolução.",
+    "note": "A ligação territorial é opcional e depende da vontade da pessoa em associar o seu gesto a um lugar."
   },
   "trace_and_return": {
     "trace": {
-      "type": "anónimo",
-      "description": "O gesto final (ex.: mão aberta) é guardado como um ponto pulsante na constelação COSMICOXES, visível em futuras sessões como um 'rasto' de outras pessoas.",
-      "persistence": "O rasto permanece por 24 horas, depois desvanece-se."
+      "type": "constelação_pessoal",
+      "description": "O elemento final (som, forma ou palavra) é adicionado à constelação pessoal da pessoa no COSMICOXES, visível apenas para ela.",
+      "persistence": "O elemento permanece na constelação até a pessoa removê-lo manualmente ou até ser substituído por um novo gesto habitável em uma sessão futura."
     },
     "return": {
-      "immediate": [
-        "Palavra escrita à mão (ex.: 'habitar')",
-        "Som de respiração ou passos"
-      ],
-      "latent": [
-        "O gesto final regressa em sessões futuras com uma camada adicional (sombra/eco)."
-      ]
+      "type": "objeto_digital",
+      "description": "A pessoa recebe um ficheiro digital (áudio, imagem ou texto) do elemento final, que pode guardar ou partilhar.",
+      "format": "O formato depende do tipo de elemento final: áudio (MP3), imagem (PNG) ou texto (TXT)."
     }
   },
   "accessibility_equivalents": {
     "visual": {
-      "reduced_motion": "A pulsação da forma e a distorção líquida são substituídas por transições suaves ou estáticas.",
-      "high_contrast": "As camadas de textura usam cores com alto contraste e padrões distintos (ex.: listras, pontos).",
-      "color_blind": "As camadas são diferenciadas por textura e não apenas por cor."
+      "alternative": "Todas as formas e transições visuais têm descrições textuais opcionais que podem ser lidas por um leitor de ecrã. O texto central é sempre legível e contrastado.",
+      "reduced_motion": "As transições visuais podem ser desativadas, substituídas por mudanças instantâneas de estado."
     },
     "auditory": {
-      "no_audio": "O zumbido e os sons são substituídos por vibrações (se permitido) ou por feedback visual (ex.: barras de som que se movem).",
-      "transcript": "Uma descrição textual dinâmica aparece no ecrã: 'Camada 1 de 5: textura áspera, som grave.'"
+      "alternative": "Todos os sons têm legendas visuais (ex.: 'murmúrio', 'sopro', 'puf') que aparecem no ecrã. A paisagem sonora final é descrita em texto.",
+      "volume_control": "O volume dos sons pode ser ajustado ou desativado completamente."
     },
     "haptic": {
-      "no_touch": "O gesto de 'puxar' é substituído por teclas (ex.: setas para arrastar, barra de espaço para remover camada).",
-      "no_vibration": "O pulso visual (linha que se expande) é amplificado."
+      "alternative": "A vibração háptica é opcional e pode ser substituída por um pulso visual (ex.: um círculo a expandir-se no ponto de toque)."
     },
     "kinesthetic": {
-      "static_control": "A distorção da textura é controlada por botões ('Distorcer Horizontal', 'Distorcer Vertical').",
-      "voice_control": "Comandos de voz como 'remover camada', 'puxar para cima', 'puxar para baixo'."
+      "alternative": "Todos os gestos (clique, toque, movimento do cursor) têm equivalentes de teclado (ex.: setas para mover, barra de espaço para remover)."
+    },
+    "proprioceptive": {
+      "alternative": "A experiência pode ser pausada a qualquer momento, e o ritmo de remoção pode ser ajustado para 'lento' ou 'rápido' conforme a preferência da pessoa."
+    },
+    "temporal_interoceptive": {
+      "alternative": "A pessoa pode desativar o desaparecimento automático de elementos, controlando completamente o ritmo da experiência."
     },
     "cognitive": {
-      "simplified": "A experiência pode ser reduzida a 3 camadas (em vez de 5-7) para pessoas que preferem menos complexidade.",
-      "no_time_pressure": "O acaso controlado (remoção automática após 10 segundos) é desativado."
+      "alternative": "O texto e as instruções são simples e diretos, com opção para uma versão 'simplificada' com menos elementos visuais e sonoros."
     }
   },
   "optional_permissions": {
-    "required": [],
-    "optional": [
-      {
-        "permission": "vibration",
-        "purpose": "Feedback táctil sutil quando uma camada é removida.",
-        "fallback": "Pulso visual (linha que se expande a partir do ponto de contacto)."
-      },
-      {
-        "permission": "microphone",
-        "purpose": "Permitir comandos de voz para remover camadas ou distorcer a textura.",
-        "fallback": "Controlo por teclado/toque."
-      }
-    ]
+    "microphone": {
+      "use": "Opcional para gravar o elemento final se for um som, permitindo que a pessoa guarde o áudio da sua própria voz ou de um som ambiente.",
+      "request_timing": "A permissão é pedida apenas quando a pessoa escolhe guardar o elemento final como áudio."
+    },
+    "camera": {
+      "use": "Não aplicável.",
+      "request_timing": "N/A"
+    },
+    "geolocation": {
+      "use": "Opcional para associar o elemento final a um lugar físico na constelação do COSMICOXES.",
+      "request_timing": "A permissão é pedida apenas quando a pessoa opta por adicionar uma localização ao seu gesto habitável."
+    },
+    "motion": {
+      "use": "Opcional para usar a inclinação ou movimento do dispositivo para alterar a intensidade dos sons ou a opacidade das formas.",
+      "request_timing": "A permissão é pedida no início da experiência, com uma explicação clara do benefício."
+    }
   },
   "overstimulation_risk": {
-    "potential_risk": [
-      "Flashing ou transições rápidas entre camadas (mitigado por transições suaves).",
-      "Som súbito ao remover camadas (mitigado por evolução gradual do zumbido para nota pura).",
-      "Sobrecarga visual com texturas complexas (mitigado por paleta de cores terrosas e orgânicas)."
-    ],
+    "potential_risk": "A densidade inicial de elementos visuais e sonoros pode ser sobrecarregada para pessoas com sensibilidade sensorial.",
     "mitigation": [
-      "Transições visuais e sonoras são sempre suaves e gradual.",
-      "A pessoa pode pausar a experiência a qualquer momento (botão 'Pausar' visível em todos os momentos).",
-      "Modo 'Reduzido' disponível: menos camadas, sons mais suaves, sem distorção líquida."
+      "A experiência começa com uma opção para 'modo simples', que reduz o número inicial de elementos para 3-5.",
+      "O volume dos sons é ajustável e pode ser desativado.",
+      "As transições visuais podem ser desativadas ou substituídas por mudanças instantâneas.",
+      "A pessoa pode pausar a experiência a qualquer momento.",
+      "O ritmo de desaparecimento pode ser abrandado ou acelerado conforme a preferência da pessoa."
     ]
   },
-  "distinctiveness": [
-    "A experiência é centrada na **remoção** como gesto criativo, em vez de adição ou seleção (diferente de 'Galeria Diletante' ou 'Dado Sem Lado').",
-    "A tradução cruzada entre **táctil (remover camadas) → auditivo (evolução do som) → visual (revelação do gesto)** é única.",
-    "O **silêncio ativo** ('shhh') como camada final e a **devolução de um gesto habitável** (mão, passo) não aparecem em nenhuma outra curadoria.",
-    "A **ausência de texto inicial** e a **revelação progressiva de significado** (de forma abstrata para gesto humano) são assinaturas exclusivas.",
-    "A **latência do rasto** (gesto regressa em sessões futuras com uma camada adicional) é uma forma de memória não intrusiva."
-  ],
+  "distinctiveness": {
+    "unique_traits": [
+      "A experiência é uma prática de subtração radical, onde o objetivo é remover até restar apenas um gesto habitável, em contraste com a maioria das experiências digitais que incentivam a adição ou acumulação.",
+      "A tradução cruzada entre som e forma visual é central e dinâmica, com os sons a criarem formas e as formas a emitirem sons.",
+      "O silêncio é usado como uma ferramenta ativa de redução, não como ausência passiva.",
+      "A devolução é um objeto digital tangível (áudio, imagem ou palavra) que a pessoa pode guardar, em vez de um simples 'concluído' ou pontuação.",
+      "A constelação pessoal no COSMICOXES cria um sentido de continuidade e presença social indireta, sem vigilância ou perfil psicológico.",
+      "A estética é minimalista e orgânica, com transições suaves e elementos que 'respiram' à medida que desaparecem."
+    ],
+    "comparison": "Esta experiência não pode ser confundida com outras porque é a única focada na redução como prática sensorial e poética, com uma assinatura de tradução cruzada única entre som e forma, e uma devolução que é um objeto digital habitável."
+  },
   "questions_for_eduardo": [
-    "O convite 'Retira até sobrar um gesto habitável' deve ser literalmente apresentado como texto em algum momento da experiência, ou é apenas uma intenção curatorial?",
-    "A forma inicial deve ser sempre um quadrado, ou pode variar (ex.: círculo, retângulo) em diferentes sessões?",
-    "A palavra devolta (ex.: 'habitar') deve ser sempre a mesma para a mesma pessoa em sessões diferentes, ou pode variar?",
-    "O gesto final (ex.: mão aberta) deve ser sempre o mesmo, ou pode ser aleatório entre um conjunto de gestos pré-definidos (ex.: mão, passo, traço)?",
-    "A constelação COSMICOXES deve ser visível durante a experiência, ou apenas como rasto latente?"
+    "A curadoria 'simpliCIDADE' deve ter uma ligação mais forte a um território físico ou memória territorial, ou deve permanecer abstrata e universal?",
+    "O elemento final (som, forma ou palavra) deve ser sempre devolve como um ficheiro digital, ou deve haver opções adicionais (ex.: partilha direta no COSMICOXES, impressão simbólica)?",
+    "A 'constelação de gestos habitáveis' deve ser visível apenas para a pessoa, ou deve haver uma opção para partilhar publicamente (com moderação)?",
+    "A experiência deve incluir uma 'pista' ou dica inicial mais explícita sobre o objetivo de redução, ou deve manter a abordagem minimalista atual?"
   ],
   "improvement_proposals": [
     {
-      "proposal": "Incluir uma opção para a pessoa 'nomear' o gesto final (ex.: 'Este gesto é o meu 'pousar''), que seria guardado como parte do rasto.",
-      "justification": "Aprofundaria a devolução e a conexão emocional com a experiência, alinhando-se com o princípio de 'habitar'."
+      "proposal": "Adicionar uma camada de 'memória territorial' opcional, onde a pessoa pode associar o seu gesto habitável a um lugar, objeto ou memória específica, enriquecendo a devolução com contexto.",
+      "justification": "Isso alinharia a experiência com o princípio de território e memória do Atlas Vivo MILK, sem forçar uma ligação física."
     },
     {
-      "proposal": "Adicionar uma camada 'táctil' opcional: se o dispositivo suportar, a textura da forma pode ser sentida como uma vibração diferente para cada camada (ex.: vibração curta para textura áspera, longa para textura lisa).",
-      "justification": "Enriqueceria a tradução cruzada entre sentidos, mas deve ser opcional e com fallback visual."
+      "proposal": "Incluir uma opção para a pessoa 'nomear' o seu gesto habitável final, adicionando uma camada de significado pessoal.",
+      "justification": "Isso tornaria a devolução mais pessoal e significativa, alinhando com a prática de nomeação e identidade do FALArte."
     },
     {
-      "proposal": "Permitir que a pessoa 'guarde' o gesto final como uma imagem ou som para download, como forma de devolução tangível.",
-      "justification": "Aumentaria o sentido de propriedade e memória da experiência."
+      "proposal": "Adicionar uma fase de 'reflexão' no final, onde a pessoa é convidada a descrever ou desenhar o que sente após a redução, antes de receber a devolução.",
+      "justification": "Isso aprofundaria a experiência sensorial e poética, criando um momento de pausa e introspecção."
+    },
+    {
+      "proposal": "Integração com o 'Livro Cubo' ou 'SOMOSTODOSPOSSIVEIS' como uma forma de expandir o gesto habitável para uma dinâmica mais complexa ou partilhada.",
+      "justification": "Isso criaria uma ponte entre a prática individual de redução e as dinâmicas coletivas do Atlas."
     }
   ],
   "generic_fallback_allowed": false,

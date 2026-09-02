@@ -6,409 +6,367 @@
       {
         "source": "Cópia de Fica registado neste dossiê…",
         "quote": "Nuno / Escuta — é outra função, ligada a escuta, observação, presença; coração pulsante; porta de contribuição pública apenas quando o fluxo autoral assim o determina.",
-        "authority": "autoral"
+        "authority": "autoral_direct"
       },
       {
         "source": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
-        "quote": "A camada pública deve acolher, provocar, brincar, escutar, encantar e deixar rasto.",
-        "authority": "conceptual"
+        "quote": "Convite: 'Escuta um vestígio. Responde com outro.'",
+        "authority": "autoral_direct"
       }
     ],
     "secondary": [
       {
         "source": "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md",
-        "quote": "D5 Escutar o Silêncio — camadas de escuta, ambiente, corpo, silêncio; partitura pessoal.",
-        "authority": "interpretative"
+        "quote": "Escutar o Silêncio — camadas de escuta, ambiente, corpo, silêncio; partitura pessoal.",
+        "authority": "autoral_recovered"
       }
     ]
   },
   "authorial_invariants": [
-    "Função ligada a escuta, observação e presença",
-    "Coração pulsante como elemento central",
-    "Porta de contribuição pública condicionada ao fluxo autoral (não é colector genérico)",
-    "Convite: 'Escuta um vestígio. Responde com outro.'",
-    "Relação com a presença e o corpo, sem burocracia"
+    "A experiência é centrada em escuta e observação, não em explicação ou coleção de dados.",
+    "O coração pulsante é um elemento simbólico e sensorial central.",
+    "A porta de contribuição pública é condicional ao fluxo autoral, não um coletor genérico.",
+    "O convite é: 'Escuta um vestígio. Responde com outro.'",
+    "A dinâmica deve preservar a presença e a resposta viva, sem burocratizar a interação."
   ],
-  "perceptual_intent": "Criar um espaço de escuta ativa onde a presença da pessoa altera o ambiente sonoro e visual, evocando a ideia de um coração pulsante que responde a vestígios e devolve novos vestígios. A experiência deve sentir-se como um diálogo sensorial com o território e a memória, onde o silêncio e a ausência são tão ativos quanto o som e a imagem.",
+  "perceptual_intent": "Criar um espaço de escuta ativa onde a pessoa é convocada a perceber vestígios (sonoros, visuais, territoriais) e a responder com os seus próprios, num diálogo não linear entre ausência e presença. A experiência deve sentir-se como um coração que pulsa: vivo, rítmico e sensível à atenção do participante.",
   "threshold": {
-    "description": "A pessoa entra num espaço vazio, escuro e silencioso. Um ponto de luz pulsante (coração) aparece no centro, emitindo um som grave e contínuo, como um batimento cardíaco. O ambiente responde à mera presença (cursor, toque ou respiração percebida pelo ritmo de interação) com micro-vibrações visuais e sonoras, como se o sistema 'sentisse' a chegada.",
-    "sensory_trigger": [
-      "visual_pulse",
-      "auditory_heartbeat",
-      "proprioceptive_awareness"
-    ]
+    "description": "A pessoa entra num ambiente onde o ecrã está quase vazio, exceto por um ponto de luz pulsante (coração) no centro, que emite um som subliminar de batimento cardíaco. O fundo é um gradiente de preto para cinza-escuro, com texturas de papel envelhecido que se revelam lentamente. Não há texto inicial, apenas o convite implícito do ritmo.",
+    "sensory_trigger": "O som do batimento cardíaco (auditivo) e a luz pulsante (visual) criam uma sensação de presença imediata, como se o sistema já estivesse 'vivo' antes da chegada da pessoa."
   },
   "dramaturgical_arc": [
     {
       "stage": "limiar",
-      "action": "O espaço está vazio, exceto por um ponto de luz pulsante (coração) no centro. O som de um batimento cardíaco lento preenche o ambiente. A pessoa percebe que algo está a 'escutá-la' antes de qualquer gesto.",
-      "sensory_focus": [
-        "visual_minimal",
-        "auditory_ambient",
-        "proprioceptive_attention"
-      ]
+      "action": "O ambiente está em repouso: batimento cardíaco lento, luz fraca. A pessoa percebe que algo está a 'respirar' antes de interagir."
     },
     {
       "stage": "chamada",
-      "action": "O coração pulsa mais rápido e emite um som que se desdobra em camadas: o batimento original, um murmúrio de vozes distantes (evocação de território) e um ruído branco suave. O texto 'Escuta um vestígio.' aparece em tipografia orgânica, como se escrito à mão, e desaparece lentamente.",
-      "sensory_focus": [
-        "auditory_layering",
-        "visual_typography",
-        "temporal_suspense"
-      ]
+      "action": "O coração pulsa mais rápido por 3 segundos, como se notasse a presença. Um vestígio sonoro (ex.: um murmúrio, um som ambiental gravado em Lisboa, ou um fragmento de voz de Nuno A) emerge do silêncio, com volume crescente até ser audível. O vestígio é curto (2-5 segundos) e desaparece."
     },
     {
       "stage": "primeiro_gesto",
-      "action": "A pessoa é convidada a interagir com o coração: aproximar o cursor, tocar (em dispositivos tácteis) ou pressionar uma tecla. O gesto mais simples (ex: clique ou toque) faz o coração expandir-se, revelando uma paisagem sonora territorial (ex: sons de uma freguesia de Lisboa, gravados ou evocados).",
-      "sensory_focus": [
-        "kinesthetic_gesture",
-        "auditory_territorial",
-        "visual_expansion"
-      ]
+      "action": "A pessoa é convidada a responder com o seu próprio vestígio: pode gravar um som (opcional, com permissão de microfone), escrever uma palavra, ou tocar no ecrã para 'deixar uma marca'. Se não interagir, o sistema espera 10 segundos e repete o vestígio com uma variação (ex.: mais agudo, mais lento)."
     },
     {
       "stage": "resposta_viva",
-      "action": "O sistema responde com um 'vestígio' sonoro ou visual: uma frase em voz baixa (ex: 'Aqui o vento dobra a esquina'), uma imagem desfoque de um lugar (evocação de memória territorial), ou um som ambiente que se mistura com o batimento do coração. O vestígio é único por sessão e depende do ritmo/posição do gesto inicial.",
-      "sensory_focus": [
-        "auditory_whisper",
-        "visual_blur",
-        "cross_sensory_echo"
-      ]
+      "action": "O sistema responde ao gesto da pessoa: se foi um som, o coração pulsa em sincronia com o ritmo do áudio gravado; se foi uma palavra, a palavra aparece no ecrã como uma mancha de tinta que se espalha e depois se transforma em som (ex.: a palavra 'vento' gera um som de vento); se foi um toque, o coração emite um novo vestígio sonoro, como uma resposta."
     },
     {
       "stage": "desvio",
-      "action": "O vestígio começa a desvanecer-se. Se a pessoa não responder, o coração volta ao estado inicial. Se responder (ex: clicar no vestígio ou emitir um som voluntário via microfone), o vestígio 'reage': a frase repete-se em eco distorcido, a imagem ganha foco ou o som ambiente transforma-se num ritmo.",
-      "sensory_focus": [
-        "auditory_distortion",
-        "visual_focus_shift",
-        "temporal_urgency"
-      ]
+      "action": "O vestígio da pessoa e o vestígio do sistema começam a sobrepor-se: os sons misturam-se, as palavras ou imagens criam camadas visuais (ex.: transparências, sobreposições). O ritmo do coração acelera e depois abrandar, como se respirasse."
     },
     {
       "stage": "aprofundamento_sensorial",
-      "action": "Dois canais contaminam-se: o som do vestígio altera a cor do coração (ex: sons agudos tornam-no mais claro; sons graves, mais escuro). A pessoa pode 'tocar' o vestígio para explorar a sua textura sonora ou visual. O território evocado (ex: uma rua) começa a 'respirar' no ambiente: sons de passos, vozes, ou o cheiro evocado de pão (através de descrição textual ou associação visual).",
-      "sensory_focus": [
-        "auditory_visual_cross",
-        "olfactory_evocation",
-        "kinesthetic_exploration"
-      ]
+      "action": "Dois canais contaminam-se: o som do coração passa a modular a cor do fundo (ex.: batimento rápido = vermelho intenso; lento = azul escuro). A pessoa pode arrastar o dedo no ecrã para 'desenhar' no espaço sonoro, alterando a espacialização do som (ex.: mover o som para a esquerda ou direita)."
     },
     {
-      "stage": "escolha_acaso_silencio",
-      "action": "A pessoa pode: (1) 'Responder com outro vestígio' (escrever ou gravar uma frase, ou escolher uma imagem de um inventário territorial), (2) esperar em silêncio, ou (3) sair. Se escolher responder, o seu vestígio é absorvido pelo coração, que pulsa em novo ritmo. Se esperar, o vestígio original transforma-se lentamente em algo novo (ex: a frase vira um trava-língua; o som vira uma música).",
-      "sensory_focus": [
-        "participant_agency",
-        "temporal_patience",
-        "auditory_transformation"
-      ]
+      "stage": "escolha_acaso_silêncio",
+      "action": "A pessoa pode: (1) gravar outro vestígio; (2) esperar em silêncio; (3) tocar no coração para 'congelar' o momento. Se escolher o silêncio, o sistema reduz gradualmente todos os estímulos (som, luz) até quase desaparecerem, revelando um novo vestígio visual (ex.: uma fotografia de Nuno A em negativo, ou um mapa de Lisboa com um ponto de luz)."
     },
     {
       "stage": "aparição",
-      "action": "Emergem novos elementos: uma constelação de vestígios passados (de outras sessões, anónimos e moderados) aparece como pontos de luz ao redor do coração. Cada ponto emite um som ou frase única. A pessoa pode explorá-los ou ignorá-los.",
-      "sensory_focus": [
-        "visual_constellation",
-        "auditory_multiplicity",
-        "social_presence_evoked"
-      ]
+      "action": "Emergem vestígios de outras pessoas (anónimos, moderados) que responderam ao mesmo convite. Os vestígios aparecem como sombras ou eco: uma palavra escrita por outra pessoa pode surgir como um traço no ecrã, ou um som gravado pode ser ouvido em loop suave. A pessoa percebe que está num espaço compartilhado, mas não intrusivo."
     },
     {
       "stage": "devolução",
-      "action": "O coração devolve algo à pessoa: (1) um 'bilhete' com a sua contribuição (se a fez) transformada em poesia ou som, (2) um mapa sonoro minimalista da sua interação (ex: uma linha que traça o percurso do cursor com sons), ou (3) um silêncio propositado, como se o sistema 'respirasse' com ela. O bilhete pode ser guardado ou descartado.",
-      "sensory_focus": [
-        "tactile_evocation",
-        "auditory_trace",
-        "emotional_return"
-      ]
+      "action": "O sistema devolve à pessoa uma 'partitura' do que foi criado: uma sequência de sons, palavras e gestos que pode ser ouvida ou vista como uma composição única. A partitura é gerada em tempo real e pode ser guardada como um 'vestígio' (ex.: um código alfanumérico ou um link temporário)."
     },
     {
       "stage": "rasto_latência",
-      "action": "O vestígio da pessoa (se contribuir) fica latente no sistema, podendo aparecer em futuras sessões como parte da constelação. O coração volta ao estado inicial, mas com uma subtileza: o seu batimento agora inclui um 'eco' do vestígio da pessoa, como uma memória incorporada.",
-      "sensory_focus": [
-        "temporal_latency",
-        "social_legacy",
-        "auditory_memory"
-      ]
+      "action": "O vestígio da pessoa permanece no sistema como parte de uma constelação de escutas. Se regressar mais tarde, pode encontrar o seu vestígio misturado com outros, ou perceber que o coração pulsa de forma diferente (ex.: mais rápido se houver mais atividade no território associado)."
     }
   ],
   "participant_verbs": [
     "escutar",
-    "respirar",
-    "tocar",
     "responder",
+    "tocar",
+    "gravar",
     "esperar",
-    "explorar",
-    "deixar"
+    "arrastar",
+    "congelar"
   ],
   "system_responses": [
     {
       "trigger": "presença inicial",
-      "response": "Coração pulsa e emite batimento cardíaco + murmúrios territoriais."
+      "response": "Batimento cardíaco acelerado + vestígio sonoro emergente."
     },
     {
-      "trigger": "primeiro gesto (clique/toque)",
-      "response": "Coração expande-se, revelando paisagem sonora territorial única."
+      "trigger": "gravação de som",
+      "response": "Coração pulsa em sincronia com o ritmo do áudio + novo vestígio sonoro gerado."
     },
     {
-      "trigger": "interação com vestígio (clique/toque)",
-      "response": "Vestígio reage: eco distorcido, foco visual ou transformação rítmica."
+      "trigger": "palavra escrita",
+      "response": "Palavra aparece como mancha de tinta, transforma-se em som associado + sobreposição visual."
     },
     {
-      "trigger": "resposta da pessoa (texto/áudio/imagem)",
-      "response": "Vestígio é absorvido pelo coração, alterando o seu ritmo e cor."
+      "trigger": "toque no ecrã",
+      "response": "Novo vestígio sonoro emitido pelo coração + alteração na textura do fundo."
     },
     {
-      "trigger": "espera em silêncio",
-      "response": "Vestígio transforma-se lentamente (ex: frase → trava-língua; som → música)."
+      "trigger": "arrasto no ecrã",
+      "response": "Spatialização do som alterada (ex.: som move-se para a esquerda/direita)."
     },
     {
-      "trigger": "exploração da constelação",
-      "response": "Cada ponto emite som/frase única; interação revela mais camadas."
+      "trigger": "silêncio prolongado",
+      "response": "Redução gradual de estímulos + revelação de vestígio visual (ex.: fotografia, mapa)."
     },
     {
-      "trigger": "saída",
-      "response": "Coração volta ao estado inicial, mas com 'eco' do vestígio da pessoa."
+      "trigger": "toque no coração",
+      "response": "Momento 'congelado': som e luz param por 3 segundos, depois retomam com um novo vestígio."
+    },
+    {
+      "trigger": "regresso posterior",
+      "response": "Vestígio da pessoa misturado com outros na constelação de escutas."
     }
   ],
-  "sensory_signature_id": "nuno-escuta-coração-pulsante-vestigio",
+  "sensory_signature_id": "nuno-escuta-pulsar-vestigio",
   "sensory_channels": {
     "visual": {
       "elements": [
-        "coração pulsante",
-        "paisagem sonora territorial (imagem desfoque)",
-        "constelação de vestígios",
-        "tipografia orgânica",
-        "transições suaves de cor/foco"
+        "ponto de luz pulsante (coração)",
+        "gradiente de preto para cinza-escuro",
+        "texturas de papel envelhecido",
+        "manchas de tinta que se espalham",
+        "sobreposições visuais (transparências)",
+        "fotografias em negativo ou mapas com pontos de luz"
       ],
-      "intensity": "subtle_to_immersive"
+      "dynamics": [
+        "luz que pulsa em sincronia com som",
+        "cores que mudam com o ritmo do batimento",
+        "transparências que revelam camadas ocultas"
+      ]
     },
     "auditory": {
       "elements": [
-        "batimento cardíaco",
-        "murmúrios territoriais",
-        "paisagem sonora (ruídos ambiente)",
-        "eco distorcido",
-        "ritmo transformado",
-        "silêncio ativo"
+        "batimento cardíaco (ritmo variável)",
+        "vestígios sonoros (murmúrios, sons ambientais, fragmentos de voz)",
+        "sons gerados a partir de palavras (ex.: 'vento' → som de vento)",
+        "spatialização de som (esquerda/direita)"
       ],
-      "spatialization": "mono_to_stereo",
-      "intensity": "low_to_moderate"
+      "dynamics": [
+        "volume e ritmo que respondem à interação",
+        "sobreposição de sons (vestígio da pessoa + sistema)",
+        "silêncio gradual como transição"
+      ]
     },
     "haptic": {
       "elements": [
-        "vibração sutil (opcional, em dispositivos compatíveis)",
-        "feedback táctil em botões virtuais"
+        "vibração sutil em dispositivos compatíveis (opcional)"
       ],
-      "intensity": "minimal"
+      "dynamics": [
+        "vibração sincronizada com o batimento cardíaco"
+      ]
     },
     "kinesthetic": {
       "elements": [
-        "movimento do cursor/toque",
-        "pressão (se suportado)",
-        "velocidade do gesto",
-        "trajetória"
+        "toque no ecrã",
+        "arrasto do dedo",
+        "pressão (se suportado)"
       ],
-      "intensity": "light_to_moderate"
+      "dynamics": [
+        "alteração da spatialização do som com o movimento",
+        "desenho no espaço sonoro"
+      ]
     },
     "proprioceptive": {
       "elements": [
-        "instruções de respiração (opcionais)",
-        "postura sugerida (ex: 'fechar os olhos')",
-        "atenção ao ritmo corporal"
+        "instruções implícitas de ritmo (ex.: 'respira com o coração')",
+        "postura sugerida (ex.: 'fecha os olhos para escutar')"
       ],
-      "intensity": "subtle"
+      "dynamics": [
+        "ritmo do batimento convida à sincronia corporal"
+      ]
     },
     "temporal_interoceptive": {
       "elements": [
-        "espera",
-        "pulso",
-        "aceleração/desaceleração",
-        "suspensão",
-        "respiração percebida"
+        "espera (silêncio ativo)",
+        "aceleração/abrandamento do ritmo",
+        "suspensão do tempo ('congelar')"
       ],
-      "intensity": "variable"
+      "dynamics": [
+        "tempo como matéria de escuta",
+        "pausas que revelam camadas"
+      ]
     },
     "spatial": {
       "elements": [
-        "profundidade visual (coração em 3D suave)",
-        "posicionamento do vestígio no espaço",
-        "constelação em órbita"
+        "profundidade visual (camadas de transparência)",
+        "spatialização do som (2D ou 3D)"
       ],
-      "intensity": "moderate"
+      "dynamics": [
+        "movimento no ecrã altera a perceção espacial"
+      ]
     },
     "olfactory_evocation": {
       "elements": [
-        "descrição textual de cheiros territoriais (ex: 'pão quente da padaria da esquina')",
-        "associação visual a memórias olfativas"
+        "memória de cheiros associados a vestígios sonoros (ex.: som de mar → evoca cheiro a sal)",
+        "palavras que evocam aromas (ex.: 'pão' → evoca cheiro a pão quente)"
       ],
-      "intensity": "evocative"
+      "dynamics": [
+        "associação livre, nunca fingida como output físico"
+      ]
     },
     "gustatory_evocation": {
       "elements": [
-        "referências a sabores territoriais (ex: 'o gosto do café da tia Maria')",
-        "memórias gustativas em texto ou som"
+        "memória de sabores associados a vestígios (ex.: som de feira → evoca sabor de fruta)",
+        "palavras que evocam sabores (ex.: 'doce' → evoca sabor de mel)"
       ],
-      "intensity": "evocative"
+      "dynamics": [
+        "associação livre, nunca fingida como output físico"
+      ]
     },
     "social_presence": {
       "elements": [
-        "constelação de vestígios de outras sessões (anónimos)",
-        "eco de contribuições passadas",
-        "presença implícita do território"
+        "vestígios anónimos de outras pessoas",
+        "sensação de espaço compartilhado sem intrusão"
       ],
-      "intensity": "subtle"
+      "dynamics": [
+        "constelação de escutas que evolui com o tempo"
+      ]
     }
   },
   "cross_sensory_translation": {
-    "primary": "Som (paisagem sonora territorial) → Cor e forma do coração (visual)",
-    "secondary": "Gesto (movimento do cursor) → Ritmo e timbre do som (auditory)",
-    "tertiary": "Silêncio (ausência de interação) → Transformação do vestígio (visual/auditory)"
+    "primary": "O som do batimento cardíaco (auditivo) modula a cor do fundo (visual) e a vibração (háptica, se disponível).",
+    "secondary": "A palavra escrita (visual/textual) transforma-se em som (auditivo) e em mancha de tinta (visual).",
+    "tertiary": "O movimento do dedo no ecrã (cinestésico) altera a spatialização do som (auditivo)."
   },
   "silence_or_absence": {
-    "mechanism": "O silêncio é um estado ativo: (1) ausência de som durante a espera faz o vestígio transformar-se; (2) o coração 'respira' em silêncio entre batimentos; (3) a pessoa pode escolher não contribuir, e o sistema devolve um silêncio propositado como resposta.",
-    "purpose": "Criar espaço para a reflexão e a escuta interna, evocando a ideia de que o vazio também é parte da experiência."
+    "mechanism": "O silêncio é um estado ativo: quando a pessoa não interage, o sistema não 'desiste', mas reduz os estímulos até quase desaparecerem, revelando novos vestígios. O silêncio também pode ser um gesto (ex.: não gravar nada é uma resposta válida).",
+    "effect": "O silêncio permite que vestígios ocultos (visuais ou sonoros) surjam, como se a ausência de ação revelasse camadas mais profundas."
   },
   "surprise_or_indeterminacy": {
-    "mechanisms": [
-      "O vestígio inicial é aleatoriamente selecionado de um conjunto territorial (ex: sons de diferentes freguesias de Lisboa).",
-      "A transformação do vestígio durante a espera é imprevisível (ex: frase → trava-língua; som → música).",
-      "A constelação de vestígios de outras sessões aparece em posições aleatórias.",
-      "O 'eco' do vestígio da pessoa no coração é único e depende do ritmo da sua interação."
-    ]
+    "mechanism": [
+      "O vestígio inicial é selecionado aleatoriamente de um conjunto curado (ex.: sons de Lisboa, fragmentos de voz de Nuno A, ou vestígios de outras pessoas).",
+      "A resposta do sistema ao gesto da pessoa não é previsível: o mesmo gesto pode gerar respostas diferentes em sessões distintas.",
+      "A sobreposição de vestígios (da pessoa + sistema + outros) cria combinações únicas e imprevisíveis.",
+      "O coração pode 'tropeçar' no ritmo, criando um momento de quebra na expectativa."
+    ],
+    "effect": "A pessoa nunca sabe exatamente o que vai acontecer, mas sente que o sistema está a responder de forma viva e específica."
   },
   "session_variation": [
     {
       "type": "acaso_controlado",
-      "description": "Vestígio inicial é selecionado aleatoriamente de um conjunto pré-definido de sons/imagens territoriais."
+      "description": "O vestígio inicial é selecionado aleatoriamente de um conjunto curado de sons ou palavras."
     },
     {
       "type": "resposta_a_ritmo",
-      "description": "O ritmo do gesto inicial (ex: velocidade do clique) altera a intensidade e duração do vestígio revelado."
+      "description": "O ritmo do batimento cardíaco e a intensidade das respostas do sistema variam consoante a velocidade e o tipo de interação da pessoa (ex.: gestos rápidos = respostas mais intensas)."
     },
     {
-      "type": "resposta_a_posição",
-      "description": "A posição do cursor/toque no coração determina a camada sonora territorial (ex: lado esquerdo = sons da Baixa; lado direito = sons de Alfama)."
+      "type": "ordem_mutável",
+      "description": "A ordem dos vestígios que surgem (sonoros ou visuais) é aleatória, mas sempre coerente com a curadoria."
+    },
+    {
+      "type": "presença_de_outros_vestígios",
+      "description": "Vestígios de outras pessoas (anónimos) podem aparecer ou não, dependendo da atividade no sistema."
     },
     {
       "type": "temporalidade_real",
-      "description": "O vestígio inicial pode variar consoante a hora do dia (ex: sons de manhã vs. sons de noite)."
-    },
-    {
-      "type": "combinação_fragmentos",
-      "description": "O vestígio pode ser uma combinação única de dois fragmentos territoriais (ex: som de uma rua + frase de uma lenda local)."
+      "description": "O ritmo do coração pode ser influenciado pela hora do dia (ex.: mais lento à noite, mais rápido de manhã)."
     }
   ],
   "territorial_binding": {
-    "relation": "A experiência evoca territórios reais (ex: freguesias de Lisboa) através de sons, imagens desfoque e memórias, sem exigir geolocalização. Os vestígios são inspirados em lugares concretos, mas a experiência funciona em qualquer local.",
-    "sources": [
-      "PUBLICO_TERRITORIAL__CURADORIA_NOS_FALARTE_RESIDUAL.pdf",
-      "curadoria entrada freguesias.xlsx"
-    ],
-    "evocation_methods": [
-      "paisagem sonora",
-      "imagem desfoque",
-      "frase territorial",
-      "memória evocado"
+    "relation": "A experiência está ligada ao território de Lisboa e à presença de Nuno A (fotógrafo documentado no corpus). Os vestígios sonoros podem incluir sons reais de Lisboa (ex.: trânsito, vozes, mar), e as fotografias que surgem podem ser de lugares específicos da cidade.",
+    "sustainability": "Os sons e imagens são curados a partir de material autoral (ex.: fotografias de Nuno A, gravações de campo em Lisboa). Não são inventados, mas selecionados de um corpus existente.",
+    "questions_for_eduardo": [
+      "Confirmar se os vestígios sonoros devem ser exclusivamente de Lisboa ou se podem incluir outros territórios associados ao Atlas.",
+      "Validar se as fotografias de Nuno A podem ser usadas como vestígios visuais ou se devem ser tratadas como material de fundo."
     ]
   },
   "trace_and_return": {
     "trace": {
-      "mechanism": "O vestígio contribuído pela pessoa (texto, áudio ou imagem) é guardado como um 'rasto' anónimo e moderado. Este rasto pode aparecer em futuras sessões como parte da constelação de vestígios.",
-      "persistence": "latente_no_sistema"
+      "type": "vestígio_pessoal",
+      "description": "O som, palavra ou gesto da pessoa é guardado como um vestígio anónimo e pode ser reutilizado em sessões futuras (ex.: como parte da constelação de escutas)."
     },
     "return": {
-      "mechanism": "A pessoa recebe um 'bilhete' com a sua contribuição transformada (ex: texto → poesia; som → música minimalista) ou um mapa sonoro da sua interação.",
-      "formats": [
-        "texto_poético",
-        "áudio_transformado",
-        "visual_abstrato",
-        "silêncio_propositado"
-      ]
+      "type": "partitura",
+      "description": "A pessoa recebe uma 'partitura' única (sequência de sons, palavras e gestos) que pode ser ouvida ou vista como uma composição. Esta partitura é gerada em tempo real e pode ser guardada como um código ou link temporário."
+    },
+    "latency": {
+      "type": "constelação_viva",
+      "description": "Os vestígios da pessoa permanecem no sistema e podem ser reencontrados em sessões posteriores, misturados com outros vestígios."
     }
   },
   "accessibility_equivalents": {
     "visual": {
-      "alternative": "Todas as imagens e transições visuais têm descrições textuais opcionais (ex: 'Um coração pulsante no centro da tela, emitindo luz suave').",
-      "reduced_motion": "Versão estável sem animações, com foco em texto e som."
+      "alternative": "Todas as interações visuais (ex.: manchas de tinta, fotografias) têm descrições textuais opcionais que podem ser lidas por leitores de ecrã. O batimento cardíaco é também representado por um gráfico de ondas sonoras (visualização do som).",
+      "reduced_motion": "A opção 'reduced-motion' desativa as animações de pulso e sobreposição, mantendo a interação estática (ex.: o coração é um círculo fixo, os sons são representados por barras de volume)."
     },
     "auditory": {
-      "alternative": "Todos os sons têm legendas ou descrições textuais (ex: 'Batimento cardíaco lento, misturado com murmúrios distantes').",
-      "volume_control": "Controlo de volume global e por camada sonora."
-    },
-    "kinesthetic": {
-      "alternative": "Interação via teclado (ex: setas para mover o cursor; Enter para selecionar).",
-      "static_control": "Modo 'exploração estática' onde a pessoa navega com teclas ou voz."
+      "alternative": "Todos os sons têm legendas visuais (ex.: 'som de mar', 'voz murmurando') e podem ser substituídos por vibração (se disponível) ou por representações visuais dinâmicas (ex.: ondas que se movem no ecrã).",
+      "silence_mode": "Modo 'silêncio' desativa todos os sons, substituindo-os por representações visuais (ex.: o batimento cardíaco é mostrado como um gráfico de pulso)."
     },
     "haptic": {
-      "alternative": "Feedback visual (ex: pulso de cor) substitui vibração."
+      "alternative": "A vibração é opcional e pode ser substituída por um pulso visual (ex.: o coração brilha intermitentemente)."
     },
-    "temporal": {
-      "alternative": "Modo 'sem pressão' onde a pessoa pode pausar a experiência a qualquer momento."
+    "kinesthetic": {
+      "alternative": "Todas as interações por toque/arrasto têm equivalentes por teclado (ex.: setas para mover o som, barra de espaço para gravar)."
     },
-    "cognitive": {
-      "alternative": "Instruções claras e opcionais em linguagem simples, com opção de repetir ou pular passos."
-    }
+    "proprioceptive": {
+      "alternative": "As instruções de ritmo ou postura são opcionais e podem ser ignoradas sem perder a experiência."
+    },
+    "temporal_interoceptive": {
+      "alternative": "A opção 'sem pressão' remove todos os limites de tempo, permitindo que a pessoa interaja no seu próprio ritmo."
+    },
+    "poetic_preservation": "A acessibilidade não reduz a poesia da experiência: por exemplo, a 'partitura' pode ser ouvida ou lida como um poema sonoro, e os vestígios visuais podem ser descritos de forma evocativa (ex.: 'uma mancha de tinta que parece um suspiro')."
   },
   "optional_permissions": {
     "microphone": {
-      "purpose": "Permite à pessoa gravar um vestígio sonoro (ex: uma frase ou som ambiente) para responder ao sistema.",
-      "fallback": "A pessoa pode digitar texto ou selecionar uma imagem de um inventário territorial."
+      "purpose": "Permite gravar vestígios sonoros (ex.: voz, sons ambientais).",
+      "fallback": "A pessoa pode escrever uma palavra ou tocar no ecrã para gerar um som sintético (ex.: um 'beep' ou um som aleatório do sistema)."
     },
     "camera": {
-      "purpose": "Permite à pessoa tirar uma foto para responder com um vestígio visual.",
-      "fallback": "A pessoa pode selecionar uma imagem pré-existente ou digitar uma descrição."
+      "purpose": "Não é necessário para esta experiência.",
+      "fallback": "N/A"
     },
     "geolocation": {
-      "purpose": "NÃO é necessário para a experiência. Se usado, seria para personalizar o vestígio territorial com base na localização da pessoa.",
-      "fallback": "Vestígio territorial genérico (ex: sons de Lisboa)."
+      "purpose": "Opcional para associar o vestígio a um território específico (ex.: 'Este som foi gravado em Alfama').",
+      "fallback": "O vestígio é associado a um território genérico ('Lisboa') ou a uma constelação sem localização."
     },
     "motion": {
-      "purpose": "Permite usar a inclinação do dispositivo para interagir com o coração (ex: inclinar para 'balançar' o vestígio).",
-      "fallback": "Interação via cursor/toque ou teclado."
+      "purpose": "Opcional para alterar a spatialização do som com o movimento do dispositivo.",
+      "fallback": "A spatialização do som é controlada pelo toque/arrasto no ecrã."
     }
   },
   "overstimulation_risk": {
     "potential_risks": [
-      "Som súbito ou excessivo (mitigado por volume controlável e camadas sonoras suaves).",
-      "Animações visuais rápidas (mitigado por opção de reduced-motion e transições suaves).",
-      "Pressão temporal (mitigado por modo 'sem pressão' e pausas opcionais)."
+      "Som súbito ou alto (ex.: vestígios sonoros com volume elevado).",
+      "Animações rápidas ou flashing (ex.: pulso do coração em ritmo acelerado).",
+      "Sobreposição excessiva de sons ou imagens (ex.: múltiplos vestígios a surgir ao mesmo tempo)."
     ],
     "mitigation": [
-      "Controlo de volume por camada sonora.",
-      "Opção de reduced-motion para desativar animações.",
-      "Modo 'sem pressão' para pausar a experiência.",
-      "Silêncio ativo como parte da experiência (nunca som contínuo sem pausa)."
+      "Todos os sons têm volume controlado e são gradualmente introduzidos (fade-in).",
+      "O ritmo do batimento cardíaco nunca excede 120 BPM (batimentos por minuto).",
+      "A opção 'reduced-motion' desativa todas as animações rápidas.",
+      "A pessoa pode 'congelar' o momento a qualquer altura para pausar todos os estímulos.",
+      "O número máximo de vestígios sobrepostos é 3 (para evitar sobrecarga sensorial)."
     ]
   },
-  "distinctiveness": {
-    "unique_elements": [
-      "Coração pulsante como elemento central e vivo, que 'respira' e incorpora vestígios.",
-      "Vestígios territoriais que se transformam com o tempo e a interação (ex: frase → trava-língua).",
-      "Constelação de vestígios de outras sessões, evocando uma presença social sem vigilância.",
-      "Silêncio como estado ativo e propositado, não como ausência de conteúdo.",
-      "Devolução de um 'bilhete' com a contribuição transformada, não apenas um 'obrigado'.",
-      "Tradução cruzada entre som e cor/formas do coração, específica desta curadoria."
-    ],
-    "comparison": "Diferente de 'Escutar o Silêncio' (D5 do Livro Cubo) por não se focar apenas no silêncio, mas na escuta ativa e na resposta com vestígios. Diferente de 'FUCO' por não ser uma conversa, mas um diálogo sensorial com o território. Diferente de 'Galeria Diletante' por não usar fotografias de Nuno A, mas sons e memórias territoriais."
-  },
+  "distinctiveness": [
+    "A assinatura sensorial única é o 'coração pulsante' como metáfora de escuta viva, que não aparece em nenhuma outra experiência do Atlas.",
+    "A tradução cruzada entre som (batimento) e cor (fundo) + vibração (háptica) é específica desta curadoria.",
+    "O convite 'Escuta um vestígio. Responde com outro.' define uma dinâmica de diálogo não linear, diferente de outras experiências que se focam em coleção ou exploração.",
+    "A devolução como 'partitura' (sequência de sons, palavras e gestos) é única e não é replicada em outras curadorias.",
+    "A relação com o território é mediada por vestígios sonoros e visuais de Lisboa, associados à presença de Nuno A, sem inventar factos autorais."
+  ],
   "questions_for_eduardo": [
-    "O 'coração pulsante' deve ter uma forma específica (ex: coração literal, círculo, ou forma abstrata) ou pode ser uma representação mais livre?",
-    "Os vestígios territoriais devem ser baseados em lugares reais específicos (ex: freguesias de Lisboa) ou podem ser genéricos (ex: 'uma rua qualquer')?",
-    "A constelação de vestígios de outras sessões deve ser visível desde o início ou apenas após a interação da pessoa?",
-    "O 'bilhete' de devolução deve ser guardado no sistema para acesso futuro ou é apenas para a sessão atual?",
-    "Há um limite de tempo para a experiência ou a pessoa pode explorar livremente?"
+    "Confirmar se os vestígios sonoros iniciais devem ser exclusivamente sons reais de Lisboa (gravados) ou se podem incluir sons sintéticos ou de outras origens (ex.: sons de Nuno A, ou sons gerados pelo sistema).",
+    "Validar se as fotografias de Nuno A podem ser usadas como vestígios visuais (ex.: surgir como resposta a um gesto) ou se devem ser tratadas apenas como material de fundo ou contextual.",
+    "Clarificar se a 'partitura' devolve apenas os vestígios da pessoa ou se pode incluir vestígios de outras pessoas (anónimos) para criar uma composição coletiva.",
+    "Confirmar se o coração pulsante deve ter uma representação visual fixa (ex.: círculo) ou se pode variar de forma (ex.: mancha, linha, ponto) em diferentes sessões."
   ],
   "improvement_proposals": [
     {
-      "proposal": "Incluir um modo 'território específico' onde a pessoa pode selecionar uma freguesia ou lugar para personalizar os vestígios (ex: sons de Alfama vs. sons do Chiado).",
-      "source": "curadoria entrada freguesias.xlsx"
+      "proposal": "Incluir um modo 'escuta profunda' onde a pessoa pode focar-se num único vestígio (sonoro ou visual) durante um período prolongado, com todos os outros estímulos desativados.",
+      "justification": "Aprofunda a dimensão de escuta ativa e meditativa, alinhada com a dinâmica 'Escutar o Silêncio' do Livro Cubo."
     },
     {
-      "proposal": "Adicionar uma camada de 'memória coletiva' onde vestígios de sessões passadas são organizados por tema (ex: sons de água, sons de mercado).",
-      "source": "PUBLICO_TERRITORIAL__CURADORIA_NOS_FALARTE_RESIDUAL.pdf"
+      "proposal": "Permitir que a pessoa 'doe' o seu vestígio a um território específico (ex.: 'Este som pertence a Alfama'), criando uma camada territorial mais rica.",
+      "justification": "Reforça a ligação ao território e a devolução comunitária, alinhada com os princípios FALArte."
     },
     {
-      "proposal": "Integração com COSMICOXES para que os vestígios possam ser 'lançados' como partículas no cosmos, criando uma conexão com outras curadorias.",
-      "source": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf"
+      "proposal": "Adicionar um 'diário de vestígios' onde a pessoa pode rever todas as suas contribuições passadas, organizadas por data ou território.",
+      "justification": "Cria uma narrativa pessoal de participação e reforça o rasto/latência."
     }
   ],
   "generic_fallback_allowed": false,

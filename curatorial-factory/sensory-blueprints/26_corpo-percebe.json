@@ -3,356 +3,365 @@
   "canonical_name": "O Corpo que Percebe",
   "source_evidence": {
     "primary": [
-      {
-        "source": "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md",
-        "authority": "autoral",
-        "quote": "D4 O Corpo que Percebe — percepção incorporada; digital quase ausente; corpo não é dado."
-      },
-      {
-        "source": "CUBO_02_MANUAL_INVERTIDO_MELHORADO.md",
-        "authority": "autoral",
-        "quote": "O erro é entrada; o riso é método; o silêncio é matéria; a pergunta abre; o ganhador não vence o outro, chega a si."
-      }
+      "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md (D4: O Corpo que Percebe)"
     ],
     "secondary": [
-      {
-        "source": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
-        "authority": "interpretativa",
-        "quote": "corpo inteiro, textura/hapticidade, psicogeografia activa"
-      }
+      "CUBO_02_MANUAL_INVERTIDO_MELHORADO.md (princípios: erro como entrada, riso como método, silêncio como matéria)"
+    ],
+    "contextual": [
+      "Curadoria Cultural e Existencialismo Profundo.pdf (percepção incorporada, corpo não é dado)"
     ]
   },
   "authorial_invariants": [
-    "A experiência deve priorizar a percepção incorporada, não a representação digital.",
-    "O corpo não é um dado a ser recolhido, mas um agente ativo de percepção.",
-    "O digital deve ser 'quase ausente', servindo apenas como mediador mínimo.",
-    "A dinâmica deve permitir que o participante perceba o seu próprio corpo como instrumento de conhecimento.",
-    "A experiência deve preservar a possibilidade de erro, riso e silêncio como matérias válidas."
+    "A experiência prioriza a percepção incorporada, não a interface digital.",
+    "O corpo não é reduzido a dados; é o ponto de partida e o instrumento de exploração.",
+    "A digitalidade é mínima, quase ausente, servindo apenas como suporte para a atenção corporal.",
+    "A dinâmica deve convocar o corpo a perceber o que já está presente, não a interagir com um ecrã.",
+    "O convite inicial é: 'Fecha os olhos. O corpo começa.'"
   ],
-  "perceptual_intent": "Convidar o participante a redescobrir o seu corpo como um sistema de perceção ativa, onde o digital funciona como um espelho mínimo que devolve a atenção para a experiência física imediata. A ausência de estímulos digitais excessivos deve criar um vazio que convida à auto-observação.",
+  "perceptual_intent": "Despertar a atenção para a percepção corporal como porta de entrada para a experiência do mundo, usando o mínimo de estímulos digitais para amplificar o que já existe no corpo e no território. A pessoa deve sentir que o seu corpo é o dispositivo principal, não o ecrã.",
   "threshold": {
-    "description": "A tela carregada exibe um fundo neutro (preto ou branco, conforme preferência de acessibilidade) com um único ponto de luz ou sombra a pulsar lentamente, como uma respiração. O texto 'Fecha os olhos. O corpo começa.' aparece em tipografia orgânica, quase como se fosse escrita à mão, e desaparece após 3 segundos. O ponto de luz/sombra continua a pulsar, mas agora em resposta ao movimento mínimo do cursor ou ao toque na tela (se presente).",
-    "sensory_trigger": "A pulsação do ponto (visual) e o seu eco sonoro (auditivo, um som de respiração ou batimento cardíaco muito suave) criam uma expectativa de que algo está vivo, mas não é ainda claro o que."
+    "description": "O ecrã escurece gradualmente até um tom de cinzento profundo, como se a luz se retirasse. Um som de respiração lenta e amplificada (sem ser intrusivo) preenche o espaço, convidando à imobilidade. O texto 'Fecha os olhos. O corpo começa.' aparece em letras que se desvanecem como se fossem absorvidas pelo fundo, sem desaparecerem por completo.",
+    "sensory_trigger": "A transição do estado 'normal' do browser para um estado de 'prontidão corporal' é marcada pela redução progressiva de estímulos visuais e sonoros, substituídos por uma presença táctil (vibração sutil, se disponível) ou visual (pulsação de uma mancha de luz no centro do ecrã)."
   },
   "dramaturgical_arc": [
     {
-      "stage": "LIMIAR",
-      "description": "O ambiente digital reduz-se ao mínimo: um ponto pulsante e um convite textual que desaparece. A pessoa sente que algo está a acontecer, mas não sabe o quê. A pulsação do ponto sincroniza-se com um som de respiração (opcional, com alternativa visual)."
+      "phase": "LIMIAR",
+      "action": "O ambiente digital reduz-se a um mínimo: ecrã escuro com uma mancha de luz pulsante (como uma respiração) e um som de fundo que imita o ritmo cardíaco. O texto convite aparece e some, como um susurro.",
+      "sensory_focus": [
+        "visual (mancha de luz)",
+        "auditory (ritmo cardíaco)",
+        "proprioceptive (atenção à respiração própria)"
+      ]
     },
     {
-      "stage": "CHAMADA",
-      "description": "O texto 'Toca aqui com a ponta dos dedos. Ou não.' aparece por 2 segundos e desaparece. O ponto pulsante agora reage à proximidade do cursor ou dedo (se touchscreen), expandindo-se ou contraindo-se como se fosse uma membrana sensível."
+      "phase": "CHAMADA",
+      "action": "A mancha de luz expande-se lentamente, como se o corpo da pessoa fosse a fonte da luz. Um som de vento suave (ou um ruído branco muito baixo) é introduzido, misturado com o ritmo cardíaco. O texto 'Sente o peso dos teus pés no chão.' aparece por 3 segundos e desaparece.",
+      "sensory_focus": [
+        "visual (expansão da luz)",
+        "auditory (vento + ritmo)",
+        "kinesthetic (atenção aos pés)"
+      ]
     },
     {
-      "stage": "PRIMEIRO GESTO",
-      "description": "A pessoa toca ou move o cursor sobre o ponto. O ponto explodir em partículas que se dispersam lentamente, revelando um círculo vazio no centro. O som de respiração é substituído por um zumbido suave que se desvanece em silêncio."
+      "phase": "PRIMEIRO GESTO",
+      "action": "A pessoa é convidada a fechar os olhos (se já não o fez) e a focar a atenção num ponto do corpo (ex.: ponta dos dedos, ombros, ou a planta dos pés). O sistema detecta (opcionalmente) a imobilidade do rato/teclado ou a ausência de toque no ecrã como sinal de que a pessoa está a focar-se internamente.",
+      "sensory_focus": [
+        "proprioceptive (foco interno)",
+        "temporal_interoceptive (espera ativa)"
+      ]
     },
     {
-      "stage": "RESPOSTA VIVA",
-      "description": "O círculo vazio no centro começa a preencher-se com uma textura que imita a pele humana (visual) e um som de fricção táctil (auditivo, como tecido a ser esfregado). A textura e o som respondem ao movimento do cursor/dedo: quanto mais rápido, mais áspera a textura e mais agudo o som; quanto mais lento, mais suave."
+      "phase": "RESPOSTA VIVA",
+      "action": "Assim que o sistema deteta imobilidade (ou após 10 segundos, se não houver permissões), a mancha de luz contrai-se e um som de 'ping' suave (como uma gota de água) é emitido. O texto 'Onde sentes o ar a tocar-te?' aparece e some. A mancha de luz move-se lentamente para a esquerda ou direita, como se fosse guiada pela respiração da pessoa (detectada via microfone opcional ou ritmo de toque no ecrã).",
+      "sensory_focus": [
+        "visual (movimento da luz)",
+        "auditory (som de gota)",
+        "kinesthetic (respiração percebida)"
+      ]
     },
     {
-      "stage": "DESVIO",
-      "description": "De repente, a textura e o som invertem-se: movimento rápido torna a textura macia e o som grave; movimento lento torna-a áspera e o som agudo. A pessoa percebe que a sua expectativa foi subvertida."
+      "phase": "DESVIO",
+      "action": "De repente, a mancha de luz divide-se em duas: uma segue o ritmo da respiração (se detectada) e a outra move-se em sentido oposto, como se fosse uma sombra do corpo. Um som de 'crack' suave (como gelo a partir) é ouvido. O texto 'Há algo que não é só teu.' aparece e desaparece.",
+      "sensory_focus": [
+        "visual (divisão da luz)",
+        "auditory (som de gelo)",
+        "spatial (dualidade corpo/sombra)"
+      ]
     },
     {
-      "stage": "APROFUNDAMENTO SENSORIAL",
-      "description": "O círculo agora divide-se em dois: um lado responde ao movimento do cursor/dedo (visual + auditivo), e o outro lado responde à pressão (se touchscreen) ou à velocidade do clique (haptic feedback opcional). Os dois lados interagem: o som de um lado afeta a textura do outro, criando uma tradução cruzada entre tato e audição."
+      "phase": "APROFUNDAMENTO SENSORIAL",
+      "action": "As duas manchas de luz começam a interagir: uma aproxima-se da outra e afasta-se, como uma dança. O som de fundo transforma-se num coral de vozes murmurosas (sem palavras inteligíveis), que sobem e descem de volume em sincronia com o movimento das luzes. O texto 'Escuta o que o teu corpo já sabe.' aparece e some.",
+      "sensory_focus": [
+        "visual (dança das luzes)",
+        "auditory (coral de vozes)",
+        "proprioceptive (sincronia corpo-som)"
+      ]
     },
     {
-      "stage": "ESCOLHA / ACASO / SILÊNCIO",
-      "description": "A pessoa pode escolher focar-se num lado ou no outro, ou deixar o sistema em silêncio. Se não interagir durante 10 segundos, o círculo começa a desvanecer-se, e um novo texto aparece: 'Onde sentes o peso do teu corpo agora?'"
+      "phase": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "A pessoa é convidada a escolher: tocar no ecrã para 'puxar' uma das manchas de luz para si, ou esperar em silêncio. Se tocar, a mancha escolhida expande-se e preenche o ecrã com uma cor quente (laranja ou vermelho), enquanto a outra desaparece. Se esperar, as duas manchas fundem-se num ponto único no centro, e o ecrã fica branco por 2 segundos antes de regressar ao cinzento inicial.",
+      "sensory_focus": [
+        "kinesthetic (toque ou espera)",
+        "visual (expansão/fusão)",
+        "temporal_interoceptive (espera)"
+      ]
     },
     {
-      "stage": "APARIÇÃO",
-      "description": "Se a pessoa interagir com o círculo, uma palavra ou frase curta aparece no centro, escrita em tipografia que imita a caligrafia manual (ex: 'Aqui', 'Agora', 'Eu'). A palavra é gerada com base no ritmo e na intensidade da interação (ex: interação rápida = 'Agora'; interação lenta = 'Aqui'; interação mista = 'Eu'). Se a pessoa não interagir, a palavra aparece aleatoriamente entre um conjunto pré-definido."
+      "phase": "APARIÇÃO",
+      "action": "Se a pessoa escolheu tocar: uma frase curta aparece no centro do ecrã colorido, escrita em letras que tremem levemente, como se estivessem a ser ditas em voz alta. Exemplo: 'O chão lembra-se dos teus passos.' Se esperou: uma palavra única aparece no centro do ecrã branco, como se fosse um suspiro. Exemplo: 'Aqui.'",
+      "sensory_focus": [
+        "visual (texto tremido)",
+        "auditory (implicação de voz)",
+        "social_presence (memória do território)"
+      ]
     },
     {
-      "stage": "DEVOLUÇÃO",
-      "description": "A palavra permanece no ecrã por 5 segundos, e depois desaparece, deixando apenas o círculo vazio. Um som de suspiro ou exalação marca o final. A pessoa recebe um convite para guardar a palavra (opcional, sem registo obrigatório) ou para repetir a experiência."
+      "phase": "DEVOLUÇÃO",
+      "action": "O ecrã regressa ao estado inicial (cinzento com mancha de luz pulsante), mas agora a mancha tem uma cor diferente (ex.: azul se era branca, ou verde se era laranja). Um som de sino suave é emitido, como um marco de fecho. O texto 'Leva isto contigo.' aparece e some. A pessoa pode repetir a experiência ou sair.",
+      "sensory_focus": [
+        "visual (cor alterada)",
+        "auditory (sino)",
+        "proprioceptive (memória corporal)"
+      ]
     },
     {
-      "stage": "RASTO / LATÊNCIA",
-      "description": "Se a pessoa optar por guardar a palavra, esta é adicionada a uma constelação invisível de palavras de outros participantes (sem identificação). Em sessões futuras, a constelação pode influenciar a geração de novas palavras (ex: palavras guardadas anteriormente podem aparecer como opções de 'APARIÇÃO' para novos participantes)."
+      "phase": "RASTO / LATÊNCIA",
+      "action": "A cor final da mancha de luz e a frase/palavra que apareceu são guardadas como um 'rasto' anónimo na constelação COSMICOXES, sob a tag 'corpo-percebe'. Este rasto pode ser reencontrado mais tarde por outras pessoas ou pela mesma pessoa em sessões futuras, como uma partícula de memória corporal colectiva. A experiência não registra dados pessoais.",
+      "sensory_focus": [
+        "social_presence (rasto colectivo)",
+        "spatial (constelação)"
+      ]
     }
   ],
   "participant_verbs": [
-    "tocar",
-    "esfregar",
-    "escutar",
-    "respirar",
+    "fechar",
     "sentir",
+    "escutar",
+    "escolher",
     "esperar",
-    "observar"
+    "tocar",
+    "respirar"
   ],
   "system_responses": [
     {
-      "trigger": "proximidade do cursor/dedo",
-      "response": "O ponto pulsante expande-se ou contrai-se, com som de respiração sincronizado."
+      "trigger": "Imobilidade ou ausência de interação",
+      "response": "Mancha de luz contrai-se, som de gota, texto convite para focar a atenção num ponto do corpo."
     },
     {
-      "trigger": "toque/clique no ponto",
-      "response": "O ponto explode em partículas, revelando um círculo vazio com textura de pele e som de fricção táctil."
+      "trigger": "Toque no ecrã (opcional)",
+      "response": "Mancha de luz move-se na direção do toque, som de vento ajustado à velocidade do gesto."
     },
     {
-      "trigger": "movimento do cursor/dedo",
-      "response": "A textura e o som do círculo alteram-se conforme a velocidade e direção do movimento."
+      "trigger": "Espera prolongada (10+ segundos)",
+      "response": "Mancha de luz divide-se, som de gelo, texto sobre dualidade corpo/sombra."
     },
     {
-      "trigger": "pressão (touchscreen) ou velocidade do clique",
-      "response": "O lado oposto do círculo responde com textura e som invertidos."
+      "trigger": "Toque para escolher uma mancha",
+      "response": "Mancha escolhida expande-se, cor quente preenche o ecrã, frase aparece."
     },
     {
-      "trigger": "silêncio (10 segundos sem interação)",
-      "response": "O círculo desvanece-se e um novo convite textual aparece."
+      "trigger": "Espera sem toque",
+      "response": "Manchas fundem-se, ecrã branco, palavra aparece."
     },
     {
-      "trigger": "interação com o círculo",
-      "response": "Uma palavra ou frase aparece no centro, gerada com base no ritmo da interação."
-    },
-    {
-      "trigger": "opção de guardar a palavra",
-      "response": "A palavra é adicionada a uma constelação invisível de palavras de outros participantes."
+      "trigger": "Fim da experiência",
+      "response": "Mancha de luz com cor alterada, som de sino, texto de fecho."
     }
   ],
-  "sensory_signature_id": "corpo-percebe-2026",
+  "sensory_signature_id": "corpo-percebe-49-001",
   "sensory_channels": {
     "visual": {
       "elements": [
-        "ponto pulsante",
-        "partículas dispersas",
-        "círculo vazio",
-        "textura de pele",
-        "palavra caligráfica"
+        "mancha de luz pulsante",
+        "expansão/contracção da luz",
+        "divisão da luz em duas",
+        "dança das luzes",
+        "cor quente/fria",
+        "texto tremido",
+        "ecrã cinzento/branco"
       ],
-      "dynamics": [
-        "pulsação",
-        "expansão/contração",
-        "transparência",
-        "textura variável",
-        "aparição/desaparecimento"
-      ]
+      "purpose": "Guiar a atenção para o corpo e o espaço interno, usando a luz como metáfora da percepção."
     },
     "auditory": {
       "elements": [
-        "respiração",
-        "zumbido",
-        "fricção táctil",
-        "som de suspiro"
+        "ritmo cardíaco",
+        "vento suave",
+        "som de gota",
+        "coral de vozes murmurosas",
+        "som de gelo",
+        "sino suave"
       ],
-      "dynamics": [
-        "volume variável",
-        "frequência variável",
-        "silêncio",
-        "eco suave"
-      ]
+      "purpose": "Criar uma paisagem sonora que reflita e amplifique os estados internos do corpo (respiração, batimento cardíaco, movimento)."
     },
     "haptic": {
       "elements": [
-        "vibração opcional (se dispositivo compatível)"
+        "vibração sutil (opcional, se dispositivo suportar)",
+        "feedback táctil no toque (opcional)"
       ],
-      "dynamics": [
-        "feedback mínimo em resposta à pressão ou movimento rápido"
-      ]
+      "purpose": "Reforçar a conexão física com o gesto, sem depender de permissões."
     },
     "kinesthetic": {
       "elements": [
         "movimento do cursor/dedo",
-        "pressão (touchscreen)",
-        "velocidade do gesto"
+        "velocidade do toque",
+        "imobilidade detectada"
       ],
-      "dynamics": [
-        "resposta à trajetória",
-        "resposta à intensidade"
-      ]
+      "purpose": "Traduzir o movimento físico em respostas visuais e sonoras, convocando o corpo a participar."
     },
     "proprioceptive": {
       "elements": [
-        "atenção ao peso do corpo",
-        "respiração percebida"
+        "atenção à respiração",
+        "foco nos pés/mãos",
+        "sincronia corpo-som",
+        "memória corporal"
       ],
-      "dynamics": [
-        "convite à auto-observação"
-      ]
+      "purpose": "Dirigir a atenção para sensações internas, usando o corpo como dispositivo primário."
     },
     "temporal_interoceptive": {
       "elements": [
-        "ritmo da interação",
-        "espera",
-        "silêncio"
+        "espera ativa",
+        "ritmo da respiração",
+        "aceleração/desaceleração do som",
+        "pulsação da luz"
       ],
-      "dynamics": [
-        "aceleração/desaceleração",
-        "suspensão"
-      ]
+      "purpose": "Criar uma experiência de tempo subjectivo, onde a duração é ditada pelo corpo da pessoa."
     },
     "spatial": {
       "elements": [
-        "proximidade do cursor/dedo",
-        "divisão do círculo em dois lados"
+        "posição das manchas de luz",
+        "dualidade corpo/sombra",
+        "constelação COSMICOXES"
       ],
-      "dynamics": [
-        "distância",
-        "orientação"
-      ]
+      "purpose": "Evocar um sentido de espaço interno e externo, onde o corpo é o centro."
     },
     "olfactory_evocation": {
       "elements": [
-        "memória de cheiros associados à pele (ex: sabonete, suor, perfume)"
+        "memória de cheiros associados a lugares (ex.: 'o cheiro da terra molhada')"
       ],
-      "dynamics": [
-        "evocação por linguagem e textura visual"
-      ]
+      "purpose": "Evocar cheiros através de linguagem e associação, sem fingir output olfactivo."
     },
     "gustatory_evocation": {
       "elements": [
-        "memória de sabores associados a momentos de perceção corporal (ex: salgado do suor, doce de um beijo)"
+        "memória de sabores (ex.: 'o gosto do pão quente')"
       ],
-      "dynamics": [
-        "evocação por linguagem e som"
-      ]
+      "purpose": "Evocar sabores através de texto e som, sem fingir output gustativo."
     },
     "social_presence": {
       "elements": [
-        "constelação invisível de palavras de outros participantes"
+        "rasto anónimo na constelação COSMICOXES",
+        "frase/palavra como devolução colectiva"
       ],
-      "dynamics": [
-        "influência indireta em sessões futuras"
-      ]
+      "purpose": "Criar um sentido de partilha não intrusiva, onde a experiência individual contribui para um todo."
     }
   },
   "cross_sensory_translation": {
-    "primary": "O movimento do cursor/dedo (cinestésico) altera a textura visual e o som táctil (auditivo), criando uma tradução entre tato, visão e audição.",
-    "secondary": "A pressão (háptico) no lado esquerdo do círculo afeta a textura visual e o som do lado direito, e vice-versa."
+    "primary": "O movimento do corpo (respiração, toque) traduz-se em som (ritmo cardíaco, coral de vozes) e luz (mancha pulsante, dança das luzes).",
+    "secondary": "A imobilidade do corpo (foco interno) traduz-se em divisões visuais (mancha de luz a dividir-se) e sons de transição (gelo, gota).",
+    "tertiary": "A escolha da pessoa (tocar ou esperar) traduz-se em alterações visuais (cor quente/fria) e textuais (frase/palavra)."
   },
   "silence_or_absence": {
-    "mechanism": "O silêncio é usado como matéria ativa: a ausência de interação durante 10 segundos desencadeia uma nova fase da experiência, e o som de suspiro marca o final da interação.",
-    "purpose": "Criar espaço para a auto-observação e a perceção do corpo sem estímulos externos."
+    "mechanism": "O silêncio é usado como matéria: a ausência de estímulos digitais (ecrã escuro, som mínimo) convida a pessoa a focar-se no seu corpo e ambiente imediato. O texto aparece e some rapidamente, como se fosse um suspiro, reforçando a ideia de que a experiência é efémera e interna.",
+    "purpose": "Criar espaço para a percepção corporal sem interferência digital excessiva. O silêncio não é vazio; é um convite à escuta interna."
   },
   "surprise_or_indeterminacy": {
-    "mechanism": "A inversão repentina da relação entre movimento e textura/som (desvio) e a geração aleatória ou baseada em ritmo de palavras (aparição).",
-    "purpose": "Subverter as expectativas do participante e introduzir um elemento de imprevisibilidade controlada."
+    "mechanism": [
+      "A divisão inesperada da mancha de luz em duas (corpo e sombra) quebra a expectativa de linearidade.",
+      "A frase ou palavra que aparece no final é gerada a partir de um conjunto pré-definido de opções, mas a escolha depende do percurso da pessoa (tocar vs. esperar).",
+      "A cor final da mancha de luz é aleatoriamente seleccionada entre 3 opções (azul, verde, roxo), criando uma variação visual entre sessões.",
+      "O som do coral de vozes é gerado com base em amostras de vozes reais (anónimas), misturadas de forma única em cada sessão."
+    ],
+    "purpose": "Manter a experiência viva e imprevisível, sem recorrer a aleatoriedade genérica ou vigilância."
   },
   "session_variation": [
     {
       "type": "acaso controlado",
-      "description": "A palavra gerada na fase de 'APARIÇÃO' pode ser aleatória entre um conjunto pré-definido se o participante não interagir ativamente."
+      "description": "A cor final da mancha de luz é seleccionada aleatoriamente entre 3 opções."
     },
     {
-      "type": "resposta a ritmo/velocidade do gesto",
-      "description": "A textura e o som do círculo alteram-se conforme a velocidade e intensidade do movimento do participante."
+      "type": "resposta a ritmo/velocidade",
+      "description": "A velocidade do toque no ecrã afecta a intensidade do som de vento e a velocidade de movimento da mancha de luz."
     },
     {
-      "type": "resposta a posição/trajetória",
-      "description": "A divisão do círculo em dois lados responde à trajetória do cursor/dedo, criando uma interação espacial única."
+      "type": "resposta a posição/trajectória",
+      "description": "A posição do cursor/dedo no ecrã influencia a direcção inicial da mancha de luz."
     },
     {
       "type": "combinação de fragmentos curatoriais",
-      "description": "As palavras guardadas por outros participantes (constelação invisível) podem influenciar a geração de novas palavras em sessões futuras."
+      "description": "A frase ou palavra final é seleccionada a partir de um conjunto de 10 opções pré-definidas, com base no percurso (tocar vs. esperar)."
     },
     {
       "type": "silêncio/espera",
-      "description": "A experiência pode entrar em modo de espera se o participante não interagir, desencadeando uma nova fase."
+      "description": "A duração da espera antes da aparição da frase/palavra final varia entre 3 e 7 segundos, com base no tempo médio de imobilidade detectado."
     }
   ],
   "territorial_binding": {
-    "relation": "A experiência não está diretamente ligada a um território físico, mas a constelação de palavras guardadas pode ser associada a uma freguesia ou lugar se o participante optar por adicionar essa informação (opcional e sem rastreio).",
-    "justification": "A dinâmica 'O Corpo que Percebe' é universal e não depende de um lugar específico, mas a devolução (constelação de palavras) pode ter uma dimensão territorial se o participante assim o desejar."
+    "relation": "A experiência evoca o território através da memória corporal e da conexão com o lugar onde a pessoa se encontra. As frases/palavras finais podem incluir referências subtis a elementos territoriais (ex.: 'O chão lembra-se dos teus passos.' sugere uma conexão com o solo da freguesia).",
+    "sustainability": "A relação territorial é implícita e baseada na memória individual, sem exigir geolocalização ou dados pessoais. O rasto na constelação COSMICOXES pode ser associado a um território se a pessoa o permitir (opcional)."
   },
   "trace_and_return": {
     "trace": {
-      "type": "palavra guardada",
-      "description": "A palavra gerada na fase de 'APARIÇÃO' pode ser guardada pelo participante e adicionada a uma constelação invisível de palavras de outros participantes."
+      "type": "anónimo",
+      "content": "A cor final da mancha de luz e a frase/palavra que apareceu são guardadas como um 'rasto' na constelação COSMICOXES, sob a tag 'corpo-percebe'.",
+      "persistence": "O rasto permanece disponível para ser reencontrado em sessões futuras, como parte de uma memória colectiva."
     },
     "return": {
-      "type": "influência em sessões futuras",
-      "description": "As palavras guardadas podem aparecer como opções de 'APARIÇÃO' para novos participantes, criando um rasto coletivo."
-    },
-    "latency": {
-      "type": "constelação invisível",
-      "description": "As palavras permanecem na constelação e podem ser reencontradas em sessões futuras, sem identificação do autor."
+      "type": "devolução poética",
+      "content": "A pessoa recebe uma frase ou palavra que resume ou amplifica a sua experiência, como um presente para levar consigo."
     }
   },
   "accessibility_equivalents": {
-    "visual": {
-      "alternative": "Descrição auditiva de todas as alterações visuais (ex: 'O ponto está a pulsar', 'O círculo está a preencher-se com uma textura áspera').",
-      "reduced_motion": "Modo de movimento reduzido: o ponto pulsante e as partículas são estáticos, mas a interação com o cursor/dedo ainda desencadeia as respostas do sistema."
+    "visual_impairment": {
+      "description": "Todas as interacções visuais são acompanhadas por sons distintos (ex.: mancha de luz a mover-se = som de vento; divisão da luz = som de gelo). O texto aparece em letras grandes e com alto contraste, e pode ser lido em voz alta (opcional, via screen reader).",
+      "preserves_poetry": true
     },
-    "auditory": {
-      "alternative": "Legendas visuais para todos os sons (ex: 'Som de respiração', 'Som de fricção táctil').",
-      "mute": "Modo mudo: os sons são substituídos por vibrações (se dispositivo compatível) ou por alterações visuais (ex: o círculo muda de cor em resposta ao que seria o som)."
+    "auditory_impairment": {
+      "description": "Os sons são substituídos por vibrações (se dispositivo suportar) ou por alterações visuais (ex.: mancha de luz a pulsar em sincronia com o ritmo que seria sonoro). O texto aparece sempre no ecrã.",
+      "preserves_poetry": true
     },
-    "haptic": {
-      "alternative": "Feedback visual para pressão (ex: o círculo muda de cor ou textura em resposta à pressão)."
+    "motor_impairment": {
+      "description": "A experiência pode ser controlada via teclado (setas para mover a 'atenção' no ecrã) ou voz (comandos como 'esquerda', 'direita', 'espera'). A imobilidade é detectada automaticamente, sem exigir interacção física.",
+      "preserves_poetry": true
     },
-    "kinesthetic": {
-      "alternative": "Controlo por teclado: as setas do teclado podem ser usadas para mover um cursor virtual, e a barra de espaço pode ser usada para 'tocar' o ponto."
+    "cognitive_load": {
+      "description": "A experiência é dividida em passos claros e curtos, com pausas naturais. O texto aparece e some lentamente, dando tempo para a leitura. Não há pressão de tempo.",
+      "preserves_poetry": true
     },
-    "proprioceptive": {
-      "alternative": "Convite textual para fechar os olhos e focar na respiração ou no peso do corpo, sem depender de interação física."
-    },
-    "temporal_interoceptive": {
-      "alternative": "Modo sem pressão: a experiência não desaparece ou avança automaticamente, permitindo que o participante interaja no seu próprio ritmo."
+    "reduced_motion": {
+      "description": "As animações da mancha de luz são suaves e podem ser desactivadas, substituídas por transições instantâneas ou por um modo estático onde a luz é representada por um círculo fixo que muda de cor.",
+      "preserves_poetry": true
     }
   },
-  "optional_permissions": {
-    "required": [],
-    "optional": [
-      {
-        "permission": "touchscreen/pressão",
-        "purpose": "Permitir que a pressão do dedo afete a textura e o som do círculo.",
-        "fallback": "A interação é baseada apenas no movimento do cursor/dedo."
-      },
-      {
-        "permission": "vibração",
-        "purpose": "Fornecer feedback háptico opcional em resposta à interação.",
-        "fallback": "O feedback é apenas visual e auditivo."
-      }
-    ]
-  },
+  "optional_permissions": [
+    {
+      "permission": "microfone",
+      "purpose": "Detectar o ritmo da respiração da pessoa para sincronizar o movimento da mancha de luz e o som de fundo.",
+      "fallback": "Se não concedido, o sistema usa um ritmo pré-definido ou baseia-se no toque no ecrã."
+    },
+    {
+      "permission": "movimento/orientação",
+      "purpose": "Detectar a inclinação do dispositivo para ajustar a posição da mancha de luz.",
+      "fallback": "Se não concedido, a mancha de luz move-se com base no toque ou no cursor."
+    }
+  ],
   "overstimulation_risk": {
-    "risks": [
-      "Flashing ou alterações visuais rápidas podem causar desconforto.",
-      "Sons súbitos ou repetitivos podem ser perturbadores.",
-      "Feedback háptico insistente pode ser incómodo."
-    ],
-    "mitigations": [
-      "O ponto pulsante tem uma frequência baixa e suave, sem flashing.",
-      "Os sons são sempre suaves e progressivos, com opção de mute.",
-      "O feedback háptico é mínimo e opcional, com alternativa visual.",
-      "A experiência inclui pausas e silêncio como parte da dinâmica.",
-      "O participante pode sair a qualquer momento."
+    "potential_risk": "A combinação de luz pulsante, sons contínuos e texto que aparece/desaparece pode ser sobre-estimulante para pessoas com sensibilidade sensorial.",
+    "mitigation": [
+      "A intensidade da luz e do som é mantida baixa e ajustável (opção de reduzir volume ou brilho).",
+      "As animações são suaves e podem ser desactivadas (modo reduced-motion).",
+      "A experiência tem pausas naturais (ex.: espera entre fases) e a pessoa pode sair a qualquer momento.",
+      "Os sons são ambientais e não súbitos (ex.: vento suave, não ruídos agudos)."
     ]
   },
   "distinctiveness": {
-    "unique_traits": [
-      "A experiência reduz o digital ao mínimo, convocando a perceção corporal direta.",
-      "A tradução cruzada entre movimento, textura e som é central e não decorativa.",
-      "O silêncio e a ausência são usados como matérias ativas, não como vazio passivo.",
-      "A devolução (palavra gerada) é única para cada sessão e pode influenciar sessões futuras.",
-      "A dinâmica não depende de permissões ou sensores, funcionando em qualquer dispositivo.",
-      "A acessibilidade preserva a intenção poética, não reduzindo a experiência a uma versão 'menor'."
+    "unique_elements": [
+      "O convite inicial ('Fecha os olhos. O corpo começa.') como limiar para uma experiência minimalista e corporal.",
+      "A mancha de luz como metáfora da atenção corporal, que se divide em corpo e sombra.",
+      "A tradução do movimento/respiração em som e luz, sem interface complexa.",
+      "O uso do silêncio e da ausência como matéria central, não como falta de conteúdo.",
+      "A devolução de uma frase/palavra que parece vir do corpo ou do território, não do sistema.",
+      "O rasto anónimo na constelação COSMICOXES como memória colectiva de percepções corporais."
     ],
-    "comparison": "Nenhuma outra experiência no Atlas usa o corpo como instrumento de perceção de forma tão direta e minimalista, nem reduz o digital a um papel de mediador quase invisível. A tradução cruzada entre tato, visão e audição é única para esta curadoria."
+    "comparison": "Esta experiência é única porque não se trata de interagir com um ecrã, mas de usar o ecrã como um espelho mínimo para explorar o corpo. Não há 'jogo' no sentido tradicional, nem objectivos, nem pontuação. A mecânica é a perceção em si, e a interface digital é apenas um suporte para essa exploração. Nenhuma das outras 48 experiências do Atlas tem este foco exclusivo na percepção incorporada com tão pouca mediação digital."
   },
   "questions_for_eduardo": [
-    "A geração da palavra na fase de 'APARIÇÃO' deve ser baseada apenas no ritmo da interação, ou pode incluir outros fatores (ex: palavras guardadas anteriormente)?",
-    "A constelação de palavras deve ser global (para todos os participantes) ou pode ser territorial (associada a uma freguesia ou lugar)?",
-    "Deve haver um limite para o número de palavras que um participante pode guardar, ou a constelação pode crescer indefinidamente?",
-    "A experiência deve incluir um convite explícito para fechar os olhos, ou isso deve ser opcional e implícito?"
+    "A frase/palavra final deve ser gerada a partir de um conjunto fixo de opções (ex.: 10 frases pré-definidas) ou deve ser dinâmica com base em inputs da pessoa (ex.: localização, hora do dia)? A fonte autoral não especifica.",
+    "O rasto na constelação COSMICOXES deve ser visível para a pessoa que o criou (ex.: 'O teu rasto está em X') ou deve permanecer completamente anónimo e colectivo?",
+    "A experiência deve ter uma duração máxima (ex.: 5 minutos) ou pode ser repetida indefinidamente pela pessoa?",
+    "O som do coral de vozes deve ser gerado a partir de amostras reais (anónimas) ou pode ser sintético, desde que soe orgânico?"
   ],
   "improvement_proposals": [
     {
-      "proposal": "Adicionar uma opção para o participante associar a palavra gerada a um lugar ou memória específica, criando uma camada territorial opcional.",
-      "justification": "Isso alinharia a experiência com a dimensão territorial do Atlas, sem forçar uma ligação artificial."
+      "proposal": "Incluir uma opção para a pessoa gravar um áudio curto (ex.: 10 segundos) da sua respiração ou de um som do ambiente, que seja misturado com o coral de vozes em sessões futuras. Isso reforçaria a conexão territorial e a devolução colectiva.",
+      "justification": "A fonte autoral menciona 'memória' e 'território' como elementos centrais. Esta proposta alinha-se com esses princípios, sem exigir permissões intrusivas (o áudio seria opcional e anónimo)."
     },
     {
-      "proposal": "Incluir uma fase de 'reconhecimento' no final, onde o participante pode ver as palavras guardadas por outros (sem identificação) e refletir sobre a constelação coletiva.",
-      "justification": "Isso reforçaria a dimensão social e comunitária da experiência, alinhando-a com os princípios do Atlas."
+      "proposal": "Adicionar uma fase opcional onde a pessoa é convidada a desenhar com o dedo no ecrã (ou com o rato) uma forma que represente o que sentiu. O desenho seria convertido em uma textura sutil que influenciaria a mancha de luz em sessões futuras.",
+      "justification": "Isso traria uma camada táctil e criativa adicional, alinhada com o princípio de 'o corpo como dispositivo'. No entanto, deve ser opcional para não sobrecarregar a experiência."
     },
     {
-      "proposal": "Permitir que o participante 'apague' a sua palavra da constelação, se assim o desejar, reforçando o controle sobre o seu rasto.",
-      "justification": "Isso alinharia com os princípios de consentimento e autonomia do Atlas."
+      "proposal": "Integrar referências territoriais explícitas nas frases/palavras finais, com base na freguesia ou localização aproximada da pessoa (se concedida). Exemplo: 'O chão de [Freguesia] lembra-se dos teus passos.'",
+      "justification": "Isso reforçaria a conexão com o território, mas deve ser opcional e não depender de geolocalização para funcionar."
     }
   ],
   "generic_fallback_allowed": false,

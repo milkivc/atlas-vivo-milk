@@ -3,351 +3,344 @@
   "canonical_name": "O Cubo Interior",
   "source_evidence": {
     "primary": [
-      {
-        "id": "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md",
-        "authority": "autoral",
-        "excerpt": "D7 O Cubo Interior — síntese/viagem pelas seis faces; não reduzir a menu 3D."
-      },
-      {
-        "id": "CUBO_02_MANUAL_INVERTIDO_MELHORADO.md",
-        "authority": "autoral",
-        "excerpt": "Livro Cubo, Manual Invertido, SOMOSTODOSPOSSIVEIS, seis faces, vazio central, anti-regras; estado: versão melhorada para revisão humana."
-      }
+      "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md (D7: O Cubo Interior)",
+      "CUBO_02_MANUAL_INVERTIDO_MELHORADO.md (6 faces + vazio central)"
     ],
     "secondary": [
-      {
-        "id": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
-        "authority": "curatorial",
-        "excerpt": "Princípios CARE, dissidência, anticolonialidade, intergeracionalidade e feminismo de dados; 16 seres folclóricos; 5 núcleos/dispositivos nomeados."
-      }
+      "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf (princípios CARE, dissidência, anticolonialidade)"
+    ],
+    "tertiary": [
+      "Curadoria Cultural e Existencialismo Profundo.pdf (território fluido, Llansol/cena-fulgor)"
     ]
   },
   "authorial_invariants": [
-    "O Cubo Interior é uma síntese/viagem pelas seis faces do Livro Cubo (porta, jaula, chão, céu, espelho, buraco).",
-    "O vazio central do cubo preserva o que não deve ser fechado.",
-    "O erro é entrada; o riso é método; o silêncio é matéria; a pergunta abre.",
-    "O ganhador não vence o outro, chega a si.",
-    "Não é um menu 3D nem uma representação estática das faces.",
-    "O cubo é lugar, jogo, metodologia de encontro, arquitectura sensorial e sistema vivo.",
-    "SOMOSTODOSPOSSIVEIS: baralho + espaço + corpo + voz; anti-regras; jogo termina quando todos querem continuar."
+    "Sete dinâmicas do Livro Cubo, sendo D7 a síntese: 'O Cubo Interior'",
+    "Seis faces do Cubo: 1. a porta, 2. a jaula, 3. o chão, 4. o céu, 5. o espelho, 6. o buraco",
+    "Vazio central como espaço livre e não fechado",
+    "Princípios: o erro é entrada; o riso é método; o silêncio é matéria; a pergunta abre; o ganhador não vence o outro, chega a si",
+    "SOMOSTODOSPOSSIVEIS: baralho + espaço + corpo + voz; anti-regras; jogo termina quando todos querem continuar",
+    "O Cubo Interior não é um menu 3D, mas uma viagem pelas faces"
   ],
-  "perceptual_intent": "Convidar a pessoa a atravessar uma viagem interior não-linear, onde cada face do cubo é um estado de consciência, um gesto ou uma pergunta que se desdobra em resposta ao seu movimento, ritmo ou silêncio. A experiência deve sentir-se como um ritual de auto-descoberta, onde o corpo e a atenção são os únicos guias, e o sistema responde como um espelho vivo que devolve o que foi oferecido, mas transformado.",
+  "perceptual_intent": "Convidar a pessoa a uma viagem interior através das seis faces do Cubo, onde cada face é um limiar sensorial e existencial. A experiência deve sentir-se como um ritual de auto-descoberta, onde o corpo, a voz e o silêncio são matéria prima para a transformação. O vazio central é o espaço de não-saber, onde a pessoa é convocada a preencher com a sua própria presença.",
   "threshold": {
-    "description": "A tela começa em negro profundo, com um ponto de luz minúsculo e pulsante no centro (como uma estrela ou um furo de agulha). O ponto não é clicável. A pessoa percebe que algo está a respirar: a luz expande-se e contrai-se em ritmo irregular, como se fosse um coração ou uma respiração. Não há texto, som ou instrução. A luz é a única presença.",
-    "sensory_trigger": "A pulsação da luz (ritmo visual) convida à atenção sem exigir ação imediata."
+    "description": "A pessoa entra num espaço escuro, onde um cubo flutua lentamente no centro do ecrã. O cubo é translúcido, com contornos difusos, e emite um som de respiração profunda e lenta. À medida que a pessoa se aproxima (com o cursor ou dedo), o cubo revela-se como um portal: as suas faces começam a brilhar fracamente, como se estivessem a acordar.",
+    "sensory_trigger": "Aproximação do cursor/dedo + som de respiração (auditory) + brilho difuso (visual)"
   },
   "dramaturgical_arc": [
     {
-      "phase": "limiar",
-      "description": "Tela negra com ponto de luz pulsante. A pessoa é confrontada com o vazio e a expectativa."
+      "stage": "LIMIAR",
+      "action": "O cubo flutua no vazio, emitindo um som de respiração. A pessoa sente que algo a observa, mas não há instruções. O ambiente é escuro, com um gradiente de luz que sugere profundidade."
     },
     {
-      "phase": "chamada",
-      "description": "O ponto de luz começa a deslocar-se lentamente em direções aleatórias, como se fosse arrastado por uma corrente invisível. A pessoa sente que algo a observa ou espera por ela."
+      "stage": "CHAMADA",
+      "action": "O cubo gira lentamente, revelando uma face por vez. Cada face tem uma textura e um som único: a porta (madeira rangendo), a jaula (metal a tremer), o chão (terra a rachar), o céu (vento), o espelho (eco distorcido), o buraco (silêncio absoluto)."
     },
     {
-      "phase": "primeiro gesto",
-      "description": "A pessoa move o cursor, toca a tela ou faz um gesto (opcional). O ponto de luz reage: aproxima-se, afasta-se ou divide-se em dois, como se fosse um ser vivo curioso."
+      "stage": "PRIMEIRO GESTO",
+      "action": "A pessoa toca ou clica numa face. O cubo para de girar e a face tocada expande-se, preenchendo o ecrã com a sua textura e som. Aparece um convite mínimo: 'Entra.'"
     },
     {
-      "phase": "resposta viva",
-      "description": "O sistema responde com um som subliminar (como um suspiro ou um zumbido) e a luz transforma-se em uma das seis faces do cubo (ex: a porta, o espelho). A face aparece como uma silhueta translúcida, com textura e profundidade, mas sem detalhes legíveis."
+      "stage": "RESPOSTA VIVA",
+      "action": "Ao entrar, a pessoa é transportada para um espaço sensorial correspondente à face: a porta abre-se para um corredor estreito (som de passos), a jaula fecha-se à volta dela (som de grades), o chão desmorona-se (som de queda), o céu eleva-a (som de vento), o espelho reflete-a distorcida (eco da sua voz, se permitir microfone), o buraco absorve-a (silêncio)."
     },
     {
-      "phase": "desvio",
-      "description": "A face do cubo que apareceu não é estática: ela distorce-se, gira ou fragmenta-se em resposta ao movimento da pessoa. Se a pessoa parar, a face congela e emite um som único (ex: um sino, um riso, um murmúrio)."
+      "stage": "DESVIO",
+      "action": "No interior de cada face, algo inesperado acontece: a porta leva a um espelho em vez de um corredor; a jaula abre-se sozinha; o chão revela um buraco; o céu mostra o chão; o espelho reflete o vazio; o buraco devolve-a à porta. O sistema não explica, apenas responde."
     },
     {
-      "phase": "aprofundamento sensorial",
-      "description": "Dois canais começam a contaminar-se: o som da face (ex: o espelho emite um eco da voz da pessoa, se esta falou) mistura-se com a textura visual (ex: a porta ganha relevos que respondem ao volume do som ambiente, se permitido). A pessoa percebe que o cubo está a "
+      "stage": "APROFUNDAMENTO SENSORIAL",
+      "action": "Dois canais contaminam-se: na jaula, o som do metal mistura-se com a vibração do ecrã (se suportado); no espelho, a voz da pessoa (se gravada) distorce-se visualmente em ondas; no buraco, o silêncio altera a cor do ambiente para tons de cinzento."
+    },
+    {
+      "stage": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "A pessoa pode: 1) Ficar em silêncio e esperar que a face se feche sozinha; 2) Repetir um gesto (ex: tocar a face novamente); 3) Sair para o vazio central. O sistema responde de forma imprevisível: pode fechar a face, abrir outra, ou manter-se em suspenso."
+    },
+    {
+      "stage": "APARIÇÃO",
+      "action": "No vazio central, as faces visitadas começam a flutuar à volta da pessoa, como memórias. Uma frase emerge no centro: 'O que sobrou?' ou 'O que falta?'. A pessoa é convidada a responder com um gesto, uma palavra ou silêncio."
+    },
+    {
+      "stage": "DEVOLUÇÃO",
+      "action": "O sistema devolve uma constelação das faces visitadas, com as respostas da pessoa (se houver) integradas como novas texturas ou sons. Esta constelação é única para a sessão e pode ser guardada como rasto (opcional)."
+    },
+    {
+      "stage": "RASTO / LATÊNCIA",
+      "action": "A constelação fica disponível para regresso futuro, mas não é permanente. Pode ser partilhada como um 'cubo-memória' anónimo, que outros podem encontrar e explorar, sem saber quem o criou."
     }
   ],
   "participant_verbs": [
-    "observar",
-    "respirar",
     "tocar",
     "escutar",
+    "respirar",
     "esperar",
-    "desviar",
-    "deixar-se"
+    "escolher",
+    "repetir",
+    "silenciar"
   ],
   "system_responses": {
-    "initial": "Ponto de luz pulsante em tela negra, sem texto ou som.",
-    "to_movement": {
-      "cursor/touch": "O ponto de luz divide-se, aproxima-se ou afasta-se, emitindo sons orgânicos (respiração, água, vento).",
-      "stillness": "O ponto de luz congela e emite um som único (ex: sino, riso, murmúrio)."
-    },
-    "to_voice": {
-      "optional": "Se a pessoa falhar, a face do cubo (ex: espelho) repete a voz em eco distorcido, misturado com sons ambientais (ex: chuva, pássaros)."
-    },
-    "to_silence": {
-      "prolonged": "A face do cubo desvanece-se lentamente, revelando uma nova camada (ex: o buraco, o vazio central)."
-    },
-    "to_choice": {
-      "face_selection": "Se a pessoa 'escolher' uma face (por movimento ou toque), o cubo gira para revelar a face oposta, com uma transição que simula gravidade ou queda."
-    },
-    "to_return": {
-      "devolution": "No final, o sistema devolve uma frase ou imagem gerada a partir das interações da pessoa (ex: 'A porta que abristes era o chão que pisaste')."
-    }
+    "to_gesture": "Cada face do cubo responde com uma transformação sensorial única (som + textura + movimento).",
+    "to_voice": "Se a pessoa falhar ou sussurrar, o espelho distorce a voz em tempo real (opcional, com permissão).",
+    "to_silence": "O buraco absorve o som ambiente (se permitido) ou reduz o volume gradual da experiência.",
+    "to_waiting": "As faces começam a girar sozinhas, como se impacientes, emitindo sons aleatórios das outras faces.",
+    "to_repetition": "Repetir o mesmo gesto na mesma face pode desencadear uma resposta diferente (ex: a jaula abre-se na segunda vez)."
   },
-  "sensory_signature_id": "cubo-interior-viagem-silencio-espelho",
+  "sensory_signature_id": "CUBO-INT-2026-09-02",
   "sensory_channels": {
     "visual": {
       "elements": [
-        "ponto de luz pulsante",
-        "silhuetas translúcidas das faces do cubo",
-        "texturas dinâmicas (relevos, distorções)",
-        "transições de profundidade e escala",
-        "negro profundo como pano de fundo"
+        "cubo translúcido com faces texturizadas",
+        "gradientes de luz e escuridão",
+        "expansão da face tocada",
+        "distorsão do espelho",
+        "constelação de faces no vazio central"
       ],
       "dynamics": [
-        "pulsação rítmica",
-        "movimento orgânico (como ser vivo)",
-        "fragmentação e recomposição",
-        "transparência variável"
+        "transparência variável",
+        "movimento de rotação e expansão",
+        "texturas que respondem ao toque",
+        "cores que mudam com o silêncio"
       ]
     },
     "auditory": {
       "elements": [
-        "sons orgânicos (respiração, água, vento)",
-        "ecos distorcidos da voz da pessoa",
-        "sons únicos por face (sino, riso, murmúrio)",
-        "paisagem sonora minimalista"
+        "respiração profunda (limiar)",
+        "sons únicos por face (porta, jaula, chão, céu, espelho, buraco)",
+        "eco distorcido da voz",
+        "silêncio absoluto (buraco)",
+        "sons aleatórios de outras faces"
       ],
       "dynamics": [
-        "volume e timbre respondem ao movimento/posição",
-        "silêncio como matéria ativa",
-        "sobreposição de camadas sonoras"
+        "espacialização do som (ex: voz vinda de trás no espelho)",
+        "volume que responde à distância do cursor",
+        "ritmo que acelera ou abrandar conforme o gesto"
       ]
     },
     "haptic": {
       "elements": [
-        "vibração sutil em dispositivos compatíveis (opcional)",
-        "feedback de pressão em touchscreens (opcional)"
+        "vibração sutil em dispositivos compatíveis (ex: ao tocar a jaula)",
+        "feedback de pressão (se suportado)"
       ],
       "dynamics": [
-        "resposta ao toque ou arrasto",
-        "intensidade variável conforme a face do cubo"
+        "intensidade variável conforme a face"
       ]
     },
     "kinesthetic": {
       "elements": [
-        "movimento do cursor/dedo",
-        "inclinação do dispositivo (opcional)",
-        "velocidade e trajectória do gesto"
+        "movimento do cursor/dedo para girar o cubo",
+        "gestos de toque para expandir faces",
+        "inclinação do dispositivo (opcional) para navegar no vazio central"
       ],
       "dynamics": [
-        "o sistema reage à direção, velocidade e ritmo do movimento"
+        "velocidade do gesto afeta a rotação do cubo",
+        "trajectória do toque altera a textura da face"
       ]
     },
     "proprioceptive": {
       "elements": [
-        "instruções implícitas de postura (ex: 'fechar os olhos', 'respirar profundamente')",
-        "sensação de equilíbrio/desorientação nas transições"
+        "instruções implícitas para respirar (através do som de respiração)",
+        "postura sugerida: 'fechar os olhos' (opcional)"
       ],
       "dynamics": [
-        "convite à atenção corporal sem obrigatoriedade"
+        "ritmo da respiração do sistema sincroniza com o da pessoa (se detectado via microfone, opcional)"
       ]
     },
     "temporal_interoceptive": {
       "elements": [
-        "ritmo da pulsação inicial",
-        "espera e suspensão",
-        "aceleração/desaceleração das transições"
+        "espera como parte da experiência",
+        "suspensão do tempo nas faces",
+        "ritmo de respiração"
       ],
       "dynamics": [
-        "o tempo é um personagem: pode esticar-se ou comprimir-se"
+        "duração variável conforme a interacção",
+        "pausas aleatórias entre respostas"
       ]
     },
     "spatial": {
       "elements": [
-        "profundidade visual (3D simulado)",
-        "distância entre a pessoa e as faces do cubo",
-        "orientação espacial (ex: 'cima' vs 'baixo' nas faces)"
+        "profundidade sugerida pelo cubo flutuante",
+        "espaço 3D implícito nas faces",
+        "constelação de faces no vazio central"
       ],
       "dynamics": [
-        "o cubo parece girar ou cair conforme a interação"
+        "perspectiva que muda conforme o ângulo de visualização"
       ]
     },
     "olfactory_evocation": {
       "elements": [
-        "memória de cheiros associados a cada face (ex: 'porta' → madeira velha, 'espelho' → metal frio)",
-        "palavras que evocam aromas (ex: 'resina', 'poeira', 'chuva')"
+        "evocação de cheiros através de linguagem: 'madeira velha' (porta), 'ferro oxidado' (jaula), 'terra molhada' (chão), 'ar puro' (céu)"
       ],
       "dynamics": [
-        "evocação por linguagem e imagem, nunca output físico"
+        "palavras que aparecem e desaparecem como sugestões"
       ]
     },
     "gustatory_evocation": {
       "elements": [
-        "memória de sabores associados a momentos ou lugares (ex: 'chão' → terra molhada, 'céu' → fruta madura)"
+        "evocação de sabores através de memórias: 'pão quente' (chão), 'água fresca' (céu)"
       ],
       "dynamics": [
-        "evocação por metáfora ou descrição"
+        "associação a receitas ou pratos territoriais (ex: 'pão de Alfama')"
       ]
     },
     "social_presence": {
       "elements": [
-        "sensação de ser observado pelo cubo",
-        "eco da voz da pessoa como se fosse outra presença",
-        "frases devoltas como se viessem de um 'outro'"
+        "constelações de cubos-memória de outros participantes (anónimos)",
+        "sensação de ser observado pelo cubo"
       ],
       "dynamics": [
-        "presença implícita, nunca explícita (ex: sem avatares ou chatbots)"
+        "encontro com rastos de outras pessoas sem identificação"
       ]
     }
   },
   "cross_sensory_translation": {
-    "primary": "O som da voz da pessoa (se falada) transforma-se em textura visual na face do 'espelho': o eco distorcido da voz cria padrões de onda que se materializam como relevos ou cores na superfície do espelho.",
-    "secondary": "O movimento do cursor/dedo altera o timbre do som ambiente: um gesto rápido produz um som agudo, enquanto um gesto lento produz um som grave."
+    "primary": "Som (respiração/eco) traduz-se em movimento (rotação do cubo) e textura visual (ondas sonoras visíveis no espelho).",
+    "secondary": "Gesto (toque) traduz-se em som (cada face tem um timbre único) e cor (a face tocada ilumina-se).",
+    "tertiary": "Silêncio traduz-se em ausência de cor (tons de cinzento no buraco) e redução de movimento."
   },
   "silence_or_absence": {
-    "mechanism": "O silêncio prolongado da pessoa faz com que a face atual do cubo desvaneça, revelando o vazio central. O vazio não é um 'nada', mas um espaço de possibilidade: nele, sons mínimos (ex: um suspiro) ou luzes fracas (ex: um ponto) podem emergir espontaneamente, como se o sistema também 'respirasse'.",
-    "purpose": "O silêncio é um gesto ativo: ele abre portas para camadas mais profundas da experiência."
+    "mechanism": "O buraco (6ª face) é o espaço do silêncio absoluto. Ao entrar, todos os sons param, as cores desaturam e o movimento cessa. O silêncio não é vazio, mas uma presença ativa que convida à introspecção.",
+    "effect": "O silêncio altera a perceção das outras faces: ao regressar, os sons e cores parecem mais intensos."
   },
   "surprise_or_indeterminacy": {
-    "mechanisms": [
-      {
-        "name": "face aleatória inicial",
-        "description": "A primeira face do cubo que aparece não é fixa: é escolhida aleatoriamente entre as seis, mas com um peso que favorece faces menos exploradas em sessões anteriores (sem rastreio de usuário)."
-      },
-      {
-        "name": "resposta não linear",
-        "description": "O sistema pode 'ignorar' um gesto da pessoa (ex: não reagir a um toque) e, em vez disso, responder a um gesto anterior ou a um padrão de interação (ex: se a pessoa fez três gestos rápidos, a quarta interação pode ser mais lenta)."
-      },
-      {
-        "name": "aparição do vazio",
-        "description": "Em momentos aleatórios (mas controlados), o cubo 'quebra' e revela o vazio central, independentemente da interação da pessoa."
-      },
-      {
-        "name": "devolução poética",
-        "description": "A frase ou imagem devolta no final é gerada a partir de um algoritmo simples que combina: (1) a face mais interagida, (2) o ritmo médio dos gestos, (3) uma palavra aleatória de um corpus autoral (ex: 'porta', 'riso', 'poeira')."
-      }
-    ]
+    "mechanism": [
+      "A face do espelho pode refletir não a pessoa, mas o vazio central ou uma face aleatória do cubo.",
+      "A jaula pode abrir-se sozinha após um tempo aleatório de espera.",
+      "O chão pode revelar um buraco que leva a uma face não visitada.",
+      "A constelação final pode incluir faces não visitadas, como se o cubo 'lembrasse' de algo."
+    ],
+    "trigger": "Acaso controlado + tempo de espera + gestos repetidos"
   },
   "session_variation": [
     {
-      "type": "acaso controlado",
-      "description": "A face inicial do cubo é sorteada entre as seis, com pesos que favorecem faces menos frequentes em sessões globais (sem rastreio individual)."
+      "type": "acaso_controlado",
+      "description": "A ordem das faces ao girar o cubo é aleatória, mas ponderada para evitar repetições consecutivas da mesma face."
     },
     {
-      "type": "ordem mutável",
-      "description": "A sequência das faces que aparecem durante a sessão não é fixa: depende da interação da pessoa (ex: se ela explorar mais a 'porta', a próxima face pode ser a 'jaula')."
+      "type": "resposta_a_ritmo",
+      "description": "Se a pessoa interagir rapidamente, o cubo gira mais rápido e os sons sobrepõem-se. Se interagir devagar, o cubo move-se lentamente e os sons são mais claros."
     },
     {
-      "type": "resposta a ritmo/velocidade",
-      "description": "O sistema ajusta a intensidade das respostas (ex: sons mais altos, transições mais rápidas) conforme a velocidade dos gestos da pessoa."
+      "type": "resposta_a_posicao",
+      "description": "A face que se expande ao toque depende da posição do cursor/dedo no ecrã (ex: canto superior esquerdo = porta, canto inferior direito = buraco)."
     },
     {
-      "type": "resposta a posição/trajectória",
-      "description": "A direcção e forma do movimento do cursor/dedo alteram a face do cubo que é revelada (ex: um movimento circular pode invocar o 'céu', enquanto um movimento retilíneo pode invocar o 'chão')."
+      "type": "combinação_de_fragmentos",
+      "description": "A constelação final combina as faces visitadas com sons e texturas de faces não visitadas, criando uma experiência única por sessão."
     },
     {
-      "type": "temporalidade real",
-      "description": "A intensidade da luz inicial e os sons ambiente variam conforme a hora do dia (ex: mais escuro e silencioso à noite, mais claro e com sons de pássaros de manhã)."
+      "type": "temporalidade_real",
+      "description": "À noite, o cubo emite sons mais graves e as texturas são mais escuras. De manhã, os sons são mais agudos e as cores mais vivas."
     }
   ],
   "territorial_binding": {
-    "relation": "O Cubo Interior não está diretamente ligado a um território físico, mas as faces podem evocar memórias ou sensações territoriais (ex: a 'porta' pode remeter a uma porta de uma casa de infância, o 'chão' a uma rua de Lisboa).",
-    "evocation": "A devolução final pode incluir uma referência sutil a um lugar real (ex: 'A porta que abristes era a da Rua do Poço dos Negros'), mas apenas se a pessoa interagiu de forma a sugerir uma conexão territorial (ex: mencionou um lugar em voz alta).",
-    "note": "Qualquer referência territorial deve ser genérica ou baseada em corpus autoral existente. Não inventar lugares ou factos."
+    "relation": "O Cubo Interior não está diretamente ligado a um território físico, mas as texturas e sons das faces podem evocar memórias territoriais (ex: som de uma porta de madeira antiga em Alfama, eco de uma jaula num mercado).",
+    "sustainability": "As evocações territoriais são genéricas e não dependem de dados geolocalizados. Podem ser personalizadas com base em contribuições públicas (ex: FALArte) se o fluxo autoral o permitir.",
+    "questions": [
+      "Pode o Cubo Interior integrar sons ou texturas de contribuições territoriais reais (ex: FALArte) sem quebrar a sua natureza universal?"
+    ]
   },
   "trace_and_return": {
     "trace": {
-      "digital": "A sessão pode deixar um 'rasto' anónimo na constelação COSMICOXES: um ponto de luz que pulsa no mapa territorial do Atlas, visível para outros participantes como um 'eco' da experiência.",
-      "personal": "A pessoa recebe uma frase ou imagem gerada a partir da sua interação, que pode guardar ou partilhar (ex: 'O espelho que quebraste era o chão que pisaste')."
+      "type": "constelação de faces",
+      "description": "A constelação das faces visitadas, com as respostas da pessoa (se houver), é guardada como um 'cubo-memória'. Este rasto é anónimo e pode ser partilhado ou regressado mais tarde.",
+      "persistence": "Temporário (24h) ou permanente (opcional, com consentimento)."
+    },
+    "return": {
+      "type": "devolução poética",
+      "description": "O sistema devolve a constelação como uma obra de arte generativa, onde as faces, sons e texturas se reorganizam em tempo real. A pessoa recebe um link ou código para regressar à sua constelação."
     },
     "latency": {
-      "description": "O rasto digital (ponto de luz no COSMICOXES) permanece visível por 24 horas e depois desvanece, como uma memória efémera.",
-      "purpose": "A latência reforça a ideia de que a experiência é viva e temporária, como um ritual."
+      "type": "cosmic_flow",
+      "description": "As constelações podem ser integradas no COSMICOXES como partículas que interagem com outras experiências do Atlas."
     }
   },
   "accessibility_equivalents": {
     "visual": {
-      "reduced_motion": "Versão estável onde as transições são suaves e sem movimento brusco. As faces do cubo aparecem como imagens estáticas com descrições textuais.",
-      "high_contrast": "Modo de alto contraste onde as silhuetas das faces são preenchidas com cores sólidas e bordas grossas.",
-      "screen_reader": "Descrições detalhadas de cada face e das suas transformações (ex: 'A porta está a girar lentamente, como se fosse empurrada por um vento invisível')."
+      "reduced_motion": "Versão estável do cubo, sem rotação automática. As faces são apresentadas como uma lista vertical com descrições textuais e sons associados.",
+      "high_contrast": "Contornos mais definidos para as faces e texto em alto contraste.",
+      "screen_reader": "Descrições detalhadas de cada face, som e textura. Exemplo: 'Face da porta: som de madeira a ranger, textura de madeira envelhecida, convite para entrar.'"
     },
     "auditory": {
-      "captions": "Legendas para todos os sons (ex: 'Suspiro longo', 'Sino distorcido').",
-      "visual_feedback": "Sons são representados visualmente por ícones ou padrões (ex: um sino aparece como um símbolo de sino a vibrar).",
-      "mute": "Modo silencioso onde todos os sons são substituídos por vibrações (opcional) ou feedback visual."
+      "no_audio": "Substituição dos sons por vibrações (se suportado) ou por descrições visuais (ex: 'O som da jaula é metálico e vibrante').",
+      "transcript": "Legendas para todos os sons, com opção de ativação/desativação."
     },
     "haptic": {
-      "alternative": "Vibrações são substituídas por pulsos visuais (ex: um círculo que expande e contrai no centro da tela)."
+      "no_vibration": "Feedback visual (ex: pulso de cor) em vez de vibração."
     },
     "kinesthetic": {
-      "keyboard": "Controles de teclado para simular movimento (ex: setas para mover o 'cursor' virtual, barra de espaço para 'tocar').",
-      "voice": "Comandos de voz para interagir (ex: 'abrir porta', 'girar cubo')."
+      "no_touch": "Navegação por teclado: setas para girar o cubo, Enter para entrar numa face, Espaço para regressar ao vazio central.",
+      "no_movement": "Modo estático onde o cubo é apresentado como uma imagem interativa com zonas clicáveis."
     },
     "proprioceptive": {
-      "static": "Instruções de postura são opcionais e podem ser ignoradas sem perder a experiência."
+      "no_posture": "Instruções opcionais substituídas por texto (ex: 'Respira profundamente' aparece como sugestão, não como comando)."
     },
-    "temporal": {
-      "no_time_pressure": "Modo sem limite de tempo, onde a pessoa pode explorar cada face pelo tempo que quiser."
+    "temporal_interoceptive": {
+      "no_waiting": "Modo sem suspense: todas as respostas são imediatas, sem pausas aleatórias."
+    },
+    "cognitive": {
+      "simplified": "Versão com menos faces (ex: apenas 3 faces: porta, espelho, buraco) e instruções mais diretas."
     }
   },
   "optional_permissions": {
     "microphone": {
-      "purpose": "Permite que a voz da pessoa seja captada e transformada em eco ou textura visual (ex: na face do 'espelho').",
-      "fallback": "Se negado, a face do 'espelho' usa sons pré-gravados ou permanece silenciosa."
+      "purpose": "Permitir que a voz da pessoa seja distorcida no espelho e integrada na constelação final como um som único.",
+      "fallback": "Se não concedido, o espelho usa sons pré-gravados de vozes anónimas ou mantém-se em silêncio."
     },
     "device_motion": {
-      "purpose": "Permite que a inclinação do dispositivo afete a orientação do cubo (ex: inclinar o telemóvel faz o cubo 'cair' para um lado).",
-      "fallback": "Se negado, o cubo reage apenas ao toque ou cursor."
+      "purpose": "Permitir que a inclinação do dispositivo navegue no vazio central, como se o cubo fosse um objeto físico.",
+      "fallback": "Navegação por toque ou teclado."
     },
     "geolocation": {
-      "purpose": "Permite que a hora do dia no território da pessoa afete a intensidade da luz e sons ambiente.",
-      "fallback": "Se negado, a experiência usa a hora do servidor ou um ciclo fixo."
+      "purpose": "NÃO APLICÁVEL. O Cubo Interior não depende de localização geográfica.",
+      "fallback": "N/A"
     }
   },
   "overstimulation_risk": {
-    "potential": [
-      "Flashing ou transições rápidas podem causar desconforto em pessoas com epilepsia fotossensível.",
-      "Sons súbitos ou altos podem ser perturbadores para pessoas com sensibilidade auditiva.",
-      "Vibrações insistentes podem ser incómodas em dispositivos hápticos."
-    ],
-    "mitigation": [
-      "Modo 'reduced_motion' desativa todas as animações rápidas ou flashing.",
-      "Controle de volume global, com opção para desativar sons completamente.",
-      "Vibrações são opcionais e limitadas a 3 segundas por interação.",
-      "Avisos claros antes de qualquer estímulo intenso (ex: 'Próxima transição pode ser rápida. Podes desativar no menu de acessibilidade.')."
-    ]
+    "visual": {
+      "risk": "Flashing ou rotação rápida do cubo pode causar desconforto.",
+      "mitigation": "Limitar a velocidade de rotação e oferecer modo 'reduced_motion'. Evitar cores piscantes."
+    },
+    "auditory": {
+      "risk": "Sobreposição de sons pode ser caótica.",
+      "mitigation": "Limitar o número de sons simultâneos (máximo 2) e oferecer controle de volume por face."
+    },
+    "haptic": {
+      "risk": "Vibração contínua pode ser incómoda.",
+      "mitigation": "Limitar a duração da vibração (máximo 2 segundos) e oferecer opção para desativar."
+    },
+    "cognitive": {
+      "risk": "Complexidade da experiência pode ser esmagadora.",
+      "mitigation": "Oferecer modo simplificado com menos faces e instruções mais claras."
+    }
   },
-  "distinctiveness": {
-    "unique_elements": [
-      "A experiência é uma viagem não-linear pelas seis faces do Livro Cubo, cada uma com uma personalidade sensorial única (ex: a 'jaula' pode ter sons metálicos e texturas de grades, o 'buraco' pode ser um vazio que 'puxa' o cursor).",
-      "O vazio central é um estado ativo, não uma ausência passiva: ele 'respira' e pode revelar camadas ocultas.",
-      "A devolução final é uma frase poética gerada a partir da interação da pessoa, não um certificado ou badges.",
-      "O sistema responde ao silêncio da pessoa como um gesto ativo, não como uma falta de interação.",
-      "A tradução cruzada entre voz e textura visual (ex: eco da voz → padrões no espelho) é única para esta experiência."
-    ],
-    "non_generic": [
-      "Não é um quiz, um menu 3D ou uma animação decorativa.",
-      "Não usa pontos, XP ou badges.",
-      "Não é uma página explicativa ou um dashboard.",
-      "Não finge produzir cheiro ou gosto.",
-      "Não depende de permissões para funcionar (embora as use para enriquecer a experiência)."
-    ]
-  },
+  "distinctiveness": [
+    "É a única experiência que usa as seis faces do Cubo como estrutura narrativa e sensorial.",
+    "O vazio central é um elemento único no Atlas, representando o não-saber e a liberdade.",
+    "A tradução cruzada entre som, gesto e textura é específica: cada face tem uma assinatura sensorial irrepetível.",
+    "A devolução é uma constelação generativa, não um objeto estático ou uma pontuação.",
+    "O silêncio ativo (buraco) é um mecanismo central, não um mero estado de ausência.",
+    "A experiência convida à introspecção sem ser terapêutica ou clínica."
+  ],
   "questions_for_eduardo": [
-    "As seis faces do cubo (porta, jaula, chão, céu, espelho, buraco) devem ter personalidades sensoriais específicas (ex: sons, texturas, comportamentos). Existem descrições autorais detalhadas para cada face, ou devemos propor uma assinatura sensorial para cada uma?",
-    "A devolução final (frase ou imagem) deve ser gerada a partir de um corpus autoral específico (ex: frases do Livro Cubo ou do Manual Invertido), ou pode ser livremente inspirada nas interações da pessoa?",
-    "O vazio central deve ter um comportamento específico (ex: revelar memórias, sons ou luzes aleatórias), ou deve permanecer como um espaço de silêncio e possibilidade aberta?",
-    "A experiência deve ter um 'fim' claro (ex: quando a pessoa explorar todas as faces), ou pode ser cíclica, permitindo que a pessoa retorne ao início a qualquer momento?"
+    "O Cubo Interior deve permitir a integração de contribuições territoriais reais (ex: sons ou texturas de FALArte) ou manter-se como uma experiência universal e abstrata?",
+    "A constelação final pode ser partilhada publicamente (anónima) ou deve permanecer privada por defeito?",
+    "O vazio central pode ter uma representação visual (ex: um ponto de luz) ou deve permanecer completamente vazio?",
+    "As faces do cubo podem ter descrições textuais opcionais (ex: 'Esta é a porta que nunca abre') ou a experiência deve ser puramente sensorial?"
   ],
   "improvement_proposals": [
     {
-      "proposal": "Incluir uma opção para a pessoa 'deixar um rasto' voluntário no COSMICOXES (ex: uma palavra ou desenho) que fique associado à sua sessão e seja visível para outros participantes como um 'eco' anónimo.",
-      "justification": "Reforça a ideia de comunidade e devolução, alinhada com os princípios do Atlas Vivo MILK."
+      "type": "territorial_integration",
+      "description": "Integração opcional de sons ou texturas de contribuições do FALArte (ex: som de uma porta real em Alfama) para personalizar as faces do cubo, sem quebrar a sua natureza universal.",
+      "dependency": "Aprovação autoral e fluxo de consentimento para uso de contribuições públicas."
     },
     {
-      "proposal": "Adicionar uma face 'oculta' do cubo (ex: a 'sombra') que só aparece em sessões noturnas ou para pessoas que exploraram o vazio central por mais de 30 segundos.",
-      "justification": "Aumenta a surpresa e a profundidade da experiência, mantendo-a não-linear e imprevisível."
+      "type": "cosmic_flow_integration",
+      "description": "As constelações do Cubo Interior podem interagir com o COSMICOXES, criando um fluxo entre experiências (ex: uma face do cubo pode 'conversar' com uma estrela no COSMICOXES).",
+      "dependency": "Definição da gramática de interação entre experiências."
     },
     {
-      "proposal": "Permitir que a pessoa 'quebre' o cubo intencionalmente (ex: com um gesto brusco) para revelar o vazio central mais cedo, como uma forma de 'anti-regra'.",
-      "justification": "Alinha com o princípio autoral de que 'o erro é entrada' e 'o ganhador não vence o outro, chega a si'."
+      "type": "multiplayer_lite",
+      "description": "Modo opcional onde duas pessoas podem explorar o mesmo cubo em sessões separadas, e as suas constelações finais interagem (ex: as faces de um cubo respondem às do outro).",
+      "dependency": "Garantir anonimato e consentimento explícito."
     }
   ],
   "generic_fallback_allowed": false,

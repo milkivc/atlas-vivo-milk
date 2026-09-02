@@ -3,370 +3,321 @@
   "canonical_name": "Cantares",
   "source_evidence": {
     "primary": [
-      "catalog_entry: {id: 'cantares', nome: 'Cantares', familia: 'folclore', mecanica: 'ecoar', convite: 'Escolhe uma sílaba. Faz-lhe eco.'}"
+      {
+        "source": "catalog_entry",
+        "authority": "high",
+        "excerpt": "id: cantares, nome: Cantares, familia: folclore, mecanica: ecoar, convite: Escolhe uma sílaba. Faz-lhe eco."
+      },
+      {
+        "source": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
+        "authority": "high",
+        "excerpt": "16 seres folclóricos; jogos tradicionais, trava-línguas e adivinhas."
+      }
     ],
-    "supporting": [
-      "constitution: 2.1 (canais operáveis pelo dispositivo)",
-      "constitution: 3 (tradução cruzada dos sentidos)",
-      "constitution: 4 (arco dramatúrgico obrigatório)",
-      "constitution: 5 (dinamismo e variação entre sessões)",
-      "constitution: 9 (assinatura sensorial única)",
-      "source_corpus: Âncoras Autorais (folclore, oralidade, trava-línguas, adivinhas)",
-      "source_corpus: LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md (D5: Escutar o Silêncio)"
+    "secondary": [
+      {
+        "source": "Curadoria Cultural e Existencialismo Profundo.pdf",
+        "authority": "medium",
+        "excerpt": "língua viva, oralidade, absurdo/Camus, etnofísica, soberania da memória."
+      }
     ]
   },
-  "authorial_invariants": {
-    "core": [
-      "Convite: 'Escolhe uma sílaba. Faz-lhe eco.'",
-      "Mecânica: 'ecoar'",
-      "Família: 'folclore'"
-    ],
-    "derived": [
-      "A sílaba deve ser livremente escolhida pela pessoa (sem restrições de idioma ou sentido).",
-      "O eco deve ser uma resposta viva, não uma repetição mecânica.",
-      "A experiência deve preservar a oralidade e o ritmo como elementos centrais."
-    ],
-    "non_negotiable": [
-      "Não pode ser reduzida a um botão 'repetir' ou a uma animação decorativa."
-    ]
-  },
-  "perceptual_intent": "Transformar a sílaba num corpo sonoro que habita o espaço digital, expandindo-se em eco, ritmo e textura até se tornar uma paisagem sonora efémera. A pessoa deve sentir que a sua voz (ou escolha) altera o ambiente, como se o som ganhasse vida própria e respondesse à sua presença.",
+  "authorial_invariants": [
+    "A mecânica central é 'ecoar'.",
+    "O convite inicial é: 'Escolhe uma sílaba. Faz-lhe eco.'",
+    "Pertence à família 'folclore'.",
+    "Deve preservar a oralidade, o ritmo e a brincadeira com a linguagem.",
+    "Não inventar factos etnográficos ou folclóricos; usar apenas o que está sustentado."
+  ],
+  "perceptual_intent": "Transformar uma sílaba num eco vivo que se propaga, distorce e devolve como uma paisagem sonora e visual em mutação. A pessoa deve sentir que a sua voz (ou escolha) altera o ambiente, como se o som ganhasse corpo, cor e movimento, e o eco se tornasse uma entidade com vida própria.",
   "threshold": {
-    "description": "A pessoa entra num espaço vazio, escuro ou de cor uniforme (ex.: preto profundo com um ponto de luz central). Um murmúrio distorcido, quase inaudível, emerge dos limites do ecrã, como se vindo de uma direção não identificável. O som não é uma sílaba, mas uma vibração que sugere uma presença. A luz central pulsa lentamente, sincronizada com o murmúrio.",
-    "sensory_trigger": [
-      "auditory (murmúrio distorcido)",
-      "visual (ponto de luz pulsante)",
-      "spatial (direcionalidade ambígua do som)"
-    ]
+    "description": "A tela começa em silêncio absoluto, com um fundo negro profundo e uma única sílaba (aleatoriamente selecionada de um conjunto de sílabas folclóricas ou onomatopaicas, ex: 'la', 'ma', 'pa', 'ta') a flutuar no centro, quase impercetível, como se fosse uma partícula de luz ou som suspensa no ar. A sílaba não é clicável nem interativa — apenas existe. O cursor, ao aproximar-se, faz com que a sílaba vibre levemente (feedback visual sutil).",
+    "sensory_trigger": "A ausência de som e a sílaba solitária criam uma tensão que convida à ação."
   },
   "dramaturgical_arc": [
     {
-      "stage": 1,
-      "name": "LIMIAR",
-      "description": "O ambiente está em repouso, mas algo está *quase* a acontecer. O murmúrio e a luz sugerem uma expectativa, como se o espaço estivesse à espera de um gesto."
+      "phase": "limiar",
+      "action": "A tela está em silêncio e escuridão. Uma sílaba solitária (ex: 'ta') aparece, flutuando como um ponto de luz ou som.",
+      "sensory_focus": [
+        "visual (sílaba como partícula)",
+        "auditory (silêncio absoluto)",
+        "spatial (vazio central)"
+      ]
     },
     {
-      "stage": 2,
-      "name": "CHAMADA",
-      "description": "Aparece o convite: 'Escolhe uma sílaba. Faz-lhe eco.' em tipografia orgânica, como se escrita à mão, com letras que tremem levemente. O texto surge próximo do ponto de luz, mas não o toca."
+      "phase": "chamada",
+      "action": "A sílaba pulsa uma vez, como se respirasse. O convite 'Escolhe uma sílaba. Faz-lhe eco.' aparece em voz sussurrada (ou texto que se forma lentamente, como se fosse ditado por uma voz invisível).",
+      "sensory_focus": [
+        "auditory (voz sussurrada)",
+        "visual (texto que emerge)",
+        "temporal_interoceptive (ritmo da pulsação)"
+      ]
     },
     {
-      "stage": 3,
-      "name": "PRIMEIRO GESTO",
-      "description": "A pessoa digita ou diz uma sílaba (ex.: 'ma'). O sistema não repete a sílaba de imediato. Em vez disso, a sílaba aparece no centro como um objecto sonoro visível: uma forma geométrica simples (ex.: círculo) que pulsa ao ritmo da sílaba pronunciada."
+      "phase": "primeiro_gesto",
+      "action": "A pessoa pode: (1) clicar/tocar a sílaba, (2) pronunciar uma sílaba (opcional, com microfone), ou (3) digitar uma sílaba no teclado. O gesto mais simples (clique/toque) é o padrão.",
+      "sensory_focus": [
+        "kinesthetic (clique/toque)",
+        "auditory (pronúncia opcional)",
+        "visual (feedback imediato)"
+      ]
     },
     {
-      "stage": 4,
-      "name": "RESPOSTA VIVA",
-      "description": "O objecto sonoro (sílaba) expande-se em ondas concêntricas, cada uma com um timbre diferente (ex.: a primeira onda soa como a sílaba original; a segunda como um eco metálico; a terceira como um suspiro). As ondas interagem com os limites do ecrã, criando reverberações visuais (linhas que se distorcem) e sonoras (eco que se multiplica)."
+      "phase": "resposta_viva",
+      "action": "A sílaba escolhida (ou a sílaba inicial, se não houver escolha) ecoa uma vez, mas o eco não é idêntico: ganha uma camada de reverberação, como se fosse pronunciada por múltiplas vozes sobrepostas (coral folclórico). Simultaneamente, a sílaba no ecrã multiplica-se em dezenas de cópias, cada uma com um tom de cor diferente (baseado em uma paleta de tons terrosos e vibrante, inspirada em tecidos ou cerâmicas tradicionais). As sílabas espalham-se como um enxame, criando uma constelação sonora e visual.",
+      "sensory_focus": [
+        "auditory (eco coral)",
+        "visual (constelação de sílabas coloridas)",
+        "spatial (movimento do enxame)"
+      ]
     },
     {
-      "stage": 5,
-      "name": "DESVIO",
-      "description": "De repente, uma das ondas 'quebra' e inverte a direção, como se fosse sugada para o centro. O som correspondente distorce-se (ex.: a sílaba soa ao contrário ou com um *glitch* controlado). A luz central oscila em intensidade."
+      "phase": "desvio",
+      "action": "De repente, uma das sílabas do enxame 'tropeça' — inverte-se (ex: 'ta' → 'at') ou funde-se com outra sílaba vizinha (ex: 'la' + 'ma' → 'lama'). O som correspondente a esta sílaba modificada é reproduzido com um timbre distorcido (como um instrumento de corda desafinado).",
+      "sensory_focus": [
+        "auditory (timbre distorcido)",
+        "visual (sílaba invertida/fundida)",
+        "surprise (quebra de expectativa)"
+      ]
     },
     {
-      "stage": 6,
-      "name": "APROFUNDAMENTO SENSORIAL",
-      "description": "As ondas sonoras começam a alterar a cor do ambiente: cada timbre modifica a paleta (ex.: eco metálico → tons frios; suspiro → tons quentes). O movimento do cursor ou do dedo (se em touch) afeta a velocidade das ondas, criando uma relação entre gesto e som. O som passa a ser espacializado: a sílaba original parece vir de trás da pessoa, enquanto os ecos vêm de direções aleatórias."
+      "phase": "aprofundamento_sensorial",
+      "action": "As sílabas começam a interagir entre si: colidem, fundem-se ou repelam-se, alterando o som e a cor do ambiente. O som evolui para uma paisagem sonora de vozes, instrumentos folclóricos (ex: adufe, cavaquinho) e sons ambientais (vento, água). A cor do fundo passa de negro para um degradê de tons quentes (laranja, ocre, vermelho terroso), como se o ambiente ganhasse textura. A pessoa pode 'tocar' nas sílabas para alterar a sua trajetória ou som.",
+      "sensory_focus": [
+        "auditory (paisagem sonora complexa)",
+        "visual (degradê de cores, movimento das sílabas)",
+        "kinesthetic (interação táctil)",
+        "haptic (vibração opcional em dispositivos compatíveis)"
+      ]
     },
     {
-      "stage": 7,
-      "name": "ESCOLHA / ACASO / SILÊNCIO",
-      "description": "A pessoa pode: (a) repetir a sílaba para reforçar as ondas; (b) escolher uma nova sílaba, que se sobrepõe à anterior, criando uma polifonia; ou (c) fazer silêncio. Se optar por (c), as ondas param gradualmente, mas o ambiente não volta ao estado inicial: a cor e a luz ficam alteradas, como se a sílaba tivesse deixado um rasto."
+      "phase": "escolha_acaso_silencio",
+      "action": "A pessoa pode: (1) escolher uma sílaba para 'fixar' no centro (ela para de mover-se e o som correspondente torna-se um drone contínuo), (2) deixar o sistema evoluir aleatoriamente, ou (3) fazer silêncio (não interagir). Se a pessoa escolher o silêncio, o ambiente começa a esmaecer: as sílabas desvanecem-se, o som diminui até um murmúrio, e o fundo volta a negro. Uma sílaba solitária (a última fixada ou uma nova) permanece, pulsando lentamente.",
+      "sensory_focus": [
+        "auditory (drone ou murmúrio)",
+        "visual (desvanecimento ou fixação)",
+        "temporal_interoceptive (espera)"
+      ]
     },
     {
-      "stage": 8,
-      "name": "APARIÇÃO",
-      "description": "Se a pessoa interagir o suficiente, emerge uma 'constelação' de sílabas anteriores (de outras sessões ou da mesma), organizadas em órbita ao redor do centro. Cada sílaba é representada por um ponto luminoso que emite o seu som quando o cursor passa por cima. A constelação tem um ritmo próprio, como se respirasse."
+      "phase": "aparição",
+      "action": "Se a pessoa fixou uma sílaba, esta cresce até preencher o ecrã, transformando-se numa palavra ou frase curta (ex: 'ta' → 'tarde', 'la' → 'lua cheia') extraída de um corpus de expressões folclóricas ou trava-línguas. A palavra aparece em letras que se formam como se fossem esculpidas em madeira ou tecido, com som de marteladas ou tecelagem. Se a pessoa optou pelo acaso ou silêncio, uma palavra aleatória do corpus aparece no centro, como um presente inesperado.",
+      "sensory_focus": [
+        "visual (palavra esculpida)",
+        "auditory (som de marteladas/tecelagem)",
+        "gustatory_evocation (memória de sabores associados à palavra, ex: 'tarde' → pão quente)"
+      ]
     },
     {
-      "stage": 9,
-      "name": "DEVOLUÇÃO",
-      "description": "A pessoa recebe de volta a sua sílaba inicial, mas transformada: (a) como um ficheiro de áudio curto (download opcional); (b) como uma imagem da constelação gerada (com a sílaba destacada); ou (c) como um texto poético gerado a partir das sílabas interagidas (ex.: 'ma / la / pa / ma' → 'A mala pede mais'). A devolução é efémera: desaparece após 30 segundos ou quando a pessoa sai."
+      "phase": "devolução",
+      "action": "A palavra final (ou a sílaba fixada) é 'devolvida' à pessoa de três formas: (1) como um ficheiro de áudio (download opcional) com a pronúncia da palavra em voz coral, (2) como uma imagem gerativa da constelação de sílabas no momento da aparição (download opcional), e (3) como um 'rasto' no COSMICOXES: a palavra é adicionada a uma constelação pública de 'Cantares', visível para outras pessoas que passarem pela experiência (sem associar à identidade da pessoa).",
+      "sensory_focus": [
+        "auditory (áudio coral)",
+        "visual (imagem gerativa)",
+        "social_presence (constelação pública)"
+      ]
     },
     {
-      "stage": 10,
-      "name": "RASTO / LATÊNCIA",
-      "description": "A sílaba da pessoa é adicionada à constelação global (anónima, sem dados pessoais). Em sessões futuras, pode reencontrar a sua sílaba ou sílabas de outros, criando uma memória colectiva. A constelação evolui lentamente ao longo do tempo, como um organismo vivo."
+      "phase": "rasto_latencia",
+      "action": "A experiência termina com a tela a regressar ao limiar inicial (silêncio e sílaba solitária), mas agora a sílaba é a última palavra gerada (ou uma sílaba aleatória do corpus). A pessoa pode repetir a experiência, e a sílaba inicial será sempre a última palavra devolta na sessão anterior. Se a pessoa sair e regressar, a sílaba inicial será aleatória, mas a constelação pública de 'Cantares' no COSMICOXES permanece alterada.",
+      "sensory_focus": [
+        "visual (sílaba inicial alterada)",
+        "temporal_interoceptive (latência da constelação)"
+      ]
     }
   ],
   "participant_verbs": [
     "escolher",
-    "pronunciar",
+    "ecoar",
+    "tocar",
+    "fixar",
     "escutar",
-    "segurar",
-    "soltar",
-    "repetir",
-    "observar"
+    "silenciar",
+    "deixar"
   ],
   "system_responses": [
-    {
-      "trigger": "Sílabas digitadas/pronunciadas",
-      "response": [
-        "Criação de objecto sonoro visível (forma geométrica pulsante)",
-        "Expansão em ondas com timbres variados",
-        "Alteração da cor do ambiente com base no timbre"
-      ]
-    },
-    {
-      "trigger": "Movimento do cursor/dedo",
-      "response": [
-        "Ajuste da velocidade das ondas sonoras",
-        "Distorsão espacial do som (direcionalidade)",
-        "Alteração da trajectória das ondas"
-      ]
-    },
-    {
-      "trigger": "Silêncio prolongado",
-      "response": [
-        "Paragem gradual das ondas",
-        "Manutenção das alterações de cor/luz como rasto",
-        "Emerge constelação de sílabas passadas"
-      ]
-    },
-    {
-      "trigger": "Repetição da sílaba",
-      "response": [
-        "Reforço das ondas existentes",
-        "Sobreposição de sílabas (polifonia)",
-        "Aumento da complexidade visual/sonora"
-      ]
-    }
+    "A sílaba inicial pulsa e convida à ação.",
+    "Multiplica a sílaba em um enxame sonoro e visual.",
+    "Inverte ou funde sílabas, criando um desvio sonoro e visual.",
+    "Transforma o ambiente em uma paisagem sonora e cromática.",
+    "Devolve uma palavra ou frase como presente final.",
+    "Adiciona a palavra à constelação pública de 'Cantares'.",
+    "Reinicia com a última palavra como sílaba inicial."
   ],
-  "sensory_signature_id": "cantares_eco_vivo_038",
+  "sensory_signature_id": "cantares_eco_coral_visual",
   "sensory_channels": {
     "visual": {
-      "elements": [
-        "ponto de luz pulsante",
-        "ondas concêntricas distorcidas",
-        "constelação de sílabas luminosas",
-        "paleta de cores dinâmica (frios/quentes)",
-        "tipografia orgânica e trémula"
-      ],
-      "purpose": "Representar o som como forma e movimento; criar profundidade e espacialidade visual."
+      "description": "Sílaba como partícula de luz; constelação de sílabas coloridas; degradê de tons terrosos; palavra esculpida em madeira/tecido; feedback visual sutil para interações.",
+      "intensity": "high"
     },
     "auditory": {
-      "elements": [
-        "sílaba original",
-        "ecos com timbres variados (metálico, suspiro, glitch)",
-        "spatialização do som (direcionalidade)",
-        "murmúrio inicial distorcido",
-        "polifonia de sílabas sobrepostas"
-      ],
-      "purpose": "Transformar a sílaba num corpo sonoro vivo, com profundidade e movimento."
+      "description": "Silêncio inicial; eco coral; paisagem sonora de vozes, instrumentos folclóricos e sons ambientais; timbre distorcido; drone contínuo; murmúrio; som de marteladas/tecelagem.",
+      "intensity": "high"
     },
     "haptic": {
-      "elements": [
-        "vibração opcional em dispositivos compatíveis (sincronizada com as ondas sonoras)",
-        "feedback táctil leve ao tocar no objecto sonoro"
-      ],
-      "purpose": "Reinforçar a sensação de interacção física com o som."
+      "description": "Vibração opcional em dispositivos compatíveis (ex: ao tocar uma sílaba).",
+      "intensity": "low",
+      "optional": true
     },
     "kinesthetic": {
-      "elements": [
-        "movimento do cursor/dedo afeta a velocidade das ondas",
-        "gestos de arrasto para 'puxar' sílabas na constelação"
-      ],
-      "purpose": "Conectar o corpo da pessoa ao ritmo e à espacialidade do som."
+      "description": "Toque/clique para interagir com sílabas; arrasto para alterar trajetória (opcional).",
+      "intensity": "medium"
     },
     "proprioceptive": {
-      "elements": [
-        "instruções subtis para ajustar a postura (ex.: 'Inclina-te para a sílaba')",
-        "sensação de equilíbrio alterado pela espacialização do som"
-      ],
-      "purpose": "Convocar a atenção corporal sem obrigar movimento."
+      "description": "Ritmo da pulsação inicial; espera durante o silêncio; postura para escutar o áudio coral.",
+      "intensity": "low"
     },
     "temporal_interoceptive": {
-      "elements": [
-        "ritmo das ondas sonoras",
-        "pausas entre sílabas",
-        "respiração percebida na constelação (expansão/contracção)",
-        "tempo de devolução efémera (30 segundos)"
-      ],
-      "purpose": "Criar uma experiência de tempo vivo, com suspensão e retorno."
+      "description": "Ritmo da sílaba pulsante; aceleração/desaceleração do enxame; espera durante o desvanecimento; latência da constelação pública.",
+      "intensity": "medium"
     },
     "spatial": {
-      "elements": [
-        "direcionalidade ambígua do som inicial",
-        "spatialização do som (sílaba vinda de trás, ecos de lados aleatórios)",
-        "constelação em órbita 3D (profundidade visual)"
-      ],
-      "purpose": "Dar ao som uma presença física no espaço digital."
+      "description": "Movimento do enxame de sílabas no ecrã; profundidade visual da constelação; sensação de ambiente imersivo.",
+      "intensity": "medium"
     },
     "olfactory_evocation": {
-      "elements": [
-        "descrição textual opcional: 'Cheira a terra molhada depois da chuva' (associada a sílabas graves)",
-        "imagem de texturas que evocam memórias olfativas (ex.: pão, erva)"
-      ],
-      "purpose": "Evocar memórias olfativas sem fingir output físico."
+      "description": "Evocação de cheiros associados a palavras folclóricas (ex: 'tarde' → pão quente, 'lua cheia' → ervas secas).",
+      "intensity": "low"
     },
     "gustatory_evocation": {
-      "elements": [
-        "descrição textual opcional: 'Sabe a mel de laranja' (associada a sílabas agudas)",
-        "sons de mastigação ou de líquidos (subtilmente integrados nos ecos)"
-      ],
-      "purpose": "Evocar memórias gustativas sem fingir output físico."
+      "description": "Evocação de sabores associados a palavras folclóricas (ex: 'tarde' → mel, 'lua cheia' → vinho).",
+      "intensity": "low"
     },
     "social_presence": {
-      "elements": [
-        "constelação de sílabas de outras sessões (anónimas)",
-        "sensação de partilha de um momento efémero"
-      ],
-      "purpose": "Criar uma experiência colectiva sem vigilância ou perfilamento."
+      "description": "Constelação pública de 'Cantares' no COSMICOXES, onde as palavras devoltas por outras pessoas são visíveis.",
+      "intensity": "medium"
     }
   },
   "cross_sensory_translation": {
-    "primary": "Som (sílaba) → Forma visual (ondas geométricas) → Cor (paleta dinâmica)",
-    "secondary": "Movimento do cursor → Velocidade do som → Espacialização do som",
-    "tertiary": "Silêncio → Alteração permanente da luz/cor (rasto visual)"
+    "primary": "Som (eco coral) → Forma (constelação visual de sílabas coloridas).",
+    "secondary": [
+      "Gesto (toque/clique) → Timbre (alteração do som da sílaba).",
+      "Palavra (aparição final) → Textura (letra esculpida em madeira/tecido).",
+      "Silêncio (escolha da pessoa) → Desvanecimento visual e sonoro."
+    ]
   },
   "silence_or_absence": {
-    "mechanism": "O silêncio da pessoa é um gesto ativo: paragem das ondas sonoras, mas manutenção das alterações visuais como rasto. O ambiente nunca volta ao estado inicial, criando uma ausência que é também presença.",
-    "purpose": "Transformar o silêncio num elemento construtivo da experiência, não num vazio passivo."
+    "mechanism": "O silêncio é um gesto ativo: a pessoa pode escolher não interagir, o que desencadeia o desvanecimento do enxame e a aparição de uma sílaba/palavra solitária. O silêncio também é usado como pausas entre ecos e como fundo inicial/final.",
+    "effect": "Cria tensão, convida à reflexão e permite que o ambiente 'respire'."
   },
   "surprise_or_indeterminacy": {
     "mechanism": [
-      "Inversão aleatória da direção de uma onda sonora (desvio)",
-      "Sobreposição acidental de sílabas (polifonia não planeada)",
-      "Emerge constelação de sílabas passadas em momentos imprevisíveis",
-      "A sílaba inicial pode ser transformada em texto poético de forma não determinística"
+      "Inversão ou fusão aleatória de sílabas durante o enxame.",
+      "Aparição de uma palavra folclórica ou trava-língua não previsível.",
+      "A sílaba inicial da próxima sessão é a última palavra devolta na sessão anterior (se a pessoa regressar).",
+      "A constelação pública de 'Cantares' evolui com contribuições de outras pessoas."
     ],
-    "purpose": "Criar momentos de quebra de expectativa que mantenham a coerência poética."
+    "effect": "Quebra a linearidade, introduz acaso controlado e torna cada sessão única."
   },
   "session_variation": [
     {
       "type": "acaso_controlado",
-      "description": "A direcionalidade inicial do som (murmúrio) é aleatória em cada sessão."
+      "description": "A sílaba inicial é selecionada aleatoriamente de um corpus de sílabas folclóricas."
     },
     {
-      "type": "ordem_mutável",
-      "description": "A ordem dos timbres das ondas sonoras varia entre sessões (ex.: metálico → suspiro → glitch ou suspiro → glitch → metálico)."
+      "type": "ordem_mutavel",
+      "description": "A ordem de aparição das sílabas no enxame e as suas colisões/fusões são geradas aleatoriamente."
     },
     {
       "type": "resposta_a_ritmo",
-      "description": "A velocidade das ondas ajusta-se ao ritmo com que a pessoa repete a sílaba (rápido = ondas aceleradas; lento = ondas lentas)."
+      "description": "A velocidade do gesto da pessoa (clique rápido vs. lento) afeta a velocidade do enxame e a duração do eco."
     },
     {
-      "type": "resposta_a_posição",
-      "description": "A posição do cursor/dedo afeta a espacialização do som (ex.: cursor à esquerda = sílaba parece vir da esquerda)."
+      "type": "resposta_a_posicao",
+      "description": "A posição do cursor/toque no ecrã influencia a trajetória das sílabas no enxame."
     },
     {
       "type": "combinação_de_fragmentos",
-      "description": "A constelação de sílabas é única em cada sessão, combinando sílabas de sessões anteriores de forma aleatória."
+      "description": "A palavra final é gerada a partir de combinações aleatórias de sílabas do corpus folclórico."
     },
     {
-      "type": "temporalidade_real",
-      "description": "A cor base do ambiente altera-se subtamente consoante a hora do dia (manhã = tons claros; noite = tons escuros)."
+      "type": "memoria_devolvida",
+      "description": "A sílaba inicial da próxima sessão é a última palavra devolta na sessão anterior (se a pessoa regressar)."
     }
   ],
   "territorial_binding": {
-    "relation": "A experiência evoca o folclore oral (cantares, trava-línguas, adivinhas) sem estar ligada a um território físico específico. No entanto, a constelação de sílabas pode ser associada a um 'território sonoro' imaginário, onde cada sílaba representa um lugar ou uma memória colectiva.",
-    "evocation": [
-      "Memórias de brincadeiras de infância com sílabas e sons",
-      "Ritmos e cadências de línguas e sotaques (sem especificar localização)",
-      "Sons ambientais de festas ou mercados (integrados nos ecos)"
-    ],
-    "note": "Não há vinculação a uma freguesia ou lugar real, mas a experiência pode ser interpretada como um 'mapa sonoro' abstracto do folclore."
+    "description": "A constelação pública de 'Cantares' no COSMICOXES está ligada ao território do Atlas Vivo MILK. As palavras devoltas são associadas a coordenadas geográficas aleatórias dentro das freguesias do projeto, criando um mapa sonoro e visual de sílabas e palavras folclóricas. A pessoa pode explorar este mapa para 'escutar' os cantares de outras pessoas.",
+    "sustainability": "A relação territorial é simbólica e baseada em dados públicos do Atlas, sem rastreio de localização da pessoa."
   },
   "trace_and_return": {
-    "trace": {
-      "digital": [
-        "Sílabas adicionadas à constelação global (anónima)",
-        "Alterações de cor/luz que persistem entre sessões",
-        "Ficheiro de áudio ou imagem gerada (download opcional)"
-      ],
-      "emotional": [
-        "Sensação de ter 'deixado uma marca' no ambiente sonoro",
-        "Memória da polifonia criada"
-      ]
+    "immediate": {
+      "description": "A pessoa recebe: (1) um ficheiro de áudio com a pronúncia coral da palavra final, (2) uma imagem gerativa da constelação de sílabas, e (3) a adição da palavra à constelação pública de 'Cantares'."
     },
-    "return": {
-      "immediate": [
-        "Sílabas transformadas em texto poético ou ficheiro de áudio",
-        "Imagem da constelação com a sílaba destacada"
-      ],
-      "latent": [
-        "Reencontro com a sílaba em sessões futuras (na constelação)",
-        "Evolução da constelação ao longo do tempo"
-      ]
+    "latent": {
+      "description": "A constelação pública de 'Cantares' no COSMICOXES permanece alterada, permitindo que outras pessoas interajam com as palavras devoltas. A sílaba inicial da próxima sessão da mesma pessoa é a última palavra devolta."
     }
   },
   "accessibility_equivalents": {
-    "visual_impairment": {
-      "description": "Todas as interacções visuais têm equivalentes sonoros: (a) as ondas são descritas em tempo real por voz sintética (ex.: 'Onda metálica a expandir-se à esquerda'); (b) a constelação é anunciada como uma lista de sílabas com posições relativas (ex.: 'Sílabas à tua frente: ma, la, pa'); (c) as alterações de cor são traduzidas em sons (ex.: tons frios = som agudo; tons quentes = som grave).",
-      "preserves_poetry": true
+    "visual": {
+      "alternative": "Todas as interações visuais (ex: sílabas coloridas, constelação) têm descrições sonoras opcionais (ex: 'sílaba 'ta' a mover-se para a esquerda, cor laranja').",
+      "reduced_motion": "Modo de movimento reduzido: as sílabas movem-se lentamente ou param, e as transições são suaves."
     },
-    "auditory_impairment": {
-      "description": "Todas as interacções sonoras têm equivalentes visuais: (a) as sílabas são representadas por formas e cores distintas (ex.: 'ma' = círculo vermelho; 'la' = quadrado azul); (b) os ecos são mostrados como anéis concêntricos com texturas diferentes; (c) a espacialização do som é representada por setas ou linhas que indicam a direção.",
-      "preserves_poetry": true
+    "auditory": {
+      "alternative": "Todas as interações sonoras (ex: eco coral, paisagem sonora) têm legendas visuais (ex: 'eco de 'ta' com 3 vozes sobrepostas'). O áudio pode ser desativado, e a experiência continua com feedback visual."
     },
-    "motor_impairment": {
-      "description": "Alternativas ao movimento do cursor/dedo: (a) uso de teclado para seleccionar sílabas (setas + Enter); (b) voz para repetir sílabas ou comandos como 'mais rápido'/'mais lento'; (c) modo 'estático' onde as ondas se movem automaticamente, mas a pessoa pode pausar/retomar com uma tecla.",
-      "preserves_poetry": true
+    "kinesthetic": {
+      "alternative": "Todas as interações tácteis (clique/toque) podem ser substituídas por: (1) teclado (setas para mover sílabas, Enter para fixar), (2) voz (comandos como 'fixar sílaba', 'silenciar'), ou (3) switch (botão único para interações básicas)."
     },
-    "cognitive_load": {
-      "description": "Modo simplificado: (a) redução do número de sílabas na constelação; (b) ritmo mais lento das ondas; (c) opção para desativar a polifonia (só uma sílaba de cada vez).",
-      "preserves_poetry": true
+    "haptic": {
+      "alternative": "A vibração é opcional e pode ser substituída por um pulso visual (ex: sílaba a piscar)."
     },
-    "reduced_motion": {
-      "description": "Modo estável: (a) as ondas são representadas como formas estáticas que mudam de cor em vez de se mover; (b) a constelação é mostrada como um mapa 2D sem animação.",
-      "preserves_poetry": true
+    "temporal": {
+      "alternative": "Modo sem pressão: a experiência não avança automaticamente; a pessoa controla o ritmo com botões de 'próximo' ou 'espera'."
+    },
+    "cognitive": {
+      "alternative": "A complexidade da constelação de sílabas pode ser reduzida (ex: menos sílabas no enxame, palavras mais simples)."
     }
   },
   "optional_permissions": {
     "microphone": {
-      "purpose": "Permitir que a pessoa pronuncie a sílaba em vez de digitá-la, para uma experiência mais imersiva.",
-      "fallback": "Digitação manual da sílaba."
+      "purpose": "Permitir que a pessoa pronuncie uma sílaba ou palavra para interagir com o sistema.",
+      "fallback": "A pessoa pode digitar a sílaba ou usar o clique/toque."
     },
-    "motion": {
-      "purpose": "Usar a inclinação do dispositivo para afectar a espacialização do som (ex.: inclinar para a esquerda = sílaba parece vir da esquerda).",
-      "fallback": "Movimento do cursor/dedo para o mesmo efeito."
+    "geolocation": {
+      "purpose": "Associar a palavra devolta a uma coordenada geográfica aleatória dentro das freguesias do Atlas (para a constelação pública).",
+      "fallback": "A palavra é associada a uma coordenada aleatória genérica."
     }
   },
   "overstimulation_risk": {
-    "potential_risks": [
-      "Polifonia excessiva (muitas sílabas sobrepostas)",
-      "Flashing ou piscar rápido das ondas visuais",
-      "Som súbito ou muito alto"
-    ],
-    "mitigation": [
-      "Limitar o número máximo de sílabas sobrepostas (ex.: 3).",
-      "Usar transições suaves para as ondas visuais (sem *flashing*).",
-      "Volume do som ajustável e sempre abaixo de um limite seguro.",
-      "Opção para pausar a experiência a qualquer momento (tecla 'P' ou botão visível).",
-      "Modo 'reduced motion' para evitar sobrecarga visual."
-    ]
+    "visual": {
+      "risk": "O enxame de sílabas coloridas e o degradê de cores podem ser intensos para pessoas com sensibilidade visual.",
+      "mitigation": "Modo de alto contraste; redução do número de sílabas no enxame; opção para desativar animações."
+    },
+    "auditory": {
+      "risk": "A paisagem sonora complexa (vozes, instrumentos, sons ambientais) pode ser excessiva.",
+      "mitigation": "Controlo de volume; opção para desativar o som; modo 'silêncio ativo' (apenas sons mínimos)."
+    },
+    "cognitive": {
+      "risk": "A complexidade da constelação de sílabas e a geração de palavras aleatórias podem ser confuses.",
+      "mitigation": "Modo simplificado com menos sílabas e palavras mais curtas; descrições textuais opcionais."
+    }
   },
-  "distinctiveness": {
-    "unique_traits": [
-      "A sílaba como objecto sonoro visível que se expande em ondas com timbres variados.",
-      "A tradução cruzada entre som, forma, cor e movimento do cursor.",
-      "O silêncio como gesto ativo que deixa um rasto visual permanente.",
-      "A constelação de sílabas como memória colectiva efémera.",
-      "A devolução da sílaba transformada em texto poético ou ficheiro de áudio.",
-      "A espacialização do som que responde à posição do cursor/dedo."
-    ],
-    "comparison": "Nenhuma outra experiência no Atlas usa sílabas como corpo sonoro visível ou explora a tradução som → forma → cor de forma tão central. Experiências como 'Escutar o Silêncio' ou 'Palavra Ritual' trabalham com som e linguagem, mas não com a sílaba como elemento gerador de uma paisagem sonora dinâmica."
-  },
+  "distinctiveness": [
+    "A experiência é centrada na oralidade e no folclore, com uma mecânica de 'ecoar' única.",
+    "A tradução cruzada entre som (eco coral) e forma (constelação visual) é específica desta curadoria.",
+    "O uso do silêncio como gesto ativo e a devolução de uma palavra folclórica ou trava-língua são assinaturas sensoriais exclusivas.",
+    "A constelação pública de 'Cantares' no COSMICOXES cria uma relação territorial e social única, ligada ao folclore.",
+    "A evocação de cheiros e sabores associados a palavras folclóricas é uma camada sensorial adicional não presente em outras experiências.",
+    "A sílaba inicial da próxima sessão ser a última palavra devolta é um mecanismo de latência específico."
+  ],
   "questions_for_eduardo": [
-    "O convite 'Escolhe uma sílaba. Faz-lhe eco.' deve ser literal (a pessoa escolhe uma sílaba qualquer) ou há um conjunto pré-definido de sílabas associadas ao folclore (ex.: sílabas de trava-línguas ou cantares tradicionais)?",
-    "A constelação de sílabas deve ser global (para todas as pessoas) ou local (por sessão)?",
-    "A transformação da sílaba em texto poético deve seguir uma regra específica (ex.: baseada em rimas, aliterações) ou pode ser gerada de forma livre?",
-    "Há alguma restrição quanto ao uso de sílabas de línguas não-portuguesas?"
+    "O corpus de sílabas folclóricas e palavras/trava-línguas deve ser extraído de uma fonte específica (ex: base de dados do Atlas, obra literária)? Se sim, qual?",
+    "A constelação pública de 'Cantares' no COSMICOXES deve ser visível apenas para esta experiência ou integrada com outras curadorias?",
+    "A devolução da palavra final deve incluir uma referência à sua origem folclórica (ex: 'Esta palavra vem de um trava-língua de [região]')?",
+    "A experiência deve permitir que a pessoa 'guarde' uma sílaba ou palavra favorita para sessões futuras (ex: perfil anónimo)?"
   ],
   "improvement_proposals": [
     {
-      "proposal": "Incorporar sílabas de trava-línguas ou cantares tradicionais como sugestões iniciais (ex.: 'ma' de 'marmelada', 'pa' de 'papa').",
-      "justification": "Reforçar a ligação ao folclore e à oralidade, sem limitar a liberdade da pessoa."
+      "proposal": "Incluir um modo 'coral' onde múltiplas pessoas podem interagir simultaneamente, criando um eco coletivo em tempo real (com moderação para evitar abuso).",
+      "justification": "Aprofundaria a dimensão social e folclórica da experiência, alinhando com a ideia de 'coral' e 'festa'."
     },
     {
-      "proposal": "Adicionar uma camada de 'território sonoro' onde cada sílaba está associada a um lugar imaginário (ex.: 'ma' = mercado; 'la' = lago).",
-      "justification": "Aprofundar a relação com o território, mesmo que abstracto."
+      "proposal": "Adicionar uma camada de 'ritmo' onde a pessoa pode bater palmas ou usar um instrumento virtual (ex: adufe) para alterar o eco das sílabas.",
+      "justification": "Reforçaria a conexão com a música e o folclore tradicional, usando o corpo de forma mais ativa."
     },
     {
-      "proposal": "Permitir que a pessoa 'apague' uma sílaba da constelação, criando um vazio que afeta o som das sílabas vizinhas.",
-      "justification": "Adicionar uma camada de interacção mais complexa, mantendo a coerência poética."
+      "proposal": "Integração com a curadoria 'Festas' para associar as palavras devoltas a festas tradicionais específicas (ex: 'tarde' → Festa de São João).",
+      "justification": "Criaria uma ponte natural entre 'Cantares' e 'Festas', enriquecendo o contexto territorial."
     }
   ],
   "generic_fallback_allowed": false,

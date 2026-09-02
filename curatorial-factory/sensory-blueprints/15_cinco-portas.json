@@ -3,332 +3,432 @@
   "canonical_name": "Cinco Portas",
   "source_evidence": {
     "primary": [
-      {
-        "source": "catalog_entry",
-        "authority": "authorial",
-        "quote": "Abre uma porta. Não perguntes para onde.",
-        "mechanics": "abrir"
-      },
-      {
-        "source": "constitution",
-        "section": "11. EXEMPLOS DE DIRECÇÃO",
-        "quote": "A casa aparece a partir de ausências, sons, palavras, memórias e portas impossíveis. Algumas divisões só existem se a pessoa deixar de olhar directamente para elas; outras surgem por voz, silêncio ou espera.",
-        "relevance": "inspiração para dinâmica de portas como limiares sensoriais"
-      }
+      "catalog_entry.convite: 'Abre uma porta. Não perguntes para onde.'",
+      "catalog_entry.mecanica: 'abrir'"
     ],
     "secondary": [
-      {
-        "source": "source_corpus",
-        "section": "ÂNCORAS AUTORAIS — CAMADA PÚBLICA",
-        "quote": "A entrada é silenciosa/encantatória: selo quase invisível, constelação, descoberta e permissividade.",
-        "relevance": "contexto de entrada como limiar"
-      },
-      {
-        "source": "source_corpus",
-        "section": "LIVRO CUBO — NÚCLEO AUTORAL",
-        "quote": "1. a porta — onde entras;",
-        "relevance": "porta como metáfora de entrada e transformação"
-      }
+      "constitution.11: 'A Casa que Não Existia — Não “planta 3D”. A casa aparece a partir de ausências, sons, palavras, memórias e portas impossíveis.'"
+    ],
+    "interpretation": [
+      "source_corpus.ÂNCORAS AUTORAIS: 'A entrada é silenciosa/encantatória: selo quase invisível, constelação, descoberta e permissividade.'"
     ]
   },
   "authorial_invariants": [
-    "O convite é 'Abre uma porta. Não perguntes para onde.'",
-    "A mecânica central é 'abrir'",
-    "A experiência é pública e operável com motor comum",
-    "Não deve explicar o destino da porta antes de ser aberta",
-    "A porta é um limiar, não um menu ou card"
+    "O convite é uma porta, não uma pergunta.",
+    "A porta não revela o destino antes de ser aberta.",
+    "A experiência deve preservar o mistério e a surpresa como valores centrais.",
+    "A dinâmica é de abertura, não de escolha entre opções visíveis.",
+    "A porta é um limiar, não um menu."
   ],
-  "perceptual_intent": "Criar uma experiência de limiar onde a pessoa é convocada a atravessar portas que não são físicas, mas sim sensoriais e existenciais. Cada porta aberta revela uma camada do território, da memória ou do corpo, sem nunca esclarecer o destino antecipadamente. A ausência de explicação prévia é parte da assinatura.",
+  "perceptual_intent": "Criar uma experiência de transição onde a pessoa sente que está a entrar num espaço desconhecido, mas familiar em emoção. A porta é ao mesmo tempo um objecto físico (evocado) e uma metáfora de passagem, onde o gesto de abrir é também um acto de confiança e curiosidade. A ausência de explicação prévia deve gerar uma tensão poética entre o conhecido e o desconhecido.",
   "threshold": {
-    "description": "A pessoa entra num espaço onde cinco portas se materializam progressivamente, não como objectos 3D, mas como alterações subtis no ambiente digital: uma sombra que se alonga, um som que ressoa como se vindo de trás de uma parede invisível, uma palavra que paira no ar como se escrita em névoa, um cheiro evocado por uma descrição que surge e desaparece, ou um gesto que convida a aproximar-se. As portas não são clicáveis; são convites para agir de outra forma.",
-    "sensory_trigger": "A primeira porta 'aparece' quando a pessoa para de mover o cursor/dedo por 3 segundos. O ambiente escurece levemente e um murmúrio sonoro (como vento atrás de uma porta) torna-se audível."
+    "description": "A tela está em silêncio e escuridão quase total. Um único ponto de luz fraca (como uma vela ou uma fenda) aparece no centro, projetando uma sombra alongada de uma porta entreaberta. O som ambiente é um murmúrio distante, como vozes ou vento, mas ininteligível. A pessoa percebe que algo está 'à espera' sem saber o quê.",
+    "sensory_trigger": "A luz da 'porta' pulsa levemente, como uma respiração, e o murmúrio sobe e desce em volume de forma orgânica, sem padrão repetitivo."
   },
   "dramaturgical_arc": [
     {
-      "stage": 1,
-      "name": "LIMIAR",
-      "description": "O ambiente digital (fundo neutro ou textura orgânica) altera-se: surgem cinco 'marcas' no espaço — não portas literais, mas sugestões de portas (ex: uma sombra vertical, um som de dobradiça, uma palavra 'abre' escrita em tipografia instável, um cheiro evocado por texto efémero, um convite para fechar os olhos). A pessoa percebe que algo mudou, mas não sabe o quê."
+      "stage": "LIMIAR",
+      "action": "A tela está em estado de expectativa: porta semi-iluminada, som de murmúrio, ausência de instruções textuais. A pessoa sente que algo está prestes a acontecer, mas não sabe o quê.",
+      "sensory_focus": [
+        "visual (luz fraca, sombra)",
+        "auditory (murmúrio)",
+        "temporal_interoceptive (espera)"
+      ]
     },
     {
-      "stage": 2,
-      "name": "CHAMADA",
-      "description": "Uma das marcas (aleatoriamente ou por proximidade do cursor) 'respira': a sombra pulsa, o som ganha volume por um instante, a palavra 'abre' tremula, o texto sobre cheiro ganha intensidade. O convite é implícito: interagir com essa marca."
+      "stage": "CHAMADA",
+      "action": "A porta (sombra projetada) move-se levemente, como se fosse empurrada por uma brisa invisível. O murmúrio transforma-se num som de dobradiças a ranger, muito suave. Aparece, em letras trémulas e quase transparentes, a frase: *Abre uma porta. Não perguntes para onde.*",
+      "sensory_focus": [
+        "visual (movimento da sombra, texto trémulo)",
+        "auditory (dobradiças)",
+        "spatial (profundidade sugerida)"
+      ]
     },
     {
-      "stage": 3,
-      "name": "PRIMEIRO GESTO",
-      "description": "A pessoa aproxima o cursor/dedo da marca ou, em alternativa acessível, pressiona uma tecla (ex: barra de espaço). A marca responde com um feedback mínimo: a sombra alonga-se, o som emite um 'clique' metálico, a palavra 'abre' inverte-se, o texto sobre cheiro desaparece."
+      "stage": "PRIMEIRO GESTO",
+      "action": "A pessoa é convidada a 'tocar' a porta (com cursor, dedo ou voz, se disponível). O gesto pode ser: clicar, arrastar a sombra para abrir, ou dizer 'abre' (opcional).",
+      "sensory_focus": [
+        "kinesthetic (toque/arrasto)",
+        "auditory (resposta ao gesto)",
+        "proprioceptive (atenção ao corpo)"
+      ]
     },
     {
-      "stage": 4,
-      "name": "RESPOSTA VIVA",
-      "description": "A marca transformada 'abre-se': a sombra divide-se em duas, revelando um fragmento de território (ex: uma fotografia desbotada de uma rua, um som de mercado, uma palavra em dialeto local). A resposta é específica à porta: cada uma das cinco portas tem uma assinatura sensorial única (ex: porta 1 = visual + som territorial; porta 2 = texto + cheiro evocado; porta 3 = som + movimento; etc.)."
+      "stage": "RESPOSTA VIVA",
+      "action": "A porta abre-se lentamente, revelando não um interior, mas um *espaço de transição*: um corredor escuro com 5 portas idênticas, alinhadas em profundidade. Cada porta tem uma textura diferente (madeira, metal, tecido, vidro, sombra). O som do murmúrio transforma-se num eco que parece vir de trás de cada porta. A luz da tela ajusta-se para simular a entrada num espaço fechado.",
+      "sensory_focus": [
+        "visual (corredor, portas, texturas)",
+        "auditory (eco multiplicado)",
+        "spatial (profundidade)"
+      ]
     },
     {
-      "stage": 5,
-      "name": "DESVIO",
-      "description": "Após a resposta, algo inesperado acontece: a porta 'fechada' pode emitir um som de riso, a fotografia pode distorcer-se como se vista através de água, a palavra pode ganhar um significado duplo, ou o cheiro evocado pode ser substituído por outro. Este desvio quebra a linearidade e convida à exploração."
+      "stage": "DESVIO",
+      "action": "Quando a pessoa se aproxima (com cursor/dedo) de uma das portas, esta *reage*: a porta de madeira range, a de metal vibra levemente (feedback háptico opcional), a de tecido move-se como se fosse soprada, a de vidro reflete a sombra da pessoa, e a de sombra *desaparece* temporariamente. O eco transforma-se num som único para cada porta (ex: madeira = batida de coração, metal = sino, tecido = suspiro, vidro = riso, sombra = silêncio).",
+      "sensory_focus": [
+        "visual (reação das portas)",
+        "auditory (sons únicos)",
+        "haptic (vibração opcional)",
+        "kinesthetic (movimento do cursor/dedo)"
+      ]
     },
     {
-      "stage": 6,
-      "name": "APROFUNDAMENTO SENSORIAL",
-      "description": "Se a pessoa interagir com a porta aberta (ex: clicar na fotografia, aproximar o cursor do som, ler a palavra em voz alta), dois canais sensoriais contaminam-se: a fotografia pode começar a emitir o som territorial associado, ou o som pode alterar a cor do ambiente. A tradução cruzada torna-se evidente."
+      "stage": "APROFUNDAMENTO SENSORIAL",
+      "action": "Se a pessoa *permanecer* perto de uma porta por 3 segundos, esta começa a 'respirar': abre e fecha levemente, como se fosse viva. O som associado à porta intensifica-se e mistura-se com o eco das outras, criando uma paisagem sonora complexa. A textura da porta torna-se mais detalhada (ex: veias na madeira, ferrugem no metal).",
+      "sensory_focus": [
+        "visual (movimento, detalhe)",
+        "auditory (paisagem sonora)",
+        "temporal_interoceptive (ritmo da respiração)"
+      ]
     },
     {
-      "stage": 7,
-      "name": "ESCOLHA / ACASO / SILÊNCIO",
-      "description": "A pessoa pode: (a) fechar a porta (gestos: afastar cursor, pressionar 'ESC', ou esperar 10 segundos), (b) abrir outra porta, ou (c) permanecer em silêncio. Se escolher (c), a porta pode revelar uma camada mais profunda (ex: a fotografia ganha uma voz que conta uma história, o som territorial transforma-se num trava-língua, o cheiro evocado ganha uma receita associada)."
+      "stage": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "A pessoa pode: (1) *escolher* uma porta para abrir (clicar/arrastar), (2) *esperar* em silêncio, ou (3) *recuar* (afastar o cursor/dedo). Se escolher uma porta, esta abre-se para um *fragmento* (imagem, som, texto, ou combinação) associado a uma das 5 'portas' do Atlas (ex: uma memória territorial, um som de festa, uma palavra em dialeto local). Se esperar, uma das portas abre-se *sozinha* (acaso controlado). Se recuar, o corredor fecha-se lentamente e a experiência recomeça com uma porta diferente no limiar.",
+      "sensory_focus": [
+        "visual (fragmento ou fecho)",
+        "auditory (som do fragmento ou silêncio)",
+        "kinesthetic (escolha ou recuo)"
+      ]
     },
     {
-      "stage": 8,
-      "name": "APARIÇÃO",
-      "description": "Algo novo emerge: uma porta que não estava lá antes (a 'sexta porta'), um fragmento de memória colectiva (ex: uma contribuição anónima de outra pessoa que já passou por ali), ou um objecto simbólico (ex: uma chave, um bilhete, uma semente). Esta aparição é efémera e só visível durante a sessão."
+      "stage": "APARIÇÃO",
+      "action": "Ao abrir uma porta, emerge um *fragmento vivo*: uma fotografia em tons sepia de um lugar real (ex: uma rua de Lisboa), sobreposta por uma camada de texto em movimento (ex: uma palavra em dialeto ou um trava-língua), e um som ambiente (ex: vozes de mercado, sino de igreja). O fragmento não é estático: a fotografia pode 'respirar' (zoom lento), o texto pode desvanecer-se e reaparecer, e o som pode variar em volume como se a pessoa estivesse a aproximar-se ou afastar-se.",
+      "sensory_focus": [
+        "visual (fotografia, texto)",
+        "auditory (som ambiente)",
+        "temporal_interoceptive (movimento lento)"
+      ]
     },
     {
-      "stage": 9,
-      "name": "DEVOLUÇÃO",
-      "description": "Ao sair (ou após um tempo pré-definido), a pessoa recebe algo de volta: uma palavra que resume a sua interacção (ex: 'limiar', 'espera', 'cheiro'), um som que capturou (se permitiu microfone), ou um fragmento visual da sua trajetória (ex: o caminho do cursor transformado em linha ou textura). A devolução é minimalista e poética."
+      "stage": "DEVOLUÇÃO",
+      "action": "O fragmento *deixa um rasto*: uma palavra, um som ou uma textura (ex: a sombra de um objecto da fotografia) permanece na tela por 10 segundos após o fecho da porta. Este rasto é único para cada sessão e pode ser 'coletado' (arrastado para um canto da tela) ou ignorado. Se a pessoa interagir com o rasto (ex: clicar), este transforma-se num *convite* para uma das outras curadorias do Atlas (ex: 'Fala com o Fucô sobre esta memória').",
+      "sensory_focus": [
+        "visual (rasto)",
+        "auditory (som residual)",
+        "social_presence (convite)"
+      ]
     },
     {
-      "stage": 10,
-      "name": "RASTO / LATÊNCIA",
-      "description": "A experiência pode deixar um rasto: a porta aberta pela pessoa pode 'ficar entreaberta' para a próxima sessão (visível como uma sombra mais clara ou um som residual), ou a sua devolução pode ser integrada no cosmos COSMICOXES como uma partícula anónima. Alternativamente, a porta pode fechar-se completamente, como se nunca tivesse existido."
+      "stage": "RASTO / LATÊNCIA",
+      "action": "Se a pessoa sair da experiência, o rasto permanece como uma *partícula* no cosmos do Atlas (COSMICOXES), visível em futuras sessões como um ponto de luz ou som. Se a pessoa regressar à experiência, o corredor pode ter uma porta adicional (a 6ª), que é o rasto da sessão anterior, agora transformado numa nova porta para explorar.",
+      "sensory_focus": [
+        "visual (partícula no cosmos)",
+        "auditory (som residual no cosmos)",
+        "spatial (nova porta)"
+      ]
     }
   ],
   "participant_verbs": [
-    "parar",
-    "aproximar",
+    "tocar",
     "abrir",
-    "escutar",
     "esperar",
-    "fechar",
-    "silenciar"
+    "escolher",
+    "recuar",
+    "coletar",
+    "ouvir"
   ],
-  "system_responses": {
-    "to_parar": "O ambiente escurece levemente e um murmúrio sonoro (vento/porta) torna-se audível. As cinco marcas surgem progressivamente.",
-    "to_aproximar": "A marca mais próxima 'respira': sombra pulsa, som ganha volume, palavra tremula, ou texto sobre cheiro ganha intensidade.",
-    "to_abrir": "A marca transformada 'abre-se', revelando um fragmento de território (fotografia, som, palavra, cheiro evocado). Cada porta tem uma assinatura sensorial única.",
-    "to_escutar": "Se a pessoa aproximar o cursor de um som territorial, este pode distorcer-se ou revelar uma camada oculta (ex: voz, trava-língua).",
-    "to_esperar": "Se a pessoa permanecer imóvel por 10 segundos, a porta aberta pode revelar uma camada mais profunda (história, receita, memória).",
-    "to_fechar": "A porta volta ao estado inicial (sombra, som residual, palavra estática). O fragmento territorial desaparece.",
-    "to_silenciar": "Se a pessoa não interagir com nenhuma porta por 20 segundos, uma das portas emite um som ou texto que convida à ação (ex: 'Ainda estás aí?')."
-  },
-  "sensory_signature_id": "cinco-portas-limiar-sensorial",
+  "system_responses": [
+    {
+      "gesture": "toque/clique na porta inicial",
+      "response": "A porta abre-se, revelando o corredor com 5 portas. O som de dobradiças mistura-se com o murmúrio, que se transforma em eco."
+    },
+    {
+      "gesture": "aproximação do cursor/dedo a uma das 5 portas",
+      "response": "A porta reage com movimento, som e textura únicos. O eco transforma-se num som associado à porta."
+    },
+    {
+      "gesture": "permanência perto de uma porta por 3 segundos",
+      "response": "A porta 'respira' (abre/fecha levemente), o som intensifica-se, e a textura ganha detalhe."
+    },
+    {
+      "gesture": "escolha de uma porta para abrir",
+      "response": "A porta abre-se para um fragmento vivo (imagem + texto + som), que emerge lentamente."
+    },
+    {
+      "gesture": "espera em silêncio",
+      "response": "Uma das portas abre-se sozinha (acaso controlado), revelando um fragmento."
+    },
+    {
+      "gesture": "recuo (afastar cursor/dedo)",
+      "response": "O corredor fecha-se lentamente, e a experiência recomeça com uma porta diferente no limiar."
+    },
+    {
+      "gesture": "interação com o rasto (clique/arrasto)",
+      "response": "O rasto transforma-se num convite para outra curadoria do Atlas."
+    }
+  ],
+  "sensory_signature_id": "cinco-portas-silencio-e-eco",
   "sensory_channels": {
     "visual": {
-      "description": "Sombras verticais que se alongam/encurtam, fotografias desbotadas ou distorcidas, palavras em tipografia instável (ex: 'abre' que tremula ou inverte), texturas orgânicas no fundo, transições de cor subtis (ex: ambiente que escurece/clareia).",
-      "intensity": "subtil a moderada",
-      "accessibility_note": "Contraste suficiente para leitura; opção de reduzir movimento (reduced-motion)."
+      "elements": [
+        "sombra de porta projetada",
+        "corredor em profundidade",
+        "5 portas com texturas distintas",
+        "fragmento vivo (fotografia + texto)",
+        "rasto (palavra/sombra/som)",
+        "partícula no cosmos"
+      ],
+      "dynamics": [
+        "luz fraca/pulsante",
+        "movimento orgânico das portas",
+        "respiração das texturas",
+        "zoom lento em fotografias",
+        "desvanecimento de texto"
+      ]
     },
     "auditory": {
-      "description": "Murmúrios (vento, dobradiças, risos), sons territoriais (mercado, rua, água), vozes que contam histórias ou recitam trava-línguas, silêncios que 'falam' (ex: ausência de som que revela uma camada visual). Espacialização sutil (som parece vir de trás da 'porta').",
-      "intensity": "baixa a moderada",
-      "accessibility_note": "Legendas para sons territoriais; opção de desativar som."
+      "elements": [
+        "murmúrio distante",
+        "dobradiças a ranger",
+        "eco multiplicado",
+        "sons únicos por porta (batida de coração, sino, suspiro, riso, silêncio)",
+        "som ambiente do fragmento",
+        "som residual do rasto"
+      ],
+      "dynamics": [
+        "variação de volume orgânica",
+        "paisagem sonora complexa",
+        "transição suave entre sons"
+      ]
     },
     "haptic": {
-      "description": "Vibração sutil em dispositivos compatíveis quando uma porta 'abre' ou 'fecha' (opcional, não obrigatório). Feedback táctil mínimo para gestos de aproximação/afastamento.",
-      "intensity": "mínima",
-      "accessibility_note": "Equivalente visual/sonoro para vibração (ex: pulso luminoso)."
+      "elements": [
+        "vibração opcional (porta de metal)",
+        "feedback de toque (arrasto)"
+      ],
+      "dynamics": [
+        "vibração leve e breve"
+      ]
     },
     "kinesthetic": {
-      "description": "Movimento do cursor/dedo altera a proximidade das marcas (portas). Velocidade e trajectória podem influenciar a resposta do sistema (ex: movimento rápido = porta abre com som agudo; movimento lento = porta abre com som grave).",
-      "intensity": "moderada",
-      "accessibility_note": "Controlo por teclado (setas, barra de espaço) ou voz (comandos simples como 'abrir', 'fechar')."
+      "elements": [
+        "movimento do cursor/dedo",
+        "arrasto para abrir",
+        "recuo"
+      ],
+      "dynamics": [
+        "velocidade e trajetória influenciam a resposta das portas"
+      ]
     },
     "proprioceptive": {
-      "description": "Instruções implícitas para postura (ex: 'fechar os olhos', 'respirar fundo') através de texto efémero ou som. A pessoa é convocada a perceber o seu corpo no espaço (ex: 'Sentes o peso da porta?').",
-      "intensity": "subtil",
-      "accessibility_note": "Instruções opcionais; alternativa para quem não pode/pode mover-se."
+      "elements": [
+        "atenção ao corpo (mão, dedo, postura)",
+        "respiração percebida (ritmo das portas)"
+      ],
+      "dynamics": [
+        "instruções implícitas de movimento (ex: 'permanecer perto')"
+      ]
     },
     "temporal_interoceptive": {
-      "description": "Espera e ritmo são centrais: a pessoa pode ter de esperar para que uma porta 'respira', ou o sistema pode responder mais lentamente a gestos rápidos. Silêncio e pausa são usados como ferramentas dramáticas.",
-      "intensity": "moderada",
-      "accessibility_note": "Modo sem pressão temporal; opção de pular esperas."
+      "elements": [
+        "espera",
+        "ritmo das portas",
+        "duração do fragmento"
+      ],
+      "dynamics": [
+        "pausas intencionais",
+        "aceleração/desaceleração do tempo"
+      ]
     },
     "spatial": {
-      "description": "As cinco portas estão dispostas no espaço digital como se em um corredor ou praça. A proximidade do cursor/dedo altera a intensidade da interacção. A 'sexta porta' pode surgir num local inesperado (ex: atrás da pessoa, se usar geolocalização opcional).",
-      "intensity": "moderada",
-      "accessibility_note": "Navegação por teclado mantém a noção de espaço (ex: tab para mover entre portas)."
+      "elements": [
+        "profundidade do corredor",
+        "posição das portas",
+        "distância do cursor/dedo"
+      ],
+      "dynamics": [
+        "perspetiva forçada",
+        "proximidade/distança afeta a intensidade sensorial"
+      ]
     },
     "olfactory_evocation": {
-      "description": "Cheiros evocados por texto efémero (ex: 'Aqui cheira a pão quente', 'O ar tem salitre'). Nunca fingido como output do browser.",
-      "intensity": "evocação apenas",
-      "accessibility_note": "Texto descritivo sempre disponível."
+      "elements": [
+        "memória de cheiros associados a portas (ex: madeira = serragem, metal = ferrugem, tecido = lavanda)"
+      ],
+      "dynamics": [
+        "evocação através de texto ou som (ex: 'o cheiro a madeira velha')"
+      ]
     },
     "gustatory_evocation": {
-      "description": "Sabores evocados por memórias ou receitas associadas a territórios (ex: 'Lembras-te do sabor do pão da padaria da esquina?'). Nunca fingido como output do browser.",
-      "intensity": "evocação apenas",
-      "accessibility_note": "Texto ou áudio descritivo."
+      "elements": [
+        "memória de sabores associados a fragmentos (ex: som de mercado = gosto a pão fresco)"
+      ],
+      "dynamics": [
+        "evocação através de texto ou som (ex: 'o sabor do pão da padaria da esquina')"
+      ]
     },
     "social_presence": {
-      "description": "Presença de outras pessoas é sugerida por rastos anónimos (ex: uma porta que foi aberta por outra pessoa e 'fica entreaberta', um som residual de uma interacção passada). Nunca vigilância ou perfil psicológico.",
-      "intensity": "subtil",
-      "accessibility_note": "Rastos são opcionais e podem ser desativados."
+      "elements": [
+        "murmúrio de vozes",
+        "convite para outras curadorias",
+        "rasto partilhado no cosmos"
+      ],
+      "dynamics": [
+        "presença implícita de outras pessoas (sem vigilância)"
+      ]
     }
   },
   "cross_sensory_translation": {
-    "primary": "Som territorial (auditory) altera a cor e textura (visual) do ambiente quando a pessoa aproxima o cursor. Exemplo: som de mercado = ambiente ganha tons quentes e textura de tecido; som de água = ambiente ganha tons azuis e textura ondulada.",
-    "secondary": "Palavra escrita (visual) ganha 'peso' sonoro (auditory): ao ler uma palavra em voz alta (ou aproximar o cursor), esta emite um som que ressoa como se fosse um objecto físico (ex: a palavra 'pedra' soa como uma pedra a cair)."
+    "primary": "O som do eco (auditory) altera a textura visual das portas: quanto mais intenso o eco, mais detalhada e 'viva' a textura da porta associada.",
+    "secondary": "O movimento do cursor/dedo (kinesthetic) modula o volume do som ambiente do fragmento: aproximar-se aumenta o volume, afastar-se diminui.",
+    "tertiary": "A luz fraca da porta inicial (visual) é traduzida em som: a intensidade da luz corresponde à frequência de um tom grave (como um sino distorcido)."
   },
   "silence_or_absence": {
-    "mechanism": "O silêncio é usado como ferramenta dramática: (1) Se a pessoa não interagir com nenhuma porta por 20 segundos, o ambiente fica em silêncio total e uma porta emite um som único (ex: um 'clique' ou um suspiro) para convocar a atenção. (2) Uma das portas pode ser 'a porta do silêncio': ao abri-la, todos os sons param e o ambiente visual simplifica-se (ex: fundo branco, apenas uma palavra ou sombra). (3) A devolução pode incluir um momento de silêncio (ex: a palavra 'espera' aparece e desaparece lentamente).",
-    "purpose": "Criar tensão, convite à reflexão e quebra de expectativa. O silêncio não é vazio; é uma camada sensorial ativa."
+    "mechanism": "A 5ª porta (sombra) *desaparece* quando o cursor/dedo se aproxima, criando um vazio temporário. Este silêncio visual é acompanhado por um silêncio sonoro (o eco pára). A ausência é tão significativa quanto a presença das outras portas.",
+    "purpose": "Convidar à reflexão sobre o que não está visível ou audível, e criar uma tensão entre o cheio e o vazio."
   },
   "surprise_or_indeterminacy": {
-    "mechanisms": [
-      {
-        "name": "Porta que não existia",
-        "description": "Após abrir 3 portas, uma 'sexta porta' pode surgir num local inesperado (ex: no canto do ecrã, ou atrás de uma das portas já abertas). Esta porta não tem assinatura sensorial predefinida; a sua resposta é gerada a partir de uma combinação aleatória de fragmentos territoriais (fotografia + som + palavra)."
-      },
-      {
-        "name": "Desvio sonoro",
-        "description": "Ao abrir uma porta, o som territorial associado pode ser substituído por outro (ex: som de mercado vira som de chuva) se a pessoa interagir rapidamente (cursor em movimento acelerado)."
-      },
-      {
-        "name": "Memória colectiva",
-        "description": "Uma das portas pode revelar um fragmento deixado por outra pessoa (ex: uma palavra, um som, uma fotografia) que já interagiu com a experiência. Este fragmento é anónimo e efémero."
-      },
-      {
-        "name": "Porta que se fecha sozinha",
-        "description": "Se a pessoa demorar demasiado a interagir com uma porta aberta, esta pode fechar-se sozinha, emitindo um som de 'trancar' e voltando ao estado inicial."
-      }
-    ]
+    "mechanism": [
+      "A porta que se abre sozinha (acaso controlado) é escolhida com base na *velocidade* do gesto inicial da pessoa (ex: gesto rápido = porta de metal; gesto lento = porta de tecido).",
+      "O fragmento revelado por cada porta é *aleatório dentro de uma categoria* (ex: porta de madeira = sempre memórias territoriais; porta de vidro = sempre sons de festas).",
+      "Se a pessoa recuar 3 vezes seguidas, a 6ª porta (rasto) aparece no corredor, com um fragmento gerado a partir das interações anteriores.",
+      "O som ambiente do fragmento pode conter *palavras subliminares* (ex: um nome de rua ou uma gíria local), que só são percebidas em repetidas audições."
+    ],
+    "purpose": "Manter a experiência imprevisível e única em cada sessão, sem depender de dados pessoais."
   },
   "session_variation": [
     {
-      "type": "acaso_controlado",
-      "description": "A ordem das cinco portas é aleatória em cada sessão, mas sempre com uma porta 'principal' (ex: a que tem a assinatura sensorial mais complexa) num local central."
+      "type": "acaso controlado",
+      "description": "A porta que se abre sozinha é selecionada com base em parâmetros aleatórios (ex: hora do dia, posição do cursor no ecrã)."
     },
     {
-      "type": "resposta_a_ritmo",
-      "description": "A velocidade do gesto da pessoa (cursor/teclado) altera a resposta do sistema: gestos rápidos = sons agudos e cores quentes; gestos lentos = sons graves e cores frias."
+      "type": "ordem mutável",
+      "description": "A ordem das 5 portas no corredor é aleatorizada em cada sessão."
     },
     {
-      "type": "resposta_a_posicao",
-      "description": "A posição do cursor no ecrã influencia a intensidade da interacção: cursor no centro = resposta mais intensa; cursor nas bordas = resposta mais subtil."
+      "type": "resposta a ritmo/velocidade do gesto",
+      "description": "A porta que reage mais intensamente (ex: vibra mais, abre mais rápido) depende da velocidade do gesto inicial da pessoa."
     },
     {
-      "type": "temporalidade_real",
-      "description": "Se a sessão decorrer durante a noite, as portas podem ter assinaturas sensoriais mais escuras e sons mais graves. Durante o dia, as assinaturas são mais claras e sons mais agudos. (Opcional: usar hora do dispositivo sem rastreio.)"
+      "type": "combinação de fragmentos curatoriais",
+      "description": "Os fragmentos associados a cada porta são combinados de forma única em cada sessão (ex: fotografia A + som B + texto C)."
     },
     {
-      "type": "memoria_deixada",
-      "description": "Se a pessoa já interagiu com a experiência antes (e autorizou), uma das portas pode 'lembrar' da sua interacção passada (ex: revelar o fragmento que recebeu na devolução anterior)."
+      "type": "temporalidade real",
+      "description": "O murmúrio inicial e o eco das portas variam consoante a hora do dia (ex: de manhã = sons de mercado; à noite = sons de ruas desertas)."
+    },
+    {
+      "type": "rasto anterior",
+      "description": "Se a pessoa já interagiu com a experiência, uma 6ª porta (o rasto da sessão anterior) aparece no corredor."
     }
   ],
   "territorial_binding": {
-    "description": "Cada porta está associada a um fragmento territorial real do Atlas Vivo MILK: (1) uma fotografia de uma rua ou lugar; (2) um som gravado num território específico; (3) uma palavra ou expressão em dialeto local; (4) um cheiro ou sabor evocado ligado a uma prática territorial; (5) uma memória ou história colectiva. Os fragmentos são extraídos do corpus autoral (ex: festas, topónimos, falares) e nunca inventados.",
-    "sources": [
-      "curadoria entrada freguesias.xlsx",
-      "PUBLICO_TERRITORIAL__CURADORIA_NOS_FALARTE_RESIDUAL.pdf",
-      "F01–F20 (gramáticas territoriais)"
+    "relation": "As 5 portas representam 5 *tipos de entrada* para o território do Atlas Vivo MILK: (1) Memória (madeira), (2) Som (metal), (3) Palavra (tecido), (4) Imagem (vidro), (5) Silêncio (sombra). Cada porta está associada a fragmentos reais do corpus territorial (ex: fotografias de Nuno A, sons de festas, palavras em dialeto).",
+    "evidence": [
+      "source_corpus.ÂNCORAS AUTORAIS: 'O rastro desejado: memória, lembrança, história, receita, piada, rua, bairro, venda, café, pãozinho, lugar desaparecido, brincadeira, palavra, som, gesto, folclore, fábula.'"
     ],
-    "note": "A associação territorial é implícita: a pessoa não recebe um 'mapa' ou 'localização', mas sim a sensação de estar num lugar específico."
+    "constraint": "Os fragmentos devem ser extraídos do corpus autoral (ex: fotografias de Nuno A, dinâmicas territoriais F01–F20) e nunca inventados."
   },
   "trace_and_return": {
     "trace": {
-      "description": "A pessoa pode deixar um rasto: (1) uma porta que 'fica entreaberta' para a próxima sessão (visível como uma sombra mais clara ou um som residual); (2) uma palavra ou fragmento visual que é integrado no cosmos COSMICOXES como partícula anónima; (3) um som ou gesto que é gravado (se permitiu microfone/câmara) e devolve-se na forma de um fragmento sonoro ou visual.",
-      "persistence": "Efémero (dura até ao fecho da sessão) ou anónimo (integrado no cosmos)."
+      "type": "rasto sensorial",
+      "description": "Uma palavra, som ou textura do fragmento permanece na tela por 10 segundos após o fecho da porta. Este rasto é único para cada sessão e pode ser interativo (ex: arrastado para um canto).",
+      "persistence": "O rasto é visível apenas na sessão atual, mas pode ser transformado em partícula no cosmos (COSMICOXES) para sessões futuras."
     },
     "return": {
-      "description": "A devolução é minimalista e poética: (1) uma palavra que resume a interacção (ex: 'limiar', 'espera', 'cheiro'); (2) um som que capturou (se permitiu microfone); (3) um fragmento visual da trajetória (ex: o caminho do cursor transformado em linha ou textura); (4) um objecto simbólico (ex: uma chave, um bilhete) que aparece no final.",
-      "format": "Texto, som ou imagem efémera."
+      "type": "convite ou partícula",
+      "description": "Se a pessoa interagir com o rasto, este transforma-se num convite para outra curadoria (ex: 'Fala com o Fucô sobre esta memória'). Se não interagir, o rasto desaparece e pode regressar como partícula no cosmos."
     }
   },
   "accessibility_equivalents": {
     "visual": {
-      "alternative": "Todas as interacções visuais têm equivalente sonoro ou táctil. Exemplo: som de 'porta a abrir' para quem não vê a sombra; vibração para quem não ouve o som.",
-      "reduced_motion": "Opção para desativar animações e transições visuais. As portas são representadas por formas estáticas (ex: retângulos com bordas grossas)."
+      "alternative": "Todas as interações visuais (ex: sombra da porta, texturas) têm descrições sonoras opcionais (ex: 'Uma porta de madeira com veias escuras está à tua frente').",
+      "reduced_motion": "As portas abrem-se com animações suaves ou estáticas, conforme a preferência do utilizador. O corredor pode ser apresentado como uma lista vertical estática."
     },
     "auditory": {
-      "alternative": "Todos os sons têm equivalente visual (ex: onda sonora que se materializa como forma) ou táctil (vibração). Legendas para sons territoriais ou vozes.",
-      "mute_option": "Opção para desativar todos os sons."
+      "alternative": "Todos os sons têm legendas visuais (ex: 'Som de dobradiças a ranger') e transcrições para o fragmento (ex: texto do trava-língua).",
+      "volume_control": "O volume dos sons pode ser ajustado ou desligado, sem perder a experiência."
     },
     "haptic": {
-      "alternative": "Vibração é substituída por pulso visual (ex: círculo que expande e contrai) ou sonoro (ex: som de 'clique')."
+      "alternative": "A vibração opcional é substituída por um pulso visual (ex: a porta de metal 'treme' visualmente)."
     },
     "kinesthetic": {
-      "alternative": "Controlo por teclado (setas para mover entre portas, barra de espaço para abrir/fechar) ou voz (comandos simples como 'abrir porta 1', 'fechar')."
+      "alternative": "Todas as interações por gesto (ex: arrastar) podem ser feitas com teclado (ex: setas para navegar entre portas) ou voz (ex: 'abre porta 3')."
     },
     "proprioceptive": {
-      "alternative": "Instruções para postura ou movimento são opcionais. Alternativa: texto que convida à imaginação (ex: 'Imagina que estás a empurrar uma porta pesada')."
+      "alternative": "Instruções de movimento (ex: 'permanecer perto') são substituídas por temporizadores visuais (ex: 'A porta abrir-se-á em 3 segundos')."
     },
     "temporal_interoceptive": {
-      "alternative": "Modo sem pressão temporal: esperas são encurtadas ou removidas. Opção para pular interacções baseadas em tempo."
+      "alternative": "A espera pode ser substituída por um botão 'pular espera' ou um modo 'sem pressão'."
     },
-    "cognitive": {
-      "alternative": "Texto simplificado para instruções. Opção para desativar elementos complexos (ex: trava-línguas)."
-    }
+    "olfactory_evocation": {
+      "alternative": "As evocações olfativas são sempre acompanhadas por texto (ex: 'Imagina o cheiro a madeira velha')."
+    },
+    "gustatory_evocation": {
+      "alternative": "As evocações gustativas são sempre acompanhadas por texto (ex: 'Lembra-te do sabor do pão da padaria da esquina')."
+    },
+    "social_presence": {
+      "alternative": "O murmúrio e o eco são substituídos por descrições textuais (ex: 'Ouvem-se vozes distantes, como num mercado')."
+    },
+    "poetic_preservation": "Todas as alternativas mantêm a intenção poética da experiência: mistério, surpresa e transição."
   },
   "optional_permissions": {
     "microphone": {
-      "purpose": "Capturar voz da pessoa para: (1) interagir com portas por comando vocal; (2) gravar um som ou palavra para devolução; (3) detectar nível sonoro ambiente (opcional, sem gravação) para ajustar a experiência.",
-      "trigger": "Apenas quando a pessoa clica num botão explícito 'Usar voz' ou aproxima o cursor de uma porta que requer voz.",
-      "fallback": "Interacção por teclado ou gesto."
+      "purpose": "Permitir que a pessoa diga 'abre' para interagir com as portas.",
+      "fallback": "A interação por voz é opcional; o gesto manual (clique/arrasto) é sempre suficiente."
     },
     "camera": {
-      "purpose": "Capturar gesto ou expressões faciais para interacções mais imersivas (ex: abrir uma porta com um piscar de olhos).",
-      "trigger": "Apenas quando a pessoa clica num botão explícito 'Usar câmara'.",
-      "fallback": "Interacção por cursor/teclado."
+      "purpose": "Nenhuma. A câmara não é necessária para esta experiência.",
+      "fallback": "N/A"
     },
     "geolocation": {
-      "purpose": "Associar a experiência a um território real (ex: a 'sexta porta' surge num local próximo à localização da pessoa).",
-      "trigger": "Apenas quando a pessoa clica num botão explícito 'Usar localização'.",
-      "fallback": "Portas surgem em posições aleatórias no ecrã."
+      "purpose": "Nenhuma. A geolocalização não é necessária para esta experiência.",
+      "fallback": "N/A"
     },
     "device_motion": {
-      "purpose": "Usar inclinação ou movimento do dispositivo para interagir com as portas (ex: inclinar para 'abrir' uma porta).",
-      "trigger": "Apenas quando a pessoa clica num botão explícito 'Usar movimento'.",
-      "fallback": "Interacção por cursor/teclado."
+      "purpose": "Permitir que a pessoa incline o dispositivo para 'abrir' as portas (ex: inclinar para a direita abre a porta da direita).",
+      "fallback": "A interação por movimento é opcional; o gesto manual é sempre suficiente."
     }
   },
   "overstimulation_risk": {
-    "risks": [
-      "Flashing ou transições visuais rápidas (ex: sombras a piscar).",
-      "Sons súbitos ou altos (ex: som de porta a bater).",
-      "Vibrações insistentes (ex: feedback táctil repetitivo).",
-      "Pressão temporal (ex: portas que fecham automaticamente após pouco tempo)."
+    "potential_risks": [
+      "Flashing ou transições visuais rápidas (ex: texto trémulo).",
+      "Sons súbitos ou altos (ex: eco multiplicado).",
+      "Vibração insistente (ex: porta de metal).",
+      "Loops compulsivos (ex: porta a abrir/fechar repetidamente)."
     ],
-    "mitigations": [
-      "Limitar a frequência de transições visuais (máx. 3 por segundo).",
-      "Limitar o volume dos sons a 50% do máximo do dispositivo por defeito.",
-      "Limitar vibrações a 1 por interacção e desativá-las por defeito em dispositivos móveis.",
-      "Fornecer opção para desativar todos os estímulos dinâmicos (modo 'estático').",
-      "Incluir botão de 'pausa' para interromper a experiência a qualquer momento.",
-      "Garantir que o modo reduzido (reduced-motion) remove todas as animações."
+    "mitigation": [
+      "Limitar a frequência do texto trémulo a 2-3 Hz e garantir que não pisca mais do que 3 vezes seguidas.",
+      "Manter o volume dos sons abaixo de 70% do máximo do dispositivo e garantir transições suaves entre sons.",
+      "Limitar a vibração a 1 pulso breve por interação.",
+      "Permitir que a pessoa pause ou saia da experiência a qualquer momento, com um botão visível e acessível.",
+      "Oferecer um modo 'reduzido' (reduced-motion, sons mais baixos, sem vibração) por defeito para utilizadores que o preferirem."
     ]
   },
   "distinctiveness": {
     "unique_elements": [
-      "A ausência de explicação prévia: a pessoa não sabe para onde a porta leva, e o sistema nunca o revela antecipadamente.",
-      "A tradução cruzada entre som territorial e cor/textura do ambiente.",
-      "O uso do silêncio como camada sensorial ativa (ex: porta do silêncio, devolução com pausa).",
-      "A 'sexta porta' que surge inesperadamente e não tem assinatura sensorial predefinida.",
-      "A devolução minimalista e poética (palavra, som, fragmento visual) que não é um 'prémio' ou 'recompensa', mas sim um rasto da interacção.",
-      "A associação implícita a territórios reais sem nunca mostrar um mapa ou localização explícita.",
-      "A combinação de gestos simples (parar, aproximar, abrir) com respostas complexas e multissensoriais."
+      "A porta como *limiar* (não menu) e a ausência de explicação prévia.",
+      "O corredor com 5 portas *vivas* (reagem ao gesto, respiram, têm sons únicos).",
+      "A 5ª porta (sombra) que *desaparece* ao ser tocada, criando um vazio ativo.",
+      "A tradução cruzada entre eco (som) e textura (visual).",
+      "O rasto que se transforma em convite para outras curadorias.",
+      "A relação direta com o corpus territorial do Atlas (fragmentos reais de memórias, sons, palavras)."
     ],
-    "comparison": "Esta experiência não pode ser confundida com: (1) um menu ou card (as portas não são clicáveis como botões); (2) um quiz ou jogo de pontos (não há pontuação ou objectivos); (3) uma animação decorativa (as portas respondem à presença da pessoa); (4) um chatbot (não há diálogo linear); (5) uma galeria de imagens (as portas revelam fragmentos multissensoriais, não apenas visuais)."
+    "comparison": "Esta experiência não pode ser confundida com: (1) 'A Casa que Não Existia' (que usa portas impossíveis e ausências), porque aqui as portas são *reais* e *interativas*; (2) 'Galeria Diletante' (que usa fotografias e palavras), porque aqui o foco é a *transição* e o *mistério*; (3) 'Dado Sem Lado' (que usa acaso e movimento), porque aqui o acaso é *controlado* e o movimento é *orgânico*."
   },
   "questions_for_eduardo": [
-    "As cinco portas devem ter assinaturas sensoriais fixas (ex: porta 1 = visual + som; porta 2 = texto + cheiro evocado) ou podem variar entre sessões?",
-    "A 'sexta porta' deve ser sempre aleatória ou pode ser associada a um fragmento territorial específico (ex: uma festa ou topónimo do Atlas)?",
-    "O som territorial deve ser gravado no momento (se microfone permitido) ou pode ser pré-gravado a partir do corpus autoral?",
-    "A devolução deve ser sempre efémera (dura apenas a sessão) ou pode ser guardada no cosmos COSMICOXES para sessões futuras?",
-    "A experiência deve ter um limite de tempo máximo (ex: 5 minutos) ou pode ser explorada livremente?"
+    "As 5 portas devem representar categorias fixas (ex: Memória, Som, Palavra, Imagem, Silêncio) ou podem variar consoante o corpus territorial disponível?",
+    "Os fragmentos associados a cada porta devem ser *exclusivos* de 'Cinco Portas' ou podem ser partilhados com outras curadorias (ex: uma fotografia de Nuno A também pode aparecer em 'Galeria Diletante')?",
+    "O rasto deve ser *pessoal* (visível apenas para a pessoa que o criou) ou *coletivo* (visível para todos no cosmos)?",
+    "A 6ª porta (rasto) deve ser uma *nova porta* no corredor ou um *fragmento* que aparece noutra parte da tela?",
+    "O murmúrio inicial deve ser *genérico* (ex: vozes indistintas) ou *específico* (ex: sons reais de festas do Atlas)?"
   ],
   "improvement_proposals": [
     {
-      "proposal": "Incluir uma opção para a pessoa 'deixar uma marca' numa porta (ex: desenhar, gravar um som, escrever uma palavra) que fique visível para outras pessoas (anónima ou com nome inventado).",
-      "justification": "Aumenta a dimensão comunitária e o rasto colectivo, alinhado com o princípio de devolução do Atlas."
+      "proposal": "Incluir uma *6ª porta oculta* que só aparece se a pessoa interagir com todas as 5 portas sem recuar. Esta porta poderia levar a um fragmento *único* (ex: uma história ou som nunca antes ouvido no Atlas).",
+      "justification": "Aumentaria a recompensa pela exploração completa e reforçaria o mistério."
     },
     {
-      "proposal": "Associar cada porta a uma das seis faces do Livro Cubo (ex: porta 1 = a porta; porta 2 = a jaula; etc.) para criar uma narrativa mais profunda.",
-      "justification": "Reforça a ligação ao núcleo autoral do Livro Cubo e adiciona uma camada de significado."
+      "proposal": "Permitir que a pessoa *feche* uma porta manualmente (ex: clicar noutra porta ou num botão 'fechar').",
+      "justification": "Daria mais controle à pessoa e evitaria a sensação de estar 'preso' num fragmento."
     },
     {
-      "proposal": "Permitir que a pessoa 'feche os olhos' (ex: clicar num botão ou pressionar uma tecla) para revelar uma porta oculta que só é visível no 'escuro' (fundo preto).",
-      "justification": "Explora a propriocepção e a ausência visual como ferramenta sensorial."
+      "proposal": "Adicionar uma *camada de tempo* ao corredor: as portas poderiam ter 'idades' diferentes (ex: porta de madeira = antiga, porta de metal = moderna), e o som ambiente variar consoante a 'idade' da porta selecionada.",
+      "justification": "Aprofundaria a relação com o território e a memória."
+    },
+    {
+      "proposal": "Incluir *pistas territoriais* nos fragmentos (ex: o som de uma porta incluir o nome de uma rua ou bairro).",
+      "justification": "Reforçaria a ligação ao corpus territorial do Atlas."
     }
   ],
   "generic_fallback_allowed": false,

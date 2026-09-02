@@ -7,297 +7,381 @@
       "catalog_entry.mecanica: 'trocar'"
     ],
     "secondary": [
-      "constitution.11: 'Palavra Ritual — A palavra deve ganhar corpo, ritmo, peso, eco e desgaste.'",
-      "source_corpus: 'LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md — D4 O Corpo que Percebe — percepção incorporada; digital quase ausente.'"
+      "constitution.11: 'Palavra Ritual' (inspiração para transformação de palavra)",
+      "source_corpus: 'LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md' (D5 Escutar o Silêncio como referência para ausência ativa)"
     ],
-    "interpretation": [
-      "constitution.3: 'Princípio de tradução cruzada dos sentidos'",
-      "constitution.4: 'Arco dramatúrgico obrigatório'"
+    "authorial_anchors": [
+      "Assimetria orgânica e calor táctil (estética MILK)",
+      "Bilhetes/caixas como rascunho de caderno, folha rasgada"
     ]
   },
   "authorial_invariants": [
-    "A dinâmica central é 'trocar' uma metade escrita por outra guardada em silêncio.",
-    "O convite é explícito: 'Escreve metade. Guarda a outra em silêncio.'",
-    "A assimetria é estrutural: uma parte é visível/activa, a outra é ausente/latente.",
-    "A experiência deve preservar a tensão entre o dito e o não-dito."
+    "A experiência deve ser assimetrica: uma metade é escrita, a outra é guardada em silêncio.",
+    "O gesto de trocar é central, mas não como transação burocrática.",
+    "O bilhete deve parecer vivo, com textura de papel rasgado ou caderno de rascunho.",
+    "A ausência (silêncio) deve ser matéria ativa, não um vazio passivo.",
+    "A devolução deve ser poética e não explicativa."
   ],
-  "perceptual_intent": "Criar uma experiência onde a palavra escrita ganha peso físico e emocional ao ser confrontada com a sua ausência. A assimetria do bilhete deve ser sentida como um vazio que pulsa, um eco que falta, ou um corpo que se recusa a ser completo. A pessoa deve perceber que o silêncio é parte ativa da troca, não um mero vazio.",
+  "perceptual_intent": "Criar uma experiência de escrita e silêncio que se dobra sobre si mesma, onde a palavra escrita convoca a palavra não dita, e o sistema responde como se o silêncio fosse um interlocutor. A pessoa deve sentir que está a participar num diálogo incompleto, onde a ausência é tão presente quanto o texto.",
   "threshold": {
-    "description": "A tela surge em tons de papel envelhecido, com uma mancha de tinta ou grafite que parece ter sido apagada à pressa. Um único traço visível — uma linha quebra ao meio, como se algo tivesse sido rasgado. O cursor, ao aproximar-se, revela uma sombra de texto que não se lê por completo.",
-    "sensory_trigger": {
-      "visual": "Contraste mínimo, textura de papel, linha partida, sombra de texto incompleto.",
-      "auditory": "Silêncio absoluto, com um zumbido subliminar (20-30Hz) que sugere uma presença ausente.",
-      "haptic": "Vibração sutil (se suportado) ao tocar na linha partida, como um pulso de hesitação."
-    }
+    "description": "A pessoa entra num espaço visualmente minimalista, dominado por uma folha de papel digital com textura de rascunho, levemente amarelada e com bordas irregulares (como se fosse arrancada de um caderno). O cursor, ao pairar sobre a folha, revela uma sombra que se move em ritmo lento, como uma respiração. Não há instruções visíveis. O som ambiente é um murmúrio distorcido, quase inaudível, que se desvanece em 3 segundos.",
+    "sensory_trigger": [
+      "visual: textura do papel e sombra do cursor",
+      "auditory: murmúrio que desaparece",
+      "temporal_interoceptive: ritmo lento da sombra"
+    ]
   },
   "dramaturgical_arc": [
-    "O limiar (tela com linha partida e sombra de texto) convida à aproximação.",
-    "A chamada surge como um traço que parece querer ser completado: 'Escreve metade...' aparece em tipografia manual, como se escrito à pressa.",
-    "O primeiro gesto é digitar ou desenhar (com dedo/rato) uma frase, palavra ou símbolo na metade visível do bilhete.",
-    "A resposta viva do sistema: a metade escrita ganha peso — as letras afundam-se levemente no 'papel', como se pressionadas por uma mão invisível. Simultaneamente, a sombra da outra metade (em silêncio) parece mover-se, como se algo tentasse emergir.",
-    "O desvio: ao tentar apagar ou corrigir, a sombra da metade em silêncio reage — treme, escurece ou emite um som de fricção (como papel a ser rasgado).",
-    "O aprofundamento sensorial: a metade escrita começa a 'respirar' (pulsar em opacidade) ao ritmo de um som ambiente (ex.: vento ou respiração gravada em campo próximo). A sombra da outra metade projetada no ecrã ganha textura, como se fosse um tecido ou pele.",
-    "Escolha/acaso/silêncio: a pessoa pode: (a) guardar o bilhete (clicar num selo que aparece), (b) apagar tudo e começar de novo, ou (c) esperar. Se esperar 10 segundos, a sombra da metade em silêncio 'fala' — um som de voz distorcida (ou texto que aparece e desaparece) com um fragmento de uma frase real do corpus autoral (ex.: 'o que não se diz...').",
-    "Aparição: se a pessoa guardar o bilhete, a sombra da metade em silêncio materializa-se como uma mancha de tinta que se espalha, revelando uma palavra ou símbolo único (ex.: um topónimo, um nome de festa, ou um fragmento de uma dinâmica territorial do corpus).",
-    "Devolução: o sistema devolve um 'rasto' — um bilhete digital assinado com a data e hora, contendo apenas a metade escrita pela pessoa e a mancha/símbolo da outra metade. Este bilhete pode ser partilhado ou guardado como imagem.",
-    "Latência: o bilhete guardado pode 'regressar' em sessões futuras como sombra em outras experiências (ex.: em 'Galeria Diletante' ou 'FUCO'), sugerindo uma conexão invisível entre as curadorias."
+    {
+      "stage": "limiar",
+      "description": "A folha de papel aparece vazio, com a sombra do cursor a sugerir movimento orgânico. O murmúrio inicial desaparece, leaving um silêncio ativo."
+    },
+    {
+      "stage": "chamada",
+      "description": "Aparece uma linha horizontal no centro da folha, como um convite para escrever. A linha tremula levemente, como se fosse traçada à mão. Não há texto explicativo."
+    },
+    {
+      "stage": "primeiro_gesto",
+      "description": "A pessoa clica ou toca na linha. A folha reage: a linha divide-se em duas metades assimetricas, uma à esquerda (visível) e uma à direita (escondida por uma sombra ou dobra). Um som de papel a rasgar-se é ouvido, suave e orgânico."
+    },
+    {
+      "stage": "resposta_viva",
+      "description": "A metade esquerda (visível) convida a pessoa a escrever. À medida que a pessoa digita, as letras aparecem com um leve *delay* entre si, como se estivessem a ser escritas à mão. A sombra da metade direita (silenciosa) move-se levemente, como se respirasse."
+    },
+    {
+      "stage": "desvio",
+      "description": "Quando a pessoa pára de escrever por 5 segundos, a sombra da metade direita 'responde': as letras escritas na metade esquerda começam a desvanecer-se lentamente, como se estivessem a ser apagadas por uma mão invisível. Simultaneamente, um som de lápis a riscar papel é ouvido, mas em *reverse* (como se o som estivesse a ser 'desfeito')."
+    },
+    {
+      "stage": "aprofundamento_sensorial",
+      "description": "A pessoa pode optar por: (1) continuar a escrever, (2) apagar o que escreveu, ou (3) esperar. Se escolher (1), as letras ganham peso visual (sombra mais escura) e o som do lápis torna-se mais presente. Se escolher (2), o som do lápis em *reverse* acelera e a sombra da metade direita move-se mais rápido. Se escolher (3), o silêncio entre as letras aumenta, e a sombra da metade direita começa a 'puxar' as letras da metade esquerda para o seu lado, como se as estivesse a roubar."
+    },
+    {
+      "stage": "escolha_acaso_silencio",
+      "description": "A pessoa é confrontada com uma escolha implícita: (a) preencher a metade esquerda até ao limite, (b) deixar a metade direita 'roubar' as letras, ou (c) fechar os olhos (ou desviar o olhar) por 3 segundos. Cada opção altera o percurso: (a) as letras tornam-se fixas e a sombra para; (b) as letras desaparecem da metade esquerda e reaparecem na direita, invertidas; (c) a folha dobra-se ao meio, escondendo ambas as metades, e um novo som (de papel a ser aberto) é ouvido."
+    },
+    {
+      "stage": "aparição",
+      "description": "Se a pessoa escolheu (a): a metade direita revela-se, mas em branco, com um traço horizontal a tremular. Se escolheu (b): a metade direita mostra as letras invertidas, como um espelho, e um som de suspiro é ouvido. Se escolheu (c): a folha abre-se, revelando que ambas as metades estão agora em branco, mas com uma mancha de tinta que se espalha lentamente, como uma memória do que foi escrito."
+    },
+    {
+      "stage": "devolução",
+      "description": "A experiência devolve à pessoa: (1) um *bilhete digital* com a metade escrita (se existiu) e a metade em branco (ou invertida), com a textura do papel e a data/hora do gesto; (2) um som único, gerado a partir do ritmo da escrita (velocidade, pausas), que pode ser guardado ou partilhado; (3) a mancha de tinta (se aplicável) transforma-se num *rasto* que pode ser deixado no COSMICOXES como uma partícula sem nome."
+    },
+    {
+      "stage": "latencia",
+      "description": "O bilhete digital pode ser reaberto mais tarde. Se a pessoa regressar, a metade em branco pode conter uma palavra ou frase escrita por outra pessoa (anónima) que também deixou um rasto no COSMICOXES, criando um diálogo assincrono. A mancha de tinta, se partilhada, pode aparecer noutros bilhetes como um eco visual."
+    }
   ],
   "participant_verbs": [
     "escrever",
-    "apagar",
     "esperar",
-    "tocar",
-    "guardar",
     "observar",
+    "apagar",
+    "desviar o olhar",
+    "escutar",
     "respirar"
   ],
-  "system_responses": {
-    "immediate": [
-      "A metade escrita afunda-se no 'papel' com um som de caneta a pressionar.",
-      "A sombra da metade em silêncio move-se como se viva."
-    ],
-    "delayed": [
-      "A sombra emite um som de fricção (papel/tecido) ao ser 'tocada' indiretamente.",
-      "A metade escrita pulsa em opacidade ao ritmo de um som ambiente (vento/respiração).",
-      "A sombra materializa-se como mancha de tinta após 10 segundos de espera."
-    ],
-    "transformative": [
-      "A mancha de tinta revela uma palavra/símbolo único do corpus autoral.",
-      "O bilhete guardado regressa como sombra em outras experiências."
-    ]
-  },
-  "sensory_signature_id": "ASYM-2026-BILHETE",
+  "system_responses": [
+    {
+      "trigger": "clique/toque na linha inicial",
+      "response": [
+        "visual: divisão assimetrica da folha",
+        "auditory: som de papel a rasgar",
+        "haptic: vibração suave (se dispositivo suportar)"
+      ]
+    },
+    {
+      "trigger": "escrita na metade esquerda",
+      "response": [
+        "visual: letras com *delay* de aparecimento",
+        "auditory: som de lápis a escrever (ritmo variável)",
+        "temporal_interoceptive: pausa entre letras aumenta com inatividade"
+      ]
+    },
+    {
+      "trigger": "pausa de 5 segundos",
+      "response": [
+        "visual: letras desvanecem-se",
+        "auditory: som de lápis em *reverse*",
+        "kinesthetic: sombra da metade direita move-se"
+      ]
+    },
+    {
+      "trigger": "escolha de apagar",
+      "response": [
+        "visual: letras desaparecem",
+        "auditory: som de lápis em *reverse* acelerado",
+        "proprioceptive: sombra da metade direita 'puxa' as letras"
+      ]
+    },
+    {
+      "trigger": "fechar os olhos/desviar olhar",
+      "response": [
+        "visual: folha dobra-se",
+        "auditory: som de papel a ser aberto",
+        "spatial: folha parece recuar no ecrã"
+      ]
+    },
+    {
+      "trigger": "regresso ao bilhete",
+      "response": [
+        "visual: metade em branco pode conter texto de outro participante",
+        "auditory: som único gerado a partir do ritmo original",
+        "social_presence: eco de outras contribuições anónimas"
+      ]
+    }
+  ],
+  "sensory_signature_id": "ASYM-2026-BILHETE-SILENCIO",
   "sensory_channels": {
     "visual": {
       "primary": [
-        "textura de papel envelhecido",
-        "linha partida",
-        "sombra de texto incompleto",
-        "tipografia manual",
-        "mancha de tinta dinâmica",
-        "pulsação de opacidade"
+        "textura de papel rasgado",
+        "sombra orgânica do cursor",
+        "letra com *delay* de aparecimento",
+        "mancha de tinta que se espalha",
+        "dobra da folha"
       ],
       "secondary": [
-        "contraste mínimo",
-        "profundidade sutil (paralaxe leve)"
+        "tremor da linha inicial",
+        "desvanecimento das letras",
+        "inversão do texto na metade direita"
       ]
     },
     "auditory": {
       "primary": [
-        "silêncio ativo (20-30Hz zumbido subliminar)",
-        "som de caneta a pressionar papel",
-        "fricção de papel/tecido",
-        "vento ou respiração em campo próximo"
+        "som de papel a rasgar",
+        "som de lápis a escrever",
+        "som de lápis em *reverse*",
+        "murmúrio inicial",
+        "suspiro"
       ],
       "secondary": [
-        "eco distorcido de voz (fragmentos do corpus)"
+        "som de papel a ser aberto",
+        "ritmo variável do lápis (baseado na velocidade de escrita)"
       ]
     },
     "haptic": {
       "primary": [
-        "vibração sutil ao tocar a linha partida (se suportado)"
+        "vibração suave no clique inicial (opcional)"
       ],
-      "secondary": [
-        "feedback de pressão ao digitar (simulado visualmente)"
-      ]
+      "secondary": []
     },
     "kinesthetic": {
       "primary": [
-        "movimento da sombra em resposta ao cursor/dedo",
-        "ritmo de pulsação sincronizado com som ambiente"
+        "movimento da sombra da metade direita",
+        "respiração da sombra"
       ],
-      "secondary": [
-        "trajectória do cursor afeta a direcção da mancha de tinta"
-      ]
+      "secondary": []
     },
     "proprioceptive": {
       "primary": [
-        "instrução implícita para respirar (ritmo do som ambiente)",
-        "hesitação ao apagar (feedback visual/sonoro)"
+        "convite a fechar os olhos/desviar o olhar",
+        "pausa entre letras como respiração"
       ],
       "secondary": []
     },
     "temporal_interoceptive": {
       "primary": [
-        "espera de 10 segundos para revelação",
-        "ritmo de pulsação (1-2 segundos)",
-        "latência entre sessões"
+        "ritmo lento da sombra inicial",
+        "*delay* entre letras",
+        "pausa de 5 segundos como gatilho"
       ],
       "secondary": []
     },
     "spatial": {
       "primary": [
-        "profundidade sutil entre o 'papel' e a sombra",
-        "posição do cursor afeta a intensidade da sombra"
+        "folha recua no ecrã ao fechar os olhos",
+        "metades assimetricas criam profundidade"
       ],
       "secondary": []
     },
-    "olfactory_evocation": [
-      "memória de tinta fresca",
-      "papel velho",
-      "cera de vela"
-    ],
-    "gustatory_evocation": [
-      "sabor metálico de tinta",
-      "doçura de mel (referência a MILK)"
-    ],
-    "social_presence": [
-      "sensação de uma segunda mão a escrever (sombra)",
-      "voz distorcida como 'outro'"
-    ]
+    "olfactory_evocation": {
+      "primary": [
+        "evocação de papel velho (através de textura visual e som)",
+        "evocação de tinta (através da mancha que se espalha)"
+      ],
+      "secondary": []
+    },
+    "gustatory_evocation": {
+      "primary": [],
+      "secondary": []
+    },
+    "social_presence": {
+      "primary": [
+        "eco de contribuições anónimas no regresso",
+        "diálogo assincrono com outros bilhetes"
+      ],
+      "secondary": []
+    }
   },
   "cross_sensory_translation": {
-    "from": "visual (sombra de texto)",
-    "to": "auditory (som de fricção)",
-    "mechanism": "A sombra da metade em silêncio emite um som de fricção (papel/tecido) quando o cursor se aproxima, como se o texto não escrito fosse uma superfície táctil. A intensidade do som varia com a distância do cursor à sombra."
+    "primary": "O som do lápis a escrever (auditory) traduz-se no *delay* visual das letras (visual) e no ritmo da sombra (kinesthetic).",
+    "secondary": [
+      "A pausa na escrita (temporal_interoceptive) traduz-se no desvanecimento das letras (visual) e no som em *reverse* (auditory).",
+      "A mancha de tinta (visual) evoca o cheiro do papel e da tinta (olfactory_evocation)."
+    ]
   },
   "silence_or_absence": {
-    "role": "Ator principal",
-    "manifestations": [
-      "A metade em silêncio é uma ausência ativa: não é um vazio, mas um convite a preenchê-lo.",
-      "O zumbido subliminar (20-30Hz) representa o peso do não-dito.",
-      "A espera de 10 segundos é um silêncio que 'fala' — a sombra revela-se como resposta à paciência.",
-      "O bilhete guardado carrega a ausência da outra metade como rasto."
+    "primary": "A metade direita do bilhete é o silêncio ativo: não está vazio, está a 'escutar' ou a 'roubar' as palavras. O seu movimento e a ausência de texto são a sua presença.",
+    "secondary": [
+      "O murmúrio inicial desaparece para criar um limiar de silêncio.",
+      "A pausa de 5 segundos é um silêncio que desencadeia a resposta do sistema."
     ]
   },
   "surprise_or_indeterminacy": {
-    "mechanisms": [
-      {
-        "type": "acaso controlado",
-        "description": "A mancha de tinta que surge da sombra revela uma palavra/símbolo aleatório do corpus autoral (ex.: topónimo, nome de festa, fragmento de dinâmica territorial)."
-      },
-      {
-        "type": "resposta a ritmo",
-        "description": "Se a pessoa digitar rapidamente, a sombra move-se de forma mais caótica; se digitar devagar, a sombra move-se com precisão, como se a seguir a caneta."
-      },
-      {
-        "type": "resposta a posição",
-        "description": "A direcção da mancha de tinta ao materializar-se depende da posição do cursor no momento da espera."
-      },
-      {
-        "type": "memória latente",
-        "description": "O bilhete guardado pode regressar como sombra em outras experiências, com uma probabilidade baseada no tempo decorrido desde a sua criação."
-      }
+    "primary": "A metade direita pode 'roubar' as letras da esquerda, invertê-las ou revelar texto de outro participante no regresso.",
+    "secondary": [
+      "O som gerado a partir do ritmo da escrita é único para cada sessão.",
+      "A mancha de tinta espalha-se de forma imprevisível, mas orgânica."
     ]
   },
   "session_variation": [
     {
-      "type": "ordem mutável",
-      "description": "A frase do convite ('Escreve metade...') pode surgir em ordens diferentes (ex.: 'Guarda a outra em silêncio. Escreve metade.')."
+      "type": "acaso_controlado",
+      "description": "A assimetria inicial da divisão da folha (posição da linha) varia aleatoriamente entre 30% e 70% para a metade esquerda."
     },
     {
-      "type": "combinação de fragmentos",
-      "description": "A mancha de tinta revela fragmentos diferentes do corpus autoral em cada sessão."
+      "type": "ordem_mutável",
+      "description": "A ordem dos sons (lápis, papel a rasgar, suspiro) pode variar levemente entre sessões, mantendo a coerência com a ação."
     },
     {
-      "type": "temporalidade real",
-      "description": "O som ambiente (vento/respiração) varia consoante a hora do dia (ex.: vento noturno vs. respiração matinal)."
+      "type": "resposta_a_ritmo",
+      "description": "O *delay* entre as letras ao escrever varia com a velocidade de digitação da pessoa (mais rápido = *delay* menor; mais lento = *delay* maior)."
     },
     {
-      "type": "resposta a ritmo/velocidade",
-      "description": "A reação da sombra à digitação (caótica vs. precisa) depende da velocidade do gesto."
+      "type": "resposta_a_posição",
+      "description": "A direcção do movimento da sombra da metade direita (para cima/baixo/esquerda) depende da posição do cursor no ecrã no momento do primeiro clique."
     },
     {
-      "type": "presença de rasto anterior",
-      "description": "Se a pessoa já guardou um bilhete em sessões anteriores, a sombra inicial pode conter um fragmento desse bilhete."
+      "type": "combinação_fragmentos",
+      "description": "No regresso, o texto da metade em branco pode ser uma palavra ou frase aleatória de outro bilhete partilhado no COSMICOXES, desde que anónima e validada."
+    },
+    {
+      "type": "temporalidade_real",
+      "description": "A cor da mancha de tinta pode variar subtamente com a hora do dia (mais escura de manhã, mais clara à tarde)."
     }
   ],
   "territorial_binding": {
-    "relation": "Indireta (evocação)",
-    "mechanism": "As palavras/símbolos revelados pela mancha de tinta são extraídos do corpus territorial autoral (ex.: topónimos, nomes de festas, dinâmicas do 'falARTE' ou 'Livro Cubo').",
-    "example": "Se a mancha revelar 'Alcântara', pode evocar a memória de um som ou cheiro associado a esse lugar, sem fingir output físico."
+    "primary": "O bilhete digital pode ser associado a um lugar físico (freguesia, rua, ponto de referência) se a pessoa optar por partilhá-lo. Essa associação é opcional e não afeta a experiência central.",
+    "secondary": [
+      "A mancha de tinta pode evocar a cor de um elemento territorial (ex: azul do Tejo, verde de um parque) se o bilhete for associado a um lugar.",
+      "O som gerado pode incluir um fragmento sonoro mínimo de um lugar (ex: som de um bonde, gaivotas) se o bilhete for territorialmente vinculado."
+    ],
+    "questions_for_eduardo": [
+      "Confirmar se a associação territorial deve ser explícita (ex: nome da freguesia visível) ou implícita (ex: apenas na devolução)."
+    ]
   },
   "trace_and_return": {
     "immediate": {
-      "description": "O bilhete guardado é devolve como imagem com a metade escrita e a mancha/símbolo da outra metade, assinado com data e hora.",
-      "format": "Imagem PNG com fundos transparentes (para sobreposição em outras experiências)."
+      "description": "A pessoa recebe um bilhete digital (imagem + som) que pode guardar, partilhar ou reabrir mais tarde. O bilhete contém: (1) a metade escrita (se existiu), (2) a metade em branco ou invertida, (3) a data/hora, (4) o som único gerado.",
+      "format": "Imagem com textura de papel e som em ficheiro áudio (ou link para reprodução)."
     },
     "latent": {
-      "description": "O bilhete guardado pode regressar como sombra em outras curadorias (ex.: 'Galeria Diletante' ou 'FUCO'), sugerindo uma conexão invisível entre as experiências.",
-      "mechanism": "A sombra aparece com 10% de opacidade e desaparece após 5 segundos, sem interação direta."
-    }
+      "description": "Se partilhado, o bilhete pode: (a) aparecer no COSMICOXES como uma partícula sem nome, (b) ser integrado num 'livro de bilhetes' anónimo onde outras pessoas podem encontrar a metade em branco preenchida com as suas próprias palavras, criando um diálogo assincrono.",
+      "format": "Partícula visual no COSMICOXES ou entrada num arquivo digital de bilhetes."
+    },
+    "questions_for_eduardo": [
+      "Confirmar se o 'livro de bilhetes' deve ser uma curadoria separada ou parte do COSMICOXES."
+    ]
   },
   "accessibility_equivalents": {
     "visual": {
       "for_blind": {
-        "description": "Modo de alto contraste: o bilhete é descrito em voz (TTS) como 'Um bilhete de papel envelhecido com uma linha partida ao meio. Metade está em branco, à espera. Metade tem uma sombra, como se algo tivesse sido apagado.'",
-        "interaction": "A pessoa pode navegar com teclado: Tab para mover entre a metade visível e o botão 'Guardar'. Enter para digitar ou guardar."
+        "description": "Toda a interação é narrada em tempo real por uma voz sintética suave (opcional). Exemplo: 'Uma folha de papel rasgado aparece. Uma linha tremula no centro. Clique para dividir.'",
+        "sensory_preservation": "A voz usa entoação para transmitir o ritmo da sombra (ex: voz mais lenta para a respiração da sombra)."
       },
-      "for_low_vision": {
-        "description": "Aumento de contraste e tamanho de texto. A sombra da metade em silêncio é representada por um contorno tracejado."
+      "reduced_motion": {
+        "description": "As animações (sombra do cursor, desvanecimento das letras) são desativadas. A folha aparece estática, e as ações são indicadas por texto ou sons.",
+        "sensory_preservation": "Os sons (papel a rasgar, lápis) são mantidos para preservar a assinatura auditiva."
+      },
+      "color_blind": {
+        "description": "A textura do papel e as letras usam contraste suficiente. A mancha de tinta tem um padrão (ex: pontilhado) para ser distinguível."
       }
     },
     "auditory": {
       "for_deaf": {
-        "description": "Todos os sons (fricção, caneta, vento) são representados visualmente: a fricção aparece como uma linha ondulada que se move com o cursor; o vento como um fluxo de partículas."
+        "description": "Todos os sons são substituídos por vibrações (se dispositivo suportar) ou por indicações visuais (ex: ícone de lápis a aparecer quando o som de escrita é reproduzido).",
+        "sensory_preservation": "As vibrações seguem o ritmo dos sons (ex: vibração curta para papel a rasgar, vibração contínua para lápis a escrever)."
       },
-      "for_hard_of_hearing": {
-        "description": "Legendas para sons: 'Som de caneta a pressionar papel', 'Fricção de tecido', 'Vento suave'."
+      "no_audio": {
+        "description": "A experiência funciona sem som, com indicações visuais (ex: ícone de som desativado aparece quando um som seria reproduzido)."
       }
     },
-    "haptic": {
-      "for_no_vibration": {
-        "description": "A vibração é substituída por um pulso visual (a linha partida brilha brevemente)."
-      }
-    },
-    "kinesthetic": {
-      "for_no_movement": {
-        "description": "A sombra da metade em silêncio move-se automaticamente em padrões suaves, como se respirasse. A pessoa pode usar as setas do teclado para 'guiar' a sombra."
-      }
-    },
-    "temporal": {
-      "for_no_wait": {
-        "description": "A revelação da mancha de tinta ocorre após 3 segundos em vez de 10, com um botão 'Revelar agora' opcional."
+    "motor": {
+      "keyboard_only": {
+        "description": "Todas as interações podem ser feitas com teclado: (1) Tab para navegar entre elementos, (2) Enter para clicar, (3) Backspace para apagar, (4) Teclas de seta para mover o 'cursor' na folha.",
+        "sensory_preservation": "Os sons e animações são preservados para quem usa teclado."
+      },
+      "switch_control": {
+        "description": "A experiência pode ser controlada com um único botão (ex: clique único para dividir a folha, clique duplo para escrever, clique longo para apagar).",
+        "sensory_preservation": "Os sons e feedbacks visuais são adaptados para um único gesto."
+      },
+      "voice_control": {
+        "description": "A pessoa pode ditar o texto para a metade esquerda. O sistema transcreve a voz para texto com um leve *delay* para simular a escrita à mão.",
+        "sensory_preservation": "O som da voz da pessoa é misturado com o som do lápis para criar uma camada auditiva única."
       }
     },
     "cognitive": {
-      "for_reduced_motion": {
-        "description": "Todas as animações (pulsação, movimento da sombra) são desativadas. A sombra é estática, mas a mancha de tinta ainda surge ao guardar o bilhete."
+      "simplified": {
+        "description": "A experiência pode ser simplificada: (1) a folha aparece já dividida, (2) a pessoa pode escrever sem *delay* nas letras, (3) os sons são opcionais.",
+        "sensory_preservation": "A assimetria e a devolução do bilhete são mantidas."
       }
     }
   },
   "optional_permissions": {
-    "none_required": true,
-    "description": "A experiência funciona completamente sem microfone, câmara, geolocalização ou sensores de movimento. As permissões são opcionais para funcionalidades secundárias (ex.: usar a câmara para 'escanear' o bilhete guardado como imagem)."
+    "none": {
+      "description": "A experiência funciona completamente sem permissões. Todas as interações são baseadas em cliques/toques, teclado ou voz (se o dispositivo já tiver microfone ativo por outro motivo)."
+    },
+    "microphone": {
+      "description": "Opcional: se a pessoa permitir, pode ditar o texto para a metade esquerda. O microfone é pedido apenas quando a pessoa clica num botão 'Ditar' que aparece após o primeiro gesto.",
+      "benefit": "Permite uma interação mais orgânica para quem prefere voz a teclado."
+    }
   },
   "overstimulation_risk": {
-    "potential_triggers": [
-      "Zumbido subliminar (20-30Hz) pode ser incómodo para pessoas com sensibilidade auditiva.",
-      "Pulsação de opacidade pode causar desconforto em casos de epilepsia fotossensível.",
-      "Movimento da sombra pode ser distrativo para pessoas com TDAH."
-    ],
-    "mitigation": [
-      "O zumbido subliminar é opcional e pode ser desativado nas definições de acessibilidade.",
-      "A pulsação de opacidade tem uma frequência segura (<3Hz) e pode ser desativada.",
-      "O movimento da sombra pode ser pausado ou reduzido a um contorno estático.",
-      "Botão 'Pausar tudo' visível em todos os ecrãs."
-    ]
+    "visual": {
+      "risk": "Flashing ou animações rápidas podem causar desconforto.",
+      "mitigation": "Todas as animações são suaves e com *easing* (ex: sombra do cursor move-se lentamente). Opção para desativar animações (reduced-motion)."
+    },
+    "auditory": {
+      "risk": "Sons súbitos ou repetitivos podem ser agressivos.",
+      "mitigation": "Todos os sons são suaves e com volume controlável. O murmúrio inicial desaparece em 3 segundos. Opção para desativar som."
+    },
+    "haptic": {
+      "risk": "Vibrações insistentes podem ser incómodas.",
+      "mitigation": "Vibrações são curtas e opcionais. Apenas uma vibração suave no clique inicial."
+    },
+    "cognitive": {
+      "risk": "A assimetria e a ausência de instruções podem causar frustração.",
+      "mitigation": "A experiência é projetada para ser intuitiva: a linha tremula para convidar à interação, e os sons guiam a pessoa. Opção para ativação de dicas textuais (ex: 'Clique para dividir a folha')."
+    }
   },
   "distinctiveness": [
-    "A assimetria estrutural (metade escrita vs. metade em silêncio) é única no Atlas — nenhuma outra experiência explora o não-dito como ator principal.",
-    "A tradução cruzada entre sombra (visual) e som de fricção (auditory) é específica desta curadoria.",
-    "O uso do silêncio como material ativo (zumbido subliminar, espera, sombra) diferencia-a de experiências baseadas em som contínuo ou visual dominantes.",
-    "A devolução é um bilhete incompleto, não um 'certificado' ou 'recompensa' — preserva a tensão entre o dito e o não-dito.",
-    "A latência do bilhete guardado (regresso como sombra em outras experiências) cria uma narrativa transversal única."
+    "A assimetria do bilhete (metade escrita, metade silenciosa) é única entre as 49 experiências.",
+    "A tradução cruzada entre som do lápis (auditory) e *delay* das letras (visual) é específica desta experiência.",
+    "O silêncio ativo como matéria (metade direita) não é usado em nenhuma outra curadoria.",
+    "A devolução de um bilhete digital com som único gerado a partir do ritmo da escrita é exclusiva.",
+    "A combinação de textura de papel rasgado, som orgânico e mancha de tinta cria uma assinatura sensorial impossível de confundir."
   ],
   "questions_for_eduardo": [
-    "O convite 'Escreve metade. Guarda a outra em silêncio.' deve ser interpretado literalmente (a pessoa escreve uma frase e a outra metade é apagada) ou metaforicamente (a pessoa escreve uma parte de uma ideia, e a outra parte é implícita)?",
-    "A mancha de tinta que surge da sombra deve revelar fragmentos do corpus autoral (ex.: topónimos, festas) ou pode ser gerada proceduralmente (ex.: formas abstratas)?",
-    "O bilhete guardado deve ser visível apenas para a pessoa que o criou, ou pode ser partilhado publicamente (com moderação) como parte do 'cosmos' do Atlas?",
-    "A sombra do bilhete guardado em outras experiências deve ser aleatória ou baseada em critérios territoriais (ex.: se o bilhete mencionar 'Alcântara', a sombra aparece em experiências relacionadas com essa freguesia)?"
+    "Confirmar se a metade direita do bilhete deve poder conter texto de outros participantes no regresso, ou se deve permanecer sempre em branco/invertida.",
+    "Confirmar se a associação territorial (freguesia, lugar) deve ser explícita ou implícita na devolução.",
+    "Confirmar se o 'livro de bilhetes' (arquivo de bilhetes partilhados) deve ser uma curadoria separada ou integrada no COSMICOXES.",
+    "Confirmar se a mancha de tinta deve poder ser personalizada (ex: cor, forma) ou se deve ser sempre aleatória.",
+    "Confirmar se o som gerado a partir do ritmo da escrita deve ser sempre único ou se pode ser reutilizado em outras sessões."
   ],
   "improvement_proposals": [
     {
-      "type": "territorial_deepening",
-      "description": "Integrar a dinâmica com o 'falARTE' ou 'Livro Cubo' para que a mancha de tinta revele não apenas palavras, mas também sons ou imagens associados a topónimos ou festas do corpus territorial."
+      "proposal": "Adicionar uma opção para a pessoa 'assinar' o bilhete com um gesto (ex: desenhar uma assinatura com o cursor) que aparece na metade em branco.",
+      "justification": "Reforça a ideia de autoria e devolução pessoal, alinhada com a estética de rascunho de caderno."
     },
     {
-      "type": "social_presence",
-      "description": "Permitir que bilhetes guardados por diferentes pessoas possam 'encontrar-se' em sessões futuras, criando uma constelação de sombras que interagem (ex.: sombras que se sobrepõem ou emitem sons quando se tocam)."
+      "proposal": "Incluir uma camada de 'pátina' que aparece na folha ao longo do tempo (ex: manchas de café, dobras) para evocar o envelhecimento do papel.",
+      "justification": "Aumenta a evocação olfativa e táctil do papel velho, sem fingir output físico."
     },
     {
-      "type": "accessibility",
-      "description": "Adicionar um modo 'táctil' para dispositivos com ecrã táctil, onde a sombra da metade em silêncio pode ser 'tocada' para revelar a sua textura (ex.: rugosidade de papel, maciez de tecido)."
+      "proposal": "Permitir que a pessoa 'dobre' a folha digitalmente (com um gesto de arrastar) para revelar uma camada oculta com uma palavra ou imagem aleatória de outra curadoria (ex: uma fotografia da Galeria Diletante).",
+      "justification": "Cria uma ligação entre curadorias sem quebrar a assinatura sensorial do Bilhete Assimétrico."
     }
   ],
   "generic_fallback_allowed": false,

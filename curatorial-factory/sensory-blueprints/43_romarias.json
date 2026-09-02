@@ -3,70 +3,78 @@
   "canonical_name": "Romarias",
   "source_evidence": {
     "primary": [
-      "catalog_entry (ordem 43, id: romarias, nome: Romarias, familia: folclore, mecanica: percorrer, convite: 'Escolhe três paragens para uma viagem imóvel.')"
+      "catalog_entry (ordem 43, id: romarias, familia: folclore, mecanica: percorrer, convite: 'Escolhe três paragens para uma viagem imóvel.')"
     ],
     "secondary": [
-      "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf (16 seres folclóricos; 5 núcleos/dispositivos; jogos tradicionais, trava-línguas e adivinhas)",
-      "A Deriva do Sentido: Cartografia Psicogeográfica e Sensorial de Lisboa (sentipensar, configuração relacional, psicogeografia activa, tato, paladar, escuta, aroma, pátina, comércio e memória local)"
+      "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf (16 seres folclóricos, 5 núcleos/dispositivos nomeados, jogos tradicionais, trava-línguas e adivinhas)",
+      "A Deriva do Sentido: Cartografia Psicogeográfica e Sensorial de Lisboa (sentipensar, configuração relacional, psicogeografia activa, deriva e devolução comunitária)"
     ],
     "authorial_anchors": [
-      "Convite: 'Escolhe três paragens para uma viagem imóvel.' (catálogo)",
-      "Mecânica: 'percorrer' (catálogo)",
-      "Família: 'folclore' (catálogo)"
+      "Convite: 'Escolhe três paragens para uma viagem imóvel.'",
+      "Mecânica: 'percorrer'"
     ]
   },
   "authorial_invariants": [
     "A experiência deve ser uma 'viagem imóvel' (sem deslocação física).",
-    "A pessoa escolhe exatamente três paragens (não mais, não menos).",
-    "A mecânica central é 'percorrer' (navegação ou travessia, não seleção estática).",
-    "Pertence à família 'folclore', logo deve evocar práticas, memórias ou territórios associados a romarias (ex.: percursos, santuários, festas, cantos, ofertas).",
-    "Não pode ser reduzida a um mapa ou lista de locais."
+    "Deve envolver a escolha de três paragens (lugares, momentos ou estados).",
+    "O folclore é a família curatorial, logo deve evocar práticas, memórias ou territórios associados a romarias (caminhos, santuários, festas, ritos).",
+    "A mecânica de 'percorrer' implica um movimento simbólico, não literal."
   ],
-  "perceptual_intent": "Transformar a noção de romaria num ritual digital onde o corpo, a memória e o território se entrelaçam sem movimento físico. A pessoa deve sentir que está a 'caminhar' por um percurso sagrado ou simbólico, onde cada paragem revela uma camada sensorial e emocional única, como se o ecrã fosse uma janela para um lugar vivo, mas inacessível fisicamente. A ausência de deslocação deve ser compensada pela intensidade da presença evocada.",
+  "perceptual_intent": "Criar a ilusão de uma peregrinação sensorial e territorial sem sair do lugar, onde o corpo, a memória e o território se fundem num ritual de deslocamento interior. A pessoa deve sentir que está a 'caminhar' através de camadas de tempo, som, luz e significado, como se cada paragem fosse um santuário vivo que responde à sua presença.",
   "threshold": {
-    "description": "O ecrã começa em negro profundo, com um som ambiente de ventos distantes e passos abafados (como se ouvidos através de uma parede). Uma luz ténue, como de uma vela, acende-se lentamente no centro, revelando uma silhueta de uma estrada de terra batida que se desvanece em pixels. A pessoa ouve um murmúrio de vozes em coros distantes, como se vindo de um outro tempo. O cursor, ao mover-se, deixa um rasto de pó dourado que se dissipa lentamente.",
-    "sensory_trigger": "O som de passos abafados e o rasto de pó dourado do cursor são os primeiros sinais de que algo está 'vivo' no ecrã, mesmo antes de qualquer interação."
+    "description": "A tela começa num nevoeiro visual e sonoro suave, como se a pessoa estivesse num limiar entre o sonho e a vigília. O cursor (ou dedo, em touch) não é uma seta, mas uma pequena luz tremeluzente (como uma vela ou lanterna) que ilumina fracamente o espaço à sua volta. O som ambiente é um murmúrio distante, como vozes de uma procissão ou vento em árvores, que se desvanece quando a luz se aproxima.",
+    "trigger": "A luz do cursor, ao pairar sobre a tela, revela lentamente contornos de um caminho sinuoso (como uma estrada de terra ou calçada) que parece estender-se para o horizonte. O som do murmúrio ganha corpo, transformando-se num coro de vozes sobrepostas, como se várias gerações estivessem a cantar ou rezar em uníssono."
   },
   "dramaturgical_arc": [
     {
-      "stage": "LIMIAR",
-      "description": "Ecrã negro com som ambiente de ventos e passos. Luz de vela acende-se, revelando uma estrada de terra batida que se desvanece. Murmúrio de vozes distantes."
+      "stage": 1,
+      "name": "LIMIAR",
+      "description": "Nevoeiro visual e sonoro. A luz do cursor revela o caminho como uma aparição gradual."
     },
     {
-      "stage": "CHAMADA",
-      "description": "Aparece, em tipografia manual e trémula, a frase: *'Três paragens para uma viagem imóvel. Onde começas?'* A frase parece escrita à mão, com tinta que escorre levemente. O som de um sino distante toca uma vez."
+      "stage": 2,
+      "name": "CHAMADA",
+      "description": "O caminho ganha textura (pedras, terra, musgo) e o som evolui para um canto ritualístico, como um convite para começar a viagem. Aparece, em letras trémulas e semi-transparentes, a frase: 'Escolhe três paragens para uma viagem imóvel.'"
     },
     {
-      "stage": "PRIMEIRO GESTO",
-      "description": "A pessoa clica ou toca no ecrã. O som do sino repete-se, agora mais próximo, e a estrada de terra batida 'abre-se' em três caminhos sinuosos, cada um com uma cor diferente (terracota, verde-musgo, azul-céu)."
+      "stage": 3,
+      "name": "PRIMEIRO GESTO",
+      "description": "A pessoa clica/toque em qualquer ponto do caminho. O som do canto pára abruptamente, substituído pelo ruído de passos em cascalho. A luz do cursor expande-se, revelando a primeira paragem: um marco simbólico (ex: uma cruz de pedra, uma fonte, uma árvore centenária) que surge como uma silhueta escura contra um céu que muda de cor (do crepúsculo ao amanhecer, conforme a hora do dia real)."
     },
     {
-      "stage": "RESPOSTA VIVA",
-      "description": "Ao escolher um caminho (por clique, toque ou voz), o ecrã treme levemente, como se o chão fosse irregular. O som ambiente muda para o de um mercado ou feira distante, com vozes, risos e o tilintar de moedas. O caminho escolhido ilumina-se, e os outros dois escurecem, como se tivessem sido 'deixados para trás'."
+      "stage": 4,
+      "name": "RESPOSTA VIVA",
+      "description": "O marco responde ao gesto: se a pessoa se aproximar (cursor/dedo), o som dos passos transforma-se num zumbido grave (como um sino ou um cântaro a ser percutido). A silhueta ganha detalhes: texturas de pedra desgastada, musgo, ou tecido de uma bandeira. O texto 'Primeira paragem: [nome do marco]' aparece em voz sussurrada (sintetizada ou gravada, conforme disponibilidade), como se fosse um guia invisível."
     },
     {
-      "stage": "DESVIO",
-      "description": "No meio do percurso, uma sombra (como de uma árvore ou cruz) aparece no caminho. Se a pessoa parar o cursor sobre ela, ouve-se um canto ou reza em latim ou português arcaico. Se ignorar, o som desaparece, mas o caminho parece 'mais pesado' (o cursor move-se mais devagar)."
+      "stage": 5,
+      "name": "DESVIO",
+      "description": "Após alguns segundos, o marco começa a 'respirar': a silhueta pulsa levemente, e o som do zumbido ganha uma melodia simples (como um hino ou uma cantiga de romaria). De repente, o caminho à frente bifurca-se em dois: um ramal claro (iluminado) e outro escuro (sombrio). A voz sussurra: 'Escolhe o teu caminho.'"
     },
     {
-      "stage": "APROFUNDAMENTO SENSORIAL",
-      "description": "Chegada à primeira paragem: o ecrã preenche-se com uma paisagem sonora e visual do local (ex.: um santuário, uma fonte, um cruzeiro). A imagem não é estática: é uma colagem de fotografias antigas e atuais, com transições suaves como se o tempo estivesse a fluir. O som inclui cantos, preces, ou o barulho de uma procissão. A pessoa pode 'tocar' em elementos da imagem (ex.: uma vela, uma flor, uma pedra) para ouvi-los ou senti-los (através de vibração ou som táctil)."
+      "stage": 6,
+      "name": "APROFUNDAMENTO SENSORIAL",
+      "description": "A pessoa escolhe um ramal. O som e a luz adaptam-se: o ramal claro tem sons de sinos e risos; o escuro, sons de vento e murmúrios. A textura do caminho muda (areia, terra molhada, pedras lisas). A segunda paragem aparece: um objeto ritual (ex: uma vela, um rosário, uma oferta de comida). O objeto interage com o cursor: ao tocar, emite um som único (ex: o crepitar de uma vela, o tilintar de contas) e revela uma memória associada (texto curto ou áudio: 'Aqui, as avós traziam pão e mel.')."
     },
     {
-      "stage": "ESCOLHA / ACASO / SILÊNCIO",
-      "description": "Na segunda paragem, a pessoa é convidada a 'deixar uma oferta': pode gravar um som (opcional, com permissão), escrever uma palavra, ou simplesmene esperar. Se não fizer nada, o sistema 'escolhe' por ela: uma palavra aleatória de um dicionário de termos folclóricos (ex.: 'ex-voto', 'promessa', 'milagre') aparece no ecrã, escrita em tinta que parece secar lentamente."
+      "stage": 7,
+      "name": "ESCOLHA / ACASO / SILÊNCIO",
+      "description": "A pessoa pode: (a) interagir com o objeto (clicar/arrastar), o que faz com que ele se desfaça em partículas de luz/som (como se fosse consumido pelo ritual); (b) ignorá-lo, o que faz com que o objeto fique suspenso no ar, como uma oferta não aceita. Em ambos os casos, o caminho avança para a terceira paragem. Se a pessoa não interagir durante 10 segundos, o objeto desaparece sozinho, e o som do ambiente reduz-se a um silêncio pesado, como se o ritual estivesse à espera."
     },
     {
-      "stage": "APARIÇÃO",
-      "description": "Na terceira paragem, algo inesperado acontece: uma figura (sombras de peregrinos, um animal simbólico como um corvo ou uma pomba, ou um objeto sagrado) aparece e move-se lentamente pelo ecrã. A figura não é interativa, mas a sua presença altera a paisagem sonora (ex.: o canto de um galo, o som de uma porta a abrir)."
+      "stage": 8,
+      "name": "APARIÇÃO",
+      "description": "A terceira paragem é um 'santuário' abstrato: um círculo de luz no chão, com sombras de pessoas em movimento (como uma procissão). No centro, uma palavra ou símbolo (ex: 'Fé', 'Memória', 'Caminho') aparece em letras que se movem como se estivessem a ser escritas por uma mão invisível. O som é um coro de vozes que cantam uma melodia circular, sem início nem fim."
     },
     {
-      "stage": "DEVOLUÇÃO",
-      "description": "No final, o ecrã escurece novamente. Aparece uma 'relíquia digital': uma imagem gerada a partir das três paragens, das escolhas da pessoa e do acaso (ex.: uma colagem das três paisagens com a palavra deixada na segunda paragem sobreposta). A relíquia pode ser guardada como imagem ou partilhada (opcional). O som de um sino toca três vezes, como um adeus."
+      "stage": 9,
+      "name": "DEVOLUÇÃO",
+      "description": "A pessoa é convidada a 'deixar uma oferta': pode escrever uma palavra, gravar um som curto (opcional, com permissão de microfone), ou simplesmene esperar. Se interagir, a sua contribuição transforma-se num objeto simbólico (ex: uma vela, uma flor) que se junta ao círculo. O coro de vozes incorpora a sua contribuição: se for uma palavra, ela é cantada; se for um som, ele é repetido em eco. Se não interagir, o círculo fecha-se sozinho, e o som desvanece-se."
     },
     {
-      "stage": "RASTO / LATÊNCIA",
-      "description": "A relíquia digital fica disponível na 'sala das romarias' do Atlas, onde outras pessoas podem ver (mas não interagir com) as relíquias deixadas por outros. As relíquias não têm dados pessoais associados. Além disso, a palavra ou som deixado na segunda paragem pode 'ressurgir' em futuras sessões de outras pessoas, como um eco folclórico."
+      "stage": 10,
+      "name": "RASTO / LATÊNCIA",
+      "description": "A tela regressa ao nevoeiro inicial, mas agora com um traço sutil: o caminho que a pessoa percorreu permanece visível como uma linha ténue de luz (ou som, para quem não vê). A voz sussurra: 'A tua romaria ficou gravada no mapa das viagens imóveis.' O traço desaparece lentamente, como se fosse absorvido pelo território. A pessoa pode regressar mais tarde e encontrar o seu traço entre outros, como parte de uma constelação de romarias."
     }
   ],
   "participant_verbs": [
@@ -74,309 +82,325 @@
     "caminhar",
     "tocar",
     "escutar",
-    "deixar",
+    "oferecer",
     "esperar",
-    "observar"
+    "respirar"
   ],
   "system_responses": [
     {
-      "trigger": "Primeiro clique/toque",
-      "response": "Ecrã treme; som do sino aproxima-se; três caminhos aparecem."
+      "gesture": "cursor/dedo pairar sobre o caminho",
+      "response": "Revela texturas e sons do caminho (pedras, terra, musgo, passos)."
     },
     {
-      "trigger": "Escolha de um caminho",
-      "response": "Caminho ilumina-se; som ambiente muda para mercado/feira; outros caminhos escurecem."
+      "gesture": "clicar/toque na primeira paragem",
+      "response": "Ativa o marco simbólico: som de sino/cântaro, detalhes visuais, voz sussurrada com o nome da paragem."
     },
     {
-      "trigger": "Cursor sobre sombra no caminho",
-      "response": "Canto ou reza em latim/português arcaico; cursor move-se mais devagar se ignorar."
+      "gesture": "escolher ramal (claro/escuro)",
+      "response": "Muda a textura do caminho e o ambiente sonoro (sinos/risos vs. vento/murmúrios)."
     },
     {
-      "trigger": "Chegada à paragem",
-      "response": "Paisagem sonora e visual do local (colagem de fotos antigas/atuais); elementos interativos (vela, flor, pedra) com feedback táctil/sonoro."
+      "gesture": "tocar no objeto ritual (segunda paragem)",
+      "response": "Objeto emite som único (crepitar, tilintar) e revela memória associada (texto/áudio)."
     },
     {
-      "trigger": "Deixar oferta (som/palavra)",
-      "response": "Palavra aparece em tinta a secar; som de tinta a pingar."
+      "gesture": "interagir com objeto (clicar/arrastar)",
+      "response": "Objeto desfaça-se em partículas de luz/som."
     },
     {
-      "trigger": "Silêncio na segunda paragem",
-      "response": "Sistema escolhe palavra aleatória do dicionário folclórico."
+      "gesture": "ignorar objeto",
+      "response": "Objeto fica suspenso; ambiente sonoro reduz-se a silêncio pesado."
     },
     {
-      "trigger": "Chegada à terceira paragem",
-      "response": "Figura simbólica aparece; paisagem sonora altera-se."
+      "gesture": "deixar oferta (palavra/som)",
+      "response": "Contribuição transforma-se em objeto simbólico no círculo; coro de vozes incorpora a contribuição."
     },
     {
-      "trigger": "Fim da experiência",
-      "response": "Relíquia digital gerada; som de sino três vezes."
+      "gesture": "não interagir na devolução",
+      "response": "Círculo fecha-se sozinho; som desvanece-se."
     }
   ],
-  "sensory_signature_id": "romarias_viagem_imovel_43",
+  "sensory_signature_id": "romarias_viagem_imovel_folclore_43",
   "sensory_channels": {
     "visual": {
       "elements": [
-        "luz de vela",
-        "estrada de terra batida em pixels",
-        "três caminhos sinuosos (terracota, verde-musgo, azul-céu)",
-        "colagem de fotografias antigas/atuais",
-        "sombra de árvore/cruz",
-        "figura simbólica (peregrinos, animal, objeto sagrado)",
-        "relíquia digital (colagem + palavra)",
-        "tipografia manual e trémula",
-        "tinta a secar"
+        "nevoeiro inicial",
+        "caminho sinuoso com texturas (pedra, terra, musgo)",
+        "marcos simbólicos (cruz, fonte, árvore) como silhuetas",
+        "objetos rituais (vela, rosário, comida)",
+        "círculo de luz com sombras de procissão",
+        "palavra/símbolo em movimento",
+        "traço de luz do percurso anterior"
       ],
       "dynamics": [
-        "transições suaves entre fotos",
-        "rasto de pó dourado do cursor",
-        "escurecimento/iluminação de caminhos",
-        "movimento lento da figura simbólica"
+        "transparência/opacidade gradual",
+        "luz do cursor como lanterna",
+        "pulsação dos marcos",
+        "partículas de luz ao interagir com objetos",
+        "movimento circular das sombras"
       ]
     },
     "auditory": {
       "elements": [
-        "ventos distantes",
-        "passos abafados",
-        "murmúrio de vozes em coros",
-        "sino distante (uma vez, depois três vezes)",
-        "mercado/feira (vozes, risos, moedas)",
-        "canto ou reza em latim/português arcaico",
-        "paisagem sonora de santuário/fonte/cruzeiro",
-        "som táctil (ex.: tilintar de moedas, barulho de tecido)",
-        "som de tinta a pingar",
-        "canto de galo",
-        "som de porta a abrir"
+        "murmúrio distante (vozes de procissão/vento)",
+        "canto ritualístico (coro de vozes sobrepostas)",
+        "passos em cascalho",
+        "zumbido grave (sino/cântaro)",
+        "melodia simples (hino/cantiga)",
+        "som de objetos (crepitar de vela, tilintar de rosário)",
+        "coro circular sem início/fim",
+        "silêncio pesado"
       ],
       "dynamics": [
-        "mudança de ambiente sonoro com a escolha de caminhos",
-        "eco ou reverberação em espaços fechados",
-        "silêncio repentino"
+        "transição suave entre camadas sonoras",
+        "espacialização do som (direita/esquerda conforme o ramal)",
+        "eco e reverberação",
+        "incorporação da contribuição do utilizador no coro"
       ]
     },
     "haptic": {
       "elements": [
-        "vibração suave ao tocar em elementos interativos (opcional, com permissão)",
-        "feedback táctil no cursor (ex.: resistência leve ao mover sobre sombra)"
+        "vibração sutil (opcional, em dispositivos compatíveis) ao tocar em marcos/objetos"
       ],
       "dynamics": [
-        "vibração sincronizada com som táctil"
+        "feedback háptico correspondente à textura do caminho (ex: vibração mais áspera para cascalho)"
       ]
     },
     "kinesthetic": {
       "elements": [
-        "movimento do cursor como 'caminhada'",
-        "tremor do ecrã ao escolher caminho",
-        "cursor mais lento em zonas 'pesadas'"
+        "movimento do cursor/dedo como 'caminhada'",
+        "arrastar objetos rituais",
+        "espera (silêncio ativo)"
       ],
       "dynamics": [
-        "velocidade do cursor afeta a intensidade do som ambiente"
+        "velocidade do cursor afeta a intensidade do som (passos mais rápidos = som mais alto)",
+        "trajetória do cursor pode alterar o ramal escolhido"
       ]
     },
     "proprioceptive": {
       "elements": [
-        "instrução implícita para 'caminhar' com o cursor",
-        "sensação de 'peso' no cursor em zonas específicas"
+        "postura sugerida: 'imagina que estás a caminhar'",
+        "respiração percebida (ritmo do som adapta-se à espera)"
       ],
       "dynamics": [
-        "alteração da perceção de espaço com o movimento do cursor"
+        "instruções opcionais para fechar os olhos e escutar"
       ]
     },
     "temporal_interoceptive": {
       "elements": [
-        "ritmo do sino (uma vez no início, três no fim)",
-        "tempo de secagem da tinta",
-        "espera na segunda paragem",
-        "duração variável das transições entre paragens"
+        "espera (10 segundos para interagir com objeto)",
+        "ritmo circular do coro",
+        "duração variável conforme as escolhas"
       ],
       "dynamics": [
-        "aceleração/desaceleração do tempo percebido com a interação"
+        "aceleração/desaceleração do tempo percebido conforme a interação"
       ]
     },
     "spatial": {
       "elements": [
-        "profundidade sugerida pela estrada de terra batida",
-        "distância percebida nos sons (ventos distantes vs. sino próximo)",
-        "espaço entre caminhos"
+        "caminho que se estende para o horizonte",
+        "bifurcação do caminho (ramal claro/escuro)",
+        "círculo de luz como santuário",
+        "constelação de traços de romarias anteriores"
       ],
       "dynamics": [
-        "alteração da perceção de profundidade com o movimento do cursor"
+        "profundidade visual (paralaxe sutil)",
+        "posicionamento do som conforme a localização no 'território' digital"
       ]
     },
     "olfactory_evocation": {
       "elements": [
-        "cheiro de cera de vela (evocado pela luz e som de tinta a pingar)",
-        "cheiro de incenso ou flores (evocado pela paisagem sonora de santuário)",
-        "cheiro de terra molhada (evocado pela estrada de terra batida)"
+        "cheiro de cera (velas)",
+        "aroma de ervas (musgo, terra molhada)",
+        "cheiro de comida ritual (pão, mel)"
       ],
       "dynamics": [
-        "sugestão de cheiro através de associação visual e sonora"
+        "descrições textuais ou sonoras que evocam memórias olfativas (ex: 'Sentes o cheiro a cera derretida?')"
       ]
     },
     "gustatory_evocation": {
       "elements": [
-        "sabor de pão ou vinho (evocado por referências a ofertas ou procissões)",
-        "sabor de ervas ou frutas silvestres (evocado por descrições de paisagens)"
+        "sabor do pão com mel",
+        "gosto de ervas silvestres"
       ],
       "dynamics": [
-        "sugestão de sabor através de linguagem e memória"
+        "descrições ou sons que evocam memórias gustativas (ex: 'Lembras-te do gosto do pão quente na romaria?')"
       ]
     },
     "social_presence": {
       "elements": [
-        "murmúrio de vozes em coros",
-        "figura simbólica de peregrinos",
-        "relíquias digitais de outras pessoas"
+        "vozes de outras romarias (coro sobreposto)",
+        "sombras de pessoas em movimento (procissão)",
+        "contribuições de outros utilizadores (objetos no círculo)"
       ],
       "dynamics": [
-        "sensação de partilha de um ritual coletivo, mesmo em solidão"
+        "sensação de partilha de um ritual coletivo, sem interação direta"
       ]
     }
   },
   "cross_sensory_translation": {
-    "primary": "O som do sino (auditivo) altera a intensidade da luz de vela (visual) e a 'textura' do caminho (táctil/háptico).",
+    "primary": "O som do ambiente (murmúrio, canto, passos) altera a textura visual do caminho e a intensidade da luz do cursor.",
     "secondary": [
-      "O movimento do cursor (cinestésico) afeta a paisagem sonora (auditivo) e a profundidade percebida (espacial).",
-      "A palavra escrita na segunda paragem (visual/textual) ganha 'peso' e 'textura' na relíquia digital (visual + táctil evocado).",
-      "A sombra no caminho (visual) emite um canto (auditivo) e altera a velocidade do cursor (cinestésico)."
+      "O gesto de tocar num objeto ritual (visual/kinesthetic) produz um som único (auditory) e revela uma memória (textual/auditory).",
+      "A escolha do ramal (visual/kinesthetic) altera o ambiente sonoro (auditory) e a textura do caminho (visual/haptic).",
+      "A contribuição da pessoa (palavra/som) transforma-se num objeto visual (visual) e é incorporada no coro sonoro (auditory)."
     ]
   },
   "silence_or_absence": {
-    "mechanism": "O silêncio é usado como ferramenta de suspense e revelação. Na segunda paragem, se a pessoa não deixar uma oferta, o sistema 'escolhe' por ela, mas o silêncio inicial é um convite à reflexão. Além disso, o som ambiente pode diminuir ou desaparecer momentaneamente para destacar um elemento visual ou táctil.",
-    "effect": "Cria expectativa e profundiza a imersão, como se o silêncio fosse um 'lugar' a ser preenchido pela pessoa ou pelo acaso."
+    "mechanism": "O silêncio é usado como: (1) limiar (nevoeiro inicial sem som); (2) desvio (silêncio pesado se o objeto ritual for ignorado); (3) devolução (círculo fecha-se em silêncio se não houver interação).",
+    "effect": "O silêncio não é vazio: é uma presença ativa que convida à reflexão ou à espera. Na devolução, o silêncio permite que a contribuição da pessoa 'respire' antes de ser incorporada no ritual."
   },
   "surprise_or_indeterminacy": {
-    "mechanism": [
-      "A figura simbólica na terceira paragem aparece de forma aleatória (peregrinos, animal, objeto sagrado) e move-se de maneira imprevisível.",
-      "A palavra aleatória do dicionário folclórico na segunda paragem é escolhida sem lógica aparente.",
-      "A relíquia digital é gerada de forma única para cada sessão, combinando as escolhas da pessoa e o acaso.",
-      "O som ambiente na primeira paragem (mercado/feira) pode incluir vozes ou sons que não são imediatamente identificáveis, criando um sentido de mistério."
-    ],
-    "effect": "Quebra a previsibilidade e reforça a sensação de que a romaria é um ritual vivo e não uma narrativa linear."
+    "mechanisms": [
+      {
+        "type": "acaso controlado",
+        "description": "Os marcos simbólicos e objetos rituais são selecionados aleatoriamente de um conjunto pré-definido (ex: 10 marcos, 5 objetos), mas sempre coerentes com a família folclórica."
+      },
+      {
+        "type": "resposta ao ritmo",
+        "description": "A velocidade do cursor afeta a intensidade do som dos passos e a textura do caminho (ex: cursor rápido = passos altos e caminho áspero)."
+      },
+      {
+        "type": "combinação de fragmentos",
+        "description": "As memórias associadas aos objetos rituais são combinações únicas de textos/áudios curtos, geradas a partir de um corpus de frases autorais."
+      },
+      {
+        "type": "temporalidade real",
+        "description": "A cor do céu na primeira paragem adapta-se à hora do dia real (amanhecer/entardecer/noite)."
+      },
+      {
+        "type": "território evocado",
+        "description": "Os nomes dos marcos e objetos são inspirados em romarias reais de Portugal (ex: 'Cruz do Senhor dos Aflitos', 'Fonte da Pipa'), mas sem geolocalização forçada."
+      }
+    ]
   },
   "session_variation": [
-    {
-      "type": "acaso_controlado",
-      "description": "A figura simbólica na terceira paragem é escolhida aleatoriamente entre um conjunto de opções (peregrinos, corvo, pomba, cruz, etc.)."
-    },
-    {
-      "type": "ordem_mutável",
-      "description": "A ordem das três paragens pode variar entre sessões, embora a pessoa sempre escolha três."
-    },
-    {
-      "type": "resposta_a_ritmo",
-      "description": "A velocidade do cursor afeta a intensidade e o tipo de som ambiente (ex.: cursor rápido = som de passos apressados; cursor lento = som de ventos suaves)."
-    },
-    {
-      "type": "resposta_a_posição",
-      "description": "A posição do cursor no ecrã afeta a mistura de sons (ex.: cursor no canto superior = mais som de sino; cursor no centro = mais som de mercado)."
-    },
-    {
-      "type": "combinação_de_fragmentos",
-      "description": "As fotografias nas paragens são combinadas aleatoriamente a partir de um conjunto de imagens antigas e atuais do mesmo local."
-    },
-    {
-      "type": "temporalidade_real",
-      "description": "Se a experiência for acessada durante a noite, a paisagem sonora pode incluir sons noturnos (ex.: grilos, corujas)."
-    }
+    "Os marcos simbólicos e objetos rituais mudam entre sessões (seleção aleatória de um conjunto fixo).",
+    "A ordem das paragens pode variar (ex: segunda paragem pode ser um marco ou um objeto, conforme a sessão).",
+    "O ambiente sonoro adapta-se à hora do dia real (ex: mais sinos de manhã, mais murmúrios à noite).",
+    "A contribuição da pessoa (palavra/som) é incorporada de forma única no coro (ex: a palavra é cantada em diferentes tons conforme a sessão).",
+    "O traço da romaria anterior (linha de luz) tem uma cor única por sessão, baseada num algoritmo de cor aleatório mas harmonioso.",
+    "Se a pessoa regressar, pode encontrar o seu traço entre outros, criando uma constelação de romarias que evolui com o tempo."
   ],
   "territorial_binding": {
     "real_world_anchors": [
-      "As três paragens são inspiradas em locais reais de romarias em Portugal (ex.: Fátima, Santiago do Cacém, Nazaré, etc.), mas não são nomeados explicitamente para preservar a universalidade da experiência.",
-      "A paisagem sonora e visual de cada paragem é baseada em elementos folclóricos e territoriais autênticos (ex.: cantos de romaria, sons de procissões, fotografias de santuários)."
+      "Nomes de marcos e objetos inspirados em romarias e práticas folclóricas portuguesas (ex: 'Cruz do Senhor dos Aflitos' em Lisboa, 'Festa das Latas' em Tomar).",
+      "Sons de sinos, cantos e murmúrios baseados em gravações ou descrições de romarias reais."
     ],
-    "digital_territory": "As relíquias digitais são armazenadas num 'espaço sagrado' virtual (a 'sala das romarias'), que funciona como um território digital partilhado."
+    "digital_territory": {
+      "description": "O 'território' digital é um mapa abstrato de romarias imóveis, onde cada traço representa uma viagem única. As paragens são 'lugares' simbólicos dentro deste território, não geolocalizados.",
+      "relation": "A experiência evoca o território físico das romarias sem exigir geolocalização ou dados reais do utilizador."
+    },
+    "questions_for_eduardo": [
+      "Quais são os marcos simbólicos e objetos rituais autorais que devem constar do conjunto pré-definido? (Exemplo: 'Cruz do Senhor dos Aflitos' é válido? Há uma lista canónica?)",
+      "Deve a cor do traço da romaria ser associada a uma freguesia ou região específica, ou pode ser aleatória?",
+      "Há memórias ou frases autorais específicas que devem ser usadas nas interações com os objetos rituais?"
+    ]
   },
   "trace_and_return": {
     "trace": {
-      "digital": "Relíquia digital (colagem das três paragens + palavra/som deixado) guardada na 'sala das romarias'.",
-      "symbolic": "A palavra ou som deixado na segunda paragem pode 'ressurgir' em futuras sessões de outras pessoas, como um eco folclórico."
+      "type": "visual e sonoro",
+      "description": "O traço da romaria (linha de luz) permanece visível na tela inicial como parte de uma constelação de viagens imóveis. O som ambiente da tela inicial incorpora ecos das contribuições anteriores (ex: palavras cantadas, sons de objetos)."
     },
     "return": {
-      "immediate": "A relíquia digital é oferecida à pessoa no final da experiência, como um 'objeto sagrado' para guardar ou partilhar.",
-      "latent": "A relíquia permanece na 'sala das romarias' para ser vista por outros, criando um arquivo vivo de viagens imóveis."
+      "type": "simbólico e coletivo",
+      "description": "A pessoa recebe de volta: (1) a sensação de ter participado num ritual coletivo; (2) a sua contribuição transformada num objeto simbólico no círculo; (3) a possibilidade de regressar e ver o seu traço entre outros, como parte de uma memória viva."
+    },
+    "latency": {
+      "description": "O traço e o som da romaria desvanecem-se lentamente ao longo de várias sessões, como se fossem absorvidos pelo território. A constelação de traços evolui com o tempo, mas nunca é apagada completamente."
     }
   },
   "accessibility_equivalents": {
     "visual": {
-      "alternative": "Todas as imagens e transições visuais têm descrições sonoras opcionais (ex.: 'Uma estrada de terra batida aparece no ecrã, com três caminhos à frente: um de cor terracota, outro verde-musgo, outro azul-céu.').",
-      "reduced_motion": "Versão estável sem transições suaves ou tremores do ecrã; os caminhos aparecem de forma clara e estática."
+      "alternative": "Todas as interações visuais têm descrições sonoras (ex: 'Estás a aproximar-te de uma cruz de pedra. Sentes o musgo sob os dedos.').",
+      "reduced_motion": "Versão estável do caminho e marcos, sem pulsação ou movimento circular das sombras. O traço da romaria é uma linha estática."
     },
     "auditory": {
-      "alternative": "Todas as paisagens sonoras e sons têm legendas visuais (ex.: 'Som de sino ao longe. Murmúrio de vozes em coros.').",
-      "volume_control": "Controlo de volume global e por elemento sonoro (ex.: desativar som ambiente, mas manter sons interativos)."
+      "alternative": "Todas as camadas sonoras têm legendas visuais (ex: 'Coro de vozes a cantar um hino.'). O som pode ser desativado, e as interações são indicadas por texto (ex: 'Toca na vela para ouvi-la crepitar.')."
     },
     "haptic": {
-      "alternative": "Feedback visual (ex.: pulso de luz) em vez de vibração para elementos interativos."
+      "alternative": "Feedback visual (ex: pulso de luz) substitui a vibração."
     },
     "kinesthetic": {
-      "alternative": "Navegação por teclado: setas para mover o 'cursor' pelos caminhos; Enter para selecionar."
+      "alternative": "Interações por teclado (setas para mover o 'cursor', Enter para seleccionar) ou voz (comandos como 'escolher ramal claro')."
     },
     "proprioceptive": {
-      "alternative": "Instruções claras e textuais para guiar a interação (ex.: 'Move o cursor lentamente para sentir o peso do caminho.')."
+      "alternative": "Instruções de respiração são opcionais e podem ser substituídas por um temporizador visual (ex: 'Aguarda 10 segundos...')."
     },
     "temporal_interoceptive": {
-      "alternative": "Modo sem pressão: a pessoa pode pausar a experiência a qualquer momento e retomar mais tarde."
+      "alternative": "Modo sem pressão: a espera é substituída por um botão 'Continuar' que avança a experiência."
     },
-    "olfactory_evocation": {
-      "alternative": "Descrições textuais detalhadas dos cheiros evocados (ex.: 'Sentes o cheiro a cera de vela e incenso, como numa igreja antiga.')."
-    },
-    "gustatory_evocation": {
-      "alternative": "Descrições textuais detalhadas dos sabores evocados (ex.: 'Imagina o sabor doce do pão benzido, oferecido nas romarias.')."
+    "cognitive": {
+      "alternative": "Texto simplificado e opções de interação reduzidas (ex: apenas 2 paragens em vez de 3) para quem preferir uma experiência mais linear."
     }
   },
   "optional_permissions": {
     "microphone": {
-      "purpose": "Gravar um som (ex.: uma palavra, um canto) para deixar como oferta na segunda paragem.",
-      "fallback": "A pessoa pode escrever uma palavra ou simplesmene esperar; o sistema escolhe uma palavra aleatória do dicionário folclórico."
-    },
-    "camera": {
-      "purpose": "Não aplicável nesta experiência.",
-      "fallback": "N/A"
+      "purpose": "Permitir à pessoa gravar um som curto (ex: uma palavra, um canto) como oferta na terceira paragem.",
+      "trigger": "Apenas quando a pessoa clica no botão 'Gravar oferta' (aparece na devolução).",
+      "fallback": "Se não concedido, a pessoa pode escrever uma palavra ou escolher um som pré-definido (ex: sino, cântaro)."
     },
     "geolocation": {
-      "purpose": "Não aplicável nesta experiência.",
-      "fallback": "N/A"
+      "purpose": "NÃO APLICÁVEL. A experiência não requer geolocalização.",
+      "trigger": "Nenhum."
     },
-    "motion": {
-      "purpose": "Detetar a inclinação do dispositivo para simular o 'peso' do cursor em zonas específicas (opcional).",
-      "fallback": "O 'peso' do cursor é simulado apenas com base na posição do cursor no ecrã."
+    "camera": {
+      "purpose": "NÃO APLICÁVEL.",
+      "trigger": "Nenhum."
+    },
+    "device_motion": {
+      "purpose": "NÃO APLICÁVEL. O movimento do dispositivo não é usado.",
+      "trigger": "Nenhum."
     }
   },
   "overstimulation_risk": {
     "potential_risks": [
-      "Flashing ou transições visuais rápidas (mitigado com opção de reduced-motion).",
-      "Sons súbitos ou altos (mitigado com controlo de volume e legendas).",
-      "Vibração insistente (mitigado com alternativa visual e opção de desativar).",
-      "Pressão de tempo (mitigado com modo sem pressão)."
+      "Flashing ou pulsação rápida dos marcos/objetos (pode causar desconforto em pessoas com epilepsia fotosensível).",
+      "Som súbito ou alto (ex: sino repentino).",
+      "Vibração insistente (se usada em dispositivos hápticos).",
+      "Loops sonoros contínuos sem pausa (coro circular)."
     ],
-    "mitigation": [
-      "Opção de reduced-motion para transições visuais.",
-      "Controlo de volume global e por elemento sonoro.",
-      "Feedback táctil opcional e com alternativa visual.",
-      "Modo sem pressão para pausar a experiência."
+    "mitigations": [
+      "Limitar a frequência de pulsação a <3 Hz e evitar padrões de flashing.",
+      "Volume do som começa baixo e aumenta gradualmente; opção de reduzir volume ou desativar som.",
+      "Vibração é sutil e opcional; pode ser desativada nas definições.",
+      "O coro circular tem pausas aleatórias (silêncio de 2-3 segundos a cada 20 segundos).",
+      "Botão 'Pausar' visível em todos os ecrãs, que congela a experiência e reduz o som a zero."
     ]
   },
-  "distinctiveness": [
-    "A experiência é única porque transforma a romaria (um ritual de deslocação física) numa 'viagem imóvel' digital, onde o corpo e a atenção são convocados sem movimento real.",
-    "A assinatura sensorial combina som ambiente imersivo, visual de colagens de fotografias antigas/atuais e interatividade táctil/sonora para criar uma sensação de presença em locais sagrados.",
-    "A tradução cruzada entre som, visual e cinestésico (ex.: sino afeta luz e textura) é específica desta experiência e não é repetida noutros blueprints.",
-    "A devolução (relíquia digital) é um objeto simbólico único, gerado a partir das escolhas da pessoa e do acaso, e não um simples 'certificado' ou badge.",
-    "O uso do silêncio e do acaso (ex.: palavra aleatória, figura simbólica) reforça o caráter ritualístico e não linear da romaria.",
-    "A territorialidade é evocada através de elementos folclóricos autênticos (cantos, sons, fotografias), sem nomear locais específicos, preservando a universalidade."
-  ],
+  "distinctiveness": {
+    "unique_elements": [
+      "A 'viagem imóvel' como conceito central: a pessoa sente que está a percorrer um território sem se mover fisicamente.",
+      "A luz do cursor como 'lanterna' que revela o caminho e interage com os elementos (marcos, objetos).",
+      "A tradução cruzada entre som e textura visual (ex: passos alteram a aspereza do caminho).",
+      "O uso do silêncio como presença ativa (ex: silêncio pesado quando o objeto ritual é ignorado).",
+      "A devolução como incorporação da contribuição da pessoa num ritual coletivo (coro de vozes).",
+      "A constelação de traços de romarias anteriores, que evolui com o tempo e convida ao regresso.",
+      "A evocações olfativas e gustativas integradas na narrativa (ex: 'Sentes o cheiro a cera?')."
+    ],
+    "comparison": "Esta experiência não pode ser confundida com: (1) um mapa interativo (não há geolocalização ou navegação espacial real); (2) um quiz ou jogo de escolhas (as interações são sensoriais e poéticas, não lógicas); (3) uma galeria de imagens (os elementos visuais são dinâmicos e respondem à interação); (4) um chatbot (não há diálogo linear, apenas evocações e respostas do sistema)."
+  },
   "questions_for_eduardo": [
-    "As três paragens devem ser inspiradas em romarias reais específicas (ex.: Fátima, Santiago do Cacém) ou podem ser genéricas, baseadas em elementos folclóricos gerais?",
-    "A figura simbólica na terceira paragem (peregrinos, animal, objeto sagrado) deve ter um significado específico ou pode ser aleatória?",
-    "A 'sala das romarias' (onde as relíquias digitais são armazenadas) deve ser um espaço visível para todos os utilizadores ou apenas para quem completou a experiência?",
-    "O dicionário de termos folclóricos para a palavra aleatória na segunda paragem deve ser pré-definido ou gerado dinamicamente a partir do corpus do Atlas?",
-    "A experiência deve ter uma duração fixa ou variável, dependendo das escolhas da pessoa?"
+    "Quais são os marcos simbólicos e objetos rituais canónicos que devem ser usados nas paragens? (Exemplo: 'Cruz do Senhor dos Aflitos' é válido? Há uma lista autoral?)",
+    "Deve a experiência incluir referências específicas a romarias reais (ex: nomes de santuários, datas de festas) ou manter-se abstrata?",
+    "Há frases ou memórias autorais que devem ser usadas nas interações com os objetos rituais?",
+    "A cor do traço da romaria deve ser associada a uma região ou pode ser aleatória?",
+    "O coro de vozes deve ser gerado a partir de gravações reais ou pode ser sintetizado?",
+    "A duração da experiência deve ser fixa ou variável conforme as escolhas da pessoa?"
   ],
   "improvement_proposals": [
-    "Incluir a opção de a pessoa 'rezar' ou 'fazer uma promessa' na segunda paragem, em vez de apenas deixar uma oferta (som/palavra).",
-    "Adicionar uma camada de 'memória' às paragens: a pessoa pode ver relíquias digitais de outras pessoas que passaram pelo mesmo local, criando um sentido de comunidade.",
-    "Integração com o COSMICOXES: as relíquias digitais poderiam ser representadas como 'estrelas' no cosmos, criando uma ligação visual entre a romaria e o universo do Atlas.",
-    "Permitir que a pessoa 'repita' a romaria com as mesmas três paragens, mas com variações no percurso (ex.: diferentes figuras simbólicas, sons ambiente).",
-    "Adicionar uma opção de 'viagem guiada' para quem não quer escolher as paragens, onde o sistema seleciona aleatoriamente três locais e a pessoa apenas 'caminha'."
+    {
+      "proposal": "Incluir uma opção para a pessoa 'repetir a romaria' com as mesmas paragens, mas em ordem aleatória, para explorar diferentes combinações sensoriais.",
+      "justification": "Aumenta a reutilizabilidade da experiência sem perder a sua essência."
+    },
+    {
+      "proposal": "Adicionar uma camada de 'memória territorial' onde, ao regressar, a pessoa pode ver não só o seu traço, mas também os traços de outras romarias que passaram pelas mesmas paragens, criando um mapa de conexões.",
+      "justification": "Reforça a dimensão coletiva e territorial da experiência."
+    },
+    {
+      "proposal": "Permitir que a pessoa 'salve' a sua romaria como um 'objeto' (ex: uma vela virtual) que pode ser partilhado ou oferecido a outra pessoa.",
+      "justification": "Estende a devolução para além da sessão individual."
+    }
   ],
   "generic_fallback_allowed": false,
   "approved_for_code": false

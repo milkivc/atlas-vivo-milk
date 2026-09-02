@@ -1,385 +1,328 @@
 {
   "id": "lendas-138",
-  "canonical_name": "138 Lendas: O Fio que Desata o Nó",
+  "canonical_name": "138 Lendas",
   "source_evidence": {
     "primary": [
-      {
-        "source": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
-        "authority": "autoral",
-        "relevance": "Convite autoral: 'Escolhe um princípio. Inventa outro fim.' e mecânica 'desviar' para a família 'folclore'."
-      },
-      {
-        "source": "Cópia de Fica registado neste dossiê…",
-        "authority": "autoral",
-        "relevance": "Princípios de oralidade, território, lenda e brincadeira viva sem inventar factos etnográficos."
-      },
-      {
-        "source": "PUBLICO_TERRITORIAL__CURADORIA_NOS_FALARTE_RESIDUAL.pdf",
-        "authority": "autoral",
-        "relevance": "Mecânicas territoriais e relação com topónimos, falares e memórias."
-      }
+      "catalog_entry: convite 'Escolhe um princípio. Inventa outro fim.'",
+      "catalog_entry: mecânica 'desviar'",
+      "source_corpus: Lendas / falares / topónimos — 'Voz, pronúncia, ritmo, mapa, enigma, som e desvio territorial podem transformar o corpus em brincadeira viva sem inventar factos etnográficos.'"
     ],
     "secondary": [
-      {
-        "source": "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md",
-        "authority": "interpretativa",
-        "relevance": "Dinâmicas de repetição, desvio e transformação (ex: D2 Catástrofe Produtiva, D6 O Rizoma Interior)."
-      }
+      "source_corpus: FALARTE — mecânicas 7 (Palavras que desapareceram) e 10 (Remetente Ausente)",
+      "source_corpus: Livro Cubo — face 'o espelho' e 'o buraco' (liberdade narrativa)",
+      "source_corpus: Âncoras Autorais — 'O jogo abre conversa e encontro intergeracional'"
     ]
   },
   "authorial_invariants": [
-    "A curadoria pertence à família 'folclore' e à mecânica 'desviar'.",
-    "Convite autoral: 'Escolhe um princípio. Inventa outro fim.'",
-    "Deve preservar a oralidade, o território e a lenda sem inventar factos etnográficos.",
-    "A experiência deve ser uma brincadeira viva, não um texto estático.",
-    "O folclore é tratado como matéria viva, não como arquivo morto."
+    "A experiência deve partir do corpus de lendas, falares e topónimos sem inventar factos autorais.",
+    "O convite é 'Escolhe um princípio. Inventa outro fim.' — implicando desvio, reinterpretação e co-criação.",
+    "A mecânica é 'desviar' — não linearidade, quebra de expectativa, reencaminhamento.",
+    "A voz, pronúncia, ritmo e território são matérias-primas, não decoração.",
+    "A oralidade e a memória são centrais, mas não como arquivo estático."
   ],
-  "perceptual_intent": "Transformar a lenda num fio tangível que a pessoa pode segurar, desatar ou reatar, revelando camadas ocultas de significado, território e voz. A experiência convida a brincar com o tempo circular das lendas: o que foi contado pode ser recontado de outra forma, e o 'fim' é sempre um novo começo.",
+  "perceptual_intent": "Transformar a lenda num campo vivo onde a pessoa, ao pronunciar, escolher ou silenciar, altera o percurso da narrativa, o território que a sustenta e a textura sensorial que a envolve. A lenda não é contada — é *desviada* em tempo real, como um rio que muda de curso com a presença de quem o atravessa.",
   "threshold": {
-    "description": "A pessoa entra num espaço escuro, onde um fio de luz tênue (visual) traça um caminho sinuoso no ecrã. O fio parece vibrar levemente (háptico opcional) e emite um som de corda a ser esticada (auditivo). Não há texto, apenas uma sugestão de movimento: o cursor ou dedo da pessoa é atraído pelo fio como se fosse um íman suave.",
-    "sensory_trigger": "O fio reage à proximidade do cursor/dedo: aproximar-se faz o som aumentar em volume e a luz brilhar mais; afastar-se faz o oposto."
+    "description": "A pessoa entra num espaço escuro, onde apenas um ponto de luz (como uma vela ou uma estrela) pulsa lentamente no centro do ecrã. O som ambiente é um murmúrio distorcido de vozes sobrepostas, como se várias lendas estivessem a ser contadas ao mesmo tempo, mas inaudíveis. O cursor/dedo da pessoa, ao aproximar-se do ponto de luz, faz com que este se divida em três caminhos sinuosos (visualmente sugerindo rios ou raios de lua), cada um com uma cor e um timbre sonoro distintos (ex: azul-escuro com som de água, vermelho-terra com som de vento, branco-prateado com som de sinos).",
+    "sensory_trigger": "movimento do cursor/dedo + som ambiente de murmúrio"
   },
   "dramaturgical_arc": [
     {
-      "stage": "limiar",
-      "description": "O fio aparece sozinho, sem contexto. A pessoa sente que algo a observa (social_presence evocada). O som de corda é o único áudio, misturado com um murmúrio distante (auditivo)."
+      "stage": "LIMIAR",
+      "action": "O espaço escuro e o murmúrio inaudível criam uma expectativa de revelação. O ponto de luz divide-se em caminhos ao primeiro gesto de aproximação."
     },
     {
-      "stage": "chamada",
-      "description": "O fio forma uma espiral e, no centro, surge uma palavra solta em voz sussurrada (auditivo): 'Princípio'. A palavra não é escrita, apenas ouvida. O fio pulsa como se esperasse uma resposta."
+      "stage": "CHAMADA",
+      "action": "Os três caminhos vibram levemente (haptic opcional) e emitem sons que se tornam mais nítidos à medida que o cursor/dedo se aproxima. Cada caminho tem uma palavra-chave flutuante: 'PRINCÍPIO' (azul), 'MEIO' (vermelho), 'FIM' (branco)."
     },
     {
-      "stage": "primeiro_gesto",
-      "description": "A pessoa toca o fio (clique/arrasto). O fio desata-se em dezenas de fios mais finos, cada um com uma cor diferente (visual). Os fios espalham-se como raios de uma roda, e o som da corda transforma-se num coral de vozes (auditivo) que repetem a palavra 'Princípio' em tons variados."
+      "stage": "PRIMEIRO GESTO",
+      "action": "A pessoa escolhe um caminho ao tocar/clicar. O caminho selecionado ilumina-se e os outros dois desvanecem-se em partículas que se fundem no fundo, como se fossem absorvidas pela escolha."
     },
     {
-      "stage": "resposta_viva",
-      "description": "Cada fio que a pessoa toca (ou sobre o qual passa o cursor) revela um fragmento de uma lenda em voz (auditivo) ou como texto que surge e desaparece (visual). Os fragmentos são curtos (3-5 palavras) e não formam uma história linear. O som do coral adapta-se: vozes que correspondem aos fios tocados ganham volume, enquanto as outras se tornam murmúrios."
+      "stage": "RESPOSTA VIVA",
+      "action": "O caminho escolhido desdobra-se num percurso sinuoso onde a lenda correspondente (ex: uma lenda de um rio) começa a ser *dita* por uma voz que parece vir de dentro do ecrã (spatial audio). A voz não é linear: pausas, repetições e entoações mudam conforme a posição do cursor/dedo (ex: se a pessoa se afasta, a voz fica mais grave e lenta; se se aproxima, mais aguda e rápida)."
     },
     {
-      "stage": "desvio",
-      "description": "De repente, um dos fios (escolhido aleatoriamente ou pelo ritmo da pessoa) 'quebra' com um som de rasgo (auditivo). O fragmento de lenda associado a esse fio inverte-se: se era 'A princesa subiu a torre', passa a ser 'A torre subiu a princesa' (visual/auditivo). O fio quebrou transforma-se num nó (visual)."
+      "stage": "DESVIO",
+      "action": "Em certo ponto, a voz para abruptamente e o percurso visual divide-se novamente em dois: um continua a lenda original, outro sugere um 'fim alternativo' (ex: 'E se o rio tivesse secado?'). A pessoa deve escolher sem saber o resultado."
     },
     {
-      "stage": "aprofundamento_sensorial",
-      "description": "Os fios restantes começam a entrelaçar-se automaticamente, criando padrões que lembram tecidos ou mapas (visual). O coral de vozes funde-se num único som contínuo, como um vento que carrega palavras (auditivo). A pessoa pode 'puxar' os fios com o cursor para desfazer os nós ou criar novos. Cada ação altera o som: puxar um fio estica o som; soltar faz o som 'ricochetear'."
+      "stage": "APROFUNDAMENTO SENSORIAL",
+      "action": "A escolha afeta não só a narrativa, mas também o ambiente: se a pessoa optar pelo desvio, o som muda para um ruído de terra rachando (evocando secura), e o percurso visual ganha texturas de rachaduras. Se optar pela lenda original, o som torna-se mais fluido (água) e o percurso ganha reflexos prateados. A tipografia da lenda também se adapta: mais angular para o desvio, mais orgânica para a original."
     },
     {
-      "stage": "escolha_acaso_silencio",
-      "description": "A pessoa é convidada a escolher: (1) reatar o nó quebrado (clicando nele), (2) deixar o nó como está, ou (3) esperar em silêncio. Se escolher (1), o nó desata-se e o fragmento de lenda volta ao original, mas uma nova palavra surge no coral: 'Fim'. Se escolher (2), o nó permanece e o fragmento invertido torna-se permanente. Se escolher (3), o silêncio (auditivo) cresce, e os fios começam a desaparecer lentamente (visual), revelando um novo fio central com a palavra 'Fim' escrita em luz."
+      "stage": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "A pessoa pode: (1) pronunciar uma palavra (via microfone opcional) para 'inventar outro fim'; (2) esperar em silêncio por 10 segundos para que o sistema proponha um fim aleatório; ou (3) tocar num botão 'DEIXAR A LENDA RESPIRAR' (que pausará a narrativa e revelará o território associado à lenda num mapa minimalista)."
     },
     {
-      "stage": "aparição",
-      "description": "Independentemente da escolha, surge uma constelação de pontos de luz (visual) que formam um mapa mínimo de um território real (ex: uma freguesia de Lisboa). Cada ponto de luz corresponde a um fragmento de lenda recolhido. O som do coral transforma-se num murmúrio de vozes que pronunciam topónimos (auditivo)."
+      "stage": "APARIÇÃO",
+      "action": "Conforme a escolha, emerge: (a) uma nova versão da lenda, escrita em tempo real com as palavras pronunciadas pela pessoa (se usou microfone); (b) um fim aleatório gerado a partir de fragmentos de outras lendas; ou (c) um mapa com o território da lenda, onde pontos de luz indicam outros 'princípios' ou 'fins' possíveis (convidando a repetir a experiência)."
     },
     {
-      "stage": "devolução",
-      "description": "A pessoa recebe de volta: (1) o fragmento de lenda que inverteu (se aplicável), (2) a palavra 'Fim' ou a palavra que surgiu no nó, e (3) um convite para 'inventar outro fim' (auditivo/visual). Este convite aparece como um fio solto no ecrã, pronto para ser agarrado. Se a pessoa interagir com ele, a experiência recomeça com um novo 'Princípio' (variação entre sessões)."
+      "stage": "DEVOLUÇÃO",
+      "action": "A pessoa recebe um 'rasto' único: (1) uma frase gerada a partir da sua interação (ex: 'A lenda do rio que secou porque [palavra pronunciada]'); (2) um som único (combinação dos timbres do percurso); ou (3) uma coordenada territorial (se optou pelo mapa). Este rasto pode ser guardado como 'partícula' no COSMICOXES ou partilhado como convite para outras pessoas desviarem a mesma lenda."
     },
     {
-      "stage": "rasto_latência",
-      "description": "O fio que a pessoa deixou (ou o nó que criou) permanece no ecrã como um rasto mínimo (visual) durante 10 segundos após a saída. Se a pessoa regressar à experiência, o rasto pode reaparecer como um 'fio fantasma' (visual) que reage ao toque com um eco do som original (auditivo)."
+      "stage": "RASTO / LATÊNCIA",
+      "action": "A lenda desviada fica disponível no cosmos do Atlas como uma 'lenda viva', com um ícone de 'rio bifurcado' para indicar que foi alterada. Outras pessoas podem encontrar esta versão e desviá-la novamente. O sistema registra o número de desvios sem associar a identidades."
     }
   ],
   "participant_verbs": [
-    "tocar",
-    "desatar",
+    "escolher",
+    "pronunciar",
+    "desviar",
     "escutar",
-    "puxar",
     "esperar",
-    "inventar",
-    "reatar"
+    "tocar",
+    "inventar"
   ],
   "system_responses": [
-    {
-      "trigger": "proximidade do cursor/dedo ao fio",
-      "response": "O fio brilha e o som de corda aumenta em volume e frequência."
-    },
-    {
-      "trigger": "toque/clique no fio central",
-      "response": "O fio desata-se em dezenas de fios coloridos, e o som transforma-se num coral de vozes."
-    },
-    {
-      "trigger": "toque em um fio secundário",
-      "response": "Fragmento de lenda é revelado em voz ou texto efémero. O som do coral adapta-se: a voz correspondente ganha volume."
-    },
-    {
-      "trigger": "ritmo rápido de interação",
-      "response": "Os fios entrelaçam-se mais rápido, e o som do coral acelera, criando um efeito de urgência."
-    },
-    {
-      "trigger": "ritmo lento ou pausa",
-      "response": "Os fios movem-se devagar, e o som do coral torna-se mais grave e espaçado, como um suspiro."
-    },
-    {
-      "trigger": "escolha de reatar o nó",
-      "response": "O nó desata-se, o fragmento volta ao original, e a palavra 'Fim' surge no coral."
-    },
-    {
-      "trigger": "escolha de deixar o nó",
-      "response": "O nó permanece, o fragmento invertido torna-se permanente, e o som ganha uma camada de eco."
-    },
-    {
-      "trigger": "escolha de esperar em silêncio",
-      "response": "Os fios desaparecem lentamente, e o som esvanece-se, revelando um novo fio central com a palavra 'Fim'."
-    },
-    {
-      "trigger": "interação com o convite final ('inventar outro fim')",
-      "response": "A experiência recomeça com um novo 'Princípio' e um novo conjunto de fragmentos de lenda."
-    }
+    "Divide o ponto de luz em caminhos sinuosos com sons e cores distintas.",
+    "Altera a entoação, ritmo e timbre da voz conforme a posição do cursor/dedo.",
+    "Pausa a narrativa e oferece desvios não lineares.",
+    "Muda a textura visual e sonora do ambiente conforme a escolha do percurso.",
+    "Gera uma nova versão da lenda em tempo real com input da pessoa.",
+    "Revela o território associado à lenda num mapa minimalista.",
+    "Devolve um rasto único (frase, som ou coordenada).",
+    "Regista a lenda desviada no cosmos para futuras interações."
   ],
-  "sensory_signature_id": "fio-que-desata-o-no-lendas-138",
+  "sensory_signature_id": "lendas-138-rio-bifurcado",
   "sensory_channels": {
     "visual": {
       "elements": [
-        "Fio de luz tênue e vibrante (limiar).",
-        "Fios coloridos que se desatam e entrelaçam (resposta viva/aprofundamento).",
-        "Fragmentos de texto efémeros (resposta viva).",
-        "Nó visual que quebra ou se reata (desvio).",
-        "Constellation de pontos de luz formando um mapa territorial (aparição).",
-        "Fio fantasma como rasto (latência)."
+        "espaço escuro com ponto de luz central",
+        "caminhos sinuosos com cores distintas (azul, vermelho, branco)",
+        "partículas que se fundem no fundo",
+        "texturas dinâmicas (rachaduras ou reflexos)",
+        "tipografia adaptativa (angular/orgânica)",
+        "mapa minimalista com pontos de luz"
       ],
       "dynamics": [
-        "Luz que reage à proximidade do cursor/dedo.",
-        "Transparência e opacidade variáveis nos fios e textos.",
-        "Movimento orgânico dos fios (como tecido a ser tecido/desfeito).",
-        "Profundidade visual: fios mais próximos parecem mais brilhantes e nítidos."
+        "luz que pulsa e se divide",
+        "caminhos que se iluminam ou desvanecem",
+        "transições suaves entre texturas"
       ]
     },
     "auditory": {
       "elements": [
-        "Som de corda a ser esticada (limiar).",
-        "Coral de vozes que repetem 'Princípio' em tons variados (chamada).",
-        "Fragmentos de lenda em voz sussurrada ou falada (resposta viva).",
-        "Som de rasgo quando um fio quebra (desvio).",
-        "Vento que carrega palavras (aprofundamento).",
-        "Murmúrio de vozes que pronunciam topónimos (aparição).",
-        "Eco do som original no fio fantasma (latência)."
+        "murmúrio distorcido de vozes sobrepostas",
+        "sons ambientais (água, vento, sinos)",
+        "voz spatial que altera entoação, ritmo e timbre",
+        "ruídos de terra rachando ou água fluindo",
+        "som único gerado a partir do percurso"
       ],
       "dynamics": [
-        "Volume e tom adaptam-se à proximidade do cursor/dedo.",
-        "Espacialização: vozes vêm de direções diferentes conforme a posição dos fios no ecrã.",
-        "Ritmo do coral adapta-se ao ritmo de interação da pessoa.",
-        "Silêncio progressivo durante a escolha de esperar."
+        "som que se torna nítido com a aproximação",
+        "pausas e repetições na voz conforme o gesto",
+        "transições suaves entre timbres"
       ]
     },
     "haptic": {
       "elements": [
-        "Vibração leve no dispositivo (opcional) quando o fio é tocado (limiar/resposta viva)."
+        "vibração leve nos caminhos (opcional, em dispositivos compatíveis)"
       ],
       "dynamics": [
-        "Intensidade da vibração varia com a força do toque (se suportado)."
-      ],
-      "fallback": "Pulso visual (ex: fio brilha mais) para dispositivos sem háptica."
+        "vibração que acompanha a aproximação ao caminho"
+      ]
     },
     "kinesthetic": {
       "elements": [
-        "Movimento do cursor/dedo para tocar, puxar ou reatar fios.",
-        "Trajetória do cursor influencia a direção em que os fios se desatam ou entrelaçam."
+        "movimento do cursor/dedo",
+        "posição e trajectória no ecrã"
       ],
       "dynamics": [
-        "Velocidade do cursor afeta a velocidade do entrelaçamento dos fios.",
-        "Pressão (se suportada) pode esticar ou soltar fios."
-      ],
-      "fallback": "Controles de teclado (setas) para mover um 'cursor virtual' ou seleção por voz."
+        "resposta do sistema à velocidade e direção do gesto"
+      ]
     },
     "proprioceptive": {
       "elements": [
-        "Instrução implícita para ajustar a postura ou distância do ecrã (ex: 'Aproxima-te para ouvires melhor')."
+        "instruções implícitas de ritmo (ex: 'espera 10 segundos')",
+        "sensação de imersão no percurso sinuoso"
       ],
       "dynamics": [
-        "A experiência convida a pessoa a inclinar-se ou recuar para alterar a perspectiva visual/sonora."
-      ],
-      "fallback": "Ajuste automático da escala visual/sonora conforme o tamanho do ecrã."
+        "convidar a pessoa a ajustar a postura ou o ritmo da interação"
+      ]
     },
     "temporal_interoceptive": {
       "elements": [
-        "Espera durante a escolha de 'esperar em silêncio' (escolha/acaso/silêncio).",
-        "Ritmo da respiração sugerido pelo som do coral (aprofundamento)."
+        "pausas na narrativa",
+        "espera de 10 segundos para acaso",
+        "ritmo da voz que acelera/desacelera"
       ],
       "dynamics": [
-        "A duração da espera é variável conforme a sessão (variação entre sessões).",
-        "O som do coral pode sincronizar-se com um ritmo de respiração percebido (sem recolha biométrica)."
+        "suspensão do tempo para criar expectativa"
       ]
     },
     "spatial": {
       "elements": [
-        "Fios que se movem no ecrã como se estivessem num espaço 3D (profundidade sugerida).",
-        "Mapa territorial formado por pontos de luz (aparição)."
+        "spatial audio (voz que parece vir de dentro do ecrã)",
+        "mapa territorial com profundidade sugerida"
       ],
       "dynamics": [
-        "A posição dos fios no ecrã influencia a espacialização do som."
+        "som que se move conforme a posição do cursor"
       ]
     },
     "olfactory_evocation": {
       "elements": [
-        "Evocação de cheiros associados a lendas (ex: 'cheiro a lenha queimada' em lendas de fogueiras, 'cheiro a mar' em lendas costeiras)."
+        "evocação de cheiros através de linguagem (ex: 'o cheiro a terra molhada do rio')",
+        "associação de texturas visuais a memórias olfativas (ex: rachaduras = cheiro a poeira)"
       ],
       "dynamics": [
-        "Palavras ou sons que evocam memórias olfativas (ex: 'fumaça', 'sal', 'terra molhada')."
+        "palavras que sugerem cheiros sem fingir output físico"
       ]
     },
     "gustatory_evocation": {
       "elements": [
-        "Evocação de sabores associados a lendas (ex: 'gosto a mel' em lendas de abelhas, 'gosto a sal' em lendas do mar)."
+        "evocação de sabores através de metáforas (ex: 'a lenda tem um gosto a sal e a história')"
       ],
       "dynamics": [
-        "Fragmentos de lenda que mencionam alimentos ou sabores (ex: 'pão de milho', 'vinho de ramela')."
+        "linguagem que conecta a narrativa a memórias gustativas"
       ]
     },
     "social_presence": {
       "elements": [
-        "Sensação de ser observado pelo fio ou pelas vozes (limiar/chamada).",
-        "Coral de vozes que parece responder à pessoa (resposta viva).",
-        "Convite final para 'inventar outro fim' como uma voz amigável (devolução)."
+        "murmúrio de vozes sobrepostas (simulando outras pessoas a contarem lendas)",
+        "rasto partilhável que convida outras pessoas a interagir"
       ],
       "dynamics": [
-        "As vozes do coral reagem à interação da pessoa, criando uma sensação de diálogo."
+        "sensação de que a lenda é um espaço colectivo"
       ]
     }
   },
   "cross_sensory_translation": {
-    "primary": {
-      "description": "O gesto de tocar/puxar um fio (kinesthetic) altera o som do coral (auditory) e a forma dos fios no ecrã (visual).",
-      "example": "Puxar um fio estica o som associado a ele e alonga visualmente o fio no ecrã."
-    },
-    "secondary": {
-      "description": "O silêncio (temporal_interoceptive) faz desaparecer os fios (visual) e esvanece o som (auditory), revelando um novo elemento (aparição).",
-      "example": "Esperar em silêncio faz os fios sumirem e o som diminuir, até surgir o mapa territorial."
-    }
+    "primary": "A voz (auditory) altera a textura visual do percurso: entoações agudas criam reflexos prateados (como água), enquanto entoações graves criam rachaduras (como terra seca).",
+    "secondary": "O movimento do cursor/dedo (kinesthetic) modula o timbre da voz (auditory) e a cor dos caminhos (visual).",
+    "tertiary": "O silêncio (temporal_interoceptive) revela o mapa territorial (spatial), onde os pontos de luz (visual) correspondem a 'princípios' ou 'fins' possíveis."
   },
   "silence_or_absence": {
-    "use": [
-      "O silêncio é usado como ferramenta ativa: a pessoa pode escolher esperar em silêncio para revelar uma nova camada da experiência (escolha/acaso/silêncio).",
-      "A ausência de texto escrito no limiar e na chamada: a informação é transmitida apenas por som e visual.",
-      "O desaparecimento gradual dos fios durante a espera (aparição) cria um vazio que convida à reflexão."
-    ],
-    "effect": "O silêncio não é vazio; é um convite para escutar o que não está a ser dito e para perceber o que está a desaparecer."
+    "mechanism": "O silêncio da pessoa (não pronunciar palavras ou não interagir) ativa o modo 'acaso': o sistema propõe um fim aleatório para a lenda após 10 segundos de inatividade. Além disso, pausas na voz da narrativa criam momentos de suspensão onde o ambiente visual (ex: caminhos) se torna mais difuso, como se a lenda estivesse a 'respirar'.",
+    "purpose": "Convidar à reflexão, criar expectativa e permitir que a ausência de gesto seja também uma escolha criativa."
   },
   "surprise_or_indeterminacy": {
-    "mechanism": [
-      "Um fio quebra aleatoriamente (desvio), invertendo um fragmento de lenda.",
-      "A escolha de reatar ou não o nó altera permanentemente a narrativa (escolha/acaso/silêncio).",
-      "O conjunto de fragmentos de lenda apresentados varia entre sessões (variação entre sessões).",
-      "O mapa territorial final (aparição) é gerado com base nos fios tocados pela pessoa, criando uma constelação única."
-    ],
-    "effect": "A surpresa surge da quebra da linearidade e da possibilidade de reescrever a lenda, bem como da variação orgânica entre sessões."
+    "mechanism": "O desvio na lenda (escolher um 'fim alternativo') pode resultar em: (1) uma versão absurda da lenda (ex: 'o rio virou vinho'); (2) uma lenda que se funde com outra do corpus; ou (3) um silêncio prolongado seguido de uma frase enigmática (ex: 'E se a lenda fosse mentira?'). O sistema usa acaso controlado para selecionar entre estas opções, garantindo que a surpresa é sempre coerente com o corpus autoral.",
+    "purpose": "Quebrar a linearidade e convida a pessoa a co-criar significados inesperados."
   },
   "session_variation": [
     {
       "type": "acaso_controlado",
-      "description": "O fio que quebra (desvio) é escolhido aleatoriamente entre os fios tocados pela pessoa."
+      "description": "O sistema seleciona aleatoriamente entre 3 lendas do corpus para o ponto de partida, garantindo que a experiência não é sempre a mesma."
     },
     {
       "type": "ordem_mutável",
-      "description": "A ordem dos fragmentos de lenda apresentados nos fios varia entre sessões."
+      "description": "Os desvios possíveis (ex: 'fim alternativo') mudam de posição no ecrã entre sessões."
     },
     {
       "type": "resposta_a_ritmo",
-      "description": "O ritmo do coral e a velocidade do entrelaçamento dos fios adaptam-se ao ritmo de interação da pessoa (rápido/lento)."
+      "description": "A velocidade do gesto da pessoa (ex: rápido vs. lento) afeta a entoação da voz: gesto rápido = voz mais aguda e acelerada; gesto lento = voz mais grave e pausada."
+    },
+    {
+      "type": "resposta_a_posição",
+      "description": "A trajectória do cursor/dedo (ex: circular vs. linear) altera a textura visual do percurso (ex: circular = espiral de partículas; linear = caminhos retos)."
     },
     {
       "type": "combinação_de_fragmentos",
-      "description": "Os fragmentos de lenda apresentados são selecionados aleatoriamente de um conjunto maior, garantindo variedade entre sessões."
+      "description": "Se a pessoa desvia a lenda, o sistema pode combinar fragmentos de outras lendas do corpus para criar um novo 'fim' único."
     },
     {
-      "type": "território_escolhido",
-      "description": "O mapa territorial final (aparição) é gerado com base nos topónimos associados aos fragmentos de lenda tocados pela pessoa."
+      "type": "temporalidade_real",
+      "description": "Em dias de lua cheia (calculado via API opcional de fases lunares), o ponto de luz inicial tem um brilho mais intenso e os sons ambientais são mais agudos, evocando lendas associadas à lua."
     }
   ],
   "territorial_binding": {
-    "relation": "Os fragmentos de lenda estão associados a topónimos reais (ex: 'A lenda da ponte de Alcântara', 'O mistério da fonte da Estrela'). O mapa territorial final (aparição) reflete os lugares mencionados nos fragmentos tocados pela pessoa.",
-    "sustainability": "Os topónimos e lendas são baseados em fontes autorais e documentadas, sem invenção de factos etnográficos.",
-    "evocation": "A experiência evoca o território através de sons (ex: murmúrio de vozes a pronunciar topónimos) e visuais (mapa de pontos de luz)."
+    "relation": "Cada lenda está associada a um território real (ex: uma freguesia de Lisboa). O mapa minimalista revelado na fase de 'APARIÇÃO' mostra o território da lenda com pontos de luz que correspondem a outros 'princípios' ou 'fins' possíveis. Estes pontos são clicáveis e levam a outras lendas do mesmo território.",
+    "source": "source_corpus: 'Lendas / falares / topónimos' e 'FALARTE — mecânica 1 (O lugar escondido)'",
+    "evidence": "As lendas do corpus estão ancoradas em territórios específicos, e o convite à deriva territorial é central na curadoria."
   },
   "trace_and_return": {
-    "trace": {
-      "description": "O fio que a pessoa deixou (ou o nó que criou) permanece no ecrã como um rasto mínimo (visual) durante 10 segundos após a saída. Se a pessoa regressar, o rasto pode reaparecer como um 'fio fantasma' que reage ao toque com um eco do som original (auditivo).",
-      "purpose": "Deixar uma marca efémera da interação da pessoa, convidando-a a regressar e a reencontrar a sua contribuição."
+    "mechanism": {
+      "immediate": "A pessoa recebe um rasto único: (1) uma frase gerada a partir da sua interação (ex: 'A lenda do [topónimo] que [ação inventada]'); (2) um som único (combinação dos timbres do percurso); ou (3) uma coordenada territorial (se optou pelo mapa).",
+      "latent": "A lenda desviada é registada no COSMICOXES como uma 'lenda viva', com um ícone de 'rio bifurcado'. Outras pessoas podem encontrar esta versão e desviá-la novamente, criando uma rede de lendas interconectadas."
     },
-    "return": {
-      "description": "A pessoa recebe de volta: (1) o fragmento de lenda que inverteu (se aplicável), (2) a palavra 'Fim' ou a palavra que surgiu no nó, e (3) um convite para 'inventar outro fim'.",
-      "purpose": "Devolver à pessoa um elemento tangível da sua interação, incentivando-a a continuar a brincar com a lenda."
-    }
+    "purpose": "Deixar um vestígio da interação que pode ser reencontrado e transformado por outros, reforçando a ideia de que as lendas são organimos vivos."
   },
   "accessibility_equivalents": {
     "visual": {
-      "alternative": "Descrição auditiva dos elementos visuais (ex: 'Um fio de luz traça um caminho sinuoso no ecrã').",
-      "reduced_motion": "Opção para desativar o movimento dos fios, substituindo-o por uma representação estática com contornos claros.",
-      "high_contrast": "Modo de alto contraste para os fios e textos, com cores sólidas e sem transparências."
+      "reduced_motion": "Os caminhos sinuosos e partículas são substituídos por formas geométricas simples (ex: retângulos ou círculos) com transições suaves.",
+      "high_contrast": "As cores dos caminhos são substituídas por padrões de preenchimento (ex: listras, pontos) para distinguir os percursos.",
+      "color_blind": "Os caminhos usam não só cor, mas também texturas e formas distintas (ex: linha tracejada vs. linha contínua)."
     },
     "auditory": {
-      "alternative": "Legendas para os fragmentos de lenda e sons (ex: '[Som de corda a ser esticada]', '[Voz sussurrando: Princípio]').",
-      "volume_control": "Controle de volume independentemente para o som ambiente e as vozes.",
-      "mute": "Opção para desativar o som, substituindo-o por vibração (se suportado) ou pulso visual."
+      "no_audio": "O murmúrio e os sons ambientais são substituídos por vibrações (haptic) ou por legendas que descrevem o ambiente sonoro (ex: 'Vozes sobrepostas a murmurar'). A voz da lenda é substituída por texto que aparece em tempo real, com entoação sugerida por itálico, negrito ou sublinhado.",
+      "spatial_audio_fallback": "O som spatial é substituído por um volume uniforme, com legendas que indicam a direção (ex: '[voz à esquerda]')."
     },
     "haptic": {
-      "alternative": "Pulso visual (ex: fio brilha) para dispositivos sem suporte háptico."
+      "no_vibration": "As vibrações são substituídas por feedback visual (ex: um círculo que pulsa ao redor do cursor/dedo)."
     },
     "kinesthetic": {
-      "alternative": [
-        "Controles de teclado (setas) para mover um 'cursor virtual' e interagir com os fios.",
-        "Comandos de voz para selecionar fios (ex: 'Tocar fio vermelho').",
-        "Selecção por tabulação para navegar entre os fios."
-      ]
-    },
-    "proprioceptive": {
-      "alternative": "Ajuste automático da escala visual/sonora conforme o tamanho do ecrã, sem exigir movimento físico."
+      "no_movement": "A pessoa pode usar teclas (ex: setas) ou voz (ex: 'esquerda', 'direita') para navegar pelos caminhos. O ritmo do gesto é simulado por um temporizador ajustável (ex: 'lento', 'rápido').",
+      "voice_only": "A pessoa pode pronunciar comandos como 'escolher princípio', 'escolher meio' ou 'escolher fim' para navegar."
     },
     "temporal_interoceptive": {
-      "alternative": "Opção para pular a espera durante a escolha de 'esperar em silêncio', avançando automaticamente para a aparição."
+      "no_waiting": "A opção de esperar 10 segundos pelo acaso é substituída por um botão 'SORTEAR FIM' que ativa o mesmo mecanismo.",
+      "reduced_pressure": "O temporizador de 10 segundos é removido, e a pessoa pode ativar o acaso a qualquer momento com um botão."
     },
-    "cognitive": {
-      "alternative": "Modo simplificado com menos fios e fragmentos de lenda, para reduzir a carga cognitiva."
+    "general": {
+      "screen_reader": "Toda a interação é descrita em texto (ex: 'Tocaste no caminho azul. A voz da lenda está a tornar-se mais aguda.'). Os caminhos e opções são navegáveis via tabulação.",
+      "keyboard_only": "Toda a experiência é controlável via teclado, com atalhos claros (ex: '1' para caminho azul, '2' para vermelho, '3' para branco)."
     }
   },
-  "optional_permissions": {
-    "none_required": true,
-    "description": "A experiência funciona completamente sem permissões de microfone, câmara, movimento ou geolocalização. A interação é baseada em toque/clique, cursor e teclado."
-  },
+  "optional_permissions": [
+    "microphone: para pronunciar palavras e 'inventar outro fim' (alternativa: digitar a palavra).",
+    "geolocation: para associar a lenda a um território próximo da pessoa (alternativa: selecionar manualmente no mapa)."
+  ],
   "overstimulation_risk": {
     "potential_risks": [
-      "Flashing ou movimento rápido dos fios pode causar desconforto visual.",
-      "Som do coral em volume alto pode ser abrupto.",
-      "Vibração contínua (se ativada) pode ser incómoda."
+      "Flashing ou transições visuais rápidas nos caminhos sinuosos.",
+      "Som súbito ou alto no spatial audio.",
+      "Vibrações insistentes em dispositivos hápticos.",
+      "Pressão temporal implícita na espera de 10 segundos."
     ],
     "mitigation": [
-      "Limitar a velocidade de movimento dos fios e desativar animações em modo reduced-motion.",
-      "Volume do som começa baixo e aumenta gradualmente; opção de mute sempre visível.",
-      "Vibração é opcional e limitada a um pulso curto por interação.",
-      "Botão de pausa para congelar a experiência a qualquer momento."
+      "Limitar a velocidade das transições visuais e garantir que não excedem 3 flashes por segundo.",
+      "Manter o volume do som spatial num nível moderado e permitir ajuste manual.",
+      "Limitar a duração e intensidade das vibrações (máximo 1 vibração curta por interação).",
+      "Oferecer a opção de desativar o temporizador de 10 segundos e usar um botão em vez disso.",
+      "Incluir um botão 'PAUSAR' que congela toda a experiência (som, movimento, vibração) e permite à pessoa retomar quando quiser."
     ]
   },
   "distinctiveness": {
     "unique_elements": [
-      "A metáfora do fio que desata e reata como forma de interagir com lendas.",
-      "A tradução cruzada entre gesto (puxar fios), som (coral de vozes) e visual (movimento dos fios).",
-      "O uso do silêncio como ferramenta ativa para revelar novas camadas.",
-      "A devolução de um fragmento de lenda invertido ou uma palavra ('Fim') como rasto tangível.",
-      "A associação entre lendas e topónimos reais, evocando território sem fingir presença física.",
-      "A variação orgânica entre sessões baseada no ritmo e nas escolhas da pessoa."
+      "A lenda não é contada — é *desviada* em tempo real, com a pessoa a alterar o seu percurso narrativo e sensorial.",
+      "A voz da lenda responde ao gesto da pessoa (posição, velocidade, trajectória) em tempo real, criando uma experiência de 'conversa corporal' com a narrativa.",
+      "O uso do silêncio como mecanismo ativo: a ausência de gesto ou voz ativa o acaso e revela camadas ocultas (ex: o mapa territorial).",
+      "A tradução cruzada entre voz (auditory) e textura visual, onde a entoação afeta a aparência do percurso.",
+      "A devolução de um rasto único que pode ser partilhado e reutilizado por outras pessoas, criando uma rede de lendas vivas.",
+      "A associação direta entre a lenda e o território, com o mapa a servir como porta para outras narrativas do mesmo lugar."
     ],
-    "comparison": "Esta experiência não pode ser confundida com outras porque: (1) não é um quiz ou card de lenda; (2) não usa gamificação por pontos; (3) a interação é baseada em gestos orgânicos (tocar, puxar, esperar) em vez de cliques burocráticos; (4) a lenda é tratada como matéria viva e maleável, não como texto fixo; (5) a assinatura sensorial (fios, coral, silêncio) é única."
+    "comparison": "Esta experiência difere de outras como 'Galeria Diletante' (que foca na transformação de uma palavra em imagem) ou 'Fucô' (que foca em conversa e crónicas) por ser centrada na *narrativa não linear* e na *co-criação de lendas* através do gesto e da voz. Também se distingue de 'Escutar o Silêncio' (que explora a ausência de som) por usar o som e a voz como matérias-primas ativas, não como vazio."
   },
   "questions_for_eduardo": [
-    "Os fragmentos de lenda devem ser baseados em lendas reais documentadas ou podem ser criados especificamente para a experiência, desde que não inventem factos etnográficos?",
-    "O mapa territorial final (aparição) deve ser um mapa real de Lisboa ou pode ser uma representação abstrata de território?",
-    "A palavra 'Fim' deve ser sempre a mesma, ou pode variar conforme a lenda (ex: 'Fim', 'Final', 'Desfecho')?",
-    "O convite final ('inventar outro fim') deve ser uma voz gravada ou gerada dinamicamente?",
-    "Deve haver um limite máximo de tempo para a experiência, ou a pessoa pode explorar livremente?"
+    "O corpus de lendas, falares e topónimos está disponível num formato estruturado (ex: JSON ou base de dados) para que o sistema possa selecionar aleatoriamente entre 3 lendas no início da experiência? Se não, como deve ser feito o mapeamento?",
+    "Existem restrições autorais sobre quais lendas podem ser 'desviadas' ou combinadas entre si? Por exemplo, algumas lendas podem ser consideradas 'sagradas' ou imutáveis?",
+    "A associação entre lendas e territórios (freguesias) está explicitamente documentada no corpus, ou deve ser inferida a partir de topónimos ou outras pistas?",
+    "O uso de spatial audio (som 3D) é uma prioridade para esta experiência, ou pode ser substituído por um sistema de som estéreo mais simples sem perder a intenção autoral?",
+    "A frase de devolução (ex: 'A lenda do rio que secou porque [palavra pronunciada]') deve ser guardada como um objeto autónomo no Atlas, ou é apenas um rasto efémero para a pessoa?"
   ],
   "improvement_proposals": [
     {
-      "proposal": "Incluir uma opção para a pessoa gravar a sua própria voz a ler um fragmento de lenda, que depois se integra no coral de vozes (com moderação e consentimento).",
-      "justification": "Aumentaria a sensação de co-criação e conexão com a oralidade, alinhando-se com os princípios de participação e rasto do Atlas."
+      "title": "Integração com COSMICOXES",
+      "description": "Explorar a possibilidade de as lendas desviadas se tornarem 'estrelas' ou 'partículas' no COSMICOXES, onde outras pessoas possam interagir com elas como se fossem constelações narrativas. Isso reforçaria a ideia de um cosmos de lendas interconectadas.",
+      "justification": "A menção a COSMICOXES no corpus sugere que o sistema pode representar relações entre elementos sem pontuar pessoas. Esta integração alinharia com a intenção de criar um 'organismo vivo' de lendas."
     },
     {
-      "proposal": "Adicionar uma camada de 'memória' onde a pessoa pode ver os fios e nós que criou em sessões anteriores (se autorizado).",
-      "justification": "Reforçaria a ideia de rasto e devolução, criando uma narrativa contínua para a pessoa."
+      "title": "Modo 'Lenda Colectiva'",
+      "description": "Adicionar um modo onde várias pessoas (em sessões síncronas ou assíncronas) podem desviar a mesma lenda em conjunto, com as suas escolhas a influenciarem o percurso uns dos outros. Por exemplo, se uma pessoa escolhe um 'fim alternativo', isso pode abrir um novo caminho para outras pessoas que estejam a interagir com a mesma lenda.",
+      "justification": "O corpus enfatiza a 'conversa e encontro intergeracional'. Este modo exploraria a dimensão social da experiência, transformando a lenda num espaço de co-criação colectiva."
     },
     {
-      "proposal": "Integração com o COSMICOXES: os fios que a pessoa cria poderiam tornar-se partículas no cosmos, ligando a experiência a outras curadorias.",
-      "justification": "Criaria uma conexão mais forte entre as experiências do Atlas, alinhando-se com a ideia de constelação e organismo vivo."
+      "title": "Evocação de Memórias Sensoriais",
+      "description": "Incluir um mecanismo onde, ao desviarem uma lenda, as pessoas possam associar memórias sensoriais (ex: 'esta lenda cheira a [cheiro]', 'esta lenda sabe a [sabor]') que são depois evocadas em futuras interações com a mesma lenda. Estas associações seriam opcionais e anónimas.",
+      "justification": "O corpus menciona a evocação de olfacto e paladar como parte da experiência sensorial. Este mecanismo permitiria explorar esses sentidos de forma não intrusiva, alinhando com a regra de que 'olfacto e paladar só podem ser evocados digitalmente'."
+    },
+    {
+      "title": "Integração com 'Palavras que Desapareceram' (FALARTE mecânica 7)",
+      "description": "Permitir que as palavras pronunciadas pela pessoa para 'inventar outro fim' sejam registadas como 'palavras que desapareceram' (se forem gírias ou termos em desuso) e adicionadas a um inventário colectivo. Estas palavras poderiam depois ser usadas como 'princípios' ou 'fins' em futuras interações.",
+      "justification": "O corpus menciona a mecânica 7 do FALARTE ('Palavras que desapareceram') como parte da recolha territorial. Esta integração criaria uma ponte entre as lendas e o corpus de palavras em risco de desaparecimento."
     }
   ],
   "generic_fallback_allowed": false,

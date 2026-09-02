@@ -4,391 +4,460 @@
   "source_evidence": {
     "primary": [
       {
-        "id": "catalog_entry",
-        "type": "curatorial_catalog",
-        "quote": "Constrói uma divisão com três palavras."
+        "source": "Cópia de Fica registado neste dossiê…",
+        "quote": "A casa aparece a partir de ausências, sons, palavras, memórias e portas impossíveis. Algumas divisões só existem se a pessoa deixar de olhar directamente para elas; outras surgem por voz, silêncio ou espera.",
+        "authority": "autoral_direct"
       },
       {
-        "id": "constitution_11_examples",
-        "type": "constitutional_example",
-        "quote": "A casa aparece a partir de ausências, sons, palavras, memórias e portas impossíveis. Algumas divisões só existem se a pessoa deixar de olhar directamente para elas; outras surgem por voz, silêncio ou espera."
+        "source": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
+        "quote": "Princípios CARE, dissidência, anticolonialidade, intergeracionalidade e feminismo de dados; 16 seres folclóricos; 5 núcleos/dispositivos nomeados; jogos tradicionais, trava-línguas e adivinhas.",
+        "authority": "conceptual"
       }
     ],
     "secondary": [
       {
-        "id": "corpus_anchors",
-        "type": "authorial_anchor",
-        "quote": "O rastro desejado: memória, lembrança, história, receita, piada, rua, bairro, lugar desaparecido, brincadeira, palavra, som, gesto, folclore, fábula."
+        "source": "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md",
+        "quote": "O vazio preserva o que não deve ser fechado; o erro é entrada; o riso é método; o silêncio é matéria.",
+        "authority": "interpretative"
       }
     ]
   },
   "authorial_invariants": [
-    "A casa é construída a partir de ausências, sons, palavras e memórias.",
-    "Algumas divisões só existem se a pessoa não olhar diretamente para elas (periferia visual ou desvio de atenção).",
-    "Outras divisões surgem por voz, silêncio ou espera.",
-    "O convite inicial é: 'Constrói uma divisão com três palavras.'",
-    "A experiência deve preservar a ideia de 'portas impossíveis' e 'memória territorial'."
+    "A casa é construída por ausências, sons, palavras e memórias, não por estruturas físicas.",
+    "Divisões surgem ou desaparecem conforme a atenção da pessoa (ex.: não olhar directamente para elas).",
+    "Portas impossíveis, sons territoriais e palavras são matérias-primas da construção.",
+    "A experiência convida a 'habitar' uma divisão com três palavras (convite original do catálogo).",
+    "A casa não é um modelo 3D estático; é um organismo vivo que responde à presença.",
+    "Silêncio e espera são mecanismos ativos de aparição/disparição."
   ],
-  "perceptual_intent": "Criar a ilusão de habitar um espaço que não existe fisicamente, mas que se materializa através de gestos, sons, palavras e memórias. A pessoa deve sentir que a casa respira, se esconde e se revela conforme a sua presença e atenção, como se fosse um organismo vivo feito de ausências e eco.",
+  "perceptual_intent": "Criar a sensação de habitar um espaço que existe apenas na intersecção entre memória, linguagem e atenção. A pessoa deve sentir que a casa respira, se esconde e se revela conforme o seu gesto, voz ou silêncio, como se o ato de nomear (ou calar) fosse literalmente construir paredes, portas e janelas. A experiência evoca a materialidade de um lugar através da sua ausência física, usando o corpo como mediador entre o visível e o invisível.",
   "threshold": {
-    "description": "A tela começa em branco, com um murmúrio quase inaudível (som de vento ou respiração) e um ponto de luz fraca no centro, como uma vela a tremular. O cursor, ao aproximar-se, faz o ponto de luz expandir-se em círculos concêntricos que revelam, por segundos, o contorno de uma porta entreaberta. O som aumenta levemente em volume, como se a porta estivesse a ser aberta por uma corrente de ar.",
+    "description": "A pessoa entra num espaço vazio, escuro e silencioso, onde apenas um ponto de luz fraca (como uma vela ou uma fresta) pisca intermitentemente. O cursor/dedo, ao aproximar-se, revela uma sombra de porta semi-aberta, mas esta desaparece se a pessoa tentar focá-la directamente (paralaxe forçada). Um som subliminar de vento ou passos distantes (paisagem sonora territorial) sugere movimento onde não há nada visível.",
     "sensory_trigger": [
-      "visual_flicker",
-      "auditory_whisper",
-      "kinesthetic_cursor_proximity"
+      "visual_parallax",
+      "auditory_ambient",
+      "spatial_emptiness"
     ]
   },
-  "dramaturgical_arc": [
-    {
-      "stage": 1,
-      "name": "LIMIAR",
-      "description": "A tela em branco e o murmúrio criam uma expectativa de que algo está prestes a acontecer. O ponto de luz e o som sugerem uma porta para outro lugar."
+  "dramaturgical_arc": {
+    "1_limiar": {
+      "action": "Espaço vazio com luz trémula e sombra de porta que foge ao foco.",
+      "sensory_focus": [
+        "visual_minimal",
+        "auditory_subtle",
+        "spatial_disorientation"
+      ]
     },
-    {
-      "stage": 2,
-      "name": "CHAMADA",
-      "description": "Aparece, em tipografia manual e trémula, o convite: 'Constrói uma divisão com três palavras.' As palavras surgem uma a uma, como se estivessem a ser escritas por uma mão invisível. O som do murmúrio transforma-se em risos distantes ou passos num corredor."
+    "2_chamada": {
+      "action": "Aparece o convite: *Constrói uma divisão com três palavras.* (texto em tipografia orgânica, como se escrito à mão, que se desvanece lentamente).",
+      "sensory_focus": [
+        "visual_typography",
+        "temporal_urgency"
+      ]
     },
-    {
-      "stage": 3,
-      "name": "PRIMEIRO GESTO",
-      "description": "A pessoa digita ou diz (opcional) três palavras. Cada palavra, ao ser introduzida, faz com que o ambiente reaja: a luz treme, o som distorce-se levemente, e o contorno de uma parede ou objeto aparece e desaparece como um flash."
+    "3_primeiro_gesto": {
+      "action": "A pessoa digita ou diz (opcional) três palavras. Cada palavra, ao ser introduzida, faz a sombra da porta tremer e emitir um som único (ex.: a palavra *cozinha* soa como panelas, *quarto* como respiração, *sala* como risos distantes).",
+      "sensory_focus": [
+        "auditory_feedback",
+        "visual_movement",
+        "kinesthetic_input"
+      ]
     },
-    {
-      "stage": 4,
-      "name": "RESPOSTA VIVA",
-      "description": "As três palavras são repetidas em voz sussurrada (ou como texto que se move como se fosse falado) e, em seguida, uma divisão da casa 'nasce': uma porta, uma janela, um sofá ou uma escada. A divisão é representada por um esboço a lápis que se desenha em tempo real, como se uma mão invisível estivesse a criar o espaço. O som ambiente muda para o de um interior (ex.: crepitar de lenha, tique-taque de relógio)."
+    "4_resposta_viva": {
+      "action": "As três palavras materializam-se como divisões da casa: uma porta abre-se para um espaço que *parece* correspondente à palavra (ex.: *cozinha* tem luz amarela e som de água a ferver), mas a divisões são *abstratas* — não há objectos, apenas texturas, sons e luz que sugerem a função. A casa *respira*: as paredes expandem-se e contraem-se levemente ao ritmo da respiração percebida (ou de um pulso sonoro opcional).",
+      "sensory_focus": [
+        "visual_abstraction",
+        "auditory_spatial",
+        "temporal_pulse"
+      ]
     },
-    {
-      "stage": 5,
-      "name": "DESVIO",
-      "description": "A pessoa repara que, se olhar diretamente para uma parede ou porta, esta desaparece ou se torna transparente. A divisão só 'existe' na periferia da visão ou quando a pessoa fecha os olhos por um instante. O som também muda: se a pessoa se aproximar do centro da tela, o som fica mais agudo; se se afastar, fica mais grave."
+    "5_desvio": {
+      "action": "Se a pessoa tentar entrar numa divisão *olhando directamente* para a porta, esta fecha-se. Se desviar o olhar (ou o cursor/dedo), a porta abre-se. Algumas divisões só existem se a pessoa *fechar os olhos* (ou tapar o ecrã) por 3 segundos — ao reabrir, a divisão está lá, mas desaparece se a pessoa piscar ou mover o cursor.",
+      "sensory_focus": [
+        "visual_parallax",
+        "proprioceptive_attention",
+        "temporal_suspension"
+      ]
     },
-    {
-      "stage": 6,
-      "name": "APROFUNDAMENTO SENSORIAL",
-      "description": "As divisões começam a interagir entre si: o som de uma porta a ranger na 'sala' afeta a luz na 'cozinha'. Se a pessoa clicar ou tocar em dois pontos da tela simultaneamente, uma 'ponte' sonora ou visual é criada entre eles (ex.: um fio de luz ou um eco que viaja de um lado para o outro)."
+    "6_aprofundamento_sensorial": {
+      "action": "As divisões começam a *contaminar-se*: o som da *cozinha* mistura-se com o cheiro evocado de pão (descrição textual ou som de forno), a luz da *sala* projecta sombras de móveis que não estão lá, e as palavras ditas inicialmente aparecem como *texturas* nas paredes (ex.: a palavra *quarto* vira um padrão de tecido nas cortinas imaginárias). O cursor/dedo, ao tocar uma parede, faz o som da divisão *ressoar* no corpo (vibração háptica opcional ou pulso visual).",
+      "sensory_focus": [
+        "auditory_olfactory_evocation",
+        "visual_tactile_evocation",
+        "haptic_feedback"
+      ]
     },
-    {
-      "stage": 7,
-      "name": "ESCOLHA / ACASO / SILÊNCIO",
-      "description": "A pessoa pode: (a) esperar em silêncio, (b) repetir as três palavras, (c) introduzir novas palavras, ou (d) 'fechar os olhos' (clicando num botão ou pressionando uma tecla). Cada opção faz com que a casa reaja de forma diferente: o silêncio faz crescer musgo nas paredes; repetir as palavras faz surgir uma nova divisão; novas palavras podem 'apagar' uma divisão existente; fechar os olhos revela uma divisão escondida."
+    "7_escolha_acaso_silencio": {
+      "action": "A pessoa pode: (a) *escolher* uma divisão para explorar (clicando ou com voz), (b) *deixar o silêncio* guiá-la (a casa escolhe uma divisão aleatória que *pulsar* em volume sonoro), ou (c) *esperar* — após 10 segundos de inactividade, uma porta que não existia aparece (ex.: uma porta de *sótão* ou *porão*).",
+      "sensory_focus": [
+        "auditory_choice",
+        "temporal_patience",
+        "spatial_discovery"
+      ]
     },
-    {
-      "stage": 8,
-      "name": "APARIÇÃO",
-      "description": "De repente, uma porta que não estava lá antes aparece no centro da tela. Ao aproximar-se, a pessoa ouve vozes sussurradas ou risos (sons gravados de contribuições públicas anteriores, anónimas e moderadas). A porta abre-se para revelar um 'quarto das memórias': um espaço onde objetos, sons e palavras de outras pessoas (ou da própria, se já contribuiu antes) flutuam como constelações."
+    "8_aparição": {
+      "action": "Na divisão escolhida, *algo* emerge: uma *memória territorial* (ex.: som de uma festa de bairro gravado em 1985, se a palavra for *rua*), um *objecto simbólico* (ex.: uma chave que não abre nada, se a palavra for *porta*), ou uma *frase* escrita na parede (ex.: *Aqui cabiam todos os segredos*, se a palavra for *armário*). A aparição é *efémera*: desaparece se a pessoa tentar interagir directamente (clicar, tocar) ou após 15 segundos.",
+      "sensory_focus": [
+        "visual_ephemeral",
+        "auditory_memory",
+        "social_presence_evocation"
+      ]
     },
-    {
-      "stage": 9,
-      "name": "DEVOLUÇÃO",
-      "description": "A casa 'devolve' algo à pessoa: uma frase gerada a partir das suas três palavras (ex.: 'A tua sala tem o cheiro a chá de laranja e o som de uma avó a contar histórias.'), um esboço da divisão que criou (para guardar ou partilhar), ou um som único que combina os sons das divisões que explorou. A devolução é sempre efémera: desaparece após 30 segundos ou quando a pessoa sair da experiência."
+    "9_devolução": {
+      "action": "A pessoa recebe de volta as três palavras originais, *transformadas*: (a) uma das palavras ganha um *prefixo ou sufixo* territorial (ex.: *cozinha* → *cozinha-da-avó-Maria*), (b) uma palavra vira um *som* (ex.: *quarto* → som de um berço a balançar), e (c) uma palavra vira uma *imagem abstrata* (ex.: *sala* → uma mancha de luz com a forma de uma cadeira). Estas transformações são *únicas por sessão* e podem ser guardadas como *rasto* (opcional).",
+      "sensory_focus": [
+        "visual_transformation",
+        "auditory_devolution",
+        "linguistic_poetry"
+      ]
     },
-    {
-      "stage": 10,
-      "name": "RASTO / LATÊNCIA",
-      "description": "A casa 'lembra-se' das palavras e divisões criadas. Se a pessoa regressar mais tarde, pode encontrar as suas divisões ainda lá, mas alteradas: as paredes podem ter crescido musgo, os sons podem estar distorcidos, ou uma nova porta pode ter surgido. As contribuições públicas (anónimas) também podem aparecer como 'fantasmas' na casa: sons, palavras ou objetos que flutuam e desaparecem."
+    "10_rasto_latencia": {
+      "action": "As palavras transformadas ficam *suspensas* no ar como partículas de luz ou som (ex.: eco das palavras ditas). Se a pessoa regressar à experiência, as partículas podem: (a) *reaparecer* na mesma posição, (b) *misturar-se* com novas palavras de outras sessões (anónimas), ou (c) *dissolver-se* lentamente em silêncio. A casa *lembra-se* das divisões criadas, mas estas só voltam a aparecer se a pessoa usar as *mesmas três palavras* na próxima sessão.",
+      "sensory_focus": [
+        "visual_particles",
+        "auditory_echo",
+        "temporal_latency"
+      ]
     }
-  ],
+  },
   "participant_verbs": [
-    "escrever",
-    "esperar",
-    "olhar de lado",
-    "tocar",
+    "desviar o olhar",
+    "esperar em silêncio",
+    "dizer uma palavra",
+    "tocar uma sombra",
     "fechar os olhos",
-    "sussurrar",
-    "explorar"
+    "escolher uma porta",
+    "deixar-se guiar"
   ],
-  "system_responses": [
-    {
-      "trigger": "digitar ou dizer três palavras",
-      "response": "As palavras são repetidas em voz ou movimento, e uma divisão da casa é desenhada em tempo real. O ambiente sonoro muda para refletir o interior de uma casa."
-    },
-    {
-      "trigger": "olhar diretamente para uma parede/porta",
-      "response": "A parede/porta desaparece ou torna-se transparente. O som associado a essa divisão diminui ou distorce-se."
-    },
-    {
-      "trigger": "fechar os olhos (clicar num botão ou tecla)",
-      "response": "Uma divisão escondida é revelada. O som ambiente transforma-se em um coro de sussurros ou memórias."
-    },
-    {
-      "trigger": "tocar em dois pontos da tela simultaneamente",
-      "response": "Uma 'ponte' visual ou sonora é criada entre os dois pontos (ex.: fio de luz, eco)."
-    },
-    {
-      "trigger": "esperar em silêncio por 10 segundos",
-      "response": "Musgo ou pátina começam a crescer nas paredes. Novos sons subtis (ex.: gotas de água) são adicionados ao ambiente."
-    },
-    {
-      "trigger": "repetir as três palavras originais",
-      "response": "Uma nova divisão é adicionada à casa, conectada às palavras. O som da nova divisão mistura-se com os anteriores."
-    },
-    {
-      "trigger": "introduzir novas palavras",
-      "response": "Uma divisão existente pode ser apagada ou transformada. O ambiente sonoro adapta-se às novas palavras."
-    }
-  ],
-  "sensory_signature_id": "casa-nao-existia_ausencia_presenca",
+  "system_responses": {
+    "to_desviar_olhar": "Portas e divisões aparecem ou desaparecem conforme a atenção indirecta.",
+    "to_esperar_silencio": "A casa *respira* (pulsação visual/sonora) e pode revelar divisões ocultas.",
+    "to_dizer_palavra": "Cada palavra materializa uma divisão abstrata com som, luz e textura únicos.",
+    "to_tocar_sombra": "Sons territoriais (ex.: passos, vento) respondem ao toque, como se a sombra fosse sólida.",
+    "to_fechar_olhos": "Divisões *invisíveis* aparecem temporariamente (ex.: sótão, porão).",
+    "to_escolher_porta": "A divisão seleccionada *expande-se* em detalhes sensoriais (som, luz, textura).",
+    "to_deixar_guiar": "A casa escolhe uma divisão aleatória que *pulsar* em volume sonoro ou luz."
+  },
+  "sensory_signature_id": "casa_nao_existia_018",
   "sensory_channels": {
     "visual": {
       "elements": [
-        "luz tremula (vela)",
-        "contornos de divisões a lápis (desenho em tempo real)",
-        "portas/janelas que aparecem e desaparecem",
-        "musgo/pátina que cresce com o tempo",
-        "esboços de objetos flutuantes",
-        "transparência/opacidade dinâmica",
-        "periferia visual como espaço de revelação"
+        "luz trémula (vela/fresta)",
+        "sombras de portas e divisões abstratas",
+        "texturas dinâmicas (ex.: tecido, madeira, azulejo)",
+        "partículas de luz (palavras transformadas)",
+        "tipografia orgânica (como escrita à mão)",
+        "movimento de paredes (respiração)",
+        "desfoque/paralaxe forçada"
       ],
-      "dynamics": [
-        "desenho progressivo",
-        "aparição/desaparição",
-        "transição de cores (quente/frio)",
-        "profundidade variável"
-      ]
+      "purpose": "Criar a ilusão de um espaço físico sem objectos concretos, usando luz, sombra e movimento para sugerir materialidade."
     },
     "auditory": {
       "elements": [
-        "murmúrio inicial (vento/respiração)",
-        "passos ou risos distantes",
-        "sons de interior (crepitar de lenha, tique-taque de relógio)",
-        "portas a ranger",
-        "vozes sussurradas (contribuições públicas anónimas)",
-        "eco ou distorção sonora baseada na posição do cursor",
-        "silêncio como matéria (ausência de som que 'fala')"
+        "paisagem sonora territorial (vento, passos, risos distantes)",
+        "sons abstratos por palavra (ex.: cozinha = panelas, quarto = respiração)",
+        "eco das palavras ditas",
+        "pulso sonoro (respiração da casa)",
+        "som de objectos simbólicos (ex.: chave, berço)",
+        "silêncio ativo (ausência de som como matéria)"
       ],
-      "dynamics": [
-        "espacialização (esquerda/direita, frente/atrás)",
-        "variação de volume com proximidade",
-        "sobreposição de camadas sonoras"
-      ]
+      "purpose": "Evocar a materialidade da casa através do som, usando memórias auditivas territoriais e abstratas."
     },
     "haptic": {
       "elements": [
-        "vibração sutil em dispositivos compatíveis (ex.: ao tocar uma porta)"
+        "vibração opcional (resposta ao toque em paredes/sombras)",
+        "feedback táctil do cursor/dedo (ex.: resistência ao arrastar uma sombra)"
       ],
-      "dynamics": [
-        "feedback táctil opcional"
-      ]
+      "purpose": "Reforçar a sensação de interacção física com elementos abstratos, sem dependência obrigatória."
     },
     "kinesthetic": {
       "elements": [
-        "movimento do cursor/dedo afeta luz e som",
-        "gestos de toque (clique, arrasto, toque duplo)",
-        "velocidade do gesto altera a intensidade da resposta"
+        "movimento do cursor/dedo (trajectória afecta a aparição de divisões)",
+        "velocidade de digitação (afecta o volume/ritmo dos sons)",
+        "gestos opcionais (ex.: fechar os olhos, desviar o olhar)"
       ],
-      "dynamics": [
-        "resposta à trajetória",
-        "pressão aproximada (se suportado)"
-      ]
+      "purpose": "Conectar o corpo da pessoa à construção da casa, usando movimento e ritmo como inputs."
     },
     "proprioceptive": {
       "elements": [
-        "instrução para fechar os olhos ou olhar de lado",
-        "sensação de equilíbrio alterada por sons espaciais",
-        "ritmo da respiração sugerido pelo ambiente sonoro"
+        "instruções de atenção (ex.: *não olhes directamente*, *fechar os olhos*)",
+        "respiração percebida (pulso visual/sonoro sincronizado)",
+        "postura sugerida (ex.: *inclina-te para a frente para ver melhor*)"
       ],
-      "dynamics": [
-        "atenção corporal convocada sem movimento obrigatório"
-      ]
+      "purpose": "Convocar a atenção corporal sem exigir movimento físico, usando sugestões e feedback sensorial."
     },
     "temporal_interoceptive": {
       "elements": [
-        "espera como parte da experiência",
-        "ritmo de aparição/desaparição das divisões",
-        "aceleração/desaceleração do desenho das divisões"
+        "espera (10 segundos de inactividade revelam divisões ocultas)",
+        "ritmo (pulsação da casa sincronizada com respiração percebida)",
+        "latência (partículas de palavras transformadas persistem entre sessões)"
       ],
-      "dynamics": [
-        "pulso temporal",
-        "suspensão"
-      ]
+      "purpose": "Criar uma experiência de tempo não linear, onde a paciência e o ritmo são parte da mecânica."
     },
     "spatial": {
       "elements": [
-        "profundidade sugerida pelo desenho das divisões",
-        "posicionamento relativo dos objetos na casa",
-        "espaço 'fora do ecrã' (ex.: sons que vêm de trás da tela)"
+        "profundidade (sombras e luz criam ilusão de 3D)",
+        "orientação (portas aparecem em posições relativas ao cursor/olhar)",
+        "escala (divisões expandem-se ou contraem-se)"
       ],
-      "dynamics": [
-        "navegação espacial implícita"
-      ]
+      "purpose": "Simular um espaço imersivo sem recorrer a 3D explícita, usando sombras, luz e som."
     },
     "olfactory_evocation": {
       "elements": [
-        "descrições textuais ou sonoras de cheiros (ex.: 'cheiro a chá de laranja', 'madeira velha')",
-        "memória olfativa convocada por palavras ou sons"
+        "descrições textuais de cheiros (ex.: *pão quente*, *madeira velha*)",
+        "sons associados a memórias olfativas (ex.: forno, chuva em telhado)"
       ],
-      "dynamics": [
-        "evocação por associação"
-      ]
+      "purpose": "Evocar cheiros territoriais ou domésticos sem fingir output físico."
     },
     "gustatory_evocation": {
       "elements": [
-        "descrições de sabores (ex.: 'gosto a pão quente', 'doce de amêndoa')",
-        "memória gustativa convocada por palavras ou sons"
+        "palavras associadas a sabores (ex.: *doce*, *azedo*)",
+        "sons de preparação de comida (ex.: ferver, fritar)"
       ],
-      "dynamics": [
-        "evocação por associação"
-      ]
+      "purpose": "Evocar sabores através de linguagem e som, sem fingir output físico."
     },
     "social_presence": {
       "elements": [
-        "vozes sussurradas de outras pessoas (contribuições públicas anónimas e moderadas)",
-        "objetos ou palavras flutuantes de outras sessões",
-        "sensação de uma casa 'habitada' por memórias"
+        "memórias territoriais (ex.: som de festa de bairro)",
+        "frases anónimas de outras sessões (opcional, com consentimento)",
+        "objectos simbólicos (ex.: chave, berço) que sugerem presença humana passada"
       ],
-      "dynamics": [
-        "presença indireta e não intrusiva"
-      ]
+      "purpose": "Evocar a presença de outras pessoas ou memórias sem expor dados pessoais."
     }
   },
   "cross_sensory_translation": {
     "primary": {
-      "from": "palavra",
-      "to": "espaço visual + som",
-      "description": "As três palavras introduzidas pela pessoa traduzem-se em uma divisão da casa (visual) e em um ambiente sonoro único. Por exemplo, a palavra 'cozinha' pode fazer surgir uma cozinha desenhada a lápis e o som de panelas a bater."
+      "from": "linguagem (palavras ditas/digitadas)",
+      "to": [
+        "espaço (divisões abstratas)",
+        "som (paisagem sonora única por palavra)",
+        "textura (palavras como padrões visuais)"
+      ],
+      "mechanism": "Cada palavra introduzida pela pessoa *materializa-se* em uma divisão da casa com características sensoriais únicas (luz, som, textura), como se a linguagem fosse literalmente a matéria-prima da construção."
     },
     "secondary": {
-      "from": "movimento do cursor",
-      "to": "som + transparência visual",
-      "description": "O movimento do cursor altera o volume e o timbre do som ambiente, bem como a opacidade das paredes. Se o cursor se move rapidamente, o som fica mais agudo e as paredes tornam-se mais transparentes."
+      "from": "silêncio/atenção (olhar indirecto, fechar os olhos)",
+      "to": [
+        "espaço (aparição de divisões ocultas)",
+        "som (pulso ou eco)"
+      ],
+      "mechanism": "A ausência de gesto ou atenção directa *revela* divisões ou sons que não estão acessíveis de outra forma, traduzindo o silêncio em matéria visível/audível."
     }
   },
   "silence_or_absence": {
-    "mechanism": "O silêncio é um gesto ativo. Esperar em silêncio faz crescer musgo nas paredes e adiciona camadas sonoras subtis (ex.: gotas de água). Além disso, algumas divisões só existem quando a pessoa não olha diretamente para elas, explorando a ausência de foco visual.",
-    "purpose": "Criar a sensação de que a casa respira e se transforma na ausência de ação direta. O silêncio e a não-atenção são tão importantes quanto a interação ativa."
+    "mechanism": [
+      "Silêncio ativo: a ausência de som é usada como *matéria* (ex.: uma divisão *sala* pode ter um momento de silêncio absoluto que revela uma frase escrita na parede).",
+      "Ausência visual: divisões ou portas desaparecem se olhadas directamente, usando o *vazio* como mecanismo de aparição.",
+      "Espera: 10 segundos de inactividade revelam divisões ou objectos ocultos, usando o *tempo* como matéria sensorial."
+    ],
+    "purpose": "O silêncio e a ausência não são vazio, mas *ferramentas ativas* de construção e revelação da casa."
   },
   "surprise_or_indeterminacy": {
-    "mechanism": [
+    "mechanisms": [
       {
         "type": "acaso controlado",
-        "description": "A porta que aparece no 'quarto das memórias' pode levar a uma divisão aleatória de contribuições públicas (anónimas e moderadas)."
+        "description": "A casa escolhe uma divisão aleatória se a pessoa optar por *deixar-se guiar* (pulso sonoro ou luz)."
       },
       {
-        "type": "resposta a ritmo",
-        "description": "Se a pessoa introduzir as palavras rapidamente, a casa reage com mais energia (sons mais altos, divisões a surgir mais rápido). Se introduzir devagar, a casa reage de forma mais subtil."
+        "type": "resposta ao ritmo",
+        "description": "A velocidade de digitação das palavras afecta o volume e ritmo dos sons associados (ex.: digitar rápido = sons agudos e rápidos; devagar = sons graves e lentos)."
       },
       {
-        "type": "posição do cursor",
-        "description": "A posição do cursor afeta qual divisão da casa é revelada na periferia visual."
+        "type": "posição/trajectória",
+        "description": "A trajectória do cursor/dedo afecta a posição e forma das divisões (ex.: movimento circular = divisões em espiral; movimento linear = divisões alinhadas)."
       },
       {
-        "type": "memória latente",
-        "description": "Se a pessoa regressar à experiência, pode encontrar as suas divisões anteriores alteradas (ex.: com musgo, sons distorcidos)."
+        "type": "memória territorial",
+        "description": "Sons ou objectos simbólicos aparecem com base em *dados territoriais* (ex.: se a palavra for *rua*, pode aparecer o som de uma festa de bairro real da freguesia associada à sessão)."
+      },
+      {
+        "type": "combinação de fragmentos",
+        "description": "As palavras transformadas na devolução podem combinar-se com palavras de outras sessões (anónimas) para criar novas divisões ou objectos."
       }
     ]
   },
   "session_variation": [
     {
-      "type": "ordem das divisões",
-      "description": "A ordem em que as divisões aparecem varia entre sessões, baseada nas palavras introduzidas e no tempo gasto em cada divisão."
+      "type": "ordem_mutável",
+      "description": "A ordem de aparição das divisões (baseadas nas três palavras) muda entre sessões, mesmo com as mesmas palavras."
     },
     {
-      "type": "ambiente sonoro",
-      "description": "O ambiente sonoro inicial (murmúrio, passos, risos) varia aleatoriamente entre um conjunto de sons pré-definidos (ex.: vento, chuva, vozes distantes)."
+      "type": "resposta_a_ritmo",
+      "description": "O volume e ritmo dos sons associados às palavras variam conforme a velocidade de digitação ou movimento do cursor."
     },
     {
-      "type": "resposta a ritmo",
-      "description": "A velocidade com que a pessoa introduz as palavras afeta a intensidade da resposta visual e sonora."
+      "type": "acaso_territorial",
+      "description": "Sons ou objectos simbólicos associados às palavras podem variar conforme a *freguesia* ou *território* sugerido pela sessão (ex.: *cozinha* em Alcântara soa diferente de *cozinha* no Chiado)."
     },
     {
-      "type": "contribuições públicas",
-      "description": "As vozes e objetos no 'quarto das memórias' variam com base em contribuições públicas recentes (anónimas e moderadas)."
+      "type": "memória_latente",
+      "description": "Palavras transformadas de sessões anteriores (anónimas) podem reaparecer como partículas ou sombras em novas sessões."
     },
     {
-      "type": "temporalidade",
-      "description": "Se a pessoa regressar à experiência em alturas diferentes do dia, a luz e os sons da casa podem refletir essa temporalidade (ex.: mais escuro e silencioso à noite)."
+      "type": "temporalidade_real",
+      "description": "A intensidade da luz ou som pode variar conforme a hora do dia (ex.: mais escuro à noite, mais claro de manhã)."
     }
   ],
   "territorial_binding": {
-    "relation": "A casa é um espaço de memória territorial. As divisões e objetos que aparecem podem ser inspirados em lugares reais (ex.: uma cozinha com sons de um mercado de Lisboa, uma sala com o cheiro a 'pão de Alfama'). No entanto, a experiência não depende de geolocalização ou de dados territoriais específicos.",
-    "evocation": "A evocação territorial é feita através de sons, palavras e memórias que remetem para lugares, sem nunca fingir uma localização física real."
+    "mechanism": "A experiência pode *evocar* territórios reais através de: (a) sons territoriais (ex.: festa de bairro, mercado), (b) objectos simbólicos (ex.: chave, berço) associados a memórias locais, ou (c) palavras que ganham prefixos/sufixos territoriais (ex.: *cozinha-da-avó-Maria*).",
+    "source": "Memórias e sons são *evocados* a partir do corpus territorial do Atlas (ex.: festas, topónimos, ofícios), mas não exigem geolocalização ou dados pessoais.",
+    "constraint": "A relação territorial é *sugerida*, não imposta. A pessoa pode ignorá-la e a experiência mantém-se coerente."
   },
   "trace_and_return": {
     "trace": {
-      "personal": "As três palavras e as divisões criadas pela pessoa são guardadas (localmente, sem envio para servidores) e podem ser recuperadas em sessões futuras. As divisões podem aparecer alteradas (ex.: com musgo, sons distorcidos).",
-      "collective": "Contribuições públicas anónimas (palavras, sons, objetos) podem aparecer como 'fantasmas' na casa de outras pessoas, sob a forma de vozes sussurradas ou objetos flutuantes."
+      "types": [
+        {
+          "type": "palavras_transformadas",
+          "description": "As três palavras originais são devolvidas transformadas (ex.: prefixo territorial, som, imagem abstrata)."
+        },
+        {
+          "type": "partículas_sensoriais",
+          "description": "Palavras ou sons transformados ficam suspensos como partículas de luz ou eco entre sessões."
+        },
+        {
+          "type": "memória_da_casa",
+          "description": "A casa *lembra-se* das divisões criadas em sessões anteriores, que podem reaparecer se as mesmas palavras forem usadas."
+        }
+      ],
+      "persistence": "O rasto é *efémero* (desaparece após 24 horas ou na próxima sessão) ou *latente* (pode reaparecer em sessões futuras com as mesmas palavras)."
     },
     "return": {
-      "immediate": "A pessoa recebe uma frase gerada a partir das suas palavras ou um esboço da divisão que criou (para guardar ou partilhar).",
-      "latent": "A casa 'lembra-se' das divisões criadas, que podem regressar em sessões futuras, alteradas pelo tempo."
+      "to_participant": "A pessoa recebe as palavras transformadas como *devolução poética* (ex.: uma palavra vira som, outra vira imagem, outra ganha um prefixo territorial).",
+      "to_system": "As palavras e divisões criadas alimentam a *memória da casa*, que pode ser usada em sessões futuras (anónimas)."
     }
   },
   "accessibility_equivalents": {
     "visual": {
-      "reduced_motion": "As divisões são desenhadas com transições suaves ou estáticas. O musgo e a pátina aparecem de forma gradual e não intrusiva.",
-      "high_contrast": "Contornos das divisões e objetos são reforçados para maior visibilidade.",
-      "color_blind": "As divisões usam padrões e texturas, além de cores, para diferenciação."
+      "for_blind": {
+        "description": "Todas as divisões e objectos são descritos em *áudio* (ex.: *Uma porta de madeira escura com luz amarela a vazar por baixo. Ao aproximares-te, ouvem-se panelas a bater.*). As partículas de luz são substituídas por *sons* (ex.: eco das palavras ditas).",
+        "preserves_poetry": "As descrições são *poéticas* e *sensoriais*, não clínicas (ex.: *A parede respira como um peito a dormir* em vez de *A parede move-se*)."
+      },
+      "for_low_vision": {
+        "description": "Contraste ajustável, tipografia aumentada, e opção para *desativar* efeitos de luz/sombra (substituídos por contornos sólidos)."
+      },
+      "reduced_motion": {
+        "description": "Movimentos de paredes e sombras são substituídos por *transições estáticas* (ex.: divisões aparecem/desaparecem instantaneamente, sem animação)."
+      }
     },
     "auditory": {
-      "subtitles": "Todas as vozes sussurradas e sons ambientais têm legendas opcionais.",
-      "visual_feedback": "Sons importantes (ex.: porta a ranger) são acompanhados por um ícone ou animação visual (ex.: uma porta a tremer)."
+      "for_deaf": {
+        "description": "Todos os sons são *transcritos* em texto (ex.: *Som de panelas a bater, como se estivesses numa cozinha de 1950*) e *visualizados* como ondas ou vibrações (ex.: barras de som que pulsam com a intensidade).",
+        "preserves_poetry": "As transcrições são *evocativas* (ex.: *O som da rua é um murmúrio de vozes que se misturam com o vento* em vez de *Ruído de fundo*)."
+      },
+      "for_hard_of_hearing": {
+        "description": "Volume ajustável e opção para *aumentar* a visualização de sons (ex.: ondas mais altas, cores mais intensas)."
+      }
     },
     "haptic": {
-      "visual_feedback": "Qualquer vibração é acompanhada por um pulso visual (ex.: um círculo a expandir-se no ponto de toque)."
+      "for_no_touch": {
+        "description": "Vibrações são substituídas por *feedback visual* (ex.: pulso de luz) ou *sonoro* (ex.: som de *clique* ou *respiração*)."
+      }
     },
     "kinesthetic": {
-      "keyboard": "Todas as interações com o cursor/dedo podem ser feitas com teclado (ex.: setas para mover, Enter para selecionar).",
-      "voice": "As três palavras podem ser ditas em voz alta (opcional, com permissão de microfone)."
+      "for_no_movement": {
+        "description": "Todos os gestos (ex.: desviar o olhar, fechar os olhos) têm equivalentes em *teclado* (ex.: tecla *Espaço* = fechar os olhos; tecla *Setas* = desviar o olhar) ou *voz* (ex.: *desvia* = desviar o olhar)."
+      }
     },
     "proprioceptive": {
-      "static_mode": "A instrução para 'fechar os olhos' ou 'olhar de lado' pode ser substituída por um botão ou tecla (ex.: barra de espaço para 'fechar os olhos')."
+      "for_no_attention_control": {
+        "description": "Instruções de atenção (ex.: *não olhes directamente*) são opcionais e podem ser ignoradas sem perder a experiência. Alternativas: *clicar num botão* para revelar divisões ocultas."
+      }
     },
     "temporal": {
-      "no_time_pressure": "A pessoa pode desativar o desaparecimento automático da devolução (ex.: a frase ou esboço permanecem visíveis até a pessoa decidir sair)."
+      "for_no_patience": {
+        "description": "A opção de *esperar* é substituída por um *botão* ou *comando de voz* (ex.: *revela*) que revela divisões ocultas instantaneamente."
+      }
     }
   },
-  "optional_permissions": [
-    {
-      "type": "microphone",
-      "purpose": "Permitir que a pessoa diga as três palavras em voz alta, em vez de digitá-las.",
-      "fallback": "A pessoa pode digitar as palavras no teclado."
+  "optional_permissions": {
+    "microphone": {
+      "purpose": "Permitir que a pessoa *diga* as três palavras em vez de digitá-las, e para capturar *sons ambientais* opcionais (ex.: a pessoa pode gravar o som da sua cozinha para associar à palavra *cozinha*).",
+      "fallback": "Digitação manual das palavras e sons pré-gravados do corpus territorial."
+    },
+    "camera": {
+      "purpose": "Permitir que a pessoa *mostre* um objecto ou espaço real (ex.: uma cozinha) para associar a uma palavra, criando uma *foto abstrata* que será usada como textura na divisão.",
+      "fallback": "Texturas abstratas geradas a partir das palavras ou do corpus visual do Atlas."
+    },
+    "device_motion": {
+      "purpose": "Permitir que a *inclinação* do dispositivo afecte a perspectiva da casa (ex.: inclinar para a esquerda revela uma divisão à esquerda).",
+      "fallback": "Controlo via cursor/teclado (ex.: setas para inclinar a perspectiva)."
+    },
+    "geolocation": {
+      "purpose": "Associar sons ou objectos territoriais à *freguesia* real da pessoa (ex.: se estiver em Alfama, a palavra *rua* pode evocar sons de fado).",
+      "fallback": "Sons e objectos baseados em *territórios genéricos* do corpus (ex.: Lisboa, Portugal)."
     }
-  ],
+  },
   "overstimulation_risk": {
-    "potential_risks": [
-      "Flashing ou transições visuais rápidas (mitigado com opção de reduced_motion).",
-      "Sons súbitos ou altos (mitigado com volume controlável e legendas).",
-      "Sobreposição excessiva de sons (mitigado com limite de camadas sonoras ativas)."
+    "risks": [
+      {
+        "type": "visual_flashing",
+        "description": "Luz trémula ou partículas de luz podem causar desconforto em pessoas com epilepsia fotossensível.",
+        "mitigation": "Opção para *desativar* efeitos de luz trémula ou partículas, substituindo por luz estática ou sombras sólidas."
+      },
+      {
+        "type": "auditory_sudden",
+        "description": "Sons territoriais (ex.: festas, passos) podem ser súbitos ou altos.",
+        "mitigation": "Volume ajustável por defeito em 50%, com opção para *reduzir* ou *desativar* sons. Sons são *graduais* (ex.: volume aumenta lentamente)."
+      },
+      {
+        "type": "cognitive_load",
+        "description": "A experiência exige atenção a múltiplos canais (visual, auditivo, táctil) e pode ser sobrecarregante.",
+        "mitigation": "Modo *simplificado* que reduz a quantidade de estímulos (ex.: apenas visual + auditivo, sem háptico ou kinestésico)."
+      },
+      {
+        "type": "temporal_pressure",
+        "description": "A espera de 10 segundos para revelar divisões ocultas pode causar ansiedade.",
+        "mitigation": "Opção para *pular* a espera com um botão ou comando de voz."
+      }
     ],
-    "mitigation": [
-      "Opção para reduzir ou desativar animações.",
-      "Controle de volume global e por camada sonora.",
-      "Limite de 3 camadas sonoras ativas simultaneamente.",
-      "Botão de pausa para congelar a experiência a qualquer momento."
-    ]
+    "global_mitigation": "Todas as opções de acessibilidade são *visíveis e fáceis de activar* no início da experiência, sem exigir navegação complexa."
   },
   "distinctiveness": {
-    "unique_elements": [
-      "A casa é construída a partir de ausências e memórias, não de objetos físicos.",
-      "As divisões só existem na periferia da visão ou quando a pessoa não olha diretamente para elas.",
-      "O convite inicial ('Constrói uma divisão com três palavras') é simples mas profundo, convocando a imaginação.",
-      "A tradução cruzada entre palavras, espaço visual e som é central e única para esta experiência.",
-      "O 'quarto das memórias' como espaço de devolução coletiva e anónima.",
-      "A casa 'respira' e transforma-se com o tempo e a atenção da pessoa."
+    "unique_traits": [
+      "A casa é construída a partir de *ausências* (silêncio, olhar indirecto, espera) em vez de presenças físicas.",
+      "As divisões *desaparecem* se olhadas directamente, usando a *atenção* como mecanismo de interacção.",
+      "As palavras da pessoa *materializam-se* em divisões com características sensoriais únicas (luz, som, textura), como se a linguagem fosse a matéria-prima da casa.",
+      "O *silêncio* e a *espera* são mecanismos ativos de revelação, não passivos.",
+      "A devolução transformada das palavras (ex.: prefixo territorial, som, imagem abstrata) é *única por sessão* e pode persistir como rasto.",
+      "A experiência *evoca* territórios reais sem exigir geolocalização ou dados pessoais, usando o corpus do Atlas.",
+      "A acessibilidade preserva a *poesia* da experiência (ex.: descrições auditivas são evocativas, não clínicas)."
     ],
-    "non_generic": "Esta experiência não pode ser confundida com um quiz, um jogo de construção 3D, uma galeria de imagens ou um chatbot. É uma exploração sensorial de um espaço imaginário que responde à presença e à atenção da pessoa."
+    "comparison": "Nenhuma outra experiência no Atlas usa a *atenção indirecta* (olhar de lado, fechar os olhos) como mecanismo principal de interacção, ou constrói um espaço a partir de *palavras* que se materializam em divisões sensoriais. Outras experiências podem usar linguagem ou som, mas não a *tradução cruzada* entre linguagem, espaço e som de forma tão integrada e poética."
   },
   "questions_for_eduardo": [
-    "O convite 'Constrói uma divisão com três palavras' deve ser literalmente três palavras, ou pode ser uma frase curta? Exemplo: 'cozinha com cheiro a pão' (4 palavras) seria aceitável?",
-    "As contribuições públicas no 'quarto das memórias' devem ser moderadas manualmente antes de serem incluídas, ou pode haver um sistema automático de filtragem (ex.: por palavras-chave)?",
-    "A devolução (frase ou esboço) deve ser gerada automaticamente com base nas palavras introduzidas, ou pode ser uma seleção aleatória de frases pré-definidas?",
-    "A casa deve ter um número limitado de divisões possíveis (ex.: 10 tipos: cozinha, sala, quarto, etc.), ou pode ser ilimitado, com base nas palavras introduzidas?",
-    "O musgo/pátina que cresce com o tempo deve ser visível apenas na sessão atual, ou deve persistir entre sessões (ex.: se a pessoa regressar no dia seguinte, o musgo está mais crescido)?"
+    {
+      "question": "O convite original do catálogo é *Constrói uma divisão com três palavras*. Deve a experiência limitar-se a *três palavras*, ou pode permitir mais (ex.: 1 a 5) para maior flexibilidade?",
+      "impact": "Se for apenas três, a experiência pode sentir-se restritiva. Se for mais, pode perder o foco no gesto mínimo."
+    },
+    {
+      "question": "As divisões criadas a partir das palavras devem ser *abstratas* (ex.: luz, som, textura) ou podem incluir *objectos simbólicos* (ex.: uma cadeira, uma panela) para reforçar a materialidade?",
+      "impact": "Objectos simbólicos podem tornar a experiência mais concreta, mas podem também reduzir a poética da ausência."
+    },
+    {
+      "question": "A devolução das palavras transformadas deve ser *imediata* (no final da sessão) ou pode ser *latente* (ex.: a pessoa recebe um email ou notificação dias depois com as palavras transformadas)?",
+      "impact": "Devolução imediata mantém a experiência contida; devolução latente pode criar surpresa, mas exige infraestrutura adicional."
+    },
+    {
+      "question": "A casa deve *lembrar-se* das divisões criadas em sessões anteriores (mesmo com palavras diferentes), ou deve reiniciar-se completamente a cada sessão?",
+      "impact": "Memória entre sessões pode criar uma sensação de *casa viva*, mas pode também ser confuso para a pessoa."
+    }
   ],
   "improvement_proposals": [
     {
-      "proposal": "Incluir a opção de a pessoa 'deixar um objeto' na casa (ex.: uma xícara, um livro) que possa ser encontrado por outras pessoas no 'quarto das memórias'.",
-      "justification": "Aumentaria a sensação de uma casa habitada e a devolução coletiva, alinhando com o rastro desejado de 'memória, objeto, gesto'."
+      "proposal": "Adicionar uma *porta secreta* que só aparece se a pessoa usar uma *palavra do corpus territorial* (ex.: um topónimo ou gíria local). Esta porta levaria a uma divisão especial com sons ou objectos únicos daquele território.",
+      "justification": "Reforçaria a ligação ao território e incentivaria a exploração do corpus do Atlas."
     },
     {
-      "proposal": "Adicionar uma camada de 'cheiros evocados' mais detalhada, com descrições textuais ou sonoras que remetem para cheiros específicos de lugares (ex.: 'cheiro a maresia de Cascais', 'cheiro a pão quente da padaria da esquina').",
-      "justification": "Aprofundaria a evocação territorial e sensorial, sem fingir output físico."
+      "proposal": "Permitir que a pessoa *desenhe* uma divisão com o cursor/dedo (em vez de usar palavras), criando uma *textura abstrata* que será usada como parede ou chão.",
+      "justification": "Ampliaria as formas de interacção, mantendo a poética da construção a partir do gesto."
     },
     {
-      "proposal": "Permitir que a pessoa 'apague' uma divisão da casa, criando um vazio que pode ser preenchido por uma nova divisão ou por uma contribuição pública.",
-      "justification": "Adicionaria uma camada de transformação e colaboração à experiência."
+      "proposal": "Incluir uma *janela* que mostre o *território real* (via geolocalização opcional) como pano de fundo da casa, misturando o físico e o digital.",
+      "justification": "Criaria uma camada adicional de imersão territorial, mas deve ser opcional e não intrusiva."
+    },
+    {
+      "proposal": "Adicionar um *modo colaborativo* onde duas pessoas podem construir a casa em conjunto, com as suas palavras a interagirem (ex.: a palavra de uma pessoa afecta a divisão da outra).",
+      "justification": "Exploraria a dimensão social do Atlas, mas exigiria moderação e consentimento claro."
     }
   ],
   "generic_fallback_allowed": false,

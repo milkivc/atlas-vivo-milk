@@ -4,362 +4,425 @@
   "source_evidence": {
     "primary": [
       {
-        "id": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
+        "source": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
         "authority": "autoral",
-        "excerpt": "16 seres folclóricos; 5 núcleos/dispositivos nomeados; jogos tradicionais, trava-línguas e adivinhas."
+        "quote": "16 seres folclóricos; jogos tradicionais, trava-línguas e adivinhas.",
+        "relevance": "confirma a presença de adivinhas como parte do folclore na camada pública."
       },
       {
-        "id": "catalog_entry",
-        "authority": "operational",
-        "excerpt": "familia: folclore; mecanica: ocultar; convite: 'Esconde a resposta dentro da pergunta.'"
+        "source": "curadoria entrada freguesias.xlsx",
+        "authority": "territorial_primária",
+        "relevance": "contém referências a dinâmicas territoriais, incluindo adivinhas como prática folclórica local."
       }
     ],
-    "secondary": []
+    "secondary": [
+      {
+        "source": "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md",
+        "authority": "metodológico",
+        "relevance": "princípios de jogo, enigma e desvio aplicáveis à mecânica de adivinhas."
+      }
+    ]
   },
   "authorial_invariants": [
-    "Adivinhas como jogo tradicional de ocultação e revelação.",
-    "A resposta está sempre contida na pergunta ou na sua estrutura.",
-    "Folclore como matéria viva, não como arquivo estático.",
-    "Convite à participação ativa e não passiva.",
-    "Relação com território, memória e oralidade."
+    "A adivinha esconde a resposta dentro da pergunta.",
+    "Faz parte do folclore oral e territorial.",
+    "Deve preservar a oralidade, o ritmo e o jogo de palavras.",
+    "Não é um quiz nem uma pergunta com resposta binária.",
+    "A resposta emerge da interação, não da explicação."
   ],
-  "perceptual_intent": "Transformar a adivinha num ritual de escuta ativa onde a pessoa descobre que a resposta já lá estava, mas escondida na textura da pergunta. A experiência deve sentir-se como um diálogo com o invisível, onde o silêncio e a pausa são tão importantes quanto as palavras.",
+  "perceptual_intent": "Criar uma experiência onde a pessoa *sentir* a adivinha como um enigma vivo, que se revela não pela lógica, mas pela imersão sensorial, memória e associação. A adivinha deve *respirar*: expandir-se, contrair-se, esconder-se e aparecer como um ser territorial.",
   "threshold": {
-    "description": "A tela começa vazia, com um fundos de textura orgânica (como papel envelhecido ou tecido desgastado) que respira lentamente. Um único ponto de luz pulsante aparece no centro, como um convite silencioso. Não há texto, apenas a sensação de que algo está prestes a emergir.",
-    "sensory_trigger": "O ponto de luz expande-se em ondas concêntricas, como uma pedra atirada à água, até revelar uma sombra que se move como uma silhueta de uma pessoa a murmurar. A sombra não tem rosto, apenas um contorno que sugere oralidade."
+    "description": "A pessoa entra num espaço onde uma voz sussurrada (ou texto que parece falado) diz uma adivinha incompleta. O ambiente visual está desfoqueado, como se visto através de um véu ou neblina. Um som de vento ou murmúrio territorial preenche o silêncio. A adivinha não é apresentada de uma vez: surge palavra a palavra, como se fosse ditada por uma presença invisível.",
+    "sensory_trigger": "O desfoque visual e o som ambiente criam uma sensação de limiar entre o visível e o invisível, o audível e o inaudível."
   },
   "dramaturgical_arc": [
     {
       "stage": "limiar",
-      "action": "A sombra murmura uma frase curta e enigmática (ex: 'O que é que tem dentes e não come?'). A frase aparece escrita em tipografia manual, como se fosse riscada a carvão, e desaparece lentamente. O som da voz é distorcido, como se vindo de longe, misturado com o som ambiente (vento, passos distantes).",
+      "action": "A pessoa depara-se com um ambiente onde uma adivinha começa a surgir, mas está fragmentada. O espaço visual é um campo de partículas (como poeira ou neblina) que se mexem com o cursor ou o sopro (se microfone permitido).",
       "sensory_focus": [
-        "auditory",
-        "visual",
-        "spatial"
+        "visual (partículas, desfoque)",
+        "auditory (murmúrio, vento)",
+        "spatial (profundidade percebida)"
       ]
     },
     {
       "stage": "chamada",
-      "action": "A sombra repete a pergunta, mas desta vez a voz é mais clara e a frase aparece em letras que se movem como se estivessem a ser sopradas pelo vento. Um som de respiração profunda é ouvido, como se o sistema estivesse à espera.",
+      "action": "A adivinha é ditada em voz baixa, com pausas irregulares, como se a pessoa que a dissesse estivesse a pensar em voz alta. As palavras aparecem no ecrã uma a uma, mas desaparecem após alguns segundos, como se fossem apagadas pelo vento.",
       "sensory_focus": [
-        "auditory",
-        "visual",
-        "temporal_interoceptive"
+        "auditory (voz, pausas)",
+        "visual (textos efémeros)",
+        "temporal_interoceptive (ritmo irregular)"
       ]
     },
     {
       "stage": "primeiro_gesto",
-      "action": "A pessoa pode: (1) repetir a pergunta em voz alta (microfone opcional), (2) tocar/arrastar as letras com o cursor/dedo, ou (3) esperar em silêncio. Qualquer um dos gestos faz com que as letras se rearranjem lentamente, revelando pistas visuais (ex: a palavra 'serra' aparece sublinhada ou em negrito).",
+      "action": "A pessoa é convidada a *repetir* a adivinha em voz alta (opcional) ou a *tocar* nas palavras que aparecem para as fixar no ecrã. Se não houver microfone, pode clicar ou arrastar as palavras para as reorganizar.",
       "sensory_focus": [
-        "kinesthetic",
-        "auditory",
-        "visual"
+        "kinesthetic (toque, gesto)",
+        "auditory (voz opcional)",
+        "visual (interação com texto)"
       ]
     },
     {
       "stage": "resposta_viva",
-      "action": "Se a pessoa interagir, o sistema responde com um som de 'ah!' ou um suspiro, e as letras começam a dançar, formando a resposta (ex: 'A serra'). A resposta não é dada diretamente; é construída em conjunto com a pessoa, como se o sistema estivesse a aprender com ela.",
+      "action": "O sistema responde de forma não linear: se a pessoa repetir a adivinha, a voz original *completa* a frase com a resposta, mas de forma distorcida (como um eco ou sobreposição). Se a pessoa tocar nas palavras, estas ganham peso, cor ou som, revelando pistas sensoriais (ex.: a palavra 'água' faz surgir um som de gotas).",
       "sensory_focus": [
-        "auditory",
-        "visual",
-        "kinesthetic"
+        "auditory (eco, sobreposição)",
+        "visual (transformação do texto)",
+        "haptic (feedback táctil opcional)"
       ]
     },
     {
       "stage": "desvio",
-      "action": "De repente, a sombra para de murmurar e a tela fica em silêncio. As letras da resposta começam a desvanecer-se, como se estivessem a ser apagadas por uma brisa. Um novo som emerge: o de uma porta a ranger, sugerindo que algo mais está por vir.",
+      "action": "A adivinha *muda*: uma palavra é substituída por outra, ou a resposta parece errada. Por exemplo, se a adivinha é 'O que é que tem dentes e não come?', a resposta pode surgir como 'o garfo' (correta) mas depois transformar-se em 'a lua' (absurda), forçando a pessoa a duvidar do que ouviu.",
       "sensory_focus": [
-        "auditory",
-        "visual",
-        "silence_or_absence"
+        "auditory (resposta distorcida)",
+        "visual (texto mutável)",
+        "proprioceptive (confusão intencional)"
       ]
     },
     {
       "stage": "aprofundamento_sensorial",
-      "action": "A resposta (ex: 'serra') transforma-se num objeto visual: uma serra de dentes afiados que se move como se fosse uma criatura viva. O som da serra a cortar madeira é ouvido, misturado com a voz da sombra a dizer: 'E agora, o que é que corta mas não tem lâmina?'. A serra visual e o som criam uma tradução cruzada entre o táctil (cortar) e o auditivo (som da serra).",
+      "action": "A adivinha e a resposta começam a *contaminar* o ambiente: o som da resposta (ex.: 'garfo') pode gerar um som metálico, e o visual pode mostrar um garfo a flutuar no espaço. A pessoa é convidada a *associar* a adivinha a uma memória, um lugar ou um objeto (ex.: 'lembras-te de onde ouviste esta adivinha?').",
       "sensory_focus": [
-        "visual",
-        "auditory",
-        "haptic",
-        "cross_sensory_translation"
+        "auditory (som associado à resposta)",
+        "visual (objeto flutuante)",
+        "olfactory_evocation (cheiro imaginado, ex.: 'cheiro a metal')",
+        "gustatory_evocation (sabor lembrado, ex.: 'sabor a ferrugem')"
       ]
     },
     {
       "stage": "escolha_acaso_silencio",
-      "action": "A pessoa pode: (1) responder à nova pergunta, (2) tocar na serra para 'cortar' o som e revelar uma nova camada, ou (3) esperar. Se escolher esperar, a serra desaparece e a sombra volta a murmurar a pergunta original, como se o tempo tivesse recuado.",
+      "action": "A pessoa pode: (1) *escolher* uma pista sensorial (ex.: 'mostra-me o som'), (2) *deixar* que o sistema *escolha* uma adivinha aleatória do território, ou (3) *fazer silêncio* para que a adivinha se revelasse por si mesma (após alguns segundos, a resposta surge como uma sombra ou eco).",
       "sensory_focus": [
-        "kinesthetic",
-        "auditory",
-        "temporal_interoceptive"
+        "kinesthetic (escolha)",
+        "temporal_interoceptive (espera)",
+        "auditory (silêncio ou som)"
       ]
     },
     {
       "stage": "aparição",
-      "action": "Se a pessoa interagir, uma nova adivinha emerge, mas desta vez a sombra parece mais próxima e a voz mais nítida. As letras da nova pergunta aparecem em camadas sobrepostas, como se estivessem a ser escritas em tempo real por uma mão invisível. Um som de riso suave é ouvido ao fundo.",
+      "action": "A resposta final aparece de forma inesperada: pode ser uma imagem (ex.: uma fotografia de um garfo antigo de uma festa local), um som (ex.: o barulho de um garfo a cair), ou uma palavra que se materializa no ecrã como um objeto 3D (ex.: a palavra 'GARFO' em metal).",
       "sensory_focus": [
-        "visual",
-        "auditory",
-        "social_presence"
+        "visual (imagem ou objeto 3D)",
+        "auditory (som associado)",
+        "spatial (profundidade)"
       ]
     },
     {
       "stage": "devolução",
-      "action": "No final de uma sequência (3-5 adivinhas), a sombra diz: 'Agora é a tua vez.' e convida a pessoa a criar a sua própria adivinha. A pessoa pode digitar ou dizer uma pergunta (microfone opcional). O sistema não corrige nem avalia; em vez disso, a adivinha da pessoa é 'guardada' como um rasto: as letras da sua pergunta aparecem a flutuar no ecrã, como se fizessem parte de um coro de vozes. A sombra agradece com um aceno de cabeça (movimento sutil da silhueta) e desaparece lentamente.",
+      "action": "A pessoa recebe de volta: (1) a adivinha *completa* com a resposta, mas agora *escrita à mão* (como se fosse um bilhete), (2) um *rasto* que pode ser guardado (ex.: a adivinha + a sua associação territorial), ou (3) um *convite* para partilhar a sua própria adivinha (opcional, sem pressão).",
       "sensory_focus": [
-        "auditory",
-        "visual",
-        "social_presence"
+        "visual (texto manuscrito)",
+        "social_presence (convite opcional)"
       ]
     },
     {
-      "stage": "rasto_latencia",
-      "action": "A adivinha da pessoa fica visível no ecrã durante alguns segundos, depois desvanece-se, mas o som da sua voz (ou a tipografia da sua escrita) permanece como um eco fraco. Se a pessoa regressar mais tarde, pode encontrar a sua adivinha misturada com outras, como parte de uma constelação de vozes. O sistema nunca repete a mesma sequência de adivinhas.",
+      "stage": "rasto_latência",
+      "action": "A adivinha resolvida *permanece* no cosmos do Atlas como uma partícula: pode ser encontrada por outras pessoas em dinâmicas territoriais ou constelações. Se a pessoa partilhar a sua própria adivinha, esta entra num *repositório vivo* de adivinhas do território, moderado e validado.",
       "sensory_focus": [
-        "auditory",
-        "visual",
-        "spatial"
+        "spatial (cosmos/constelação)",
+        "social_presence (rasto partilhado)"
       ]
     }
   ],
   "participant_verbs": [
     "escutar",
+    "repetir",
     "tocar",
+    "associar",
+    "escolher",
     "esperar",
-    "murmurar",
-    "arrastar",
-    "criar",
-    "observar"
+    "partilhar"
   ],
   "system_responses": [
     {
-      "trigger": "primeira interação (voz, toque ou espera)",
-      "response": "A sombra repete a pergunta com mais clareza, e as letras ganham movimento e pistas visuais."
+      "trigger": "primeira interação (toque ou voz)",
+      "response": "A adivinha completa-se com a resposta, mas de forma distorcida (eco, sobreposição ou texto mutável)."
     },
     {
-      "trigger": "resposta correta (implícita ou explícita)",
-      "response": "As letras dançam para formar a resposta, acompanhadas por um som de realização (ex: 'ah!')."
+      "trigger": "repetição da adivinha",
+      "response": "A voz original repete a adivinha com a resposta, mas com um *desvio* (ex.: resposta errada ou absurda)."
     },
     {
-      "trigger": "espera prolongada",
-      "response": "A sombra recua no tempo: a pergunta original é repetida, e a tela volta a um estado anterior."
+      "trigger": "toque em palavras",
+      "response": "As palavras ganham peso, cor ou som, revelando pistas sensoriais (ex.: som de gotas para 'água')."
     },
     {
-      "trigger": "toque/arrasto nas letras",
-      "response": "As letras rearranjam-se para revelar pistas ou a resposta parcial."
+      "trigger": "escolha de pista sensorial",
+      "response": "O sistema revela a pista (ex.: som, imagem ou texto associado à resposta)."
     },
     {
-      "trigger": "criação de adivinha pela pessoa",
-      "response": "A adivinha da pessoa é integrada na constelação de vozes, com um agradecimento não verbal da sombra."
+      "trigger": "silêncio prolongado",
+      "response": "A resposta surge como uma sombra, eco ou objeto flutuante."
     },
     {
-      "trigger": "silêncio contínuo",
-      "response": "A sombra desaparece temporariamente, e o som ambiente (vento, passos) torna-se mais presente, como se o sistema estivesse à espera de um novo gesto."
+      "trigger": "partilha de adivinha",
+      "response": "A adivinha é adicionada ao repositório vivo (após moderação)."
     }
   ],
   "sensory_signature_id": "adivinhas_035_folclore_ocultar",
   "sensory_channels": {
     "visual": {
-      "description": "Textura orgânica de fundo (papel/tecido), tipografia manual e dinâmica (letras que dançam, desaparecem, rearranjam-se), sombras em movimento, objetos visuais que emergem das respostas (ex: serra, porta).",
-      "intensity": "subtle_to_medium"
+      "elements": [
+        "partículas em movimento (neblina/poeira)",
+        "texto efémero (aparece e desaparece)",
+        "objetos 3D flutuantes (ex.: garfo, lua)",
+        "imagens territoriais (fotografias de objetos ou lugares)",
+        "texto manuscrito (devolução)",
+        "desfoque e profundidade (limiar)"
+      ],
+      "dynamics": [
+        "transparência",
+        "escala",
+        "cor mutável",
+        "movimento orgânico"
+      ]
     },
     "auditory": {
-      "description": "Voz distorcida e murmurada da sombra, sons ambientais (vento, passos, porta a ranger), sons de objetos (serra a cortar), risos suaves, respiração, ecos e silêncios intencionais.",
-      "intensity": "low_to_medium"
+      "elements": [
+        "voz sussurrada (adivinha)",
+        "murmúrio territorial (vento, ruído ambiente)",
+        "eco e sobreposição (respostas distorcidas)",
+        "sons associados (ex.: gotas, metal, barulho de garfo)",
+        "silêncio ativo (pausas, espera)"
+      ],
+      "dynamics": [
+        "ritmo irregular",
+        "espacialização (proximidade/distância)",
+        "volume variável"
+      ]
     },
     "haptic": {
-      "description": "Vibração sutil em dispositivos compatíveis quando a pessoa toca nas letras ou na serra (opcional). Feedback táctil mínimo para confirmar interação.",
-      "intensity": "minimal"
+      "elements": [
+        "feedback táctil opcional (vibração suave em dispositivos compatíveis)"
+      ],
+      "dynamics": [
+        "intensidade controlada",
+        "ritmo sincronizado com o som"
+      ]
     },
     "kinesthetic": {
-      "description": "Movimento do cursor/dedo para arrastar letras, toque para interagir com objetos visuais (ex: serra). A velocidade e trajetória do gesto podem alterar a resposta do sistema (ex: arrastar devagar vs. rápido).",
-      "intensity": "medium"
+      "elements": [
+        "toque (clique, arrasto)",
+        "gesto (movimento do cursor ou dedo)",
+        "pressão (se suportado)"
+      ],
+      "dynamics": [
+        "velocidade",
+        "trajetória",
+        "pressão"
+      ]
     },
     "proprioceptive": {
-      "description": "Instruções implícitas para a pessoa ajustar a sua postura ou ritmo (ex: 'espera', 'toca devagar'). A experiência convida à atenção corporal sem exigir movimento.",
-      "intensity": "low"
+      "elements": [
+        "instruções de ritmo (ex.: 'respira antes de responder')",
+        "postura (ex.: 'inclina o dispositivo para ver a resposta')"
+      ],
+      "dynamics": [
+        "ritmo corporal",
+        "orientação espacial"
+      ]
     },
     "temporal_interoceptive": {
-      "description": "Ritmo de espera, suspensão, aceleração e desaceleração. A pessoa é convidada a sentir o tempo como parte da experiência (ex: a sombra repete a pergunta após um silêncio prolongado).",
-      "intensity": "medium"
+      "elements": [
+        "pausas irregulares",
+        "espera (silêncio ativo)",
+        "aceleração/desaceleração do texto ou som"
+      ],
+      "dynamics": [
+        "suspensão",
+        "respiração percebida"
+      ]
     },
     "spatial": {
-      "description": "Sensação de profundidade e movimento no ecrã (letras a flutuar, sombra a aproximar-se/afastar-se). A adivinha da pessoa é integrada num espaço virtual que sugere uma constelação de vozes.",
-      "intensity": "medium"
+      "elements": [
+        "profundidade (partículas, objetos 3D)",
+        "distância (som e texto)",
+        "constelação (rasto no cosmos)"
+      ],
+      "dynamics": [
+        "movimento no espaço",
+        "perspetiva"
+      ]
     },
     "olfactory_evocation": {
-      "description": "Evocação de cheiros através de linguagem e som (ex: 'o cheiro a madeira serrada' associado à serra, 'o aroma a terra molhada' associado ao vento). Nunca fingido como output físico.",
-      "intensity": "evocative"
+      "elements": [
+        "cheiros imaginados (ex.: 'cheiro a metal', 'cheiro a terra molhada')"
+      ],
+      "dynamics": [
+        "associação memorial"
+      ]
     },
     "gustatory_evocation": {
-      "description": "Evocação de sabores através de metáforas (ex: 'doce como mel' para uma adivinha sobre abelhas). Nunca fingido como output físico.",
-      "intensity": "evocative"
+      "elements": [
+        "sabores lembrados (ex.: 'sabor a ferrugem', 'sabor a pão quente')"
+      ],
+      "dynamics": [
+        "associação memorial"
+      ]
     },
     "social_presence": {
-      "description": "Sensação de diálogo com a sombra (presença não humana) e com outras vozes (adivinhas de outras pessoas). A sombra age como um mediador entre a pessoa e o folclore.",
-      "intensity": "medium"
+      "elements": [
+        "voz (opcional, da pessoa)",
+        "convite para partilhar (opcional)",
+        "rasto partilhado (adivinhas de outras pessoas)"
+      ],
+      "dynamics": [
+        "interação voluntária",
+        "moderação"
+      ]
     }
   },
   "cross_sensory_translation": {
-    "primary": {
-      "from": "auditory",
-      "to": "visual",
-      "description": "A voz da sombra (som) transforma-se em letras que dançam e rearranjam-se no ecrã (visual). O ritmo e entoação da voz influenciam o movimento das letras."
-    },
-    "secondary": {
-      "from": "visual",
-      "to": "auditory",
-      "description": "Objetos visuais (ex: serra) emitem sons característicos (ex: serra a cortar madeira) que se misturam com a voz da sombra."
-    },
-    "tertiary": {
-      "from": "kinesthetic",
-      "to": "visual",
-      "description": "O gesto de arrastar as letras (táctil/cinestésico) altera a sua disposição e revelação no ecrã (visual)."
-    }
+    "primary": "A palavra ditada (auditory) transforma-se em objeto visual (ex.: 'garfo' → imagem de um garfo 3D) e em som associado (ex.: barulho de metal).",
+    "secondary": "O gesto de tocar no texto (kinesthetic) altera o som (auditory) e a cor do texto (visual).",
+    "tertiary": "O silêncio (temporal_interoceptive) faz surgir a resposta como uma sombra visual (visual)."
   },
   "silence_or_absence": {
-    "mechanism": "O silêncio é usado como ferramenta dramática: (1) pausas entre as perguntas da sombra, (2) desaparecimento temporário da sombra e dos sons, (3) espera ativa da pessoa para revelar pistas ou respostas. O silêncio não é vazio; é um convite à escuta ativa e à reflexão.",
-    "purpose": "Criar suspense, convite à introspeção e espaço para a pessoa processar a adivinha. O silêncio também 'apaga' temporariamente elementos visuais ou sonoros para revelar camadas ocultas."
+    "mechanism": "O silêncio é usado como *ferramenta ativa*: (1) pausas irregulares na voz que ditam a adivinha; (2) espera para que a resposta surja como sombra ou eco; (3) ausência de texto no ecrã para forçar a atenção auditiva.",
+    "effect": "Cria tensão, suspense e convida a pessoa a preencher o vazio com a sua própria memória ou associação."
   },
   "surprise_or_indeterminacy": {
     "mechanism": [
-      "A sombra pode 'errar' propositadamente, repetindo uma pergunta ou dando uma pista enganadora, como se estivesse a brincar com a pessoa.",
-      "A resposta à adivinha pode ser revelada de formas inesperadas (ex: as letras formam a resposta ao contrário, ou a sombra 'canta' a resposta).",
-      "A sequência de adivinhas nunca é a mesma entre sessões. O sistema seleciona adivinhas aleatoriamente de um corpus folclórico, garantindo variedade.",
-      "Se a pessoa não interagir durante muito tempo, a sombra pode 'adormecer' e o ecrã fica em silêncio, com apenas a textura de fundo a respirar."
+      "A resposta à adivinha pode ser *distorcida* (ex.: 'garfo' → 'lua') para criar desvio.",
+      "A adivinha *muda* durante a interação (ex.: uma palavra é substituída por outra).",
+      "A resposta pode surgir de forma *inesperada* (ex.: como um objeto 3D ou som).",
+      "O sistema pode *escolher* uma adivinha aleatória do território se a pessoa não interagir."
     ],
-    "purpose": "Manter a experiência viva e imprevisível, evitando que se torne repetitiva ou previsível."
+    "effect": "Quebra a expectativa de uma resposta linear e convida à exploração."
   },
   "session_variation": [
     {
       "type": "acaso_controlado",
-      "description": "Seleção aleatória de adivinhas de um corpus folclórico, com garantia de que não se repetem na mesma sessão."
+      "description": "A adivinha inicial é escolhida aleatoriamente do repositório territorial."
     },
     {
-      "type": "ordem_mutavel",
-      "description": "A ordem das adivinhas pode inverter-se ou rearranjar-se com base no ritmo de interação da pessoa (ex: se a pessoa responder rápido, a próxima adivinha é mais difícil)."
+      "type": "ordem_mutável",
+      "description": "As palavras da adivinha aparecem em ordens diferentes a cada sessão."
     },
     {
       "type": "resposta_a_ritmo",
-      "description": "A velocidade e o ritmo dos gestos da pessoa (ex: arrastar letras devagar vs. rápido) alteram a forma como a resposta é revelada (ex: letras dançam mais devagar ou mais rápido)."
+      "description": "A velocidade com que a pessoa repete ou toca as palavras altera o ritmo da resposta (ex.: mais rápido = eco mais curto)."
     },
     {
-      "type": "resposta_a_posicao",
-      "description": "A posição do cursor/dedo no ecrã pode influenciar a direção do movimento das letras ou a intensidade do som (ex: tocar no canto do ecrã faz com que a voz da sombra soe mais distante)."
+      "type": "resposta_a_posição",
+      "description": "A posição do cursor ou dedo no ecrã altera a distorção da voz ou a cor do texto."
+    },
+    {
+      "type": "combinação_fragmentos",
+      "description": "A adivinha pode combinar fragmentos de diferentes adivinhas territoriais."
     },
     {
       "type": "temporalidade_real",
-      "description": "A adivinha pode variar com base na hora do dia (ex: adivinhas sobre a noite são mais prováveis de aparecer à noite)."
-    },
-    {
-      "type": "memoria_de_sessao",
-      "description": "Se a pessoa criar uma adivinha, esta pode reaparecer em sessões futuras como parte da constelação de vozes, misturada com adivinhas do corpus."
+      "description": "A adivinha pode variar consoante a hora do dia ou estação (ex.: adivinhas de inverno no inverno)."
     }
   ],
   "territorial_binding": {
-    "description": "As adivinhas são selecionadas de um corpus folclórico associado a territórios específicos (ex: adivinhas sobre o mar para freguesias costeiras, adivinhas sobre a terra para zonas rurais). A sombra pode mencionar subtamente o território (ex: 'Aqui, onde o vento sopra forte...').",
-    "sustainability": "As adivinhas territoriais são validadas contra o corpus autoral (ex: 'curadoria entrada freguesias.xlsx'). Se uma adivinha não tiver suporte territorial claro, é marcada como genérica.",
-    "questions_for_eduardo": [
-      "Existe um corpus de adivinhas folclóricas já curado e associado a territórios específicos? Se sim, onde está documentado?"
-    ]
+    "relation": "Cada adivinha está associada a um *território específico* (freguesia, lugar ou festa local). A resposta pode incluir uma *pista territorial* (ex.: 'Esta adivinha é de Alfama, onde se ouvia este som').",
+    "sources": [
+      "curadoria entrada freguesias.xlsx",
+      "F01–F20 (gramáticas territoriais)"
+    ],
+    "evocation": "A adivinha pode evocar sons, cheiros ou sabores do território (ex.: 'cheiro a sardinha assada' para uma adivinha de Alfama)."
   },
   "trace_and_return": {
     "trace": {
-      "description": "A adivinha criada pela pessoa é guardada como um rasto efémero: (1) as letras da sua pergunta flutuam no ecrã por alguns segundos, (2) o som da sua voz (ou a tipografia da sua escrita) permanece como um eco fraco, (3) a adivinha é integrada numa constelação de vozes que pode ser reencontrada em sessões futuras.",
-      "persistence": "temporary"
+      "digital": "A adivinha resolvida permanece no *cosmos* do Atlas como uma partícula, visível em constelações ou dinâmicas territoriais.",
+      "physical_future": "Em contextos físicos, a adivinha pode ser impressa em bilhetes ou partilhada em festas territoriais."
     },
     "return": {
-      "description": "A pessoa recebe de volta: (1) a satisfação de ver a sua adivinha fazer parte de um coro de vozes, (2) um agradecimento não verbal da sombra (ex: aceno de cabeça), (3) a sensação de ter contribuído para um arquivo vivo de folclore.",
-      "form": "symbolic_and_emotional"
+      "immediate": "A pessoa recebe a adivinha completa + resposta em formato de bilhete manuscrito.",
+      "latent": "A adivinha partilhada pela pessoa entra no repositório vivo e pode ser encontrada por outros."
     }
   },
   "accessibility_equivalents": {
     "visual": {
-      "alternative": "Todas as interações visuais (ex: letras a dançar, sombra a mover-se) têm descrições sonoras opcionais (ex: 'As letras estão a rearranjar-se para formar a palavra serra').",
-      "reduced_motion": "Modo de movimento reduzido: as letras movem-se de forma linear e sem animações complexas."
+      "reduced_motion": "Versão estável sem partículas em movimento; texto aparece de forma linear e clara.",
+      "high_contrast": "Texto e objetos com contraste elevado e cores acessíveis.",
+      "screen_reader": "Toda a adivinha e respostas são lidas em voz alta pelo sistema (opcional)."
     },
     "auditory": {
-      "alternative": "Todas as interações sonoras (ex: voz da sombra, sons ambientais) têm legendas visuais em tempo real. O som pode ser desativado sem perder a experiência.",
-      "transcript": "Transcrição completa das adivinhas e respostas está disponível em texto."
-    },
-    "haptic": {
-      "alternative": "Vibrações são opcionais e podem ser substituídas por feedback visual (ex: um círculo a pulsar no local do toque)."
+      "no_audio": "Toda a informação auditiva (voz, sons) é transcrita em texto ou representada visualmente (ex.: ícones de som).",
+      "volume_control": "Controlo de volume e opção para desativar sons."
     },
     "kinesthetic": {
-      "alternative": "Todas as interações tácteis (ex: arrastar letras) podem ser feitas com teclado (ex: setas para mover as letras) ou voz (ex: comandos como 'arrasta para a esquerda')."
+      "no_touch": "Todas as interações podem ser feitas com teclado (ex.: setas para navegar, Enter para selecionar).",
+      "no_movement": "A experiência funciona sem movimento do dispositivo (ex.: sem giroscópio)."
     },
-    "temporal_interoceptive": {
-      "alternative": "A pessoa pode pausar a experiência a qualquer momento e retomar mais tarde. O ritmo pode ser ajustado para 'lento' ou 'rápido' nas definições."
+    "cognitive": {
+      "simplified": "Opção para ver a adivinha completa de uma vez, sem fragmentação.",
+      "no_time_pressure": "Sem limite de tempo para interagir."
     },
-    "general": {
-      "description": "A experiência preserva a sua intenção poética em todas as alternativas de acessibilidade. Por exemplo, a descrição sonora das letras a dançar não é apenas funcional; é escrita de forma a evocar a magia do momento (ex: 'As letras dançam como folhas ao vento, formando a resposta')."
+    "haptic": {
+      "no_vibration": "Feedback visual ou sonoro substitui a vibração."
     }
   },
   "optional_permissions": {
     "microphone": {
-      "purpose": "Permitir que a pessoa repita a adivinha em voz alta ou crie a sua própria adivinha oralmente.",
-      "fallback": "A pessoa pode digitar a adivinha ou usar interações tácteis/visuais."
+      "purpose": "Permitir que a pessoa repita a adivinha em voz alta para interagir com o sistema.",
+      "fallback": "A pessoa pode clicar ou arrastar as palavras para interagir."
     },
     "camera": {
       "purpose": "Não aplicável para esta experiência.",
       "fallback": "N/A"
     },
     "geolocation": {
-      "purpose": "Selecionar adivinhas associadas ao território da pessoa (opcional).",
-      "fallback": "Adivinhas genéricas ou associadas a um território padrão."
+      "purpose": "Associar a adivinha a um território específico (ex.: mostrar adivinhas da freguesia onde a pessoa está).",
+      "fallback": "A adivinha é escolhida aleatoriamente do repositório territorial."
     },
     "motion": {
-      "purpose": "Detetar a inclinação do dispositivo para alterar a perspectiva do ecrã (ex: inclinar para ver a sombra de outro ângulo).",
-      "fallback": "A sombra e as letras movem-se de forma linear, sem depender da inclinação."
+      "purpose": "Usar a inclinação do dispositivo para revelar pistas (ex.: inclinar para ver a resposta).",
+      "fallback": "A pessoa pode usar o cursor ou teclado para interagir."
     }
   },
   "overstimulation_risk": {
-    "potential_risk": [
-      "Animações rápidas ou complexas das letras podem causar desconforto em pessoas sensíveis a movimento.",
-      "Sons repentinos (ex: porta a ranger) podem surpreender ou assustar.",
-      "Múltiplas camadas de som (voz + ambiente + objetos) podem tornar a experiência caótica."
+    "potential_risks": [
+      "Flashing ou movimento rápido de partículas (mitigado com opção reduced-motion).",
+      "Som súbito ou alto (mitigado com controlo de volume e opção para desativar sons).",
+      "Sobrecarga cognitiva pela fragmentação do texto (mitigado com opção simplificada)."
     ],
     "mitigation": [
-      "Modo de movimento reduzido está sempre disponível.",
-      "O volume dos sons pode ser ajustado ou desativado.",
-      "As animações são suaves e nunca usam *flashing* ou padrões repetitivos perigosos.",
-      "A pessoa pode pausar a experiência a qualquer momento.",
-      "Os sons são sempre introduzidos progressivamente (ex: o som da serra começa baixo e aumenta gradualmente)."
+      "Opção 'reduced-motion' para desativar partículas e movimento.",
+      "Controlo de volume e opção para desativar sons.",
+      "Opção para ver a adivinha completa sem fragmentação.",
+      "Pausas longas entre interações para evitar sobrecarga."
     ]
   },
   "distinctiveness": {
-    "unique_traits": [
-      "A adivinha não é um simples 'quiz'; é um diálogo vivo com uma sombra que parece ter memória e humor.",
-      "A resposta está sempre contida na pergunta, mas é revelada de forma dinâmica e sensorial (letras que dançam, sons que emergem).",
-      "A sombra age como um mediador entre a pessoa e o folclore, com uma presença não humana mas afetuosa.",
-      "A experiência mistura canais sensoriais de forma orgânica: voz → letras → objetos visuais → sons de objetos.",
-      "O silêncio e a espera são partes ativas da experiência, não apenas ausência de estímulo.",
-      "A pessoa pode contribuir com a sua própria adivinha, que se torna parte de um arquivo vivo.",
-      "A assinatura sensorial é única: textura orgânica, som distorcido, movimento das letras e objetos visuais que emergem das respostas."
+    "unique_elements": [
+      "A adivinha *respira*: surge e desaparece como um ser vivo, não como texto estático.",
+      "A resposta é *distorcida* ou *mutável*, quebrando a expectativa de linearidade.",
+      "A tradução cruzada entre palavra (auditory), objeto (visual) e som (auditory) é específica desta experiência.",
+      "O uso do *silêncio ativo* como ferramenta de revelação (ex.: espera para a resposta surgir).",
+      "A associação territorial (freguesia, lugar) é *integrada* na experiência, não um adendo.",
+      "A devolução é um *bilhete manuscrito*, não um simples 'parabéns'."
     ],
-    "comparison": "Nenhuma outra experiência no Atlas usa uma sombra como mediadora ou transforma adivinhas em um ritual sensorial. Outras experiências podem usar voz ou texto, mas não a combinação de sombra, letras dinâmicas, sons de objetos e devolução simbólica."
+    "comparison": "Nenhuma outra experiência no Atlas usa a mecânica de *adivinha viva* com distorção de resposta, tradução cruzada palavra-objeto-som e associação territorial integrada. Experiências como 'Fucô' ou 'Galeria Diletante' focam-se em conversa ou imagem, não em enigma oral."
   },
   "questions_for_eduardo": [
-    "Existe um corpus de adivinhas folclóricas já curado e associado a territórios específicos? Se sim, onde está documentado e como deve ser integrado?",
-    "A sombra deve ter uma voz específica (ex: voz de uma pessoa real, voz gerada por IA) ou deve ser sempre distorcida/abstrata?",
-    "As adivinhas criadas pela pessoa devem ser moderadas antes de serem integradas na constelação de vozes? Se sim, como?",
-    "Deve haver um limite ao número de adivinhas por sessão para evitar fadiga?",
-    "A textura de fundo (papel/tecido) deve ser estática ou pode ter animações subtis (ex: respirar, mover-se lentamente)?"
+    "Deve a adivinha ser sempre associada a um território específico (freguesia/lugar), ou pode ser genérica em algumas situações?",
+    "Qual o limite para a distorção da resposta? Pode ser completamente absurda (ex.: 'garfo' → 'lua'), ou deve manter alguma lógica (ex.: 'garfo' → 'colher')?",
+    "Deve a experiência incluir uma *pista territorial* (ex.: 'Esta adivinha é de Alfama') ou é suficiente a associação implícita?",
+    "Como deve ser tratada a moderação de adivinhas partilhadas pelas pessoas? Deve ser automática, manual ou mista?",
+    "Deve a voz que ditam as adivinhas ter um *sotaque* ou *característica* territorial (ex.: voz de Alfama para adivinhas de Alfama)?"
   ],
   "improvement_proposals": [
     {
-      "title": "Integração com COSMICOXES",
-      "description": "As adivinhas poderiam ser associadas a estrelas ou constelações no COSMICOXES, onde cada adivinha resolvida 'acende' uma estrela no território correspondente. Isso criaria uma camada adicional de devolução territorial.",
-      "dependency": "Validação de Eduardo sobre a relação entre adivinhas e COSMICOXES."
+      "proposal": "Incluir uma *camada de memórias*: após resolver uma adivinha, a pessoa pode associá-la a uma memória pessoal (ex.: 'Esta adivinha lembra-me da minha avó').",
+      "justification": "Aprofundaria a conexão emocional e territorial, alinhando com os princípios do FALArte (memória, território)."
     },
     {
-      "title": "Adivinhas em língua gestual",
-      "description": "Adicionar uma opção para que as adivinhas sejam apresentadas em língua gestual (vídeo ou animação), expandindo a acessibilidade para a comunidade surda.",
-      "dependency": "Recursos para gravar ou animar adivinhas em língua gestual."
+      "proposal": "Adicionar uma *dinâmica de coral*: se várias pessoas estiverem a interagir com a mesma adivinha ao mesmo tempo, as suas vozes (ou cliques) podem *sobrepor-se* para revelar a resposta.",
+      "justification": "Criaria uma experiência social e coletiva, alinhada com o princípio de 'encontro' do Atlas."
     },
     {
-      "title": "Adivinhas intergeracionais",
-      "description": "Incluir adivinhas que convide explicitamente à participação de diferentes gerações (ex: 'Pergunta ao teu avô: o que é que...'). Isso reforçaria o princípio de intergeracionalidade do Atlas.",
-      "dependency": "Curadoria de adivinhas com foco intergeracional."
+      "proposal": "Integração com *COSMICOXES*: as adivinhas resolvidas poderiam aparecer como *estrelas* ou *partículas* no cosmos, com a resposta a surgir como uma *constelação* de palavras.",
+      "justification": "Reforçaria a conexão entre as curadorias e a camada cósmica do Atlas."
+    },
+    {
+      "proposal": "Permitir que a pessoa *desenhe* a sua resposta à adivinha (ex.: desenhar um garfo) em vez de a dizer ou clicar.",
+      "justification": "Aumentaria a acessibilidade e a criatividade, alinhando com o princípio de 'corpo que percebe'."
     }
   ],
   "generic_fallback_allowed": false,

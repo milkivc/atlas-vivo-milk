@@ -3,342 +3,346 @@
   "canonical_name": "Festival Dado Sem Lado",
   "source_evidence": {
     "primary": [
-      "Cópia de Fica registado neste dossiê… (fonte autoral forte para Dado Sem Lado)",
-      "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md (princípios de jogo, anti-regras, absurdo)",
-      "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf (gramáticas de jogo tradicional e desvio)"
+      {
+        "source": "Cópia de Fica registado neste dossiê…",
+        "quote": "Dado Sem Lado — jogo-festival de desvio; pode dobrar-se como avião de papel, voar como mosca e desafiar a pessoa a apanhá-lo; pode haver prémio secreto; desafios misturam lenda, comida, absurdo, oralidade, infância e adulto; nunca reduzir a botão 'sortear'.",
+        "authority": "autoral_direct"
+      },
+      {
+        "source": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
+        "quote": "jogos tradicionais, trava-línguas e adivinhas como parte da camada pública.",
+        "authority": "autoral_contextual"
+      }
     ],
     "secondary": [
-      "curadoria entrada freguesias.xlsx (territorialidade opcional, não determinante)",
-      "A Deriva do Sentido: Cartografia Psicogeográfica e Sensorial de Lisboa (psicogeografia activa, brincadeira territorial)"
-    ],
-    "excluded": [
-      "Qualquer solução técnica legada (GAS/Sheets) ou invenção de mecânicas sem suporte autoral"
+      {
+        "source": "RELATORIO_COMPLETO_ESTADO_CAMADA_PUBLICA_ATLAS_VIVO_MILK_2026-07-25",
+        "quote": "826 festas públicas reais + 1 registo técnico interno; 615 relações F01–F20; 198 dinâmicas territoriais.",
+        "authority": "factual_state"
+      }
     ]
   },
   "authorial_invariants": [
-    "Jogo-festival de desvio, não botão 'sortear'.",
-    "O dado pode dobrar-se como avião de papel, voar como mosca e desafiar a pessoa a apanhá-lo.",
-    "Desafios misturam lenda, comida, absurdo, oralidade, infância e adulto.",
-    "Prémio secreto opcional (nunca pontuação ou badge).",
-    "Anti-regra: o dado não tem lado 'certo'; a regra é o desvio.",
-    "Relação com o Livro Cubo: erro como entrada, riso como método, silêncio como matéria."
+    "O dado é um objecto vivo que escapa à regra tradicional (6 lados fixos).",
+    "O jogo-festival convida ao desvio, à quebra de expectativa e à brincadeira com o acaso.",
+    "Pode assumir formas não convencionais: avião de papel, mosca, ou outras metamorfoses.",
+    "Desafios misturam lenda, comida, oralidade, absurdo, infância e adulto.",
+    "Existe a possibilidade de um prémio secreto (sem sistema de pontos ou badges).",
+    "Nunca deve ser reduzido a um botão 'sortear' ou mecânica genérica de randomização."
   ],
-  "perceptual_intent": "Transformar o acaso num corpo vivo que escapa, desafia e convida à perseguição lúdica. A pessoa deve sentir que o dado é um ser teimoso, não um objecto passivo. A experiência evoca a infância (brincadeira de rua), a oralidade (lendas, trava-línguas) e o território (ruas, festas, comidas) sem nunca se reduzir a um quiz ou sorteio genérico.",
+  "perceptual_intent": "Transformar o acto de lançar um dado num ritual de desvio corporal e sensorial, onde o acaso se torna uma presença física, auditiva e visual que desafia a noção de controle e linearidade. A experiência deve evocar a surpresa de um festival popular, onde o dado é ao mesmo tempo objecto, personagem e território.",
   "threshold": {
-    "description": "A tela está quase vazia, com um ponto minúsculo e pulsante no centro (como um dado a 3D reduzido a um pixel). O fundo é um degradê orgânico de tons terrosos (como um chão de terra batida), com uma textura subtil de grãos que se mexem lentamente, como se respirassem. Um som de ventoinha ou asa a bater (baixo volume, quase subliminar) sugere movimento oculto.",
-    "sensory_trigger": "O ponto pisca uma vez, como se chamasse, e desaparece. No mesmo instante, o som de ventoinha cessa abruptamente, deixando um silêncio que 'pesa' (como se o ar tivesse sido sugado)."
+    "description": "A pessoa entra num espaço vazio, escuro e silencioso, onde um único ponto de luz (um dado tridimensional suspenso) gira lentamente no centro do ecrã. O dado não tem faces visíveis — é uma forma abstrata, quase orgânica, que pulsa como um coração. O som ambiente é um zumbido baixo, como o de uma mosca a voar em círculos. Não há texto, botões ou instruções.",
+    "sensory_trigger": "A luz do dado atrai o olhar; o zumbido convida à escuta atenta. A ausência de interface tradicional cria uma expectativa de que algo está prestes a acontecer."
   },
   "dramaturgical_arc": [
     {
-      "stage": "LIMIAR",
-      "action": "O ponto desaparece. A tela escurece 10% e o som de ventoinha é substituído por um zumbido grave (como um dado a rolar dentro de uma caixinha de metal). A pessoa percebe que algo mudou, mas não sabe o quê."
+      "stage": 1,
+      "name": "LIMIAR",
+      "description": "O dado gira no vazio. A pessoa percebe que o ambiente não é estático: a luz do dado projeta sombras que se movem como se fossem vivas. O zumbido ganha camadas — agora parece uma voz murmurosa, como se o dado falasse em uma língua desconhecida."
     },
     {
-      "stage": "CHAMADA",
-      "action": "Aparece uma sombra alongada e distorcida do dado, projectada na parede (lado esquerdo da tela). A sombra move-se lentamente, como se o dado estivesse a rolar. Uma voz sussurrada (ou texto que aparece e desaparece) diz: *‘Lança sem procurar o lado certo.’* O zumbido aumenta de volume."
+      "stage": 2,
+      "name": "CHAMADA",
+      "description": "O dado para de girar e uma voz (ou texto que aparece e desaparece rapidamente) diz: *Lança sem procurar o lado certo.* A frase repete-se em eco, como se fosse um convite e uma advertência ao mesmo tempo."
     },
     {
-      "stage": "PRIMEIRO GESTO",
-      "action": "A pessoa pode: (1) tocar/arrastar a sombra; (2) soprar para o microfone (opcional); (3) mover o dispositivo (opcional); ou (4) esperar. Qualquer gesto faz a sombra reagir: se tocada, salta; se soprada, gira; se o dispositivo se mover, a sombra projecta-se num ângulo diferente; se esperar, a sombra aproxima-se sozinha."
+      "stage": 3,
+      "name": "PRIMEIRO GESTO",
+      "description": "A pessoa é convidada a interagir com o dado: pode arrastá-lo com o cursor/dedo, soprar para o microfone (opcional) ou tocar no ecrã. O dado reage ao gesto: se arrastado, deforma-se como se fosse de borracha; se soprado, voa como avião de papel; se tocado, salta como uma mosca."
     },
     {
-      "stage": "RESPOSTA VIVA",
-      "action": "O dado materializa-se em 3D (mas não realista: é uma forma geométrica orgânica, com arestas irregulares e textura de papel amassado). Começa a rolar em direcção ao cursor/dedo da pessoa, emitindo um som de rolagem (madeira em pedra). Se a pessoa se mexer, o dado ajusta a trajectória, como se a perseguição fosse mútua."
+      "stage": 4,
+      "name": "RESPOSTA VIVA",
+      "description": "O dado, agora em movimento, emite sons que mudam de acordo com a sua trajectória: um zumbido agudo se voar rápido, um som grave e ritmado se rolar lentamente, ou um estalido se colidir com as bordas do ecrã. A luz do dado projeta sombras que se transformam em formas reconhecíveis (uma mosca, um avião, um prato de comida) por breves instantes."
     },
     {
-      "stage": "DESVIO",
-      "action": "Quando o dado está a 20% da tela da pessoa, ele *dobra-se* ao meio (como um avião de papel) e voa em direcção aleatória, emitindo um som de asa. Se a pessoa tentar apanhá-lo com o cursor, o dado acelera. Se a pessoa parar, o dado abrandar e paira no ar, como uma mosca."
+      "stage": 5,
+      "name": "DESVIO",
+      "description": "De repente, o dado divide-se em dois, três ou mais fragmentos. Cada fragmento assume uma forma e um som distintos: um parece uma fatia de bolo, outro um peixe, outro uma nuvem. Os fragmentos movem-se em direcções opostas, como se fugissem uns dos outros. A voz murmura: *Escolhe o que não é lado.*"
     },
     {
-      "stage": "APROFUNDAMENTO SENSORIAL",
-      "action": "O som do dado transformou-se: agora é uma mistura de zumbido, riso abafado e um *clique* metálico (como um dado a bater num copo). A sombra do dado projecta-se em todas as direcções, criando um padrão de luz fractal. Se a pessoa mover o cursor para a sombra, esta *queima* (como papel) e revela uma palavra ou símbolo efémero (ex: ‘SARDINHA’, ‘REPOLHO’, ‘JANELA QUEBRADA’ — referências ao baralho SOMOSTODOSPOSSIVEIS)."
+      "stage": 6,
+      "name": "APROFUNDAMENTO SENSORIAL",
+      "description": "Se a pessoa interagir com um fragmento (tocar, arrastar ou soprar), este cresce e revela uma camada sensorial adicional: o fragmento 'bolo' emite um cheiro evocativo de baunilha (através de descrição textual ou som associado); o fragmento 'peixe' projeta uma sombra que parece nadar; o fragmento 'nuvem' faz com que o ambiente fique mais claro, como se uma luz fosse acesa. Os sons misturam-se: o zumbido da mosca, o estalar do avião de papel, o murmúrio da voz."
     },
     {
-      "stage": "ESCOLHA / ACASO / SILÊNCIO",
-      "action": "O dado para no ar e *cai* lentamente. A pessoa pode: (1) apanhá-lo com o cursor (o dado desdobra-se num desafio: ex: ‘Diz um trava-língua de [freguesia aleatória]’); (2) deixar cair (o dado bate no ‘chão’ e salta para um lado aleatório, emitindo um som de riso); ou (3) ignorar (o dado desaparece e o som de ventoinha regressa, mais forte)."
+      "stage": 7,
+      "name": "ESCOLHA / ACASO / SILÊNCIO",
+      "description": "Os fragmentos começam a desaparecer um a um, como se fossem sugados por um vórtice no centro do ecrã. A pessoa pode tentar 'apanhar' um fragmento antes que ele desapareça, arrastando-o para uma zona segura (uma área circular no canto do ecrã). Se conseguir, o fragmento transforma-se num objecto estável (ex: uma fatia de bolo em 3D, um peixe de papel, uma nuvem de tinta). Se não conseguir, o fragmento some e emite um som de desintegração (como um suspiro ou um estalo)."
     },
     {
-      "stage": "APARIÇÃO",
-      "action": "Se apanhado: o dado abre-se como uma flor, revelando um *prémio secreto* (ex: uma receita de um doce tradicional, uma lenda local em forma de adivinha, ou uma foto distorcida de um lugar da freguesia). Se caído: o dado transformou-se num *pião* e gira, projectando sombras de outras formas (estrelas, corações, peixes). Se ignorado: a tela escurece e aparece um texto: *‘O dado foi-se embora. Mas volta quando menos esperares.’*"
+      "stage": 8,
+      "name": "APARIÇÃO",
+      "description": "Se a pessoa tiver 'apanhado' pelo menos um fragmento, o ambiente muda: o ecrã preenche-se com uma paisagem que evoca um festival popular (luzes coloridas, som de risos distantes, cheiro de comida evocada). No centro, aparece um dado gigante, agora com faces visíveis — mas cada face é uma imagem ou palavra relacionada com os fragmentos que a pessoa salvou (ex: uma face com uma fatia de bolo, outra com um peixe, outra com uma nuvem)."
     },
     {
-      "stage": "DEVOLUÇÃO",
-      "action": "A pessoa recebe um *rasto*: (1) se interagiu, uma *partícula* (símbolo ou palavra) é adicionada ao seu ‘inventário’ (visível como um ícone flutuante no canto da tela, que pode ser arrastado para o COSMICOXES); (2) se ignorou, o dado deixa uma *mancha de tinta* no ‘chão’ (que permanece nas próximas sessões, como um graffiti). Em ambos os casos, o som de ventoinha regressa, mas agora com um *eco* da interacção (ex: um riso ou um *clique* metálico ocasional)."
+      "stage": 9,
+      "name": "DEVOLUÇÃO",
+      "description": "O dado gigante rola sozinho e pára numa face aleatória. A face revelada transforma-se num convite: *Leva este lado contigo.* A pessoa recebe uma 'ficha' digital (gerada como imagem ou texto) com a imagem/word da face, uma frase absurda relacionada (ex: *O peixe que voa não tem lado*), e um código único que pode ser guardado ou partilhado. Se a pessoa não tiver apanhado nenhum fragmento, recebe uma ficha em branco com a frase: *O lado certo é o que não procuras.*"
     },
     {
-      "stage": "RASTO / LATÊNCIA",
-      "action": "O dado *nunca some completamente*. Nas sessões seguintes, pode aparecer: (1) como uma sombra passageira; (2) como um som de rolagem ao carregar a página; ou (3) como uma partícula no COSMICOXES. A mancha de tinta (se ignorado) cresce lentamente com o tempo, como um musgo digital."
+      "stage": 10,
+      "name": "RASTO / LATÊNCIA",
+      "description": "A ficha gerada fica disponível para ser consultada mais tarde na secção 'Rastos' da WebApp. Além disso, o fragmento que a pessoa salvou (ex: fatia de bolo) passa a fazer parte de uma constelação colectiva visível em 'COSMICOXES', onde todos os fragmentos salvados por outras pessoas aparecem como estrelas num céu digital. A constelação evolui com o tempo: fragmentos semelhantes aglomeram-se, criando padrões que podem ser explorados."
     }
   ],
   "participant_verbs": [
-    "perseguir",
+    "arrastar",
     "soprar",
-    "esperar",
+    "tocar",
     "apanhar",
-    "deixar cair",
-    "ignorar",
-    "ouvir"
+    "escolher",
+    "escutar",
+    "observar"
   ],
-  "system_responses": [
-    "O dado rola em direcção ao cursor, ajustando a trajectória.",
-    "O dado dobra-se e voa como avião de papel.",
-    "O dado projecta sombras fractais que revelam palavras efémeras.",
-    "O dado abre-se como uma flor, revelando um prémio secreto.",
-    "O dado transforma-se num pião e gira, projectando sombras.",
-    "O dado desaparece e regressa como sombra ou som.",
-    "A tela escurece e o som de ventoinha regressa com eco.",
-    "Partículas ou manchas são adicionadas ao inventário ou ao território."
-  ],
-  "sensory_signature_id": "DSL_002_FESTIVAL_DADO_SEM_LADO",
+  "system_responses": {
+    "visual": [
+      "O dado deforma-se, voa ou salta em resposta ao gesto.",
+      "Fragmentos do dado assumem formas reconhecíveis (comida, animais, objectos).",
+      "Sombras projetadas transformam-se em silhuetas de objectos ou seres.",
+      "Paisagem de festival aparece como recompensa sensorial.",
+      "Dado gigante com faces personalizadas surge no final.",
+      "Constelação de fragmentos salvados evolui em COSMICOXES."
+    ],
+    "auditory": [
+      "Zumbido do dado que varia em altura e ritmo conforme o movimento.",
+      "Voz murmurosa que repete frases enigmáticas (*Lança sem procurar o lado certo*).",
+      "Sons de colisão, voo ou desintegração conforme a interacção.",
+      "Risos distantes e sons de festival como recompensa.",
+      "Som de suspiro ou estalo quando um fragmento desaparece."
+    ],
+    "haptic": [
+      "Vibração sutil (opcional) quando o dado colide com as bordas do ecrã (em dispositivos compatíveis)."
+    ],
+    "kinesthetic": [
+      "O dado reage à velocidade e trajectória do gesto (arrasto, toque).",
+      "Fragmentos movem-se em direcções opostas, criando um sentido de caos controlado."
+    ],
+    "proprioceptive": [
+      "Instruções implícitas para ajustar a postura ou ritmo (ex: *Escolhe o que não é lado* convida à pausa e reflexão)."
+    ],
+    "temporal_interoceptive": [
+      "Tempo de espera entre a acção e a resposta do sistema (ex: fragmento desaparece lentamente).",
+      "Ritmo acelerado ou lento conforme a interacção da pessoa.",
+      "Silêncio repentino antes da aparição do dado gigante."
+    ]
+  },
+  "sensory_signature_id": "DSL-002-FESTIVAL-DESVIO",
   "sensory_channels": {
     "visual": {
-      "primary": [
-        "sombra distorcida",
-        "dado 3D orgânico",
-        "textura de papel amassado",
-        "projecção de luz fractal",
-        "degradê terroso",
-        "partículas efémeras",
-        "mancha de tinta"
-      ],
-      "secondary": [
-        "piscar do ponto inicial",
-        "queimar da sombra",
-        "abrir como flor",
-        "girar como pião"
+      "primary": true,
+      "elements": [
+        "luz dinâmica",
+        "sombras animadas",
+        "formas orgânicas",
+        "paisagem de festival",
+        "constelação COSMICOXES"
       ]
     },
     "auditory": {
-      "primary": [
-        "zumbido grave (dado a rolar)",
-        "som de asa (voo)",
-        "clique metálico",
-        "riso abafado",
-        "ventoinha/asa a bater",
-        "eco do som de rolagem"
-      ],
-      "secondary": [
-        "silêncio repentino",
-        "som de papel a queimar",
-        "som de pião a girar"
+      "primary": true,
+      "elements": [
+        "zumbido modular",
+        "voz murmurosa",
+        "sons de colisão/voo",
+        "risos distantes",
+        "silêncio estratégico"
       ]
     },
     "haptic": {
-      "optional": [
-        "vibração subtil ao apanhar o dado (se dispositivo suportar)",
-        "feedback de pressão ao tocar a sombra (se ecrã táctil)"
+      "primary": false,
+      "elements": [
+        "vibração opcional"
       ]
     },
     "kinesthetic": {
-      "primary": [
+      "primary": true,
+      "elements": [
+        "resposta a gesto",
         "trajectória do cursor/dedo",
-        "movimento do dispositivo (opcional)",
-        "velocidade de perseguição"
-      ],
-      "secondary": [
-        "soprar para o microfone (opcional)"
+        "velocidade"
       ]
     },
     "proprioceptive": {
-      "primary": [
-        "postura de espera (corpo imóvel)",
-        "ritmo de respiração (sugerido pelo som)"
+      "primary": true,
+      "elements": [
+        "instruções de ritmo",
+        "pausa implícita"
       ]
     },
     "temporal_interoceptive": {
-      "primary": [
-        "espera pelo regresso do dado",
-        "aceleração/abrandamento do som",
-        "latência da mancha de tinta"
-      ],
-      "secondary": [
-        "suspensão do tempo durante a queda do dado"
+      "primary": true,
+      "elements": [
+        "espera",
+        "ritmo variável",
+        "suspensão"
       ]
     },
     "spatial": {
-      "primary": [
-        "projecção da sombra em 2D/3D",
-        "distância entre dado e cursor",
-        "orientação do dispositivo (opcional)"
-      ],
-      "secondary": [
-        "profundidade da textura do chão"
+      "primary": true,
+      "elements": [
+        "profundidade visual",
+        "movimento 3D",
+        "vórtice central"
       ]
     },
     "olfactory_evocation": {
-      "evocation": [
-        "cheiro a papel velho (pela textura visual)",
-        "cheiro a terra molhada (pelo degradê terroso)",
-        "cheiro a comida tradicional (pelo prémio secreto)"
+      "primary": false,
+      "elements": [
+        "cheiro de baunilha (evocado via texto/som)",
+        "aroma de comida de festival (evocado)"
       ]
     },
     "gustatory_evocation": {
-      "evocation": [
-        "sabor de doce tradicional (pelo prémio secreto)",
-        "sabor a terra (pela mancha de tinta)"
+      "primary": false,
+      "elements": [
+        "sabor de bolo (evocado via descrição)"
       ]
     },
     "social_presence": {
-      "primary": [
-        "voz sussurrada (como um convite)",
-        "riso abafado (como resposta)"
+      "primary": true,
+      "elements": [
+        "constelação colectiva em COSMICOXES",
+        "frases partilhadas por outras pessoas"
       ]
     }
   },
   "cross_sensory_translation": {
-    "primary": "O som do dado (zumbido, clique metálico) altera a textura visual do dado (de liso para amassado) e a trajectória da sombra (de recta para fractal).",
-    "secondary": "O movimento do cursor (cinestésico) altera o volume e o timbre do som do dado (auditivo).",
-    "tertiary": "A palavra efémera (visual) é pronunciada em sussurro (auditivo) se a pessoa parar o cursor sobre ela."
+    "description": "O som do zumbido do dado traduz-se em movimento visual (a luz pulsa em sincronia com o som). O gesto de arrastar o dado traduz-se em som (altura e ritmo do zumbido mudam conforme a velocidade do arrasto). A forma do fragmento (ex: fatia de bolo) traduz-se em cheiro evocativo (baunilha) e em sombra projetada (silhueta de um bolo).",
+    "mechanism": "som → luz/movimento; gesto → som; forma → cheiro/evocação; sombra → objecto reconhecível."
   },
   "silence_or_absence": {
-    "mechanism": "O silêncio repentino (após o zumbido inicial) é usado para: (1) marcar a transição do limiar para a chamada; (2) criar expectativa durante a queda do dado; (3) dar espaço para o eco dos sons anteriores (ventoinha, riso).",
-    "effect": "O silêncio não é vazio: é uma presença que *puxa* a atenção da pessoa para o que está prestes a acontecer."
+    "mechanism": "O silêncio é usado como ferramenta dramática: após o desvio (fragmentos a desaparecer), há um momento de silêncio total antes da aparição da paisagem de festival. Além disso, a ausência de faces visíveis no dado inicial cria uma expectativa de mistério.",
+    "purpose": "Criar suspense, focar a atenção no gesto seguinte e evocar a noção de que o acaso também é silêncio."
   },
   "surprise_or_indeterminacy": {
-    "primary": "O dado dobra-se e voa como avião de papel (quebra a expectativa de rolagem).",
-    "secondary": "O prémio secreto é aleatório (receita, lenda, foto) e específico do território.",
-    "tertiary": "A mancha de tinta cresce com o tempo, mesmo sem interacção.",
-    "quaternary": "O dado pode regressar em sessões futuras como sombra, som ou partícula."
+    "mechanism": [
+      "O dado divide-se em fragmentos de formas e sons aleatórios (mas dentro de um conjunto curado: comida, animais, objectos).",
+      "A face final do dado gigante é aleatória, mas baseada nos fragmentos que a pessoa salvou.",
+      "A constelação em COSMICOXES evolui de forma imprevisível conforme a contribuição de outras pessoas.",
+      "O prémio secreto (ficha digital) é gerado de forma única e não repetível."
+    ],
+    "purpose": "Quebrar a expectativa de linearidade e controle, reforçando a ideia de festival como espaço de acaso e desvio."
   },
   "session_variation": [
     {
-      "type": "acaso controlado",
-      "description": "O prémio secreto (receita, lenda, foto) é seleccionado aleatoriamente de um conjunto curatorial pré-definido para a freguesia ou tema."
+      "type": "acaso_controlado",
+      "description": "Os fragmentos em que o dado se divide são seleccionados aleatoriamente a partir de um conjunto fixo (ex: 10 formas possíveis)."
     },
     {
-      "type": "ordem mutável",
-      "description": "A sequência de desafios (trava-língua, adivinha, etc.) altera-se entre sessões."
+      "type": "resposta_a_ritmo",
+      "description": "A velocidade e ritmo do gesto da pessoa afectam a deformação do dado e o som emitido (ex: arrasto rápido = zumbido agudo; arrasto lento = zumbido grave)."
     },
     {
-      "type": "resposta a ritmo/velocidade",
-      "description": "Se a pessoa perseguir o dado rapidamente, este acelera e emite sons mais agudos; se lentamente, abrandar e emite sons graves."
+      "type": "combinação_de_fragmentos",
+      "description": "As faces do dado gigante no final são uma combinação única dos fragmentos que a pessoa salvou, misturados com elementos aleatórios."
     },
     {
-      "type": "resposta a posição/trajectória",
-      "description": "A sombra do dado projecta-se em ângulos diferentes consoante a posição do cursor ou a orientação do dispositivo."
+      "type": "temporalidade_real",
+      "description": "A paisagem de festival que aparece no final varia conforme a hora do dia (ex: luzes mais quentes ao entardecer, sons mais animados à noite)."
     },
     {
-      "type": "combinação de fragmentos curatoriais",
-      "description": "As palavras efémeras (ex: ‘SARDINHA’) são combinadas aleatoriamente com símbolos ou imagens do corpus autoral."
-    },
-    {
-      "type": "temporalidade real",
-      "description": "O som de ventoinha é mais forte durante a noite (se o dispositivo permitir detecção de hora sem rastreio)."
+      "type": "presença_de_outros_rastos",
+      "description": "A constelação em COSMICOXES é actualizada em tempo real com os fragmentos salvados por outras pessoas, criando uma experiência colectiva em evolução."
     }
   ],
   "territorial_binding": {
-    "primary": {
-      "relation": "O prémio secreto (receita, lenda, foto) é específico de uma freguesia ou lugar real, extraído do corpus territorial (ex: ‘curadoria entrada freguesias.xlsx’).",
-      "example": "Se o dado for apanhado em Alfama, o prémio pode ser uma receita de *arroz de leite* ou uma lenda sobre o *Castelo de São Jorge*."
-    },
-    "secondary": {
-      "relation": "As palavras efémeras (ex: ‘REPOLHO’) são topónimos ou referências do baralho SOMOSTODOSPOSSIVEIS, que por sua vez remetem para lugares reais.",
-      "note": "A relação territorial é *evocada*, não imposta. A pessoa não precisa de saber a localização exacta para interagir."
-    },
-    "optional": {
-      "geolocation": "Se a pessoa permitir geolocalização, o dado pode *pousar* num lugar próximo (ex: uma rua da freguesia actual), mas a experiência funciona sem esta permissão."
-    }
+    "description": "A experiência evoca o território de forma indirecta, através de sons, imagens e objectos que remetem para festas populares, comida tradicional e lendas locais. Os fragmentos do dado podem assumir formas relacionadas com elementos territoriais (ex: um fragmento em forma de 'pastel de nata' ou 'sardinha assada').",
+    "sustainability": "A relação territorial é evocativa e não depende de geolocalização ou dados específicos de uma freguesia. É uma celebração genérica do território como espaço de festival e memória colectiva.",
+    "questions_for_eduardo": [
+      "Deve a experiência incluir fragmentos específicos de uma ou mais freguesias do Atlas, ou manter-se genérica e evocativa?"
+    ]
   },
   "trace_and_return": {
-    "immediate": {
-      "type": "partícula ou mancha",
-      "description": "A pessoa recebe uma partícula (símbolo ou palavra) no inventário ou uma mancha de tinta no ‘chão’ da tela."
+    "trace": {
+      "personal": "A ficha digital gerada no final (com a face do dado e uma frase) é guardada na secção 'Rastos' da pessoa.",
+      "collective": "Os fragmentos salvados pela pessoa passam a fazer parte da constelação em COSMICOXES, visível para todos."
     },
-    "latent": {
-      "type": "regresso do dado",
-      "description": "O dado regressa em sessões futuras como sombra, som ou partícula no COSMICOXES."
-    },
-    "cosmic": {
-      "type": "integração no COSMICOXES",
-      "description": "As partículas podem ser arrastadas para o COSMICOXES, onde se tornam parte de uma constelação maior."
+    "return": {
+      "immediate": "A ficha digital é entregue no final da experiência.",
+      "latent": "A constelação em COSMICOXES evolui com o tempo, permitindo que a pessoa regresso e veja como o seu fragmento se integrou no todo."
     }
   },
   "accessibility_equivalents": {
-    "visual_impairment": {
-      "description": "Todas as acções visuais (sombra, dado 3D, textura) são acompanhadas por sons distintos (ex: zumbido para rolagem, clique para dobra, riso para voo). As palavras efémeras são lidas em voz alta (opcional, com controlo de volume).",
-      "alternative": "Modo de alto contraste: o dado e a sombra são representados por formas geométricas simples (círculo, quadrado) com cores sólidas."
+    "visual": {
+      "alternative": "Todas as interacções visuais (ex: deformação do dado, sombras) são acompanhadas por descrições sonoras ou textuais opcionais (ex: *O dado está a deformar-se como borracha*).",
+      "reduced_motion": "Versão estável onde o dado e fragmentos não se movem, mas a interacção (arrasto, toque) continua a funcionar."
     },
-    "auditory_impairment": {
-      "description": "Todos os sons são acompanhados por legendas visuais (ex: ‘Zumbido do dado’, ‘Riso abafado’) que aparecem e desaparecem em sincronia. O volume dos sons é controlável.",
-      "alternative": "Modo silencioso: os sons são substituídos por vibrações (se dispositivo suportar) ou por pulsos visuais (ex: círculo concêntrico a expandir-se)."
+    "auditory": {
+      "alternative": "Todos os sons são acompanhados por legendas visuais (ex: *Zumbido agudo*) ou vibração (opcional)."
     },
-    "motor_impairment": {
-      "description": "Todas as interacções com o cursor/dedo têm equivalentes no teclado: (1) setas para mover; (2) barra de espaço para apanhar; (3) tecla ‘S’ para soprar; (4) tecla ‘E’ para esperar. O dado move-se mais lentamente para dar tempo de reacção.",
-      "alternative": "Modo estático: o dado move-se automaticamente em direcção ao centro da tela, e a pessoa pode interagir apenas com teclas ou voz (ex: ‘apanha’, ‘deixa cair’)."
+    "haptic": {
+      "alternative": "Vibração é substituída por feedback visual (ex: pulso de luz) ou sonoro (ex: som de clique)."
     },
-    "cognitive_load": {
-      "description": "A experiência pode ser pausada a qualquer momento (tecla ‘P’). Os desafios (trava-línguas, adivinhas) têm uma versão simplificada (ex: ‘Diz uma palavra que rime com [palavra]’).",
-      "alternative": "Modo guiado: uma voz ou texto explica cada passo (ex: ‘Toca no dado para o apanhar’)."
+    "kinesthetic": {
+      "alternative": "Gestos podem ser substituídos por teclado (ex: setas para arrastar, barra de espaço para 'apanhar')."
     },
-    "reduced_motion": {
-      "description": "O dado move-se em linha recta (sem dobras ou voos) e as sombras são estáticas. Os sons são mais suaves e sem eco."
+    "proprioceptive": {
+      "alternative": "Instruções de ritmo ou pausa são opcionais e podem ser ignoradas sem perder a experiência."
+    },
+    "temporal_interoceptive": {
+      "alternative": "Modo sem pressão: a pessoa pode pausar a experiência a qualquer momento e retomar mais tarde."
+    },
+    "olfactory_evocation": {
+      "alternative": "Cheiros evocados são sempre acompanhados por descrições textuais ou sonoras (ex: *O fragmento emite um aroma a baunilha*)."
+    },
+    "gustatory_evocation": {
+      "alternative": "Sabores evocados são sempre acompanhados por descrições textuais (ex: *Este fragmento lembra o sabor doce de um bolo de aniversário*)."
     }
   },
-  "optional_permissions": [
-    {
-      "type": "microphone",
-      "purpose": "Soprar para o dado (fazê-lo girar ou voar).",
-      "fallback": "Botão na tela para simular o sopro (tecla ‘S’)."
+  "optional_permissions": {
+    "microphone": {
+      "purpose": "Permitir soprar para o microfone para fazer o dado voar como avião de papel.",
+      "fallback": "A interacção de soprar é substituída por um gesto de arrasto rápido ou toque duplo."
     },
-    {
-      "type": "device_motion",
-      "purpose": "Inclinar o dispositivo para alterar a trajectória do dado.",
-      "fallback": "Controlo com setas do teclado."
-    },
-    {
-      "type": "geolocation",
-      "purpose": "Associar o prémio secreto a uma freguesia próxima.",
-      "fallback": "Prémio secreto aleatório do corpus geral."
+    "motion": {
+      "purpose": "Usar a inclinação do dispositivo para controlar a trajectória do dado (opcional).",
+      "fallback": "A trajectória é controlada apenas por arrasto ou toque."
     }
-  ],
+  },
   "overstimulation_risk": {
-    "potential": [
-      "Flashing: Nenhum (evitado por design).",
-      "Sound: Som súbito excessivo (mitigado por volume controlável e modo silencioso).",
-      "Motion: Movimento rápido do dado (mitigado por modo reduzido e controlo de velocidade).",
-      "Cognitive: Pressão de tempo (mitigado por modo pausado e desafios opcionais)."
+    "risks": [
+      "Flashing ou luzes intermitentes rápidas (mitigado: luzes são suaves e sem padrões de flashing perigoso).",
+      "Sons súbitos ou excessivamente altos (mitigado: volume é controlado e sons são progressivos).",
+      "Movimento constante sem pausa (mitigado: a pessoa pode pausar a experiência a qualquer momento)."
     ],
-    "mitigation": [
-      "Volume dos sons é ajustável e o modo silencioso está sempre disponível.",
-      "O dado move-se a uma velocidade adaptável (lento/rápido) consoante as preferências da pessoa.",
-      "A experiência pode ser pausada ou abandonada a qualquer momento.",
-      "Nenhum loop compulsivo: o dado para após 30 segundos de inactividade."
+    "mitigations": [
+      "Luzes são sempre suaves e sem padrões de flashing (WCAG compliant).",
+      "Volume dos sons é ajustável e nunca excede níveis seguros.",
+      "A pessoa pode pausar ou sair da experiência a qualquer momento.",
+      "Modo 'reduced motion' disponível para quem prefere menos movimento."
     ]
   },
   "distinctiveness": {
     "unique_elements": [
-      "O dado como ser teimoso (não objecto passivo).",
-      "A tradução cruzada entre som (zumbido) e textura visual (amassado).",
-      "O prémio secreto como devolução territorial (receita, lenda, foto).",
-      "A mancha de tinta como rasto latente (cresce com o tempo).",
-      "A integração com o COSMICOXES (partículas tornam-se constelação).",
-      "A anti-regra: o dado não tem lado ‘certo’; o desvio é a regra."
+      "O dado como objecto vivo que escapa à regra tradicional (sem faces fixas).",
+      "A metamorfose do dado em formas não convencionais (avião de papel, mosca, comida).",
+      "A tradução cruzada entre som, movimento e forma (ex: zumbido → luz pulsante; gesto → som modular).",
+      "A devolução sob a forma de uma ficha digital única e uma constelação colectiva em COSMICOXES.",
+      "O uso do silêncio e da ausência como ferramentas dramáticas (ex: momento de silêncio antes da aparição do festival).",
+      "A mistura de elementos de festival popular (comida, lendas, sons) com uma mecânica de jogo abstracta."
     ],
-    "comparison": "Nenhuma outra experiência no Atlas usa: (1) um objecto que foge e desafia a perseguição; (2) uma tradução som-textura; (3) um prémio secreto territorial; (4) um rasto que cresce com o tempo. A Galeria Diletante trabalha com palavras e fotos, mas não com perseguição lúdica. O FUCO é um mediador, não um objecto. O Reizinho quebra normas, mas não persegue."
+    "comparison": "Esta experiência não pode ser confundida com outras porque: (1) o dado não é um objecto estático, mas uma entidade viva que se transforma; (2) a interacção não é linear (o acaso e o desvio são centrais); (3) a devolução é ao mesmo tempo pessoal (ficha única) e colectiva (constelação em COSMICOXES); (4) a evocação territorial é feita através de elementos sensoriais (som, forma, cheiro evocativo) em vez de dados geográficos."
   },
   "questions_for_eduardo": [
-    "O prémio secreto deve ser sempre específico de uma freguesia, ou pode ser aleatório do corpus geral quando a geolocalização não é permitida?",
-    "As palavras efémeras (ex: ‘SARDINHA’) devem ser sempre do baralho SOMOSTODOSPOSSIVEIS, ou podem incluir outros elementos do corpus (ex: topónimos, gírias)?",
-    "O dado deve ter um número limitado de ‘vidas’ (ex: 3 tentativas de apanhar) ou pode ser infinito?",
-    "A mancha de tinta deve desaparecer após um certo tempo, ou permanecer permanentemente?",
-    "O som de ventoinha deve ser o mesmo para todas as sessões, ou pode variar consoante o território (ex: som de mar para freguesias costeiras)?"
+    "Deve a experiência incluir fragmentos específicos de uma ou mais freguesias do Atlas, ou manter-se genérica e evocativa do território?",
+    "O prémio secreto (ficha digital) deve ser sempre único, ou pode haver repetições para criar padrões na constelação COSMICOXES?",
+    "A voz murmurosa deve ser uma voz humana gravada, uma voz sintetizada ou texto que aparece e desaparece?",
+    "Deve haver um limite de tempo para a experiência, ou a pessoa pode explorar livremente?"
   ],
   "improvement_proposals": [
     {
-      "type": "territorial_deepening",
-      "description": "Integrar o ‘O som que só existe aqui’ (FALArte mecânica 5) como um dos prémios secretos: a pessoa recebe um áudio ou descrição de um som singular da freguesia."
+      "proposal": "Incluir um modo 'narrativa' onde a pessoa pode optar por uma versão mais guiada da experiência, com mais texto e menos interacção, para quem prefira uma abordagem mais contemplativa.",
+      "justification": "Ampliar a acessibilidade para pessoas que possam ter dificuldade com interacções rápidas ou complexas."
     },
     {
-      "type": "social_presence",
-      "description": "Permitir que o dado, ao ser apanhado, *convide* outra pessoa (aleatória, com consentimento) para uma sessão conjunta de perseguição (ex: dois dados a voar em sincronia)."
+      "proposal": "Adicionar uma camada de 'memória' onde a pessoa pode regressar a fragmento salvos em sessões anteriores e interagir com eles de novas formas (ex: combinar fragmentos para criar novos objectos).",
+      "justification": "Aprofundar a devolução e o rasto, criando uma experiência mais rica e pessoal ao longo do tempo."
     },
     {
-      "type": "cross_curatorial_link",
-      "description": "Se o dado pousar num lugar associado a uma festa do corpus (ex: F01–F20), a sombra do dado pode projectar um símbolo ou palavra relacionada com essa festa."
-    },
-    {
-      "type": "haptic_enhancement",
-      "description": "Para dispositivos com feedback háptico, adicionar vibrações que imitem o som do dado (ex: vibração curta para *clique* metálico, longa para zumbido)."
+      "proposal": "Integração com a dinâmica 'Escutar o Silêncio': após a experiência, a pessoa pode ser convidada a gravar um som do seu ambiente (opcional) que será misturado com os sons do dado em sessões futuras.",
+      "justification": "Criar uma ponte entre curadorias e enriquecer a paisagem sonora da experiência."
     }
   ],
   "generic_fallback_allowed": false,

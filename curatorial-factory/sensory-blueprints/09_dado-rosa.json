@@ -4,318 +4,628 @@
   "source_evidence": {
     "primary": [
       {
-        "source": "catálogo de entrada (ordem 9, id: dado-rosa)",
-        "authority": "autoral_explicita",
-        "extract": "nome: 'Dado Rosa'; família: 'curadoria'; mecânica: 'sortear'; convite: 'Atira uma possibilidade ao ar.'; camada: 'pública'; estado: 'operável_motor_comum'"
+        "id": "catalog_entry",
+        "type": "curatorial_catalog",
+        "authority": "high",
+        "details": "Mecânica: sortear; Convite: 'Atira uma possibilidade ao ar.'; Família: curadoria; Estado: operável_motor_comum."
       },
       {
-        "source": "Âncoras Autoriais — Dado Sem Lado",
-        "authority": "autoral_recuperada",
-        "extract": "jogo-festival de desvio; pode dobrar-se como avião de papel, voar como mosca e desafiar a pessoa a apanhá-lo; pode haver prémio secreto; desafios misturam lenda, comida, absurdo, oralidade, infância e adulto; nunca reduzir a botão 'sortear'."
+        "id": "corpus_dado_sem_lado",
+        "type": "authorial_recovery",
+        "authority": "high",
+        "details": "Dado Sem Lado: jogo-festival de desvio; pode dobrar-se como avião de papel, voar como mosca, desafiar a apanhar; prémio secreto; mistura lenda, comida, absurdo, oralidade, infância e adulto; nunca reduzir a botão 'sortear'."
       }
     ],
     "secondary": [
       {
-        "source": "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md",
-        "authority": "interpretativa",
-        "extract": "D2 Catástrofe Produtiva — criação → ruptura/catástrofe → trabalhar com o que sobrevive/emerge."
+        "id": "livro_cubo_dinamicas",
+        "type": "methodological_reference",
+        "authority": "medium",
+        "details": "D2 Catástrofe Produtiva: criação → ruptura/catástrofe → trabalhar com o que sobrevive/emerge. Aplicável à mecânica de desvio e surpresa."
       },
       {
-        "source": "SOMOSTODOSPOSSIVEIS (Livro Cubo)",
-        "authority": "interpretativa",
-        "extract": "anti-regras; jogo termina quando todos querem continuar; cada sessão cria novas cartas."
+        "id": "falarte_mecanicas",
+        "type": "territorial_mechanics",
+        "authority": "medium",
+        "details": "Mecânica 10: 'Remetente Ausente' (carta nunca entregue; pode tornar-se partícula/cosmos). Inspiração para rasto/latência."
       }
     ]
   },
   "authorial_invariants": [
-    "O convite é 'Atira uma possibilidade ao ar.' (nunca 'clicar para sortear').",
-    "A mecânica é 'sortear', mas o dado não é um objecto estático.",
-    "O dado deve escapar à expectativa de um objecto geométrico rígido (ex: dobrar-se, voar, desafiar).",
-    "Deve misturar lenda, comida, absurdo, oralidade, infância e adulto nos desafios.",
-    "Pode conter prémio secreto (opcional e não explicado de antemão).",
-    "Nunca reduzir a um botão genérico de sorteio."
+    "O objecto 'Dado' deve escapar à sua forma tradicional (cubo, 6 faces).",
+    "A mecânica de 'sortear' é um convite, não um comando.",
+    "O convite 'Atira uma possibilidade ao ar' implica movimento, acaso e transformação física do objecto.",
+    "Deve misturar lenda, comida, absurdo, oralidade, infância e adulto.",
+    "Pode conter prémio secreto (nunca monetário ou pontuação).",
+    "Nunca reduzir a um botão ou interface estática de 'sortear'."
   ],
-  "perceptual_intent": "Transformar o acto de 'sortear' num ritual lúdico e corporal onde o acaso é uma presença física, sensorial e narrativa. O dado não é um objecto passivo, mas um ser vivo que convida à brincadeira, desafia a lógica e devolve uma possibilidade como se fosse um presente do território ou da memória colectiva.",
+  "perceptual_intent": "Transformar o acto de lançar um dado num ritual vivo onde o objecto se desmaterializa, voa, desafia e devolve uma possibilidade que é ao mesmo tempo acaso e escolha. A experiência deve sentir-se como um jogo de rua, uma brincadeira ancestral e uma provocação poética, onde o corpo, o som e o território se entrelaçam para criar um momento de surpresa e devolução.",
   "threshold": {
-    "description": "A tela começa em branco, com um murmúrio distorcido de vozes infantis a repetir 'um, dois, três...' em volumes decrescentes. De repente, o murmúrio pára. Um ponto rosa (quase imperceptível) aparece no centro do ecrã, a tremer como se fosse uma semente prestes a germinar. O cursor da pessoa, ao aproximar-se, faz o ponto expandir-se em direcções imprevisíveis, como se fosse atraído por uma gravidade invisível.",
-    "sensory_trigger": [
-      "auditory (murmúrio distorcido)",
-      "visual (ponto rosa tremulo)",
-      "kinesthetic (cursor como íman)"
-    ]
+    "description": "A pessoa entra num espaço vazio, exceto por um ponto rosa pulsante no centro do ecrã. O ponto não é um botão, mas uma presença que respira: expande e contrai lentamente, como se fosse um coração ou um dado a ganhar volume. O fundo é um degradê de tons terrosos (como um chão de terra batida), com texturas subtis que sugerem pátina ou desgaste do tempo. Um som de ventoinha ou folhas secas a roçar o chão (paisagem sonora mínima) preenche o espaço, mas é tão baixo que quase não se ouve — apenas se sente.",
+    "sensory_trigger": "A pulsação do ponto rosa (visual) + o som ambiente (auditivo) criam uma expectativa de que algo está prestes a acontecer, sem explicação."
   },
-  "dramaturgical_arc": {
-    "limiar": "Murmúrio infantil e ponto rosa tremulo que reage à presença do cursor.",
-    "chamada": "O ponto rosa cresce e transforma-se num dado de faces irregulares (algumas em forma de folha, outras de nuvem, outras de boca aberta). Sobre uma das faces, lê-se: 'Atira uma possibilidade ao ar.'",
-    "primeiro_gesto": "A pessoa arrasta o dado com o cursor ou dedo (ou pressiona a tecla 'espaço' para lançar).",
-    "resposta_viva": "O dado voa em trajectória parabólica, rodando no ar. Cada face que passa pelo centro do ecrã emite um som único: um riso, um estalo de dedos, um suspiro, um estalar de língua, um som de panela a ferver, ou o nome de uma rua de Lisboa pronunciado em voz baixa.",
-    "desvio": "No auge da trajectória, o dado desdobra-se: uma das faces abre-se como uma porta, revelando uma imagem fragmentada (ex: um pormenor de uma festa tradicional, um objecto doméstico, uma sombra de criança a correr). A imagem desaparece ao tocar o chão.",
-    "aprofundamento_sensorial": "O som do impacto do dado no 'chão' (invisível) faz tremer o ecrã como se fosse uma membrana. O tremor propaga-se em ondas concêntricas que distorcem temporariamente as cores do ambiente (ex: o rosa do dado contamina a tela como tinta na água).",
-    "escolha_acaso_silencio": "A pessoa pode: (1) apanhar o dado e lançá-lo novamente; (2) esperar que ele se recomponha sozinho (demora 3-7 segundos, com sons de respiração); ou (3) clicar na imagem fragmentada que apareceu (se a memorizou) para 'perseguir' o rasto.",
-    "aparição": "Se a pessoa escolher perseguir o rasto, surge uma constelação de 3-5 'possibilidades' (palavras, sons ou imagens) que flutuam como bolhas. Cada bolha contém um fragmento de uma lenda, uma receita, um topónimo ou um desafio absurdo (ex: 'Encontra o lugar onde o pão é mais doce que o açúcar').",
-    "devolução": "A pessoa recebe uma 'possibilidade' aleatória (ou a que escolheu) na forma de um 'bilhete' digital: um texto curto (máx. 12 palavras) que combina elementos do fragmento (ex: 'Rua das Portas Santo Antão + bolacha de azeite + riso da avó'). O bilhete pode ser guardado, partilhado ou 'deixado cair' no território (geolocalização opcional).",
-    "latencia": "O dado, ao ser abandonado, volta ao centro do ecrã como um ponto rosa, mas agora com uma face adicional: a 'possibilidade' devolta pela pessoa (se partilhada). Em sessões futuras, o dado pode 'lembrar-se' de possibilidades anteriores, misturando-as com as novas."
-  },
-  "participant_verbs": [
-    "arrastar",
-    "lançar",
-    "esperar",
-    "perseguir",
-    "escolher",
-    "deixar cair",
-    "ouvir"
+  "dramaturgical_arc": [
+    {
+      "stage": 1,
+      "name": "LIMIAR",
+      "description": "O ponto rosa pulsa. O som ambiente (ventoinha/folhas) é quase imperceptível. A pessoa sente que algo está vivo, mas não sabe o quê."
+    },
+    {
+      "stage": 2,
+      "name": "CHAMADA",
+      "description": "Aparece, em letras trémulas e orgânicas (como se escritas à mão com tinta que escorre), a frase: *'Atira uma possibilidade ao ar.'* A frase não é um título, mas um convite que parece vir do ponto rosa. O som ambiente aumenta ligeiramente de volume, como se o espaço respirasse."
+    },
+    {
+      "stage": 3,
+      "name": "PRIMEIRO GESTO",
+      "description": "A pessoa é convidada a interagir com o ponto rosa. Se tocar (ou clicar), o ponto explode em partículas rosas que se reorganizam num dado de 6 faces, mas com uma distorção: uma das faces está em falta, como se o dado fosse incompleto. O som ambiente transforma-se num *clique* seco (como um dado a bater numa mesa), seguido de um suspiro sonoro (respiração)."
+    },
+    {
+      "stage": 4,
+      "name": "RESPOSTA VIVA",
+      "description": "O dado rola no ecrã, mas em vez de parar, uma das faces (a que está em falta) começa a descolar-se, como se fosse de papel. O som do rolamento é substituído por um *rasgo* de papel (auditivo) e uma vibração táctil (se o dispositivo suportar). O dado transforma-se num avião de papel rosa, que levita no ar."
+    },
+    {
+      "stage": 5,
+      "name": "DESVIO",
+      "description": "O avião de papel voa em direcção à pessoa (como se fosse atirado para ela). Se a pessoa tentar 'apanhá-lo' com o cursor ou dedo, o avião desvia-se bruscamente, como uma mosca, e emite um som agudo e breve (como um *zumbido*). Se a pessoa não interagir, o avião paira no ar, a tremer."
+    },
+    {
+      "stage": 6,
+      "name": "APROFUNDAMENTO SENSORIAL",
+      "description": "O avião de papel começa a desdobrar-se no ar, revelando uma face oculta: uma ilustração minimalista de um objecto ou comida tradicional (ex: um pão, uma laranja, um brinquedo de madeira). O som do zumbido transforma-se num *murmúrio* (como uma voz a contar uma lenda em segundo plano). A ilustração ganha textura: parece que se pode tocar (visualmente, com som de fricção se o cursor passar por cima)."
+    },
+    {
+      "stage": 7,
+      "name": "ESCOLHA / ACASO / SILÊNCIO",
+      "description": "A pessoa pode: (a) tentar apanhar o avião (gesto rápido), (b) soprar para o microfone (se permitido) para o afugentar, ou (c) esperar em silêncio. Cada opção tem consequências: (a) o avião desintegra-se em partículas que formam uma palavra ou frase (ex: *'Sorte é o que sobra quando a lógica falha.'*), (b) o avião voa para fora do ecrã, deixando um rasto de poeira (visual) e um som de vento, (c) o avião cai lentamente, como uma folha, e o som ambiente volta ao silêncio inicial."
+    },
+    {
+      "stage": 8,
+      "name": "APARIÇÃO",
+      "description": "Se a pessoa escolheu (a) ou (c), aparece uma 'possibilidade' no ecrã: uma combinação única de uma lenda local (texto curto), um som territorial (ex: o som de um sino de igreja da freguesia) e uma ilustração do objecto/comida. Se escolheu (b), o ecrã fica vazio por 3 segundos, e depois aparece uma sombra do avião no chão (como se tivesse caído fora do ecrã), acompanhada de um som de *impacto suave* (como um objecto a cair na terra)."
+    },
+    {
+      "stage": 9,
+      "name": "DEVOLUÇÃO",
+      "description": "A 'possibilidade' (ou a sombra) transforma-se num *rasto*: um bilhete digital que a pessoa pode 'guardar' (copiar para a área de transferência como texto + imagem) ou 'deixar' (que se junta a uma constelação invisível de outros rastos, visível apenas como pontos de luz no fundo do ecrã). O bilhete tem a forma de um dado de papel dobrado, com a frase: *'Leva isto contigo. Ou não.'*"
+    },
+    {
+      "stage": 10,
+      "name": "RASTO / LATÊNCIA",
+      "description": "Se a pessoa deixou o rasto, este permanece no 'cosmos' da experiência (visível como um ponto de luz rosa no fundo do ecrã em sessões futuras). Se a pessoa guardou o bilhete, este pode 'reaparecer' em outras curadorias do Atlas (ex: na Galeria Diletante, como uma fotografia que se sobrepõe a uma imagem de Nuno A). O ponto rosa inicial volta a pulsar, mas agora com uma textura diferente (como se tivesse sido usado)."
+    }
   ],
-  "system_responses": {
-    "to_arrastar": "O dado segue o cursor/dedo, mas com inércia e micro-desvios (como se fosse vivo). Emite sons de fricção (ex: papel a rasgar, tecido a esfregar).",
-    "to_lancar": "Trajectória parabólica com rotação aleatória. Cada face visível emite um som único. A altura do lançamento afecta a duração do voo e o número de faces visíveis.",
-    "to_esperar": "O dado recompõe-se sozinho, emitindo sons de respiração ou de um relógio de areia. A tela treme levemente como se o tempo estivesse a passar.",
-    "to_perseguir": "A imagem fragmentada expande-se em constelação de bolhas. O cursor/dedo atrai as bolhas mais próximas, que emitem sons de campainhas ou risos.",
-    "to_escolher": "A bolha seleccionada explode em confetes digitais (partículas que caem lentamente) e revela o fragmento completo (texto, som ou imagem).",
-    "to_deixar_cair": "O bilhete digital 'cai' no ecrã como se fosse um objecto físico, emitindo um som de impacto suave. Se geolocalização estiver activada, o bilhete 'aterra' num mapa minimalista da freguesia associada ao fragmento.",
-    "to_ouvir": "Os sons do dado (risos, suspiros, etc.) misturam-se com sons ambientais opcionais (ex: vento, passos) se o utilizador permitir microfone. Caso contrário, os sons são gerados pelo sistema."
-  },
-  "sensory_signature_id": "dado-rosa-49-09",
+  "participant_verbs": [
+    "tocar",
+    "apanhar",
+    "soprar",
+    "esperar",
+    "observar",
+    "deixar",
+    "guardar"
+  ],
+  "system_responses": [
+    {
+      "gesture": "tocar o ponto rosa",
+      "response": "Explosão em partículas → reorganização num dado incompleto + som de *clique* + suspiro."
+    },
+    {
+      "gesture": "tocar o dado",
+      "response": "Dado rola → face em falta descola-se → transforma-se em avião de papel + som de *rasgo* + vibração táctil."
+    },
+    {
+      "gesture": "tentar apanhar o avião",
+      "response": "Avião desvia-se como mosca + som de *zumbido* agudo."
+    },
+    {
+      "gesture": "soprar para o microfone (opcional)",
+      "response": "Avião voa para fora do ecrã + som de vento + rasto de poeira."
+    },
+    {
+      "gesture": "esperar em silêncio",
+      "response": "Avião cai lentamente como folha + som ambiente volta ao silêncio inicial."
+    },
+    {
+      "gesture": "guardar o bilhete",
+      "response": "Bilhete copiado para a área de transferência (texto + imagem) + frase *'Leva isto contigo. Ou não.'*"
+    },
+    {
+      "gesture": "deixar o rasto",
+      "response": "Rasto junta-se à constelação de pontos de luz no fundo do ecrã (visível em sessões futuras)."
+    }
+  ],
+  "sensory_signature_id": "dado-rosa-voo-e-desvio",
   "sensory_channels": {
     "visual": {
       "elements": [
-        "ponto rosa tremulo (limiar)",
-        "dado de faces irregulares (geometria orgânica)",
-        "trajectória parabólica com rotação",
-        "imagem fragmentada (porta aberta no dado)",
-        "ondas concêntricas de distorção de cor",
-        "constelação de bolhas flutuantes",
-        "bilhete digital (textura de papel enrugado)",
-        "partículas de confetes (queda lenta)",
-        "mapa minimalista (linhas e pontos, sem preenchimento)"
+        "Ponto rosa pulsante (limiar).",
+        "Degradê terroso com textura de pátina.",
+        "Dado incompleto (face em falta).",
+        "Avião de papel rosa a voar/desviar-se.",
+        "Ilustração minimalista de objecto/comida com textura táctil visual.",
+        "Partículas rosas (explosão/desintegração).",
+        "Bilhete em forma de dado de papel dobrado.",
+        "Pontos de luz rosa (constelação de rastos).",
+        "Sombra do avião no chão (se voou para fora do ecrã)."
       ],
       "dynamics": [
-        "expansão/contracção",
-        "rotação",
-        "distorção de cor",
-        "transparência variável",
-        "foco/desfoco"
+        "Pulsação (respiração visual).",
+        "Rolamento do dado (física digital).",
+        "Descolagem da face do dado (animação de papel).",
+        "Voo do avião (trajectória imprevisível).",
+        "Desdobramento do avião (revelação da ilustração).",
+        "Desintegração em partículas (transição para palavra/frase).",
+        "Aparição/disparição gradual (sombra, bilhete)."
       ]
     },
     "auditory": {
       "elements": [
-        "murmúrio infantil distorcido (limiar)",
-        "sons de fricção (arrastar)",
-        "riso, estalo de dedos, suspiro, estalar de língua, panela a ferver, topónimo pronunciado (faces do dado)",
-        "respiração ou relógio de areia (recomposição do dado)",
-        "campainhas ou risos (bolhas)",
-        "som de impacto suave (bilhete a cair)",
-        "vento ou passos (ambiente opcional)"
+        "Som ambiente de ventoinha/folhas secas (limiar).",
+        "Clique seco (dado a bater na mesa).",
+        "Suspiro sonoro (respiração).",
+        "Rasgo de papel (face a descolar).",
+        "Zumbido agudo (avião a desviar-se).",
+        "Som de vento (avião a voar para fora do ecrã).",
+        "Impacto suave (avião a cair no chão).",
+        "Murmúrio (voz a contar lenda em segundo plano).",
+        "Silêncio (retorno ao som ambiente inicial)."
       ],
       "dynamics": [
-        "espacialização (esquerda/direita conforme posição do dado)",
-        "volume variável com distância",
-        "eco leve em momentos de silêncio"
+        "Volume e textura do som ambiente variam com a interacção.",
+        "Sons de transição (clique, rasgo, zumbido) são breves e específicos.",
+        "Murmúrio é sobreposto e não intrusivo.",
+        "Silêncio é usado como elemento ativo (ex: quando o avião cai)."
       ]
     },
     "haptic": {
       "elements": [
-        "vibração suave no impacto do dado (se dispositivo suportar)"
+        "Vibração táctil (se dispositivo suportar) quando o dado se transforma em avião."
       ],
       "dynamics": [
-        "intensidade proporcional à altura do lançamento"
-      ]
+        "Vibração é breve e sincronizada com o som de rasgo de papel."
+      ],
+      "fallback": "Pulso visual (piscar rápido do ecrã) para dispositivos sem vibração."
     },
     "kinesthetic": {
       "elements": [
-        "arrastar com inércia",
-        "lançamento com trajectória física simulada",
-        "perseguição de bolhas com atracção magnética"
+        "Trajectória do cursor/dedo a perseguir o avião.",
+        "Gesto de 'apanhar' (clique rápido).",
+        "Gesto de 'soprar' (se microfone permitido).",
+        "Gesto de 'esperar' (ausência de movimento)."
       ],
       "dynamics": [
-        "resistência leve ao movimento",
-        "aceleração/desaceleração"
-      ]
+        "O avião reage à velocidade e direcção do cursor/dedo.",
+        "O gesto de soprar (se permitido) afasta o avião do ecrã."
+      ],
+      "fallback": "Teclado: setas para mover um 'dedo virtual' no ecrã."
     },
     "proprioceptive": {
       "elements": [
-        "instrução implícita para usar a mão dominante (arrastar) ou não dominante (esperar)",
-        "sensação de peso do dado ao lançar (feedback visual de inércia)"
-      ]
+        "Instrução implícita para ajustar a postura (ex: 'inclinar-se para ver melhor' o avião a voar).",
+        "Sensação de 'peso' do dado ao rolá-lo (através de som e vibração)."
+      ],
+      "dynamics": [
+        "A experiência convida a mover-se sem obrigar (ex: o avião voa para fora do ecrã, sugerindo que a pessoa se incline)."
+      ],
+      "fallback": "Descrição textual opcional: *'Sentes o peso do dado na tua mão?'*."
     },
     "temporal_interoceptive": {
       "elements": [
-        "espera pela recomposição do dado (3-7 segundos)",
-        "ritmo do murmúrio inicial (decrescente)",
-        "pulsação das ondas de distorção"
+        "Pulsação do ponto rosa (ritmo lento).",
+        "Tempo de espera até o avião cair (se não interagir).",
+        "Duração variável da aparição do bilhete (depende da escolha da pessoa).",
+        "Silêncio ativo (ex: 3 segundos de ecrã vazio)."
       ],
       "dynamics": [
-        "aceleração/desaceleração do tempo percebido"
+        "O ritmo da pulsação acelera ligeiramente antes da transformação do dado.",
+        "O tempo de espera é uma escolha poética, não uma pressão."
       ]
     },
     "spatial": {
       "elements": [
-        "profundidade simulada na trajectória do dado",
-        "posicionamento das bolhas em 3D (flutuando à frente/atrás)",
-        "mapa minimalista com perspectiva isométrica"
+        "Profundidade sugerida pelo degradê terroso (fundo).",
+        "Avião a voar em 3D (mesmo em 2D, a trajectória sugere profundidade).",
+        "Sombra do avião no 'chão' (se voou para fora do ecrã).",
+        "Constelação de pontos de luz (rastos) no fundo do ecrã."
+      ],
+      "dynamics": [
+        "O avião move-se em trajectórias não lineares (como uma mosca).",
+        "A sombra do avião projecta-se no 'chão' (fundo do ecrã) se este voar para fora."
       ]
     },
     "olfactory_evocation": {
       "elements": [
-        "cheiro a pão quente (evocado pelo fragmento 'bolacha de azeite')",
-        "cheiro a terra molhada (evocado pelo fragmento 'rua')",
-        "cheiro a erva fresca (evocado pelo fragmento 'festa tradicional')"
+        "Evocação de cheiro de papel velho (através da textura visual do dado/avião).",
+        "Evocação de cheiro de terra molhada (através do degradê terroso e som de ventoinha).",
+        "Evocação de cheiro de comida tradicional (ex: pão quente, laranja) através da ilustração do objecto."
       ],
-      "method": "associação textual e sonora (ex: som de forno + texto 'pão')"
+      "dynamics": [
+        "A textura visual e o som sugerem memórias olfativas, mas nunca fingem produzir cheiro."
+      ]
     },
     "gustatory_evocation": {
       "elements": [
-        "sabor doce (evocado por 'bolacha de azeite')",
-        "sabor salgado (evocado por 'sardinha')",
-        "sabor ácido (evocado por 'limão na festa')"
+        "Evocação de sabor de comida tradicional (ex: doçura de laranja, acidez de limão) através da ilustração e da lenda associada."
       ],
-      "method": "descrição poética + som de mastigação ou riso"
+      "dynamics": [
+        "A lenda ou frase que aparece pode incluir descrições gustativas (ex: *'O pão da avó cheirava a infância.'*)."
+      ]
     },
     "social_presence": {
       "elements": [
-        "vozes infantis (murmúrio inicial)",
-        "risos e sons corporais (faces do dado)",
-        "memória colectiva (fragmentos de lendas/receitas)"
+        "Murmúrio de voz a contar uma lenda (presença de uma 'comunidade' invisível).",
+        "Constelação de rastos (presença de outras pessoas que deixaram bilhetes).",
+        "Frase *'Leva isto contigo. Ou não.'* (convite à partilha)."
       ],
       "dynamics": [
-        "sensação de partilha sem interacção directa"
+        "A voz do murmúrio é anónima e genérica, não gravada de uma pessoa real.",
+        "Os rastos são visíveis como pontos de luz, mas não revelam identidades."
       ]
     }
   },
   "cross_sensory_translation": {
-    "primary": "O som emitido por cada face do dado (auditory) altera a cor e a textura visual do ambiente (visual). Ex: um riso (som agudo) faz o ecrã ganhar tons pastel; um estalo de língua (som seco) introduz granulação na imagem.",
-    "secondary": "A trajectória do dado (kinesthetic/visual) modula a espacialização do som (auditory). Ex: quando o dado sobe, o som parece vir de cima; quando desce, o som parece vir de baixo."
+    "primary": {
+      "from": "gesto (tocar o dado)",
+      "to": "som (rasgo de papel) + visual (descolagem da face) + táctil (vibração)",
+      "description": "O gesto de tocar o dado traduz-se em som, transformação visual e feedback táctil, como se o dado fosse um objecto físico que se desintegra nas mãos da pessoa."
+    },
+    "secondary": {
+      "from": "som (murmúrio da lenda)",
+      "to": "visual (ilustração do objecto/comida) + gustatory_evocation (sabor lembrado)",
+      "description": "O som do murmúrio (auditivo) evoca uma imagem (visual) que, por sua vez, evoca um sabor (gustativo) através da memória e da associação."
+    },
+    "tertiary": {
+      "from": "movimento (trajectória do avião)",
+      "to": "som (zumbido) + visual (desvio)",
+      "description": "O movimento do avião (cinestésico) traduz-se em som (zumbido) e em uma resposta visual (desvio), como se o avião fosse um ser vivo que reage à presença da pessoa."
+    }
   },
   "silence_or_absence": {
-    "mechanism": "O dado, ao ser abandonado por mais de 10 segundos, 'adormece': para de emitir sons, as cores desaturam e o ponto rosa volta ao centro, tremendo levemente. O silêncio é um convite para recomeçar ou sair.",
-    "effect": "Cria uma pausa deliberada, quebrando o ritmo da interacção e permitindo à pessoa reflectir sobre a 'possibilidade' recebida."
+    "mechanism": "Silêncio ativo como elemento dramatúrgico.",
+    "examples": [
+      {
+        "moment": "Quando o avião cai no chão (se a pessoa esperar).",
+        "effect": "O som ambiente desaparece por 3 segundos, criando um vazio que realça a aparição da sombra do avião."
+      },
+      {
+        "moment": "Antes da aparição do bilhete.",
+        "effect": "Um momento de silêncio total (visual e auditivo) precede a devolução, como se o sistema estivesse a 'respirar'."
+      },
+      {
+        "moment": "Se a pessoa não interagir com o avião.",
+        "effect": "O avião paira em silêncio, e o som ambiente volta ao mínimo inicial, como se o tempo tivesse parado."
+      }
+    ],
+    "purpose": "O silêncio não é ausência de conteúdo, mas um convite à atenção e à surpresa. É usado para marcar transições e para criar expectativa."
   },
   "surprise_or_indeterminacy": {
-    "mechanism": [
-      "O dado desdobra-se no ar, revelando uma face oculta com uma imagem fragmentada (imprevisível).",
-      "A constelação de bolhas aparece com um número aleatório de elementos (3-5).",
-      "O prémio secreto (se existir) é revelado apenas se a pessoa escolher a bolha 'certa' (determinada por um algoritmo simples: ex: a bolha que emite o som mais grave).",
-      "O bilhete devolve uma combinação única de elementos (lenda + comida + topónimo), gerada em tempo real."
-    ],
-    "intensity": "baixa a média (surpresa suave, não choque)"
+    "mechanisms": [
+      {
+        "type": "acaso controlado",
+        "description": "A face do dado que descola (e o objecto/comida que aparece no avião) é escolhida aleatoriamente a partir de um conjunto pré-definido de possibilidades (ex: 10 objectos/comidas tradicionais de Lisboa)."
+      },
+      {
+        "type": "resposta a ritmo/velocidade",
+        "description": "A trajectória do avião adapta-se à velocidade do cursor/dedo da pessoa: se for rápido, o avião desvia-se mais bruscamente; se for lento, o avião paira mais tempo."
+      },
+      {
+        "type": "resposta a posição",
+        "description": "Se a pessoa mover o cursor/dedo para a esquerda ou direita do ecrã, o avião voa na direcção oposta (como se fosse uma mosca a fugir)."
+      },
+      {
+        "type": "combinação de fragmentos",
+        "description": "A 'possibilidade' (lenda + som + ilustração) é uma combinação única gerada em tempo real, com base na escolha da pessoa (apanhar/soprar/esperar) e no acaso da face do dado."
+      },
+      {
+        "type": "temporalidade real",
+        "description": "Se a experiência for acessada durante uma festa tradicional (ex: Santo António), o conjunto de objectos/comidas pode ser filtrado para incluir apenas os relevantes para essa festa."
+      }
+    ]
   },
   "session_variation": [
     {
-      "type": "acaso_controlado",
-      "description": "As faces do dado e os seus sons são seleccionados aleatoriamente de um conjunto fixo (ex: 12 sons diferentes)."
+      "type": "acaso controlado",
+      "description": "A face do dado que descola (e o objecto/comida associado) é diferente em cada sessão."
     },
     {
-      "type": "ordem_mutável",
-      "description": "A sequência de fragmentos (lendas, receitas, etc.) na constelação de bolhas é reordenada em cada sessão."
+      "type": "ordem mutável",
+      "description": "A sequência de aparecimento dos elementos (ex: primeiro o som, depois o ponto rosa, ou vice-versa) pode variar."
     },
     {
-      "type": "resposta_a_ritmo",
-      "description": "A altura do lançamento do dado afecta a duração do voo e o número de faces visíveis (lançamento rápido = menos faces; lento = mais faces)."
+      "type": "resposta a ritmo/velocidade",
+      "description": "A trajectória do avião adapta-se à velocidade do gesto da pessoa."
     },
     {
-      "type": "resposta_a_posição",
-      "description": "A posição do cursor/dedo no momento do lançamento influencia a direcção inicial do dado (ex: lançamento da esquerda = trajectória para a direita)."
+      "type": "resposta a posição",
+      "description": "A direcção do voo do avião adapta-se à posição do cursor/dedo da pessoa."
     },
     {
-      "type": "combinação_de_fragmentos",
-      "description": "O bilhete final combina elementos de fragmentos diferentes em cada sessão (ex: lenda A + comida B + topónimo C)."
+      "type": "combinação de fragmentos",
+      "description": "A 'possibilidade' (lenda + som + ilustração) é uma combinação única por sessão."
     },
     {
-      "type": "memória_de_sessões_anteriores",
-      "description": "Se a pessoa partilhou um bilhete em sessões anteriores, o dado pode 'lembrar-se' e incluir uma face com esse bilhete (opcional, sem rastreio de identidade)."
+      "type": "temporalidade real",
+      "description": "O conjunto de objectos/comidas pode ser filtrado com base na data/hora (ex: festas sazonais)."
     }
   ],
   "territorial_binding": {
-    "relation": "Os fragmentos (lendas, receitas, topónimos) são extraídos de um corpus territorial real associado à camada pública do Atlas Vivo MILK. Cada fragmento está ligado a uma freguesia ou lugar específico de Lisboa.",
-    "evidence": [
-      "Fragmentos de lendas: ex: 'A lenda da Rua das Portas Santo Antão' (freguesia de Santa Maria Maior).",
-      "Receitas: ex: 'Bolacha de azeite' (associada a Alfama).",
-      "Topónimos: ex: 'Rua do Poço dos Negros' (freguesia de Misericórdia)."
+    "real_world_anchors": [
+      {
+        "type": "objecto/comida tradicional",
+        "description": "Os objectos/comidas que aparecem no avião são ancorados em tradições específicas de Lisboa (ex: pão de Santo António, laranja da Feira da Ladra, brinquedo de madeira de Alfama).",
+        "source": "corpus_falarte_mecanicas (Mecânica 6: 'O que ainda resiste')."
+      },
+      {
+        "type": "lenda local",
+        "description": "As lendas associadas aos objectos/comidas são baseadas em narrativas reais das freguesias de Lisboa (ex: lendas do Bairro Alto, Alfama, Graça).",
+        "source": "corpus_falarte_mecanicas (Mecânica 7: 'Palavras que desapareceram')."
+      },
+      {
+        "type": "festa tradicional",
+        "description": "A experiência pode adaptar-se a festas sazonais (ex: Santo António, São João) para mostrar objectos/comidas relevantes.",
+        "source": "corpus_festas_dinamicas_territoriais."
+      }
     ],
-    "geolocation": {
-      "optional": true,
-      "use": "Se activada, o bilhete 'aterra' num mapa minimalista da freguesia associada ao fragmento. A pessoa pode ver outros bilhetes 'deixados cair' por outras pessoas (anónimos)."
+    "digital_territory": {
+      "description": "Os rastos deixados pela pessoa (bilhetes) podem 'reaparecer' em outras curadorias do Atlas (ex: Galeria Diletante, Fucô), criando uma rede invisível de conexões territoriais digitais.",
+      "source": "corpus_cosmicoxes (relações entre curadorias)."
     }
   },
   "trace_and_return": {
     "trace": {
-      "digital": "O bilhete guardado ou partilhado fica associado à sessão (sem identidade). Em sessões futuras, o dado pode incluir uma face com um fragmento de um bilhete anterior.",
-      "territorial": "Se geolocalização estiver activada, o bilhete é 'deixado' no mapa da freguesia, visível para outros utilizadores (anónimo)."
+      "digital": {
+        "description": "Bilhete em forma de dado de papel dobrado, com a frase *'Leva isto contigo. Ou não.'* e a combinação única de lenda + som + ilustração.",
+        "formats": [
+          "texto",
+          "imagem"
+        ],
+        "persistence": "Copiado para a área de transferência da pessoa ou deixado como ponto de luz na constelação de rastos."
+      },
+      "cosmic": {
+        "description": "Se a pessoa deixar o rasto, este junta-se a uma constelação de pontos de luz rosa no fundo do ecrã, visível em sessões futuras. Os pontos de luz podem 'piscar' quando a pessoa passa o cursor por cima, como se estivessem vivos.",
+        "persistence": "Persiste entre sessões, mas não está associado a nenhuma identidade."
+      }
     },
     "return": {
-      "immediate": "O bilhete digital (texto curto) é a devolução principal.",
-      "latent": "O dado 'lembra-se' de possibilidades anteriores, integrando-as nas faces em sessões futuras."
+      "immediate": {
+        "description": "A pessoa recebe o bilhete como devolução imediata da sua interacção."
+      },
+      "latent": {
+        "description": "O rasto (bilhete ou ponto de luz) pode reaparecer em outras curadorias do Atlas, criando uma sensação de continuidade e conexão territorial."
+      }
     }
   },
   "accessibility_equivalents": {
     "visual": {
-      "reduced_motion": "O dado move-se em trajectórias lineares (sem rotação) e as ondas de distorção são substituídas por transições suaves de cor.",
-      "high_contrast": "O ponto rosa e o dado têm contornos pretos grossos. As bolhas têm cores sólidas e alto contraste.",
-      "color_blind": "As faces do dado são diferenciadas por texturas (ex: listras, pontos) em vez de cores."
+      "for_blind_low_vision": {
+        "description": "Todas as interacções visuais são acompanhadas por descrições sonoras e tácteis (ex: *'Um ponto rosa pulsa no centro do ecrã, como um coração.'*).",
+        "fallbacks": [
+          "Descrição textual dinâmica (ex: *'O dado rolou e uma face descolou-se, transformando-se num avião de papel.'*).",
+          "Sons específicos para cada transformação (ex: clique, rasgo, zumbido).",
+          "Vibração táctil para feedback de interacção."
+        ]
+      },
+      "for_color_blindness": {
+        "description": "O ponto rosa e o avião de papel têm contraste suficiente com o fundo terroso. As ilustrações dos objectos/comidas usam padrões e texturas para diferenciação.",
+        "fallbacks": [
+          "Modo de alto contraste opcional.",
+          "Legendas para cores (ex: *'O avião é rosa claro.'*)."
+        ]
+      },
+      "for_reduced_motion": {
+        "description": "A pessoa pode desativar animações (ex: rolamento do dado, voo do avião) e ver versões estáticas dos elementos.",
+        "fallbacks": [
+          "Dado aparece já rolado, com a face em falta visível.",
+          "Avião aparece estático no centro do ecrã, com a ilustração do objecto/comida já desdobrada.",
+          "Transições são instantâneas (sem animação)."
+        ]
+      }
     },
     "auditory": {
-      "no_audio": "Todos os sons são substituídos por vibrações (se dispositivo suportar) ou por legendas visuais (ex: 'riso', 'estalo de dedos').",
-      "transcript": "Os fragmentos de lendas/receitas são sempre acompanhados por texto (mesmo com áudio activado)."
+      "for_deaf_hard_of_hearing": {
+        "description": "Todos os sons são acompanhados por feedback visual (ex: vibração do ecrã, pulso de cor, texto descritivo).",
+        "fallbacks": [
+          "Legendas para sons (ex: *'Som de rasgo de papel.'*).",
+          "Indicadores visuais de volume (ex: barra de som que pulsa com o murmúrio).",
+          "Vibração táctil para sons importantes (ex: zumbido do avião)."
+        ]
+      },
+      "for_no_audio": {
+        "description": "A experiência funciona sem som, com feedback visual e táctil.",
+        "fallbacks": [
+          "Sons são substituídos por animações (ex: o avião treme em vez de emitir zumbido).",
+          "Descrições textuais opcionais (ex: *'O avião emite um som agudo.'*)."
+        ]
+      }
     },
-    "motor": {
-      "no_drag": "O dado pode ser lançado com a tecla 'espaço' ou com um botão virtual (grande e central).",
-      "no_click": "A selecção de bolhas pode ser feita com as setas do teclado + 'Enter'.",
-      "slow_response": "O tempo de espera pela recomposição do dado é reduzido para 1-2 segundos."
+    "haptic": {
+      "for_no_vibration": {
+        "description": "Vibração táctil é substituída por pulso visual (ex: piscar rápido do ecrã).",
+        "fallbacks": [
+          "Animação de 'choque' (ex: o dado treme quando tocado).",
+          "Som de feedback (ex: clique mais alto)."
+        ]
+      }
+    },
+    "kinesthetic": {
+      "for_no_touch": {
+        "description": "Todas as interacções por toque são substituíveis por teclado (ex: setas para mover um 'dedo virtual').",
+        "fallbacks": [
+          "Teclado: setas para mover o cursor, Enter para 'tocar'.",
+          "Voz: comandos como *'apanhar'*, *'soprar'*, *'esperar'*."
+        ]
+      },
+      "for_no_movement": {
+        "description": "A pessoa pode interagir sem mover o cursor/dedo (ex: esperar, usar voz).",
+        "fallbacks": [
+          "Comandos de voz para todas as acções (ex: *'tocar o dado'*, *'soprar'*).",
+          "Botões de teclado para acções principais (ex: Espaço para 'tocar', S para 'soprar')."
+        ]
+      }
+    },
+    "proprioceptive": {
+      "for_no_movement": {
+        "description": "As sugestões de postura (ex: inclinar-se) são opcionais e acompanhadas de descrições textuais.",
+        "fallbacks": [
+          "Descrição textual: *'Sentes o peso do dado na tua mão?'*.",
+          "Feedback sonoro: *'O dado é pesado... ou leve como o ar?'*."
+        ]
+      }
+    },
+    "temporal_interoceptive": {
+      "for_no_pressure": {
+        "description": "A pessoa pode desativar o tempo de espera (ex: o avião não cai automaticamente).",
+        "fallbacks": [
+          "Modo 'sem pressão': o avião paira até a pessoa interagir.",
+          "Descrição textual: *'Podes esperar o tempo que quiseres.'*."
+        ]
+      }
     },
     "cognitive": {
-      "simplified_fragments": "Os fragmentos de lendas/receitas podem ser reduzidos a palavras-chave (ex: 'pão + rua + avó').",
-      "no_surprise": "A constelação de bolhas aparece sempre com o mesmo número de elementos (3) e sem prémio secreto."
+      "for_simple_language": {
+        "description": "Todas as frases e lendas são escritas em linguagem simples e clara, com opção para tradução ou explicação.",
+        "fallbacks": [
+          "Frases curtas e diretas (ex: *'Atira uma possibilidade ao ar.'* em vez de *'Lança o dado e vê o destino.'*).",
+          "Opção para ver a lenda em partes (ex: uma frase de cada vez)."
+        ]
+      },
+      "for_no_reading": {
+        "description": "Todas as informações textuais são acompanhadas de áudio ou símbolos visuais.",
+        "fallbacks": [
+          "Narração em voz (opcional) para todas as frases e lendas.",
+          "Ícones ou ilustrações para representar acções (ex: mão a apanhar para 'apanhar')."
+        ]
+      }
     }
   },
-  "optional_permissions": [
-    "microphone (para captar sons ambientais e misturar com os sons do dado)",
-    "geolocation (para 'deixar cair' o bilhete no mapa da freguesia)"
-  ],
+  "optional_permissions": {
+    "microphone": {
+      "purpose": "Permitir à pessoa soprar para afugentar o avião.",
+      "trigger": "Apenas quando o avião está a voar no ecrã e a pessoa clica num botão 'Soprar' (que aparece opcionalmente).",
+      "fallback": "A pessoa pode usar o teclado (ex: tecla S) ou o gesto de 'apanhar' para interagir com o avião."
+    },
+    "camera": {
+      "purpose": "Não aplicável para esta experiência.",
+      "trigger": "Nunca solicitado."
+    },
+    "geolocation": {
+      "purpose": "Filtrar objectos/comidas com base na freguesia da pessoa (se em Lisboa).",
+      "trigger": "Apenas se a pessoa optar por partilhar a localização, através de um botão opcional 'Usar a minha localização'.",
+      "fallback": "A experiência usa um conjunto genérico de objectos/comidas de Lisboa."
+    },
+    "motion_orientation": {
+      "purpose": "Permitir que o avião reaja à inclinação do dispositivo (ex: se a pessoa inclinar o telemóvel, o avião voa na direcção oposta).",
+      "trigger": "Apenas se a pessoa optar por permitir, através de um botão opcional 'Usar movimento'.",
+      "fallback": "O avião reage apenas ao cursor/dedo ou teclado."
+    }
+  },
   "overstimulation_risk": {
-    "potential": [
-      "Flashing: Nenhum (as distorções de cor são suaves e sem piscar rápido).",
-      "Sound: Sons súbitos (ex: riso alto) podem ser surpreendentes, mas são curtos e não repetitivos.",
-      "Motion: Trajectória do dado pode causar desconforto em pessoas com sensibilidade ao movimento (mitigado com reduced_motion).",
-      "Cognitive load: Combinação de sons, imagens e texto pode ser complexa para algumas pessoas (mitigado com opções de simplificação)."
-    ],
-    "mitigation": [
-      "Opção de reduzir movimento (reduced_motion).",
-      "Opção de desactivar sons (ou substituir por vibração/legendas).",
-      "Opção de simplificar fragmentos (palavras-chave em vez de texto completo).",
-      "Botão de pausa em todos os momentos (congela a experiência)."
+    "potential_risks": [
+      {
+        "type": "visual",
+        "description": "Animações rápidas (ex: voo do avião, desintegração em partículas) podem causar desconforto em pessoas com sensibilidade ao movimento.",
+        "mitigation": [
+          "Opção para desativar animações (modo 'reduced motion').",
+          "Animações são suaves e não usam flashing.",
+          "Duração limitada das animações (ex: o avião voa durante 5 segundos no máximo)."
+        ]
+      },
+      {
+        "type": "auditory",
+        "description": "Sons súbitos (ex: zumbido do avião) podem assustar pessoas com sensibilidade auditiva.",
+        "mitigation": [
+          "Sons são breves e de volume moderado.",
+          "Opção para desativar sons ou reduzir volume.",
+          "Sons são sempre precedidos por um aviso visual (ex: o avião começa a tremer antes de emitir som)."
+        ]
+      },
+      {
+        "type": "cognitive",
+        "description": "A experiência pode ser complexa para pessoas com dificuldades de atenção ou processamento de informação.",
+        "mitigation": [
+          "Instruções são simples e repetidas (ex: *'Atira uma possibilidade ao ar.'*).",
+          "A pessoa pode interagir no seu próprio ritmo (sem pressão de tempo).",
+          "Opção para ver uma versão simplificada da experiência (ex: apenas o dado e o avião, sem lendas)."
+        ]
+      }
     ]
   },
   "distinctiveness": {
     "unique_elements": [
-      "O dado como ser vivo (geometria orgânica, sons corporais, desdobramento no ar).",
-      "A tradução cruzada entre som (faces do dado) e cor/textura do ambiente.",
-      "A devolução na forma de um 'bilhete' que combina lenda + comida + topónimo.",
-      "A latência do dado 'lembrar-se' de possibilidades anteriores.",
-      "A evocação de cheiros e sabores através de associação textual e sonora (sem fingir output físico)."
+      "O dado incompleto (face em falta) que se transforma num avião de papel.",
+      "O avião de papel que voa como uma mosca e desvia-se do cursor/dedo.",
+      "A combinação de lenda + som territorial + ilustração de objecto/comida como 'possibilidade'.",
+      "O bilhete em forma de dado de papel dobrado, com a frase *'Leva isto contigo. Ou não.'*.",
+      "A constelação de rastos (pontos de luz rosa) que persiste entre sessões.",
+      "A evocação de cheiro e sabor através de memórias e associações, sem fingir output físico."
     ],
-    "comparison": "Nenhuma outra curadoria do Atlas usa um objecto (dado) que se desdobra no ar, emite sons corporais e devolve uma combinação única de elementos territoriais. Outras experiências podem usar acaso ou interacção física, mas não com esta assinatura sensorial e narrativa."
+    "comparison_with_others": [
+      {
+        "curadoria": "Dado Sem Lado",
+        "difference": "Em 'Dado Sem Lado', o dado escapa, dobra-se e desafia a apanhá-lo como um objecto físico. Em 'Dado Rosa', o dado transforma-se num avião de papel que voa e devolve uma 'possibilidade' territorial (lenda + som + objecto)."
+      },
+      {
+        "curadoria": "Galeria Diletante",
+        "difference": "Em 'Galeria Diletante', a interacção é com fotografias e palavras que contaminam luz e enquadramento. Em 'Dado Rosa', a interacção é com um objecto (dado/avião) que se transforma e devolve um rasto territorial."
+      },
+      {
+        "curadoria": "Fucô",
+        "difference": "Fucô é um mediador vivo que conversa e fareja pausas/território. 'Dado Rosa' é um objecto que se transforma e convida à acção física (tocar, apanhar, soprar)."
+      },
+      {
+        "curadoria": "Reizinho",
+        "difference": "Reizinho institui regras absurdas e convida a quebrá-las. 'Dado Rosa' não tem regras; é um convite ao acaso e à surpresa, com um objecto que escapa à sua forma tradicional."
+      }
+    ],
+    "why_cannot_be_confused": "A assinatura sensorial de 'Dado Rosa' é única pela combinação de: (1) objecto que se transforma (dado → avião de papel), (2) interacção física (tocar, apanhar, soprar), (3) devolução territorial (lenda + som + objecto), (4) rasto em forma de bilhete/dado de papel, e (5) evocação de cheiro/sabor sem fingir output físico. Nenhuma outra curadoria usa esta combinação de elementos e dinâmicas."
   },
   "questions_for_eduardo": [
-    "O 'prémio secreto' mencionada em 'Dado Sem Lado' deve ser um elemento fixo (ex: uma lenda rara) ou gerado dinâmicamente em cada sessão?",
-    "Os fragmentos (lendas, receitas, topónimos) devem ser extraídos de um corpus específico do Atlas ou podem ser gerados a partir de uma base de dados territorial mais ampla?",
-    "A geolocalização deve ser usada apenas para 'deixar cair' o bilhete ou também para personalizar os fragmentos com base na localização da pessoa?",
-    "O dado deve ter um número fixo de faces (ex: 6) ou variável (ex: 4-8) em cada sessão?"
+    {
+      "id": "q1",
+      "question": "O conjunto de objectos/comidas tradicionais de Lisboa deve ser fixo ou pode ser dinâmico (ex: adaptar-se a festas sazonais ou à localização da pessoa)?",
+      "context": "A fonte 'corpus_festas_dinamicas_territoriais' sugere que as festas são ancoradas em tradições específicas, mas não especifica se o conjunto deve ser estático ou dinâmico."
+    },
+    {
+      "id": "q2",
+      "question": "A frase *'Leva isto contigo. Ou não.'* é autoral ou pode ser adaptada? Por exemplo, *'Guarda este segredo.'* ou *'Deixa-o voar.'*?",
+      "context": "A frase aparece como uma devolução poética, mas não está explicitamente validada no corpus."
+    },
+    {
+      "id": "q3",
+      "question": "O prémio secreto (mencionado em 'Dado Sem Lado') deve ser incluído em 'Dado Rosa'? Se sim, qual a sua forma (ex: uma lenda rara, um som único, um objecto especial)?",
+      "context": "O corpus menciona 'prémio secreto' para 'Dado Sem Lado', mas não especifica se deve ser aplicado a 'Dado Rosa'."
+    },
+    {
+      "id": "q4",
+      "question": "A constelação de rastos (pontos de luz rosa) deve ser visível apenas em 'Dado Rosa' ou pode reaparecer em outras curadorias (ex: Galeria Diletante, Fucô)?",
+      "context": "O corpus menciona que os rastos podem reaparecer em outras curadorias, mas não especifica como ou quando."
+    }
   ],
   "improvement_proposals": [
     {
-      "area": "territorial_binding",
-      "proposal": "Integração com o corpus de 'FALArte' (ex: usar os 10 mecanismos autorais como categorias de fragmentos). Ex: 'O lugar escondido' → fragmento de uma lenda associada a um lugar secreto; '30 dias, o mesmo lugar' → fragmento de uma receita tradicional de uma rua específica."
+      "id": "p1",
+      "proposal": "Incluir uma opção para a pessoa 'desenhar' o seu próprio objecto/comida no avião de papel, em vez de usar ilustrações pré-definidas. O desenho seria guardado como rasto.",
+      "justification": "Aumentaria a personalização e a conexão emocional com a experiência, alinhando-se com a mecânica 'O lugar escondido' do FALArte (ponto exacto que só a pessoa conhece).",
+      "source": "corpus_falarte_mecanicas (Mecânica 1: 'O lugar escondido')."
     },
     {
-      "area": "cross_sensory_translation",
-      "proposal": "Adicionar uma camada de 'peso' ao dado: o som emitido por cada face pode alterar a 'gravidade' do dado (ex: som grave = dado mais pesado; som agudo = dado mais leve), afectando a trajectória."
+      "id": "p2",
+      "proposal": "Adicionar uma camada de 'memória' ao rasto: se a pessoa regressar à experiência, o avião pode 'lembrar-se' da sua interacção anterior (ex: voar na direcção oposta à da última vez).",
+      "justification": "Criaria uma sensação de continuidade e relação com o sistema, sem depender de perfil psicológico ou vigilância.",
+      "source": "corpus_livro_cubo (Princípio: 'o erro é entrada; o riso é método')."
     },
     {
-      "area": "trace_and_return",
-      "proposal": "Permitir que os bilhetes 'deixados cair' no território possam ser 'apanhados' por outros utilizadores em sessões futuras, criando uma rede de possibilidades partilhadas (com moderação para evitar spam)."
+      "id": "p3",
+      "proposal": "Incluir sons territoriais reais (ex: sino de uma igreja específica de Lisboa) como parte da 'possibilidade', em vez de sons genéricos.",
+      "justification": "Aumentaria a ancoragem territorial e a autenticidade da experiência.",
+      "source": "corpus_falarte_mecanicas (Mecânica 5: 'O som que só existe aqui')."
     },
     {
-      "area": "accessibility",
-      "proposal": "Adicionar uma opção de 'modo táctil' para dispositivos com ecrã táctil, onde o dado pode ser 'segurado' e 'lançado' com gestos de pressionar e soltar (sem arrastar)."
+      "id": "p4",
+      "proposal": "Permitir que a pessoa 'partilhe' o seu rasto (bilhete) com outras pessoas, criando uma rede de conexões visíveis (ex: uma linha entre os pontos de luz da constelação).",
+      "justification": "Aumentaria a dimensão social e comunitária da experiência, alinhando-se com o princípio de 'encontro entre rastos de pessoas diferentes' do corpus.",
+      "source": "corpus_constituicao (Ponto 12: 'encontro entre rastos de pessoas diferentes com moderação e consentimento')."
     }
   ],
   "generic_fallback_allowed": false,

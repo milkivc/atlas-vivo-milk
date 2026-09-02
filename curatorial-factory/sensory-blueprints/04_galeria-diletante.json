@@ -4,346 +4,332 @@
   "source_evidence": {
     "primary": [
       "Cópia de Fica registado neste dossiê… (fonte autoral forte para Galeria Diletante)",
-      "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf (teatro do absurdo curatorial, devolução poética)"
+      "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf (teatro do absurdo curatorial, acolhe sentimento, devolve continuação poética)"
     ],
     "secondary": [
-      "PUBLICO_TERRITORIAL__CURADORIA_NOS_FALARTE_RESIDUAL.pdf (referências a oralidade e rasto)",
-      "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md (princípios de erro, riso e silêncio como matéria)"
+      "A Deriva do Sentido: Cartografia Psicogeográfica e Sensorial de Lisboa (sentipensar, configuração relacional)"
     ],
     "authority_level": "high"
   },
   "authorial_invariants": [
-    "Teatro do absurdo curatorial: a galeria acolhe o sentimento e devolve continuação poética.",
-    "Quando a pessoa escreve uma palavra, surge uma fotografia real de Nuno A (asset específico, não genérico).",
-    "A galeria continua a fala como se escutasse o estado da pessoa na fotografia.",
+    "Teatro do absurdo curatorial: a galeria acolhe o sentimento e devolve uma continuação poética.",
+    "Quando a pessoa escreve uma palavra, surge uma fotografia real de Nuno A (asset Nuno, não Nuno A).",
+    "A galeria continua a fala como se escutasse o estado da pessoa representada na fotografia.",
     "O título 'Galeria Diletante' sofre mutações tipográficas/silábicas quase subliminares.",
-    "Fotografias de Nuno A e asset 'Nuno' são distintos e não intercambiáveis.",
-    "Aproximação de duas coisas sem autoridade (convite original)."
+    "A experiência convida a aproximar duas coisas sem autoridade (convite: 'Escolhe sem autoridade. Aproxima duas coisas.').",
+    "A mecânica é 'escolher', mas a dinâmica é de contaminação e relação, não de seleção estática."
   ],
-  "perceptual_intent": "Criar um espaço onde a pessoa sinta que a sua presença e escolhas alteram a relação entre elementos visuais e sonoros, como se a galeria fosse um organismo que respira e reage ao seu estado emocional. A ausência de autoridade (diletante) é traduzida em fluidez, acaso controlado e devolução poética não linear.",
+  "perceptual_intent": "Criar um espaço onde a escolha não é um acto de poder, mas de contaminação poética. A pessoa sente que a sua presença altera a galeria, e que a galeria, por sua vez, responde com uma voz que parece escutar o estado emocional da fotografia de Nuno A. A experiência é uma dança entre o acaso, a memória e a transformação silenciosa do título e das relações entre elementos.",
   "threshold": {
-    "description": "A pessoa entra num espaço visualmente minimalista, com um título 'Galeria Diletante' que parece tremular levemente, como se fosse uma folha ao vento. O fundo é um degradê de cinzentos quentes, com uma textura de papel envelhecido. Não há botões, menus ou instruções. Apenas um cursor que, ao pairar sobre a área central, revela um traço de luz fraca, como se algo estivesse a ser revelado pela sua presença.",
-    "sensory_trigger": "O movimento do cursor (ou foco do teclado) ativa uma camada de som ambiente: um murmúrio distorcido, como vozes de uma conversa em segundo plano, misturado com o som de páginas a virar lentamente."
+    "description": "A pessoa entra num espaço visualmente minimalista, onde o título 'Galeria Diletante' aparece em tipografia orgânica, levemente tremida, como se respirasse. O fundo é um gradiente de cinzentos quentes, evocando papel envelhecido. Não há instruções explícitas, apenas um campo de texto vazio com um cursor piscando lentamente, como um convite silencioso.",
+    "sensory_trigger": "O cursor pisca em ritmo irregular, sincronizado com uma respiração sonora quase inaudível (paisagem sonora de fundo)."
   },
   "dramaturgical_arc": [
     {
-      "stage": "limiar",
-      "action": "O título 'Galeria Diletante' sofre uma mutação silábica subtil (ex: 'Gale-ria Dile-tante' → 'Ga-leria Di-le-tan-te') ao primeiro movimento do cursor. O som ambiente aumenta levemente em volume, como se a galeria 'acordasse'."
+      "stage": "LIMIAR",
+      "action": "O título 'Galeria Diletante' aparece com mutações tipográficas subliminares (ex.: letras que se deslocam levemente, sombras que crescem/encolhem). O fundo respira em tons de cinza, e um som de papel a ser manuseado (baixo volume) preenche o espaço."
     },
     {
-      "stage": "chamada",
-      "action": "Aparece, no centro, uma zona de texto vazio com um placeholder que pisca: 'Escreve uma palavra que te habita'. O placeholder desaparece ao primeiro toque/tecla, como se a galeria já soubesse que a pessoa ia interagir."
+      "stage": "CHAMADA",
+      "action": "Um campo de texto vazio surge no centro, com o placeholder: 'Aproxima duas coisas'. O cursor pisca em ritmo irregular, como se aguardasse. Não há botões nem explicações."
     },
     {
-      "stage": "primeiro_gesto",
-      "action": "A pessoa escreve uma palavra (ex: 'saudade'). A palavra aparece no ecrã, mas as letras começam a desvanecer-se lentamente, como se estivessem a ser absorvidas pelo fundo."
+      "stage": "PRIMEIRO GESTO",
+      "action": "A pessoa escreve uma palavra ou frase curta (ex.: 'casa' ou 'sol e mar'). O texto não é validado; qualquer entrada é aceite."
     },
     {
-      "stage": "resposta_viva",
-      "action": "Do local onde a palavra desapareceu, emerge uma fotografia real de Nuno A (asset específico). A foto não é estática: tem uma leve distorção, como se estivesse a ser projetada num tecido em movimento. Simultaneamente, ouve-se um suspiro ou um som de respiração (como se a galeria 'inspirasse' a palavra)."
+      "stage": "RESPOSTA VIVA",
+      "action": "O texto escrito desaparece lentamente, como se fosse absorvido pelo fundo. Simultaneamente, uma fotografia real de Nuno A (asset Nuno) surge em um canto da tela, com um enquadramento que parece responder à palavra escrita (ex.: se a palavra for 'casa', a foto pode mostrar um detalhe de uma janela ou porta). A foto não é estática: tem um leve movimento de respiração (zoom sutil, como se a câmera estivesse viva)."
     },
     {
-      "stage": "desvio",
-      "action": "A fotografia de Nuno A começa a 'conversar' com a palavra escrita: a imagem ganha uma borda de luz que pulsa ao ritmo de uma voz distorcida (mas não inteligível) que parece vir da foto. A voz não diz nada coerente, mas a entoação sugere uma pergunta ou um convite."
+      "stage": "DESVIO",
+      "action": "O título 'Galeria Diletante' sofre uma mutação visível: uma sílaba ou letra desaparece ou se duplica (ex.: 'Galeria Diletantte'). A foto de Nuno A ganha uma camada de cor ou textura que não estava presente inicialmente, como se a palavra escrita tivesse 'contaminado' a imagem."
     },
     {
-      "stage": "aprofundamento_sensorial",
-      "action": "A palavra escrita pela pessoa (ex: 'saudade') começa a interferir com a imagem: a cor da foto desatura-se para tons de azul ou verde, consoante a palavra. Simultaneamente, o som ambiente transforma-se num zumbido que oscila entre agudo e grave, como se a galeria estivesse a 'traduzir' a palavra em frequências sonoras. O cursor, ao mover-se, altera a intensidade do zumbido (proximidade/distância)."
+      "stage": "APROFUNDAMENTO SENSORIAL",
+      "action": "A paisagem sonora evolui: o som de papel é substituído por um murmúrio distorcido (voz de Nuno A ou som ambiente da foto, processado para ser abstrato). A foto começa a interagir com o texto escrito: se a pessoa mover o cursor sobre a foto, o murmúrio ganha volume e clareza, como se a imagem 'falasse'."
     },
     {
-      "stage": "escolha_acaso_silencio",
-      "action": "Aparecem, em volta da foto, 3-5 'portas' (retângulos semi-transparentes com texturas de papel rasgado). Cada porta tem um símbolo abstrato (ex: uma mancha de tinta, um traço de lápis). A pessoa pode escolher uma porta ou esperar. Se esperar, uma das portas abre-se sozinha ao fim de 10 segundos."
+      "stage": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "A pessoa pode: (1) escrever outra palavra, (2) clicar na foto para 'fixá-la' no espaço, ou (3) esperar em silêncio. Se escolher (1), uma segunda foto de Nuno A surge, criando uma relação visual com a primeira (ex.: as duas fotos se sobrepõem parcialmente, ou uma reflete a outra). Se escolher (2), a foto fixada ganha um contorno luminoso. Se escolher (3), o murmúrio cessa e o título volta a mutar."
     },
     {
-      "stage": "aparição",
-      "action": "Ao abrir uma porta, surge uma nova camada: uma segunda fotografia (ou uma versão distorcida da primeira) aparece, sobreposta com um texto poético curto (ex: 'o que ficas quando te vais'). O texto não é uma explicação, mas uma continuação da palavra inicial. O som transforma-se num coral de vozes sobrepostas, como se várias pessoas estivessem a murmurar a palavra."
+      "stage": "APARIÇÃO",
+      "action": "Uma terceira camada surge: um fragmento de texto poético (de autor desconhecido ou de Nuno A) aparece sobreposto às fotos, como se fosse uma continuação da 'fala' da galeria. O texto não explica nada; é uma resposta sensorial à combinação das palavras e fotos."
     },
     {
-      "stage": "devolução",
-      "action": "A galeria 'devolve' algo à pessoa: a palavra inicial (ex: 'saudade') aparece agora como um objeto gráfico (ex: uma nuvem de pontos que formam a palavra, ou uma sombra projetada). Este objeto pode ser 'arrastado' para fora do ecrã (ou clicado para guardar). Se a pessoa o guardar, recebe um ficheiro com a palavra transformada em imagem + o texto poético + o som ambiente da sessão (como um 'rasgo' sonoro)."
+      "stage": "DEVOLUÇÃO",
+      "action": "A galeria 'devolve' uma composição visual e sonora única para a sessão: as fotos, o texto poético e o título mutado são organizados num layout orgânico (como uma colagem), e um som de 'fecho' (ex.: um suspiro ou um clique de câmera) marca o fim da experiência. A pessoa pode guardar esta composição como imagem ou áudio (opcional)."
     },
     {
-      "stage": "rasto_latencia",
-      "action": "Ao sair, a palavra inicial permanece no ecrã durante 3 segundos, como se a galeria a 'relembrasse'. Depois, desaparece, mas o título 'Galeria Diletante' volta a tremular, agora com uma mutação diferente (ex: 'Galeria Dile-tan-te' → 'Gale-ria Diletante'). O som ambiente reduz-se a um silvo longínquo, como se a galeria voltasse a adormecer."
+      "stage": "RASTO / LATÊNCIA",
+      "action": "A composição gerada fica disponível na 'constelação' da pessoa (se autenticada) como um rasto. Se a pessoa regressar à Galeria Diletante, a composição anterior pode reaparecer como um 'fantasma' (transparência baixa) no fundo, ou o título pode mutar para incluir um fragmento do texto poético anterior."
     }
   ],
   "participant_verbs": [
     "escrever",
+    "aproximar",
+    "escutar",
+    "contaminar",
+    "fixar",
     "esperar",
-    "observar",
-    "escolher",
-    "arrastar",
-    "ouvir",
-    "sentir"
+    "observar"
   ],
   "system_responses": [
     {
-      "trigger": "movimento do cursor/foco",
-      "response": "Mutação subtil do título + ativação de som ambiente (murmúrios + páginas a virar)."
+      "trigger": "Palavra escrita",
+      "response": "Foto de Nuno A surge com enquadramento contextual à palavra. Título muta subliminarmente. Som de papel evolui para murmúrio."
     },
     {
-      "trigger": "escrita de uma palavra",
-      "response": "Palavra desvanece-se + emergência de fotografia de Nuno A + som de respiração."
+      "trigger": "Cursor sobre a foto",
+      "response": "Murmúrio ganha volume e clareza. Foto ganha movimento de respiração (zoom sutil)."
     },
     {
-      "trigger": "cursor sobre a foto",
-      "response": "Borda de luz na foto + voz distorcida (não inteligível) + alteração de cor da foto consoante a palavra."
+      "trigger": "Clique na foto",
+      "response": "Foto fixada ganha contorno luminoso. Nova foto surge em relação visual com a primeira."
     },
     {
-      "trigger": "movimento do cursor",
-      "response": "Alteração da frequência do zumbido sonoro (proximidade/distância)."
+      "trigger": "Silêncio (nenhuma ação por 10 segundos)",
+      "response": "Murmúrio cessa. Título volta a mutar. Nova camada de textura ou cor é adicionada às fotos."
     },
     {
-      "trigger": "escolha de uma porta ou espera",
-      "response": "Abertura de uma porta + surgimento de nova camada (foto + texto poético) + coral de vozes."
+      "trigger": "Segunda palavra escrita",
+      "response": "Segunda foto surge. Relação visual entre as fotos (sobreposição, reflexo, etc.). Texto poético aparece."
     },
     {
-      "trigger": "arrastar o objeto gráfico da palavra",
-      "response": "Devolução de um ficheiro com a palavra transformada em imagem + texto + som."
-    },
-    {
-      "trigger": "saída da experiência",
-      "response": "Palavra inicial permanece 3 segundos + mutação final do título + silvo longínquo."
+      "trigger": "Fim da sessão",
+      "response": "Composição final (fotos + texto + título mutado) é gerada. Som de fecho."
     }
   ],
-  "sensory_signature_id": "GD-2026-09-02-TREMOR-PALAVRA-FOTO",
+  "sensory_signature_id": "GD-2026-SIG-004",
   "sensory_channels": {
     "visual": {
       "elements": [
-        "Título com mutações tipográficas subliminares",
-        "Fundo com textura de papel envelhecido e degradê de cinzentos quentes",
-        "Fotografias de Nuno A com distorção dinâmica (como tecido em movimento)",
-        "Palavra escrita que desvanece e se transforma em objeto gráfico",
-        "Portas com texturas de papel rasgado e símbolos abstratos",
-        "Camadas sobrepostas de imagens e texto poético",
-        "Objeto gráfico final (nuvem de pontos ou sombra projetada)"
+        "Tipografia orgânica e mutável do título",
+        "Fotos de Nuno A com movimento de respiração (zoom sutil)",
+        "Gradiente de cinzentos quentes (fundo)",
+        "Camadas de textura e cor sobrepostas às fotos",
+        "Layout orgânico da composição final (colagem)",
+        "Transparência e sobreposição de elementos"
       ],
-      "dynamics": [
-        "Alteração de cor das fotos consoante a palavra escrita",
-        "Efeitos de luz e bordas nas fotos em resposta ao cursor",
-        "Transições suaves entre camadas (desfoco, transparência)"
-      ]
+      "intensity": "subtle_to_moderate"
     },
     "auditory": {
       "elements": [
-        "Murmúrios distorcidos (vozes em segundo plano)",
-        "Som de páginas a virar lentamente",
-        "Respiração/suspiro (como se a galeria 'inspirasse' a palavra)",
-        "Zumbido que oscila entre agudo e grave (tradução sonora da palavra)",
-        "Voz distorcida não inteligível (como pergunta ou convite)",
-        "Coral de vozes sobrepostas (murmúrio da palavra)",
-        "Silvo longínquo (ao sair)"
+        "Som de papel a ser manuseado (baixo volume, ritmo respiratório)",
+        "Murmúrio distorcido (voz ou som ambiente processado)",
+        "Murmúrio ganha clareza com interação do cursor",
+        "Som de fecho (suspiro ou clique de câmera)"
       ],
-      "dynamics": [
-        "Alteração do volume e frequência do zumbido consoante a posição do cursor",
-        "Sobreposição de camadas sonoras (murmúrios + zumbido + coral)"
-      ]
+      "spatialization": "Mono (com variação de volume baseada em interação)",
+      "intensity": "low_to_moderate"
     },
     "haptic": {
-      "elements": [],
-      "dynamics": [],
-      "note": "Sem feedback háptico obrigatório. Se disponível, vibração subtil pode acompanhar a emergência da foto ou a abertura das portas, mas não é central."
+      "elements": [
+        "Feedback visual de 'toque' (contorno luminoso ao clicar na foto)"
+      ],
+      "optional": true,
+      "intensity": "minimal"
     },
     "kinesthetic": {
       "elements": [
-        "Movimento do cursor (proximidade/distância)",
-        "Arrastar o objeto gráfico da palavra"
+        "Movimento do cursor afeta volume do murmúrio",
+        "Ritmo de escrita afeta a velocidade das mutações do título"
       ],
-      "dynamics": [
-        "Alteração do som e da luz consoante a velocidade e trajetória do cursor"
-      ]
+      "intensity": "subtle"
     },
     "proprioceptive": {
       "elements": [
-        "Instrução implícita para observar a respiração (através do som de respiração da galeria)",
-        "Sensação de espera e suspensão (durante a escolha das portas)"
+        "Instrução implícita de 'aproximar' (convite a relacionar elementos)",
+        "Sensação de 'respiração' do espaço (ritmo visual e sonoro)"
       ],
-      "dynamics": []
+      "intensity": "subtle"
     },
     "temporal_interoceptive": {
       "elements": [
-        "Ritmo da mutação do título (lento, orgânico)",
-        "Tempo de espera para a abertura automática das portas (10 segundos)",
-        "Duração da permanência da palavra final (3 segundos)",
-        "Silêncio entre camadas sonoras"
+        "Ritmo irregular do cursor piscando",
+        "Tempo de espera afeta a evolução da paisagem sonora",
+        "Duração variável da experiência (segundos a minutos)"
       ],
-      "dynamics": [
-        "Aceleração ou desaceleração do zumbido consoante a interação"
-      ]
+      "intensity": "moderate"
     },
     "spatial": {
       "elements": [
-        "Proximidade/distância do cursor em relação aos elementos (foto, portas)",
-        "Camadas sobrepostas que criam profundidade (foto + texto + objeto gráfico)"
+        "Posicionamento orgânico das fotos e texto na composição final",
+        "Sensação de profundidade com sobreposição de camadas"
       ],
-      "dynamics": [
-        "Alteração da intensidade sonora e visual consoante a posição espacial do cursor"
-      ]
+      "intensity": "subtle"
     },
     "olfactory_evocation": {
       "elements": [
-        "Evocação de cheiro de papel velho (através da textura visual e do som de páginas a virar)",
-        "Evocação de cheiro de tinta ou lápis (através dos símbolos abstratos nas portas)"
+        "Evocação de 'papel velho' ou 'tinta de impressão' através do gradiente de cinzentos e som de papel"
       ],
-      "note": "Nunca fingido como output do browser. Apenas sugestão através de outros canais."
+      "intensity": "evocative"
     },
     "gustatory_evocation": {
       "elements": [
-        "Evocação de sabor amargo ou doce consoante a palavra escrita (ex: 'saudade' → amargo; 'alegria' → doce), sugerido através da cor e do som."
+        "Evocação de 'sabor a memória' ou 'gosto a tempo' através do texto poético e da relação entre as fotos"
       ],
-      "note": "Nunca fingido como output do browser. Apenas associação poética."
+      "intensity": "evocative"
     },
     "social_presence": {
       "elements": [
-        "Sensação de que a galeria 'escuta' e responde (através do som de respiração e da voz distorcida)",
-        "Coral de vozes que sugere a presença de outras pessoas (mesmo que não estejam fisicamente)"
+        "Sensação de diálogo com a galeria (resposta poética às palavras)",
+        "Presença implícita de Nuno A através das fotos e do murmúrio"
       ],
-      "dynamics": []
+      "intensity": "subtle"
     }
   },
   "cross_sensory_translation": {
-    "primary": "A palavra escrita pela pessoa (canal visual/textual) altera a cor e a textura da fotografia de Nuno A (canal visual) e o timbre/frequência do som ambiente (canal auditivo).",
-    "secondary": "O movimento do cursor (canal cinestésico) altera a intensidade do som (canal auditivo) e a borda de luz na foto (canal visual).",
-    "tertiary": "O silêncio (ausência de som) é traduzido em transparência ou desfoque das camadas visuais."
+    "primary": "A palavra escrita (linguagem) é traduzida em enquadramento visual (foto de Nuno A) e som (murmúrio que responde à interação).",
+    "secondary": "O movimento do cursor (cinestésico) altera o volume e clareza do som (auditivo), criando uma relação direta entre gesto e paisagem sonora.",
+    "tertiary": "O silêncio (ausência de ação) desencadeia mutações visuais no título e nas fotos, traduzindo a ausência em transformação visual."
   },
   "silence_or_absence": {
-    "mechanism": "O silêncio é usado como camada ativa: quando a pessoa pára de interagir, o som ambiente reduz-se a um silvo, e as camadas visuais tornam-se mais transparentes, como se a galeria 'respirasse' na ausência de gesto.",
-    "effect": "Cria uma sensação de suspensão e expectativa, convida à reflexão ou à espera de algo imprevisto (ex: abertura automática de uma porta)."
+    "mechanism": "O silêncio é uma camada ativa: (1) o campo de texto vazio convida à escrita sem pressão; (2) a espera de 10 segundos sem ação desencadeia mutações no título e nas fotos; (3) o murmúrio pode cessar abruptamente, criando um vazio sonoro que realça a aparição do texto poético.",
+    "purpose": "Criar espaço para a reflexão e a surpresa. O silêncio não é vazio; é um convite à atenção."
   },
   "surprise_or_indeterminacy": {
     "mechanisms": [
       {
-        "type": "acaso_controlado",
-        "description": "A mutação do título 'Galeria Diletante' é gerada aleatoriamente a partir de um conjunto pré-definido de variações silábicas (ex: 5-10 opções)."
+        "type": "acaso controlado",
+        "description": "A foto de Nuno A que surge é selecionada aleatoriamente de um conjunto pré-definido, mas o enquadramento é ajustado com base na palavra escrita (ex.: palavras relacionadas a 'água' podem priorizar fotos com reflexos ou líquidos)."
       },
       {
-        "type": "resposta_ao_ritmo",
-        "description": "A velocidade com que a pessoa escreve a palavra afeta a intensidade da distorção da foto de Nuno A e a frequência do zumbido sonoro."
+        "type": "ordem mutável",
+        "description": "A ordem de aparição das fotos e do texto poético varia entre sessões, mas mantém uma lógica de 'contaminação' (ex.: a segunda foto sempre dialoga visualmente com a primeira)."
       },
       {
-        "type": "ordem_mutavel",
-        "description": "A ordem das portas que aparecem em volta da foto é aleatória em cada sessão."
+        "type": "resposta a ritmo/velocidade",
+        "description": "Se a pessoa escrever rapidamente, as mutações do título e as fotos podem surgir com mais intensidade (ex.: mais camadas de textura). Se escrever devagar, as mutações são mais sutis."
       },
       {
-        "type": "combinação_fragmentos",
-        "description": "O texto poético que surge na aparição é uma combinação aleatória de fragmentos autorais pré-aprovados, garantindo que nunca é igual em duas sessões."
+        "type": "resposta a posição/trajetória",
+        "description": "O movimento do cursor sobre a foto afeta a clareza do murmúrio: trajetórias circulares podem distorcer o som, enquanto trajetórias lineares o tornam mais claro."
       },
       {
-        "type": "temporalidade_real",
-        "description": "A cor base do degradê do fundo altera-se consoante a hora do dia (manhã: tons quentes; tarde: tons frios; noite: tons escuros)."
+        "type": "combinação de fragmentos",
+        "description": "O texto poético final é gerado a partir de fragmentos pré-existentes, combinados com base nas palavras escritas e nas fotos selecionadas."
       }
     ]
   },
   "session_variation": [
-    "Mutação aleatória do título 'Galeria Diletante' (5-10 variações pré-definidas).",
-    "Ordem aleatória das portas em volta da foto.",
-    "Combinação aleatória de fragmentos poéticos na aparição final.",
-    "Alteração da cor base do fundo consoante a hora do dia.",
-    "Intensidade da distorção da foto de Nuno A consoante a velocidade de escrita da palavra.",
-    "Frequência do zumbido sonoro consoante a trajetória do cursor."
+    "A foto de Nuno A inicial é selecionada aleatoriamente de um conjunto de 10-15 fotos, com enquadramento ajustado à palavra escrita.",
+    "A mutação do título 'Galeria Diletante' varia entre sessões (ex.: uma letra desaparece, uma sílaba é duplicada, ou o título ganha uma sombra colorida).",
+    "O texto poético final é uma combinação única de fragmentos, baseada nas palavras escritas e nas fotos selecionadas.",
+    "A paisagem sonora evolui de forma diferente: o murmúrio pode ser mais ou menos distorcido, ou pode incluir sons ambiente das fotos (ex.: vento, água).",
+    "O layout da composição final (fotos + texto) é gerado organicamente, com sobreposições e posições aleatórias, mas sempre mantendo uma relação visual entre os elementos.",
+    "A duração do som de fecho varia (ex.: suspiro curto ou longo, clique de câmera único ou múltiplo)."
   ],
   "territorial_binding": {
-    "relation": "A experiência evoca o território através da fotografia real de Nuno A (asset específico ligado a um lugar concreto, não genérico). A galeria funciona como um 'lugar' onde a memória e a palavra se encontram, independentemente da localização física da pessoa.",
-    "note": "Não depende de geolocalização ou permissões. O território é evocado pela autoria da foto e pela devolução poética, não por dados de localização."
+    "relation": "Indireta. As fotos de Nuno A são territoriais (ligadas a lugares reais), mas a experiência não exige geolocalização. A relação territorial é evocada através da memória e da associação poética das fotos com as palavras escritas.",
+    "evocation": "A galeria convida a pessoa a 'aproximar duas coisas' que podem ser territoriais (ex.: 'rua' e 'memória'), mas a experiência não depende de dados geográficos."
   },
   "trace_and_return": {
     "trace": {
-      "description": "A palavra inicial escrita pela pessoa é transformada num objeto gráfico (nuvem de pontos ou sombra projetada) que pode ser guardado como ficheiro (imagem + texto poético + som ambiente da sessão).",
-      "persistence": "O ficheiro é gerado no dispositivo da pessoa e não é armazenado no servidor. A galeria 'lembra' a palavra durante 3 segundos ao sair."
+      "type": "composição visual e sonora",
+      "description": "A composição final (fotos + texto poético + título mutado) é guardada como uma imagem ou áudio (opcional). Esta composição pode ser acessada posteriormente na 'constelação' da pessoa (se autenticada).",
+      "persistence": "Sessão e opcionalmente na constelação do utilizador."
     },
     "return": {
-      "description": "A devolução é o ficheiro com a palavra transformada, que funciona como um 'rasgo' da experiência: uma memória tangível da interação.",
-      "poetic_intent": "A pessoa leva consigo uma continuação poética da sua palavra inicial, como se a galeria lhe tivesse dado um presente."
+      "type": "fantasma e memória",
+      "description": "Se a pessoa regressar à Galeria Diletante, a composição anterior pode reaparecer como um 'fantasma' (transparência baixa) no fundo, ou o título pode mutar para incluir um fragmento do texto poético anterior. Isso cria uma sensação de continuidade e memória."
     },
-    "latency": {
-      "description": "A mutação final do título ao sair sugere que a galeria permanece 'viva' e em transformação, mesmo após a interação."
-    }
+    "latency": "A composição pode 'rondar' a galeria em sessões futuras, como um rasto latente."
   },
   "accessibility_equivalents": {
     "visual": {
-      "alternative": "Todas as interações visuais têm equivalentes sonoros (ex: mutação do título é acompanhada por um som subtil de papel a rasgar; a emergência da foto é anunciada por um suspiro).",
-      "reduced_motion": "Opção para desativar mutações do título e distorções das fotos, mantendo a essência poética através de transições suaves e sons.",
-      "high_contrast": "Modo de alto contraste onde as texturas de papel são substituídas por formas geométricas simples, mas a paleta de cores é preservada."
+      "for_blind_or_low_vision": {
+        "description": "Todas as mutações visuais (título, fotos, texto poético) são descritas em tempo real por uma voz sintetizada suave (opcional, pode ser desativada). As fotos de Nuno A são descritas com detalhes sensoriais (ex.: 'foto de uma janela com luz a entrar, textura de madeira envelhecida').",
+        "preserves_poetry": "A voz usa entoação poética, e as descrições são minimalistas mas evocativas (ex.: 'a palavra que escreveste fez a foto ganhar um tom azulado, como se a memória ficasse mais fria')."
+      },
+      "for_color_blindness": {
+        "description": "As mutações de cor são substituídas por mutações de textura ou padrão (ex.: o título ganha um padrão de linhas em vez de uma sombra colorida)."
+      },
+      "reduced_motion": {
+        "description": "As mutações do título e o movimento de respiração das fotos são substituídos por estados estáticos (ex.: o título aparece em 3 versões fixas, e as fotos são estáticas)."
+      }
     },
     "auditory": {
-      "alternative": "Todas as camadas sonoras têm legendas visuais (ex: 'murmúrios distorcidos' aparece como texto flutuante; o zumbido é representado por uma onda visual). O som ambiente pode ser desativado, mas a experiência mantém-se intacta através dos elementos visuais e hápticos.",
-      "subtitles": "Legendas para vozes distorcidas (ex: '[voz indistinta, como uma pergunta]')."
+      "for_deaf_or_hard_of_hearing": {
+        "description": "O murmúrio e os sons ambiente são substituídos por vibrações visuais (ex.: ondas concêntricas a partir do cursor) ou por legendas que descrevem o som (ex.: 'murmúrio distorcido, como uma voz a vir de longe'). O som de fecho é substituído por um flash visual suave.",
+        "preserves_poetry": "As legendas são poéticas e minimalistas (ex.: 'o silêncio da galeria é um suspiro')."
+      },
+      "for_reduced_auditory_sensitivity": {
+        "description": "Os sons são atenuados ou substituídos por versões mais suaves (ex.: o murmúrio é um zumbido baixo)."
+      }
     },
     "haptic": {
-      "alternative": "Vibração subtil (se disponível) é substituída por um pulso visual (ex: um círculo que expande e contrai em volta do cursor)."
+      "for_no_touch_support": {
+        "description": "O feedback visual do 'toque' (contorno luminoso) é substituído por um som ou uma mutação visual (ex.: a foto ganha um brilho temporário)."
+      }
     },
     "kinesthetic": {
-      "alternative": "Todas as interações com o cursor têm equivalentes via teclado (ex: setas para mover o foco; Enter para selecionar). O arrastar do objeto gráfico pode ser feito com teclas de seta ou tabulação."
+      "for_no_mouse_or_touch": {
+        "description": "O movimento do cursor é substituído por teclas: (1) setas para mover um 'cursor virtual' sobre a foto, (2) barra de espaço para 'fixar' a foto, (3) Enter para submeter a palavra escrita."
+      }
     },
     "proprioceptive": {
-      "alternative": "Instruções de respiração ou espera são opcionais e podem ser ignoradas sem perder a experiência."
+      "for_reduced_mobility": {
+        "description": "As instruções implícitas ('aproximar', 'escutar') são substituídas por texto opcional (ex.: 'Tenta aproximar duas ideias ou memórias')."
+      }
     },
     "temporal_interoceptive": {
-      "alternative": "A experiência pode ser pausada a qualquer momento (ex: pressionar a barra de espaço). O tempo de espera para a abertura automática das portas pode ser ajustado (ex: 5, 10 ou 15 segundos)."
-    },
-    "cognitive": {
-      "alternative": "O texto poético pode ser lido em voz alta pelo sistema (se microfone não estiver ativo) ou apresentado em letras grandes com alto contraste."
+      "for_no_timing_pressure": {
+        "description": "A experiência pode ser pausada a qualquer momento com a tecla 'P'. O ritmo do cursor piscando é fixo e não afeta a experiência."
+      }
     }
   },
   "optional_permissions": {
-    "required": [],
-    "optional": [
-      {
-        "permission": "microfone",
-        "purpose": "Permitir que a pessoa grave a sua voz para substituir a palavra escrita, criando uma camada sonora pessoal. A voz seria distorcida e integrada na experiência como um 'rasgo' sonoro.",
-        "fallback": "A experiência funciona integralmente sem microfone, usando apenas a palavra escrita."
-      }
-    ],
-    "note": "Nenhuma permissão é necessária para a experiência base. O microfone é opcional e apenas pedido se a pessoa expressar interesse em usar a voz."
+    "none_required": true,
+    "description": "A experiência funciona completamente sem microfone, câmara, geolocalização ou sensores de movimento. Todas as interações são baseadas em teclado, mouse ou toque."
   },
   "overstimulation_risk": {
-    "risks": [
-      "Flashing ou transições visuais rápidas (mitigado por transições suaves e opção de reduced-motion).",
-      "Som súbito excessivo (mitigado por volume progressivo e opção de desativar som).",
-      "Sobreposição de camadas sonoras complexas (mitigado por silêncios estratégicos e opção de reduzir a complexidade sonora).",
-      "Pressão de tempo (mitigado por opção de ajustar o tempo de espera e pausar a experiência)."
+    "potential_risks": [
+      "Flashing ou mutações visuais rápidas (mitigado por opção de reduced_motion).",
+      "Som súbito (mitigado por volume baixo e opção de desativar som).",
+      "Sobreposição excessiva de elementos visuais (mitigado por layout orgânico e transparências controladas)."
     ],
     "mitigations": [
-      "Transições visuais lentas e orgânicas.",
-      "Volume sonoro progressivo e controlável.",
-      "Opção para desativar camadas sonoras ou visuais complexas.",
-      "Possibilidade de pausar a experiência a qualquer momento.",
-      "Avisos visuais antes de transições significativas (ex: 'A galeria vai respirar...')."
+      "Opção de 'reduced_motion' desativa todas as animações.",
+      "Opção de desativar som completamente.",
+      "Contraste e brilho ajustáveis.",
+      "Duração controlada: a experiência pode ser interrompida a qualquer momento com a tecla 'Esc'."
     ]
   },
   "distinctiveness": {
     "unique_elements": [
-      "A mutação subtil e orgânica do título 'Galeria Diletante' como limiar e fecho da experiência.",
-      "A emergência de uma fotografia real de Nuno A (asset específico) como resposta à palavra escrita, com distorção dinâmica.",
-      "A tradução cruzada entre palavra escrita, cor da foto e frequência sonora.",
-      "A devolução de um ficheiro com a palavra transformada em objeto gráfico + texto poético + som ambiente.",
-      "A sensação de que a galeria 'escuta' e responde, sem ser um chatbot ou uma página estática.",
-      "O uso do silêncio e da espera como camadas ativas da experiência."
+      "A contaminação poética entre a palavra escrita e a foto de Nuno A (a foto 'responde' à palavra).",
+      "O título 'Galeria Diletante' muta subliminarmente, criando uma sensação de instabilidade e vida.",
+      "A galeria 'fala' através de um murmúrio que evolui com a interação, como se a galeria fosse um ser vivo.",
+      "A devolução é uma composição visual e sonora única, gerada a partir da sessão, que pode 'rondar' a galeria em futuras visitas.",
+      "A relação entre as fotos de Nuno A e as palavras escritas é territorial e poética, não explicativa."
     ],
-    "comparison": "Esta experiência não pode ser confundida com outras porque: (1) não é um quiz, um card ou uma página explicativa; (2) não depende de gamificação ou pontos; (3) a interação é poética e não linear, com uma assinatura sensorial única (tremor do título, distorção da foto, tradução cruzada palavra-som-cor); (4) a devolução é um objeto gráfico tangível, não um 'concluído' ou badge."
+    "why_not_confusable": "Nenhuma outra experiência no Atlas Vivo MILK usa a combinação de: (1) mutações tipográficas subliminares do título, (2) fotos de Nuno A que 'respondem' a palavras escritas, (3) um murmúrio que evolui com a interação, e (4) uma composição final que se torna um rasto latente. A assinatura sensorial é única na sua abordagem ao 'teatro do absurdo curatorial'."
   },
   "questions_for_eduardo": [
-    "O asset 'Nuno A' referido no corpus é um conjunto específico de fotografias ou uma única imagem? Se for um conjunto, como deve ser a seleção entre elas (aleatória, consoante a palavra, etc.)?",
-    "Os fragmentos poéticos para a aparição final devem ser pré-aprovados por Eduardo ou podem ser gerados a partir de um corpus existente (ex: textos de Llansol, Camus, etc.)?",
-    "A mutação do título 'Galeria Diletante' deve seguir uma lógica específica (ex: silábica, visual, semântica) ou pode ser livre dentro de um conjunto de opções?",
-    "O som de respiração da galeria deve ser sempre o mesmo ou pode variar consoante a palavra escrita ou o estado da sessão?"
+    "As fotos de Nuno A (asset Nuno) são um conjunto fixo ou podem ser atualizadas periodicamente? Se sim, como é feita a curadoria das novas fotos?",
+    "O texto poético final deve ser gerado a partir de fragmentos pré-existentes (ex.: de Nuno A ou outros autores) ou pode ser criado dinâmicamente com base em algoritmos de linguagem? Se for o segundo caso, qual o limite para a geração automática?",
+    "A composição final (fotos + texto + título mutado) deve ser guardada como uma imagem estática ou pode incluir elementos animados (ex.: o movimento de respiração das fotos)?",
+    "O murmúrio deve ser sempre uma distorção de voz ou pode incluir sons ambiente das fotos (ex.: vento, água)? Se sim, como garantir que os sons ambiente não sejam intrusivos?",
+    "A mutação do título 'Galeria Diletante' deve ser sempre subliminar ou pode, em algumas sessões, ser mais visível (ex.: uma letra a desaparecer completamente)?"
   ],
   "improvement_proposals": [
     {
-      "proposal": "Incluir uma opção para que a pessoa possa 'apagar' a sua palavra e começar de novo, como se a galeria permitisse um 'recomeço' poético.",
-      "rationale": "Reforça a ideia de que o erro ou a mudança de ideia são parte da experiência, alinhado com os princípios do Livro Cubo ('o erro é entrada')."
+      "proposal": "Incluir uma opção para a pessoa 'aproximar' duas fotos de Nuno A manualmente (arrastando uma sobre a outra), em vez de apenas escrever palavras. Isso reforçaria o convite 'Aproxima duas coisas'.",
+      "justification": "A mecânica atual depende muito da escrita, mas o convite sugere uma ação mais física (aproximar)."
     },
     {
-      "proposal": "Adicionar uma camada de 'memória' onde a pessoa pode ver as palavras que já escreveu em sessões anteriores (se autorizar o armazenamento local).",
-      "rationale": "Cria uma continuidade entre sessões e reforça a ideia de rasto, sem depender de um servidor ou perfil psicológico."
+      "proposal": "Adicionar uma camada de 'pátina' visual às fotos, que evolui com base no tempo gasto na experiência (ex.: quanto mais tempo a pessoa passar, mais a foto ganha textura de papel envelhecido).",
+      "justification": "Reforçaria a evocação de memória e território, alinhando com a estética do Atlas."
     },
     {
-      "proposal": "Permitir que a pessoa 'converse' com a foto de Nuno A através de um campo de texto adicional, onde pode escrever uma pergunta ou um pensamento. A galeria responderia com uma distorção na foto ou um som, sem texto.",
-      "rationale": "Aprofundaria a interação poética e a sensação de diálogo com a galeria, sem cair em chatbot genérico."
+      "proposal": "Permitir que a pessoa 'converse' com a galeria através de voz (opcional), em vez de apenas texto. A voz seria transcrita para texto e usada da mesma forma.",
+      "justification": "Aumentaria a acessibilidade e a sensação de diálogo vivo, mas requereria permissão de microfone (opcional)."
     },
     {
-      "proposal": "Integração com o COSMICOXES: a palavra escrita pela pessoa poderia gerar uma 'partícula' que se junta a uma constelação maior, visível noutra parte do Atlas.",
-      "rationale": "Conectaria a Galeria Diletante com o universo mais amplo do Atlas, criando uma sensação de continuidade e rasto cósmico."
+      "proposal": "Incluir uma opção para a pessoa 'deixar um rasto' na galeria (ex.: desenhar ou escrever diretamente sobre as fotos), que seria incorporado na composição final.",
+      "justification": "Reinforçaria a ideia de que a galeria é um espaço vivo e participativo, não apenas um espetáculo."
     }
   ],
   "generic_fallback_allowed": false,

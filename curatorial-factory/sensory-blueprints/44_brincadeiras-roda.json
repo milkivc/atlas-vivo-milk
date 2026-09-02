@@ -3,472 +3,423 @@
   "canonical_name": "Brincadeiras de Roda",
   "source_evidence": {
     "primary": [
-      {
-        "source": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
-        "authority": "autoral",
-        "relevance": "Menciona jogos tradicionais, trava-línguas e adivinhas como parte do folclore, com foco em dinâmicas circulares e intergeracionais."
-      },
-      {
-        "source": "Cópia de Fica registado neste dossiê…",
-        "authority": "autoral",
-        "relevance": "Referência a oralidade, brincadeira viva e intergeracionalidade como princípios da camada pública."
-      }
+      "catalog_entry (ordem: 44, id: brincadeiras-roda, nome: Brincadeiras de Roda, familia: folclore, mecanica: circular, convite: Faz a palavra passar sem a prender.)"
     ],
     "secondary": [
-      {
-        "source": "A Deriva do Sentido: Cartografia Psicogeográfica e Sensorial de Lisboa",
-        "authority": "curatorial",
-        "relevance": "Aborda a psicogeografia activa e o corpo como ferramenta de leitura do território, útil para contextualizar a roda como espaço de encontro."
-      }
+      "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf (16 seres folclóricos; jogos tradicionais, trava-línguas e adivinhas.)"
+    ],
+    "tertiary": [
+      "A Deriva do Sentido: Cartografia Psicogeográfica e Sensorial de Lisboa (ritmo, corpo, território, memória local.)"
     ]
   },
   "authorial_invariants": {
     "mechanics": "circular",
-    "convite": "Faz a palavra passar sem a prender.",
-    "family": "folclore",
-    "public_layer": true,
-    "intergenerational": true,
-    "orality": true,
-    "territorial_roots": true
+    "invitation": "Faz a palavra passar sem a prender.",
+    "folklore_family": true,
+    "ritualistic_play": true,
+    "oral_tradition": true,
+    "collective_participation": true,
+    "territorial_roots": "implied (folclore)"
   },
-  "perceptual_intent": "Recriar a magia das brincadeiras de roda como um espaço vivo de transmissão oral, ritmo corporal e conexão intergeracional, onde a palavra e o gesto circulam livremente, sem serem capturados. A experiência deve evocar a sensação de pertencer a um círculo que respira, canta e se transforma com a presença de cada um, sem hierarquias.",
+  "perceptual_intent": "Recriar a magia das brincadeiras de roda como um ritual vivo de transmissão oral, onde a palavra, o gesto e o som se entrelaçam em movimento circular. A experiência deve evocar a sensação de pertencer a um grupo que co-cria uma dança de vozes, corpos e memórias, sem nunca prender a palavra — apenas fazê-la circular, transformar-se e regressar de forma inesperada.",
   "threshold": {
-    "description": "A pessoa entra num espaço digital onde uma roda de luzes suaves e som ambiente (murmúrios distantes, risos, passos) se forma lentamente à sua volta. Não há texto explicativo. A roda não está completa: há um vazio no círculo, como se algo ou alguém estivesse em falta. A luz e o som pulsam em ritmo irregular, como uma respiração coletiva à espera de ser preenchida.",
-    "sensory_trigger": "O vazio na roda (visual) + o ritmo irregular do som (auditivo) criam uma tensão sutil que convida à participação."
+    "description": "A pessoa entra num espaço vazio, escuro e silencioso. Um círculo de luz fraca e pulsante (como uma roda de fogo distorcida) aparece no centro do ecrã, acompanhado por um murmúrio de vozes sobrepostas que cantam uma quadra folclórica em loop reverso. O círculo não é clicável, mas reage à presença do cursor/dedo com um leve tremor na luz e no som.",
+    "sensory_trigger": [
+      "visual (círculo de luz pulsante)",
+      "auditory (murmúrio de vozes reversas)",
+      "spatial (sensação de profundidade no círculo)"
+    ]
   },
   "dramaturgical_arc": [
     {
-      "stage": 1,
-      "name": "LIMIAR",
-      "description": "A roda aparece incompleta, com um vazio visível e um ritmo sonoro que parece esperar por algo. A pessoa sente que algo está em falta."
+      "stage": "LIMIAR",
+      "action": "O círculo de luz e o murmúrio reverso criam uma ruptura com o ambiente anterior. A pessoa percebe que algo está 'fora do lugar' mas não identifica o quê.",
+      "sensory_focus": [
+        "visual (luz instável)",
+        "auditory (som invertido)"
+      ]
     },
     {
-      "stage": 2,
-      "name": "CHAMADA",
-      "description": "Um murmúrio sutil (voz distorcida, como um eco de crianças) repete a frase do convite: *‘Faz a palavra passar sem a prender.’* A frase não é escrita, mas ouvida em fragmentos, como se viesse de diferentes direções da roda."
+      "stage": "CHAMADA",
+      "action": "Uma voz sutil (mas clara) sussurra: *Faz a palavra passar sem a prender.* O círculo de luz expande-se levemente, como um convite para entrar.",
+      "sensory_focus": [
+        "auditory (voz sussurrada)",
+        "visual (expansão do círculo)"
+      ]
     },
     {
-      "stage": 3,
-      "name": "PRIMEIRO GESTO",
-      "description": "A pessoa é convida a *soprar* (microfone opcional) ou *tocar* (clique/arrasto) no vazio da roda. Se usar o microfone, o sopro é captado e transformado em um som que preenche temporariamente o vazio. Se usar o toque, uma partícula de luz surge no ponto de contacto e começa a circular."
+      "stage": "PRIMEIRO GESTO",
+      "action": "A pessoa move o cursor/dedo em direção ao círculo. Ao tocar a borda, o murmúrio pára abruptamente e uma quadra folclórica (ex: *A roda da vida, roda sem par, quem não souber dançar, saia do lugar*) aparece escrita em letras que giram lentamente em torno do círculo, como se fosse uma roda de palavras.",
+      "sensory_focus": [
+        "kinesthetic (movimento do cursor/dedo)",
+        "visual (texto em movimento circular)"
+      ]
     },
     {
-      "stage": 4,
-      "name": "RESPOSTA VIVA",
-      "description": "A roda reage: o vazio fecha-se momentaneamente com a partícula ou o som, e a frase *‘Faz a palavra passar sem a prender’* é repetida em coro por vozes que surgem de pontos aleatórios da roda, como se cada participante (invisível) a dissesse uma vez. O ritmo da roda acelera levemente."
+      "stage": "RESPOSTA VIVA",
+      "action": "Assim que a pessoa para de mover o cursor/dedo, as letras da quadra começam a desintegrar-se em partículas que se reorganizam num novo círculo, mais pequeno, no centro. Um som de risos infantis distantes ecoa, como se a roda tivesse aceitado o gesto.",
+      "sensory_focus": [
+        "visual (partículas e novo círculo)",
+        "auditory (risos ecoantes)"
+      ]
     },
     {
-      "stage": 5,
-      "name": "DESVIO",
-      "description": "De repente, uma das vozes *erra* a frase: diz uma palavra trocada, uma sílaba a mais, ou um trava-língua relacionado (ex: *‘Três pratos de trigo para três tigres tristes’*). A roda treme visualmente (como um glitch suave) e o ritmo quebra."
+      "stage": "DESVIO",
+      "action": "O novo círculo não é estático: as partículas que o compõem são, na verdade, sílabas da quadra original. Se a pessoa tentasse 'clicar' ou 'tocar' o círculo, as sílabas dispersam-se como se tivessem sido assustadas, e o som de risos transforma-se num zumbido agudo (como um apito de brincadeira).",
+      "sensory_focus": [
+        "visual (dispersão de sílabas)",
+        "auditory (zumbido agudo)"
+      ]
     },
     {
-      "stage": 6,
-      "name": "APROFUNDAMENTO SENSORIAL",
-      "description": "A pessoa é convida a *escolher* uma das vozes (clicando num ponto da roda) ou a *repetir* a frase errada (microfone). Se escolher uma voz, esta ganha volume e a roda gira mais rápido, misturando som e luz. Se repetir a frase, a sua voz é integrada no coro, alterando a textura sonora (ex: a voz da pessoa torna-se um eco, um suspiro, ou uma batida rítmica)."
+      "stage": "APROFUNDAMENTO SENSORIAL",
+      "action": "As sílabas dispersas começam a reagir ao movimento do cursor/dedo: se a pessoa as 'perseguir', elas fogem em direções opostas, mas se a pessoa parar, elas aproximam-se lentamente, formando uma nova palavra ou som (ex: *ro-da* vira *dá*). O zumbido agudo transforma-se num ritmo percussivo que acompanha o movimento das sílabas.",
+      "sensory_focus": [
+        "kinesthetic (perseguição/paragem)",
+        "visual (reorganização de sílabas)",
+        "auditory (ritmo percussivo)"
+      ]
     },
     {
-      "stage": 7,
-      "name": "ESCOLHA / ACASO / SILÊNCIO",
-      "description": "A roda para abruptamente. Silêncio. A pessoa pode: (a) *esperar* (a roda reinicia sozinha com uma nova frase ou trava-língua), (b) *tocar* num ponto aleatório para *quebrar* a roda (ela fragmenta-se em partículas que caem como folhas), ou (c) *sair* (a roda desvanece-se lentamente)."
+      "stage": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "A pessoa pode: (1) continuar a perseguir as sílabas, (2) parar e observar, ou (3) 'soprar' para o microfone (opcional) para dispersar tudo. Se escolher (1), as sílabas formam uma nova quadra aleatória; se (2), as sílabas formam uma palavra única (ex: *brincar*); se (3), tudo desaparece e o círculo original regressa, mas agora com uma cor diferente.",
+      "sensory_focus": [
+        "kinesthetic (escolha de ação)",
+        "auditory (opcional: sopro)",
+        "visual (resultados diferentes)"
+      ]
     },
     {
-      "stage": 8,
-      "name": "APARIÇÃO",
-      "description": "Se a pessoa esperou: uma nova frase ou trava-língua surge, escrita em letras que se formam como se fossem desenhadas por uma mão invisível. Se quebrou a roda: as partículas formam uma imagem efémera (ex: uma criança a rir, um objeto folclórico como um pião ou uma boneca de pano). Se saiu: nada aparece, mas o som de um sino ou um riso distante é ouvido."
+      "stage": "APARIÇÃO",
+      "action": "Independentemente da escolha, surge uma nova camada: uma silhueta de crianças de mãos dadas (em estilo de sombra chinesa) aparece por trás do círculo, dançando em sentido contrário ao movimento do cursor/dedo. O som agora é uma música folclórica completa, mas distorcida como se fosse ouvida debaixo de água.",
+      "sensory_focus": [
+        "visual (silhuetas em movimento)",
+        "auditory (música distorcida)"
+      ]
     },
     {
-      "stage": 9,
-      "name": "DEVOLUÇÃO",
-      "description": "A pessoa recebe de volta: (a) a frase ou trava-língua que ouviu/criou, escrita num *bilhete digital* (estilo rascunho de caderno, com manchas de tinta e assimetria orgânica), ou (b) um *som* (a sua voz transformada em melodia ou ritmo) que pode guardar ou partilhar. O bilhete ou som tem um *código territorial* (ex: nome de uma rua ou freguesia de Lisboa associada à brincadeira)."
+      "stage": "DEVOLUÇÃO",
+      "action": "A música pára. As silhuetas param e voltam-se para a pessoa. Uma voz (a mesma do início) diz: *A palavra que passaste foi [palavra ou quadra gerada]. Guarda-a.* No ecrã, aparece a palavra/quadra escrita em letras que se desvanecem lentamente, como se estivessem a ser apagadas pelo vento. A pessoa pode 'copiar' a palavra (gestual ou clique) para levá-la consigo.",
+      "sensory_focus": [
+        "auditory (voz e música)",
+        "visual (palavra a desvanecer)",
+        "haptic (opcional: vibração leve ao copiar)"
+      ]
     },
     {
-      "stage": 10,
-      "name": "RASTO / LATÊNCIA",
-      "description": "O bilhete ou som fica disponível no *cosmos* da pessoa (área pessoal não visível por outros) e pode *reaparecer* em futuras sessões como parte de um coro maior ou como uma pista para outras brincadeiras. Se a pessoa partilhar o código territorial, este pode ser usado por outros para *ativar* a mesma brincadeira num contexto físico (ex: numa roda real)."
+      "stage": "RASTO / LATÊNCIA",
+      "action": "A palavra copiada pela pessoa fica registada como um 'rasto' anónimo na constelação COSMICOXES, associada à data e à hora. Se a pessoa regressar mais tarde, poderá encontrar a sua palavra a circular noutra roda, misturada com outras. O círculo original permanece no ecrã, mas agora com uma textura que evoca tecido desgastado, como se a roda tivesse sido usada muitas vezes.",
+      "sensory_focus": [
+        "visual (textura do círculo)",
+        "spatial (rasto na constelação)"
+      ]
     }
   ],
   "participant_verbs": [
-    "soprar",
     "tocar",
-    "escolher",
-    "repetir",
-    "esperar",
-    "quebrar",
-    "ouvir"
+    "perseguir",
+    "parar",
+    "observar",
+    "soprar",
+    "escutar",
+    "deixar ir"
   ],
-  "system_responses": {
-    "to_soprar": {
-      "visual": "Partícula de luz surge no vazio e começa a circular na roda.",
-      "auditory": "O sopro é transformado em um som harmónico que preenche o vazio.",
-      "haptic": "Vibração suave (se dispositivo suportar) no momento do sopro."
+  "system_responses": [
+    {
+      "trigger": "cursor/dedo toca a borda do círculo",
+      "response": [
+        "murmúrio pára",
+        "quadra aparece em movimento circular",
+        "som de risos distantes"
+      ]
     },
-    "to_tocar": {
-      "visual": "Partícula de luz surge no ponto de toque e integra-se na roda.",
-      "auditory": "Som de um sino ou campainha suave.",
-      "kinesthetic": "A roda gira levemente em resposta ao toque."
+    {
+      "trigger": "cursor/dedo para de se mover",
+      "response": [
+        "letras desintegram-se em partículas",
+        "novo círculo forma-se",
+        "risos transformam-se em eco"
+      ]
     },
-    "to_escolher_voz": {
-      "visual": "A voz escolhida ganha brilho e a roda acelera.",
-      "auditory": "A voz escolhida repete a frase com mais clareza, enquanto as outras se tornam murmúrios.",
-      "spatial": "A roda parece *inclinar-se* para a voz escolhida."
+    {
+      "trigger": "cursor/dedo tenta clicar/tocar o novo círculo",
+      "response": [
+        "sílabas dispersam-se",
+        "zumbido agudo"
+      ]
     },
-    "to_repetir_frase": {
-      "visual": "A voz da pessoa aparece como uma onda de luz que se propaga pela roda.",
-      "auditory": "A voz da pessoa é integrada no coro, alterando a textura sonora (eco, suspiro, batida rítmica).",
-      "temporal_interoceptive": "O ritmo da roda sincroniza-se com a respiração percebida da pessoa."
+    {
+      "trigger": "cursor/dedo persegue sílabas",
+      "response": [
+        "sílabas fogem",
+        "ritmo percussivo acelera"
+      ]
     },
-    "to_esperar": {
-      "visual": "A roda reinicia sozinha, com uma nova frase ou trava-língua a surgir lentamente.",
-      "auditory": "Silêncio seguido de um suspiro coletivo.",
-      "silence_or_absence": "O vazio na roda torna-se mais visível, como se algo estivesse a nascer."
+    {
+      "trigger": "cursor/dedo para",
+      "response": [
+        "sílabas aproximam-se",
+        "ritmo percussivo abrandar"
+      ]
     },
-    "to_quebrar": {
-      "visual": "A roda fragmenta-se em partículas que caem como folhas ou confetes.",
-      "auditory": "Som de vidro a partir (suave) ou risos distantes.",
-      "kinesthetic": "Sensação de *queda* (movimento da câmera ou desfoque)."
+    {
+      "trigger": "sopro para o microfone (opcional)",
+      "response": [
+        "tudo desaparece",
+        "círculo regressa com nova cor"
+      ]
     },
-    "to_sair": {
-      "visual": "A roda desvanece-se lentamente, como se fosse absorvida pelo fundo.",
-      "auditory": "Som de um sino ou riso distante.",
-      "silence_or_absence": "O espaço fica vazio, com apenas um ponto de luz a piscar (como uma estrela)."
+    {
+      "trigger": "escolha final (perseguir/parar/soprar)",
+      "response": [
+        "nova quadra/palavra/cor",
+        "silhuetas dançam",
+        "música distorcida"
+      ]
+    },
+    {
+      "trigger": "fim da experiência",
+      "response": [
+        "palavra/quadra desvanece",
+        "voz devolve a palavra",
+        "textura do círculo altera-se"
+      ]
     }
-  },
+  ],
   "sensory_signature_id": "roda-viva-44",
   "sensory_channels": {
     "visual": {
-      "elements": [
-        "roda de luzes suaves",
-        "vazio no círculo",
-        "partículas em movimento",
-        "letra desenhada à mão",
-        "glitch suave",
-        "imagem efémera (criança, objeto folclórico)",
-        "bilhete digital (rascunho de caderno)",
-        "código territorial"
+      "primary": [
+        "círculo de luz pulsante",
+        "texto em movimento circular",
+        "partículas/sílabas em reorganização",
+        "silhuetas em sombra chinesa",
+        "textura de tecido desgastado"
       ],
-      "dynamics": [
-        "pulsação",
-        "rodação",
-        "fragmentação",
-        "aparição/desaparição",
-        "textura orgânica (manchas de tinta)"
+      "secondary": [
+        "expansão/contração do círculo",
+        "desvanecimento de letras",
+        "cor dinâmica do círculo"
       ]
     },
     "auditory": {
-      "elements": [
-        "murmúrios distantes",
-        "risos",
-        "passos",
-        "voz distorcida (eco de crianças)",
-        "frase do convite em coro",
-        "erro na frase (trava-língua)",
-        "sopro transformado em som",
-        "vozes individuais",
-        "som de sino/campainha",
-        "som de vidro a partir",
-        "respiração coletiva",
-        "silêncio"
+      "primary": [
+        "murmúrio de vozes reversas",
+        "voz sussurrada",
+        "risos infantis distantes",
+        "zumbido agudo",
+        "ritmo percussivo",
+        "música folclórica distorcida"
       ],
-      "dynamics": [
-        "espacialização (vozes vêm de diferentes pontos)",
-        "sincronização com gesto",
-        "transformação da voz",
-        "ritmo acelerado/quebrado"
+      "secondary": [
+        "eco",
+        "silêncio repentino",
+        "variação de volume com movimento"
       ]
     },
     "haptic": {
-      "elements": [
-        "vibração suave (opcional)"
-      ],
-      "dynamics": [
-        "feedback no sopro ou toque"
+      "primary": [],
+      "secondary": [
+        "vibração leve ao copiar a palavra (opcional, em dispositivos compatíveis)"
       ]
     },
     "kinesthetic": {
-      "elements": [
+      "primary": [
         "movimento do cursor/dedo",
-        "gesto de soprar",
-        "toque/arrasto"
+        "perseguição/paragem",
+        "toque na borda do círculo"
       ],
-      "dynamics": [
-        "roda gira em resposta ao gesto",
-        "sensação de queda ao quebrar a roda"
+      "secondary": [
+        "velocidade do gesto afeta ritmo percussivo"
       ]
     },
     "proprioceptive": {
-      "elements": [
-        "postura de espera",
-        "respiração percebida"
+      "primary": [
+        "sensação de circularidade",
+        "ritmo corporal induzido pelo som"
       ],
-      "dynamics": [
-        "ritmo da roda sincronizado com respiração"
-      ]
+      "secondary": []
     },
     "temporal_interoceptive": {
-      "elements": [
-        "espera",
-        "ritmo irregular",
-        "aceleração/desaceleração",
-        "silêncio"
+      "primary": [
+        "espera pelo desvanecimento das letras",
+        "ritmo da música distorcida",
+        "pulsação do círculo de luz"
       ],
-      "dynamics": [
-        "pulsação da roda",
-        "quebra de ritmo",
-        "suspensão"
+      "secondary": [
+        "aceleração/abrandamento com movimento"
       ]
     },
     "spatial": {
-      "elements": [
-        "roda como espaço circular",
-        "vazio como convite",
-        "partículas em órbita"
+      "primary": [
+        "profundidade do círculo de luz",
+        "movimento contrário das silhuetas"
       ],
-      "dynamics": [
-        "inclusão do participante no círculo",
-        "fragmentação do espaço"
-      ]
+      "secondary": []
     },
     "olfactory_evocation": {
-      "elements": [
-        "memória de cheiros associados a brincadeiras de infância (ex: terra molhada, pão quente, laranja)"
+      "primary": [
+        "memória de cheiro de terra molhada (evocado pela textura do círculo)",
+        "cheiro de pão quente (evocado pela palavra *brincar* ou quadras de roda)"
       ],
-      "trigger": "Frase ou imagem evoca cheiros através de associação (ex: *‘Três pratos de trigo’* → cheiro a pão)."
+      "secondary": []
     },
     "gustatory_evocation": {
-      "elements": [
-        "memória de sabores associados a festas ou brincadeiras (ex: doce de amendoim, chá de laranja)"
+      "primary": [
+        "sabor de bolacha-maria (evocado por quadras de roda infantis)",
+        "sabor de fruta da época (evocado por palavras sazonais)"
       ],
-      "trigger": "Frase ou imagem evoca sabores através de associação (ex: *‘boneca de pano’* → sabor a algodão doce)."
+      "secondary": []
     },
     "social_presence": {
-      "elements": [
-        "vozes de outras pessoas (invisíveis)",
-        "coro",
-        "erro proposital (como uma criança a tropeçar na frase)",
-        "código territorial partilhável"
+      "primary": [
+        "vozes sobrepostas (murmúrio)",
+        "risos infantis",
+        "silhuetas de crianças de mãos dadas"
       ],
-      "dynamics": [
-        "sensação de pertencer a um grupo",
-        "interação indireta com outros participantes (através de rastos)"
+      "secondary": [
+        "sensação de pertencer a um grupo invisível"
       ]
     }
   },
   "cross_sensory_translation": {
-    "primary": {
-      "from": "gesto (soprar/toque)",
-      "to": "som (transformação do sopro em melodia) + visual (partícula de luz)",
-      "description": "O gesto físico (soprar ou tocar) é traduzido em som e luz, criando uma resposta imediata e tangível que integra o participante na roda."
-    },
-    "secondary": {
-      "from": "voz (frase repetida)",
-      "to": "visual (onda de luz) + auditivo (eco/suspiro/batida)",
-      "description": "A voz da pessoa é transformada em elementos visuais e sonoros que alteram a textura da roda, como se a sua presença modificasse o espaço."
-    },
-    "tertiary": {
-      "from": "silêncio",
-      "to": "visual (vazio mais visível) + auditivo (suspiro coletivo)",
-      "description": "O silêncio não é ausência, mas um elemento ativo que revela camadas ocultas (ex: o vazio na roda torna-se mais nítido)."
-    }
+    "primary": "O movimento do cursor/dedo (kinesthetic) traduz-se em reorganização visual das sílabas (visual) e em alteração do ritmo percussivo (auditory).",
+    "secondary": "A voz sussurrada (auditory) convida a um gesto (kinesthetic), que por sua vez revela texto em movimento (visual)."
   },
   "silence_or_absence": {
-    "role": "matéria ativa",
-    "manifestations": [
-      {
-        "type": "vazio na roda",
-        "purpose": "Convite à participação. O vazio não é um erro, mas um espaço para ser preenchido."
-      },
-      {
-        "type": "silêncio após quebra da roda",
-        "purpose": "Cria suspense e prepara para a aparição de algo novo (frase, imagem, som)."
-      },
-      {
-        "type": "ausência de texto explicativo",
-        "purpose": "Força a pessoa a confiar nos sentidos e na intuição."
-      }
-    ]
+    "mechanism": "O silêncio é usado como matéria ativa: (1) o murmúrio reverso pára abruptamente quando a pessoa toca o círculo, criando um vazio sonoro que convida à atenção; (2) o zumbido agudo (apito) é seguido por um silêncio repentino quando as sílabas se reorganizam; (3) a música distorcida pára no momento da devolução, leaving only the voice and the fading word.",
+    "purpose": "Criar momentos de suspensão que destacam a aparição de novos elementos (quadra, sílabas, silhuetas)."
   },
   "surprise_or_indeterminacy": {
-    "mechanisms": [
-      {
-        "type": "erro proposital",
-        "description": "Uma voz *erra* a frase do convite, introduzindo um trava-língua ou uma variação inesperada. Isso quebra a expectativa de repetição perfeita e convida à brincadeira."
-      },
-      {
-        "type": "fragmentação da roda",
-        "description": "Ao *quebrar* a roda, esta fragmenta-se em partículas que formam uma imagem efémera (ex: uma criança, um objeto folclórico)."
-      },
-      {
-        "type": "aparição aleatória",
-        "description": "A frase ou imagem que aparece no final é escolhida aleatoriamente de um conjunto de opções autorais (trava-línguas, provérbios, objetos folclóricos)."
-      },
-      {
-        "type": "código territorial",
-        "description": "O bilhete ou som devolve um código associado a um lugar real de Lisboa, que pode ser usado para ativar a brincadeira num contexto físico."
-      }
-    ]
+    "mechanism": [
+      "A quadra ou palavra gerada no final é aleatória, mas sempre coerente com o corpus folclórico (baseada em um conjunto pré-definido de quadras e palavras).",
+      "As sílabas dispersam-se de forma imprevisível quando a pessoa tenta 'clicar' no círculo, quebrando a expectativa de interação direta.",
+      "As silhuetas dançam em sentido contrário ao movimento do cursor/dedo, criando um desvio lúdico.",
+      "A cor do círculo altera-se aleatoriamente entre sessões, mas sempre dentro de uma paleta terrosa (ocres, castanhos, verdes musgo)."
+    ],
+    "purpose": "Manter a sensação de brincadeira viva e imprevisível, como uma roda real onde nada é completamente controlável."
   },
   "session_variation": [
     {
-      "type": "ordem das vozes",
-      "description": "A ordem em que as vozes repetem a frase ou o trava-língua muda a cada sessão."
+      "type": "acaso controlado",
+      "description": "A quadra inicial e a palavra final são selecionadas aleatoriamente de um conjunto de 20 quadras folclóricas e 50 palavras relacionadas com brincadeiras de roda."
     },
     {
-      "type": "frase inicial",
-      "description": "A frase do convite (*‘Faz a palavra passar sem a prender’*) pode ser substituída por um trava-língua ou provérbio aleatório de um conjunto autoral."
+      "type": "ordem mutável",
+      "description": "A ordem das sílabas que se reorganizam varia entre sessões, criando diferentes palavras ou sons."
     },
     {
-      "type": "resposta ao gesto",
-      "description": "A forma como a roda reage ao sopro ou toque (ex: partícula de luz vs. som) varia aleatoriamente."
+      "type": "resposta a ritmo/velocidade do gesto",
+      "description": "A velocidade do cursor/dedo afeta a velocidade do ritmo percussivo e a dispersão das sílabas."
     },
     {
-      "type": "imagem efémera",
-      "description": "A imagem que aparece ao *quebrar* a roda (ex: criança, objeto folclórico) é escolhida aleatoriamente."
+      "type": "resposta a posição/trajetória",
+      "description": "A trajetória do cursor/dedo (ex: circular, linear, caótica) afeta a forma como as sílabas se reorganizam (ex: em espiral, em linha, aleatoriamente)."
     },
     {
-      "type": "código territorial",
-      "description": "O código territorial devolve um lugar diferente de Lisboa a cada sessão."
-    },
-    {
-      "type": "ritmo da roda",
-      "description": "O ritmo inicial da roda (pulsação, velocidade) varia entre sessões."
+      "type": "temporalidade real",
+      "description": "A cor do círculo e o tipo de música distorcida variam consoante a hora do dia (manhã: tons claros; tarde: tons quentes; noite: tons escuros)."
     }
   ],
   "territorial_binding": {
-    "real_world_anchor": true,
-    "description": "A experiência está ligada ao folclore e às brincadeiras de roda de Lisboa e de Portugal, com referências a lugares específicos (ex: ruas, freguesias) através do *código territorial*. O código pode ser usado para ativar a brincadeira num contexto físico (ex: numa roda real num parque ou praça).",
-    "examples": [
-      "Código territorial associado a uma rua de Alfama, onde uma brincadeira de roda era tradicionalmente praticada.",
-      "Código associado a uma festa popular (ex: Santo António), onde trava-línguas e brincadeiras de roda são parte da celebração."
-    ],
-    "source_sustainability": "A ligação territorial é sustentada pelo corpus autoral (ex: *Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf* menciona jogos tradicionais e dinâmicas territoriais)."
+    "relation": "A experiência evoca o território através de: (1) quadras folclóricas específicas de regiões de Portugal (ex: *A roda da vida* é comum no Alentejo); (2) memórias de brincadeiras de roda em espaços públicos (ruas, praças, pátios); (3) a textura do círculo, que lembra o chão de terra batida onde estas brincadeiras aconteciam.",
+    "source": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf (jogos tradicionais e folclore territorial).",
+    "sustainability": "A relação territorial é evocada, não simulada. Não depende de geolocalização ou dados específicos de localização."
   },
   "trace_and_return": {
     "trace": {
-      "digital": "O bilhete digital ou som guardado no *cosmos* da pessoa.",
-      "physical": "O *código territorial* que pode ser usado para ativar a brincadeira num contexto físico."
+      "type": "anónimo",
+      "description": "A palavra ou quadra gerada no final da experiência é registada na constelação COSMICOXES como um 'rasto' associado à data e hora. Este rasto pode reaparecer noutra sessão, misturado com outros, em novas rodas.",
+      "persistence": "O rasto permanece na constelação durante 30 dias, depois desvanece-se lentamente."
     },
     "return": {
-      "immediate": "A frase ou trava-língua que a pessoa ouviu/criou, escrita num bilhete ou transformada em som.",
-      "latent": "O bilhete ou som pode *reaparecer* em futuras sessões como parte de um coro maior ou como pista para outras brincadeiras. Se partilhado, o código territorial pode conectar pessoas em diferentes sessões."
-    },
-    "purpose": "Criar uma memória viva da brincadeira, que persiste e se transforma com o tempo, e que pode ser partilhada com outros."
+      "type": "simbólico",
+      "description": "A pessoa recebe a palavra/quadra para 'levar consigo' (copiar para a área de transferência ou guardar como imagem). Esta palavra pode ser usada noutra experiência ou partilhada como um convite para outras pessoas entrarem na roda."
+    }
   },
   "accessibility_equivalents": {
     "visual_impairment": {
-      "alternative": "Todas as interações visuais (ex: partícula de luz, roda) são acompanhadas por sons distintos (ex: sino para toque, murmúrio para vazio). O bilhete digital é lido em voz alta por uma voz sintética natural (opcional).",
-      "preservation": "A sensação de circularidade e ritmo é mantida através do som e da espacialização auditiva."
+      "description": "Todas as interações visuais têm equivalentes sonoros: (1) o círculo de luz é descrito como *um círculo pulsante à tua frente*; (2) o movimento das sílabas é acompanhado por sons que indicam a sua posição (ex: *sílabas à esquerda*, *sílabas a aproximar-se*); (3) as silhuetas são descritas como *sombras de crianças a dançar em sentido contrário*.",
+      "preserves_poetry": "Os sons e descrições mantêm o ritmo e a magia da brincadeira, sem reduzir a experiência a uma lista de instruções."
     },
     "auditory_impairment": {
-      "alternative": "Todas as interações sonoras (ex: voz, sopro) são acompanhadas por vibrações (se dispositivo suportar) ou por animacões visuais (ex: onda de luz para som, texto para voz). O convite é escrito em letras grandes e contrastadas, com opção de aumentar o tamanho.",
-      "preservation": "A magia da roda e do coro é traduzida em elementos visuais e táteis."
+      "description": "Todos os sons têm equivalentes visuais: (1) o murmúrio reverso é representado por um círculo com borda tremida; (2) os risos e a música distorcida são representados por ondas sonoras animadas em torno do círculo; (3) a voz sussurrada aparece como texto com efeito de *fading in/out*.",
+      "preserves_poetry": "As animações e textos mantêm a sensação de mistério e circularidade."
     },
     "motor_impairment": {
-      "alternative": "Todas as interações por gesto (soprar, tocar) têm equivalentes por teclado (ex: tecla *S* para soprar, tecla *T* para tocar) ou voz (ex: dizer *‘soprar’* ou *‘tocar’*). A roda pode ser controlada com um *switch* ou dispositivo adaptado.",
-      "preservation": "A sensação de participação ativa e de pertencer à roda é mantida."
+      "description": "Todas as interações com o cursor/dedo têm equivalentes via teclado ou voz: (1) as setas do teclado movem um cursor virtual; (2) a tecla *Espaço* simula o toque no círculo; (3) a voz pode ser usada para *soprar* (comando *sopra*) ou *parar* (comando *para*).",
+      "preserves_poetry": "Os comandos de voz e teclado mantêm a fluidez e a sensação de brincadeira."
     },
     "cognitive_load": {
-      "alternative": "Modo *simplificado*: a roda gira mais devagar, as vozes falam mais claramente, e o convite é repetido mais vezes. Opção de desativar o *erro proposital* (trava-língua).",
-      "preservation": "A essência da brincadeira (circularidade, oralidade, conexão) é preservada, com menos estímulos simultâneos."
+      "description": "A experiência pode ser pausada a qualquer momento com a tecla *P* ou o comando *pausa*. Durante a pausa, o ecrã escurece e uma voz diz: *A roda espera por ti.*",
+      "preserves_poetry": "A pausa não quebra a magia; pelo contrário, reforça a ideia de que a roda é paciente."
     },
     "reduced_motion": {
-      "alternative": "A roda é representada como um círculo estático com pontos de luz que piscam em vez de girarem. As partículas movem-se em linhas retas ou desaparecem/aparecem em vez de circular.",
-      "preservation": "A sensação de ritmo e circularidade é mantida através de luz e som."
+      "description": "Em modo *reduced-motion*, os círculos e sílabas movem-se mais lentamente, e as silhuetas são estáticas mas com um efeito de *glow* para indicar movimento. Os sons mantêm-se inalterados.",
+      "preserves_poetry": "A lentidão e o *glow* mantêm a sensação de vida e mistério."
     }
   },
   "optional_permissions": {
     "microphone": {
-      "purpose": "Capturar o sopro ou a voz da pessoa para integrar no coro ou transformar em som.",
-      "fallback": "Se não concedido, a pessoa pode usar o toque ou teclado para interagir. O sopro é simulado com um som pré-gravado suave.",
-      "moment_of_ask": "Apenas quando a pessoa se aproxima do vazio da roda e o convite é ouvido."
+      "purpose": "Permitir que a pessoa sopre para o microfone para dispersar as sílabas (opção 3 na etapa *ESCOLHA / ACASO / SILÊNCIO*).",
+      "fallback": "Se a permissão for negada, a pessoa pode usar a tecla *S* ou o comando *sopra* para simular o sopro."
     },
     "camera": {
-      "required": false,
-      "note": "Não é necessária para esta experiência."
-    },
-    "geolocation": {
-      "required": false,
-      "note": "Não é necessária para esta experiência, mas o *código territorial* pode ser usado para ativar a brincadeira num contexto físico (ex: num parque)."
+      "purpose": "Não aplicável.",
+      "fallback": "N/A"
     },
     "device_motion": {
-      "required": false,
-      "note": "Não é necessária para esta experiência."
+      "purpose": "Não aplicável.",
+      "fallback": "N/A"
+    },
+    "geolocation": {
+      "purpose": "Não aplicável.",
+      "fallback": "N/A"
     }
   },
   "overstimulation_risk": {
-    "potential_risks": [
-      {
-        "type": "flashing",
-        "mitigation": "Evitar luzes piscantes rápidas. Usar transições suaves e cores pastel. Opção de *reduced_motion* desativa animacões complexas."
-      },
-      {
-        "type": "sudden_loud_sounds",
-        "mitigation": "Todos os sons (ex: sino, vidro a partir) são suaves e progressivos. Volume máximo é limitado e pode ser ajustado pelo utilizador."
-      },
-      {
-        "type": "cognitive_overload",
-        "mitigation": "Modo *simplificado* reduz o número de estímulos simultâneos (ex: menos vozes, roda mais lenta). Opção de pausar a experiência a qualquer momento."
-      },
-      {
-        "type": "physical_discomfort",
-        "mitigation": "Vibrações (se usadas) são suaves e curtas. Opção de desativar vibração."
-      }
+    "potential_triggers": [
+      "Flashing: O círculo de luz pulsante pode ser problemático para pessoas com epilepsia fotosensível.",
+      "Sound: O zumbido agudo e a música distorcida podem ser desconfortáveis para pessoas com sensibilidade auditiva.",
+      "Motion: O movimento circular das letras e sílabas pode causar tonturas em pessoas com sensibilidade ao movimento."
     ],
-    "safe_defaults": {
-      "visual": "Cores suaves, transições lentas, sem flashing.",
-      "auditory": "Volume baixo, sons progressivos, sem ruídos súbitos.",
-      "haptic": "Vibrações curtas e suaves (se dispositivo suportar)."
-    }
+    "mitigation": [
+      "Flashing: O círculo de luz tem uma frequência de pulsação inferior a 3 Hz e pode ser desativado no modo *reduced-motion*.",
+      "Sound: O volume dos sons pode ser ajustado via teclado (teclas *+* e *-*). O zumbido agudo tem uma duração máxima de 2 segundos.",
+      "Motion: O movimento circular pode ser pausado ou abrandado no modo *reduced-motion*."
+    ]
   },
   "distinctiveness": {
     "unique_elements": [
-      "A *roda viva* como espaço de circularidade e oralidade, onde a palavra e o gesto circulam livremente.",
-      "O *vazio* como convite ativo à participação, não como um erro ou ausência passiva.",
-      "O *erro proposital* (trava-língua) como mecanismo de surpresa e quebra de expectativa, típico das brincadeiras infantis.",
-      "A *tradução cruzada* entre gesto (soprar/toque) e som/luz, que integra o participante na roda de forma imediata e tangível.",
-      "O *código territorial* como ligação entre o digital e o físico, permitindo que a brincadeira transcenda o ecrã.",
-      "A *devolução* sob a forma de um bilhete digital ou som, que pode ser guardado ou partilhado, criando uma memória viva da experiência.",
-      "A *fragmentação da roda* em partículas que formam uma imagem efémera, evocando a magia das brincadeiras de infância."
+      "A tradução cruzada entre movimento (cursor/dedo), reorganização visual (sílabas) e som (ritmo percussivo) é específica desta experiência e não é repetida noutra curadoria.",
+      "O uso do silêncio como matéria ativa (murmúrio que pára, zumbido que cede lugar ao silêncio) é central e não decorativo.",
+      "A devolução da palavra/quadra como um 'rasto' anónimo na constelação COSMICOXES é única e ligada à identidade territorial do folclore.",
+      "A evocações olfativas e gustativas (terra molhada, pão quente, bolacha-maria) são específicas das memórias de brincadeiras de roda e não são genéricas.",
+      "A mecânica de 'fazer a palavra passar sem a prender' é literal e não uma metáfora abstrata."
     ],
-    "comparison": "Esta experiência não pode ser confundida com outras porque: (1) é a única que usa a *roda* como metáfora central de circularidade e oralidade; (2) é a única que convida explicitamente a *fazer a palavra passar sem a prender*; (3) é a única que usa o *erro proposital* (trava-língua) como mecanismo de surpresa; (4) é a única que devolve um *código territorial* ligado a um lugar real de Lisboa."
+    "comparison": "Esta experiência não pode ser confundida com: (1) *COSMICOXES* (que lida com constelações e gravidade, não com circularidade folclórica); (2) *Galeria Diletante* (que trabalha com fotografia e continuidade poética, não com oralidade e movimento); (3) *Fucô* (que é um mediador vivo, não uma brincadeira coletiva); (4) *Dado Sem Lado* (que lida com acaso e desvio, não com ritmo circular)."
   },
   "questions_for_eduardo": [
-    {
-      "question": "O convite *‘Faz a palavra passar sem a prender’* deve ser sempre a frase inicial, ou pode ser substituído por outros trava-línguas ou provérbios autorais? Se sim, qual é o conjunto autoral de frases a usar?",
-      "priority": "high",
-      "source_gap": "O corpus menciona trava-línguas e provérbios como parte do folclore, mas não especifica um conjunto canónico para esta experiência."
-    },
-    {
-      "question": "A *imagem efémera* que aparece ao *quebrar* a roda deve ser sempre um objeto folclórico ou pode incluir outras referências (ex: crianças, lugares de Lisboa)? Se sim, qual é o conjunto autoral de imagens a usar?",
-      "priority": "medium",
-      "source_gap": "O corpus menciona objetos folclóricos (ex: pião, boneca de pano), mas não especifica se outras imagens são permitidas."
-    },
-    {
-      "question": "O *código territorial* deve ser sempre associado a um lugar real de Lisboa, ou pode ser um código abstrato (ex: um número ou símbolo)? Se for associado a um lugar, como deve ser gerado (ex: aleatoriamente a partir de uma lista, com base no IP da pessoa)?",
-      "priority": "medium",
-      "source_gap": "O corpus menciona a ligação territorial, mas não especifica como o código deve ser gerado ou associado a lugares."
-    },
-    {
-      "question": "A *voz distorcida* (eco de crianças) que repete o convite deve ser uma gravação real ou pode ser gerada sinteticamente? Se for gravação, existe um conjunto autoral de vozes a usar?",
-      "priority": "medium",
-      "source_gap": "O corpus não especifica se as vozes devem ser reais ou sintéticas."
-    }
+    "O corpus folclórico específico (quadras, palavras) a usar deve ser validado. As 20 quadras e 50 palavras mencionadas são um exemplo; qual é o conjunto canónico a usar?",
+    "A textura do círculo (tecido desgastado) deve ser baseada em fotografias reais de chão de terra batida ou é uma interpretação abstrata?",
+    "O som de risos infantis distantes deve ser uma gravação real ou uma síntese sonora que evite direitos autorais?",
+    "A devolução da palavra/quadra para a constelação COSMICOXES deve ser visível para a pessoa (ex: *A tua palavra está agora na roda de [data]*) ou deve permanecer anónima e invisível?"
   ],
   "improvement_proposals": [
     {
-      "proposal": "Incluir uma *opção de gravar* a voz da pessoa (com consentimento explícito) para que esta possa ser integrada em futuras sessões como parte do coro, criando uma camada de memória coletiva.",
-      "justification": "Aprofundaria a conexão intergeracional e a sensação de pertencer a um grupo, alinhando com os princípios de oralidade e memória do Atlas Vivo MILK.",
-      "source_support": "O corpus menciona a *oralidade* e a *intergeracionalidade* como princípios centrais, e a *memória* como um dos rastos desejados."
+      "title": "Integração com memórias territoriais reais",
+      "description": "Se houver um corpus de quadras folclóricas por região (ex: Alentejo, Minho, Ribatejo), a experiência poderia adaptar as quadras e palavras consoante a freguesia ou região de origem da pessoa (se esta optar por partilhar essa informação).",
+      "source": "curadoria entrada freguesias.xlsx (pendente de parsing tabular)."
     },
     {
-      "proposal": "Adicionar uma *camada de território físico* onde, ao usar o *código territorial* num lugar real de Lisboa (ex: num parque), a pessoa possa *ativar* a brincadeira num ecrã público ou num dispositivo móvel, conectando o digital ao físico.",
-      "justification": "Reforçaria a ligação entre o Atlas Vivo MILK e o território, alinhando com as dinâmicas territoriais mencionadas no corpus.",
-      "source_support": "O corpus menciona *dinâmicas territoriais* e a *ligação ao folclore e às festas populares* como parte da camada pública."
+      "title": "Roda colaborativa em tempo real",
+      "description": "Permitir que múltiplas pessoas (em sessões diferentes) possam contribuir para a mesma roda, com as suas sílabas/palavras a interagir entre si. Ex: se duas pessoas estivessem a brincar ao mesmo tempo, as sílabas de uma poderiam misturar-se com as da outra.",
+      "constraint": "Requer moderação para evitar abuso e garantir que a experiência permaneça poética e não caótica."
     },
     {
-      "proposal": "Incluir *trava-línguas regionais* (ex: do Alentejo, Minho, Açores) como opções para a frase inicial, para refletir a diversidade do folclore português.",
-      "justification": "Ampliaria o alcance territorial da experiência, alinhando com o princípio de *diversidade* e *intergeracionalidade* do Atlas.",
-      "source_support": "O corpus menciona *jogos tradicionais* e *trava-línguas* como parte do folclore, sem limitar a uma região específica."
+      "title": "Roda física como extensão",
+      "description": "Em contextos físicos (ex: festas, escolas), a experiência digital poderia ser projetada num chão ou parede, permitindo que as pessoas brincassem com o corpo todo. O movimento do corpo seria captado por câmaras (opcional) e traduzido em interações digitais.",
+      "note": "Esta proposta é para um futuro dispositivo derivado e não afeta o blueprint digital atual."
     }
   ],
   "generic_fallback_allowed": false,

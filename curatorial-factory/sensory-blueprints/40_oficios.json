@@ -3,388 +3,387 @@
   "canonical_name": "Ofícios: O Gesto que Fala sem Nome",
   "source_evidence": {
     "primary": [
-      {
-        "source": "catalog_entry",
-        "quote": "Escolhe um ofício. Faz o gesto sem nome.",
-        "authority": "canonical"
-      },
-      {
-        "source": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
-        "quote": "16 seres folclóricos; jogos tradicionais, trava-línguas e adivinhas.",
-        "authority": "authorial"
-      },
-      {
-        "source": "Curadoria Cultural e Existencialismo Profundo.pdf",
-        "quote": "território fluido, Llansol/cena-fulgor, museologia participativa, língua viva, absurdo/Camus, etnofísica, soberania da memória.",
-        "authority": "interpretative"
-      }
+      "catalog_entry (mecanica: gesticular, convite: 'Escolhe um ofício. Faz o gesto sem nome.')"
     ],
     "secondary": [
-      {
-        "source": "A Deriva do Sentido: Cartografia Psicogeográfica e Sensorial de Lisboa",
-        "quote": "sentipensar, configuração relacional, psicogeografia activa, corpo inteiro, textura/hapticidade.",
-        "authority": "curatorial"
-      }
+      "Corpus: FALARTE (mecânica 6: 'O que ainda resiste — ofício, comércio, gesto ou prática persistente.')",
+      "Corpus: Livro Cubo (D4: 'O Corpo que Percebe — percepção incorporada; digital quase ausente; corpo não é dado.')"
+    ],
+    "tertiary": [
+      "Corpus: A Deriva do Sentido (tato, gesto, memória local, saber-fazer)"
     ]
   },
   "authorial_invariants": [
-    "O convite é 'Escolhe um ofício. Faz o gesto sem nome.'",
-    "A mecânica é 'gesticular' (do catálogo).",
-    "Pertence à família 'folclore'.",
-    "Deve convocar a memória corporal e territorial dos ofícios.",
-    "Não pode ser reduzido a card, menu, quiz ou animação decorativa.",
-    "Deve preservar a oralidade e o gesto como linguagem viva."
+    "O ofício é escolhido pela pessoa, não imposto pelo sistema.",
+    "O gesto é o ponto de entrada, não a explicação do ofício.",
+    "O sistema responde ao gesto, não ao nome do ofício.",
+    "A experiência preserva a oralidade e o saber-fazer como matéria viva.",
+    "Nenhum ofício é inventado; todos são extraídos de corpus territorial ou memória autorizada.",
+    "O silêncio e a ausência são partes ativas da devolução."
   ],
-  "perceptual_intent": "Evocar a inteligência manual e a memória corporal dos ofícios tradicionais, transformando o gesto em linguagem viva e o corpo em arquivo sensorial. A experiência deve fazer com que a pessoa sinta que o seu movimento 'fala' um ofício sem palavras, e que o sistema 'responde' como se o gesto fosse uma frase num dialeto esquecido.",
+  "perceptual_intent": "Convocar a memória corporal dos ofícios como linguagem não-verbal, onde o gesto é o texto e o sistema o traduz em eco sensorial. A pessoa deve sentir que o seu corpo *sabe* algo que a mente não nomeia, e que o Atlas o reconhece sem palavras.",
   "threshold": {
-    "description": "A tela está em repouso, com um fundo de textura orgânica (como linho ou papel envelhecido) e um único ponto de luz pulsante no centro, como uma vela ou uma ferramenta de ofício (ex: agulha, martelo, foice) projetada em sombra chinesa. O som ambiente é um murmúrio de vozes distantes em dialeto ou uma paisagem sonora de uma oficina (madeira a ranger, metal a bater, tecido a ser cortado), mas tão baixo que parece vir de trás da tela. A pessoa sente que algo a observa, à espera.",
-    "sensory_trigger": "O ponto de luz começa a tremer levemente quando o cursor/dedo se aproxima, como se reagisse à presença."
+    "description": "A tela está em repouso, com um fundo de textura orgânica (papel envelhecido, tecido desgastado ou terra seca) que respira lentamente em tons terrosos. Um único ponto de luz pulsante, como uma vela ou ferramenta abandonada, atrai o olhar. Nenhum texto, nenhum botão. O cursor, se presente, é uma mão estilizada em negativo (sombra ou recorte).",
+    "sensory_trigger": "O primeiro movimento do cursor/rato ou toque na tela faz o ponto de luz expandir-se em anéis concêntricos, como ondas em água, revelando uma silhueta de ferramenta ou objeto associado a um ofício (ex.: foice, tear, rolo de padeiro). A silhueta é preenchida por uma textura que evoca o material do ofício (madeira, metal, farinha)."
   },
   "dramaturgical_arc": [
     {
-      "phase": "limiar",
-      "action": "A tela está em repouso com textura orgânica e som ambiente mínimo. Um ponto de luz (ferramenta de ofício) pulsa no centro."
+      "stage": "LIMIAR",
+      "action": "A tela transita de repouso para um estado de 'prontidão'. O ponto de luz cresce e a silhueta da ferramenta aparece, mas sem contexto. O som ambiente (se ativo) muda para um murmúrio de vozes distantes ou sons de ofício (marteladas, tecido a ser tecido) em volume muito baixo, como se vindo de outro tempo.",
+      "sensory_focus": [
+        "visual (textura, silhueta, luz)",
+        "auditory (murmúrio subliminar)"
+      ]
     },
     {
-      "phase": "chamada",
-      "action": "Aparece, em tipografia manual e irregular (como se escrita à mão com carvão), a frase: 'Faz o gesto sem nome.' A frase desvanece-se lentamente, como se apagada por uma mão invisível."
+      "stage": "CHAMADA",
+      "action": "Aparece, em tipografia manual e irregular (como escrita à mão com carvão ou giz), a frase: *'Faz o gesto que o teu corpo lembra.'* A frase surge em partes, como se escrita em tempo real, e desaparece lentamente. A silhueta da ferramenta gira 180 graus, como um convite.",
+      "sensory_focus": [
+        "visual (tipografia viva, movimento)",
+        "temporal_interoceptive (ritmo de aparecimento/desaparecimento)"
+      ]
     },
     {
-      "phase": "primeiro_gesto",
-      "action": "A pessoa move o cursor/dedo ou, se preferir, usa o teclado (setas ou teclas numéricas) para 'desenhar' um gesto no ar. O sistema não pede permissões: o gesto é captado como trajectória 2D (sem câmara)."
+      "stage": "PRIMEIRO GESTO",
+      "action": "A pessoa move o cursor/rato ou dedo para traçar um gesto no ar (ex.: segurar um martelo, amassar pão, fiar lã). O sistema captura a trajetória, velocidade e pressão (se disponível) do gesto, mas não o nomeia.",
+      "sensory_focus": [
+        "kinesthetic (trajetória, velocidade)",
+        "proprioceptive (consciência do movimento)"
+      ]
     },
     {
-      "phase": "resposta_viva",
-      "action": "O gesto desenhado no ar ganha vida: a trajectória transforma-se em uma silhueta animada de um ofício (ex: tecelã, ferreiro, oleiro) a executar o movimento. A silhueta é minimalista, em sombra chinesa, e move-se em loop curto, como se repetisse o gesto da pessoa. Simultaneamente, um som característico do ofício (ex: tear, bigorna, roda de oleiro) ressoa, mas distorcido como se vindo de um sonho."
+      "stage": "RESPOSTA VIVA",
+      "action": "O gesto da pessoa é 'ecoado' pelo sistema: a silhueta da ferramenta original transforma-se na trajetória do gesto, preenchida com a textura do ofício correspondente (ex.: gesto de amassar → textura de farinha; gesto de tecer → fios entrelaçados). Um som único e breve (ex.: *clique* de tesoura, *soprar* em forno, *raspar* de plaina) é emitido, espacializado como vindo da direção do gesto. Se o gesto for reconhecido como associado a um ofício, a silhueta ganha detalhes (ex.: foice ganha lâmina afiada em metal).",
+      "sensory_focus": [
+        "visual (transformação da silhueta)",
+        "auditory (som espacializado)",
+        "haptic (vibração opcional para feedback do gesto)"
+      ]
     },
     {
-      "phase": "desvio",
-      "action": "De repente, a silhueta para e 'olha' para a pessoa (viragem da sombra). O som corta abruptamente. Uma voz sussurra (em português ou dialeto): 'Este não é o teu gesto.' A silhueta desintegra-se em partículas que caem como serradura ou fios de lã."
+      "stage": "DESVIO",
+      "action": "A silhueta transformada começa a 'respirar' (expande e contrai lentamente). De repente, uma segunda silhueta aparece ao lado, representando um ofício *complementar* ou *oposto* (ex.: gesto de ferreiro → silhueta de tecelã; gesto de padeiro → silhueta de moleiro). As duas silhuetas interagem: a do gesto da pessoa atrai ou repele a segunda, como se em diálogo. Um som de *fricção* ou *atrito* (ex.: metal contra pedra, tecido a rasgar) preenche o espaço.",
+      "sensory_focus": [
+        "visual (interação entre silhuetas)",
+        "auditory (som de fricção)",
+        "spatial (movimento relativo entre elementos)"
+      ]
     },
     {
-      "phase": "aprofundamento_sensorial",
-      "action": "As partículas reassumem a forma de uma ferramenta do ofício (ex: fuso, alicate, plaina). A ferramenta 'cai' na tela e, ao tocar o chão, emite um som metálico ou de madeira. A pessoa pode 'pegar' na ferramenta arrastando-a. Ao fazê-lo, a ferramenta deforma a textura do fundo (como se riscasse o linho) e o som do ofício volta, agora mais claro e rítmico. A ferramenta também 'pesa': o cursor/dedo sente uma resistência háptica (vibração leve, se suportado) ou visual (arrasto mais lento)."
+      "stage": "APROFUNDAMENTO SENSORIAL",
+      "action": "As silhuetas fundem-se em uma única forma abstrata, que agora pulsa com a textura e o som do ofício original *e* do complementar. A tela escurece gradualmente, e a forma abstrata projeta sombras que revelam *ferramentas* ou *objetos* associados aos dois ofícios (ex.: bigorna e fuso). O som evolui para uma *paisagem sonora* dos ofícios: marteladas rítmicas + roda de fiar + voz de um mestre a dar instruções (em volume baixo, como memória).",
+      "sensory_focus": [
+        "visual (sombras, texturas sobrepostas)",
+        "auditory (paisagem sonora)",
+        "temporal_interoceptive (ritmo da paisagem sonora)"
+      ]
     },
     {
-      "phase": "escolha_acaso_silencio",
-      "action": "A ferramenta, ao ser arrastada, revela fragmento de uma lenda ou trava-língua relacionado com o ofício (ex: 'O ferreiro que forjava o vento' ou 'Tecelã, tece o teu tecido, que o teu tecido te tece a ti'). A pessoa pode: (1) continuar a arrastar a ferramenta para 'escrever' com ela na tela (deixando um rasto de tinta/ferrugem), (2) soltar a ferramenta para que ela caia e emita um som final, ou (3) ficar imóvel. Se ficar imóvel por 5 segundos, o som do ofício desvanece-se e uma voz sussurra: 'O gesto espera.'"
+      "stage": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "A pessoa pode: (1) *tocar* uma das sombras projetadas para 'escolher' um ofício; (2) *esperar* em silêncio; ou (3) *fazer um novo gesto*. Se tocar uma sombra, o som correspondente a esse ofício aumenta de volume e a sombra ganha cor. Se esperar, as sombras começam a desvanecer-se em direções opostas, como se o tempo as levasse. Se fizer um novo gesto, o ciclo repete-se com a nova trajetória.",
+      "sensory_focus": [
+        "kinesthetic (toque ou novo gesto)",
+        "auditory (volume dinâmico)",
+        "silence_or_absence (desvanecimento)"
+      ]
     },
     {
-      "phase": "aparição",
-      "action": "Se a pessoa escolher arrastar a ferramenta para 'escrever', o rasto forma uma palavra ou símbolo do ofício (ex: 'linho', 'forja', 'barro'). A palavra/símbolo brilha levemente e, ao soltar a ferramenta, uma imagem de arquivo (fotografia ou desenho) de um ofício real aparece por trás do rasto, como se revelada pela fricção. Se a pessoa soltar a ferramenta, esta cai e o som final (ex: martelada) ecoa três vezes, cada vez mais fraco, até desaparecer. Se a pessoa ficar imóvel, a ferramenta desaparece e a tela volta ao estado inicial, mas com a textura agora riscada pelo gesto anterior."
+      "stage": "APARIÇÃO",
+      "action": "Se a pessoa escolheu um ofício (ou o sistema 'escolheu' por acaso após espera), aparece uma *palavra* ou *frase* associada ao ofício, escrita em tipografia que imita o material do ofício (ex.: palavra 'pão' em textura de farinha; 'tecer' em fios entrelaçados). A palavra surge como se *saindo* da sombra ou do gesto, e é acompanhada por um som *íntimo* (ex.: *mastigar* pão, *cortar* tecido). Se a pessoa não interagiu, aparece uma *ausência*: um espaço vazio em forma de ferramenta, com a frase *'O que o teu corpo não esqueceu.'* em voz sussurrada.",
+      "sensory_focus": [
+        "visual (palavra materializada)",
+        "auditory (som íntimo ou voz)",
+        "olfactory_evocation (cheiro de pão, lã, metal quente — *apenas sugerido* por texto ou som)"
+      ]
     },
     {
-      "phase": "devolução",
-      "action": "A experiência devolve uma 'ferramenta de memória': um objeto digital (ex: um fuso, uma agulha, um prego) que a pessoa pode 'guardar' no seu inventário pessoal (visível apenas para si). O objeto tem um nome (ex: 'Fuso de [nome do ofício]') e uma descrição poética (ex: 'Guarda o fio que te teceu'). A pessoa pode regressar mais tarde para 'usar' a ferramenta em outras experiências (ex: na curadoria 'Festas', para 'costurar' uma memória)."
+      "stage": "DEVOLUÇÃO",
+      "action": "A palavra ou ausência é 'devolvida' à pessoa de uma das seguintes formas: (1) *como um selo*: a palavra aparece em um 'bilhete' digital (estilo caderno rasgado) que a pessoa pode 'guardar' (download como imagem ou texto); (2) *como um rasto*: a palavra é adicionada a uma *constelação* de ofícios no COSMICOXES, visível em futuras sessões; (3) *como um convite*: a frase *'Procura este gesto na [freguesia X]'* aparece, com um link opcional para a dinâmica territorial correspondente (se existente no corpus). Se a pessoa não interagiu, o vazio permanece como *latência*: a ferramenta em negativo volta ao centro da tela, agora com a textura do gesto original da pessoa.",
+      "sensory_focus": [
+        "visual (selo, constelação, convite)",
+        "social_presence (rasto partilhado no COSMICOXES)"
+      ]
     },
     {
-      "phase": "rasto_latência",
-      "action": "O gesto e a ferramenta deixam um rasto na textura do fundo, visível em sessões futuras (como uma mancha de tinta ou uma marca de ferramenta). Se a pessoa regressar, o rasto pode interagir com novos gestos (ex: uma marca de martelo pode 'bater' em um novo gesto, emitindo som). O rasto desvanece-se lentamente ao longo de 7 dias ou após 100 interações de outras pessoas (o que acontecer primeiro)."
+      "stage": "RASTO / LATÊNCIA",
+      "action": "A experiência termina com a tela a regressar ao estado inicial (fundo texturizado + ponto de luz), mas agora o ponto de luz tem a *cor* ou *textura* do ofício devolver. Se a pessoa regressar, o ponto de luz 'lembra' o último ofício e reage mais rápido ao gesto. O rasto no COSMICOXES (se criado) permanece como partícula ativa por 7 dias, depois desvanece-se lentamente."
     }
   ],
   "participant_verbs": [
-    "desenhar no ar",
-    "arrastar a ferramenta",
-    "escutar o som do ofício",
-    "escrever com o rasto",
-    "soltar a ferramenta",
-    "esperar em silêncio",
-    "guardar a ferramenta"
+    "traçar",
+    "escolher",
+    "esperar",
+    "tocar",
+    "reconhecer",
+    "deixar",
+    "ouvi"
   ],
   "system_responses": [
-    {
-      "trigger": "primeiro gesto (trajectória)",
-      "response": "Transforma a trajectória em silhueta animada do ofício correspondente, com som característico distorcido."
-    },
-    {
-      "trigger": "silhueta 'olha' para a pessoa",
-      "response": "Corta o som abruptamente e sussurra 'Este não é o teu gesto.' Desintegra a silhueta em partículas."
-    },
-    {
-      "trigger": "partículas reassumem forma de ferramenta",
-      "response": "Ferramenta 'cai' na tela com som metálico/madeira. Deforma a textura do fundo ao ser arrastada e emite som rítmico do ofício."
-    },
-    {
-      "trigger": "arrastar ferramenta para 'escrever'",
-      "response": "Rasto forma palavra/símbolo do ofício. Revela imagem de arquivo por trás do rasto."
-    },
-    {
-      "trigger": "soltar ferramenta",
-      "response": "Ferramenta cai e emite som final (ex: martelada) em eco decrescente."
-    },
-    {
-      "trigger": "ficar imóvel por 5 segundos",
-      "response": "Som do ofício desvanece-se. Voz sussurra 'O gesto espera.'"
-    },
-    {
-      "trigger": "guardar ferramenta",
-      "response": "Devolve objeto digital com nome e descrição poética para inventário pessoal."
-    }
+    "Transforma o gesto em silhueta texturizada",
+    "Espacializa som como eco do gesto",
+    "Funde ofícios complementares em forma abstrata",
+    "Projeta sombras de ferramentas como memória",
+    "Materializa palavras em texturas do ofício",
+    "Devolve a palavra como selo, rasto ou convite territorial",
+    "Guarda a latência do gesto na cor do ponto de luz"
   ],
   "sensory_signature_id": "OFICIOS_GESTO_SEM_NOME_040",
   "sensory_channels": {
     "visual": {
-      "elements": [
-        "textura orgânica (linho/papel envelhecido)",
-        "ponto de luz pulsante (ferramenta de ofício em sombra chinesa)",
-        "silhueta animada do ofício (minimalista, loop curto)",
-        "partículas (serradura, fios de lã)",
-        "ferramenta 2D (fuso, alicate, plaina)",
-        "rasto de tinta/ferrugem ao arrastar ferramenta",
-        "imagem de arquivo (fotografia/desenho do ofício)",
-        "objeto digital (ferramenta de memória)"
+      "primary": [
+        "textura orgânica (papel, tecido, terra)",
+        "silhuetas dinâmicas de ferramentas",
+        "tipografia manual e irregular",
+        "sombras projetadas",
+        "palavras materializadas em texturas"
       ],
-      "dynamics": [
-        "transição suave entre estados (desvanecimento, desintegração)",
-        "deformação da textura do fundo ao arrastar ferramenta",
-        "brilho leve em palavras/símbolos revelados"
+      "secondary": [
+        "luz pulsante",
+        "anéis concêntricos",
+        "fundos que 'respiram'",
+        "transições suaves entre estados"
       ]
     },
     "auditory": {
-      "elements": [
-        "murmúrio de vozes distantes (dialeto)",
-        "paisagem sonora de oficina (madeira, metal, tecido)",
-        "som característico do ofício (tear, bigorna, roda de oleiro) distorcido",
-        "som metálico/madeira ao 'cair' a ferramenta",
-        "eco decrescente do som final",
-        "voz sussurrada ('Este não é o teu gesto.', 'O gesto espera.')",
-        "som rítmico do ofício ao arrastar ferramenta"
+      "primary": [
+        "sons de ofício (marteladas, tecer, amassar)",
+        "paisagem sonora sobreposta",
+        "som espacializado (direção do gesto)",
+        "som íntimo (mastigar, cortar)",
+        "voz sussurrada"
       ],
-      "dynamics": [
-        "volume e distorção ajustados à proximidade do cursor/dedo",
-        "corte abrupto do som no desvio",
-        "eco e desvanecimento progressivo"
+      "secondary": [
+        "murmúrio de vozes distantes",
+        "fricção/atrito entre materiais",
+        "ritmo de aparecimento/desaparecimento"
       ]
     },
     "haptic": {
-      "elements": [
-        "resistência visual ao arrastar ferramenta (arrasto mais lento)",
-        "vibração leve (se dispositivo suportar) ao 'pegar' na ferramenta"
+      "primary": [
+        "vibração opcional para feedback do gesto (se dispositivo suportar)"
       ],
-      "dynamics": [
-        "feedback tátil opcional e não intrusivo"
+      "secondary": [
+        "feedback visual de pressão (ex.: espessura da trajetória do gesto)"
       ]
     },
     "kinesthetic": {
-      "elements": [
-        "trajectória 2D do cursor/dedo (gesto no ar)",
-        "arrasto da ferramenta",
-        "movimento da silhueta animada"
+      "primary": [
+        "captura de trajetória, velocidade e pressão do gesto"
       ],
-      "dynamics": [
-        "captura de gesto sem permissões especiais"
+      "secondary": [
+        "movimento relativo entre silhuetas"
       ]
     },
     "proprioceptive": {
-      "elements": [
-        "instrução implícita para usar mão dominante/não dominante",
-        "sensação de 'peso' da ferramenta ao arrastar"
+      "primary": [
+        "consciência do corpo no gesto (ex.: mão dominante vs. não dominante)"
       ],
-      "dynamics": [
-        "conscientização corporal através do gesto"
+      "secondary": [
+        "orientação espacial das sombras projetadas"
       ]
     },
     "temporal_interoceptive": {
-      "elements": [
-        "ritmo do som do ofício",
-        "pausa de 5 segundos para 'escolher' imobilidade",
-        "desvanecimento progressivo do rasto (7 dias ou 100 interações)"
+      "primary": [
+        "ritmo da paisagem sonora",
+        "respiração das silhuetas",
+        "tempo de espera como parte ativa"
       ],
-      "dynamics": [
-        "controle do tempo como elemento dramático"
+      "secondary": [
+        "aceleração/desaceleração do som"
       ]
     },
     "spatial": {
-      "elements": [
-        "profundidade sugerida pela textura do fundo",
-        "posição da ferramenta na tela (caindo, arrastada)",
-        "interação entre rastos de sessões diferentes"
+      "primary": [
+        "espacialização do som (esquerda/direita, frente/trás)",
+        "movimento das silhuetas no ecrã"
       ],
-      "dynamics": [
-        "espaço como suporte de memória coletiva"
+      "secondary": [
+        "profundidade das sombras projetadas"
       ]
     },
     "olfactory_evocation": {
-      "elements": [
-        "memória olfativa evocada por sons (ex: cheiro a ferro quente ao som da bigorna)",
-        "descrição poética do objeto devuelto (ex: 'Guarda o fio que te teceu' evoca cheiro a linho)"
+      "primary": [
+        "sugestão de cheiros por texto ou som (ex.: 'cheiro a pão quente' em voz sussurrada, 'metal quente' em som de forja)"
       ],
-      "dynamics": [
-        "evocação sem fingir output físico"
-      ]
+      "secondary": []
     },
     "gustatory_evocation": {
-      "elements": [
-        "memória gustativa associada a ofícios (ex: pão do padeiro, mel do apicultor)",
-        "palavras/símbolos que evocam sabores (ex: 'barro' pode evocar terra molhada)"
+      "primary": [
+        "sugestão de sabores por texto ou som (ex.: 'sabor a azeite' em voz, 'doçura do mel' em som de colmeia)"
       ],
-      "dynamics": [
-        "evocação através de linguagem e associação"
-      ]
+      "secondary": []
     },
     "social_presence": {
-      "elements": [
-        "vozes distantes em dialeto (presença de outros)",
-        "rastos de outras pessoas visíveis na textura do fundo",
-        "objetos digitais partilhados (ferramentas de memória)"
+      "primary": [
+        "rasto no COSMICOXES (partícula ativa por 7 dias)",
+        "constelação de ofícios partilhada"
       ],
-      "dynamics": [
-        "presença indireta de outros participantes"
+      "secondary": [
+        "voz de mestre a dar instruções (como memória coletiva)"
       ]
     }
   },
   "cross_sensory_translation": {
-    "primary": {
-      "from": "gesto (kinesthetic)",
-      "to": "silhueta animada (visual) + som do ofício (auditory)",
-      "description": "O gesto da pessoa é traduzido em movimento e som, como se o corpo falasse uma linguagem de ofícios."
-    },
-    "secondary": {
-      "from": "arrasto da ferramenta (kinesthetic/haptic)",
-      "to": "deformação da textura (visual) + som rítmico (auditory)",
-      "description": "O movimento físico da ferramenta altera o ambiente visual e sonoro, como se a ferramenta 'riscasse' o mundo."
-    },
-    "tertiary": {
-      "from": "silêncio/imobilidade (temporal_interoceptive)",
-      "to": "desvanecimento do som (auditory) + voz sussurrada (auditory)",
-      "description": "A ausência de movimento é traduzida em ausência de som e presença de voz, como se o silêncio fosse um convite."
-    }
+    "rule": "O gesto (kinesthetic) é traduzido em textura visual (visual) e som espacializado (auditory), que por sua vez geram sombras (visual + spatial) e palavras materializadas (visual + olfactory_evocation).",
+    "example": "Gesto de amassar pão (trajetória circular, pressão variada) → textura de farinha na silhueta → som de amassar (auditory) → sombra de rolo de padeiro (visual) → palavra 'pão' em textura de farinha (visual) + sugestão de cheiro a pão quente (olfactory_evocation)."
   },
   "silence_or_absence": {
-    "mechanism": "O silêncio é usado como: (1) ausência de som do ofício no limiar, (2) corte abrupto do som no desvio, (3) desvanecimento progressivo do som final, e (4) pausa de 5 segundos para imobilidade. A ausência visual é usada na desintegração da silhueta em partículas e no desaparecimento gradual do rasto.",
-    "purpose": "Criar tensão, surpresa e espaço para a reflexão. O silêncio não é vazio, mas um convite para escutar o que não está lá."
+    "mechanism": "O silêncio é usado como: (1) *espera ativa* (a tela não responde imediatamente ao gesto, criando suspense); (2) *ausência de palavra* (a devolução pode ser um vazio em forma de ferramenta); (3) *desvanecimento* (sombras e sons desaparecem gradualmente se a pessoa não interagir).",
+    "purpose": "Convocar a memória do ofício sem preencher o espaço com ruído. O silêncio permite que a pessoa 'ouça' o seu próprio gesto."
   },
   "surprise_or_indeterminacy": {
     "mechanism": [
-      {
-        "type": "desvio",
-        "description": "A silhueta 'olha' para a pessoa e desintegra-se, quebrando a expectativa de que o gesto seria aceito."
-      },
-      {
-        "type": "acaso controlado",
-        "description": "A ferramenta que aparece após a desintegração é aleatória entre 3-5 ferramentas do mesmo ofício ou de ofícios relacionados (ex: fuso e agulha para tecelagem)."
-      },
-      {
-        "type": "aparição",
-        "description": "A imagem de arquivo revelada pelo rasto é uma de 3-5 imagens possíveis para o mesmo ofício, escolhida aleatoriamente."
-      },
-      {
-        "type": "rasto",
-        "description": "O rasto deixado na textura do fundo interage de forma imprevisível com novos gestos (ex: uma marca de martelo pode 'bater' em um novo gesto, emitindo som)."
-      }
+      "A silhueta do ofício complementar aparece *aleatoriamente* (mas sempre com relação semântica ou histórica com o ofício original, extraída do corpus).",
+      "O som da paisagem sonora é *gerado dinâmicamente* a partir da combinação dos sons dos ofícios envolvidos, com volume e ritmo variáveis.",
+      "A palavra devolver pode ser *uma de várias* associadas ao ofício (ex.: para padeiro: 'pão', 'forno', 'fermento', 'trigo'), escolhida por acaso controlado.",
+      "A cor do ponto de luz no final é *determinada pelo gesto original* (ex.: gesto rápido → vermelho; gesto lento → azul)."
     ],
-    "purpose": "Manter a experiência viva e imprevisível, como um ofício que nunca é igual duas vezes."
+    "purpose": "Criar a sensação de que o sistema *reage* de forma única a cada gesto, sem ser previsível."
   },
   "session_variation": [
     {
-      "type": "ferramenta aleatória",
-      "description": "A ferramenta que aparece após a desintegração da silhueta é uma de 3-5 opções para o ofício ou ofícios relacionados."
+      "type": "acaso controlado",
+      "description": "Ofício complementar é selecionado aleatoriamente a partir de uma lista de ofícios relacionados (ex.: ferreiro → tecelã, oleiro, serralheiro)."
     },
     {
-      "type": "imagem de arquivo aleatória",
-      "description": "A imagem revelada pelo rasto é uma de 3-5 imagens possíveis para o ofício."
+      "type": "resposta a ritmo/velocidade do gesto",
+      "description": "Gestos rápidos geram sons agudos e silhuetas com texturas mais 'ásperas' (ex.: metal); gestos lentos geram sons graves e texturas 'macias' (ex.: lã)."
     },
     {
-      "type": "ordem dos ofícios",
-      "description": "A silhueta inicial corresponde a um ofício aleatório de uma lista de 10-15 ofícios folclóricos (ex: tecelã, ferreiro, oleiro, padeiro)."
+      "type": "resposta a posição/trajetória",
+      "description": "A trajetória do gesto altera a forma da silhueta final (ex.: gesto em círculo → silhueta redonda; gesto em linha reta → silhueta alongada)."
     },
     {
-      "type": "interação com rastos",
-      "description": "Os rastos de sessões anteriores (até 100) interagem com os novos gestos de forma imprevisível (ex: som, deformação da textura)."
+      "type": "combinação de fragmentos curatoriais",
+      "description": "As palavras devolver são extraídas de um corpus de termos associados aos ofícios, com pesos baseados em frequência no corpus autoral."
     },
     {
-      "type": "temporalidade",
-      "description": "O som ambiente inicial (murmúrio de vozes) varia entre dia/noite (se o dispositivo permitir deteção de hora sem rastreio)."
+      "type": "temporalidade real (opcional)",
+      "description": "Se a pessoa regressar à experiência no mesmo dia, o ponto de luz lembra o último ofício. Se regressar em dias diferentes, a cor do ponto de luz muda para uma paleta associada à estação do ano (ex.: outono → tons terrosos)."
     }
   ],
   "territorial_binding": {
-    "relation": "Os ofícios e ferramentas são associados a regiões específicas de Portugal (ex: tecelagem em Guimarães, oleiro em Barcelos, ferreiro em Marvão). As imagens de arquivo e sons são de ofícios reais dessses territórios.",
-    "mechanism": "Se a pessoa permitir geolocalização (opcional), a experiência pode sugerir ofícios típicos da sua região ou de uma região próxima. Caso contrário, a seleção é aleatória entre ofícios nacionais.",
-    "note": "A geolocalização é pedida apenas uma vez, no início da sessão, e apenas se a pessoa clicar em um botão 'Descobrir ofícios da minha terra' (que aparece discretamente no canto inferior direito)."
+    "relation": "A palavra ou convite devolver pode incluir uma *ligação opcional* a uma dinâmica territorial do Atlas (ex.: *'Procura este gesto na Freguesia de Arroios'*), se o ofício estiver associado a um lugar específico no corpus. Esta ligação é *sugestiva*, não obrigatória.",
+    "source": "Corpus: FALARTE (mecânica 6: 'O que ainda resiste — ofício, comércio, gesto ou prática persistente.') e dinâmicas territoriais documentadas (826 festas públicas).",
+    "constraint": "A ligação territorial só é apresentada se o ofício tiver uma entrada validada no corpus territorial (ex.: padeiro → padaria histórica em Alfama)."
   },
   "trace_and_return": {
-    "trace": {
-      "personal": "A ferramenta de memória guardada no inventário pessoal (ex: 'Fuso de Tecelã').",
-      "collective": "O rasto na textura do fundo, visível para todos e que interage com novos gestos."
+    "immediate": {
+      "type": "selo digital",
+      "description": "A palavra ou ausência é devolver como um 'bilhete' (imagem ou texto) que a pessoa pode guardar (download). O bilhete tem a estética de caderno rasgado, com a palavra escrita em textura do ofício."
     },
-    "return": {
-      "immediate": "A ferramenta de memória e a imagem de arquivo revelada.",
-      "latent": "O rasto na textura do fundo, que persiste e interage com futuras sessões."
+    "latent": {
+      "type": "constelação no COSMICOXES",
+      "description": "A palavra é adicionada a uma constelação de ofícios no COSMICOXES, visível em futuras sessões. A partícula correspondente ao ofício pulsa com a cor associada ao gesto original da pessoa."
+    },
+    "territorial": {
+      "type": "convite",
+      "description": "Se aplicável, um convite para explorar o ofício em um lugar físico (ex.: *'Visita a padaria da Av. Almirante Reis, onde o gesto ainda vive.'*)."
+    },
+    "memory": {
+      "type": "latência do ponto de luz",
+      "description": "O ponto de luz inicial passa a ter a cor ou textura do último ofício interagido, criando uma memória visual para a próxima sessão."
     }
   },
   "accessibility_equivalents": {
     "visual": {
-      "alternative": "Todas as silhuetas, ferramentas e imagens têm descrições textuais detalhadas (ex: 'Silhueta de uma tecelã a tecer em um tear, com fios a cruzarem-se'). A textura do fundo tem alto contraste e pode ser substituída por um padrão geométrico simples (ex: xadrez) para pessoas com daltonismo.",
-      "reduced_motion": "As animações (silhueta, partículas) podem ser desativadas, substituídas por imagens estáticas com legendas."
+      "alternative": "Todas as silhuetas e texturas têm descrições textuais detalhadas (ex.: *'Silhueta de foice: lâmina curva em metal, cabo de madeira. Textura: metal frio com reflexos.'*).",
+      "reduced_motion": "As transições entre estados são suaves e podem ser desativadas. As silhuetas não piscam nem têm movimento rápido.",
+      "high_contrast": "Modo de alto contraste disponível, onde as silhuetas são preenchidas com cores sólidas e contornos grossos."
     },
     "auditory": {
-      "alternative": "Todos os sons têm legendas visuais (ex: '[Som de tear a tecer]') que aparecem em tempo real. O volume pode ser ajustado ou desativado. Para pessoas surdas, os sons são traduzidos em vibrações (se dispositivo suportar) ou em pulsações visuais (ex: círculo a expandir e contrair)."
-    },
-    "haptic": {
-      "alternative": "A resistência ao arrastar a ferramenta é substituída por um feedback visual (ex: a ferramenta fica mais escura ao ser arrastada)."
+      "alternative": "Todos os sons têm legendas visuais (ex.: *'Som de marteladas rítmicas em metal.'*). O volume é ajustável e pode ser desativado.",
+      "text_to_speech": "As palavras devolver podem ser lidas em voz alta por um sintetizador de voz (opcional)."
     },
     "kinesthetic": {
-      "alternative": "O gesto pode ser feito com o teclado (setas ou teclas numéricas) ou com um switch (tecla única para 'desenhar' uma linha reta ou curva). Para pessoas com mobilidade reduzida, o gesto pode ser substituído por uma seleção de ofício a partir de uma lista (com descrições táteis e sonoras)."
+      "alternative": "O gesto pode ser substituído por: (1) *teclado*: pressionar uma tecla para 'traçar' um gesto pré-definido (ex.: seta para cima = gesto de erguer); (2) *voz*: dizer o nome de um ofício ou gesto (ex.: *'amassar'*).",
+      "switch_control": "Suporte para controlo por switch (ex.: um único botão para confirmar o gesto)."
     },
-    "proprioceptive": {
-      "alternative": "As instruções de postura ou uso de mão dominante/não dominante são opcionais e podem ser ignoradas sem perder a experiência."
+    "haptic": {
+      "alternative": "A vibração é opcional e pode ser substituída por feedback visual (ex.: pulso na cor da silhueta)."
     },
     "temporal_interoceptive": {
-      "alternative": "A pausa de 5 segundos para imobilidade pode ser substituída por um botão 'Esperar' que aciona o mesmo efeito."
+      "alternative": "O ritmo da experiência pode ser ajustado (ex.: modo 'lento' para pessoas que preferem mais tempo)."
+    },
+    "cognitive": {
+      "alternative": "Instruções simplificadas disponíveis (ex.: *'Move o rato para fazer um gesto. O sistema vai adivinhar o ofício.'*)."
     }
   },
   "optional_permissions": {
-    "required": [],
-    "optional": [
-      {
-        "permission": "geolocation",
-        "purpose": "Sugerir ofícios típicos da região da pessoa.",
-        "trigger": "Botão 'Descobrir ofícios da minha terra' no canto inferior direito.",
-        "fallback": "Seleção aleatória de ofícios nacionais."
-      }
-    ],
-    "never_silent": true
+    "none": {
+      "description": "A experiência funciona completamente sem qualquer permissão (microfone, câmara, geolocalização, movimento).",
+      "fallback": "O gesto é capturado via rato/toque, e o som é gerado sinteticamente."
+    },
+    "microphone": {
+      "optional": true,
+      "purpose": "Permitir que a pessoa *diga* o nome de um ofício ou gesto em vez de o traçar. O sistema usa reconhecimento de voz para associar a palavra a um ofício.",
+      "trigger": "Apenas pedido se a pessoa clicar em um ícone de microfone ou pressionar uma tecla específica (ex.: 'V').",
+      "fallback": "Se negado, a pessoa pode usar o rato/toque ou teclado."
+    },
+    "camera": {
+      "optional": false,
+      "reason": "Não é necessária para esta experiência."
+    },
+    "geolocation": {
+      "optional": false,
+      "reason": "Não é necessária para esta experiência."
+    },
+    "device_motion": {
+      "optional": true,
+      "purpose": "Permitir que o gesto seja capturado via movimento do dispositivo (ex.: inclinar o telemóvel para simular o gesto de tecer).",
+      "trigger": "Apenas pedido se a pessoa clicar em um ícone de movimento ou pressionar uma tecla específica (ex.: 'M').",
+      "fallback": "Se negado, a pessoa pode usar o rato/toque ou teclado."
+    }
   },
   "overstimulation_risk": {
-    "risks": [
-      "Flashing ou animações rápidas (silhueta a desintegrar-se).",
-      "Som súbito (corte abrupto do som ou martelada final).",
-      "Vibração insistente (se dispositivo suportar)."
-    ],
-    "mitigations": [
-      "As animações têm opção de reduced-motion (desativar ou substituir por estáticas).",
-      "O volume do som é ajustável e pode ser desativado. O corte abrupto do som é acompanhado por um desvanecimento visual (ex: tela a escurecer levemente).",
-      "A vibração é opcional e pode ser desativada nas definições de acessibilidade.",
-      "A experiência tem um botão 'Pausar' visível em todos os momentos, que congela a tela e o som."
-    ]
+    "visual": {
+      "risk": "Transições rápidas entre silhuetas ou texturas complexas podem causar desconforto.",
+      "mitigation": "Limitar a velocidade das transições; oferecer modo 'reduced motion'; usar cores suaves e contrastes moderados."
+    },
+    "auditory": {
+      "risk": "Paisagem sonora com múltiplos sons sobrepostos pode ser excessiva.",
+      "mitigation": "Limitar o número de sons simultâneos (máximo 3); oferecer controle de volume por canal; permitir desativar o som completamente."
+    },
+    "haptic": {
+      "risk": "Vibração contínua pode ser incómoda.",
+      "mitigation": "Limitar a vibração a feedbacks breves (máximo 1 segundo); oferecer opção para desativar."
+    },
+    "cognitive": {
+      "risk": "A experiência pode ser complexa para pessoas com dificuldades de atenção.",
+      "mitigation": "Oferecer modo 'simplificado' com menos elementos visuais e sonoros; fornecer instruções passo a passo em texto."
+    }
   },
   "distinctiveness": [
-    "A experiência é a única que traduz o gesto da pessoa em silhuetas animadas de ofícios folclóricos, com som e textura interativa.",
-    "A mecânica de 'gesto sem nome' é única: a pessoa não seleciona um ofício, mas o seu gesto 'invoca' um ofício que o sistema interpreta e devolve.",
-    "A tradução cruzada entre gesto (kinesthetic) e silhueta/sonoro (visual/auditory) é específica desta curadoria.",
-    "O uso do silêncio como desvio (corte abrupto do som) e como convite (pausa de 5 segundos) é assinatura desta experiência.",
-    "A devolução de uma 'ferramenta de memória' para inventário pessoal é única e conecta-se com outras curadorias (ex: 'Festas').",
-    "A textura do fundo como 'papel vivo' que guarda rastos de sessões anteriores é uma metáfora visual exclusiva."
+    "É a única experiência que usa o *gesto como linguagem primária* (sem nomear o ofício).",
+    "A tradução cruzada entre gesto (kinesthetic) → textura (visual) → som (auditory) é *específica dos ofícios* e não é repetida em outras curadorias.",
+    "O uso do *silêncio como ausência ativa* (vazio em forma de ferramenta) é único nesta experiência.",
+    "A devolução como *selo digital materializado* (palavra em textura do ofício) é exclusiva.",
+    "A *constelação de ofícios no COSMICOXES* é um rasto específico desta curadoria.",
+    "A *ligação opcional a dinâmicas territoriais* (ex.: convite para explorar o ofício em um lugar físico) é única e baseada no corpus autoral."
   ],
   "questions_for_eduardo": [
-    "A lista de ofícios folclóricos a incluir deve ser fixa (ex: 10-15) ou dinâmica (baseada em dados territoriais)? Se dinâmica, qual a fonte autoral para a lista?",
-    "As imagens de arquivo dos ofícios devem ser fotografias reais (ex: do acervo do Atlas) ou ilustrações originais? Se fotografias, qual o processo de seleção e licença?",
-    "O som do ofício deve ser gravado em estúdio (para consistência) ou captado em contexto real (para autenticidade)?",
-    "A ferramenta de memória guardada no inventário pessoal deve ser visível apenas para a pessoa ou pode ser partilhada com outros (ex: em 'Festas')?",
-    "O rasto na textura do fundo deve persistir indefinidamente ou desaparecer após um tempo/limite de interações? Se desaparecer, qual o critério (ex: 7 dias, 100 interações)?"
+    "A lista de ofícios complementares deve ser extraída do corpus territorial (ex.: ferreiro → tecelã) ou pode incluir ofícios não documentados, mas logicamente relacionados?",
+    "A palavra devolver deve ser sempre um *substantivo* (ex.: 'pão') ou pode incluir *verbos* (ex.: 'amassar') ou *expressões* (ex.: 'pão de cada dia')?",
+    "O convite territorial (ex.: *'Procura este gesto na Freguesia de Arroios'*) deve ser *específico* (com nome da freguesia) ou pode ser *genérico* (ex.: *'Procura este gesto num lugar próximo'*)?",
+    "A latência do ponto de luz (cor/textura do último ofício) deve persistir *indefinidamente* ou apenas por um período limitado (ex.: 7 dias)?",
+    "A paisagem sonora deve incluir *vozes humanas* (ex.: mestre a dar instruções) ou apenas sons ambientais e de ferramentas?"
   ],
   "improvement_proposals": [
     {
-      "proposal": "Incluir uma camada de 'ofícios em risco' ou 'ofícios desaparecidos' para evocar a urgência da preservação da memória corporal.",
-      "justification": "A curadoria 'folclore' pode beneficiar de uma dimensão de resgate cultural, alinhada com a missão do Atlas Vivo MILK."
+      "type": "territorial_enrichment",
+      "description": "Integração com o corpus de *826 festas públicas* para associar ofícios a lugares específicos (ex.: padeiro → padarias históricas; tecelã → fábricas de tecido). Requer parsing do ficheiro 'curadoria entrada freguesias.xlsx'."
     },
     {
-      "proposal": "Adicionar uma opção para a pessoa gravar o seu próprio som de ofício (ex: imitar o som de um tear) e incorporá-lo na experiência.",
-      "justification": "Aprofundaria a participação ativa e a conexão com a oralidade, mas requer validação autoral para não se tornar um dispositivo genérico."
+      "type": "cross_curatorial_link",
+      "description": "Criar uma *ponte* entre esta experiência e a curadoria 'Fucô': se a pessoa devolver uma palavra associada a um ofício, Fucô pode 'comentar' sobre ela em futuras interações (ex.: *'Ah, o gesto do padeiro... lembra-me da padaria da minha avó.'*)."
     },
     {
-      "proposal": "Integrar a experiência com a curadoria 'Lendas' ou 'Topónimos', associando ofícios a lugares específicos (ex: 'O ferreiro de Marvão').",
-      "justification": "Criaria uma rede de significados territoriais, mas depende da existência de dados autorais para as associações."
+      "type": "material_evocation",
+      "description": "Adicionar *texturas táteis* mais detalhadas para os ofícios (ex.: textura de farinha com grãos visíveis; metal com reflexos realistas). Requer validação de que as texturas não sobrecarregam o dispositivo."
+    },
+    {
+      "type": "orality_preservation",
+      "description": "Incluir *gravações de voz* de mestres de ofícios (com consentimento) para a paisagem sonora, em vez de sons sintéticos. Requer verificação de direitos autorais e privacidade."
     }
   ],
   "generic_fallback_allowed": false,
