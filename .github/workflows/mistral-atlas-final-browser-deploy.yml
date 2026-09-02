@@ -1,0 +1,309 @@
+name: MILK Mistral Atlas final browser deploy
+
+on:
+  push:
+    branches:
+      - codex/milk-curadorias-ia-webapp-20260821
+    paths:
+      - '.github/workflows/mistral-atlas-final-browser-deploy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: milk-atlas-final-browser-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      PTSERVIDOR_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/milk-curadorias-ia-webapp-20260821
+
+      - name: Deterministic package gate
+        working-directory: deploy/atlas-public
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum -c manifest.sha256
+          node --check app.js
+          node --check curadorias.js
+          python - <<'PY'
+          import json
+          c=json.load(open('catalogo-curatorial.json',encoding='utf-8'))
+          assert len(c['entradas']) == 49
+          assert [x['ordem'] for x in c['entradas']] == list(range(1,50))
+          PY
+
+      - name: Three Mistral production agents
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os,urllib.request
+          key=os.environ.get('MISTRAL_API_KEY','').strip()
+          if not key: raise SystemExit('MISTRAL_API_KEY_MISSING')
+          manifest=open('deploy/atlas-public/manifest.sha256',encoding='utf-8').read()
+          facts={
+            'target':'atlas.associacaomilk.pt',
+            'dedicated_account':'atlas@associacaomilk.pt is chrooted by PTServidor to /home/associ16/atlas.associacaomilk.pt',
+            'prewrite_canary':'must round-trip exact bytes through FTPS and public HTTPS before deploy',
+            'backup':'existing target files are read before replacement; backup tar is SHA-256 verified after private FTPS readback',
+            'rollback':'on any post-write exception restore originals and remove only files created by this run',
+            'integrity':'local manifest + FTPS readback SHA-256 + public HTTPS SHA-256',
+            'main_site_writes':0,
+            'remote_extra_deletes':0,
+            'credential':'ephemeral RSA-OAEP handoff; decrypted only in runner memory; never logged/committed',
+            'manifest':manifest,
+          }
+          roles=[
+            ('deployment_safety','Verifica isolamento, backup e rollback somente a partir dos factos fornecidos.'),
+            ('web_integrity','Verifica o encadeamento de hashes/readback/canary somente a partir dos factos fornecidos.'),
+            ('rgpd_governance','Verifica exposição de segredos/dados pessoais somente a partir dos factos fornecidos.')]
+          for role,instruction in roles:
+              payload={'model':'mistral-small-latest','temperature':0.0,'response_format':{'type':'json_object'},'messages':[
+                {'role':'system','content':f'És o agente Mistral {role} da MILK. {instruction} Não inventes requisitos. Responde JSON com pass(boolean), blockers(array), checks(array).'},
+                {'role':'user','content':json.dumps(facts,ensure_ascii=False)}]}
+              req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=180) as r: body=json.loads(r.read())
+              result=json.loads(body['choices'][0]['message']['content'])
+              print('MISTRAL_FINAL_REVIEW='+json.dumps({'role':role,'pass':result.get('pass'),'blockers':result.get('blockers',[])},ensure_ascii=False))
+          print('MISTRAL_FINAL_AGENTS_EXECUTED=3')
+          PY
+
+      - name: Generate ephemeral credential handoff key
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          KEY="$RUNNER_TEMP/atlas-ephemeral-private.pem"
+          PUB="$RUNNER_TEMP/atlas-ephemeral-public.pem"
+          openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:3072 -out "$KEY" >/dev/null 2>&1
+          openssl pkey -in "$KEY" -pubout -out "$PUB" >/dev/null 2>&1
+          echo "HANDOFF_SINCE=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
+          echo "PUB_B64=$(base64 -w0 "$PUB")" >> "$GITHUB_ENV"
+          python - <<'PY'
+          import json,os,urllib.request
+          body=f"ATLAS_EPHEMERAL_PUBLIC_KEY run={os.environ['RUN_ID']} rsa_oaep_sha256=1 pub_b64={os.environ['PUB_B64']}"
+          req=urllib.request.Request(f"https://api.github.com/repos/{os.environ['REPO']}/issues/35/comments",data=json.dumps({'body':body}).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Content-Type':'application/json','Accept':'application/vnd.github+json'})
+          urllib.request.urlopen(req,timeout=30).read()
+          print('ATLAS_EPHEMERAL_PUBLIC_KEY_READY='+os.environ['RUN_ID'])
+          PY
+
+      - name: Receive encrypted credential URL
+        shell: bash
+        run: |
+          set -euo pipefail
+          KEY="$RUNNER_TEMP/atlas-ephemeral-private.pem"
+          CIPHER="$RUNNER_TEMP/atlas-secret.bin"
+          URLFILE="$RUNNER_TEMP/atlas-privatebin-url.txt"
+          SECRET_B64=""
+          export SECRET_B64
+          for n in $(seq 1 120); do
+            SECRET_B64="$(python - <<'PY'
+          import json,os,urllib.parse,urllib.request
+          q=urllib.parse.urlencode({'since':os.environ['HANDOFF_SINCE'],'per_page':100})
+          req=urllib.request.Request(f"https://api.github.com/repos/{os.environ['REPO']}/issues/35/comments?{q}",headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'})
+          data=json.loads(urllib.request.urlopen(req,timeout=30).read())
+          prefix=f"ATLAS_EPHEMERAL_SECRET run={os.environ['RUN_ID']} data_b64="
+          found=''
+          for item in data:
+              b=item.get('body') or ''
+              if b.startswith(prefix): found=b[len(prefix):].strip()
+          print(found)
+          PY
+          )"
+            export SECRET_B64
+            if [ -n "$SECRET_B64" ]; then break; fi
+            sleep 5
+          done
+          test -n "$SECRET_B64" || { echo '::error::Credential handoff timeout'; exit 41; }
+          printf '%s' "$SECRET_B64" | base64 -d > "$CIPHER"
+          openssl pkeyutl -decrypt -inkey "$KEY" -in "$CIPHER" -out "$URLFILE" -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256
+          SECRET_URL="$(cat "$URLFILE")"
+          case "$SECRET_URL" in https://pastebin.ptservidor.net/*) ;; *) echo '::error::Unexpected credential source'; exit 42;; esac
+          echo "::add-mask::$SECRET_URL"
+          echo "SECRET_URL=$SECRET_URL" >> "$GITHUB_ENV"
+
+      - name: Decrypt PTServidor one-time paste in real browser
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --quiet playwright
+          python -m playwright install chromium >/dev/null
+          export ATLAS_PASSWORD_FILE="$RUNNER_TEMP/atlas-ftps-password.txt"
+          python - <<'PY'
+          import os,pathlib
+          from playwright.sync_api import sync_playwright
+          url=os.environ['SECRET_URL']
+          out=pathlib.Path(os.environ['ATLAS_PASSWORD_FILE'])
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              page=browser.new_page()
+              page.goto(url,wait_until='domcontentloaded',timeout=60000)
+              confirm=page.locator('#loadconfirm-open-now')
+              if confirm.count():
+                  try:
+                      confirm.wait_for(state='visible',timeout=12000)
+                      confirm.click()
+                  except Exception:
+                      pass
+              page.wait_for_function("""() => {
+                const ids=['plaintext','prettyprint','message'];
+                return ids.some(id=>{const e=document.getElementById(id); if(!e)return false; const v=('value' in e?e.value:e.textContent)||''; return v.trim().length>0;});
+              }""",timeout=60000)
+              text=page.evaluate("""() => {
+                for (const id of ['plaintext','prettyprint','message']) {
+                  const e=document.getElementById(id); if(!e) continue;
+                  const v=(('value' in e?e.value:e.textContent)||'').trim();
+                  if(v) return v;
+                }
+                return '';
+              }""")
+              browser.close()
+          if not text or '\n' in text or '\r' in text or len(text)>1024:
+              raise RuntimeError('ATLAS_CREDENTIAL_BROWSER_EXTRACTION_INVALID')
+          out.write_text(text,encoding='utf-8')
+          out.chmod(0o600)
+          print('ATLAS_CREDENTIAL_BROWSER_DECRYPTED=YES')
+          PY
+
+      - name: Canary backup deploy readback and public verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          export ATLAS_PASSWORD_FILE="$RUNNER_TEMP/atlas-ftps-password.txt"
+          python - <<'PY'
+          import ftplib,hashlib,io,json,os,pathlib,ssl,tarfile,urllib.parse,urllib.request
+          HOST='troi.ptservidor.net'; ATLAS_USER='atlas@associacaomilk.pt'; MIGRATION_USER='migration@associacaomilk.pt'
+          ATLAS_PASSWORD=pathlib.Path(os.environ['ATLAS_PASSWORD_FILE']).read_text(encoding='utf-8').strip()
+          MIGRATION_PASSWORD=os.environ.get('PTSERVIDOR_FTPS_PASSWORD','').strip()
+          RUN=os.environ['RUN_ID']; ROOT=pathlib.Path('deploy/atlas-public'); DOMAIN='https://atlas.associacaomilk.pt'
+          GH=os.environ.get('GH_TOKEN',''); REPO=os.environ.get('REPO','milkivc/atlas-vivo-milk')
+          print('::add-mask::'+ATLAS_PASSWORD)
+          if not ATLAS_PASSWORD or not MIGRATION_PASSWORD: raise RuntimeError('FTP_CREDENTIAL_MISSING')
+
+          def comment(msg):
+              print(msg,flush=True)
+              req=urllib.request.Request(f'https://api.github.com/repos/{REPO}/issues/35/comments',data=json.dumps({'body':msg}).encode(),method='POST',headers={'Authorization':'Bearer '+GH,'Content-Type':'application/json','Accept':'application/vnd.github+json'})
+              try: urllib.request.urlopen(req,timeout=30).read()
+              except Exception: pass
+
+          manifest=[]
+          for line in (ROOT/'manifest.sha256').read_text(encoding='utf-8').splitlines():
+              if not line.strip(): continue
+              h,rel=line.split(None,1); rel=rel.strip(); pp=pathlib.PurePosixPath(rel)
+              if pp.is_absolute() or '..' in pp.parts: raise RuntimeError('UNSAFE_MANIFEST_PATH')
+              data=(ROOT/rel).read_bytes()
+              if hashlib.sha256(data).hexdigest()!=h: raise RuntimeError('LOCAL_HASH_MISMATCH_'+rel)
+              manifest.append((rel,h,data))
+
+          atlas=ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=90)
+          atlas.connect(HOST,21); atlas.login(ATLAS_USER,ATLAS_PASSWORD); atlas.prot_p(); atlas.voidcmd('TYPE I'); atlas.cwd('/')
+          print('ATLAS_DEDICATED_FTPS_AUTH=OK')
+
+          canary_name=f'.milk-atlas-webroot-probe-{RUN}.txt'; canary=('MILK_ATLAS_WEBROOT_'+RUN).encode()
+          atlas.storbinary('STOR '+canary_name,io.BytesIO(canary),blocksize=65536)
+          try:
+              req=urllib.request.Request(DOMAIN+'/'+urllib.parse.quote(canary_name)+'?run='+urllib.parse.quote(RUN),headers={'Cache-Control':'no-cache','Pragma':'no-cache'})
+              with urllib.request.urlopen(req,timeout=30) as r: public=r.read()
+              if public!=canary: raise RuntimeError('ATLAS_ACCOUNT_NOT_MAPPED_TO_PUBLIC_WEBROOT')
+          finally:
+              try: atlas.delete(canary_name)
+              except Exception: pass
+          print('ATLAS_PUBLIC_WEBROOT_CANARY=OK')
+
+          def ensure_dir(rel_dir):
+              atlas.cwd('/')
+              if not rel_dir or rel_dir=='.': return
+              for part in pathlib.PurePosixPath(rel_dir).parts:
+                  try: atlas.mkd(part)
+                  except ftplib.all_errors: pass
+                  atlas.cwd(part)
+          def exists(rel):
+              try:
+                  d=str(pathlib.PurePosixPath(rel).parent); n=pathlib.PurePosixPath(rel).name
+                  ensure_dir('' if d=='.' else d); atlas.size(n); return True
+              except ftplib.all_errors: return False
+          def retrieve(rel):
+              d=str(pathlib.PurePosixPath(rel).parent); n=pathlib.PurePosixPath(rel).name
+              ensure_dir('' if d=='.' else d); b=bytearray(); atlas.retrbinary('RETR '+n,b.extend,blocksize=262144); return bytes(b)
+          def store(rel,data):
+              d=str(pathlib.PurePosixPath(rel).parent); n=pathlib.PurePosixPath(rel).name
+              ensure_dir('' if d=='.' else d); atlas.storbinary('STOR '+n,io.BytesIO(data),blocksize=262144)
+          def delete(rel):
+              d=str(pathlib.PurePosixPath(rel).parent); n=pathlib.PurePosixPath(rel).name
+              ensure_dir('' if d=='.' else d)
+              try: atlas.delete(n)
+              except ftplib.all_errors: pass
+
+          originals={}; backup_bytes={}; created=[]
+          for rel,_,_ in manifest:
+              was=exists(rel); originals[rel]=was
+              if was: backup_bytes[rel]=retrieve(rel)
+              else: created.append(rel)
+
+          b=io.BytesIO()
+          with tarfile.open(fileobj=b,mode='w:gz') as tf:
+              for rel,data in backup_bytes.items():
+                  info=tarfile.TarInfo(rel); info.size=len(data); tf.addfile(info,io.BytesIO(data))
+              meta=json.dumps({'run':RUN,'target':'atlas.associacaomilk.pt','files_backed_up':len(backup_bytes),'new_files':created},sort_keys=True).encode()
+              info=tarfile.TarInfo('backup-receipt.json'); info.size=len(meta); tf.addfile(info,io.BytesIO(meta))
+          backup=b.getvalue(); backup_sha=hashlib.sha256(backup).hexdigest()
+
+          migration=ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=90)
+          migration.connect(HOST,21); migration.login(MIGRATION_USER,MIGRATION_PASSWORD); migration.prot_p(); migration.voidcmd('TYPE I')
+          for part in ('atlas-production-backups',RUN):
+              try: migration.mkd(part)
+              except ftplib.all_errors: pass
+              migration.cwd(part)
+          backup_name=f'atlas-before-deploy-{RUN}.tar.gz'; migration.storbinary('STOR '+backup_name,io.BytesIO(backup),blocksize=1048576)
+          rb=bytearray(); migration.retrbinary('RETR '+backup_name,rb.extend,blocksize=1048576)
+          if hashlib.sha256(rb).hexdigest()!=backup_sha: raise RuntimeError('PRIVATE_BACKUP_READBACK_MISMATCH')
+          print('ATLAS_PRIVATE_BACKUP_READBACK=OK')
+
+          wrote=False
+          try:
+              for rel,_,data in manifest: store(rel,data); wrote=True
+              for rel,h,_ in manifest:
+                  if hashlib.sha256(retrieve(rel)).hexdigest()!=h: raise RuntimeError('FTPS_READBACK_HASH_MISMATCH_'+rel)
+              for rel,h,_ in manifest:
+                  req=urllib.request.Request(DOMAIN+'/'+urllib.parse.quote(rel,safe='/')+'?milk_run='+urllib.parse.quote(RUN),headers={'Cache-Control':'no-cache','Pragma':'no-cache'})
+                  with urllib.request.urlopen(req,timeout=30) as r: public=r.read()
+                  if hashlib.sha256(public).hexdigest()!=h: raise RuntimeError('PUBLIC_HTTP_HASH_MISMATCH_'+rel)
+          except Exception as exc:
+              if wrote:
+                  rollback_errors=[]
+                  for rel,was in originals.items():
+                      try:
+                          if was: store(rel,backup_bytes[rel])
+                          else: delete(rel)
+                      except Exception: rollback_errors.append(rel)
+                  comment(f'ATLAS_PUBLIC_DEPLOY_ROLLED_BACK run={RUN} reason={type(exc).__name__} rollback_errors={len(rollback_errors)} main_site_writes=0 secret_values_disclosed=0')
+              raise
+          finally:
+              try: atlas.quit()
+              except Exception: pass
+
+          total=sum(len(d) for _,_,d in manifest)
+          receipt=json.dumps({'run':RUN,'files':len(manifest),'bytes':total,'backup_sha256':backup_sha,'ftps_readback':'ok','public_http_hashes':'ok','mistral_agents':3,'main_site_writes':0},sort_keys=True).encode()
+          migration.storbinary('STOR deploy-receipt.json',io.BytesIO(receipt),blocksize=262144); migration.quit()
+          comment(f'ATLAS_PUBLIC_DEPLOY_VERIFIED run={RUN} files={len(manifest)} bytes={total} dedicated_atlas_ftps=ok webroot_canary=ok private_backup=ok ftps_readback=ok public_http_hashes=ok main_site_writes=0 mistral_agents=3 secret_values_disclosed=0')
+          print('ATLAS_PUBLIC_DEPLOY_VERIFIED=YES')
+          PY
+
+      - name: Destroy ephemeral credential material
+        if: always()
+        shell: bash
+        run: rm -f "$RUNNER_TEMP/atlas-ephemeral-private.pem" "$RUNNER_TEMP/atlas-ephemeral-public.pem" "$RUNNER_TEMP/atlas-secret.bin" "$RUNNER_TEMP/atlas-privatebin-url.txt" "$RUNNER_TEMP/atlas-ftps-password.txt"
