@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.2.0",
+  "source_revision": "2026-08-12T18:15:05.799Z",
+  "source_projection": "47_EXPORTACAO_PUBLICA_VISUAL",
+  "gate_approved": 826,
+  "visual_export": 826,
+  "rights_rows_scanned": 828,
+  "official_parishes": 3259,
+  "projected": 826,
+  "rejected": 0,
+  "resolution": {
+    "exact_key": 470,
+    "official_key_reconciled": 43,
+    "official_name_match": 5,
+    "municipal_scope": 289,
+    "regional_scope": 18,
+    "multi_parish_centroid": 1
+  },
+  "all_visual_exports_projected": true
+}

@@ -4,6 +4,10 @@ import {
   COSMIC_WORDS_SEED
 } from './experience-machine.js';
 import { mountCopernico } from './copernico.js';
+import {
+  loadValidatedTerritories,
+  mountTerritorialMilks
+} from './territory-data.js';
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const opening = document.querySelector('#opening');
@@ -16,6 +20,7 @@ const enter = document.querySelector('#enterAtlas');
 const openingWord = document.querySelector('.opening-word');
 const experience = new AtlasExperienceMachine();
 let copernicoController = null;
+let territorialMilksController = null;
 
 experience.setReducedMotion(reduced);
 document.documentElement.dataset.atlasState = experience.state;
@@ -82,6 +87,23 @@ async function enterTerritory() {
     if (!experience.send(globeEvent)) throw new Error('COPERNICO_STATE_TRANSITION_BLOCKED');
     document.documentElement.dataset.globeStatus = 'ready';
     copernicoView.focus({ preventScroll: true });
+
+    const records = await loadValidatedTerritories();
+    territorialMilksController = await mountTerritorialMilks({
+      view: copernicoController.view,
+      itowns: window.itowns,
+      records,
+      container: copernicoView,
+      statusElement: copernicoStatus,
+      onSelect(record) {
+        window.dispatchEvent(new CustomEvent('atlas:validated-territory-request', {
+          detail: { territory: record },
+        }));
+      },
+    });
+    window.dispatchEvent(new CustomEvent('atlas:validated-territories-ready', {
+      detail: { validated: true, count: records.length },
+    }));
   } catch {
     document.documentElement.dataset.globeStatus = 'fail-closed';
     setCopernicoStatus('O globo Copérnico não ficou disponível. O Atlas não avançou para dados territoriais.', 'alert');
@@ -95,12 +117,10 @@ window.addEventListener('atlas:validated-territories-ready', event => {
   if (event.detail?.validated !== true) return;
   if (!experience.send('territory_ready')) return;
 
-  copernicoController?.destroy();
-  copernicoController = null;
-  copernicoStage.hidden = true;
   territory.hidden = false;
   document.documentElement.dataset.territorial = 'validated-materialized';
-  document.querySelector('.author-portal')?.focus();
+  document.documentElement.dataset.territorialCount = String(event.detail.count);
+  copernicoView.focus({ preventScroll: true });
 });
 
 const closeBackdrop = dialog => dialog.addEventListener('click', event => {

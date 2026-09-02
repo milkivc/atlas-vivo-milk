@@ -1,0 +1,6 @@
+iTowns v2.46.0
+Original work: French IGN; maintained by IGN and CIRIL Group.
+Licence: CeCILL-B v1.0 OR MIT; incorporated dependencies retain original licences.
+Self-hosted by Atlas Vivo MILK; no public CDN dependency.
+Release archive SHA-256: caa9e3c8a981c9328d3fbf9bbeaca84edd39d2fbaf28defccb36c461e45925b4
+Bundled itowns.umd.js SHA-256: c057f8961908aec71267e4e9770dd7506367e57cecf58cbc3ab8f491903fe288

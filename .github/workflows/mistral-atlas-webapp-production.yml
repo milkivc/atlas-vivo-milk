@@ -1,0 +1,294 @@
+name: MILK Mistral Atlas WebApp production
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths:
+      - '.github/workflows/mistral-atlas-webapp-production.yml'
+      - 'deploy/atlas-public/**'
+      - 'tests/ia-milk-public-boundary.test.mjs'
+      - 'recovery/PUBLIC_TERRITORY_PROJECTION_REPORT_2026-09-02.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: milk-atlas-webapp-production
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: Deterministic WebApp gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          node tests/ia-milk-public-boundary.test.mjs
+          for file in deploy/atlas-public/*.js; do node --check "$file"; done
+          jq -e '.validated == true and .record_count == 826 and (.records|length) == 826 and ([.records[].id]|unique|length) == 826 and ([.records[].validated]|all)' deploy/atlas-public/territorios-publicos.json >/dev/null
+          python - <<'PY'
+          import json, math, pathlib
+          path=pathlib.Path('deploy/atlas-public/territorios-publicos.json')
+          data=json.loads(path.read_text(encoding='utf-8'))
+          assert data['layer']=='public' and data['projection']=='PUBLIC-ONLY'
+          allowed={'exact_key','official_key_reconciled','official_name_match','municipal_scope','regional_scope','multi_parish_centroid'}
+          for n,r in enumerate(data['records'],1):
+              assert r.get('estado_publicacao')=='APROVADO_PARA_EXPORTACAO', (n,'estado_publicacao')
+              lat=float(r['latitude']); lon=float(r['longitude'])
+              assert math.isfinite(lat) and math.isfinite(lon) and -90<=lat<=90 and -180<=lon<=180, (n,'coordinates')
+              assert r.get('milk_asset')=='assets/milk-territorial.png' and r.get('milk_asset_key')=='vaquinha_constelacao_brilho', (n,'asset')
+              assert r.get('convite_atlas') and r.get('ticket',{}).get('convite'), (n,'convite')
+              assert r.get('territorial_resolution') in allowed, (n,'resolution')
+              forbidden=json.dumps(r,ensure_ascii=False).lower()
+              assert 'camada invisível' not in forbidden and 'camada invisivel' not in forbidden, (n,'boundary')
+          print('ATLAS_826_SEMANTIC_GATE=PASS')
+          PY
+          test "$(sha256sum deploy/atlas-public/vendor/itowns/itowns.umd.js | awk '{print $1}')" = c057f8961908aec71267e4e9770dd7506367e57cecf58cbc3ab8f491903fe288
+          grep -Fq "loadValidatedTerritories" deploy/atlas-public/atlas.js
+          grep -Fq "FeatureGeometryLayer" deploy/atlas-public/territory-data.js
+          grep -Fq "826 festas" deploy/atlas-public/territory-data.js
+          if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_FTPS_PASSWORD|NEXTCLOUD_KEY|client_secret|access_token' deploy/atlas-public --exclude-dir=vendor; then exit 31; fi
+          git diff --check
+          echo 'ATLAS_WEBAPP_DETERMINISTIC=PASS'
+
+      - name: Mistral Vibe Code source audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python -m pip install --disable-pip-version-check --quiet mistral-vibe
+          vibe --version
+          vibe --trust --max-turns 10 --output json --prompt "AUDITORIA SOMENTE LEITURA. Lê deploy/atlas-public/atlas.js, copernico.js, territory-data.js, territorios-publicos.json, experience-machine.js, falarte.js e palavra-ritual.js. Confirma: 826 festas PUBLIC-ONLY; iTowns/COPÉRNICO; nenhuma passagem territorial antes do payload validado; MILK oficial; bilhetes; teclado; reduced motion; falARTE e Palavra Ritual sem regressão; nenhum segredo. NÃO alteres ficheiros. Devolve findings com evidência literal." > /tmp/vibe-audit.json
+          test -s /tmp/vibe-audit.json
+          test -z "$(git status --porcelain)"
+          echo 'MISTRAL_VIBE_CODE_AUDIT=EXECUTED'
+
+      - name: Five-agent Mistral council
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, pathlib, urllib.request
+          key=os.environ['MISTRAL_API_KEY'].strip()
+          paths=['deploy/atlas-public/atlas.js','deploy/atlas-public/copernico.js','deploy/atlas-public/territory-data.js','deploy/atlas-public/experience-machine.js','deploy/atlas-public/falarte.js','deploy/atlas-public/palavra-ritual.js','recovery/PUBLIC_TERRITORY_PROJECTION_REPORT_2026-09-02.json']
+          source='\n\n'.join('FILE '+p+'\n'+pathlib.Path(p).read_text(encoding='utf-8') for p in paths)
+          roles={
+            'copernico_runtime':'Verifica iTowns, lifecycle, layer, picking e fail-closed.',
+            'territorial_integrity':'Confirma 826/826, IDs únicos, escopos territoriais rastreáveis e zero coordenadas inventadas.',
+            'curatorial_fidelity':'Bloqueia cards genéricos como substituto das experiências específicas e regressões falARTE/Palavra Ritual.',
+            'accessibility_performance':'Verifica teclado, aria-live, reduced motion e custo de 826 pontos.',
+            'public_boundary':'Bloqueia segredos, PII, Camada Invisível, prompts e ligação reversa.'
+          }
+          failed=[]
+          for role,rule in roles.items():
+              payload={'model':'mistral-medium-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':f'És agente MILK {role}. {rule} Responde JSON estrito com pass:boolean, blockers:array, evidence:array, tests:array. Só aceita blockers com evidência literal.'},{'role':'user','content':source}]}
+              req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=240) as response: body=json.loads(response.read())
+              review=json.loads(body['choices'][0]['message']['content'])
+              print('MISTRAL_COUNCIL='+json.dumps({'role':role,**review},ensure_ascii=False))
+              if review.get('pass') is not True or review.get('blockers'): failed.append(role)
+          if failed: raise SystemExit('MISTRAL_COUNCIL_BLOCKED='+','.join(failed))
+          print('MISTRAL_COUNCIL_PASS=5')
+          PY
+
+  nextcloud:
+    needs: audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      NEXTCLOUD_ATLAS: ${{ secrets.NEXTCLOUD_ATLAS }}
+      NEXTCLOUD_KEY: ${{ secrets.NEXTCLOUD_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Copy verified release to private Nextcloud staging
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64, hashlib, io, json, os, pathlib, tarfile, urllib.parse, urllib.request
+          raw=os.environ.get('NEXTCLOUD_ATLAS','').strip()
+          secret=os.environ.get('NEXTCLOUD_KEY','').strip()
+          base=''; user='admin'; password=secret
+          try:
+              obj=json.loads(raw)
+              if isinstance(obj,dict):
+                  base=str(obj.get('base_url') or obj.get('url') or '')
+                  user=str(obj.get('user') or obj.get('username') or user)
+                  password=str(obj.get('app_password') or obj.get('password') or password)
+          except Exception:
+              if raw.startswith('http'): base=raw
+              else:
+                  for line in raw.splitlines():
+                      if '=' in line:
+                          k,v=line.split('=',1); k=k.strip().upper(); v=v.strip()
+                          if k in ('URL','BASE_URL','NEXTCLOUD_BASE_URL'): base=v
+                          elif k in ('USER','USERNAME','NEXTCLOUD_USER'): user=v
+                          elif k in ('PASSWORD','APP_PASSWORD'): password=v
+          if not base or not password: raise SystemExit('NEXTCLOUD_ROUTE_INCOMPLETE')
+          if '/remote.php/dav/files/' not in base:
+              base=base.rstrip('/')+'/remote.php/dav/files/'+urllib.parse.quote(user,safe='')+'/'
+          auth='Basic '+base64.b64encode((user+':'+password).encode()).decode()
+          root=pathlib.Path('deploy/atlas-public'); destination='ATLAS_WEBAPP_STAGING/'+os.environ['GITHUB_SHA']
+          def request(method,url,data=None):
+              req=urllib.request.Request(url,data=data,method=method,headers={'Authorization':auth})
+              with urllib.request.urlopen(req,timeout=120) as r:return r.status,r.read()
+          current=base
+          for part in destination.split('/'):
+              current+=urllib.parse.quote(part,safe='')+'/'
+              try: request('MKCOL',current)
+              except Exception as exc:
+                  if getattr(exc,'code',None) not in (405,): raise
+          count=0; total=0
+          for path in sorted(p for p in root.rglob('*') if p.is_file()):
+              rel=path.relative_to(root)
+              parent=current
+              for part in rel.parts[:-1]:
+                  parent+=urllib.parse.quote(part,safe='')+'/'
+                  try: request('MKCOL',parent)
+                  except Exception as exc:
+                      if getattr(exc,'code',None) not in (405,): raise
+              data=path.read_bytes(); url=parent+urllib.parse.quote(rel.name,safe='')
+              request('PUT',url,data); _,readback=request('GET',url)
+              if readback!=data: raise SystemExit('NEXTCLOUD_READBACK_MISMATCH:'+str(rel))
+              count+=1; total+=len(data)
+          archive=io.BytesIO()
+          with tarfile.open(fileobj=archive,mode='w:gz',format=tarfile.PAX_FORMAT) as tf:
+              for path in sorted(p for p in root.rglob('*') if p.is_file()):
+                  info=tf.gettarinfo(str(path),arcname=str(path.relative_to(root)))
+                  info.uid=info.gid=0; info.uname=info.gname=''; info.mtime=0
+                  with path.open('rb') as fh: tf.addfile(info,fh)
+          payload=archive.getvalue(); digest=hashlib.sha256(payload).hexdigest()
+          release_url=current+'atlas-webapp-public.tar.gz'
+          request('PUT',release_url+'.part',payload)
+          move=urllib.request.Request(release_url+'.part',method='MOVE',headers={'Authorization':auth,'Destination':release_url,'Overwrite':'T'})
+          with urllib.request.urlopen(move,timeout=120) as response:
+              if response.status not in (201,204): raise SystemExit('NEXTCLOUD_ATOMIC_MOVE_FAILED')
+          request('PUT',current+'atlas-webapp-public.sha256',(digest+'  atlas-webapp-public.tar.gz\n').encode())
+          _,readback=request('GET',release_url)
+          if hashlib.sha256(readback).hexdigest()!=digest: raise SystemExit('NEXTCLOUD_ARCHIVE_READBACK_MISMATCH')
+          print(f'NEXTCLOUD_WEBAPP_STAGING_VERIFIED files={count} bytes={total} archive_sha256={digest}')
+          PY
+
+  ptservidor:
+    needs: [audit, nextcloud]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      PTSERVIDOR_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
+      PTSERVIDOR_FTP_WEBDAV: ${{ secrets.PTSERVIDOR_FTP_WEBDAV }}
+      NEXTCLOUD_ATLAS: ${{ secrets.NEXTCLOUD_ATLAS }}
+      NEXTCLOUD_KEY: ${{ secrets.NEXTCLOUD_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Recover the audited release from Nextcloud
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64, hashlib, json, os, pathlib, tarfile, urllib.parse, urllib.request
+          raw=os.environ.get('NEXTCLOUD_ATLAS','').strip(); secret=os.environ.get('NEXTCLOUD_KEY','').strip()
+          base=''; user='admin'; password=secret
+          try:
+              obj=json.loads(raw)
+              if isinstance(obj,dict):
+                  base=str(obj.get('base_url') or obj.get('url') or '')
+                  user=str(obj.get('user') or obj.get('username') or user)
+                  password=str(obj.get('app_password') or obj.get('password') or password)
+          except Exception:
+              if raw.startswith('http'): base=raw
+              else:
+                  for line in raw.splitlines():
+                      if '=' in line:
+                          k,v=line.split('=',1); k=k.strip().upper(); v=v.strip()
+                          if k in ('URL','BASE_URL','NEXTCLOUD_BASE_URL'): base=v
+                          elif k in ('USER','USERNAME','NEXTCLOUD_USER'): user=v
+                          elif k in ('PASSWORD','APP_PASSWORD'): password=v
+          if not base or not password: raise SystemExit('NEXTCLOUD_ROUTE_INCOMPLETE')
+          if '/remote.php/dav/files/' not in base:
+              base=base.rstrip('/')+'/remote.php/dav/files/'+urllib.parse.quote(user,safe='')+'/'
+          auth='Basic '+base64.b64encode((user+':'+password).encode()).decode()
+          release=base+'ATLAS_WEBAPP_STAGING/'+os.environ['GITHUB_SHA']+'/'
+          def get(name):
+              req=urllib.request.Request(release+name,headers={'Authorization':auth})
+              with urllib.request.urlopen(req,timeout=180) as response:return response.read()
+          expected=get('atlas-webapp-public.sha256').decode().split()[0]
+          payload=get('atlas-webapp-public.tar.gz')
+          if hashlib.sha256(payload).hexdigest()!=expected: raise SystemExit('NEXTCLOUD_RELEASE_HASH_MISMATCH')
+          archive=pathlib.Path('/tmp/atlas-webapp-public.tar.gz'); archive.write_bytes(payload)
+          target=pathlib.Path('/tmp/atlas-nextcloud-release'); target.mkdir()
+          with tarfile.open(archive,'r:gz') as tf:
+              for member in tf.getmembers():
+                  resolved=(target/member.name).resolve()
+                  if target.resolve() not in resolved.parents: raise SystemExit('NEXTCLOUD_ARCHIVE_PATH_REJECTED')
+              tf.extractall(target,filter='data')
+          print(f'NEXTCLOUD_RELEASE_RECOVERED sha256={expected}')
+          PY
+      - name: Backup, transfer all WebApp files and verify read-back
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ftplib, hashlib, io, json, os, pathlib, ssl
+          password=os.environ.get('PTSERVIDOR_FTPS_PASSWORD','').strip()
+          raw=os.environ.get('PTSERVIDOR_FTP_WEBDAV','').strip()
+          user='associ16'
+          try:
+              obj=json.loads(raw)
+              if isinstance(obj,dict):
+                  user=str(obj.get('user') or obj.get('username') or user)
+                  password=str(obj.get('password') or password)
+          except Exception: pass
+          if not password: raise SystemExit('PTSERVIDOR_FTPS_PASSWORD_MISSING')
+          ftp=ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=120)
+          ftp.connect('troi.ptservidor.net',21); ftp.login(user,password); ftp.prot_p()
+          target=None
+          for candidate in ('/atlas.associacaomilk.pt','/home/associ16/atlas.associacaomilk.pt'):
+              try: ftp.cwd(candidate); target=ftp.pwd(); break
+              except ftplib.all_errors: pass
+          if not target or target.rstrip('/').endswith('/public_html'): raise SystemExit('ATLAS_WEBROOT_UNAVAILABLE')
+          root=pathlib.Path('/tmp/atlas-nextcloud-release'); sha=os.environ['GITHUB_SHA']; backup='/atlas-deploy-backups/'+sha
+          def ensure(path):
+              ftp.cwd('/')
+              for part in [x for x in path.split('/') if x]:
+                  try: ftp.mkd(part)
+                  except ftplib.all_errors: pass
+                  ftp.cwd(part)
+          def read(path):
+              data=bytearray(); ftp.retrbinary('RETR '+path,data.extend,blocksize=1048576); return bytes(data)
+          files=sorted(p for p in root.rglob('*') if p.is_file())
+          for path in files:
+              rel=path.relative_to(root).as_posix(); remote=target.rstrip('/')+'/'+rel
+              try: old=read(remote)
+              except ftplib.all_errors: old=None
+              if old is not None:
+                  ensure(backup+'/'+str(pathlib.PurePosixPath(rel).parent))
+                  ftp.storbinary('STOR '+path.name,io.BytesIO(old),blocksize=1048576)
+          for path in files:
+              rel=path.relative_to(root).as_posix(); payload=path.read_bytes()
+              ensure(target+'/'+str(pathlib.PurePosixPath(rel).parent))
+              ftp.storbinary('STOR '+path.name,io.BytesIO(payload),blocksize=1048576)
+              restored=read(target.rstrip('/')+'/'+rel)
+              if hashlib.sha256(restored).digest()!=hashlib.sha256(payload).digest(): raise SystemExit('FTPS_READBACK_MISMATCH:'+rel)
+          ftp.quit(); print(f'PTSERVIDOR_WEBAPP_VERIFIED files={len(files)} target={target} backup={backup}')
+          PY
+      - name: Public production smoke test
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://atlas.associacaomilk.pt'
+          curl -fsSL --retry 5 "$base/?sha=$GITHUB_SHA" -o /tmp/index.html
+          grep -Fq 'Globo Copérnico do Atlas Vivo MILK com 826 festas' /tmp/index.html
+          curl -fsSL "$base/territorios-publicos.json?sha=$GITHUB_SHA" -o /tmp/territorios.json
+          jq -e '.validated == true and .record_count == 826 and (.records|length) == 826' /tmp/territorios.json >/dev/null
+          curl -fsSL "$base/vendor/itowns/itowns.umd.js?sha=$GITHUB_SHA" -o /tmp/itowns.js
+          test "$(sha256sum /tmp/itowns.js | awk '{print $1}')" = c057f8961908aec71267e4e9770dd7506367e57cecf58cbc3ab8f491903fe288
+          curl -fsSL "$base/territory-data.js?sha=$GITHUB_SHA" | grep -Fq 'FeatureGeometryLayer'
+          echo 'ATLAS_PRODUCTION_SMOKE=PASS'
