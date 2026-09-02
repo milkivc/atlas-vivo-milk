@@ -1,0 +1,96 @@
+name: MILK Curatorial Runtime Audit
+
+on:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths:
+      - 'deploy/atlas-public/falarte.js'
+      - 'deploy/atlas-public/falarte.css'
+      - 'deploy/atlas-public/palavra-ritual.js'
+      - 'deploy/atlas-public/palavra-ritual.css'
+      - 'deploy/atlas-public/curadorias.js'
+      - '.github/workflows/curatorial-runtime-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: JavaScript syntax
+        run: |
+          set -euo pipefail
+          node --check deploy/atlas-public/falarte.js
+          node --check deploy/atlas-public/palavra-ritual.js
+          node --check deploy/atlas-public/curadorias.js
+      - name: Deterministic public-boundary gates
+        run: |
+          set -euo pipefail
+          files='deploy/atlas-public/falarte.js deploy/atlas-public/palavra-ritual.js'
+          if grep -REn 'https?://|MISTRAL_API_KEY|PTSERVIDOR|contacto_organizador|convite_organizadores_interno|client_secret|access_token' $files; then
+            echo '::error::PRIVATE_OR_EXTERNAL_RUNTIME_REFERENCE'
+            exit 21
+          fi
+          grep -Fq "id: 'lugar-escondido'" deploy/atlas-public/falarte.js
+          grep -Fq "id: 'remetente-ausente'" deploy/atlas-public/falarte.js
+          test "$(grep -c "^    id: '" deploy/atlas-public/falarte.js)" -eq 10
+          grep -Fq "localStorage" deploy/atlas-public/falarte.js
+          grep -Fq "não existe envio externo activo" deploy/atlas-public/falarte.js
+          grep -Fq "nada escrito aqui é guardado ou enviado" deploy/atlas-public/palavra-ritual.js
+          ! grep -Fq "localStorage" deploy/atlas-public/palavra-ritual.js
+          grep -Fq "openFalarte" deploy/atlas-public/curadorias.js
+          grep -Fq "openPalavraRitual" deploy/atlas-public/curadorias.js
+          grep -Fq "item.id === 'falarte'" deploy/atlas-public/curadorias.js
+          grep -Fq "item.id === 'palavra-ritual'" deploy/atlas-public/curadorias.js
+          echo 'CURATORIAL_DETERMINISTIC_GATES=PASS'
+      - name: Three-agent Mistral council
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python - <<'PY'
+          import json, os, pathlib, urllib.request
+          key = os.environ['MISTRAL_API_KEY'].strip()
+          paths = [
+              'deploy/atlas-public/falarte.js',
+              'deploy/atlas-public/falarte.css',
+              'deploy/atlas-public/palavra-ritual.js',
+              'deploy/atlas-public/palavra-ritual.css',
+              'deploy/atlas-public/curadorias.js',
+          ]
+          code = '\n\n'.join(f'FILE {p}\n' + pathlib.Path(p).read_text(encoding='utf-8') for p in paths)
+          source = '''SOURCE FACTS — treat as binding, do not invent beyond them.
+          FALArte has exactly ten documented mechanics: O lugar escondido / Topografia do segredo; 30 dias, o mesmo lugar / Tempo como matéria; O mais antigo e o mais novo / Arqueologia doméstica; A embalagem conta / Poesia do quotidiano; O som que só existe aqui / Fonografia do lugar; O que ainda resiste / Etnografia da persistência; Palavras que desapareceram / Arquivo da língua viva; O que ainda não foi apagado / Arqueologia do visível; Só existe na tua memória / Cartografia do invisível; Remetente Ausente / Postal para o cosmos. The source asks for 13+ gating, author-mode and publication preference, human curation before publication. This branch has no verified secure submission endpoint, therefore local-only drafts and disabled external submission are the required safe behaviour. File selections must not be persisted.
+          A Palavra Ritual treats language as body, texture, deviation, silence, unexpected appearance and dramaturgy without a single police of meaning. It explicitly requires interaction without surveillance, accessibility, legibility, symbolic rather than aggressive movement, and code that can remain silent. Cosmic Flow is method, not merely visual effect. User text in Palavra Ritual must not be stored or transmitted by this runtime.
+          Public Atlas must not expose Camada Invisível, credentials, private organizer contacts or internal prompts. Reduced motion and keyboard operation are required.'''
+          roles = {
+              'source_fidelity': 'Check that the two runtimes materially implement the supplied source facts instead of reducing them to a generic random card. Block only with literal code evidence.',
+              'accessibility_privacy': 'Check keyboard, status announcements, reduced motion, local data behaviour, file handling and absence of external/private leakage. Block only with literal code evidence.',
+              'experience_quality': 'Check whether each runtime has a distinct experiential grammar, whether Remetente Ausente avoids falsely claiming external/space delivery, and whether Palavra Ritual preserves words while transforming their spatial relation. Block only with literal code evidence.'
+          }
+          failed=[]
+          for role, rule in roles.items():
+              payload={
+                  'model':'mistral-medium-latest',
+                  'temperature':0.0,
+                  'response_format':{'type':'json_object'},
+                  'messages':[
+                      {'role':'system','content':f'You are MILK auditor {role}. {rule} Return strict JSON with pass:boolean, blockers:array, evidence:array, tests:array.'},
+                      {'role':'user','content':source+'\n\nCANDIDATE CODE\n'+code}
+                  ]
+              }
+              req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions', data=json.dumps(payload).encode(), method='POST', headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+              with urllib.request.urlopen(req, timeout=240) as response:
+                  body=json.loads(response.read())
+              review=json.loads(body['choices'][0]['message']['content'])
+              print('MISTRAL_CURATORIAL_AUDIT='+json.dumps({'role':role,**review},ensure_ascii=False))
+              if review.get('pass') is not True or review.get('blockers'):
+                  failed.append(role)
+          if failed:
+              raise SystemExit('MISTRAL_CURATORIAL_BLOCKED='+','.join(failed))
+          print('MISTRAL_CURATORIAL_COUNCIL_OK=3')
+          PY
