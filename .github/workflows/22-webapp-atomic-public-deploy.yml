@@ -1,0 +1,199 @@
+name: 22 MILK Atlas atomic public WebApp deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths: ['.github/workflows/22-webapp-atomic-public-deploy.yml']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: atlas-public-atomic-deploy
+  cancel-in-progress: false
+
+env:
+  PTSERVIDOR_ATLAS_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_ATLAS_FTPS_PASSWORD }}
+  PTSERVIDOR_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Materialize and validate release
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$PTSERVIDOR_ATLAS_FTPS_PASSWORD"
+          test -n "$PTSERVIDOR_FTPS_PASSWORD"
+          gzip -dc deploy/atlas-public/territorios-publicos.json.gz > deploy/atlas-public/territorios-publicos.json
+          gzip -dc deploy/atlas-public/vendor/itowns/itowns.umd.js.gz > deploy/atlas-public/vendor/itowns/itowns.umd.js
+          node tests/ia-milk-public-boundary.test.mjs
+          for f in deploy/atlas-public/*.js; do node --check "$f"; done
+          jq -e '.validated == true and .layer == "public" and .projection == "PUBLIC-ONLY"' deploy/atlas-public/territorios-publicos.json >/dev/null
+          test "$(sha256sum deploy/atlas-public/vendor/itowns/itowns.umd.js | awk '{print $1}')" = c057f8961908aec71267e4e9770dd7506367e57cecf58cbc3ab8f491903fe288
+          grep -q 'authorial-portals.css' deploy/atlas-public/index.html
+          grep -q 'galeria-diletante' deploy/atlas-public/authorial-portals.js
+          grep -q 'cronicas-fuco' deploy/atlas-public/authorial-portals.js
+          grep -q "kind: 'light'" deploy/atlas-public/authorial-portals.js
+          if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_FTPS_PASSWORD|NEXTCLOUD_KEY|client_secret|access_token' deploy/atlas-public --exclude-dir=vendor; then exit 31; fi
+          if grep -RInE 'openDynamic\(|generic_fallback_allowed[" ]*:[ ]*true' deploy/atlas-public; then exit 32; fi
+          echo ATLAS_PUBLIC_RELEASE_GATE=PASS
+
+      - name: Atomic backup + deploy + readback + smoke + rollback on failure
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ftplib,hashlib,io,json,os,pathlib,posixpath,ssl,tarfile,time,urllib.request
+
+          HOST='troi.ptservidor.net'
+          PUBLIC_USER='atlas@associacaomilk.pt'
+          PUBLIC_PASSWORD=os.environ['PTSERVIDOR_ATLAS_FTPS_PASSWORD'].strip()
+          PRIVATE_USER='migration@associacaomilk.pt'
+          PRIVATE_PASSWORD=os.environ['PTSERVIDOR_FTPS_PASSWORD'].strip()
+          SHA=os.environ['GITHUB_SHA']
+          SHORT=SHA[:12]
+          ROOT=pathlib.Path('deploy/atlas-public')
+          MAX_FILES=6000
+          MAX_BYTES=600*1024*1024
+
+          def connect(user,password):
+              ftp=ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=90)
+              ftp.connect(HOST,21); ftp.login(user,password); ftp.prot_p(); return ftp
+
+          public=connect(PUBLIC_USER,PUBLIC_PASSWORD)
+          private=connect(PRIVATE_USER,PRIVATE_PASSWORD)
+
+          def ensure_dir(ftp,path):
+              ftp.cwd('/')
+              for part in [p for p in path.strip('/').split('/') if p]:
+                  try: ftp.mkd(part)
+                  except ftplib.all_errors: pass
+                  ftp.cwd(part)
+
+          def mlsd_safe(ftp,path):
+              try:
+                  return list(ftp.mlsd(path))
+              except Exception:
+                  names=ftp.nlst(path)
+                  out=[]
+                  for name in names:
+                      base=posixpath.basename(name.rstrip('/'))
+                      if base in ('.','..'): continue
+                      try:
+                          size=ftp.size(name)
+                          out.append((base,{'type':'file','size':str(size or 0)}))
+                      except Exception:
+                          out.append((base,{'type':'dir'}))
+                  return out
+
+          snapshot={}
+          total=0
+          def walk(path='/'):
+              nonlocal_marker=None
+              entries=mlsd_safe(public,path)
+              for name,facts in entries:
+                  if name in ('.','..'): continue
+                  full=posixpath.join(path,name)
+                  typ=facts.get('type','')
+                  if typ in ('cdir','pdir'): continue
+                  if typ=='dir':
+                      walk(full)
+                  else:
+                      data=bytearray(); public.retrbinary('RETR '+full,data.extend,blocksize=1048576)
+                      snapshot[full.lstrip('/')]=bytes(data)
+                      if len(snapshot)>MAX_FILES or sum(len(v) for v in snapshot.values())>MAX_BYTES:
+                          raise RuntimeError('PUBLIC_BACKUP_SAFETY_LIMIT')
+          walk('/')
+          total=sum(len(v) for v in snapshot.values())
+          print('PUBLIC_PREDEPLOY_SNAPSHOT_FILES='+str(len(snapshot)))
+          print('PUBLIC_PREDEPLOY_SNAPSHOT_BYTES='+str(total))
+
+          # Persist rollback package in the private migration chroot before any public write.
+          buf=io.BytesIO()
+          with tarfile.open(fileobj=buf,mode='w:gz',format=tarfile.PAX_FORMAT) as tf:
+              for rel,data in sorted(snapshot.items()):
+                  info=tarfile.TarInfo(rel); info.size=len(data); info.mtime=0; info.uid=info.gid=0; info.uname=info.gname=''
+                  tf.addfile(info,io.BytesIO(data))
+          backup=buf.getvalue(); backup_sha=hashlib.sha256(backup).hexdigest()
+          backup_dir='ATLAS_PRODUCTION_ROLLBACK/'+SHA
+          ensure_dir(private,backup_dir)
+          private.storbinary('STOR atlas-webroot-before.tar.gz',io.BytesIO(backup),blocksize=1048576)
+          manifest=json.dumps({'before_commit':SHA,'files':len(snapshot),'bytes':total,'sha256':backup_sha},indent=2).encode()
+          private.storbinary('STOR manifest.json',io.BytesIO(manifest))
+          got=bytearray(); private.retrbinary('RETR atlas-webroot-before.tar.gz',got.extend,blocksize=1048576)
+          if hashlib.sha256(bytes(got)).hexdigest()!=backup_sha: raise RuntimeError('PRIVATE_BACKUP_READBACK_MISMATCH')
+          print('PRIVATE_ROLLBACK_BACKUP=PASS')
+          print('PRIVATE_ROLLBACK_PATH=/'+backup_dir)
+          print('PRIVATE_ROLLBACK_SHA256='+backup_sha)
+
+          release={}
+          for p in sorted(ROOT.rglob('*')):
+              if p.is_file() and not p.name.endswith('.gz'):
+                  release[p.relative_to(ROOT).as_posix()]=p.read_bytes()
+          if 'index.html' not in release: raise RuntimeError('INDEX_MISSING')
+
+          def upload_one(rel,data):
+              parent=posixpath.dirname(rel)
+              if parent: ensure_dir(public,parent)
+              else: public.cwd('/')
+              name=posixpath.basename(rel)
+              public.storbinary('STOR '+name,io.BytesIO(data),blocksize=1048576)
+              readback=bytearray(); public.retrbinary('RETR '+name,readback.extend,blocksize=1048576)
+              if hashlib.sha256(bytes(readback)).digest()!=hashlib.sha256(data).digest():
+                  raise RuntimeError('PUBLIC_READBACK_MISMATCH:'+rel)
+
+          def restore():
+              print('PUBLIC_ROLLBACK=START')
+              # restore old files, index last
+              old=[x for x in sorted(snapshot) if x!='index.html']
+              if 'index.html' in snapshot: old.append('index.html')
+              for rel in old: upload_one(rel,snapshot[rel])
+              # remove files introduced only by failed release
+              for rel in sorted(set(release)-set(snapshot), reverse=True):
+                  try: public.delete('/'+rel)
+                  except Exception: pass
+              print('PUBLIC_ROLLBACK=PASS')
+
+          try:
+              # Assets/runtime first; index last so the old page remains coherent during transfer.
+              order=[x for x in sorted(release) if x!='index.html']+['index.html']
+              for rel in order: upload_one(rel,release[rel])
+              print('PUBLIC_RELEASE_FILES_WRITTEN='+str(len(order)))
+
+              time.sleep(1)
+              checks=[
+                  ('https://atlas.associacaomilk.pt/?release='+SHORT,('Atlas Vivo MILK','tocar o possível','authorial-portals.css')),
+                  ('https://atlas.associacaomilk.pt/authorial-portals.js?release='+SHORT,('galeria-diletante','cronicas-fuco','kind: \'light\'')),
+                  ('https://atlas.associacaomilk.pt/copernico.js?release='+SHORT,('mountCopernico',))
+              ]
+              for url,needles in checks:
+                  req=urllib.request.Request(url,headers={'Cache-Control':'no-cache','User-Agent':'MILK-Atlas-Deploy-Smoke/1.0'})
+                  with urllib.request.urlopen(req,timeout=45) as r:
+                      data=r.read().decode('utf-8','replace')
+                      if r.status!=200: raise RuntimeError('HTTP_STATUS:'+str(r.status))
+                  for needle in needles:
+                      if needle not in data: raise RuntimeError('HTTP_SMOKE_MISSING:'+needle)
+              print('ATLAS_PUBLIC_HTTP_SMOKE=PASS')
+          except Exception as exc:
+              print('ATLAS_PUBLIC_DEPLOY_FAILURE='+type(exc).__name__)
+              restore()
+              raise
+          finally:
+              try: public.quit()
+              except Exception: public.close()
+              try: private.quit()
+              except Exception: private.close()
+
+          release_digest=hashlib.sha256(b''.join(rel.encode()+b'\0'+hashlib.sha256(data).digest() for rel,data in sorted(release.items()))).hexdigest()
+          print('ATLAS_PUBLIC_DEPLOY=PASS')
+          print('ATLAS_PUBLIC_RELEASE_COMMIT='+SHA)
+          print('ATLAS_PUBLIC_RELEASE_DIGEST='+release_digest)
+          print('ATLAS_PUBLIC_RELEASE_FILES='+str(len(release)))
+          print('SECRET_VALUES_DISCLOSED=0')
+          PY
