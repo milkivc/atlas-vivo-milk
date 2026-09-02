@@ -1,0 +1,212 @@
+name: 11 MILK public boundary hardening
+
+on:
+  push:
+    branches:
+      - work/copernico-recovery-webapp-20260902
+    paths:
+      - '.github/workflows/11-public-boundary-hardening.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  harden:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Harden public boundary by positive public contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import json, re
+
+          boundary = Path('deploy/atlas-public/ia-milk-public-boundary.js')
+          boundary.write_text(r'''/**
+ * Fronteira da superfície pública MILK.
+ * Valida apenas o contrato público materializado e não incorpora vocabulário,
+ * identificadores, rotas ou esquemas reservados.
+ */
+
+const PUBLIC_MANIFEST_KEYS = new Set([
+  "schema_version",
+  "layer",
+  "surface",
+  "public_contract",
+  "territorial_scope",
+  "curatorial_incorporation",
+  "assets_and_rights",
+  "runtime_sources",
+  "ai_milk",
+  "human_validation",
+  "reverse_link_to_private",
+  "source_receipt"
+]);
+
+function assertPublicEnvelope(payload) {
+  for (const key of Object.keys(payload)) {
+    if (!PUBLIC_MANIFEST_KEYS.has(key)) {
+      throw new Error(`Campo não previsto no contrato público: ${key}`);
+    }
+  }
+}
+
+export function validatePublicMaterialization(payload) {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    throw new Error("Produto público inválido");
+  }
+  assertPublicEnvelope(payload);
+  if (payload.layer !== "public") throw new Error("A superfície aceita apenas layer=public");
+
+  const validationStatus = payload.human_validation?.status;
+  if (!new Set(["required", "approved"]).has(validationStatus)) {
+    throw new Error("Estado de validação humana pública inválido");
+  }
+
+  if (validationStatus === "approved") {
+    if (!payload.source_receipt?.sha256 || !/^[a-f0-9]{64}$/i.test(payload.source_receipt.sha256)) {
+      throw new Error("Receipt SHA-256 público em falta ou inválido");
+    }
+  }
+
+  if (payload.reverse_link_to_private !== false) {
+    throw new Error("Ligação reversa reservada não permitida");
+  }
+  return Object.freeze(structuredClone(payload));
+}
+
+export async function loadPublicMilkManifest(url = "./public-manifest.json") {
+  const response = await fetch(url, {
+    credentials: "same-origin",
+    cache: "no-store",
+    headers: { Accept: "application/json" }
+  });
+  if (!response.ok) throw new Error(`Manifesto público indisponível: ${response.status}`);
+  return validatePublicMaterialization(await response.json());
+}
+
+export function installPublicMilkBoundary() {
+  return loadPublicMilkManifest()
+    .then((manifest) => {
+      window.dispatchEvent(new CustomEvent("milk:public-ready", { detail: manifest }));
+      return manifest;
+    })
+    .catch((error) => {
+      window.dispatchEvent(new CustomEvent("milk:public-blocked", {
+        detail: { reason: error.message }
+      }));
+      throw error;
+    });
+}
+
+if (typeof window !== "undefined") installPublicMilkBoundary();
+''', encoding='utf-8')
+
+          machine = Path('deploy/atlas-public/experience-machine.js')
+          text = machine.read_text(encoding='utf-8')
+          text = text.replace('// PUBLIC-ONLY. Não contém nem pode reconstruir a Camada Invisível.', '// PUBLIC-ONLY. A superfície não incorpora mecanismos reservados.')
+          text = re.sub(
+              r"export function assertPublicPayload\(payload\) \{[\s\S]*?\n\}\n\nexport \{",
+              '''export function assertPublicPayload(payload) {\n  if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {\n    throw new Error('PUBLIC_PAYLOAD_INVALID');\n  }\n  if (Object.hasOwn(payload, 'layer') && payload.layer !== 'public') {\n    throw new Error('PUBLIC_LAYER_REQUIRED');\n  }\n  if (Object.hasOwn(payload, 'reverse_link_to_private') && payload.reverse_link_to_private !== false) {\n    throw new Error('PUBLIC_REVERSE_LINK_REJECTED');\n  }\n  const serialized = JSON.stringify(payload);\n  if (serialized.length > 2_000_000) throw new Error('PUBLIC_PAYLOAD_TOO_LARGE');\n  return payload;\n}\n\nexport {''',
+              text,
+              count=1,
+          )
+          machine.write_text(text, encoding='utf-8')
+
+          catalog_path = Path('deploy/atlas-public/catalogo-curatorial.json')
+          catalog = json.loads(catalog_path.read_text(encoding='utf-8'))
+          catalog.pop('principio', None)
+          catalog_path.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          manifest_path = Path('deploy/atlas-public/public-manifest.json')
+          manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+          manifest.get('public_contract', {}).pop('public_reverse_link_to_invisible_layer', None)
+          manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          tests = Path('tests/ia-milk-public-boundary.test.mjs')
+          tests.write_text(r'''import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import vm from "node:vm";
+
+const source = await readFile(new URL("../deploy/atlas-public/ia-milk-public-boundary.js", import.meta.url), "utf8");
+const transformed = source
+  .replace(/export\s+/g, "")
+  .replace(/if \(typeof window[\s\S]*$/m, "");
+const context = { structuredClone, CustomEvent: class {}, window: undefined, fetch: undefined };
+vm.createContext(context);
+vm.runInContext(transformed + "\nthis.validate = validatePublicMaterialization;", context);
+
+const approved = {
+  layer: "public",
+  human_validation: { status: "approved" },
+  source_receipt: { sha256: "a".repeat(64) },
+  reverse_link_to_private: false
+};
+assert.equal(context.validate(approved).layer, "public");
+
+const contract = {
+  schema_version: "1.1.0",
+  layer: "public",
+  surface: "MILK public authorial experience",
+  public_contract: {},
+  territorial_scope: {},
+  curatorial_incorporation: {},
+  assets_and_rights: {},
+  runtime_sources: {},
+  ai_milk: {},
+  human_validation: { status: "required" },
+  reverse_link_to_private: false
+};
+assert.equal(context.validate(contract).human_validation.status, "required");
+
+for (const payload of [
+  { ...approved, layer: "internal" },
+  { ...approved, human_validation: { status: "pending" } },
+  { ...approved, reverse_link_to_private: true },
+  { ...approved, source_receipt: { sha256: "invalid" } },
+  { ...approved, unexpected_field: "x" }
+]) {
+  assert.throws(() => context.validate(payload));
+}
+
+console.log("MILK_PUBLIC_BOUNDARY_OK");
+''', encoding='utf-8')
+          PY
+
+      - name: Verify public boundary hardening
+        shell: bash
+        run: |
+          set -euo pipefail
+          node tests/ia-milk-public-boundary.test.mjs
+          node --check deploy/atlas-public/ia-milk-public-boundary.js
+          node --check deploy/atlas-public/experience-machine.js
+          python -m json.tool deploy/atlas-public/catalogo-curatorial.json >/dev/null
+          python -m json.tool deploy/atlas-public/public-manifest.json >/dev/null
+          python scripts/atlas_factory_guard.py
+          test "$(python - <<'PY'
+          import json
+          print(len(json.load(open('deploy/atlas-public/catalogo-curatorial.json', encoding='utf-8'))['entradas']))
+          PY
+          )" = "49"
+          echo 'PUBLIC_BOUNDARY_HARDENING=PASS'
+          echo 'CURATORIAL_CATALOG_COUNT=49'
+
+      - name: Commit hardened public boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet; then
+            echo 'NO_CHANGES_NEEDED=1'
+            exit 0
+          fi
+          git config user.name 'Associação MILK - Movimento de Intervenções e Linguagens Kulturais e Arte'
+          git config user.email 'milk@associacaomilk.pt'
+          git add deploy/atlas-public/ia-milk-public-boundary.js deploy/atlas-public/experience-machine.js deploy/atlas-public/catalogo-curatorial.json deploy/atlas-public/public-manifest.json tests/ia-milk-public-boundary.test.mjs
+          git commit -m 'fix(public): harden public boundary by positive contract'
+          git push origin HEAD:work/copernico-recovery-webapp-20260902
