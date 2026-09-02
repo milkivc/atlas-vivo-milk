@@ -1,0 +1,85 @@
+name: 27 MILK Nextcloud canonical constitution + handoff sync
+
+on:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths:
+      - '.github/workflows/27-nextcloud-canonical-constitution-handoff-sync.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      NEXTCLOUD_PASSWORD: ${{ secrets.ADMIN_NEXTCLOUD }}
+      NEXTCLOUD_USER: admin
+      NEXTCLOUD_DAV_ROOT: https://associacaomilk.pt/nextcloud/remote.php/dav/files/admin
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+
+      - name: Authenticate once and upload canonical files with readback
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$NEXTCLOUD_PASSWORD"
+          python - <<'PY'
+          import base64, hashlib, os, pathlib, urllib.error, urllib.request
+
+          user=os.environ['NEXTCLOUD_USER']
+          password=os.environ['NEXTCLOUD_PASSWORD']
+          root=os.environ['NEXTCLOUD_DAV_ROOT'].rstrip('/')
+          auth='Basic '+base64.b64encode(f'{user}:{password}'.encode()).decode()
+
+          def request(method,url,data=None,headers=None,timeout=60):
+              h={'Authorization':auth,'User-Agent':'Atlas-Vivo-MILK-Canonical-Sync/1.0'}
+              if headers: h.update(headers)
+              req=urllib.request.Request(url,data=data,method=method,headers=h)
+              return urllib.request.urlopen(req,timeout=timeout)
+
+          # Exactly one authentication probe. Do not retry invalid credentials.
+          try:
+              with request('PROPFIND',root+'/',data=b'',headers={'Depth':'0'}) as r:
+                  status=r.status
+                  r.read()
+          except urllib.error.HTTPError as e:
+              print('NEXTCLOUD_CANONICAL_AUTH=FAIL_HTTP_'+str(e.code))
+              raise SystemExit(41)
+          if status not in (200,207):
+              print('NEXTCLOUD_CANONICAL_AUTH=FAIL_STATUS_'+str(status))
+              raise SystemExit(42)
+          print('NEXTCLOUD_CANONICAL_AUTH=PASS')
+
+          files=[
+            ('curatorial-factory/CONSTITUICAO_EXPERIENCIAL_SOBERANA_ATLAS_VIVO_MILK_20260902.md',
+             'CONSTITUICAO_EXPERIENCIAL_SOBERANA_ATLAS_VIVO_MILK_2026-09-02.md'),
+            ('ops/HANDOFF_PROXIMO_CHAT_ATLAS_VIVO_MILK_20260902.md',
+             'HANDOFF_PROXIMO_CHAT_ATLAS_VIVO_MILK_2026-09-02.md'),
+          ]
+
+          for local,remote in files:
+              payload=pathlib.Path(local).read_bytes()
+              digest=hashlib.sha256(payload).hexdigest()
+              url=root+'/'+urllib.parse.quote(remote)
+              try:
+                  with request('PUT',url,data=payload,headers={'Content-Type':'text/markdown; charset=utf-8'}) as r:
+                      put_status=r.status
+                      r.read()
+              except urllib.error.HTTPError as e:
+                  print('NEXTCLOUD_CANONICAL_PUT=FAIL file='+remote+' http='+str(e.code))
+                  raise
+              if put_status not in (200,201,204):
+                  raise SystemExit('NEXTCLOUD_CANONICAL_PUT_BAD_STATUS:'+remote+':'+str(put_status))
+              with request('GET',url) as r:
+                  got=r.read()
+              got_digest=hashlib.sha256(got).hexdigest()
+              if got_digest!=digest:
+                  raise SystemExit('NEXTCLOUD_CANONICAL_READBACK_MISMATCH:'+remote)
+              print('NEXTCLOUD_CANONICAL_FILE=PASS name='+remote+' sha256='+digest)
+          print('NEXTCLOUD_CANONICAL_SYNC=PASS_2')
+          PY
