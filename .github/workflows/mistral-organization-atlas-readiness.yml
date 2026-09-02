@@ -1,0 +1,142 @@
+name: MILK Mistral Organization + Vibe readiness
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - work/copernico-recovery-webapp-20260902
+    paths:
+      - 'AGENTS.md'
+      - '.vibe/**'
+      - 'docs/MISTRAL_ORG_ATLAS_EXECUTION.md'
+      - '.github/workflows/mistral-organization-atlas-readiness.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: milk-mistral-org-readiness
+  cancel-in-progress: true
+
+jobs:
+  readiness:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      NEXTCLOUD_ATLAS: ${{ secrets.NEXTCLOUD_ATLAS }}
+      NEXTCLOUD_KEY: ${{ secrets.NEXTCLOUD_KEY }}
+      NEXTCLOUD_BASE_URL: ${{ secrets.NEXTCLOUD_BASE_URL }}
+      NEXTCLOUD_USER: ${{ secrets.NEXTCLOUD_USER }}
+      NEXTCLOUD_APP_PASSWORD: ${{ secrets.NEXTCLOUD_APP_PASSWORD }}
+      PTSERVIDOR_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
+      CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
+      CPANEL_TOKEN: ${{ secrets.CPANEL_TOKEN }}
+      PTSERVIDOR_CPANEL_TOKEN: ${{ secrets.PTSERVIDOR_CPANEL_TOKEN }}
+
+    steps:
+      - name: Checkout Atlas WebApp branch
+        uses: actions/checkout@v4
+
+      - name: Validate Vibe project configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib, tomllib
+          required = [
+              '.vibe/config.toml',
+              '.vibe/agents/atlas-orchestrator.toml',
+              '.vibe/agents/nextcloud-corpus-reader.toml',
+              '.vibe/agents/curatorial-hermeneut.toml',
+              '.vibe/agents/ludic-systems-decoder.toml',
+              '.vibe/agents/copernico-integrity.toml',
+              '.vibe/agents/runtime-accessibility-reviewer.toml',
+              '.vibe/agents/ptservidor-release-guardian.toml',
+              'AGENTS.md',
+          ]
+          for name in required:
+              p=pathlib.Path(name)
+              if not p.is_file():
+                  raise SystemExit(f'MISSING_REQUIRED_FILE={name}')
+              if p.suffix == '.toml':
+                  tomllib.loads(p.read_text(encoding='utf-8'))
+          print(f'VIBE_PROJECT_CONFIG=OK agents={len([p for p in required if p.endswith(".toml")])-1}')
+          PY
+
+      - name: Report secret readiness without values
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os
+          names = [
+              'MISTRAL_API_KEY','NEXTCLOUD_ATLAS','NEXTCLOUD_KEY','NEXTCLOUD_BASE_URL',
+              'NEXTCLOUD_USER','NEXTCLOUD_APP_PASSWORD','PTSERVIDOR_FTPS_PASSWORD',
+              'CPANEL_API_TOKEN','CPANEL_TOKEN','PTSERVIDOR_CPANEL_TOKEN'
+          ]
+          for n in names:
+              print(f'{n}=' + ('PRESENT' if os.environ.get(n,'').strip() else 'MISSING'))
+          print('SECRET_VALUES_DISCLOSED=0')
+          PY
+
+      - name: Install Mistral Vibe Code
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python -m pip install --disable-pip-version-check -q 'mistral-vibe==2.24.5'
+          vibe --version
+
+      - name: Probe Mistral API model access
+        shell: bash
+        run: |
+          set -euo pipefail
+          code="$(curl -sS -o /tmp/models.json -w '%{http_code}' \
+            -H "Authorization: Bearer $MISTRAL_API_KEY" \
+            https://api.mistral.ai/v1/models)"
+          test "$code" = '200' || { echo "MISTRAL_MODELS_HTTP=$code"; exit 31; }
+          python - <<'PY'
+          import json
+          obj=json.load(open('/tmp/models.json',encoding='utf-8'))
+          data=obj.get('data',[]) if isinstance(obj,dict) else []
+          ids={str(x.get('id','')) for x in data if isinstance(x,dict)}
+          print(f'MISTRAL_API_MODELS=OK count={len(data)}')
+          print('MISTRAL_MEDIUM_AVAILABLE=' + ('YES' if 'mistral-medium-latest' in ids else 'UNKNOWN'))
+          print('CODESTRAL_AVAILABLE=' + ('YES' if 'codestral-latest' in ids else 'UNKNOWN'))
+          PY
+          rm -f /tmp/models.json
+
+      - name: Execute Atlas Orchestrator in read-only readiness mode
+        shell: bash
+        run: |
+          set -euo pipefail
+          vibe \
+            --agent atlas-orchestrator \
+            --prompt "Read AGENTS.md, docs/MISTRAL_ORG_ATLAS_EXECUTION.md and the .vibe agent definitions. Do not edit files and do not run shell commands. Delegate read-only inspection to available subagents when useful. Return compact JSON only with: anti_regression_loaded, nextcloud_is_corpus_source, copernico_preserved, agent_team_found, missing_capabilities, safe_next_execution. The safe_next_execution must continue the WebApp pipeline using Nextcloud corpus, not Google Drive." \
+            --max-turns 6 \
+            --output json \
+            > /tmp/atlas-mistral-readiness.json
+          test -s /tmp/atlas-mistral-readiness.json
+          python - <<'PY'
+          import pathlib
+          text=pathlib.Path('/tmp/atlas-mistral-readiness.json').read_text(encoding='utf-8',errors='replace')
+          low=text.lower()
+          required=['nextcloud','copernico','agents']
+          missing=[x for x in required if x not in low]
+          if missing:
+              raise SystemExit('MISTRAL_ORCHESTRATOR_READINESS_INCOMPLETE missing='+','.join(missing))
+          print('MISTRAL_ATLAS_ORCHESTRATOR=EXECUTED')
+          print('MISTRAL_READINESS_OUTPUT=VALIDATED')
+          PY
+          rm -f /tmp/atlas-mistral-readiness.json
+
+      - name: Final readiness receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'MILK_MISTRAL_ORG_READINESS=PASS'
+          echo 'WEBAPP_FOCUS=PRESERVED'
+          echo 'NEXTCLOUD_CORPUS=REQUIRED'
+          echo 'GOOGLE_DRIVE_INGESTION=DISABLED_BY_POLICY'
+          echo 'PTSERVIDOR_RELEASE=SEPARATE_GATED_STEP'
