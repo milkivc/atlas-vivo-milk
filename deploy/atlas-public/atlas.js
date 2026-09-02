@@ -5,11 +5,19 @@ import {
 } from './experience-machine.js';
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const opening = document.querySelector('#opening');
-const territory = document.querySelector('#territory');
-const topbar = document.querySelector('.topbar');
-const enter = document.querySelector('#enterAtlas');
-const openingWord = document.querySelector('.opening-word');
+const requireElement = selector => {
+  const node = document.querySelector(selector);
+  if (!node) throw new Error(`ATLAS_REQUIRED_ELEMENT_MISSING:${selector}`);
+  return node;
+};
+const prelude = requireElement('#prelude');
+const atlasSeal = requireElement('#atlasSeal');
+const cosmos = requireElement('#cosmos');
+const opening = requireElement('#opening');
+const territory = requireElement('#territory');
+const topbar = requireElement('.topbar');
+const enter = requireElement('#enterAtlas');
+const openingWord = requireElement('.opening-word');
 const experience = new AtlasExperienceMachine();
 
 experience.setReducedMotion(reduced);
@@ -19,6 +27,32 @@ experience.addEventListener('atlas:state', event => {
 });
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, reduced ? 0 : ms));
+
+async function revealSeal() {
+  await wait(520);
+  if (!experience.send('reveal_seal')) return;
+  atlasSeal.hidden = false;
+  atlasSeal.focus({preventScroll: true});
+}
+
+async function activateSeal() {
+  if (atlasSeal.disabled || experience.state !== PUBLIC_STATES.SELO) return;
+  atlasSeal.disabled = true;
+  if (!experience.send('touch')) {
+    atlasSeal.disabled = false;
+    return;
+  }
+  prelude.classList.add('leaving');
+  await wait(360);
+  prelude.hidden = true;
+  cosmos.hidden = false;
+  opening.hidden = false;
+  enter.focus({preventScroll: true});
+}
+
+// Button nativo: click cobre pointer/touch e activação por Enter/Espaço.
+atlasSeal.addEventListener('click', activateSeal);
+requestAnimationFrame(() => revealSeal());
 
 async function enterTerritory() {
   if (enter.disabled) return;

@@ -4,6 +4,8 @@
 // acessibilidade, direitos, evidência territorial e boundary tests.
 
 const PUBLIC_STATES = Object.freeze({
+  PRETO: 'preto',
+  SELO: 'selo',
   COSMICOXES: 'cosmicoxes',
   COSMIC_WORDS: 'cosmic_words',
   WORLD_GESTURE: 'world_gesture',
@@ -16,6 +18,8 @@ const PUBLIC_STATES = Object.freeze({
 });
 
 const TRANSITIONS = Object.freeze({
+  [PUBLIC_STATES.PRETO]: new Set(['reveal_seal']),
+  [PUBLIC_STATES.SELO]: new Set(['touch']),
   [PUBLIC_STATES.COSMICOXES]: new Set([
     'gesture',
     'silence',
@@ -74,6 +78,9 @@ const TRANSITIONS = Object.freeze({
 });
 
 const NEXT = Object.freeze({
+  [`${PUBLIC_STATES.PRETO}:reveal_seal`]: PUBLIC_STATES.SELO,
+  [`${PUBLIC_STATES.SELO}:touch`]: PUBLIC_STATES.COSMICOXES,
+
   [`${PUBLIC_STATES.COSMICOXES}:gesture`]: PUBLIC_STATES.COSMIC_WORDS,
   [`${PUBLIC_STATES.COSMICOXES}:reduce_motion`]: PUBLIC_STATES.COSMIC_WORDS,
   [`${PUBLIC_STATES.COSMICOXES}:show_territory`]: PUBLIC_STATES.GLOBE,
@@ -126,7 +133,7 @@ const NOT_PRIMARY_PORTALS = Object.freeze([
 ]);
 
 export class AtlasExperienceMachine extends EventTarget {
-  #state = PUBLIC_STATES.COSMICOXES;
+  #state = PUBLIC_STATES.PRETO;
   #context = Object.seal({
     territoryId: null,
     discoveryId: null,
