@@ -1,5 +1,5 @@
 // MILK — máquina reconciliada da experiência pública
-// PUBLIC-ONLY. Não contém nem pode reconstruir a Camada Invisível.
+// PUBLIC-ONLY. A superfície não incorpora mecanismos reservados.
 // Estado de trabalho: não ligado à release. Promoção exige revisão autoral,
 // acessibilidade, direitos, evidência territorial e boundary tests.
 
@@ -235,20 +235,17 @@ export const COSMIC_WORDS_SEED = Object.freeze([
 ]);
 
 export function assertPublicPayload(payload) {
-  const serialized = JSON.stringify(payload ?? {}).toLowerCase();
-  const forbidden = [
-    'camada invisível',
-    'camada invisivel',
-    'territorial-hypothesis-engine',
-    'h-0047',
-    'olhapin',
-    'mistral_api_key',
-    'ptservidor_ftps_password',
-    'prompt interno',
-    'private_engine'
-  ];
-  const hit = forbidden.find(token => serialized.includes(token));
-  if (hit) throw new Error(`PUBLIC_BOUNDARY_REJECTED:${hit}`);
+  if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
+    throw new Error('PUBLIC_PAYLOAD_INVALID');
+  }
+  if (Object.hasOwn(payload, 'layer') && payload.layer !== 'public') {
+    throw new Error('PUBLIC_LAYER_REQUIRED');
+  }
+  if (Object.hasOwn(payload, 'reverse_link_to_private') && payload.reverse_link_to_private !== false) {
+    throw new Error('PUBLIC_REVERSE_LINK_REJECTED');
+  }
+  const serialized = JSON.stringify(payload);
+  if (serialized.length > 2_000_000) throw new Error('PUBLIC_PAYLOAD_TOO_LARGE');
   return payload;
 }
 

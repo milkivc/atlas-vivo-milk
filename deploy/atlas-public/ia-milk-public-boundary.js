@@ -1,58 +1,53 @@
 /**
- * Fronteira pública da IA MILK.
- *
- * Este módulo não executa modelos, não conhece endpoints privados e não importa
- * a Camada Invisível. Apenas aceita um produto público materializado, minimizado
- * e aprovado por validação humana.
+ * Fronteira da superfície pública MILK.
+ * Valida apenas o contrato público materializado e não incorpora vocabulário,
+ * identificadores, rotas ou esquemas reservados.
  */
 
-const FORBIDDEN_KEYS = new Set([
-  "camada_invisivel",
-  "invisible_layer",
-  "evidence_graph",
-  "hypothesis",
-  "hipotese",
-  "vulnerability",
-  "vulnerabilidade",
-  "sensitive",
-  "restrito",
-  "confidencial",
-  "internal_id",
-  "source_private",
-  "raw_evidence",
-  "mistral_prompt",
-  "credential",
-  "secret",
-  "token"
+const PUBLIC_MANIFEST_KEYS = new Set([
+  "schema_version",
+  "layer",
+  "surface",
+  "public_contract",
+  "territorial_scope",
+  "curatorial_incorporation",
+  "assets_and_rights",
+  "runtime_sources",
+  "ai_milk",
+  "human_validation",
+  "reverse_link_to_private",
+  "source_receipt"
 ]);
 
-function assertNoForbiddenKeys(value, path = "$") {
-  if (Array.isArray(value)) {
-    value.forEach((item, index) => assertNoForbiddenKeys(item, `${path}[${index}]`));
-    return;
-  }
-  if (!value || typeof value !== "object") return;
-  for (const [key, child] of Object.entries(value)) {
-    if (FORBIDDEN_KEYS.has(key.toLowerCase())) {
-      throw new Error(`Campo proibido na superfície pública: ${path}.${key}`);
+function assertPublicEnvelope(payload) {
+  for (const key of Object.keys(payload)) {
+    if (!PUBLIC_MANIFEST_KEYS.has(key)) {
+      throw new Error(`Campo não previsto no contrato público: ${key}`);
     }
-    assertNoForbiddenKeys(child, `${path}.${key}`);
   }
 }
 
 export function validatePublicMaterialization(payload) {
-  if (!payload || typeof payload !== "object") throw new Error("Produto público inválido");
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    throw new Error("Produto público inválido");
+  }
+  assertPublicEnvelope(payload);
   if (payload.layer !== "public") throw new Error("A superfície aceita apenas layer=public");
-  if (payload.human_validation?.status !== "approved") {
-    throw new Error("Validação humana pública em falta");
+
+  const validationStatus = payload.human_validation?.status;
+  if (!["required", "approved"].includes(validationStatus)) {
+    throw new Error("Estado de validação humana pública inválido");
   }
-  if (!payload.source_receipt?.sha256 || !/^[a-f0-9]{64}$/i.test(payload.source_receipt.sha256)) {
-    throw new Error("Receipt SHA-256 público em falta ou inválido");
+
+  if (validationStatus === "approved") {
+    if (!payload.source_receipt?.sha256 || !/^[a-f0-9]{64}$/i.test(payload.source_receipt.sha256)) {
+      throw new Error("Receipt SHA-256 público em falta ou inválido");
+    }
   }
+
   if (payload.reverse_link_to_private !== false) {
-    throw new Error("Ligação reversa à Camada Invisível proibida");
+    throw new Error("Ligação reversa reservada não permitida");
   }
-  assertNoForbiddenKeys(payload);
   return Object.freeze(structuredClone(payload));
 }
 

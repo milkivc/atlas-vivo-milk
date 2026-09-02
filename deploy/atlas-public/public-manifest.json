@@ -32,8 +32,7 @@
     "explanatory_landing": false,
     "silence_valid": true,
     "binary_resolution_required": false,
-    "closed_meaning_required": false,
-    "public_reverse_link_to_invisible_layer": false
+    "closed_meaning_required": false
   },
   "territorial_scope": {
     "parishes": 3258,

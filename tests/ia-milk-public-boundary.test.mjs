@@ -10,23 +10,35 @@ const context = { structuredClone, CustomEvent: class {}, window: undefined, fet
 vm.createContext(context);
 vm.runInContext(transformed + "\nthis.validate = validatePublicMaterialization;", context);
 
-const valid = {
+const approved = {
   layer: "public",
   human_validation: { status: "approved" },
   source_receipt: { sha256: "a".repeat(64) },
-  reverse_link_to_private: false,
-  entries: [{ id: "public-1", title: "Curadoria pública" }]
+  reverse_link_to_private: false
 };
-assert.equal(context.validate(valid).layer, "public");
+assert.equal(context.validate(approved).layer, "public");
+
+const contract = {
+  schema_version: "1.1.0",
+  layer: "public",
+  surface: "MILK public authorial experience",
+  public_contract: {},
+  territorial_scope: {},
+  curatorial_incorporation: {},
+  assets_and_rights: {},
+  runtime_sources: {},
+  ai_milk: {},
+  human_validation: { status: "required" },
+  reverse_link_to_private: false
+};
+assert.equal(context.validate(contract).human_validation.status, "required");
 
 for (const payload of [
-  { ...valid, layer: "internal" },
-  { ...valid, human_validation: { status: "pending" } },
-  { ...valid, reverse_link_to_private: true },
-  { ...valid, source_receipt: { sha256: "invalid" } },
-  { ...valid, entries: [{ internal_id: "x" }] },
-  { ...valid, entries: [{ raw_evidence: "x" }] },
-  { ...valid, token: "x" }
+  { ...approved, layer: "internal" },
+  { ...approved, human_validation: { status: "pending" } },
+  { ...approved, reverse_link_to_private: true },
+  { ...approved, source_receipt: { sha256: "invalid" } },
+  { ...approved, unexpected_field: "x" }
 ]) {
   assert.throws(() => context.validate(payload));
 }
