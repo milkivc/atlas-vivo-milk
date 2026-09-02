@@ -87,23 +87,30 @@ jobs:
             echo '::error::Curatorial invariant touched'; exit 22
           fi
 
-      - name: Three Mistral agents review only the exact changed lines
+      - name: Three Mistral agents review exact delta with evidence
         run: |
           set -euo pipefail
           python - <<'PY'
           import json, os, pathlib, urllib.request
           key=os.environ['MISTRAL_API_KEY'].strip()
           diff=pathlib.Path('/tmp/atlas-p0.diff').read_text(encoding='utf-8')
+          app=pathlib.Path('deploy/atlas-public/app.js').read_text(encoding='utf-8')
           roles=[
             ('regression_guard','Bloqueia mudança curatorial, dados, rede, armazenamento ou alteração funcional dos sete motores.'),
-            ('browser_runtime','Analisa apenas lifecycle RAF/Page Visibility e AudioContext; procura corridas, IDs RAF obsoletos, impossibilidade de retomar, loops duplicados e close/recreate inválidos. Não exijas ligar o Cosmos a stopMedia: são lifecycles diferentes.'),
+            ('browser_runtime','Analisa apenas lifecycle RAF/Page Visibility e AudioContext. Procura corridas reais, impossibilidade de retomar, loops duplicados e close/recreate inválidos. Cosmos e stopMedia têm lifecycles diferentes; não exijas que stopMedia pare o Cosmos.'),
             ('accessibility_performance','Confirma redução de trabalho em background sem contrariar o botão manual de movimento nem degradar a experiência.')
           ]
           reviews=[]
+          evidence_rule=(
+            'REGRAS DE EVIDÊNCIA: cada blocker deve citar literalmente uma linha ADICIONADA do diff que o prova. '
+            'Não declares ausente uma guarda que esteja visível no código. Em JavaScript, uma callback RAF executa até ao fim sem outro evento intercalar: '
+            'zerar o ID no início da callback que acabou de disparar e agendar o próximo RAF no fim é um padrão válido quando a função de agendamento impede novo RAF se o ID já for não-zero. '
+            'Não inventes requisitos fora do objectivo autorizado. Se não houver prova concreta numa linha adicionada, não é blocker.'
+          )
           for role,instruction in roles:
               payload={'model':'mistral-medium-latest','temperature':0.0,'response_format':{'type':'json_object'},'messages':[
-                {'role':'system','content':f'És o agente Mistral {role} da MILK. {instruction} Responde JSON estrito com pass(boolean), blockers(array), regressions(array), tests(array).'},
-                {'role':'user','content':'Este é um git diff com contexto ZERO. SOMENTE linhas iniciadas por + ou - (excepto cabeçalhos +++/---) são alterações. Não atribuas ao candidato código que não esteja nessas linhas. O objectivo autorizado é apenas lifecycle do Cosmos RAF e libertação/recriação do AudioContext. Avalia:\n'+diff}
+                {'role':'system','content':f'És o agente Mistral {role} da MILK. {instruction} {evidence_rule} Responde JSON estrito com pass(boolean), blockers(array), regressions(array), tests(array).'},
+                {'role':'user','content':'Avalia o candidato P0. Primeiro o diff exacto; depois o app.js completo para contexto. Só as linhas + e - do diff são alterações.\n\nDIFF:\n'+diff+'\n\nAPP.JS COMPLETO:\n'+app}
               ]}
               req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
               with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
@@ -112,7 +119,8 @@ jobs:
           failed=[]
           for r in reviews:
               print('MISTRAL_P0_REVIEW='+json.dumps(r,ensure_ascii=False))
-              if r.get('pass') is not True or r.get('blockers'): failed.append(r['role'])
+              blockers=r.get('blockers') or []
+              if r.get('pass') is not True or blockers: failed.append(r['role'])
           if failed: raise SystemExit('MISTRAL_P0_REVIEW_BLOCKED='+','.join(failed))
           print('MISTRAL_P0_REVIEWS_OK=3')
           PY
