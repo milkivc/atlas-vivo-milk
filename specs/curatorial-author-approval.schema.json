@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atlas.associacaomilk.pt/schemas/curatorial-author-approval.schema.json",
+  "title": "Atlas Vivo MILK — Explicit Author Approval Gate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "curatorial_slug",
+    "experience_preview_sha256",
+    "author_decision",
+    "approved_for_code",
+    "approval_scope"
+  ],
+  "properties": {
+    "curatorial_slug": {"type": "string", "minLength": 1},
+    "experience_preview_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "author_decision": {"const": "approved"},
+    "approved_for_code": {"const": true},
+    "approval_scope": {
+      "const": "implement_exact_approved_experience_only"
+    },
+    "accepted_improvement_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "author_notes": {"type": "string"}
+  }
+}
