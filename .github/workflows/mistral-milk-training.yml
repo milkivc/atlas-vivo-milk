@@ -99,3 +99,5 @@ jobs:
           if hashlib.sha256(back).hexdigest()!=sha:raise RuntimeError("private_training_receipt_mismatch")
           comment(f"MILK_MISTRAL_TRAINING_VERIFIED run={run_id} agents={len(outputs)} catalogue_entries={len(catalog['entradas'])} bytes={len(data)} sha256={sha} storage=private_ftps human_review_required=yes fine_tuning_claimed=no")
           PY
+
+# orchestration trigger 2026-09-02
