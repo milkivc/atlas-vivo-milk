@@ -1,0 +1,71 @@
+name: MILK PTServidor Atlas staging route probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - work/copernico-recovery-webapp-20260902
+    paths:
+      - '.github/workflows/ptservidor-atlas-staging-probe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      PTSERVIDOR_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
+      PTSERVIDOR_FTP_WEBDAV: ${{ secrets.PTSERVIDOR_FTP_WEBDAV }}
+    steps:
+      - name: Probe dedicated Atlas FTPS route read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ftplib,json,os,ssl
+          candidates=[]
+          raw=os.environ.get('PTSERVIDOR_FTP_WEBDAV','').strip()
+          pw=os.environ.get('PTSERVIDOR_FTPS_PASSWORD','').strip()
+          if pw:
+              for user in ('atlas@associacaomilk.pt','migration@associacaomilk.pt','associ16'):
+                  candidates.append(('PTSERVIDOR_FTPS_PASSWORD',user,pw))
+          try:
+              obj=json.loads(raw)
+              if isinstance(obj,dict):
+                  u=str(obj.get('user') or obj.get('username') or '').strip()
+                  p=str(obj.get('password') or obj.get('pass') or '').strip()
+                  if p:
+                      for user in tuple(x for x in (u,'atlas@associacaomilk.pt','migration@associacaomilk.pt','associ16') if x):
+                          candidates.append(('PTSERVIDOR_FTP_WEBDAV_JSON',user,p))
+          except Exception:
+              if raw and '\n' not in raw and '=' not in raw and not raw.startswith('http'):
+                  for user in ('atlas@associacaomilk.pt','migration@associacaomilk.pt','associ16'):
+                      candidates.append(('PTSERVIDOR_FTP_WEBDAV_RAW',user,raw))
+          seen=set(); results=[]; winner=None
+          for label,user,password in candidates:
+              key=(user,password)
+              if key in seen: continue
+              seen.add(key)
+              ftp=ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=35)
+              try:
+                  ftp.connect('troi.ptservidor.net',21)
+                  ftp.login(user,password); ftp.prot_p()
+                  root=ftp.pwd(); names=[]
+                  try: names=ftp.nlst()[:30]
+                  except Exception: pass
+                  results.append((label,user,'OK',root))
+                  winner=(label,user,root)
+                  ftp.quit(); break
+              except Exception as exc:
+                  results.append((label,user,type(exc).__name__,'-'))
+                  try: ftp.close()
+                  except Exception: pass
+          for label,user,status,root in results:
+              print(f'FTPS_PROBE route={label} user={user} status={status} root={root}')
+          print('SECRET_VALUES_DISCLOSED=0')
+          if not winner: raise SystemExit('PTSERVIDOR_ATLAS_FTPS_CURRENT_SECRETS_REJECTED')
+          label,user,root=winner
+          print(f'PTSERVIDOR_ATLAS_FTPS_READY=YES route={label} user={user} root={root}')
+          PY
