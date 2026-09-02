@@ -1,0 +1,241 @@
+name: MILK WebApp — COPERNICO EU guarded build v4
+
+on:
+  push:
+    branches:
+      - work/copernico-recovery-webapp-20260902
+    paths:
+      - '.github/workflows/copernico-eu-webapp-build-v4.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: milk-copernico-eu-webapp-v4
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      BRANCH: work/copernico-recovery-webapp-20260902
+      ITOWNS_BUNDLE_SHA256: caa9e3c8a981c9328d3fbf9bbeaca84edd39d2fbaf28defccb36c461e45925b4
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Preflight and capture base
+        run: |
+          set -euo pipefail
+          BASE_SHA="$(git rev-parse HEAD)"
+          echo "BASE_SHA=$BASE_SHA" >> "$GITHUB_ENV"
+          for f in recovery/COPERNICO_EU_SOURCE_EXTRACT.md recovery/PUBLIC_TERRITORY_DATA_CONTRACT.md deploy/atlas-public/experience-machine.js deploy/atlas-public/atlas.js deploy/atlas-public/index.html deploy/atlas-public/styles.css deploy/atlas-public/catalogo-curatorial.json; do
+            test -s "$f" || { echo "::error::PREFLIGHT_MISSING:$f"; exit 10; }
+          done
+          grep -Fq "GLOBE: 'globe'" deploy/atlas-public/experience-machine.js
+          grep -Fq "TERRITORIAL_MILKS: 'territorial_milks'" deploy/atlas-public/experience-machine.js
+          cp deploy/atlas-public/experience-machine.js /tmp/machine.baseline
+          cp deploy/atlas-public/catalogo-curatorial.json /tmp/catalogue.baseline
+
+      - name: Vendor pinned iTowns v2.46.0
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/itowns deploy/atlas-public/vendor/itowns
+          curl -fsSL --retry 3 -o /tmp/itowns.zip https://github.com/iTowns/itowns/releases/download/v2.46.0/bundles.zip
+          echo "$ITOWNS_BUNDLE_SHA256  /tmp/itowns.zip" | sha256sum -c -
+          unzip -q /tmp/itowns.zip -d /tmp/itowns
+          bundle="$(find /tmp/itowns -type f -name 'itowns.umd.js' | head -n 1)"
+          test -n "$bundle"
+          cp "$bundle" deploy/atlas-public/vendor/itowns/itowns.umd.js
+          printf '%s\n' \
+            'iTowns v2.46.0' \
+            'Original work: French IGN; maintained by IGN and CIRIL Group.' \
+            'Licence: CeCILL-B v1.0 OR MIT; incorporated dependencies retain original licences.' \
+            'Self-hosted by Atlas Vivo MILK; no public CDN dependency.' \
+            'Release bundle SHA-256: caa9e3c8a981c9328d3fbf9bbeaca84edd39d2fbaf28defccb36c461e45925b4' \
+            > deploy/atlas-public/vendor/itowns/NOTICE.txt
+
+      - name: Install Mistral Vibe Code
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check mistral-vibe
+          vibe --version
+          test -n "$MISTRAL_API_KEY"
+
+      - name: Mistral A — engine
+        run: |
+          set -euo pipefail
+          rm -f deploy/atlas-public/copernico.js
+          set +e
+          vibe --trust --max-turns 16 --output json --prompt "MISSÃO A. Lê recovery/COPERNICO_EU_SOURCE_EXTRACT.md e recovery/PUBLIC_TERRITORY_DATA_CONTRACT.md. Cria SOMENTE deploy/atlas-public/copernico.js. Usa window.itowns do bundle local iTowns v2.46.0. Exporta async function mountCopernico(options) com container, statusElement, reducedMotion=false, copernicusWmsUrl=null. Cria itowns.GlobeView com Coordinates EPSG:4326 e enquadramento Portugal coerente com a fonte. O globo funciona sem WMS. Se WMS existir, aceita apenas URL HTTPS cujo hostname seja sh.dataspace.copernicus.eu, usando WMSSource + ColorLayer. Não inventes identificador de instância, token, segredo, camada ou dados territoriais. Devolve view, territorialDataReady:false e destroy(). Respeita reduced motion. Sem Three.js directo, DAT.Globe, CDN, hifas, Camada Invisível, PII ou dados simulados. Não alteres outro ficheiro. Não faças commit. Evita comentários que enumerem nomes de credenciais." > /tmp/vibe-a.json
+          rc=$?
+          set -e
+          test -s deploy/atlas-public/copernico.js || exit "$rc"
+          node --check deploy/atlas-public/copernico.js
+
+      - name: Mistral B — surface
+        run: |
+          set -euo pipefail
+          set +e
+          vibe --trust --max-turns 14 --output json --prompt "MISSÃO B. Lê recovery/COPERNICO_EU_SOURCE_EXTRACT.md, deploy/atlas-public/copernico.js, index.html e styles.css. Modifica SOMENTE deploy/atlas-public/index.html e deploy/atlas-public/styles.css. Carrega vendor/itowns/itowns.umd.js local antes dos módulos. Cria secção dedicada GLOBE inicialmente hidden, #copernico-view e estado aria-live. O globo é experiência visual, não dashboard/cartão. Mantém estética cósmica/nocturna, responsividade e prefers-reduced-motion. Preserva Livro Cubo, bilhete, textos curatoriais, portais, Nuno e assets. Sem CDN ou dados fictícios. Não faças commit." > /tmp/vibe-b.json
+          rc=$?
+          set -e
+          grep -Fq 'vendor/itowns/itowns.umd.js' deploy/atlas-public/index.html || exit "$rc"
+          grep -Fq 'copernico-view' deploy/atlas-public/index.html
+          grep -Eq 'aria-live|role="status"' deploy/atlas-public/index.html
+
+      - name: Mistral C — canonical state binding
+        run: |
+          set -euo pipefail
+          set +e
+          vibe --trust --max-turns 16 --output json --prompt "MISSÃO C. Lê recovery/COPERNICO_EU_SOURCE_EXTRACT.md, recovery/PUBLIC_TERRITORY_DATA_CONTRACT.md, experience-machine.js, copernico.js, atlas.js e index.html. Modifica SOMENTE deploy/atlas-public/atlas.js. Importa mountCopernico de './copernico.js'. Mantém COSMICOXES -> COSMIC_WORDS -> WORLD_GESTURE -> DISSOLVE. Depois de DISSOLVE mostra COPERNICO, monta o globo e só então envia globe_ready, ficando em GLOBE. NÃO envies territory_ready automaticamente. Adiciona listener atlas:validated-territories-ready; apenas em GLOBE e com detail.validated===true pode enviar territory_ready, ocultar COPERNICO e revelar território. Erro do globo actualiza status acessível e fica fail-closed. Preserva bilhete brincar/convite/tentar_a_sorte, portais, Nuno/contribuição, Livro Cubo e localStorage. Não inventes dados. Não alteres experience-machine.js. Não faças commit." > /tmp/vibe-c.json
+          rc=$?
+          set -e
+          grep -Fq "from './copernico.js'" deploy/atlas-public/atlas.js || exit "$rc"
+          grep -Fq 'atlas:validated-territories-ready' deploy/atlas-public/atlas.js
+          node --check deploy/atlas-public/atlas.js
+
+      - name: Expose complete candidate
+        run: |
+          set -euo pipefail
+          git reset --mixed "$BASE_SHA"
+          test "$(git rev-parse HEAD)" = "$BASE_SHA"
+          git status --porcelain -uall
+
+      - name: Gate 1 — exact boundary
+        run: |
+          set -euo pipefail
+          changed="$(git status --porcelain -uall | awk '{print $2}' | sort -u)"
+          for required in deploy/atlas-public/atlas.js deploy/atlas-public/copernico.js deploy/atlas-public/index.html deploy/atlas-public/styles.css deploy/atlas-public/vendor/itowns/NOTICE.txt deploy/atlas-public/vendor/itowns/itowns.umd.js; do
+            echo "$changed" | grep -Fxq "$required" || { echo "::error::MISSING:$required"; exit 41; }
+          done
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            case "$file" in
+              deploy/atlas-public/atlas.js|deploy/atlas-public/copernico.js|deploy/atlas-public/index.html|deploy/atlas-public/styles.css|deploy/atlas-public/vendor/itowns/NOTICE.txt|deploy/atlas-public/vendor/itowns/itowns.umd.js) ;;
+              *) echo "::error::FORBIDDEN_CHANGE:$file"; exit 42 ;;
+            esac
+          done <<< "$changed"
+          cmp -s deploy/atlas-public/experience-machine.js /tmp/machine.baseline
+          cmp -s deploy/atlas-public/catalogo-curatorial.json /tmp/catalogue.baseline
+          echo 'GATE1=PASS'
+
+      - name: Gate 2 — runtime/source fidelity
+        run: |
+          set -euo pipefail
+          node --check deploy/atlas-public/copernico.js
+          node --check deploy/atlas-public/atlas.js
+          grep -Fq 'GlobeView' deploy/atlas-public/copernico.js
+          grep -Fq 'EPSG:4326' deploy/atlas-public/copernico.js
+          grep -Fq 'territorialDataReady' deploy/atlas-public/copernico.js
+          grep -Fq 'WMSSource' deploy/atlas-public/copernico.js
+          grep -Fq 'ColorLayer' deploy/atlas-public/copernico.js
+          grep -Fq 'sh.dataspace.copernicus.eu' deploy/atlas-public/copernico.js
+          grep -Fq 'vendor/itowns/itowns.umd.js' deploy/atlas-public/index.html
+          echo 'GATE2=PASS'
+
+      - name: Gate 3 — fail-closed state transition
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib,re,sys
+          s=pathlib.Path('deploy/atlas-public/atlas.js').read_text(encoding='utf-8')
+          if "from './copernico.js'" not in s: sys.exit('GATE3_NO_IMPORT')
+          event=s.find('atlas:validated-territories-ready')
+          sends=list(re.finditer(r"experience\.send\(['\"]territory_ready['\"]",s))
+          if event<0 or len(sends)!=1 or sends[0].start()<event: sys.exit('GATE3_TERRITORY_READY_NOT_FAIL_CLOSED')
+          if 'validated' not in s[event:sends[0].start()+220]: sys.exit('GATE3_VALIDATED_FLAG_MISSING')
+          print('GATE3=PASS')
+          PY
+
+      - name: Gate 4 — security/public boundary/accessibility
+        run: |
+          set -euo pipefail
+          grep -Eq 'aria-live|role="status"' deploy/atlas-public/index.html
+          grep -Eq 'prefers-reduced-motion|reducedMotion' deploy/atlas-public/copernico.js deploy/atlas-public/styles.css
+          if grep -REn 'EPSG:4386|EU_INSTANCE_ID|Marvila|Vilarinho|Mina de São Domingos|Azinhaga do Sangue|hifas_ngsild|redeMicelialNGSILD' deploy/atlas-public/{copernico.js,atlas.js,index.html,styles.css}; then echo '::error::HISTORICAL_OR_INVENTED_DATA_LEAK'; exit 72; fi
+          if grep -REn 'https://(cdn\.jsdelivr\.net|unpkg\.com)' deploy/atlas-public/{copernico.js,atlas.js,index.html,styles.css}; then echo '::error::EXTERNAL_CDN'; exit 74; fi
+          if grep -REn 'new THREE\.|DAT\.Globe' deploy/atlas-public/{copernico.js,atlas.js,index.html,styles.css}; then echo '::error::REJECTED_GLOBE_STACK'; exit 75; fi
+          python - <<'PY'
+          import pathlib,re,sys
+          files=['deploy/atlas-public/copernico.js','deploy/atlas-public/atlas.js','deploy/atlas-public/index.html','deploy/atlas-public/styles.css']
+          def strip_js_comments(s):
+              s=re.sub(r'/\*.*?\*/','',s,flags=re.S)
+              s=re.sub(r'(^|\s)//[^\n]*',r'\1',s)
+              return s
+          executable='\n'.join(strip_js_comments(pathlib.Path(f).read_text(encoding='utf-8')) for f in files)
+          patterns=[
+              r'(?i)client_secret\s*[:=]',
+              r'(?i)access_token\s*[:=]',
+              r'(?i)MISTRAL_API_KEY\s*[:=]',
+              r'(?i)PTSERVIDOR_FTPS_PASSWORD\s*[:=]',
+              r'(?i)authorization\s*[:=]\s*["\']bearer\s+[^"\']+',
+              r'(?i)password\s*[:=]\s*["\'][^"\']{6,}["\']'
+          ]
+          hits=[p for p in patterns if re.search(p,executable)]
+          if hits:
+              print('::error::EXECUTABLE_SECRET_PATTERN='+','.join(hits)); sys.exit(73)
+          print('GATE4=PASS')
+          PY
+
+      - name: Prepare exact diff
+        run: |
+          set -euo pipefail
+          git add -N deploy/atlas-public/copernico.js
+          git diff -- deploy/atlas-public/atlas.js deploy/atlas-public/copernico.js deploy/atlas-public/index.html deploy/atlas-public/styles.css > /tmp/copernico.diff
+          test -s /tmp/copernico.diff
+
+      - name: Five-agent Mistral council
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os,pathlib,urllib.request
+          key=os.environ['MISTRAL_API_KEY'].strip()
+          source=pathlib.Path('recovery/COPERNICO_EU_SOURCE_EXTRACT.md').read_text(encoding='utf-8')
+          contract=pathlib.Path('recovery/PUBLIC_TERRITORY_DATA_CONTRACT.md').read_text(encoding='utf-8')
+          machine=pathlib.Path('deploy/atlas-public/experience-machine.js').read_text(encoding='utf-8')
+          diff=pathlib.Path('/tmp/copernico.diff').read_text(encoding='utf-8')
+          candidate='\n\n'.join(pathlib.Path(p).read_text(encoding='utf-8') for p in ['deploy/atlas-public/copernico.js','deploy/atlas-public/atlas.js','deploy/atlas-public/index.html','deploy/atlas-public/styles.css'])
+          roles={
+            'source_fidelity':'Bloqueia globo substituto, dados inventados, DAT.Globe/Three.js directo ou perda da genealogia COPÉRNICO/iTowns.',
+            'itowns_runtime':'Verifica GlobeView, WMS opcional seguro, lifecycle e fail-closed; o globo base não depende de credenciais.',
+            'public_boundary':'Bloqueia Camada Invisível, PII, credenciais, prompts, motores privados e dados não publicados.',
+            'accessibility_performance':'Verifica aria-live, teclado, reduced-motion, responsividade e custo de runtime.',
+            'state_machine_guard':'Confirma DISSOLVE -> GLOBE e proíbe TERRITORIAL_MILKS antes de validated-territories-ready.'
+          }
+          failed=[]
+          for role,rule in roles.items():
+              payload={'model':'mistral-medium-latest','temperature':0.0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':f'És auditor MILK {role}. {rule} Blockers exigem evidência literal. Responde JSON estrito: pass, blockers, evidence, tests.'},{'role':'user','content':'SOURCE\n'+source+'\nCONTRACT\n'+contract+'\nMACHINE\n'+machine+'\nDIFF\n'+diff+'\nCANDIDATE\n'+candidate}]}
+              req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
+              review=json.loads(body['choices'][0]['message']['content'])
+              print('MISTRAL_COPERNICO_COUNCIL='+json.dumps({'role':role,**review},ensure_ascii=False))
+              if review.get('pass') is not True or review.get('blockers'): failed.append(role)
+          if failed: raise SystemExit('MISTRAL_COUNCIL_BLOCKED='+','.join(failed))
+          print('MISTRAL_COPERNICO_COUNCIL_OK=5')
+          PY
+
+      - name: Commit validated COPERNICO increment
+        run: |
+          set -euo pipefail
+          git reset
+          git config user.name 'Associação MILK - Mistral Vibe Code'
+          git config user.email 'milk@associacaomilk.pt'
+          git add deploy/atlas-public/copernico.js deploy/atlas-public/atlas.js deploy/atlas-public/index.html deploy/atlas-public/styles.css deploy/atlas-public/vendor/itowns/NOTICE.txt deploy/atlas-public/vendor/itowns/itowns.umd.js
+          git diff --cached --check
+          git commit -m 'feat(webapp): integrate guarded COPERNICO EU globe'
+          git push origin HEAD:$BRANCH
+          echo "COPERNICO_WEBAPP_COMMIT=$(git rev-parse HEAD)"
+          echo 'COPERNICO_BUILD=VALIDATED'
+          echo 'PUBLICATION=NO'
