@@ -1,0 +1,112 @@
+name: 24 MILK Codestral secondary-key repair
+on:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths: ['.github/workflows/24-codestral-secondary-key-repair.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  repair:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { batch: 2, start: 8, end: 14 }
+          - { batch: 6, start: 36, end: 42 }
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRALAPI_KEY }}
+      START: ${{ matrix.start }}
+      END: ${{ matrix.end }}
+      BATCH: ${{ matrix.batch }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 0
+      - name: Codestral regenerate batch
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python - <<'PY'
+          import json,os,pathlib,re,subprocess,time,urllib.request
+          api='https://api.mistral.ai/v1/chat/completions'; key=os.environ['MISTRAL_API_KEY']; start,end=int(os.environ['START']),int(os.environ['END']); batch=os.environ['BATCH']
+          idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text()); rows=[x for x in idx['entries'] if start<=int(x['ordem'])<=end]
+          matrix=pathlib.Path('curatorial-factory/EXPERIENCE_RESEARCH_MATRIX_20260902.md').read_text(); out=pathlib.Path('generated')/batch; out.mkdir(parents=True,exist_ok=True)
+          system='''És Codestral. Devolve APENAS JavaScript ES. Implementa a experiência específica do blueprint como obra digital interactiva e multissensorial. Nunca card/quiz/formulário/chatbot/modal genérico. Sem fetch/CDN/tracker/storage. Não inventes factos. Teclado/touch/reduced-motion equivalentes. Não recries COPÉRNICO nem a entrada COSMICOXES. É obrigatório exportar exatamente `function mountCuratorialExperience({ root, context = {}, onClose = () => {} })`, definir `function destroy()` dentro e terminar com `return { destroy };`.'''
+          def call(msgs):
+              payload={'model':'codestral-latest','temperature':0.1,'max_tokens':9000,'messages':msgs}; req=urllib.request.Request(api,data=json.dumps(payload,ensure_ascii=False).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=300) as r: return str(json.loads(r.read())['choices'][0]['message']['content']).strip()
+          def clean(t):
+              t=re.sub(r'^```(?:javascript|js)?\s*','',t,flags=re.I); return re.sub(r'\s*```$','',t).strip()
+          def valid(code,path):
+              if not re.search(r'export\s+function\s+mountCuratorialExperience\s*\(',code): return 'mount'
+              if not re.search(r'function\s+destroy\s*\(',code): return 'destroy'
+              if not re.search(r'return\s*\{\s*destroy\s*\}',code): return 'return'
+              if any(x in code for x in ('fetch(','localStorage','sessionStorage')): return 'network/storage'
+              path.write_text(code+'\n'); p=subprocess.run(['node','--check',str(path)],capture_output=True,text=True); return None if p.returncode==0 else (p.stderr or p.stdout)[-1500:]
+          fails=[]
+          for row in rows:
+              bp=json.loads((pathlib.Path('curatorial-factory/sensory-blueprints')/row['file']).read_text()); user=json.dumps({'id':row['id'],'blueprint':bp,'research_lenses':matrix},ensure_ascii=False); previous=''; err='unknown'; path=out/(row['id']+'.js')
+              for attempt in range(7):
+                  msgs=[{'role':'system','content':system},{'role':'user','content':user}]
+                  if attempt: msgs += [{'role':'assistant','content':previous[:45000]},{'role':'user','content':'Corrige o módulo completo. Falha='+err+'. Só JavaScript completo.'}]
+                  try:
+                      previous=clean(call(msgs)); err=valid(previous,path)
+                      if not err: print('CODESTRAL_PASS='+row['id']); break
+                  except Exception as e: err=type(e).__name__+':'+str(e)
+                  time.sleep(min(20,2**attempt))
+              else: fails.append(row['id']+':'+err)
+          if fails: raise SystemExit('FAIL='+','.join(fails))
+          assert {p.name for p in out.glob('*.js')}=={x['id']+'.js' for x in rows}
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: codestral-secondary-${{ matrix.batch }}
+          path: generated/${{ matrix.batch }}/*.js
+          retention-days: 3
+  integrate:
+    needs: repair
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: codestral-direct-batch-*
+          path: generated/all
+          merge-multiple: true
+          run-id: 33631822788
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: codestral-secondary-*
+          path: generated/all
+          merge-multiple: true
+      - name: Install exact 49 runtimes
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,pathlib,shutil,subprocess
+          idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text()); src=pathlib.Path('generated/all'); dst=pathlib.Path('deploy/atlas-public/experiences'); dst.mkdir(parents=True,exist_ok=True)
+          exp={x['id']+'.js' for x in idx['entries']}; act={p.name for p in src.glob('*.js')}; assert act==exp,(len(act),sorted(exp-act),sorted(act-exp))
+          for p in src.glob('*.js'): shutil.copy2(p,dst/p.name); subprocess.run(['node','--check',str(dst/p.name)],check=True)
+          lines=['export const CURATORIAL_EXPERIENCE_LOADERS = {']+[f"  {json.dumps(x['id'])}: () => import('./{x['id']}.js')," for x in idx['entries']]+['};','export async function loadCuratorialExperience(id){const f=CURATORIAL_EXPERIENCE_LOADERS[id];if(!f)throw new Error(`CURATORIAL_RUNTIME_NOT_FOUND:${id}`);return f();}']
+          (dst/'registry.js').write_text('\n'.join(lines)+'\n')
+          PY
+          node tests/ia-milk-public-boundary.test.mjs
+          git diff --check
+          test "$(find deploy/atlas-public/experiences -maxdepth 1 -name '*.js' ! -name 'registry.js' | wc -l)" -eq 49
+      - name: Commit 49 runtimes
+        run: |
+          git config user.name 'Atlas Mistral Code'
+          git config user.email 'milk@associacaomilk.pt'
+          git add deploy/atlas-public/experiences
+          git commit -m 'feat(experiences): materialize exact 49 Mistral Code runtimes'
+          git pull --rebase origin work/copernico-recovery-webapp-20260902
+          git push origin HEAD:work/copernico-recovery-webapp-20260902
