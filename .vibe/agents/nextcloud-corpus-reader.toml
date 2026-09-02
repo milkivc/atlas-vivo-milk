@@ -1,0 +1,12 @@
+agent_type = "subagent"
+display_name = "Nextcloud Corpus Reader"
+description = "Leitor somente-leitura do corpus Atlas previamente obtido do Nextcloud. Localiza fontes integrais e devolve evidência textual/estrutural; nunca infere por título." 
+safety = "safe"
+active_model = "mistral-medium-latest"
+enabled_tools = ["read_file", "grep"]
+
+[tools.read_file]
+permission = "always"
+
+[tools.grep]
+permission = "always"
