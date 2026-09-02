@@ -1,0 +1,99 @@
+name: 22 Atlas PTServidor webroot read-only inventory
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths:
+      - '.github/workflows/22-atlas-webroot-readonly-inventory.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      ATLAS_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_ATLAS_FTPS_PASSWORD }}
+    steps:
+      - name: Inventory Atlas webroot without writes
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$ATLAS_FTPS_PASSWORD"
+          python - <<'PY'
+          import ftplib, os, ssl, json, hashlib, io, posixpath, datetime
+
+          ftp=ftplib.FTP_TLS(context=ssl.create_default_context(), timeout=90)
+          ftp.connect('troi.ptservidor.net',21)
+          ftp.login('atlas@associacaomilk.pt', os.environ['ATLAS_FTPS_PASSWORD'])
+          ftp.prot_p()
+
+          files=[]; dirs=[]; flags=[]; seen=set()
+          sensitive_tokens=('env','secret','password','passwd','credential','private','key','token','.git')
+
+          def walk(path='/', depth=0):
+              if depth>8 or path in seen: return
+              seen.add(path)
+              try:
+                  entries=list(ftp.mlsd(path, facts=['type','size','modify']))
+              except Exception:
+                  return
+              for name,facts in entries:
+                  if name in ('.','..'): continue
+                  full=posixpath.join(path.rstrip('/'),name) or '/'
+                  typ=facts.get('type','')
+                  if typ=='dir':
+                      dirs.append(full)
+                      if any(t in name.lower() for t in sensitive_tokens): flags.append({'path':full,'kind':'sensitive_name'})
+                      walk(full,depth+1)
+                  elif typ=='file':
+                      size=int(facts.get('size','0') or 0)
+                      rec={'path':full,'size':size,'modify':facts.get('modify')}
+                      low=name.lower()
+                      if any(t in low for t in sensitive_tokens): flags.append({'path':full,'kind':'sensitive_name'})
+                      # Hash public/runtime-sized assets only; never persist contents.
+                      if size <= 20_000_000:
+                          h=hashlib.sha256()
+                          try:
+                              ftp.retrbinary('RETR '+full,h.update,blocksize=262144)
+                              rec['sha256']=h.hexdigest()
+                          except Exception as exc:
+                              rec['hash_error']=type(exc).__name__
+                      files.append(rec)
+                      if len(files)>10000:
+                          raise RuntimeError('WEBROOT_ENTRY_LIMIT_EXCEEDED')
+
+          walk('/')
+          report={
+            'generated_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            'account':'atlas@associacaomilk.pt',
+            'server':'troi.ptservidor.net',
+            'pwd':ftp.pwd(),
+            'read_only':True,
+            'writes_performed':0,
+            'directory_count':len(dirs),
+            'file_count':len(files),
+            'total_bytes':sum(x['size'] for x in files),
+            'sensitive_name_flags':flags,
+            'directories':sorted(dirs),
+            'files':sorted(files,key=lambda x:x['path'])
+          }
+          with open('atlas-webroot-inventory.json','w',encoding='utf-8') as f:
+              json.dump(report,f,ensure_ascii=False,indent=2)
+          print('ATLAS_WEBROOT_INVENTORY=PASS')
+          print('ATLAS_WEBROOT_FILES='+str(report['file_count']))
+          print('ATLAS_WEBROOT_DIRS='+str(report['directory_count']))
+          print('ATLAS_WEBROOT_BYTES='+str(report['total_bytes']))
+          print('ATLAS_WEBROOT_SENSITIVE_NAME_FLAGS='+str(len(flags)))
+          ftp.quit()
+          PY
+
+      - name: Upload sanitized inventory receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: atlas-webroot-readonly-inventory
+          path: atlas-webroot-inventory.json
+          if-no-files-found: error
+          retention-days: 7
