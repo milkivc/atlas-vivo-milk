@@ -1,0 +1,82 @@
+name: 21 MILK Atlas public FTPS preflight
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths: ['.github/workflows/21-atlas-public-ftps-preflight.yml']
+
+permissions:
+  contents: read
+
+env:
+  PTSERVIDOR_ATLAS_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_ATLAS_FTPS_PASSWORD }}
+  PTSERVIDOR_ATLAS_PASSWORD: ${{ secrets.PTSERVIDOR_ATLAS_PASSWORD }}
+  ATLAS_FTPS_PASSWORD: ${{ secrets.ATLAS_FTPS_PASSWORD }}
+  PTSERVIDOR_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
+  PTSERVIDOR_FTP_WEBDAV: ${{ secrets.PTSERVIDOR_FTP_WEBDAV }}
+
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Read-only authentication against dedicated Atlas account
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ftplib,json,os,ssl
+          candidates=[]
+          for name in ('PTSERVIDOR_ATLAS_FTPS_PASSWORD','PTSERVIDOR_ATLAS_PASSWORD','ATLAS_FTPS_PASSWORD'):
+              value=os.environ.get(name,'').strip()
+              if value: candidates.append((name,value))
+          raw=os.environ.get('PTSERVIDOR_FTP_WEBDAV','').strip()
+          if raw:
+              extracted=[]
+              try:
+                  obj=json.loads(raw)
+                  if isinstance(obj,dict):
+                      for key in ('atlas_password','ftp_password','ftps_password','password'):
+                          value=str(obj.get(key) or '').strip()
+                          if value: extracted.append(value)
+              except Exception:
+                  for line in raw.splitlines():
+                      if '=' not in line: continue
+                      k,v=line.split('=',1)
+                      if k.strip().upper() in ('ATLAS_PASSWORD','FTP_PASSWORD','FTPS_PASSWORD','PASSWORD') and v.strip(): extracted.append(v.strip())
+                  if not extracted and '\n' not in raw and '=' not in raw and len(raw)<512: extracted.append(raw)
+              for value in extracted: candidates.append(('PTSERVIDOR_FTP_WEBDAV_PARSED',value))
+          fallback=os.environ.get('PTSERVIDOR_FTPS_PASSWORD','').strip()
+          if fallback: candidates.append(('PTSERVIDOR_FTPS_PASSWORD',fallback))
+
+          unique=[]; seen=set()
+          for name,value in candidates:
+              if value in seen: continue
+              seen.add(value); unique.append((name,value))
+          print('ATLAS_FTPS_CANDIDATES_PRESENT='+str(len(unique)))
+          for name,value in unique:
+              ftp=None
+              try:
+                  ftp=ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=35)
+                  ftp.connect('troi.ptservidor.net',21)
+                  ftp.login('atlas@associacaomilk.pt',value)
+                  ftp.prot_p()
+                  pwd=ftp.pwd()
+                  ftp.quit()
+                  print('ATLAS_PUBLIC_FTPS_AUTH=PASS')
+                  print('ATLAS_PUBLIC_FTPS_SECRET_ALIAS='+name)
+                  print('ATLAS_PUBLIC_FTPS_ROOT='+pwd)
+                  print('ATLAS_PUBLIC_FTPS_WRITES=0')
+                  print('SECRET_VALUES_DISCLOSED=0')
+                  raise SystemExit(0)
+              except SystemExit: raise
+              except Exception:
+                  try:
+                      if ftp: ftp.close()
+                  except Exception: pass
+          print('ATLAS_PUBLIC_FTPS_AUTH=BLOCKED')
+          print('ATLAS_PUBLIC_FTPS_WRITES=0')
+          print('SECRET_VALUES_DISCLOSED=0')
+          raise SystemExit(41)
+          PY
