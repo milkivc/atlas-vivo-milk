@@ -1,0 +1,399 @@
+{
+  "id": "arquitetura-sete-dinamicas",
+  "canonical_name": "Arquitectura Digital das 7 Dinâmicas do Livro Cubo",
+  "source_evidence": {
+    "primary": [
+      "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md",
+      "CUBO_02_MANUAL_INVERTIDO_MELHORADO.md"
+    ],
+    "secondary": [
+      "Curadoria Cultural e Existencialismo Profundo.pdf",
+      "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf"
+    ],
+    "notes": "Dinâmicas recuperadas do Manual Invertido e texto autoral. O Livro Cubo é núcleo autoral com 6 faces + vazio central. As 7 dinâmicas são: Inventário do Meu Mundo, Catástrofe Produtiva, Ponto de Kusama, Corpo que Percebe, Escutar o Silêncio, Rizoma Interior, Cubo Interior."
+  },
+  "authorial_invariants": [
+    "O Livro Cubo não é objeto estático: é lugar, jogo, metodologia de encontro e arquitectura sensorial.",
+    "6 faces + vazio central (o vazio preserva o que não deve ser fechado).",
+    "Faces: a porta, a jaula, o chão, o céu, o espelho, o buraco.",
+    "Princípios: o erro é entrada; o riso é método; o silêncio é matéria; a pergunta abre; o ganhador não vence o outro, chega a si.",
+    "SOMOSTODOSPOSSIVEIS: baralho + espaço + corpo + voz; anti-regras; jogo termina quando todos querem continuar.",
+    "As 7 dinâmicas são operadas, não decorativas.",
+    "A experiência digital deve preservar a essência física e a mediação humana, não substituí-la."
+  ],
+  "perceptual_intent": "Convidar a pessoa a atravessar as 7 dinâmicas do Livro Cubo como um percurso vivo, onde cada face e dinâmica se revela não como conteúdo, mas como transformação sensorial e corporal. A experiência deve sentir-se como um ritual de autodescoberta, onde o vazio central é tão presente quanto as faces, e onde o acaso, o erro e o silêncio são matérias de trabalho. A pessoa deve sair com a sensação de ter tocado algo que não pode ser fechado em palavras ou interfaces.",
+  "threshold": {
+    "description": "A pessoa entra num espaço digital que parece uma folha em branco, com uma única marca: um traço fino e irregular, como se fosse desenhado à mão. O traço pulsa levemente, como uma respiração. O fundo não é branco, mas uma textura de papel envelhecido, com manchas de luz que se movem como se fossem projetadas por uma janela aberta. Não há instruções, apenas o traço e o som de um lápis a riscar papel (evocado, não literal).",
+    "sensory_trigger": "O traço começa a mover-se lentamente, como se fosse puxado por uma mão invisível, e o som do lápis intensifica-se. A pessoa percebe que o seu cursor (ou dedo, em touch) afeta a direção do traço: aproximar-se faz o traço curvar-se para si; afastar-se faz o traço recuar."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": "LIMIAR",
+      "description": "O traço move-se sozinho, como se tivesse vida própria. O som do lápis é o único áudio presente, misturado com um murmúrio distante (evocação de vozes ou vento). A textura do papel ganha profundidade, como se a folha fosse um portal."
+    },
+    {
+      "stage": "CHAMADA",
+      "description": "O traço para e forma a palavra 'ENTRA' em letras trémulas, que se desmancham logo depois. No canto inferior esquerdo, aparece uma sombra que lembra a silhueta de uma porta entreaberta (face 1: a porta)."
+    },
+    {
+      "stage": "PRIMEIRO GESTO",
+      "description": "A pessoa é convidada a tocar a sombra da porta. Ao fazê-lo, a porta abre-se lentamente, revelando um espaço escuro com um ponto de luz no centro. O som do lápis transforma-se num zumbido grave, como se a porta fosse um instrumento."
+    },
+    {
+      "stage": "RESPOSTA VIVA",
+      "description": "O ponto de luz no centro do espaço escuro começa a pulsar no ritmo da respiração da pessoa (detetada opcionalmente por microfone ou, em alternativa, por um botão de 'respirar' visível). O zumbido grave sincroniza-se com a pulsação. Se a pessoa não interagir, a luz e o som continuam, mas de forma mais subtil."
+    },
+    {
+      "stage": "DESVIO",
+      "description": "De repente, a porta fecha-se e o traço original volta a aparecer, mas agora forma a palavra 'JAULA' (face 2). O som do lápis é substituído por um rangido metálico. A textura do papel ganha grades finas, como se a folha fosse uma jaula. A pessoa percebe que o seu movimento está agora confinado a um círculo invisível no centro do ecrã."
+    },
+    {
+      "stage": "APROFUNDAMENTO SENSORIAL",
+      "description": "Dentro da jaula, a pessoa pode arrastar o cursor para 'esfolar o joelho' (face 3: o chão). Ao fazê-lo, o rangido metálico transforma-se num som de atrito, como se algo fosse arrastado no chão. A textura do papel ganha uma mancha de terra, e o traço do lápis agora parece riscar a terra em vez do papel. O som do atrito mistura-se com o murmúrio inicial, criando uma paisagem sonora de memória."
+    },
+    {
+      "stage": "ESCOLHA / ACASO / SILÊNCIO",
+      "description": "A jaula desaparece e a folha volta a ser visível, mas agora com uma mancha de luz no canto superior direito (face 4: o céu). A pessoa pode escolher: 1) Olhar para a mancha de luz (que revela uma paisagem aérea, como se vista de cima), 2) Fechar os olhos (evocado por um botão ou gesto de 'piscar'), o que faz a mancha de luz expandir-se até cobrir todo o ecrã, ou 3) Ficar em silêncio por 10 segundos, o que faz a mancha de luz transformar-se num espelho (face 5)."
+    },
+    {
+      "stage": "APARIÇÃO",
+      "description": "Se a pessoa escolher o espelho, vê o seu reflexo distorcido, como se fosse uma pintura a óleo. O reflexo começa a mover-se independentemente, formando gestos que a pessoa não fez. O som do lápis volta, mas agora parece vir de dentro do espelho. Se a pessoa tocar o espelho, este quebra-se, revelando um buraco negro (face 6: o buraco)."
+    },
+    {
+      "stage": "DEVOLUÇÃO",
+      "description": "O buraco negro absorve todo o ecrã, exceto um pequeno ponto de luz no centro. Este ponto é a 'semente' do vazio central do Livro Cubo. A pessoa recebe uma frase gerada a partir das suas interações (ex: 'O teu joelho esfola o chão que não existe'). A frase aparece escrita à mão, como se fosse riscada pelo traço do lápis, e pode ser guardada como rasto."
+    },
+    {
+      "stage": "RASTO / LATÊNCIA",
+      "description": "A frase guardada torna-se uma 'partícula' no COSMICOXES, visível em futuras sessões como um ponto de luz que pulsa com a frase. Outras pessoas podem encontrar esta partícula e interagir com ela, mas a frase original só é revelada se a pessoa original autorizar (através de um gesto de 'partilhar' opcional). O vazio central do Livro Cubo permanece como um espaço em branco no centro do ecrã, acessível a qualquer momento."
+    }
+  ],
+  "participant_verbs": [
+    "tocar",
+    "arrastar",
+    "respirar",
+    "esfolar",
+    "olhar",
+    "piscar",
+    "silenciar"
+  ],
+  "system_responses": {
+    "visual": [
+      "Traço do lápis move-se e forma palavras que se desmancham.",
+      "Textura do papel ganha profundidade, grades ou manchas de terra.",
+      "Porta, jaula, chão, céu, espelho e buraco aparecem como sombras ou distorções.",
+      "Reflexo no espelho move-se independentemente.",
+      "Buraco negro absorve o ecrã, deixando apenas um ponto de luz.",
+      "Frase final aparece escrita à mão, como riscada por lápis."
+    ],
+    "auditory": [
+      "Som do lápis a riscar papel (evocado).",
+      "Zumbido grave sincronizado com a pulsação da luz.",
+      "Rangido metálico (jaula).",
+      "Som de atrito (chão).",
+      "Murmúrio distante (evocação de vozes ou vento).",
+      "Silêncio repentino (escolha do participante)."
+    ],
+    "haptic": [
+      "Vibração subtil no dispositivo (opcional) quando o traço é tocado ou a porta é aberta.",
+      "Feedback de arrasto quando o cursor é confinado à jaula."
+    ],
+    "kinesthetic": [
+      "Movimento do cursor afeta a direção do traço.",
+      "Gesto de 'respirar' (botão ou microfone) afeta a pulsação da luz.",
+      "Gesto de 'piscar' (botão ou touch) expande a mancha de luz."
+    ],
+    "proprioceptive": [
+      "Instrução para 'esfolar o joelho' (gesto de arrastar o cursor para baixo).",
+      "Instrução para fechar os olhos (evocado)."
+    ],
+    "temporal_interoceptive": [
+      "Pulsação da luz sincronizada com a respiração (ou ritmo manual).",
+      "Espera de 10 segundos para ativação do espelho.",
+      "Ritmo do som do lápis acelera ou abrandar conforme a velocidade do cursor."
+    ],
+    "spatial": [
+      "Confinamento do cursor a um círculo invisível (jaula).",
+      "Expansão da mancha de luz para cobrir todo o ecrã (céu)."
+    ],
+    "olfactory_evocation": [
+      "Evocação de cheiro a papel velho (através de descrição textual opcional: 'Sentes o cheiro a papel e tinta?').",
+      "Evocação de cheiro a terra molhada (quando o traço risca a terra)."
+    ],
+    "gustatory_evocation": [
+      "Evocação de sabor a tinta (através de descrição textual opcional: 'A tinta tem um sabor metálico?')."
+    ],
+    "social_presence": [
+      "Frase final pode ser partilhada e encontrada por outras pessoas como partícula no COSMICOXES.",
+      "Reflexo no espelho move-se como se fosse uma outra pessoa."
+    ]
+  },
+  "sensory_signature_id": "LIVRO_CUBO_7D_VIVO_001",
+  "sensory_channels": {
+    "visual": {
+      "primary": [
+        "traço vivo",
+        "textura de papel",
+        "sombras das faces",
+        "reflexo distorcido",
+        "buraco negro",
+        "frase escrita à mão"
+      ],
+      "secondary": [
+        "pulsação de luz",
+        "manchas de terra",
+        "grades metálicas"
+      ]
+    },
+    "auditory": {
+      "primary": [
+        "som do lápis",
+        "zumbido grave",
+        "rangido metálico",
+        "som de atrito",
+        "murmúrio"
+      ],
+      "secondary": [
+        "silêncio"
+      ]
+    },
+    "haptic": {
+      "primary": [
+        "vibração subtil"
+      ],
+      "secondary": [
+        "feedback de arrasto"
+      ]
+    },
+    "kinesthetic": {
+      "primary": [
+        "movimento do cursor afeta traço",
+        "gesto de respirar",
+        "gesto de piscar"
+      ],
+      "secondary": []
+    },
+    "proprioceptive": {
+      "primary": [
+        "instrução para esfolar o joelho",
+        "instrução para fechar os olhos"
+      ],
+      "secondary": []
+    },
+    "temporal_interoceptive": {
+      "primary": [
+        "pulsação sincronizada",
+        "espera de 10 segundos",
+        "ritmo do som do lápis"
+      ],
+      "secondary": []
+    },
+    "spatial": {
+      "primary": [
+        "confinamento do cursor",
+        "expansão da mancha de luz"
+      ],
+      "secondary": []
+    },
+    "olfactory_evocation": {
+      "primary": [
+        "cheiro a papel velho",
+        "cheiro a terra molhada"
+      ],
+      "secondary": []
+    },
+    "gustatory_evocation": {
+      "primary": [
+        "sabor a tinta"
+      ],
+      "secondary": []
+    },
+    "social_presence": {
+      "primary": [
+        "partícula no COSMICOXES",
+        "reflexo independentemente"
+      ],
+      "secondary": []
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": {
+      "from": "kinesthetic (movimento do cursor)",
+      "to": [
+        "visual (direção do traço)",
+        "auditory (intensidade do som do lápis)"
+      ],
+      "description": "O movimento do cursor traduz-se na direção do traço e na intensidade do som do lápis, criando uma relação direta entre gesto e resposta sensorial."
+    },
+    "secondary": {
+      "from": "proprioceptive (respiração)",
+      "to": [
+        "visual (pulsação da luz)",
+        "auditory (zumbido grave)"
+      ],
+      "description": "A respiração (detetada ou evocada) traduz-se na pulsação da luz e no zumbido grave, ligando o corpo à paisagem sonora e visual."
+    },
+    "tertiary": {
+      "from": "visual (reflexo no espelho)",
+      "to": [
+        "kinesthetic (movimento independente do reflexo)",
+        "auditory (som do lápis vindo do espelho)"
+      ],
+      "description": "O reflexo no espelho move-se independentemente e emite som, traduzindo a imagem em ação e som, como se o espelho fosse um portal para outra dimensão."
+    }
+  },
+  "silence_or_absence": {
+    "mechanism": [
+      "O silêncio da pessoa por 10 segundos ativa o espelho (face 5).",
+      "O buraco negro (face 6) absorve todo o som, deixando apenas o ponto de luz central.",
+      "A ausência de interação faz com que o traço e os sons se tornem mais subtis, mas nunca desapareçam completamente."
+    ],
+    "purpose": "O silêncio é uma matéria ativa: não é vazio, mas um convite para a pessoa perceber o que está ausente e o que pode emergir. A ausência de som no buraco negro realça a presença do ponto de luz como 'semente' do vazio central."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": [
+      "O traço do lápis forma palavras que se desmancham antes de serem lidas por completo.",
+      "O reflexo no espelho move-se independentemente, criando a surpresa de uma presença não controlada.",
+      "A frase final é gerada a partir das interações da pessoa, mas nunca é previsível (ex: combinação de gestos, tempo gasto em cada face, escolhas feitas).",
+      "O buraco negro pode 'devolver' a pessoa ao início ou a uma face aleatória se esta não interagir por muito tempo."
+    ],
+    "purpose": "Criar momentos de desorientação e maravilha, onde a pessoa percebe que a experiência não é linear nem totalmente controlável. A indeterminação reforça a ideia de que o Livro Cubo é um organismo vivo."
+  },
+  "session_variation": [
+    {
+      "type": "acaso_controlado",
+      "description": "A frase final é gerada a partir de uma combinação aleatória de fragmentos baseados nas interações da pessoa (ex: 'O teu joelho esfola o chão que não existe' vs 'A tua respiração abre a porta que não tem fecho')."
+    },
+    {
+      "type": "ordem_mutável",
+      "description": "A ordem das faces (porta, jaula, chão, céu, espelho, buraco) pode variar entre sessões, mas sempre começando pela porta e terminando no buraco/vazio central."
+    },
+    {
+      "type": "resposta_a_ritmo",
+      "description": "A velocidade do traço e a intensidade dos sons adaptam-se ao ritmo do cursor da pessoa. Se a pessoa for rápida, o traço move-se mais depressa e o som do lápis torna-se mais agudo."
+    },
+    {
+      "type": "resposta_a_posição",
+      "description": "A posição do cursor afeta a distorção do reflexo no espelho. Se a pessoa se aproximar do canto do ecrã, o reflexo distorce-se mais."
+    },
+    {
+      "type": "temporalidade_real",
+      "description": "A textura do papel e a intensidade da luz podem variar conforme a hora do dia (mais escura à noite, mais clara de dia), mas sem rastreio de localização."
+    }
+  ],
+  "territorial_binding": {
+    "relation": "indireta",
+    "description": "A experiência não está ligada a um território físico específico, mas evoca a ideia de lugar através das faces do Livro Cubo (ex: o chão como território do joelho esfolado, o céu como vista aérea de um lugar imaginado). A frase final pode incluir referências a lugares genéricos (ex: 'a rua onde o vento dobra a esquina') se a pessoa interagir com a face do céu.",
+    "notes": "A territorialidade aqui é simbólica e interior, não geolocalizada. Se Eduardo quiser ligar a uma freguesia específica, será necessário ajustar."
+  },
+  "trace_and_return": {
+    "mechanism": {
+      "trace": "A frase final gerada pela pessoa torna-se uma partícula no COSMICOXES, visível como um ponto de luz que pulsa com a frase. Outras pessoas podem interagir com esta partícula, mas a frase original só é revelada se a pessoa original autorizar.",
+      "return": "A pessoa recebe a frase escrita à mão, como se fosse um rasto físico. Pode guardá-la ou partilhá-la."
+    },
+    "latency": "A partícula no COSMICOXES permanece ativa por tempo indeterminado, podendo ser redescoberta em sessões futuras. O vazio central do Livro Cubo permanece como um espaço em branco no centro do ecrã, acessível a qualquer momento."
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "reduced_motion": "O traço move-se de forma linear e previsível, sem pulsação. As sombras das faces aparecem estáticas, com descrições textuais opcionais (ex: 'Sombra de uma porta entreaberta').",
+      "high_contrast": "O traço e as sombras são apresentados em preto sobre fundo branco, com contornos grossos.",
+      "color_blind": "As manchas de luz e terra são substituídas por texturas táteis (ex: linhas em relevo para a terra)."
+    },
+    "auditory": {
+      "no_audio": "Todos os sons são substituídos por vibrações (opcionais) e descrições textuais (ex: 'O som do lápis a riscar papel').",
+      "subtitles": "As descrições dos sons aparecem em tempo real no ecrã (ex: 'Zumbido grave sincronizado com a luz')."
+    },
+    "haptic": {
+      "no_vibration": "A vibração é substituída por um pulso visual (ex: círculo a expandir-se no ponto de toque)."
+    },
+    "kinesthetic": {
+      "no_mouse_touch": "Todas as interações podem ser feitas com teclado: setas para mover o traço, barra de espaço para 'respirar', tecla 'E' para 'piscar', tecla 'S' para silenciar.",
+      "one_handed": "As interações são projetadas para serem feitas com uma só mão (ex: tecla única para todas as ações)."
+    },
+    "proprioceptive": {
+      "no_body_movement": "As instruções para 'esfolar o joelho' ou 'fechar os olhos' são substituídas por botões visuais (ex: 'Simular esfolar o joelho')."
+    },
+    "temporal_interoceptive": {
+      "no_waiting": "A espera de 10 segundos para ativação do espelho é substituída por um botão 'Ativar espelho'."
+    },
+    "cognitive": {
+      "simplified_language": "As frases finais são geradas com linguagem simples e direta, sem metáforas complexas.",
+      "step_by_step": "A experiência pode ser pausada a qualquer momento, com um botão 'Continuar' para retomar."
+    }
+  },
+  "optional_permissions": {
+    "microphone": {
+      "purpose": "Detetar a respiração da pessoa para sincronizar a pulsação da luz e o zumbido grave.",
+      "fallback": "Botão 'Respirar' visível no ecrã, que a pessoa pode pressionar para simular a respiração."
+    },
+    "camera": {
+      "purpose": "Não aplicável nesta experiência.",
+      "fallback": "N/A"
+    },
+    "device_motion": {
+      "purpose": "Detetar a inclinação do dispositivo para afetar a distorção do reflexo no espelho.",
+      "fallback": "O reflexo distorce-se com base na posição do cursor."
+    },
+    "geolocation": {
+      "purpose": "Não aplicável nesta experiência.",
+      "fallback": "N/A"
+    }
+  },
+  "overstimulation_risk": {
+    "visual": {
+      "risk": "Pulsação rápida da luz e movimento constante do traço podem causar desconforto em pessoas com sensibilidade visual.",
+      "mitigation": "Opção de 'reduced motion' desativa a pulsação e torna o movimento do traço linear. A intensidade da luz pode ser ajustada manualmente."
+    },
+    "auditory": {
+      "risk": "Zumbido grave e rangido metálico podem ser incómodos para pessoas com sensibilidade auditiva.",
+      "mitigation": "Volume ajustável e opção para desativar sons específicos. Descrições textuais substituem os sons se necessário."
+    },
+    "haptic": {
+      "risk": "Vibração contínua pode ser incómoda.",
+      "mitigation": "Vibração é opcional e pode ser desativada. Substituída por pulso visual se desativada."
+    },
+    "cognitive": {
+      "risk": "A indeterminação e a não linearidade podem causar ansiedade em pessoas que preferem estruturas previsíveis.",
+      "mitigation": "Opção para ativação de 'modo guiado', que fornece instruções passo a passo e desativa a indeterminação."
+    }
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "A experiência é estruturada em torno das 6 faces do Livro Cubo + vazio central, uma assinatura autoral única.",
+      "O traço do lápis como elemento vivo e interativo, que forma palavras e se move conforme o gesto da pessoa.",
+      "A tradução cruzada entre respiração (proprioceptiva) e pulsação da luz (visual) + zumbido grave (auditivo).",
+      "O reflexo no espelho que se move independentemente, criando uma presença social não humana.",
+      "A frase final gerada a partir das interações, que se torna uma partícula no COSMICOXES.",
+      "O vazio central como espaço permanente e inacabado, acessível a qualquer momento.",
+      "A ausência de interface tradicional: não há botões, menus ou instruções explícitas, apenas convites sensoriais."
+    ],
+    "comparison": "Esta experiência não pode ser confundida com outras porque: 1) É a única baseada nas 7 dinâmicas do Livro Cubo; 2) Usa o traço do lápis como elemento central de interação; 3) Integra as 6 faces do Cubo como fases de um percurso; 4) A devolução é uma frase poética gerada a partir das interações, que se torna parte do COSMICOXES."
+  },
+  "questions_for_eduardo": [
+    "A experiência deve incluir uma ligação explícita a uma freguesia ou território físico, ou manter-se simbólica e interior?",
+    "A frase final deve ser sempre gerada em português, ou pode incluir termos em outras línguas (ex: topónimos)?",
+    "O vazio central deve ser acessível apenas no final da experiência, ou pode ser acessível a qualquer momento (ex: através de um gesto específico)?",
+    "A partícula no COSMICOXES deve ser visível apenas para a pessoa que a criou, ou pode ser descoberta por outras pessoas?",
+    "Deve haver um limite de tempo para a experiência, ou pode ser explorada indefinidamente?"
+  ],
+  "improvement_proposals": [
+    {
+      "type": "territorial_binding",
+      "description": "Adicionar uma camada opcional onde as faces do Livro Cubo estejam ligadas a lugares reais (ex: a porta abre para uma rua específica, o chão é uma praça, o céu é uma vista aérea de Lisboa). Isto requer validação autoral para não quebrar a abstração do Cubo."
+    },
+    {
+      "type": "social_presence",
+      "description": "Permitir que outras pessoas interajam com as partículas no COSMICOXES de forma mais ativa (ex: adicionar uma palavra ou gesto à partícula de outra pessoa), desde que com consentimento explícito."
+    },
+    {
+      "type": "accessibility",
+      "description": "Desenvolver uma versão tátil da experiência para dispositivos com ecrã braille, onde o traço e as faces do Cubo sejam traduzidos em padrões táteis."
+    },
+    {
+      "type": "cross_sensory_translation",
+      "description": "Explorar a tradução do som do lápis para vibração em dispositivos hápticos, criando uma experiência mais imersiva para quem não pode ou não quer usar áudio."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

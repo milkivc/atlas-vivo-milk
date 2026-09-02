@@ -1,0 +1,368 @@
+{
+  "id": "palavra-intrusa",
+  "canonical_name": "Palavra Intrusa",
+  "source_evidence": {
+    "primary": [
+      {
+        "source": "catalog_entry",
+        "quote": "Mete uma palavra de outra terra na frase.",
+        "authority": "authorial"
+      },
+      {
+        "source": "source_corpus",
+        "quote": "Palavras que desapareceram — gírias, alcunhas e modos de dizer em desaparecimento.",
+        "authority": "authorial",
+        "context": "FALARTE / NÓS — mecânica 7"
+      },
+      {
+        "source": "source_corpus",
+        "quote": "A festa é porta territorial composta: lugar + tempo + memória + fonte + gesto + objecto + provocação + devolução comunitária.",
+        "authority": "factual",
+        "context": "FESTAS / DINÂMICAS TERRITORIAIS"
+      }
+    ],
+    "secondary": [
+      {
+        "source": "source_corpus",
+        "quote": "Língua como património vivo, oralidade, interacção sensorial, sotaques, pluralidade.",
+        "authority": "interpretative",
+        "context": "Museu da Língua Portuguesa"
+      }
+    ]
+  },
+  "authorial_invariants": [
+    "Convite: 'Mete uma palavra de outra terra na frase.'",
+    "Família: girias (mecânica: misturar).",
+    "Foco em palavras que desapareceram ou são de 'outra terra' (territorialidade linguística).",
+    "Deve preservar a oralidade e a vivacidade da língua como património.",
+    "Não inventar factos etnográficos ou autorais."
+  ],
+  "perceptual_intent": "Criar uma experiência onde a pessoa sinta que a linguagem é um território vivo, onde palavras de outras terras ou tempos intrusam o presente, alterando o som, o ritmo e o peso das frases. A experiência deve evocar a sensação de uma língua que respira, se dobra e se mistura, como um mapa sonoro de memórias linguísticas.",
+  "threshold": {
+    "description": "A pessoa entra num espaço onde uma frase simples (ex: 'Vou à feira') aparece em tipografia orgânica, como se escrita à mão em tinta que ainda secava. A frase tremula levemente, como se fosse um tecido vivo. De repente, uma palavra da frase (ex: 'feira') ganha um contorno brilhante e subtamente se descola, como se fosse uma intrusa.",
+    "sensory_trigger": "A frase inicial aparece com um som de respiração ou murmúrio distorcido, como se a língua fosse um corpo a falhar."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": "limiar",
+      "action": "A frase inicial aparece com uma palavra destacada (intrusa). O fundo é um mapa territorial difuso, como se a frase fosse um caminho."
+    },
+    {
+      "stage": "chamada",
+      "action": "A palavra intrusa pulsa levemente e um som de voz distorcida (como um eco de uma pronúncia antiga) convida: 'Mete uma palavra de outra terra aqui.'"
+    },
+    {
+      "stage": "primeiro_gesto",
+      "action": "A pessoa pode arrastar a palavra intrusa para um espaço vazio ou substituí-la por uma palavra sua (via teclado ou voz)."
+    },
+    {
+      "stage": "resposta_viva",
+      "action": "A frase reage: se a palavra for substituída, a nova palavra ganha o contorno brilhante e a frase reescreve-se com um ritmo sonoro que imita a pronúncia da palavra intrusa original. Se a palavra for arrastada, o mapa territorial ao fundo reage, como se a palavra fosse um imã que atrai ou repele outros fragmentos de frases ou sons."
+    },
+    {
+      "stage": "desvio",
+      "action": "De repente, a frase divide-se em duas: uma com a palavra original e outra com a nova. Ambas começam a flutuar em direções opostas, como se estivessem a ser puxadas por forças invisíveis (gravidade territorial)."
+    },
+    {
+      "stage": "aprofundamento_sensorial",
+      "action": "As duas frases começam a emitir sons distintos: uma com um sotaque ou ritmo de 'outra terra' (ex: um fado distorcido ou um trava-língua), e outra com um som mais neutro. A tipografia de cada frase adapta-se ao som (ex: letras mais grossas para sons graves, mais finas para agudos)."
+    },
+    {
+      "stage": "escolha_acaso_silencio",
+      "action": "A pessoa pode: 1) Escolher uma das frases para 'salvar' (clique ou gesto), 2) Deixar que o sistema decida (silêncio), ou 3) Apagar ambas (gestos de 'varrer' ou voz)."
+    },
+    {
+      "stage": "aparição",
+      "action": "Se uma frase for salva, ela transforma-se num 'bilhete' (como os da camada pública) que flutua no espaço, com a palavra intrusa a brilhar. Se o sistema decidir, uma das frases desaparece e a outra ganha uma camada de som ou imagem associada a um território real (ex: um som de mercado ou uma foto de uma rua). Se ambas forem apagadas, o espaço fica em silêncio e um novo convite aparece: 'Qual é a palavra que falta?'"
+    },
+    {
+      "stage": "devolução",
+      "action": "A pessoa recebe de volta: 1) O bilhete com a frase e a palavra intrusa (se salva), 2) Um som ou imagem territorial associado à palavra (se o sistema decidiu), ou 3) Uma lista de palavras intrusas sugeridas por outras pessoas (anónimas) que já passaram pela experiência (se apagou)."
+    },
+    {
+      "stage": "rasto_latencia",
+      "action": "O bilhete ou a palavra intrusa fica suspenso no espaço como um 'rasto' visível para outras sessões (sem dados pessoais). A frase ou palavra pode regressar em sessões futuras, misturada com outras, como parte de um 'corpo linguístico' em constante mutação."
+    }
+  ],
+  "participant_verbs": [
+    "arrastar",
+    "substituir",
+    "escutar",
+    "salvar",
+    "apagar",
+    "escolher",
+    "esperar"
+  ],
+  "system_responses": [
+    {
+      "trigger": "arrastar palavra intrusa",
+      "response": "A palavra move-se como se fosse um objecto físico (inércia, atrito). O mapa territorial ao fundo reage com distorções visuais (como se a palavra fosse um imã)."
+    },
+    {
+      "trigger": "substituir palavra intrusa",
+      "response": "A nova palavra ganha o contorno brilhante. A frase reescreve-se com um ritmo sonoro que imita a pronúncia da palavra original. O som da frase muda para refletir a nova palavra."
+    },
+    {
+      "trigger": "salvar frase",
+      "response": "A frase transforma-se num bilhete flutuante. A palavra intrusa brilha e emite um som de 'confirmação' (ex: um sino suave)."
+    },
+    {
+      "trigger": "apagar frases",
+      "response": "O espaço fica em silêncio. Um novo convite aparece: 'Qual é a palavra que falta?'"
+    },
+    {
+      "trigger": "escolher silêncio",
+      "response": "O sistema decide: uma das frases desaparece e a outra ganha uma camada de som ou imagem territorial (ex: som de um mercado ou foto de uma rua associada à palavra)."
+    },
+    {
+      "trigger": "deixar sessão sem interagir",
+      "response": "A palavra intrusa original permanece no espaço, mas ganha uma camada de 'poeira' visual (como se estivesse a ser esquecida)."
+    }
+  ],
+  "sensory_signature_id": "palavra-intrusa_048_girias_misturar",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "Tipografia orgânica (como escrita à mão) que tremula e reage ao toque.",
+        "Contorno brilhante nas palavras intrusas.",
+        "Mapa territorial difuso ao fundo, que distorce com a interação.",
+        "Bilhetes flutuantes com frases e palavras intrusas.",
+        "Efeitos de inércia e atrito ao arrastar palavras.",
+        "Camadas de 'poeira' ou 'desgaste' para palavras não interagidas."
+      ],
+      "dynamics": [
+        "Transparência e profundidade variáveis.",
+        "Ritmo visual: letras que pulsam ou mudam de tamanho com o som.",
+        "Cor: paleta terrosa com toques de cores vibrantes para palavras intrusas."
+      ]
+    },
+    "auditory": {
+      "elements": [
+        "Som de respiração ou murmúrio distorcido no limiar.",
+        "Pronúncia distorcida da palavra intrusa (como um eco de sotaque antigo).",
+        "Ritmo sonoro que imita a pronúncia da palavra (ex: sons graves para letras grossas).",
+        "Sons territoriais associados a palavras (ex: som de mercado, fado, trava-língua).",
+        "Silêncio como resposta a apagar frases.",
+        "Som de 'confirmação' (ex: sino suave) ao salvar uma frase."
+      ],
+      "dynamics": [
+        "Espacialização: sons que vêm de direções diferentes conforme a posição da palavra no ecrã.",
+        "Eco e reverberação para palavras intrusas.",
+        "Mudança de timbre conforme a interação (ex: voz mais aguda ou grave)."
+      ]
+    },
+    "haptic": {
+      "elements": [
+        "Vibração sutil ao arrastar palavras (opcional, em dispositivos compatíveis).",
+        "Feedback táctil ao 'salvar' ou 'apagar' (ex: pulso curto)."
+      ],
+      "dynamics": [
+        "Intensidade variável conforme a velocidade do gesto."
+      ]
+    },
+    "kinesthetic": {
+      "elements": [
+        "Arrastar palavras com inércia e atrito.",
+        "Gestos de 'varrer' para apagar.",
+        "Movimento do cursor/dedo que influencia a posição das palavras."
+      ],
+      "dynamics": [
+        "Resistência variável conforme a 'força' do gesto (ex: arrastar devagar vs. rápido)."
+      ]
+    },
+    "proprioceptive": {
+      "elements": [
+        "Instruções opcionais para usar a mão não dominante.",
+        "Sugestão de postura (ex: 'Inclina o dispositivo para ver a frase de outro ângulo')."
+      ],
+      "dynamics": []
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "Espera entre interações (ex: a frase demora a reescrever-se).",
+        "Ritmo de respiração percebido nos sons.",
+        "Aceleração ou suspensão conforme a interação."
+      ],
+      "dynamics": []
+    },
+    "spatial": {
+      "elements": [
+        "Mapa territorial difuso ao fundo.",
+        "Palavras que se movem em 2D ou 3D conforme a interação.",
+        "Bilhetes flutuantes que ocupam espaço tridimensional."
+      ],
+      "dynamics": [
+        "Profundidade variável conforme a 'importância' da palavra (ex: palavras intrusas mais à frente)."
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "Evocação de cheiros associados a territórios (ex: 'cheiro a pão quente' ao ver a palavra 'padaria').",
+        "Descrições textuais de aromas (ex: 'Esta palavra cheira a maresia')."
+      ],
+      "dynamics": []
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "Evocação de sabores associados a palavras (ex: 'Esta palavra sabe a azeite').",
+        "Descrições textuais de sabores (ex: 'Esta palavra tem o gosto da infância')."
+      ],
+      "dynamics": []
+    },
+    "social_presence": {
+      "elements": [
+        "Bilhetes de outras pessoas (anónimos) que já interagiram com a experiência.",
+        "Sugestões de palavras intrusas de outras sessões."
+      ],
+      "dynamics": []
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": {
+      "from": "auditory",
+      "to": "visual",
+      "description": "O ritmo sonoro da pronúncia da palavra intrusa altera a tipografia da frase (ex: letras mais grossas para sons graves, mais finas para agudos)."
+    },
+    "secondary": {
+      "from": "kinesthetic",
+      "to": "spatial",
+      "description": "O gesto de arrastar a palavra intrusa altera a posição e a profundidade do mapa territorial ao fundo, como se a palavra fosse um imã que atrai ou repele fragmentos do território."
+    }
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio é usado como: 1) Resposta a apagar frases (espaço fica em silêncio total), 2) Convite para esperar ('Qual é a palavra que falta?'), 3) Camada de 'poeira' visual em palavras não interagidas (evocação de ausência).",
+    "effect": "O silêncio não é vazio; é uma presença ativa que convida à reflexão ou à ação."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": "1) A frase divide-se em duas quando a palavra intrusa é substituída, criando um desvio inesperado. 2) O sistema pode decidir qual das frases 'sobrevive' (escolha aleatória com peso conforme a interação prévia). 3) Palavras intrusas de outras sessões podem aparecer como sugestões (anónimas).",
+    "effect": "A indeterminação mantém a experiência viva e imprevisível, sem ser caótica."
+  },
+  "session_variation": [
+    {
+      "type": "acaso_controlado",
+      "description": "A palavra intrusa inicial é escolhida aleatoriamente de um conjunto de palavras autorais (ex: girias, topónimos, palavras em desaparecimento)."
+    },
+    {
+      "type": "ordem_mutavel",
+      "description": "A ordem das frases e palavras no espaço pode variar entre sessões (ex: frase inicial pode estar no topo ou no centro)."
+    },
+    {
+      "type": "resposta_a_ritmo",
+      "description": "A velocidade com que a pessoa interage (ex: arrastar rápido vs. devagar) influencia o som e a tipografia da frase."
+    },
+    {
+      "type": "resposta_a_posicao",
+      "description": "A posição do cursor/dedo no ecrã influencia a direcção em que a palavra intrusa se move ou o som que emite."
+    },
+    {
+      "type": "combinacao_fragmentos",
+      "description": "Palavras intrusas de outras sessões (anónimas) podem ser misturadas com as da sessão atual, criando novas frases."
+    },
+    {
+      "type": "temporalidade_real",
+      "description": "A experiência pode variar conforme a hora do dia (ex: palavras mais 'noturnas' à noite, mais 'diurnas' de dia)."
+    }
+  ],
+  "territorial_binding": {
+    "relation": "A experiência está ligada a territórios reais através de: 1) Palavras intrusas associadas a topónimos ou girias locais (ex: 'feira' pode estar ligada a um mercado específico). 2) Sons territoriais (ex: som de um mercado ou rua associado à palavra). 3) Fotos ou imagens de lugares reais (ex: foto de uma rua onde a palavra é usada).",
+    "sustainability": "As ligações territoriais são baseadas em dados autorais ou documentados (ex: corpus FALARTE, topónimos reais). Não são inventadas."
+  },
+  "trace_and_return": {
+    "trace": {
+      "mechanism": "1) Bilhetes flutuantes com frases e palavras intrusas ficam suspensos no espaço como rastos visíveis para outras sessões. 2) Palavras intrusas podem regressar em sessões futuras, misturadas com outras.",
+      "persistence": "Os rastos persistem até serem 'apagados' ou substituídos por novas interações."
+    },
+    "return": {
+      "mechanism": "A pessoa recebe de volta: 1) Um bilhete com a frase e a palavra intrusa (se salva), 2) Um som ou imagem territorial (se o sistema decidiu), ou 3) Uma lista de palavras intrusas de outras pessoas (se apagou).",
+      "form": "O retorno é sempre tangível (bilhete, som, imagem) e não apenas uma confirmação abstrata."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "alternative": "Todas as interações visuais têm equivalentes sonoros (ex: contorno brilhante da palavra intrusa é acompanhado por um som distinto).",
+      "reduced_motion": "Versão estável sem animações ou com animações minimizadas (ex: palavras não tremulam, mas mantêm o contorno brilhante)."
+    },
+    "auditory": {
+      "alternative": "Todos os sons têm legendas ou descrições textuais (ex: 'Som de um mercado em Alfama').",
+      "control": "Controlo de volume e opção para desativar sons."
+    },
+    "haptic": {
+      "alternative": "Feedback visual ou sonoro para substituição da vibração (ex: pulso visual ao arrastar)."
+    },
+    "kinesthetic": {
+      "alternative": "Interações via teclado ou voz (ex: tecla 'S' para salvar, tecla 'A' para apagar, voz para substituir palavras)."
+    },
+    "proprioceptive": {
+      "alternative": "Instruções opcionais e não intrusivas (ex: 'Podes usar a mão não dominante se quiseres')."
+    },
+    "temporal_interoceptive": {
+      "alternative": "Modo sem pressão temporal (ex: espera entre interações pode ser desativada)."
+    },
+    "cognitive": {
+      "alternative": "Texto simplificado e opções de interação reduzidas para pessoas com dificuldades cognitivas."
+    }
+  },
+  "optional_permissions": {
+    "required": [],
+    "optional": [
+      {
+        "permission": "microphone",
+        "purpose": "Permitir substituição de palavras por voz.",
+        "fallback": "Substituição por teclado."
+      },
+      {
+        "permission": "geolocation",
+        "purpose": "Associar palavras intrusas a territórios reais próximos da pessoa.",
+        "fallback": "Palavras intrusas genéricas ou baseadas em sessões anteriores."
+      }
+    ]
+  },
+  "overstimulation_risk": {
+    "risks": [
+      "Flashing ou animações rápidas (ex: palavras a tremular).",
+      "Sons súbitos ou excessivamente altos (ex: sons territoriais).",
+      "Vibrações insistentes (em dispositivos compatíveis)."
+    ],
+    "mitigations": [
+      "Limitar a frequência e intensidade das animações (ex: tremular lento, sem flashing).",
+      "Controlo de volume e opção para desativar sons.",
+      "Vibração sutil e opcional, com alternativa visual/sonora.",
+      "Modo 'reduced-motion' para desativar animações.",
+      "Avisos prévios para sons ou vibrações (ex: 'Este som pode ser alto')."
+    ]
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "A tradução cruzada entre som e tipografia (ritmo sonoro altera a aparência visual das palavras).",
+      "O uso do mapa territorial difuso como fundo reativo à interação com as palavras.",
+      "A devolução de bilhetes flutuantes ou sons territoriais como retorno tangível.",
+      "A mistura de palavras intrusas de outras sessões (anónimas) para criar novas frases.",
+      "A evocação de cheiros e sabores através de descrições textuais associadas a palavras.",
+      "A dinâmica de dividir a frase em duas quando a palavra intrusa é substituída, criando um desvio inesperado."
+    ],
+    "comparison": "Esta experiência não pode ser confundida com: 1) 'Galeria Diletante' (que usa fotos e mutações tipográficas subliminares), 2) 'Fucô' (que usa conversa e crónicas), 3) 'Dado Sem Lado' (que usa objectos e física digital), 4) 'Reizinho' (que usa regras absurdas e quebra de normas)."
+  },
+  "questions_for_eduardo": [
+    "A mecânica 'Mete uma palavra de outra terra na frase' deve ser aplicada a frases completas ou pode ser aplicada a palavras isoladas?",
+    "Existem palavras ou girias específicas (do corpus autoral) que devem ser usadas como palavras intrusas iniciais?",
+    "A devolução de bilhetes flutuantes deve ser visível para todas as sessões ou apenas para a sessão atual?",
+    "A mistura de palavras intrusas de outras sessões deve ser anónima ou pode incluir pseudónimos (com consentimento)?",
+    "O mapa territorial ao fundo deve ser genérico ou deve estar ligado a um território específico (ex: Lisboa)?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Incluir uma opção para a pessoa 'adotar' uma palavra intrusa e recebe-la como devolução em sessões futuras (ex: 'A tua palavra intrusa é X. Queres levá-la contigo?').",
+      "justification": "Aumentaria o sentido de pertença e continuidade entre sessões."
+    },
+    {
+      "proposal": "Adicionar uma camada de 'história' às palavras intrusas (ex: 'Esta palavra foi usada por 5 pessoas em Marvila').",
+      "justification": "Reforçaria a dimensão territorial e comunitária da experiência."
+    },
+    {
+      "proposal": "Permitir que a pessoa 'desenhe' uma palavra intrusa (via toque ou rato) em vez de a substituir por texto.",
+      "justification": "Aumentaria a acessibilidade para pessoas com dificuldades em escrita ou fala."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

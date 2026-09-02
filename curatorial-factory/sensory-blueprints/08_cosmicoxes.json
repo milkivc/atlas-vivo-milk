@@ -1,0 +1,447 @@
+{
+  "id": "cosmicoxes",
+  "canonical_name": "COSMICOXES",
+  "source_evidence": {
+    "primary": [
+      {
+        "source": "catalog_entry",
+        "authority": "high",
+        "quote": "Toca três pontos. Faz nascer uma constelação.",
+        "context": "Convite curatorial explícito para a experiência."
+      },
+      {
+        "source": "constitution",
+        "authority": "high",
+        "quote": "COSMICOXES: Não 'clicar em estrelas'. A pessoa deve perturbar um campo vivo: aproximação, trajectória e tempo alteram gravidade, som e linguagem; palavras podem nascer, afastar-se, colidir, silenciar-se e conduzir ao COPÉRNICO.",
+        "context": "Exemplo de direcção autoral para a curadoria."
+      },
+      {
+        "source": "source_corpus",
+        "authority": "medium",
+        "quote": "COSMICOXES/Cosmic Flow pode representar relações sem pontuar pessoas ou vigiar comportamento.",
+        "context": "Referência à dinâmica territorial e não-vigilância."
+      }
+    ],
+    "secondary": [
+      {
+        "source": "constitution",
+        "authority": "medium",
+        "quote": "famílias sensoriais: constelação / gravidade / órbita",
+        "context": "Família sensorial sugerida para combinar."
+      }
+    ]
+  },
+  "authorial_invariants": [
+    "Convite explícito: 'Toca três pontos. Faz nascer uma constelação.'",
+    "Perturbação de um campo vivo (não clique passivo em estrelas).",
+    "Aproximação, trajectória e tempo alteram gravidade, som e linguagem.",
+    "Palavras podem nascer, afastar-se, colidir, silenciar-se.",
+    "Condução ao COPÉRNICO (referência autoral implícita).",
+    "Representação de relações sem pontuação ou vigilância de comportamento.",
+    "Dinâmica territorial e não extrativa."
+  ],
+  "perceptual_intent": "Transformar a acção de 'tocar' em um acto de criação cósmica, onde a pessoa sente que está a moldar um universo vivo. A constelação não é um objecto estático, mas um campo dinâmico que responde à presença, movimento e intenção do participante, evocando uma sensação de gravidade, órbita e relação territorial.",
+  "threshold": {
+    "description": "A tela está quase vazia, com um campo escuro e pontilhado de luzes tênues que piscam em ritmo irregular, como se respirassem. Não há instruções visíveis. O cursor (ou dedo, em touch) transforma-se num ponto de luz fraca que arrasta um rasto de pó estelar. O som ambiente é um zumbido baixo, como o de um espaço profundo, com pausas aleatórias.",
+    "sensory_trigger": "A primeira interacção (toque ou movimento do cursor) faz com que o campo reaja: as luzes piscam em sincronia com o gesto, e um som de 'ping' suave, como um cristal a vibrar, ecoa na direcção do movimento."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": "LIMIAR",
+      "action": "O campo escuro e pontilhado de luzes tênues altera-se subtamente antes de a pessoa entender o que é. As luzes começam a mover-se em órbitas lentas, como se atraídas por uma gravidade invisível.",
+      "sensory_focus": [
+        "visual (luzes em movimento)",
+        "auditory (zumbido e 'ping' suave)"
+      ]
+    },
+    {
+      "stage": "CHAMADA",
+      "action": "O convite 'Toca três pontos.' aparece em letras que se formam e desvanecem como constelações, sem pressa. A frase não é fixa: as palavras surgem e desaparecem em diferentes posições, como se fossem estrelas a nascer.",
+      "sensory_focus": [
+        "visual (tipografia viva)",
+        "temporal_interoceptive (ritmo de aparição/desaparição)"
+      ]
+    },
+    {
+      "stage": "PRIMEIRO GESTO",
+      "action": "A pessoa toca ou clica em qualquer ponto do ecrã. O gesto é simples: um toque. O sistema responde com um 'ping' mais agudo e uma luz que se expande brevemente a partir do ponto tocado, como uma onda de choque cósmica.",
+      "sensory_focus": [
+        "kinesthetic (toque)",
+        "auditory (som de 'ping')",
+        "visual (expansão de luz)"
+      ]
+    },
+    {
+      "stage": "RESPOSTA VIVA",
+      "action": "Ao tocar o segundo ponto, as luzes começam a organizar-se em torno dos dois pontos tocados, como se fossem atraídas por uma força gravitacional. Um som de 'glissando' (nota musical que sobe ou desce) acompanha o movimento das luzes. Ao tocar o terceiro ponto, uma constelação nasce: as luzes formam uma figura geométrica ou orgânica entre os três pontos, e um som harmónico (como um acorde) soa, como se o universo tivesse encontrado um equilíbrio temporário.",
+      "sensory_focus": [
+        "visual (formação de constelação)",
+        "auditory (glissando e acorde)",
+        "spatial (gravidade percebida)"
+      ]
+    },
+    {
+      "stage": "DESVIO",
+      "action": "A constelação não permanece estática. Após alguns segundos, uma das 'estrelas' (luzes) começa a tremer e a emitir um som agudo e intermitente, como se estivesse instável. Se a pessoa não interagir, a estrela 'explode' em partículas que se dispersam, e a constelação desmorona. Se a pessoa tocar a estrela instável, esta estabiliza-se, mas a constelação reconfigura-se, alterando a sua forma e o som associado.",
+      "sensory_focus": [
+        "visual (tremor e explosão)",
+        "auditory (som intermitente)",
+        "kinesthetic (toque para estabilizar)"
+      ]
+    },
+    {
+      "stage": "APROFUNDAMENTO SENSORIAL",
+      "action": "A constelação agora emite sons que variam com a distância do cursor/dedo. Se a pessoa aproximar o cursor de uma estrela, o som torna-se mais agudo e intenso; se afastar, mais grave e suave. Simultaneamente, palavras começam a surgir no ecrã, flutuando como estrelas: são fragmentos de linguagem (nomes de lugares, verbos, substantivos) que se movem em órbita em torno da constelação. As palavras podem colidir, fundir-se ou desaparecer.",
+      "sensory_focus": [
+        "auditory (som variável com distância)",
+        "visual (palavras em órbita)",
+        "spatial (profundidade percebida)"
+      ]
+    },
+    {
+      "stage": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "A pessoa pode: (1) tocar uma palavra para 'fixá-la' à constelação, (2) esperar que as palavras colidam e formem uma nova frase, ou (3) não fazer nada. Se não interagir, a constelação começa a desvanecer-se lentamente, e o som reduz-se a um murmúrio. Se tocar uma palavra, esta fica ancorada à constelação e emite um som único (como um sino). Se as palavras colidirem, formam uma frase que aparece no centro do ecrã por alguns segundos antes de se dispersar.",
+      "sensory_focus": [
+        "kinesthetic (toque em palavras)",
+        "auditory (som de sino ou murmúrio)",
+        "temporal_interoceptive (espera ou acção)"
+      ]
+    },
+    {
+      "stage": "APARIÇÃO",
+      "action": "Se a pessoa fixou pelo menos uma palavra, a constelação ganha um nome: uma combinação das palavras fixadas ou uma frase gerada pela colisão. O nome aparece no centro do ecrã, escrito como se fosse uma constelação (letras que brilham e piscam). Simultaneamente, um som de 'coral cósmico' (vários tons harmónicos) preenche o espaço. Se não fixou palavras, a constelação desaparece, mas uma estrela solitária permanece, emitindo um som grave e contínuo.",
+      "sensory_focus": [
+        "visual (nome da constelação)",
+        "auditory (coral cósmico ou som grave)",
+        "social_presence (sensação de criação colectiva)"
+      ]
+    },
+    {
+      "stage": "DEVOLUÇÃO",
+      "action": "A constelação (ou a estrela solitária) permanece no ecrã por alguns segundos, como se fosse uma oferta. Depois, começa a desvanecer-se, mas não desaparece completamente: um rasto de luz permanece, como um eco visual. O som também desvanece, mas deixa um 'zumbido residual' que persiste por mais alguns segundos. A pessoa recebe uma 'devolução': uma frase ou palavra que surgiu durante a experiência (fixada ou gerada) é guardada e pode ser acessada mais tarde como parte do seu 'rasto cósmico'.",
+      "sensory_focus": [
+        "visual (rasto de luz)",
+        "auditory (zumbido residual)",
+        "proprioceptive (sensação de conclusão e latência)"
+      ]
+    },
+    {
+      "stage": "RASTO / LATÊNCIA",
+      "action": "A constelação criada (ou a estrela solitária) é adicionada a um 'cosmos' invisível, que pode ser acessado em sessões futuras. As constelações anteriores aparecem como luzes distantes no campo inicial, e a pessoa pode interagir com elas para 'reavivá-las' ou criar novas conexões. O rasto também pode ser partilhado (opcionalmente) como parte de uma constelação colectiva, sem identificação pessoal.",
+      "sensory_focus": [
+        "visual (luzes distantes no campo inicial)",
+        "social_presence (constelação colectiva)",
+        "temporal_interoceptive (latência e regresso)"
+      ]
+    }
+  ],
+  "participant_verbs": [
+    "tocar",
+    "perturbar",
+    "observar",
+    "esperar",
+    "fixar",
+    "reavivar",
+    "navegar"
+  ],
+  "system_responses": [
+    {
+      "trigger": "Primeiro toque",
+      "response": "Expansão de luz a partir do ponto tocado + som de 'ping' agudo."
+    },
+    {
+      "trigger": "Segundo toque",
+      "response": "Luzes organizam-se em órbita entre os dois pontos + som de 'glissando'."
+    },
+    {
+      "trigger": "Terceiro toque",
+      "response": "Formação de constelação + som harmónico (acorde)."
+    },
+    {
+      "trigger": "Toque em estrela instável",
+      "response": "Estabilização da estrela + reconfiguração da constelação e som."
+    },
+    {
+      "trigger": "Aproximação do cursor a uma estrela",
+      "response": "Som mais agudo e intenso."
+    },
+    {
+      "trigger": "Afastamento do cursor de uma estrela",
+      "response": "Som mais grave e suave."
+    },
+    {
+      "trigger": "Toque em palavra",
+      "response": "Palavra fixa-se à constelação + som de sino."
+    },
+    {
+      "trigger": "Colisão de palavras",
+      "response": "Formação de frase no centro do ecrã + som de coral."
+    },
+    {
+      "trigger": "Inacção prolongada",
+      "response": "Constelação desvanece-se + som reduz-se a murmúrio."
+    },
+    {
+      "trigger": "Fim da experiência",
+      "response": "Rasto de luz e zumbido residual + devolução de frase/palavra."
+    }
+  ],
+  "sensory_signature_id": "COSMICOXES_008_GRAVITACAO_LINGUAGEM",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "Campo escuro pontilhado de luzes tênues (estrelas)",
+        "Rasto de pó estelar do cursor/dedo",
+        "Expansão de luz ao tocar",
+        "Formação dinâmica de constelações",
+        "Palavras flutuantes em órbita",
+        "Nome da constelação escrito como constelação",
+        "Rasto de luz residual"
+      ],
+      "dynamics": [
+        "Luzes em movimento orbital",
+        "Tipografia viva (aparição/desaparição de letras)",
+        "Transparência e brilho variáveis",
+        "Profundidade percebida (camadas de luz)"
+      ]
+    },
+    "auditory": {
+      "elements": [
+        "Zumbido baixo (espaço profundo)",
+        "Som de 'ping' (cristal a vibrar)",
+        "Glissando (nota que sobe/desce)",
+        "Acorde harmónico",
+        "Som intermitente (estrela instável)",
+        "Som de sino (palavra fixada)",
+        "Coral cósmico (vários tons harmónicos)",
+        "Murmúrio (constelação a desvanecer)",
+        "Zumbido residual"
+      ],
+      "dynamics": [
+        "Variação de tom com distância do cursor",
+        "Espacialização do som (direcção do movimento)",
+        "Intensidade variável"
+      ]
+    },
+    "haptic": {
+      "elements": [],
+      "dynamics": [
+        "Vibração opcional em dispositivos compatíveis (ex: ao fixar uma palavra ou estabilizar uma estrela)"
+      ]
+    },
+    "kinesthetic": {
+      "elements": [
+        "Toque (dedo ou cursor)",
+        "Movimento do cursor/dedo",
+        "Pressão (se suportado)"
+      ],
+      "dynamics": [
+        "Trajectória do gesto afecta a órbita das luzes",
+        "Velocidade do gesto afecta a intensidade do som"
+      ]
+    },
+    "proprioceptive": {
+      "elements": [
+        "Sensação de gravidade e órbita",
+        "Sensação de equilíbrio/instabilidade"
+      ],
+      "dynamics": [
+        "Postura e distância do ecrã afectam a imersão"
+      ]
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "Ritmo de aparição/desaparição das luzes e palavras",
+        "Espera e latência",
+        "Respiração percebida (pausas no som)"
+      ],
+      "dynamics": [
+        "Aceleração/desaceleração do tempo percebido"
+      ]
+    },
+    "spatial": {
+      "elements": [
+        "Profundidade do campo estelar",
+        "Distância entre estrelas e cursor"
+      ],
+      "dynamics": [
+        "Movimento em 2D/3D percebido"
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "Evocação de 'cheiro a espaço' ou 'pó estelar' através de linguagem e som (ex: 'o ar cheira a metal frio' em texto opcional)"
+      ]
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "Evocação de 'sabor a universo' ou 'doçura cósmica' através de metáforas visuais e sonoras (ex: palavras como 'mel de estrela' ou sons que sugerem textura)"
+      ]
+    },
+    "social_presence": {
+      "elements": [
+        "Sensação de criação colectiva (constelações de outras sessões aparecem como luzes distantes)",
+        "Sensação de diálogo com o cosmos"
+      ]
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": {
+      "from": "kinesthetic (movimento do cursor/dedo)",
+      "to": [
+        "visual (órbita das luzes)",
+        "auditory (tom e intensidade do som)"
+      ],
+      "mechanism": "A trajectória e velocidade do gesto traduzem-se em gravidade e som, como se o movimento físico moldasse o campo cósmico."
+    },
+    "secondary": {
+      "from": "visual (palavras em órbita)",
+      "to": [
+        "auditory (som de sino ao fixar palavra)",
+        "spatial (posição da palavra no campo)"
+      ],
+      "mechanism": "As palavras, ao serem tocadas, emitem um som único e fixam-se no espaço, como se ganhassem peso e ressonância."
+    }
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio é um elemento ativo: (1) pausas aleatórias no zumbido inicial criam expectativa; (2) a ausência de instruções no limiar convida à exploração; (3) o desvanecimento da constelação em silêncio (apenas zumbido residual) marca o fim da experiência; (4) a não-interacção prolongada leva ao desaparecimento da constelação, mas deixa um rasto.",
+    "sensory_impact": "O silêncio amplifica a sensação de vazio cósmico e a importância do gesto do participante."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanisms": [
+      {
+        "type": "acaso controlado",
+        "description": "As luzes iniciais piscam em ritmo irregular, e a posição das palavras que surgem é aleatória mas dentro de uma órbita definida."
+      },
+      {
+        "type": "resposta a ritmo/velocidade",
+        "description": "A velocidade do gesto afecta a intensidade do som e a órbita das luzes."
+      },
+      {
+        "type": "combinação de fragmentos",
+        "description": "As palavras que colidem formam frases únicas, que não se repetem entre sessões."
+      },
+      {
+        "type": "estabilidade/instabilidade",
+        "description": "As estrelas podem tornar-se instáveis e 'explodir' se não forem estabilizadas, introduzindo um elemento de imprevisibilidade."
+      }
+    ]
+  },
+  "session_variation": [
+    {
+      "type": "acaso controlado",
+      "description": "Posição inicial das luzes e ritmo de piscar são aleatórios mas dentro de parâmetros definidos."
+    },
+    {
+      "type": "ordem mutável",
+      "description": "A ordem de aparição das palavras é aleatória, mas sempre em órbita em torno da constelação."
+    },
+    {
+      "type": "resposta a trajectória",
+      "description": "A forma da constelação varia consoante a trajectória dos toques (ex: toques em linha reta vs. toques em círculo criam constelações diferentes)."
+    },
+    {
+      "type": "combinação de fragmentos",
+      "description": "As palavras que surgem são seleccionadas aleatoriamente de um corpus curatorial, e as colisões entre elas geram frases únicas."
+    },
+    {
+      "type": "temporalidade real",
+      "description": "A intensidade do zumbido inicial e a velocidade das órbitas podem variar subtamente consoante a hora do dia (mais lento de noite, mais rápido de dia)."
+    }
+  ],
+  "territorial_binding": {
+    "description": "As palavras que surgem durante a experiência são extraídas de um corpus territorial real (ex: topónimos, gírias, palavras associadas a lugares específicos do Atlas Vivo MILK). A constelação criada pode ser associada a um território real, e o seu nome pode reflectir essa ligação (ex: 'Constelação do Bairro Alto').",
+    "sources": [
+      "source_corpus (topónimos, gírias, memórias territoriais)"
+    ],
+    "notes": "A ligação territorial é evocada, não imposta. A pessoa pode não perceber a relação directa, mas a experiência ganha profundidade ao saber que as palavras têm raiz num lugar real."
+  },
+  "trace_and_return": {
+    "mechanism": {
+      "immediate": "A constelação criada (ou a estrela solitária) é guardada como um 'rasto cósmico' e pode ser reavivada em sessões futuras. A pessoa recebe uma frase ou palavra gerada durante a experiência como devolução.",
+      "latent": "As constelações criadas em sessões anteriores aparecem como luzes distantes no campo inicial, permitindo à pessoa interagir com elas para criar novas conexões. O cosmos colectivo (constelações de todos os participantes) é visível como um campo de luzes ao fundo, sem identificação pessoal."
+    },
+    "return_types": [
+      "Frase ou palavra gerada durante a experiência (ex: 'Estrela do Largo do Chiado').",
+      "Nome da constelação criada (ex: 'Triângulo de Marvila').",
+      "Rasto visual (luz residual no campo inicial)."
+    ]
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "alternative": "Descrição em áudio ou texto das acções visuais (ex: 'Uma constelação está a formar-se entre os pontos que tocaste. As luzes estão a orbitar em torno deles.').",
+      "reduced_motion": "Modo de movimento reduzido: as luzes movem-se mais lentamente, e as palavras aparecem estaticamente em vez de em órbita.",
+      "high_contrast": "Modo de alto contraste: as luzes e palavras são mais brilhantes e com contornos mais definidos."
+    },
+    "auditory": {
+      "alternative": "Legendas visuais para todos os sons (ex: 'Som de ping agudo', 'Glissando', 'Coral cósmico').",
+      "muted": "Modo silencioso: os sons são substituídos por vibrações (se suportado) ou por pulso visual (ex: piscar de luzes em sincronia com o que seria o som)."
+    },
+    "kinesthetic": {
+      "alternative": "Controlo por teclado: as setas do teclado movem um cursor virtual; a tecla 'Espaço' simula o toque; a tecla 'Enter' fixa uma palavra.",
+      "switch_control": "Compatibilidade com dispositivos de controlo por interruptor (ex: um toque = um interruptor)."
+    },
+    "temporal_interoceptive": {
+      "alternative": "Modo sem pressão: a experiência não desaparece se não houver interacção; a pessoa pode explorar ao seu próprio ritmo."
+    },
+    "cognitive": {
+      "alternative": "Instruções simplificadas e opção para desativar a aparição aleatória de palavras, focando apenas na criação visual e sonora da constelação."
+    }
+  },
+  "optional_permissions": {
+    "none_required": true,
+    "description": "A experiência funciona completamente sem permissões. Microfone, câmara, geolocalização ou sensores de movimento não são necessários. Se a pessoa optar por permitir geolocalização, as palavras que surgem podem ser mais específicas para a sua área (ex: topónimos locais), mas isto é opcional e não afecta a experiência principal."
+  },
+  "overstimulation_risk": {
+    "potential_risks": [
+      "Flashing ou piscar rápido das luzes (mitigado por ritmo controlado e opção de reduced-motion).",
+      "Som súbito ou alto (mitigado por volume ajustável e modo silencioso).",
+      "Sobrecarga visual com muitas luzes e palavras (mitigado por limite no número de elementos visíveis e opção de alto contraste)."
+    ],
+    "mitigation": [
+      "Ritmo de piscar das luzes é lento e irregular, nunca excedendo 3 Hz.",
+      "Volume do som é ajustável e nunca excede 80% do volume máximo do dispositivo.",
+      "Número máximo de luzes e palavras visíveis simultaneamente é limitado (ex: 20 luzes, 5 palavras).",
+      "Opção para pausar a experiência a qualquer momento.",
+      "Modo 'reduced-motion' e 'alto contraste' disponíveis desde o início."
+    ]
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "A tradução cruzada entre gesto (kinesthetic) e gravidade/órbita (visual + auditory) é específica desta curadoria.",
+      "A dinâmica de 'perturbar um campo vivo' (em vez de clicar em elementos estáticos) é única.",
+      "A combinação de linguagem (palavras em órbita) com física cósmica (gravidade, som) é exclusiva.",
+      "O uso do silêncio como elemento ativo (pausas, desvanecimento) é central e não decorativo.",
+      "A devolução de uma constelação nomeada (ou estrela solitária) como rasto é específica.",
+      "A ligação territorial evocada através de palavras com raiz real, mas sem exigir geolocalização, é única."
+    ],
+    "comparison": "Nenhuma outra curadoria do Atlas Vivo MILK usa esta combinação de: (1) campo vivo perturbável, (2) tradução gesto-gravidade-som, (3) linguagem em órbita, (4) devolução de constelação nomeada, e (5) rasto cósmico colectivo. Outras curadorias podem usar constelações (ex: COSMICOXES como dinâmica territorial), mas não com esta assinatura sensorial e dramatúrgica."
+  },
+  "questions_for_eduardo": [
+    "O nome 'COPÉRNICO' mencionado na constituição como destino da constelação é uma referência literal a uma entidade ou lugar no Atlas Vivo MILK? Se sim, como deve ser integrado na experiência (ex: como um ponto final, uma transição, ou uma camada adicional)?",
+    "As palavras que surgem durante a experiência devem ser extraídas de um corpus específico (ex: topónimos, gírias, memórias) ou podem ser geradas livremente com base em regras poéticas?",
+    "A constelação colectiva (luzes distantes de outras sessões) deve ser visível desde o início ou apenas após a criação de uma constelação pela pessoa?",
+    "Deve haver um limite máximo de constelações guardadas por sessão ou por utilizador, ou a experiência deve permitir a criação ilimitada?",
+    "A estrela solitária (quando não são fixadas palavras) deve ter um comportamento ou som específico que a diferencie das constelações completas?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Integração de um 'modo territorial' opcional: se a pessoa permitir geolocalização, as palavras que surgem são específicas da sua freguesia ou área, e a constelação criada pode ser associada a um lugar real no mapa do Atlas Vivo MILK.",
+      "justification": "Aprofundaria a ligação territorial evocada na constituição, sem obrigar a permissões."
+    },
+    {
+      "proposal": "Adição de um 'modo colaborativo' onde duas ou mais pessoas (em dispositivos diferentes) podem criar uma constelação em conjunto, com os seus toques a afectar o mesmo campo. As constelações colaborativas teriam um som e visual únicos.",
+      "justification": "Aumentaria a sensação de social_presence e devolução comunitária, alinhada com os princípios do Atlas Vivo MILK."
+    },
+    {
+      "proposal": "Inclusão de um 'diário cósmico' onde a pessoa pode ver todas as constelações e frases que criou em sessões anteriores, organizadas por data ou por território (se geolocalização for permitida).",
+      "justification": "Reforçaria o rasto e a devolução, permitindo à pessoa revisitar as suas criações."
+    },
+    {
+      "proposal": "Uso de sons gravados em lugares reais do Atlas Vivo MILK (ex: sons de ruas, mercados, festas) como base para o zumbido e os tons harmónicos, em vez de sons gerados digitalmente.",
+      "justification": "Aumentaria a autenticidade territorial e a riqueza sonora, alinhada com a fonte autoral de 'som singular da zona' em FALARTE."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

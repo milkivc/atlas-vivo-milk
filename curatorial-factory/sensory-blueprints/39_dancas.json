@@ -1,0 +1,458 @@
+{
+  "id": "dancas",
+  "canonical_name": "Danças",
+  "source_evidence": {
+    "primary": [
+      {
+        "id": "catalog_entry",
+        "type": "curatorial_catalog",
+        "authority": "medium",
+        "details": "Entrada no catálogo: ordem 39, família 'folclore', mecânica 'mover', convite 'Move só aquilo que normalmente fica parado.'"
+      },
+      {
+        "id": "constitution",
+        "type": "curatorial_constitution",
+        "authority": "high",
+        "details": "Regras canónicas para experiências digitais multissensoriais, com foco em dinâmicas vivas, tradução cruzada de sentidos e arco dramatúrgico obrigatório."
+      }
+    ],
+    "secondary": [
+      {
+        "id": "corpus_folclore",
+        "type": "curatorial_corpus",
+        "authority": "medium",
+        "details": "Referência a 16 seres folclóricos e jogos tradicionais (trava-línguas, adivinhas) no Atlas Vivo MILK."
+      },
+      {
+        "id": "deriva_do_sentido",
+        "type": "curatorial_methodology",
+        "authority": "low",
+        "details": "Psicogeografia activa, corpo inteiro, tato, escuta, memória local e dinâmicas territoriais."
+      }
+    ]
+  },
+  "authorial_invariants": [
+    "Pertence à família 'folclore' do Atlas Vivo MILK.",
+    "Mecânica central: 'mover'.",
+    "Convite autoral: 'Move só aquilo que normalmente fica parado.'",
+    "Deve evocar danças, ritmos e gestos do folclore sem reproduzir literalmente coreografias.",
+    "Deve ser operável com motor comum (sem dependência de hardware específico)."
+  ],
+  "perceptual_intent": "Transformar o acto de mover-se num ritual de despertar o que está imóvel: memórias corporais, objectos estáticos, som adormecido, territórios silenciosos. A experiência convida a pessoa a dançar com o invisível, a sentir o peso do ar, a escutar o ritmo do chão e a devolver movimento ao que a sociedade considera fixo.",
+  "threshold": {
+    "description": "A pessoa entra num espaço digital onde o ecrã está quase vazio, com uma mancha de cor terrosa e suave (como poeira ou terra seca) que pulsa ao ritmo de uma respiração imperceptível. Um som subliminar de vento ou folhas secas arrastadas pelo chão é audível apenas se a pessoa fechar os olhos ou reduzir o volume ambiente. A mancha começa a tremer levemente, como se algo tentasse emergir.",
+    "sensory_trigger": "A primeira alteração é uma vibração visual (mancha) + som ambiente mínimo, sem explicação."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": 1,
+      "name": "Limiar",
+      "description": "Ecrã quase vazio com mancha terrosa pulsante e som de vento subliminar. A pessoa percebe que algo está vivo, mas não sabe o quê."
+    },
+    {
+      "stage": 2,
+      "name": "Chamada",
+      "description": "Aparece o convite em letras que se movem como se dançassem: 'Move só aquilo que normalmente fica parado.' As letras tremem, caem e voltam a erguer-se, como se estivessem a aprender a dançar."
+    },
+    {
+      "stage": 3,
+      "name": "Primeiro gesto",
+      "description": "A pessoa é convidada a mover o cursor, arrastar o dedo (em touchscreen) ou pressionar uma tecla. Qualquer movimento mínimo faz a mancha terrosa reagir: expande-se, contrai-se ou divide-se em partículas que seguem a trajectória do gesto."
+    },
+    {
+      "stage": 4,
+      "name": "Resposta viva",
+      "description": "O sistema responde com um som de passos ou batidas de pé (como uma dança folclórica) que segue o ritmo do gesto. As partículas da mancha começam a formar silhuetas de objectos estáticos (cadeiras, mesas, árvores, casas) que ganham movimento, como se estivessem a dançar. O som evolui para uma melodia simples, mas repetitiva, baseada em escalas modais ou ritmos tradicionais portugueses."
+    },
+    {
+      "stage": 5,
+      "name": "Desvio",
+      "description": "De repente, as silhuetas param e o som corta abruptamente. O ecrã fica em silêncio e a mancha terrosa congela. Um texto aparece: 'E agora, o que move o imóvel?'"
+    },
+    {
+      "stage": 6,
+      "name": "Aprofundamento sensorial",
+      "description": "Se a pessoa responder com um gesto (clique, arrasto, voz ou tecla), o sistema reage com uma tradução cruzada: o som volta, mas agora modula a cor das silhuetas (ex: som agudo = vermelho; grave = azul). O movimento do cursor ou dedo altera a intensidade do som e a velocidade das silhuetas, criando uma coreografia improvisada entre a pessoa e o sistema."
+    },
+    {
+      "stage": 7,
+      "name": "Escolha / Acaso / Silêncio",
+      "description": "A pessoa pode: (a) continuar a dançar com as silhuetas, (b) parar e observar o que acontece, ou (c) fechar os olhos (ou reduzir a janela). Se escolher (c), o som e as silhuetas desaparecem, leaving apenas a mancha terrosa a pulsar. Se permanecer em silêncio por 10 segundos, uma nova camada é revelada."
+    },
+    {
+      "stage": 8,
+      "name": "Aparição",
+      "description": "Emergem palavras ou frases curtas em português (ex: 'o vento dança com as pedras', 'a cadeira lembra-se de ser árvore') que se movem como se fossem parte da coreografia. As palavras são extraídas de um corpus de ditados, trava-línguas ou descrições de danças folclóricas, mas nunca explicam a experiência — apenas a enriquecem."
+    },
+    {
+      "stage": 9,
+      "name": "Devolução",
+      "description": "O sistema devolve uma 'dança' única: uma sequência de 3 a 5 gestos (movimentos do cursor, toques ou sons) que a pessoa pode repetir para 'guardar' a coreografia. Esta sequência é gerada com base nos gestos da pessoa durante a sessão e é apresentada como uma partitura visual e sonora (ex: círculo vermelho = gesto rápido; quadrado azul = gesto lento)."
+    },
+    {
+      "stage": 10,
+      "name": "Rasto / Latência",
+      "description": "A dança guardada fica disponível para ser 'reencontrada' em sessões futuras (como uma memória corporal). Além disso, a mancha terrosa original ganha uma nova camada de cor ou textura, como se tivesse absorvido a experiência. Se a pessoa regressar à experiência, a mancha estará ligeiramente diferente, como um território que evolui com cada visita."
+    }
+  ],
+  "participant_verbs": [
+    "dançar",
+    "mover",
+    "escutar",
+    "observar",
+    "respirar",
+    "improvisar",
+    "silenciar"
+  ],
+  "system_responses": [
+    {
+      "trigger": "movimento inicial (cursor, toque, tecla)",
+      "response": "Mancha terrosa expande/contrói/divide-se em partículas que seguem a trajectória. Som de passos ou batidas de pé emerge."
+    },
+    {
+      "trigger": "ritmo do gesto (rápido/lento, curto/longo)",
+      "response": "Silhuetas de objectos estáticos ganham movimento e o som evolui para uma melodia baseada em ritmos folclóricos. A cor das silhuetas modula-se com o tom do som."
+    },
+    {
+      "trigger": "pausa ou silêncio prolongado (10 segundos)",
+      "response": "Som e silhuetas desaparecem. Mancha terrosa pulsa sozinha. Nova camada é revelada (palavras ou frases em movimento)."
+    },
+    {
+      "trigger": "escolha de continuar, parar ou fechar os olhos",
+      "response": "Se continuar: coreografia improvisada entre pessoa e sistema. Se parar: silhuetas congelam e som para. Se fechar os olhos: som e silhuetas desaparecem, revelando nova camada."
+    },
+    {
+      "trigger": "fim da sessão",
+      "response": "Devolução de uma 'dança' única (sequência de gestos) como partitura visual e sonora. Mancha terrosa ganha nova camada de cor/textura."
+    }
+  ],
+  "sensory_signature_id": "dancas_folclore_mover_039",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "mancha terrosa pulsante",
+        "silhuetas de objectos estáticos em movimento",
+        "partículas que seguem trajectória do gesto",
+        "palavras/ditados em movimento coreográfico",
+        "partitura visual da dança (formas geométricas coloridas)",
+        "modulação de cor com base no som"
+      ],
+      "intensity": "subtle_to_immersive"
+    },
+    "auditory": {
+      "elements": [
+        "som subliminar de vento/folhas secas",
+        "passos ou batidas de pé (ritmo folclórico)",
+        "melodia modal ou tradicional portuguesa",
+        "modulação de tom com base no gesto",
+        "silêncio como elemento ativo"
+      ],
+      "spatialization": "mono_to_stereo"
+    },
+    "haptic": {
+      "elements": [
+        "vibração opcional em dispositivos compatíveis (ex: telemóvel) para gestos rápidos"
+      ],
+      "fallback": "pulso visual (mancha terrosa) para quem não tem vibração"
+    },
+    "kinesthetic": {
+      "elements": [
+        "trajectória do cursor/dedo",
+        "velocidade e pressão do gesto",
+        "ritmo do movimento (rápido/lento)"
+      ],
+      "fallback": "controle por teclado (setas, espaço) ou voz (comandos simples como 'rápido', 'devagar')"
+    },
+    "proprioceptive": {
+      "elements": [
+        "instruções implícitas para ajustar postura (ex: 'fechar os olhos')",
+        "percepção do ritmo corporal vs. ritmo do sistema"
+      ],
+      "fallback": "opção para desativar sugestões corporais"
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "respiração percebida (mancha pulsa ao ritmo de uma respiração)",
+        "espera/silêncio como parte da experiência",
+        "ritmo acelerado ou abrandado com base na interacção"
+      ]
+    },
+    "spatial": {
+      "elements": [
+        "profundidade visual (silhuetas sobrepostas)",
+        "movimento no ecrã como extensão do espaço físico"
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "evocação de cheiros de terra, poeira ou ervas secas (através de linguagem: ex: 'o cheiro da terra depois da chuva')"
+      ],
+      "method": "textual_and_sonic"
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "evocação de sabores associados a memórias de festas ou danças (ex: 'o gosto do pão com chouriço na festa da aldeia')"
+      ],
+      "method": "textual_and_visual"
+    },
+    "social_presence": {
+      "elements": [
+        "sensação de dançar com algo invisível (objectos, memórias, território)",
+        "partilha indireta de danças guardadas (rasto para sessões futuras)"
+      ],
+      "method": "implicit_and_latent"
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": {
+      "from": "movimento (gestos da pessoa)",
+      "to": "som (ritmo e tom) + cor (modulação visual das silhuetas)",
+      "description": "O ritmo e a trajectória do gesto da pessoa são traduzidos em som (batidas, melodias) e em cores que modulam as silhuetas em movimento."
+    },
+    "secondary": {
+      "from": "som (melodia folclórica)",
+      "to": "movimento (silhuetas dançam ao ritmo do som)",
+      "description": "A melodia gerada pelo gesto da pessoa faz com que as silhuetas de objectos estáticos se movam como se estivessem a dançar."
+    },
+    "tertiary": {
+      "from": "silêncio (pausa prolongada)",
+      "to": "aparição (palavras/ditados em movimento)",
+      "description": "O silêncio ativo (espera) revela uma nova camada de texto que se move como parte da coreografia."
+    }
+  },
+  "silence_or_absence": {
+    "role": "active_agent",
+    "manifestations": [
+      {
+        "type": "initial",
+        "description": "Som subliminar de vento/folhas secas no limiar, quase imperceptível."
+      },
+      {
+        "type": "interactive",
+        "description": "Silêncio abrupto após o desvio (stage 5), que convida a pessoa a reflectir ou agir."
+      },
+      {
+        "type": "revelatory",
+        "description": "Silêncio prolongado (10 segundos) revela uma nova camada de palavras/ditados."
+      },
+      {
+        "type": "latent",
+        "description": "A mancha terrosa pulsa em silêncio, como se respirasse, mesmo quando não há som."
+      }
+    ]
+  },
+  "surprise_or_indeterminacy": {
+    "mechanisms": [
+      {
+        "type": "unexpected_stop",
+        "description": "As silhuetas param abruptamente e o som corta, criando um momento de desvio."
+      },
+      {
+        "type": "emergent_words",
+        "description": "Palavras ou frases aparecem em movimento, sem aviso prévio, como parte da coreografia."
+      },
+      {
+        "type": "unique_dance",
+        "description": "A devolução é uma sequência de gestos única, gerada com base na interacção da pessoa."
+      },
+      {
+        "type": "evolving_territory",
+        "description": "A mancha terrosa ganha uma nova camada de cor/textura em cada sessão, como se o território evoluísse."
+      }
+    ]
+  },
+  "session_variation": [
+    {
+      "type": "gesture_rhythm",
+      "description": "A velocidade e o ritmo dos gestos da pessoa alteram a intensidade do som e a velocidade das silhuetas."
+    },
+    {
+      "type": "trajectory_path",
+      "description": "A trajectória do cursor/dedo influencia a forma como as partículas se dispersam e as silhuetas se movem."
+    },
+    {
+      "type": "randomized_words",
+      "description": "As palavras/ditados que aparecem são seleccionados aleatoriamente de um corpus de frases folclóricas, mas sempre coerentes com o tema."
+    },
+    {
+      "type": "territorial_memory",
+      "description": "A mancha terrosa retém memórias de sessões anteriores, evoluindo visualmente com o tempo."
+    },
+    {
+      "type": "silence_duration",
+      "description": "A duração do silêncio necessário para revelar a nova camada varia subtamente entre sessões (8-12 segundos)."
+    },
+    {
+      "type": "sound_scale",
+      "description": "A escala modal ou tradicional usada na melodia é seleccionada aleatoriamente entre um conjunto pré-definido (ex: escala frígia, escala de ré menor)."
+    }
+  ],
+  "territorial_binding": {
+    "real_relation": true,
+    "description": "A experiência evoca danças e ritmos folclóricos portugueses, com referências a objectos e memórias territoriais (ex: cadeiras, mesas, árvores, casas). As palavras/ditados que aparecem são extraídas de um corpus de expressões e descrições ligadas a festas, danças e tradições locais. A mancha terrosa pode ser associada a solos ou paisagens específicas (ex: terra do Alentejo, poeira de Lisboa).",
+    "sources": [
+      "Atlas Vivo MILK — 16 seres folclóricos e jogos tradicionais",
+      "Corpus de trava-línguas, adivinhas e ditados populares portugueses"
+    ],
+    "fallback": "Se não houver dados territoriais específicos, a experiência mantém a evocação genérica de folclore português."
+  },
+  "trace_and_return": {
+    "trace": {
+      "type": "latent_memory",
+      "description": "A 'dança' única (sequência de gestos) guardada pela pessoa fica disponível para ser reencontrada em sessões futuras. A mancha terrosa evolui visualmente com cada interacção, como um território que absorve as memórias das danças."
+    },
+    "return": {
+      "type": "partitura",
+      "description": "A pessoa recebe uma partitura visual e sonora da sua dança, que pode ser repetida ou partilhada (opcionalmente)."
+    },
+    "cosmic_binding": {
+      "description": "As danças guardadas podem ser integradas no COSMICOXES como partículas ou constelações, representando memórias corporais do território."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "for_blind": {
+        "description": "Modo de áudio aumentado: o som evolui para uma narrativa sonora que descreve o movimento das silhuetas e a modulação de cores (ex: 'as cadeiras dançam em círculo, vermelhas como o pôr do sol').",
+        "trigger": "Tecla de atalho ou opção no menu de acessibilidade."
+      },
+      "reduced_motion": {
+        "description": "As silhuetas movem-se de forma mais suave e previsível, com menos partículas e transições mais lentas.",
+        "trigger": "Preferência do sistema ou opção no menu."
+      },
+      "high_contrast": {
+        "description": "A mancha terrosa e as silhuetas ganham contornos mais definidos e cores mais contrastadas.",
+        "trigger": "Preferência do sistema ou opção no menu."
+      }
+    },
+    "auditory": {
+      "for_deaf": {
+        "description": "Legendas visuais para todos os sons (ex: 'passos rápidos', 'melodia em ré menor'). As palavras/ditados aparecem sempre com legendas. A partitura visual da dança é reforçada.",
+        "trigger": "Opção no menu de acessibilidade."
+      },
+      "no_audio": {
+        "description": "A experiência funciona sem som, com foco no movimento visual e nas palavras/ditados.",
+        "trigger": "Opção no menu ou detecção de ausência de áudio."
+      }
+    },
+    "motor": {
+      "no_mouse": {
+        "description": "Controle por teclado (setas para mover, espaço para seleccionar) ou voz (comandos simples como 'mover', 'parar', 'rápido', 'devagar').",
+        "trigger": "Detecção de dispositivo ou opção no menu."
+      },
+      "no_touch": {
+        "description": "Controle por teclado ou rato, com gestos simplificados (ex: clique para mover, arrasto para traçar trajectórias).",
+        "trigger": "Detecção de dispositivo."
+      },
+      "limited_mobility": {
+        "description": "Modo 'respiração': a pessoa pode interagir apenas com a respiração (através de um microfone opcional) ou com gestos mínimos (ex: pressionar uma tecla).",
+        "trigger": "Opção no menu de acessibilidade."
+      }
+    },
+    "cognitive": {
+      "simplified": {
+        "description": "Redução do número de silhuetas e palavras, com foco em um único objecto estático (ex: uma cadeira) e uma única frase. O ritmo é mais lento e previsível.",
+        "trigger": "Opção no menu de acessibilidade."
+      }
+    }
+  },
+  "optional_permissions": {
+    "microphone": {
+      "purpose": "Permitir controle por voz (comandos simples) ou interacção baseada na respiração (modo 'respiração').",
+      "request_timing": "Apenas quando a pessoa seleciona o modo de acessibilidade correspondente.",
+      "fallback": "Controle por teclado ou rato."
+    },
+    "camera": {
+      "purpose": "Nenhum uso previsto para esta experiência. Permissão não é solicitada.",
+      "request_timing": "N/A"
+    },
+    "geolocation": {
+      "purpose": "Nenhum uso previsto para esta experiência. Permissão não é solicitada.",
+      "request_timing": "N/A"
+    },
+    "motion_sensors": {
+      "purpose": "Detectar movimento do dispositivo para interacções mais imersivas (ex: inclinação para mover silhuetas).",
+      "request_timing": "Apenas quando a pessoa seleciona o modo correspondente.",
+      "fallback": "Controle por cursor, toque ou teclado."
+    }
+  },
+  "overstimulation_risk": {
+    "potential_risks": [
+      {
+        "type": "visual",
+        "description": "Movimento rápido de partículas e silhuetas pode causar desconforto em pessoas com sensibilidade ao movimento ou epilepsia.",
+        "mitigation": [
+          "Opção de 'reduced motion' para desacelerar ou simplificar o movimento.",
+          "Limite no número de partículas em ecrã (máximo de 20).",
+          "Contraste suficiente entre silhuetas e fundo."
+        ]
+      },
+      {
+        "type": "auditory",
+        "description": "Sons repentinos ou melodias complexas podem ser intensos para pessoas com sensibilidade auditiva.",
+        "mitigation": [
+          "Volume inicial baixo, com opção para ajustar.",
+          "Opção para desativar o som.",
+          "Transições suaves entre sons (sem cortes abruptos, exceto no desvio intencional)."
+        ]
+      },
+      {
+        "type": "cognitive",
+        "description": "A experiência exige atenção a múltiplos estímulos (visual, auditivo, kinestésico) simultaneamente.",
+        "mitigation": [
+          "Modo simplificado com menos elementos em ecrã.",
+          "Possibilidade de pausar a experiência a qualquer momento.",
+          "Instruções claras e progressivas."
+        ]
+      }
+    ]
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "O convite 'Move só aquilo que normalmente fica parado' como ponto de partida para uma coreografia entre a pessoa e objectos estáticos.",
+      "Tradução cruzada entre gesto (movimento), som (ritmo/tonalidade) e cor (modulação visual das silhuetas).",
+      "A mancha terrosa como 'território vivo' que evolui com cada sessão, absorvendo memórias das danças.",
+      "Devolução de uma 'dança' única como partitura visual e sonora, baseada nos gestos da pessoa.",
+      "Uso do silêncio como elemento ativo para revelar novas camadas (palavras/ditados em movimento).",
+      "Evocação de folclore português sem reproduzir literalmente coreografias, focando em memórias corporais e objectos do quotidiano.",
+      "Acessibilidade preserva a poesia: o modo de áudio aumentado para cegos transforma a experiência em uma narrativa sonora, e o controle por voz/teclado mantém a interacção kinestésica."
+    ],
+    "comparison": "Esta experiência não pode ser confundida com outras do Atlas porque: (1) não é uma galeria (Galeria Diletante), (2) não é um jogo de acaso (Dado Sem Lado), (3) não é uma conversa (Fucô), (4) não é um ritual de escuta (Escutar o Silêncio), e (5) não é uma exploração territorial (A Deriva do Sentido). A sua assinatura é a tradução de movimento em som e cor, com um território (mancha terrosa) que evolui com a interacção."
+  },
+  "questions_for_eduardo": [
+    {
+      "id": "dancas_corpus_folclore",
+      "question": "Existem referências específicas a danças folclóricas portuguesas (ex: vira, fandango, chula) ou a objectos/elementos territoriais que devam ser incluídos no corpus de silhuetas ou palavras? Caso não, deve ser usado um corpus genérico de objectos do quotidiano (cadeiras, mesas, etc.)?"
+    },
+    {
+      "id": "dancas_mancha_terrosa",
+      "question": "A mancha terrosa deve ter uma associação territorial específica (ex: solo alentejano, poeira de Lisboa) ou pode ser uma evocação genérica de terra/poeira? Caso seja específica, qual a região ou tipo de solo a evocar?"
+    },
+    {
+      "id": "dancas_som_folclorico",
+      "question": "As melodias/sons devem ser baseados em escalas ou ritmos folclóricos portugueses específicos (ex: modinha, fado, cantares alentejanos) ou podem ser criações abstratas inspiradas no folclore? Caso sejam específicos, quais as referências autorais?"
+    },
+    {
+      "id": "dancas_partitura_devolucao",
+      "question": "A partitura da dança devolta à pessoa deve ser guardada localmente (no dispositivo) ou pode ser partilhada no COSMICOXES como um rasto público (com consentimento)?"
+    }
+  ],
+  "improvement_proposals": [
+    {
+      "id": "dancas_territorial_specificity",
+      "proposal": "Integração de dados territoriais específicos (ex: festas, danças, objectos) da curadoria 'falARTE' ou do corpus de 826 festas públicas para personalizar as silhuetas e palavras com base na localização ou preferências da pessoa. Requer validação autoral para evitar sobrecarga de dados.",
+      "source": "RELATORIO_COMPLETO_ESTADO_CAMADA_PUBLICA_ATLAS_VIVO_MILK_2026-07-25"
+    },
+    {
+      "id": "dancas_multiplayer_latent",
+      "proposal": "Adicionar uma camada de 'dança colectiva' onde as silhuetas e sons de várias pessoas (em sessões diferentes) possam interagir indiretamente, criando uma coreografia latente no COSMICOXES. Requer moderação e consentimento explícito para partilha de rastos.",
+      "source": "COSMICOXES como sistema de relações não pontuadas"
+    },
+    {
+      "id": "dancas_physical_bridge",
+      "proposal": "Criar uma ponte para experiências físicas futuras: a partitura da dança devolta poderia ser impressa ou projectada em espaços públicos, convidando à sua execução corporal. Requer validação da viabilidade e alinhamento com a camada física do Atlas.",
+      "source": "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md (Ponto de Kusama, Corpo que Percebe)"
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

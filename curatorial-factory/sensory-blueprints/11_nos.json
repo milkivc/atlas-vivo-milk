@@ -1,0 +1,444 @@
+{
+  "id": "nos",
+  "canonical_name": "NÓS",
+  "source_evidence": {
+    "primary": [
+      {
+        "source": "PUBLICO_TERRITORIAL__CURADORIA_NOS_FALARTE_RESIDUAL.pdf",
+        "authority": "autoral_direct",
+        "relevance": "10 mecânicas territoriais autorais (FALArte) e princípios de recolha/consentimento"
+      },
+      {
+        "source": "falARTE.pdf + fragmentos falARTE.pdf",
+        "authority": "autoral_direct",
+        "relevance": "mecânicas territoriais estruturadas e regras de recolha/consentimento"
+      },
+      {
+        "source": "catalog_entry.mecanica",
+        "authority": "curatorial_canon",
+        "relevance": "convite: 'Ata duas palavras que nunca se encontraram.'"
+      }
+    ],
+    "secondary": [
+      {
+        "source": "Curadoria Cultural e Existencialismo Profundo.pdf",
+        "authority": "interpretative",
+        "relevance": "território fluido, língua viva, dissidência"
+      }
+    ]
+  },
+  "authorial_invariants": [
+    "Convite central: 'Ata duas palavras que nunca se encontraram.'",
+    "Foco em identidade toponímica e interacção real com o território (FALArte).",
+    "Recolha baseada em 10 mecânicas autorais (ex: 'O lugar escondido', '30 dias, o mesmo lugar', 'Palavras que desapareceram').",
+    "Consentimento granular, moderação humana e minimização de dados.",
+    "Rasto desejado: memória, palavra, som, gesto, folclore, fábula, território.",
+    "Linguagem viva, oralidade e rasto como princípios.",
+    "Não é ficha jurídica pesada; a camada legal protege sem matar a experiência."
+  ],
+  "perceptual_intent": "Criar um espaço onde o ato de 'atar' duas palavras desconhecidas se torne um ritual sensorial e territorial. A experiência deve evocar a tensão entre o individual e o colectivo ('NÓS'), transformando a linguagem em matéria viva que respira, soa, pesa e deixa rastos no território. O participante deve sentir que está a tecer uma rede invisível entre memórias, lugares e vozes, onde cada nó é uma palavra que ganha corpo, som e textura ao ser atada a outra.",
+  "threshold": {
+    "description": "A pessoa entra num espaço vazio, escuro e silencioso, onde apenas um fio de luz horizontal (como um horizonte) divide o ecrã. O fio tremula levemente, como se fosse uma corda suspensa pelo vento. Não há texto, botões ou instruções. O cursor, se presente, transforma-se num nó minúsculo (um círculo com um ponto central) que segue o movimento com um atraso subtil, como se arrastasse um fio invisível.",
+    "sensory_trigger": "O fio de luz (visual) + o nó-cursor (visual/kinestético) + o silêncio ativo (auditivo)."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": 1,
+      "name": "LIMIAR",
+      "description": "O fio de luz horizontal oscila lentamente, como uma respiração. O nó-cursor aparece e desaparece em ciclos de 3 segundos, sincronizado com um som subliminar de fio a ser puxado (inaudível se o volume estiver baixo, mas perceptível como vibração no ar)."
+    },
+    {
+      "stage": 2,
+      "name": "CHAMADA",
+      "description": "O fio de luz ganha textura: passa a ser uma corda trançada, com fibras visíveis que se movem como se estivessem a ser tecidas. Um murmúrio distorcido (como vozes sobrepostas) emerge em volume muito baixo, repetindo a palavra 'ata' em diferentes tons e ritmos. O nó-cursor agora deixa um rasto de fio fino ao ser movido."
+    },
+    {
+      "stage": 3,
+      "name": "PRIMEIRO GESTO",
+      "description": "A pessoa é convidada a clicar ou tocar o ecrã. Ao fazê-lo, o nó-cursor fixa-se no ponto de contacto e o fio de luz horizontal divide-se em dois, criando um 'Y' invertido. Um som de 'clique' orgânico (como um galho a partir) soa, e o murmúrio cessa abruptamente."
+    },
+    {
+      "stage": 4,
+      "name": "RESPOSTA VIVA",
+      "description": "Aparecem duas palavras aleatórias (de um corpus territorial pré-selecionado, ex: 'azulejo' e 'sombrinha'), cada uma num extremo do 'Y'. As palavras tremulam como se estivessem suspensas por fios. Um som de vento leve preenche o espaço. O nó-cursor agora pode ser arrastado para 'atar' as palavras."
+    },
+    {
+      "stage": 5,
+      "name": "DESVIO",
+      "description": "Ao aproximar o nó-cursor de uma das palavras, esta ganha peso visual (sombra alongada, como se fosse um objecto físico) e emite um som único (ex: 'azulejo' soa como um tilintar de cerâmica; 'sombrinha' como um estalar de tecido). Se a pessoa hesitar, as palavras começam a afastar-se lentamente, como se fossem puxadas por uma corrente invisível."
+    },
+    {
+      "stage": 6,
+      "name": "APROFUNDAMENTO SENSORIAL",
+      "description": "Ao 'atar' as duas palavras (arrastar o nó-cursor para o centro do 'Y'), o fio entre elas ganha espessura e textura (visual), e o som das duas palavras funde-se num único timbre (auditivo). A textura do fio passa a reflectir a 'matéria' das palavras: ex: 'azulejo' + 'sombrinha' = fio com padrões geométricos e som de chuva em telhado. O espaço ao redor escurece, focando a atenção no nó."
+    },
+    {
+      "stage": 7,
+      "name": "ESCOLHA / ACASO / SILÊNCIO",
+      "description": "O nó atado começa a pulsar. A pessoa pode: (a) soltar o nó (clique/gestos), (b) esperar 10 segundos, ou (c) pronunciar uma palavra (opcional, com permissão de microfone). Se (a) ou (b), o nó desata-se e as palavras caem como folhas ao vento, emitindo sons de queda. Se (c), a palavra pronunciada é 'atada' ao nó, criando um novo trio. O silêncio é uma opção válida: se a pessoa não interagir, o nó desvanece-se lentamente, deixando apenas o fio de luz original."
+    },
+    {
+      "stage": 8,
+      "name": "APARIÇÃO",
+      "description": "Se o nó for mantido atado por 5 segundos, emerge uma 'constelação' de palavras relacionadas (ex: 'rua', 'canto', 'avó') que orbitam o nó central. Estas palavras são extraídas do corpus territorial e da mecânica FALArte (ex: 'Palavras que desapareceram'). A constelação tem som ambiente (ex: murmúrio de mercado, risos distantes) e textura visual (ex: manchas de tinta, como um mapa antigo)."
+    },
+    {
+      "stage": 9,
+      "name": "DEVOLUÇÃO",
+      "description": "O nó atado e a constelação transformam-se num 'bilhete' digital: uma imagem gerativa que combina as palavras atadas, a textura do fio e um fragmento sonoro (ex: o timbre fundido). O bilhete é apresentado como um objecto táctil (sombra, relevo visual) e pode ser: (a) guardado (download como imagem + áudio), (b) partilhado (link único, sem dados pessoais), ou (c) devolvido ao território (adicionado a um 'mapa de nós' colectivo, visível na camada pública)."
+    },
+    {
+      "stage": 10,
+      "name": "RASTO / LATÊNCIA",
+      "description": "O bilhete, se partilhado ou devolvido, deixa um rasto no 'mapa de nós': um ponto luminoso que pulsa no território correspondente às palavras atadas (ex: 'azulejo' + 'sombrinha' → ponto em Alfama). O rasto permanece visível para outros participantes, que podem interagir com ele (ex: 'desatar' o nó, adicionar uma nova palavra). Se o bilhete for guardado, o rasto é apenas local (no dispositivo da pessoa)."
+    }
+  ],
+  "participant_verbs": [
+    "atar",
+    "hesitar",
+    "arrastar",
+    "escutar",
+    "esperar",
+    "pronunciar",
+    "soltar"
+  ],
+  "system_responses": [
+    {
+      "trigger": "clique/toque inicial",
+      "response": "Divisão do fio de luz em 'Y' + som de galho a partir + cessar do murmúrio."
+    },
+    {
+      "trigger": "movimento do nó-cursor",
+      "response": "Rasto de fio fino + palavras ganham peso visual e som único ao aproximar."
+    },
+    {
+      "trigger": "arrastar nó para atar palavras",
+      "response": "Fio ganha espessura/textura + som das palavras funde-se + foco visual no nó."
+    },
+    {
+      "trigger": "soltar nó ou esperar",
+      "response": "Nó desata-se + palavras caem com sons de queda + retorno ao fio de luz original."
+    },
+    {
+      "trigger": "pronunciar palavra (opcional)",
+      "response": "Palavra é atada ao nó + novo trio de palavras + som de voz distorcida (como eco)."
+    },
+    {
+      "trigger": "manter nó atado por 5 segundos",
+      "response": "Emerge constelação de palavras relacionadas + som ambiente territorial."
+    },
+    {
+      "trigger": "guardar/partilhar/devolver bilhete",
+      "response": "Bilhete gerativo (imagem + áudio) + rasto no mapa de nós ou dispositivo local."
+    }
+  ],
+  "sensory_signature_id": "NOS_FIO_VOZ_TERRITORIO_011",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "Fio de luz horizontal (limiar)",
+        "Corda trançada com fibras móveis",
+        "Nó-cursor com rasto de fio",
+        "Palavras suspensas por fios (peso visual)",
+        "Textura do fio (geométrica, orgânica, etc.)",
+        "Constelação de palavras (manchas de tinta, mapa antigo)",
+        "Bilhete gerativo (sombra, relevo visual)",
+        "Mapa de nós (pontos luminosos pulsantes)"
+      ],
+      "dynamics": [
+        "Oscilação do fio (respiração)",
+        "Pulsação do nó atado",
+        "Queda das palavras (como folhas ao vento)",
+        "Foco visual (escurecimento do espaço ao redor)"
+      ]
+    },
+    "auditory": {
+      "elements": [
+        "Murmúrio distorcido ('ata')",
+        "Som de fio a ser puxado (subaudível)",
+        "Som único por palavra (ex: tilintar, estalar)",
+        "Timbre fundido das palavras atadas",
+        "Som ambiente territorial (ex: mercado, risos)",
+        "Som de queda das palavras",
+        "Voz distorcida (eco da palavra pronunciada)"
+      ],
+      "dynamics": [
+        "Volume cresce/decresce com proximidade do nó-cursor",
+        "Fusão de sons (palavras atadas)",
+        "Silêncio ativo (ausência de som como elemento dramático)"
+      ]
+    },
+    "haptic": {
+      "elements": [
+        "Vibração sutil (opcional, em dispositivos compatíveis) ao 'atar' o nó"
+      ],
+      "dynamics": [
+        "Feedback táctil sincronizado com o som de 'clique' orgânico"
+      ]
+    },
+    "kinesthetic": {
+      "elements": [
+        "Movimento do nó-cursor (arrasto, clique)",
+        "Trajectória do fio (resistência visual ao arrastar)"
+      ],
+      "dynamics": [
+        "Atraso subtil do nó-cursor (como se arrastasse um fio invisível)",
+        "Resistência visual ao aproximar das palavras (peso)"
+      ]
+    },
+    "proprioceptive": {
+      "elements": [
+        "Instrução implícita de ritmo (ex: esperar 5 segundos para a constelação surgir)"
+      ],
+      "dynamics": [
+        "Sincronização entre movimento do cursor e respiração (fio oscila como pulmão)"
+      ]
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "Espera (10 segundos para soltar o nó)",
+        "Pulsação do nó atado",
+        "Duração da constelação (visível até interacção seguinte)"
+      ],
+      "dynamics": [
+        "Aceleração/desaceleração do tempo percebido (ex: palavras caem em câmera lenta)"
+      ]
+    },
+    "spatial": {
+      "elements": [
+        "Fio de luz como horizonte (divisão do espaço)",
+        "Palavras em extremos do 'Y' (distância espacial)",
+        "Constelação orbitando o nó (profundidade)"
+      ],
+      "dynamics": [
+        "Distância entre palavras afeta a intensidade do som e peso visual"
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "Evocação de cheiros territoriais (ex: 'azulejo' → argila molhada; 'sombrinha' → tecido úmido) via texto ou som (ex: descrição sonorizada: 'cheiro a chuva em telha')"
+      ],
+      "dynamics": [
+        "Cheiro evocado muda com a combinação de palavras"
+      ]
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "Evocação de sabores via memória (ex: 'pão' → 'gosto a pão quente com manteiga') em texto ou som (ex: som de mastigação distorcido)"
+      ],
+      "dynamics": [
+        "Sabor evocado associado a palavras do corpus territorial (ex: 'canto' → 'gosto a vinho de ramela')"
+      ]
+    },
+    "social_presence": {
+      "elements": [
+        "Murmúrio de vozes (presença colectiva)",
+        "Mapa de nós (rastos de outros participantes)",
+        "Possibilidade de interagir com nós de outros (ex: 'desatar')"
+      ],
+      "dynamics": [
+        "Presença de outros participantes afecta o ambiente sonoro (ex: mais murmúrios se houver mais nós ativos)"
+      ]
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": {
+      "from": "visual (textura do fio)",
+      "to": "auditory (timbre fundido das palavras)",
+      "description": "A textura visual do fio (ex: geométrica para 'azulejo' + orgânica para 'sombrinha') traduz-se num timbre sonoro único que funde os sons individuais das palavras."
+    },
+    "secondary": {
+      "from": "kinesthetic (movimento do nó-cursor)",
+      "to": "visual (peso das palavras)",
+      "description": "O gesto de arrastar o nó-cursor para atar as palavras traduz-se em peso visual (sombra alongada) e som único para cada palavra, como se o movimento físico afectasse a 'matéria' das palavras."
+    },
+    "tertiary": {
+      "from": "auditory (murmúrio de vozes)",
+      "to": "spatial (distância entre palavras)",
+      "description": "O murmúrio de vozes distorcido (som) afecta a distância espacial entre as palavras no 'Y', como se as vozes estivessem a puxar os fios."
+    }
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio é um elemento ativo: (1) ausência de murmúrio no limiar, (2) cessar abrupto do murmúrio após o primeiro gesto, (3) opção de não interagir (nó desvanece-se), (4) som ambiente territorial pode ser substituído por silêncio se a pessoa não pronunciar palavra.",
+    "purpose": "Criar tensão e focar a atenção no gesto mínimo. O silêncio evoca a ausência de palavras 'perdidas' (mecânica FALArte: 'Palavras que desapareceram')."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanisms": [
+      {
+        "type": "acaso controlado",
+        "description": "Seleção aleatória de palavras do corpus territorial (ex: 2 de 500), garantindo que nunca se repetem na mesma sessão."
+      },
+      {
+        "type": "resposta a ritmo",
+        "description": "Se a pessoa arrastar o nó-cursor rapidamente, as palavras afastam-se mais depressa; se lentamente, aproximam-se."
+      },
+      {
+        "type": "combinação de fragmentos",
+        "description": "A constelação de palavras relacionadas é gerada dinâmicamente com base nas palavras atadas e no território (ex: 'azulejo' + 'Alfama' → constelação com 'azulejaria', 'freguesia', 'mestre')."
+      },
+      {
+        "type": "presença de outros",
+        "description": "Se outros participantes estiverem a interagir com o mapa de nós, os seus rastos podem afectar o ambiente sonoro (ex: mais murmúrios) ou visual (ex: fios de luz mais brilhantes)."
+      },
+      {
+        "type": "silêncio como desvio",
+        "description": "Se a pessoa não interagir durante 30 segundos, o nó-cursor desaparece e o fio de luz volta ao estado inicial, como se a experiência tivesse 'respirado'."
+      }
+    ]
+  },
+  "session_variation": [
+    {
+      "type": "acaso controlado",
+      "description": "Palavras iniciais são seleccionadas aleatoriamente do corpus territorial, com restrição para evitar repetições na mesma sessão."
+    },
+    {
+      "type": "ordem mutável",
+      "description": "A constelação de palavras relacionadas aparece em ordens diferentes a cada sessão."
+    },
+    {
+      "type": "resposta a ritmo/velocidade",
+      "description": "A velocidade do gesto (arrastar o nó) afecta a distância entre as palavras e a intensidade do som."
+    },
+    {
+      "type": "resposta a posição/trajectória",
+      "description": "A trajectória do nó-cursor (ex: circular vs. linear) afecta a textura do fio (ex: circular → fio em espiral; linear → fio reto)."
+    },
+    {
+      "type": "temporalidade real",
+      "description": "O som ambiente territorial muda consoante a hora do dia (ex: de manhã → sons de mercado; à noite → sons de ruas desertas)."
+    },
+    {
+      "type": "território",
+      "description": "Se a geolocalização estiver activada (opcional), as palavras e a constelação são influenciadas pela freguesia actual (ex: em Alfama → mais palavras relacionadas com azulejos e fado)."
+    }
+  ],
+  "territorial_binding": {
+    "mechanism": "As palavras são extraídas de um corpus territorial pré-selecionado, baseado nas 10 mecânicas FALArte (ex: 'Palavras que desapareceram', 'O que ainda resiste'). A constelação de palavras relacionadas é gerada com base em: (1) palavras atadas, (2) território (freguesia, se geolocalização activada), (3) rastos de outros participantes (ex: palavras frequentadas por outros).",
+    "evidence": {
+      "corpus": "PUBLICO_TERRITORIAL__CURADORIA_NOS_FALARTE_RESIDUAL.pdf + falARTE.pdf",
+      "territorial_anchors": [
+        "freguesias de Lisboa",
+        "topónimos",
+        "memórias colectivas",
+        "ofícios tradicionais"
+      ]
+    },
+    "optional_geolocation": true
+  },
+  "trace_and_return": {
+    "trace": {
+      "digital": "Bilhete gerativo (imagem + áudio) com as palavras atadas, textura do fio e fragmento sonoro.",
+      "collective": "Ponto luminoso no 'mapa de nós' (visível na camada pública), associado ao território das palavras atadas."
+    },
+    "return": {
+      "to_participant": "Bilhete descarregável (imagem + áudio) ou link único para partilha.",
+      "to_system": "Rasto no mapa de nós (outros participantes podem interagir com o nó).",
+      "latency": "O bilhete pode ser reencontrado no mapa de nós por outros participantes, que podem 'desatar' o nó ou adicionar novas palavras."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "reduced_motion": "Desativar oscilação do fio e pulsação do nó; palavras aparecem estáticas com descrição textual da textura (ex: 'fio com padrões geométricos').",
+      "high_contrast": "Fio de luz e palavras com contornos pretos ou brancos, consoante o fundo.",
+      "color_blind": "Texturas distintas para cada palavra (ex: 'azulejo' = padrão de azulejos; 'sombrinha' = padrão de tecido)."
+    },
+    "auditory": {
+      "no_audio": "Legendas para todos os sons (ex: 'som de tilintar de cerâmica' para 'azulejo').",
+      "low_audio": "Sons substituídos por vibração (opcional) ou descrição textual.",
+      "deaf_hard_of_hearing": "Transcrição visual do murmúrio (ex: 'vozes sobrepostas a dizer 'ata'')."
+    },
+    "haptic": {
+      "no_vibration": "Feedback visual (ex: nó-cursor brilha ao 'atar') em vez de vibração."
+    },
+    "kinesthetic": {
+      "no_mouse": "Controles via teclado: setas para mover o nó-cursor; Enter para atar; Espaço para soltar.",
+      "no_touch": "Mesmos controles de teclado + voz (ex: 'atar', 'soltar', 'espera').",
+      "reduced_motion": "Movimento do nó-cursor sem atraso ou resistência."
+    },
+    "proprioceptive": {
+      "no_timing": "Opção para desativar temporizadores (ex: constelação aparece imediatamente)."
+    },
+    "temporal_interoceptive": {
+      "no_wait": "Opção para pular espera (ex: constelação aparece em 1 segundo em vez de 5)."
+    },
+    "cognitive": {
+      "simplified": "Modo 'passo a passo' com instruções textuais claras (ex: '1. Clique para dividir o fio. 2. Arraste o nó para atar as palavras.').",
+      "no_surprise": "Desativar o afastamento das palavras se a pessoa hesitar."
+    },
+    "social_presence": {
+      "no_sharing": "Opção para desativar a partilha do bilhete e o rasto no mapa de nós."
+    },
+    "poetic_equivalence": "Todas as alternativas preservam a intenção poética: o ato de 'atar' palavras ganha forma visual, sonora e táctil, mesmo em modos simplificados."
+  },
+  "optional_permissions": [
+    {
+      "permission": "microphone",
+      "purpose": "Permitir que a pessoa pronuncie uma palavra para ser atada ao nó.",
+      "fallback": "Campo de texto para inserir a palavra manualmente."
+    },
+    {
+      "permission": "geolocation",
+      "purpose": "Influenciar as palavras e a constelação com base na freguesia actual.",
+      "fallback": "Palavras e constelação baseadas apenas no corpus territorial geral."
+    }
+  ],
+  "overstimulation_risk": {
+    "risks": [
+      {
+        "type": "visual",
+        "description": "Oscilação do fio e pulsação do nó podem causar desconforto em pessoas com sensibilidade ao movimento.",
+        "mitigation": "Modo 'reduced_motion' desativa oscilações e pulsações."
+      },
+      {
+        "type": "auditory",
+        "description": "Murmúrio distorcido e sons súbitos (ex: tilintar) podem ser intensos.",
+        "mitigation": "Volume ajustável; opção para desativar sons; legendas para todos os áudios."
+      },
+      {
+        "type": "cognitive",
+        "description": "A ausência de instruções explícitas pode causar frustração.",
+        "mitigation": "Modo 'simplified' com instruções textuais; dicas visuais (ex: seta a apontar para o nó-cursor)."
+      },
+      {
+        "type": "temporal",
+        "description": "Espera de 5 segundos para a constelação pode ser longas para alguns.",
+        "mitigation": "Opção para pular espera; temporizadores visíveis (ex: barra de progresso)."
+      }
+    ]
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "O convite 'Ata duas palavras que nunca se encontraram' como núcleo da experiência.",
+      "Tradução cruzada entre textura visual do fio e timbre sonoro das palavras atadas.",
+      "Uso do silêncio como elemento ativo (cessar do murmúrio, opção de não interagir).",
+      "Bilhete gerativo (imagem + áudio) como devolução, com rasto no mapa de nós.",
+      "Corpus territorial baseadas nas 10 mecânicas FALArte (ex: 'Palavras que desapareceram').",
+      "Presença colectiva via mapa de nós (rastos de outros participantes).",
+      "Evocação de olfacto e paladar via memória territorial (ex: 'cheiro a chuva em telha')."
+    ],
+    "comparison": "Nenhuma outra experiência no Atlas usa a mecânica de 'atar' palavras com fios visuais/sonoros, nem combina tradução cruzada entre textura e timbre com um corpus territorial tão específico. A devolução (bilhete + mapa de nós) é única em como materializa a rede de palavras e memórias."
+  },
+  "questions_for_eduardo": [
+    "O corpus territorial para as palavras iniciais deve ser extraído apenas das 10 mecânicas FALArte, ou pode incluir outras fontes (ex: topónimos, ofícios)?",
+    "A constelação de palavras relacionadas deve ser gerada automaticamente (com base em semelhança semântica) ou curada manualmente para garantir coerência territorial?",
+    "O 'mapa de nós' deve ser visível apenas na camada pública do Atlas, ou também pode ser acessível via link directo (ex: para partilha em redes sociais)?",
+    "O bilhete gerativo deve incluir apenas as palavras atadas e o fio, ou também pode incorporar elementos do território (ex: nome da freguesia)?",
+    "A opção de 'desatar' um nó de outro participante deve ser permitida, ou apenas a adição de novas palavras?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Incluir uma mecânica de 'nó colectivo': se múltiplos participantes atarem as mesmas palavras em sessões diferentes, o nó ganha uma camada adicional (ex: cor mais intensa, som mais complexo) no mapa de nós.",
+      "justification": "Reforça a ideia de 'NÓS' como rede colectiva e incentiva a exploração de combinações de palavras."
+    },
+    {
+      "proposal": "Adicionar uma 'memória do nó': ao interagir com um nó no mapa de nós, a pessoa pode ver/ouvir as palavras originais e a constelação associada, como se estivesse a 'desfazer' o nó.",
+      "justification": "Aprofundar a devolução e a latência, permitindo que os rastos tenham mais camadas de significado."
+    },
+    {
+      "proposal": "Integração com a mecânica 'Remetente Ausente' (FALArte): permitir que o bilhete gerativo seja enviado como 'carta nunca entregue' para o mapa de nós, sem autor identificado.",
+      "justification": "Aumenta a variedade de rastos e alinha com o princípio de anonimato/consentimento granular."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

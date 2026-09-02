@@ -1,0 +1,378 @@
+{
+  "id": "alcunhas",
+  "canonical_name": "Alcunhas: O Nome que Sobra",
+  "source_evidence": {
+    "primary": [
+      {
+        "id": "falARTE_mecanica_7",
+        "text": "Palavras que desapareceram — gírias, alcunhas e modos de dizer em desaparecimento.",
+        "authority": "autoral",
+        "type": "mecânica territorial"
+      },
+      {
+        "id": "catalog_entry_alcunhas",
+        "text": "Dá um nome ao que não cabe no nome.",
+        "authority": "curatorial",
+        "type": "convite"
+      }
+    ],
+    "secondary": [
+      {
+        "id": "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md",
+        "text": "O Corpo que Percebe — percepção incorporada; digital quase ausente; corpo não é dado.",
+        "authority": "interpretative",
+        "type": "princípio"
+      },
+      {
+        "id": "Curadoria Cultural e Existencialismo Profundo.pdf",
+        "text": "língua viva, oralidade, interacção sensorial, sotaques, pluralidade.",
+        "authority": "interpretative",
+        "type": "princípio"
+      }
+    ]
+  },
+  "authorial_invariants": [
+    "Foco em palavras/alcunhas em desaparecimento ou sem lugar oficial no dicionário.",
+    "Convite para nomear o que resiste à nomeação.",
+    "Relação com oralidade, território e memória intergeracional.",
+    "Não é um glossário estático; é um ato de nomeação viva.",
+    "Preserva a autoria anónima ou atribuída, mas nunca inventa factos etnográficos."
+  ],
+  "perceptual_intent": "Criar uma experiência onde a pessoa sinta o peso, a textura e o som das palavras que escapam ao dicionário — como se as alcunhas fossem objectos vivos que se revelam, escondem ou transformam ao serem tocados, ditos ou ouvidos. A experiência deve evocar a sensação de segurar uma palavra que não existe em lugar nenhum, exceto na boca de quem a diz.",
+  "threshold": {
+    "description": "A pessoa entra num espaço vazio, exceto por um único ponto de luz fraca (como uma vela ou luva de nevoeiro) que pulsa lentamente. O cursor/dedo, ao aproximar-se, revela uma sombra de uma palavra escrita à mão, como se fosse um rasto de tinta fresca. A palavra não é legível de imediato — apenas se intui que é uma alcunha.",
+    "sensory_trigger": "Aproximação do cursor/dedo ativa um som de respiração ou suspiro muito suave, como se a palavra estivesse a ser ditada por uma voz ausente."
+  },
+  "dramaturgical_arc": [
+    {
+      "phase": "limiar",
+      "action": "O ambiente está escuro, com um único ponto de luz fraca. Um som de vento ou respiração longínqua preenche o espaço. A pessoa sente que algo está presente, mas não visível."
+    },
+    {
+      "phase": "chamada",
+      "action": "O ponto de luz expande-se levemente, revelando uma mancha de tinta que parece uma palavra escrita à mão, mas ilegível. Um murmúrio (sem palavras) convida à aproximação."
+    },
+    {
+      "phase": "primeiro_gesto",
+      "action": "A pessoa move o cursor/dedo sobre a mancha. A palavra começa a ganhar forma, mas ainda está incompleta. O som do murmúrio transforma-se num zumbido que sobe de tom à medida que a aproximação aumenta."
+    },
+    {
+      "phase": "resposta_viva",
+      "action": "A palavra revela-se por completo: uma alcunha (ex: 'Pé-de-Vento', 'Boca-de-Sino'). Ao mesmo tempo, o som do zumbido transforma-se na pronúncia da alcunha, ditada por uma voz que parece vir de várias direções (espacialização sonora). A palavra ganha textura visual: a tinta parece úmida, com gotas que caem lentamente."
+    },
+    {
+      "phase": "desvio",
+      "action": "Se a pessoa tentar clicar ou tocar a palavra, esta desmancha-se em gotas de tinta que caem e formam um novo padrão no chão. O som da voz repete a alcunha, mas agora com um eco que se afasta, como se a palavra estivesse a ser levada pelo vento."
+    },
+    {
+      "phase": "aprofundamento_sensorial",
+      "action": "As gotas de tinta no chão começam a formar uma constelação de outras alcunhas relacionadas (por som, significado ou território). O som da voz mistura-se com sons ambientais (ex: o som de um mercado, o barulho de uma rua) que evocam o contexto onde a alcunha nasceu. A pessoa pode arrastar o cursor/dedo sobre as gotas para 'puxar' uma nova alcunha para o centro."
+    },
+    {
+      "phase": "escolha_acaso_silêncio",
+      "action": "A pessoa pode: (1) escolher uma alcunha para 'adotar' (arrastando-a para um círculo central), (2) deixar que o sistema escolha aleatoriamente uma alcunha para ela, ou (3) permanecer em silêncio, observando as alcunhas desvanecerem-se lentamente."
+    },
+    {
+      "phase": "aparição",
+      "action": "Se a pessoa adotar uma alcunha, esta ganha vida: a palavra passa a ter um peso visual (como se fosse esculpida em pedra ou metal), e o som da voz repete-a num ritmo que imita o batimento cardíaco. Se a pessoa não agir, as alcunhas desaparecem, deixando apenas um eco da última palavra ditada."
+    },
+    {
+      "phase": "devolução",
+      "action": "A alcunha adotada (ou a última ouvida) é devolver à pessoa sob a forma de um 'bilhete' digital: um fragmento de papel rasgado com a palavra escrita à mão, acompanhado por um som de papel a ser amassado. O bilhete pode ser guardado (como um ficheiro de imagem) ou partilhado (como um link que leva a esta experiência com a alcunha pré-selecionada)."
+    },
+    {
+      "phase": "rasto_latência",
+      "action": "A alcunha adotada passa a fazer parte de um 'inventário de palavras vivas' do Atlas. Em sessões futuras, pode aparecer como uma das gotas de tinta no chão, ou ser pronunciada por outras vozes (de outras pessoas) que também a adotaram. O rasto é anónimo, mas a palavra ganha uma 'pátina' visual (como se fosse usada por várias mãos)."
+    }
+  ],
+  "participant_verbs": [
+    "espreitar",
+    "tocar",
+    "puxar",
+    "adotar",
+    "escutar",
+    "deixar ir",
+    "guardar"
+  ],
+  "system_responses": [
+    {
+      "trigger": "aproximação do cursor/dedo",
+      "response": "Revela a mancha de tinta (palavra ilegível) + som de respiração/murmúrio."
+    },
+    {
+      "trigger": "movimento sobre a mancha",
+      "response": "A palavra ganha legibilidade + zumbido que sobe de tom."
+    },
+    {
+      "trigger": "clique/toque na palavra",
+      "response": "A palavra desmancha-se em gotas de tinta + voz pronuncia a alcunha com eco."
+    },
+    {
+      "trigger": "arrastar alcunha para o centro",
+      "response": "A alcunha ganha peso visual (pedra/metal) + som de batimento cardíaco."
+    },
+    {
+      "trigger": "silêncio (sem interação por 10 segundos)",
+      "response": "As alcunhas desaparecem lentamente + eco da última palavra ditada."
+    },
+    {
+      "trigger": "escolha aleatória (botão opcional)",
+      "response": "O sistema seleciona uma alcunha ao acaso + som de dado a rolar."
+    },
+    {
+      "trigger": "guarda do bilhete",
+      "response": "Gera ficheiro de imagem do bilhete + som de papel a ser amassado."
+    }
+  ],
+  "sensory_signature_id": "alcunhas_041_v1",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "ponto de luz fraca (vela/luva de nevoeiro)",
+        "mancha de tinta escrita à mão (ilegível → legível)",
+        "gotas de tinta a cair e formar constelações",
+        "textura de tinta úmida/seca/pátina",
+        "bilhete de papel rasgado com palavra escrita à mão",
+        "peso visual da palavra (pedra/metal)"
+      ],
+      "dynamics": [
+        "transparência e opacidade variáveis",
+        "profundidade simulada (gotas a cair no 'chão')",
+        "ritmo de revelação (lento → rápido → desvanecimento)"
+      ]
+    },
+    "auditory": {
+      "elements": [
+        "respiração/murmúrio longínquo",
+        "zumbido que sobe de tom",
+        "voz que pronuncia a alcunha (espacializada)",
+        "eco que se afasta",
+        "sons ambientais (mercado, rua) relacionados com a alcunha",
+        "batimento cardíaco (ritmo)",
+        "som de papel a ser amassado",
+        "som de dado a rolar (para escolha aleatória)"
+      ],
+      "dynamics": [
+        "espacialização sonora (voz vinda de várias direções)",
+        "transição entre sons (respiração → zumbido → voz → eco)",
+        "volume e proximidade variáveis"
+      ]
+    },
+    "haptic": {
+      "elements": [
+        "vibração sutil no dispositivo (opcional) ao tocar a palavra",
+        "feedback táctil ao arrastar a alcunha (resistência simulada)"
+      ],
+      "dynamics": [
+        "intensidade variável (suave → mais forte ao clicar)"
+      ]
+    },
+    "kinesthetic": {
+      "elements": [
+        "movimento do cursor/dedo sobre a mancha",
+        "arrastar a alcunha para o centro",
+        "gestos de 'puxar' ou 'deixar ir'"
+      ],
+      "dynamics": [
+        "velocidade do gesto afeta a rapidez da revelação da palavra",
+        "trajetória do gesto afeta a direção do eco da voz"
+      ]
+    },
+    "proprioceptive": {
+      "elements": [
+        "instrução implícita para aproximar-se ou afastar-se",
+        "sensação de peso da palavra (visual + som)"
+      ],
+      "dynamics": [
+        "a proximidade do cursor/dedo afeta a intensidade do som e da textura visual"
+      ]
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "espera pela revelação da palavra",
+        "ritmo do batimento cardíaco (simulado)",
+        "silêncio entre interações"
+      ],
+      "dynamics": [
+        "duração variável do silêncio (5-15 segundos)",
+        "aceleração/desaceleração do ritmo sonoro"
+      ]
+    },
+    "spatial": {
+      "elements": [
+        "profundidade do 'chão' onde as gotas caem",
+        "posição da voz (espacialização)",
+        "distância entre alcunhas na constelação"
+      ],
+      "dynamics": [
+        "as alcunhas aparecem em camadas de profundidade diferentes"
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "evocação do cheiro de tinta fresca",
+        "evocação do cheiro de papel velho (bilhete)",
+        "evocação de cheiros territoriais (ex: mercado, rua) através de descrições sonoras"
+      ]
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "evocação do sabor de palavras na boca (ex: 'Pé-de-Vento' pode evocar o sabor do vento ou do pão quente)"
+      ]
+    },
+    "social_presence": {
+      "elements": [
+        "voz que parece vir de outras pessoas (anónimas)",
+        "pátina visual nas alcunhas (como se fossem usadas por várias mãos)",
+        "inventário de palavras vivas (rasto de outras sessões)"
+      ]
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "A voz (som) que pronuncia a alcunha transforma-se em textura visual (tinta úmida → pátina) e peso (pedra/metal).",
+    "secondary": "O movimento do cursor/dedo (cinestésico) afeta a espacialização do som (auditivo) e a profundidade visual das gotas de tinta."
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio é um estado ativo: se a pessoa não interagir, as alcunhas desaparecem lentamente, deixando apenas um eco da última palavra ditada. O silêncio também é usado para evocar a ausência de um nome oficial (a alcunha como o que 'sobra' quando o dicionário cala).",
+    "effect": "Cria uma sensação de perda ou de algo que escapa, reforçando a ideia de que as alcunhas são efémeras e precisam de ser 'seguras' (adotadas)."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": [
+      "A alcunha que aparece inicialmente é aleatória, mas relacionada com o território ou a sessão anterior (se houver rasto).",
+      "As gotas de tinta formam constelações de alcunhas relacionadas por som, significado ou território, mas a relação não é explicada.",
+      "A voz que pronuncia a alcunha pode vir de direções inesperadas (espacialização aleatória).",
+      "Se a pessoa não agir, a experiência termina com um eco, sem devolução explícita."
+    ],
+    "effect": "A pessoa nunca sabe ao certo o que vai encontrar, mas sente que há uma lógica oculta (como nas brincadeiras de adivinhas)."
+  },
+  "session_variation": [
+    {
+      "type": "acaso_controlado",
+      "description": "A alcunha inicial é selecionada aleatoriamente de um conjunto relacionado com o território ou a sessão anterior."
+    },
+    {
+      "type": "ordem_mutável",
+      "description": "As alcunhas na constelação aparecem em ordens diferentes a cada sessão."
+    },
+    {
+      "type": "resposta_a_ritmo",
+      "description": "A velocidade do gesto da pessoa afeta a rapidez com que a palavra se revela e o tom do zumbido."
+    },
+    {
+      "type": "resposta_a_trajetória",
+      "description": "A trajetória do cursor/dedo afeta a direção do eco da voz e a disposição das gotas de tinta."
+    },
+    {
+      "type": "combinação_de_fragmentos",
+      "description": "As alcunhas na constelação são combinadas com base em critérios ocultos (ex: sonoridade, território, memória)."
+    },
+    {
+      "type": "memória_de_sessão",
+      "description": "Se a pessoa já adotou uma alcunha em sessões anteriores, esta pode aparecer como uma das gotas de tinta no chão."
+    }
+  ],
+  "territorial_binding": {
+    "relation": "As alcunhas estão ligadas a territórios reais (freguesias, ruas, bairros) do Atlas. A constelação de alcunhas pode ser filtrada por território, e os sons ambientais evocam o local de origem da palavra.",
+    "sustainability": "As alcunhas são extraídas do corpus autoral (ex: 'Palavras que desapareceram' do falARTE) e não inventadas. A relação com o território é baseada em dados reais do Atlas."
+  },
+  "trace_and_return": {
+    "trace": {
+      "type": "inventário_de_palavras_vivas",
+      "description": "As alcunhas adotadas pela pessoa passam a fazer parte de um inventário anónimo do Atlas. Em sessões futuras, podem aparecer como gotas de tinta no chão ou ser pronunciadas por outras vozes."
+    },
+    "return": {
+      "type": "bilhete_digital",
+      "description": "A pessoa recebe um bilhete com a alcunha adotada, que pode guardar (como imagem) ou partilhar (como link). O bilhete tem a aparência de um fragmento de papel rasgado, com a palavra escrita à mão."
+    },
+    "latency": {
+      "type": "pátina_visual",
+      "description": "As alcunhas no inventário ganham uma pátina visual (como se fossem usadas por várias mãos) à medida que são adotadas por mais pessoas."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "alternative": "Todas as interações visuais têm descrições sonoras (ex: 'Uma mancha de tinta escura aparece à frente. Ao aproximares-te, ouves um murmúrio.').",
+      "reduced_motion": "As gotas de tinta caem em movimento suave ou estático, conforme a preferência do utilizador.",
+      "high_contrast": "A mancha de tinta e as palavras têm contornos definidos e cores contrastantes."
+    },
+    "auditory": {
+      "alternative": "Todas as interações sonoras têm legendas visuais (ex: 'Voz: Pé-de-Vento' aparece no ecrã quando a palavra é pronunciada).",
+      "silent_mode": "A experiência funciona sem som, com feedback visual (ex: a palavra treme quando seria pronunciada)."
+    },
+    "haptic": {
+      "alternative": "A vibração é opcional e pode ser desativada. O feedback táctil é substituído por feedback visual (ex: a palavra brilha ao ser tocada)."
+    },
+    "kinesthetic": {
+      "alternative": "Todas as interações com o cursor/dedo podem ser feitas com teclado (ex: setas para mover, Enter para selecionar)."
+    },
+    "proprioceptive": {
+      "alternative": "As instruções de movimento são opcionais e podem ser ignoradas sem perder a experiência."
+    },
+    "temporal_interoceptive": {
+      "alternative": "O ritmo da experiência pode ser ajustado (ex: modo 'sem pressão' onde os silêncios são mais longos)."
+    },
+    "cognitive": {
+      "alternative": "A experiência é simples e intuitiva, com feedback imediato para todas as ações."
+    }
+  },
+  "optional_permissions": {
+    "required": [],
+    "optional": [
+      {
+        "permission": "microfone",
+        "purpose": "Permitir que a pessoa diga uma alcunha em voz alta para a adicionar ao inventário (apenas se a alcunha já existir no corpus autoral).",
+        "fallback": "A pessoa pode digitar a alcunha manualmente."
+      },
+      {
+        "permission": "geolocalização",
+        "purpose": "Filtrar as alcunhas por território próximo da pessoa.",
+        "fallback": "As alcunhas são selecionadas aleatoriamente ou com base em sessões anteriores."
+      }
+    ]
+  },
+  "overstimulation_risk": {
+    "risks": [
+      "Flashing ou transições visuais rápidas (mitigado com opção de reduced-motion).",
+      "Som súbito ou alto (mitigado com volume controlável e modo silencioso).",
+      "Sobrecarga cognitiva por excesso de alcunhas (mitigado com limite de 5-7 alcunhas na constelação)."
+    ],
+    "mitigations": [
+      "Opção de reduzir movimento e som.",
+      "Limite no número de elementos visuais e sonoros ativos ao mesmo tempo.",
+      "Silêncio e vazio como partes integrantes da experiência."
+    ]
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "A alcunha como objeto vivo que se revela, desmancha e ganha peso.",
+      "A tradução cruzada entre voz (som), textura (visual) e peso (cinestésico).",
+      "O uso do silêncio como estado ativo (ausência que evoca presença).",
+      "A devolução sob a forma de um bilhete de papel rasgado, com a palavra escrita à mão.",
+      "A constelação de alcunhas que se formam a partir de gotas de tinta, evocando a ideia de palavras que 'caem' do céu ou da memória.",
+      "A relação com o território através de sons ambientais e alcunhas específicas de cada lugar."
+    ],
+    "comparison": "Nenhuma outra experiência no Atlas usa a alcunha como matéria principal, nem explora a nomeação do que não cabe no nome. Outras experiências podem usar palavras, mas não com este foco na oralidade, efemeridade e relação com o território."
+  },
+  "questions_for_eduardo": [
+    "As alcunhas devem ser extraídas apenas do corpus autoral (ex: 'Palavras que desapareceram' do falARTE), ou podem incluir contribuições públicas validadas?",
+    "A voz que pronuncia as alcunhas deve ser uma voz humana gravada, uma voz sintetizada, ou uma combinação de ambas?",
+    "O inventário de palavras vivas deve ser visível para a pessoa (ex: uma lista de alcunhas adotadas por outros), ou deve permanecer oculto?",
+    "As alcunhas podem ser editadas ou corrigidas pela pessoa (ex: se a pronúncia ou escrita estiver errada)?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Adicionar uma camada de 'história' às alcunhas, onde a pessoa pode ver (ou ouvir) uma breve narrativa sobre a origem da palavra (baseada em dados reais do Atlas).",
+      "justification": "Reforça a relação com o território e a memória intergeracional, sem inventar factos."
+    },
+    {
+      "proposal": "Permitir que a pessoa 'doe' uma alcunha (ex: uma palavra que conhece do seu território) para o inventário, desde que seja validada pela curadoria.",
+      "justification": "Aumenta a participação comunitária e a riqueza do corpus, mas requer moderação."
+    },
+    {
+      "proposal": "Incluir uma opção para a pessoa 'apagar' uma alcunha do inventário (simbolicamente), como forma de 'deixar ir' a palavra.",
+      "justification": "Reforça a ideia de efemeridade e a relação emocional com as palavras."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

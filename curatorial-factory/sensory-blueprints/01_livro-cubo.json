@@ -1,0 +1,366 @@
+{
+  "id": "livro-cubo",
+  "canonical_name": "Livro Cubo",
+  "source_evidence": {
+    "primary": [
+      "CUBO_02_MANUAL_INVERTIDO_MELHORADO.md",
+      "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md"
+    ],
+    "secondary": [
+      "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf"
+    ],
+    "authority_level": "autoral_directo"
+  },
+  "authorial_invariants": [
+    "Seis faces + vazio central como estrutura imutável.",
+    "Faces: 1. a porta; 2. a jaula; 3. o chão; 4. o céu; 5. o espelho; 6. o buraco.",
+    "O vazio central preserva o que não deve ser fechado.",
+    "Princípios: o erro é entrada; o riso é método; o silêncio é matéria; a pergunta abre; o ganhador não vence o outro, chega a si.",
+    "SOMOSTODOSPOSSIVEIS: baralho + espaço + corpo + voz; anti-regras; jogo termina quando todos querem continuar.",
+    "Sete dinâmicas autorais: Inventário do Meu Mundo, Catástrofe Produtiva, Ponto de Kusama, Corpo que Percebe, Escutar o Silêncio, Rizoma Interior, Cubo Interior.",
+    "Convite: 'Roda uma face. Abre uma camada. Deixa um vestígio.'"
+  ],
+  "perceptual_intent": "Transformar a interação com o Livro Cubo num ritual de descoberta sensorial e existencial, onde cada face é uma porta para uma camada de significado, e o vazio central é um convite à liberdade. A experiência deve sentir-se como um jogo vivo, onde o erro e o acaso são parte da jornada, e a pessoa sai com um vestígio que a conecta ao processo de autodescoberta e ao território interior/coletivo.",
+  "threshold": {
+    "description": "A pessoa entra num espaço digital que parece um livro aberto, mas as páginas são faces de um cubo suspenso no ar. O ambiente é silencioso, com uma luz suave que projeta sombras das faces no 'chão' digital. O cursor/dedo da pessoa, ao se aproximar, faz com que as sombras se movam levemente, como se o cubo respirasse. Não há instruções visíveis, apenas o convite autoral em letra manual, quase apagada, no canto inferior: *Roda uma face. Abre uma camada. Deixa um vestígio.*",
+    "sensory_trigger": "A sombra do cubo move-se em resposta à presença do cursor/dedo, criando a sensação de que o objeto está vivo e a observar."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": "LIMIAR",
+      "description": "O cubo aparece suspenso num espaço vazio, com sombras dinâmicas que reagem à presença do cursor/dedo. O ambiente sonoro é um zumbido baixo, como um vento distante, que se intensifica levemente à medida que a pessoa se aproxima."
+    },
+    {
+      "stage": "CHAMADA",
+      "description": "O convite autoral (*Roda uma face...*) surge como uma escrita à mão, tremida, como se fosse um rasto deixado por outra pessoa. A face mais próxima do cubo brilha levemente, como se pedisse para ser tocada."
+    },
+    {
+      "stage": "PRIMEIRO GESTO",
+      "description": "A pessoa toca/arrasta uma face do cubo. A face gira lentamente, revelando uma textura ou imagem que não estava visível antes (ex: a face 'a porta' mostra uma porta entreaberta com luz a vazar)."
+    },
+    {
+      "stage": "RESPOSTA VIVA",
+      "description": "O cubo emite um som de 'abertura' (ex: um suspiro, um rangido de porta, um sino distorcido) e a face tocada expande-se para revelar uma camada interior: uma paisagem sonora, uma frase escrita à mão, ou uma imagem que parece mover-se levemente. O ambiente sonoro muda para refletir a face aberta (ex: para 'o céu', o som torna-se mais etéreo; para 'o chão', mais grave e térreo)."
+    },
+    {
+      "stage": "DESVIO",
+      "description": "Se a pessoa não interagir por 10 segundos, o cubo gira sozinho, revelando uma face aleatória. Se a pessoa tentarem rodar a face 'o buraco', esta não tem fundo: a rodação parece infinita, e o som torna-se um eco distorcido que se repete até a pessoa soltar."
+    },
+    {
+      "stage": "APROFUNDAMENTO SENSORIAL",
+      "description": "Ao abrir uma segunda face, as camadas das faces já abertas começam a interagir: o som de uma mistura-se com o da outra (ex: 'a porta' + 'o espelho' cria um eco que parece vir de trás da pessoa); as imagens sobrepõem-se em transparências; o cursor/dedo, ao passar por cima, faz com que as camadas reajam (ex: a imagem da 'porta' abre-se mais se o cursor se aproximar)."
+    },
+    {
+      "stage": "ESCOLHA / ACASO / SILÊNCIO",
+      "description": "A pessoa pode escolher fechar uma face (arrastando-a de volta) ou abrir outra. Se fechar todas as faces, o cubo volta ao estado inicial, mas o som ambiente agora inclui um fragmento das camadas que foram abertas (ex: um eco do som de 'o céu'). Se a pessoa não interagir por 30 segundos, o cubo fecha todas as faces sozinho, mas deixa um rasto sonoro (ex: um suspiro ou um fragmento de voz)."
+    },
+    {
+      "stage": "APARIÇÃO",
+      "description": "Se a pessoa abrir a face 'o buraco', esta não revela uma camada, mas sim um vazio escuro. Se a pessoa aproximar o cursor/dedo do vazio, uma voz sussurra uma frase aleatória das dinâmicas autorais (ex: *O erro é entrada* ou *O ganhador não vence o outro, chega a si*). A voz é distorcida, como se viesse de um lugar profundo."
+    },
+    {
+      "stage": "DEVOLUÇÃO",
+      "description": "Ao sair da experiência, a pessoa recebe um 'vestígio': uma frase gerada a partir das faces que abriu (ex: se abriu 'a porta' e 'o espelho', recebe *A porta que reflete o que não vês*). O vestígio é apresentado como uma escrita à mão num papel digital amassado, que a pessoa pode 'guardar' (salvar como imagem) ou 'deixar' (adicionar a uma constelação pública anónima)."
+    },
+    {
+      "stage": "RASTO / LATÊNCIA",
+      "description": "Se a pessoa escolher 'deixar' o vestígio, este aparece como uma partícula na constelação COSMICOXES, ligada ao território 'Livro Cubo'. O vestígio pode ser encontrado por outras pessoas que interajam com o cubo, como uma camada oculta que só aparece se a face correspondente for aberta. O vestígio permanece ativo por 7 dias, depois desaparece, deixando apenas um eco sonoro na face associada."
+    }
+  ],
+  "participant_verbs": [
+    "rodar",
+    "abrir",
+    "escutar",
+    "esperar",
+    "deixar",
+    "tocar",
+    "observar"
+  ],
+  "system_responses": [
+    {
+      "trigger": "Toque/arrasto em uma face",
+      "response": "A face gira, revela uma camada interior (imagem, som, texto), e o ambiente sonoro adapta-se à face aberta."
+    },
+    {
+      "trigger": "Aproximação do cursor/dedo a uma face aberta",
+      "response": "A camada interior reage: imagens movem-se, sons intensificam-se, textos tremem ou ganham profundidade."
+    },
+    {
+      "trigger": "Inatividade por 10 segundos",
+      "response": "O cubo gira sozinho, revelando uma face aleatória não aberta."
+    },
+    {
+      "trigger": "Tentativa de rodar 'o buraco'",
+      "response": "A face gira infinitamente, com som de eco distorcido que se repete até a pessoa soltar."
+    },
+    {
+      "trigger": "Abertura de 'o buraco'",
+      "response": "Vazio escuro com voz sussurrando uma frase autoral aleatória."
+    },
+    {
+      "trigger": "Fechamento de todas as faces",
+      "response": "O cubo volta ao estado inicial, mas o som ambiente inclui fragmentos das camadas abertas."
+    },
+    {
+      "trigger": "Saída da experiência",
+      "response": "Geração de um vestígio (frase) com base nas faces abertas, apresentado como papel amassado."
+    },
+    {
+      "trigger": "Escolha de 'deixar' o vestígio",
+      "response": "O vestígio é adicionado à constelação COSMICOXES como partícula ativa por 7 dias."
+    }
+  ],
+  "sensory_signature_id": "LIVRO_CUBO_VAZIO_CENTRAL_001",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "cubo 3D suspenso",
+        "sombras dinâmicas",
+        "texturas das faces",
+        "camadas interiores (imagens, textos, transparências)",
+        "papel amassado com vestígio",
+        "constelação COSMICOXES"
+      ],
+      "dynamics": [
+        "luz suave e direcional",
+        "sombras que reagem ao cursor/dedo",
+        "transparências sobrepostas",
+        "movimento lento e orgânico",
+        "escrita à mão tremida"
+      ]
+    },
+    "auditory": {
+      "elements": [
+        "zumbido baixo (vento distante)",
+        "sons de abertura (suspiro, rangido, sino)",
+        "paisagem sonora adaptativa por face",
+        "eco distorcido ('o buraco')",
+        "voz sussurrada (frases autorais)",
+        "fragmentos sonoros de camadas abertas"
+      ],
+      "dynamics": [
+        "spatialização sutil (som parece vir da face correspondente)",
+        "intensidade adaptativa à proximidade do cursor/dedo",
+        "silêncio como camada ativa"
+      ]
+    },
+    "haptic": {
+      "elements": [
+        "vibração sutil em dispositivos compatíveis (ao rodar uma face)",
+        "feedback de arrasto (resistência leve ao mover o cubo)"
+      ],
+      "dynamics": [
+        "opcional e não intrusivo"
+      ]
+    },
+    "kinesthetic": {
+      "elements": [
+        "movimento do cursor/dedo",
+        "gesto de arrasto/roda",
+        "velocidade e trajetória do gesto"
+      ],
+      "dynamics": [
+        "resposta do cubo à direção e velocidade do gesto",
+        "sensação de peso ao rodar faces"
+      ]
+    },
+    "proprioceptive": {
+      "elements": [
+        "instruções implícitas de postura (ex: aproximar-se para ver detalhes)",
+        "sensação de profundidade ao interagir com camadas interiores"
+      ],
+      "dynamics": [
+        "convite à atenção corporal sem exigência física"
+      ]
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "ritmo de abertura/fechamento das faces",
+        "pausas entre interações",
+        "espera como parte da experiência",
+        "respiração percebida no ambiente sonoro"
+      ],
+      "dynamics": [
+        "aceleração/desaceleração do tempo sonoro",
+        "silêncio como momento ativo"
+      ]
+    },
+    "spatial": {
+      "elements": [
+        "espaço 3D do cubo",
+        "profundidade das camadas interiores",
+        "posicionamento do cursor/dedo no espaço"
+      ],
+      "dynamics": [
+        "sensação de imersão sem VR",
+        "espaço que parece expandir-se ao abrir faces"
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "evocação de cheiros associados às faces (ex: 'o chão' evoca terra molhada; 'o céu' evoca ar fresco)"
+      ],
+      "dynamics": [
+        "apenas sugestão textual ou visual, nunca output físico"
+      ]
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "evocação de sabores associados a memórias ou territórios (ex: 'a porta' evoca o gosto de um pão recém-assado)"
+      ],
+      "dynamics": [
+        "apenas sugestão textual ou visual, nunca output físico"
+      ]
+    },
+    "social_presence": {
+      "elements": [
+        "vestígios deixados por outras pessoas (na constelação COSMICOXES)",
+        "voz sussurrada como se viesse de outra pessoa"
+      ],
+      "dynamics": [
+        "presença indireta e anónima",
+        "encontro com rastos de outros sem interação direta"
+      ]
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "O gesto de rodar uma face (kinestésico) altera a paisagem sonora (auditivo) e a textura visual (visual) da camada interior, como se o movimento físico fosse traduzido em som e imagem.",
+    "secondary": "A voz sussurrada em 'o buraco' (auditivo) é acompanhada por uma distorção visual na face (visual), como se o som fosse também uma textura que se move."
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio é uma camada ativa: quando todas as faces estão fechadas, o ambiente sonoro é um zumbido mínimo, e a ausência de interação faz com que o cubo gire sozinho, como se o silêncio fosse um convite à ação. Além disso, 'o buraco' é uma face que representa o vazio e a ausência, com um som de eco que se repete até ser interrompido.",
+    "purpose": "Criar momentos de pausa e reflexão, onde a ausência de estímulo convida à exploração ou à introspeção."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanisms": [
+      "O cubo gira sozinho após 10 segundos de inatividade, revelando uma face aleatória.",
+      "A face 'o buraco' não tem fundo e gira infinitamente, com um som de eco distorcido.",
+      "A voz em 'o buraco' sussurra uma frase autoral aleatória das dinâmicas do Livro Cubo.",
+      "O vestígio gerado ao sair é uma combinação única das faces abertas, com frases que não se repetem exata e literalmente."
+    ],
+    "purpose": "Manter a experiência imprevisível e viva, incentivando a exploração repetida sem que seja a mesma cada vez."
+  },
+  "session_variation": [
+    {
+      "type": "acaso_controlado",
+      "description": "A face que o cubo gira sozinho após inatividade é aleatória, mas ponderada para evitar repetição imediata da mesma face."
+    },
+    {
+      "type": "ordem_mutável",
+      "description": "A ordem das frases sussurradas em 'o buraco' é aleatória e baseada nas dinâmicas autorais, mas nunca repete a mesma sequência em duas sessões."
+    },
+    {
+      "type": "resposta_a_ritmo",
+      "description": "A velocidade com que a pessoa roda as faces afeta a intensidade do som e a profundidade das camadas interiores (ex: rodar rápido faz com que os sons se sobreponham e as imagens fiquem mais distorcidas)."
+    },
+    {
+      "type": "resposta_a_posição",
+      "description": "A posição do cursor/dedo em relação ao cubo afeta a spatialização do som (ex: se o cursor estiver perto de 'o céu', o som parece vir de cima)."
+    },
+    {
+      "type": "combinação_de_fragmentos",
+      "description": "O vestígio gerado ao sair combina as faces abertas de forma única, usando um algoritmo que evita repetições literais."
+    },
+    {
+      "type": "temporalidade_real",
+      "description": "O ambiente sonoro inicial (zumbido) varia levemente com a hora do dia (mais grave de manhã, mais agudo à noite), sem rastreio indevido."
+    }
+  ],
+  "territorial_binding": {
+    "relation": "O Livro Cubo é um território interior e simbólico, mas os vestígios deixados pelas pessoas são ligados à constelação COSMICOXES, que pode ser associada a um território físico (ex: uma freguesia de Lisboa) se a pessoa optar por geolocalização opcional. As frases autorais e as dinâmicas do cubo evocam memórias e saberes territoriais (ex: 'o chão' pode evocar o chão de uma rua específica).",
+    "sustainability": "A relação territorial é evocativa e simbólica, baseada em memórias e associações, sem depender de dados geográficos precisos."
+  },
+  "trace_and_return": {
+    "vestige": {
+      "type": "frase gerada",
+      "description": "Uma frase única, gerada a partir das faces abertas, apresentada como um papel amassado digital. Exemplo: *A porta que reflete o que não vês* (se 'a porta' e 'o espelho' foram abertas).",
+      "lifespan": "7 dias na constelação COSMICOXES, depois desaparece, deixando um eco sonoro na face associada."
+    },
+    "return_mechanism": {
+      "immediate": "O vestígio é apresentado ao sair da experiência.",
+      "latent": "O vestígio pode ser encontrado por outras pessoas na constelação COSMICOXES, como uma camada oculta que só aparece se a face correspondente for aberta."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "alternative": "Descrição em áudio de todas as ações e camadas interiores, com opção de ajustar a velocidade da narração. As sombras e texturas são descritas em detalhe.",
+      "reduced_motion": "Modo de movimento reduzido: o cubo não gira automaticamente, e as transições são suaves ou estáticas."
+    },
+    "auditory": {
+      "alternative": "Legendas visuais para todos os sons e vozes, com opção de ajustar o tamanho e a cor do texto. Os sons são representados por ícones ou formas que mudam de cor/intensidade.",
+      "silence_mode": "Modo silencioso: todos os sons são substituídos por vibrações (em dispositivos compatíveis) ou por pulsações visuais (ex: um círculo que pulsa no ritmo do som)."
+    },
+    "haptic": {
+      "alternative": "Feedback visual para gestos (ex: um círculo que se expande ao tocar uma face)."
+    },
+    "kinesthetic": {
+      "alternative": "Controles via teclado: setas para rodar as faces, Enter para abrir/fechar, Espaço para 'tocar' uma face aberta."
+    },
+    "proprioceptive": {
+      "alternative": "Instruções textuais claras para postura e atenção, sem exigência física."
+    },
+    "temporal_interoceptive": {
+      "alternative": "Modo sem pressão: a experiência não avança automaticamente, e a pessoa pode pausar a qualquer momento."
+    },
+    "spatial": {
+      "alternative": "Versão 2D do cubo, com faces organizadas em círculo, mantendo a mesma lógica de interação."
+    },
+    "olfactory_evocation": {
+      "alternative": "Descrições textuais detalhadas dos cheiros evocados, com opção de áudio."
+    },
+    "gustatory_evocation": {
+      "alternative": "Descrições textuais detalhadas dos sabores evocados, com opção de áudio."
+    }
+  },
+  "optional_permissions": {
+    "required": [],
+    "optional": [
+      {
+        "permission": "geolocalização",
+        "purpose": "Associar o vestígio a um território físico específico na constelação COSMICOXES.",
+        "fallback": "O vestígio é associado a um território simbólico (ex: 'Livro Cubo') sem localização geográfica."
+      },
+      {
+        "permission": "microfone",
+        "purpose": "Permitir que a pessoa grave uma frase ou som para ser incorporado no vestígio (opcional).",
+        "fallback": "O vestígio é gerado apenas com base nas faces abertas."
+      }
+    ]
+  },
+  "overstimulation_risk": {
+    "potential_risks": [
+      "Flashing ou transições visuais rápidas ao rodar faces rapidamente.",
+      "Sons sobrepostos ou distorcidos que possam ser desconfortáveis.",
+      "Vibrações insistentes em dispositivos hápticos."
+    ],
+    "mitigation": [
+      "Limitar a velocidade de rodação das faces para evitar flashing.",
+      "Permitir que a pessoa ajuste o volume e a intensidade dos sons.",
+      "Desativar vibrações por padrão, com opção de ativação manual.",
+      "Incluir um botão de pausa imediata que silencia todos os sons e congela a experiência."
+    ]
+  },
+  "distinctiveness": "Esta experiência é única porque: (1) usa o cubo como metáfora física e digital de exploração interior, com seis faces simbólicas e um vazio central; (2) traduz o gesto de rodar em respostas sonoras e visuais dinâmicas, criando uma sensação de interação com um objeto vivo; (3) incorpora as dinâmicas autorais do Livro Cubo (ex: 'o erro é entrada', 'o silêncio é matéria') como camadas de significado; (4) gera vestígios poéticos e únicos que persistem na constelação COSMICOXES; (5) evita qualquer semelhança com menus, cards ou interfaces genéricas, focando-se na exploração sensorial e existencial.",
+  "questions_for_eduardo": [
+    "O vazio central deve ter uma representação visual (ex: um buraco negro, um espaço vazio) ou deve ser apenas uma ausência de camada interior?",
+    "As frases sussurradas em 'o buraco' devem ser apenas das dinâmicas autorais recuperadas, ou podem incluir outras frases do corpus do Livro Cubo?",
+    "O vestígio gerado ao sair deve ser sempre uma frase, ou pode incluir outros elementos (ex: uma imagem, um som)?",
+    "A constelação COSMICOXES deve ser visível durante a experiência, ou apenas ao final, quando o vestígio é gerado?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Incluir uma opção para a pessoa 'desenhar' no papel amassado do vestígio, usando o cursor/dedo, antes de o guardar ou deixar.",
+      "justification": "Aumentaria a personalização do vestígio e a conexão emocional com a experiência, alinhando-se com a dinâmica 'Inventário do Meu Mundo'."
+    },
+    {
+      "proposal": "Adicionar uma camada de 'memória territorial' às faces, onde a pessoa pode associar uma face a um lugar real (ex: 'o chão' = a rua onde cresceu), com opção de geolocalização.",
+      "justification": "Reforçaria a relação entre o território interior do Livro Cubo e o território físico, alinhando-se com o princípio de 'sentipensar' e a curadoria territorial do Atlas."
+    },
+    {
+      "proposal": "Permitir que a pessoa 'feche' o cubo manualmente, criando um som de 'fechamento' (ex: um suspiro ou um rangido) e gerando um vestígio imediato, sem esperar pela saída.",
+      "justification": "Daria mais controle à pessoa sobre o ritmo da experiência e a geração de vestígios."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

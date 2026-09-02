@@ -1,0 +1,383 @@
+{
+  "id": "ponto-kusama",
+  "canonical_name": "O Ponto de Kusama",
+  "source_evidence": {
+    "primary": [
+      {
+        "origin": "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md",
+        "quote": "D3 Ponto de Kusama — gesto mínimo, repetição, acumulação, campo colectivo.",
+        "authority": "autoral_direct"
+      },
+      {
+        "origin": "catalog_entry",
+        "quote": "Um ponto. Outro. Até o campo mudar.",
+        "authority": "curatorial_catalog"
+      }
+    ],
+    "secondary": [
+      {
+        "origin": "CUBO_02_MANUAL_INVERTIDO_MELHORADO.md",
+        "note": "Contexto do Livro Cubo e dinâmicas de acumulação/transformação.",
+        "authority": "interpretation"
+      }
+    ]
+  },
+  "authorial_invariants": [
+    "Gesto mínimo (um ponto) como unidade base de participação.",
+    "Repetição como método de acumulação e transformação do campo.",
+    "Campo colectivo: o resultado emerge da contribuição de múltiplas presenças.",
+    "Ausência de explicação prévia: a dinâmica revela-se pela prática.",
+    "O 'campo' (espaço de acumulação) deve mudar de estado com a adição de pontos.",
+    "Não é um jogo de pontuação ou métrica quantificável."
+  ],
+  "perceptual_intent": "Transformar a repetição de um gesto simples (colocar um ponto) num acto de co-criação de um campo vivo, onde a acumulação altera a percepção do espaço, do tempo e da relação entre os participantes. Convocar a atenção para o detalhe mínimo e a sua potência colectiva.",
+  "threshold": {
+    "description": "A pessoa entra num espaço vazio, onde um único ponto (visual ou sonoro) pulsa lentamente no centro. O fundo é neutro, mas com uma textura subtis que sugere profundidade (ex: grão de película ou ruído visual mínimo). O som ambiente é um zumbido quase inaudível, como um campo magnético em repouso. Nada explica o que fazer.",
+    "sensory_trigger": "A presença do ponto isolado e a sua pulsação lenta criam uma tensão entre vazio e potencialidade."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": 1,
+      "name": "LIMIAR",
+      "action": "O ponto inicial pulsa. O espaço parece respirar. A pessoa sente que algo está à espera."
+    },
+    {
+      "stage": 2,
+      "name": "CHAMADA",
+      "action": "O ponto cresce ligeiramente e emite um som agudo e curto (como um 'ping' de cristal). O cursor/dedo da pessoa, ao aproximar-se, faz o ponto brilhar fracamente."
+    },
+    {
+      "stage": 3,
+      "name": "PRIMEIRO GESTO",
+      "action": "A pessoa toca/clica no ponto. Este divide-se em dois: o original e um novo ponto idêntico, que se afasta lentamente em direcção aleatória. Um som de 'splash' suave acompanha a divisão."
+    },
+    {
+      "stage": 4,
+      "name": "RESPOSTA VIVA",
+      "action": "Cada novo ponto que a pessoa adiciona (por toque/clique) divide-se em dois, criando uma rede de pontos em expansão. Os pontos emitem sons curtos e variados (como gotas a cair em superfícies diferentes) sempre que são criados ou colidem uns com os outros. O campo sonoro torna-se uma paisagem de micro-eventos."
+    },
+    {
+      "stage": 5,
+      "name": "DESVIO",
+      "action": "Quando o número de pontos atinge um limiar invisível (ex: 12), a cor de todos os pontos inverte-se (de claro para escuro ou vice-versa), e o som ambiente muda para um tom mais grave. A pessoa percebe que o campo está a 'respirar' em uníssono com os pontos."
+    },
+    {
+      "stage": 6,
+      "name": "APROFUNDAMENTO SENSORIAL",
+      "action": "Os pontos começam a interagir entre si: colidem, fundem-se temporariamente ou criam linhas efémeras (como fios de teia) ao passarem perto uns dos outros. O som passa a ser espacializado: pontos à esquerda emitem sons no canal esquerdo, etc. A pessoa pode 'puxar' um ponto com o cursor/dedo para criar uma linha elástica que, ao soltar, impulsionará o ponto numa nova direcção."
+    },
+    {
+      "stage": 7,
+      "name": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "A pessoa pode: (a) continuar a adicionar pontos; (b) parar e observar o campo evoluir sozinho (os pontos movem-se lentamente em direcções aleatórias); ou (c) 'apagar' um ponto ao segurar o toque/clique nele até este desaparecer com um som de 'pop'. Cada escolha altera o ritmo e a densidade do campo."
+    },
+    {
+      "stage": 8,
+      "name": "APARIÇÃO",
+      "action": "Quando o campo atinge uma densidade crítica (definida por um algoritmo de acumulação não linear), uma forma emergente aparece: uma constelação de pontos forma uma silhueta (ex: um animal, um objecto quotidiano, ou uma palavra como 'CAMP' ou 'VOID'). A silhueta é efémera e dissolve-se após 10 segundos, mas o campo sonoro passa a incluir um novo elemento (ex: um murmúrio ou um som de vento)."
+    },
+    {
+      "stage": 9,
+      "name": "DEVOLUÇÃO",
+      "action": "Ao sair, a pessoa recebe uma 'semente' do campo: um código alfanumérico curto (ex: 'K-7X9') que, se partilhado com outra pessoa, fará com que o campo desta última comece com a configuração exacta (posições, cores, sons) do momento em que a primeira pessoa saiu. A semente também pode ser guardada para regressar ao mesmo campo mais tarde."
+    },
+    {
+      "stage": 10,
+      "name": "RASTO / LATÊNCIA",
+      "action": "O campo continua a evoluir em segundo plano (mesmo quando a pessoa sai). Se regressar com a mesma semente, encontrará o campo alterado pelo tempo decorrido. Os campos com mais de 24 horas de inactividade dissolvem-se lentamente, leaving apenas um ponto inicial pulsante para reiniciar o ciclo."
+    }
+  ],
+  "participant_verbs": [
+    "tocar",
+    "repetir",
+    "observar",
+    "puxar",
+    "soltar",
+    "apagar",
+    "escutar"
+  ],
+  "system_responses": [
+    "Divide o ponto em dois ao ser tocado.",
+    "Emite sons variados (gotas, cristais, ventos) em resposta a interacções.",
+    "Inverte a cor do campo ao atingir um limiar de densidade.",
+    "Cria linhas efémeras entre pontos próximos.",
+    "Espacializa o som de acordo com a posição dos pontos.",
+    "Forma silhuetas efémeras com a acumulação de pontos.",
+    "Gera uma semente única do campo para partilha ou regresso.",
+    "Dissolve o campo lentamente após inactividade prolongada."
+  ],
+  "sensory_signature_id": "KUSAMA-FIELD-025",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "pontos pulsantes",
+        "linhas efémeras entre pontos",
+        "inversão de cor do campo",
+        "silhuetas emergentes",
+        "textura de fundo subtis",
+        "brilho ao aproximar cursor"
+      ],
+      "dynamics": [
+        "expansão",
+        "colisão",
+        "fusão temporária",
+        "dissolução",
+        "aparecimento/disaparecimento"
+      ]
+    },
+    "auditory": {
+      "elements": [
+        "ping de cristal (ponto inicial)",
+        "splash (divisão de pontos)",
+        "gotas em superfícies variadas",
+        "zumbido de campo magnético",
+        "murmúrio (aparição de silhueta)",
+        "som espacializado (posição dos pontos)",
+        "pop (apagar ponto)"
+      ],
+      "dynamics": [
+        "paisagem sonora em evolução",
+        "espacialização estéreo",
+        "mudança de tom com densidade"
+      ]
+    },
+    "haptic": {
+      "elements": [
+        "vibração suave (opcional, em dispositivos compatíveis) ao criar/apagar pontos"
+      ],
+      "dynamics": [
+        "feedback táctil mínimo"
+      ]
+    },
+    "kinesthetic": {
+      "elements": [
+        "arrastar pontos com cursor/dedo",
+        "puxar linhas elásticas",
+        "velocidade do gesto afecta trajectória dos pontos"
+      ],
+      "dynamics": [
+        "movimento livre",
+        "resistência elástica"
+      ]
+    },
+    "proprioceptive": {
+      "elements": [
+        "instrução implícita para focar a atenção no gesto mínimo",
+        "ritmo de respiração sugerido pela pulsação dos pontos"
+      ],
+      "dynamics": [
+        "atenção corporal convoca a repetição"
+      ]
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "pulsação do ponto inicial",
+        "ritmo de criação/dissolução dos pontos",
+        "espera pela aparição de silhuetas"
+      ],
+      "dynamics": [
+        "aceleração/desaceleração do campo",
+        "suspensão do tempo"
+      ]
+    },
+    "spatial": {
+      "elements": [
+        "campo 2D com profundidade sugerida",
+        "posicionamento relativo dos pontos",
+        "silhuetas que ocupam espaço negativo"
+      ],
+      "dynamics": [
+        "expansão/contracção do campo",
+        "orientação espacial dos sons"
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "evocação de 'tinta fresca' ou 'pó de giz' através de descrições textuais opcionais (ex: 'Cheira a aula de desenho')"
+      ],
+      "dynamics": [
+        "memória olfactiva associada a actos de criação manual"
+      ]
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "evocação de 'doçura de mel' ou 'acidez de limão' em momentos de surpresa (ex: ao formar uma silhueta)"
+      ],
+      "dynamics": [
+        "associação gustativa a memórias de infância ou rituais"
+      ]
+    },
+    "social_presence": {
+      "elements": [
+        "semente partilhável que conecta campos de diferentes pessoas",
+        "campo que evolui com contribuições indirectas de outros"
+      ],
+      "dynamics": [
+        "co-criação assíncrona",
+        "rasto colectivo"
+      ]
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "O gesto táctil (tocar) traduz-se em som (splash) e em transformação visual (divisão do ponto).",
+    "secondary": "A densidade visual do campo (número de pontos) traduz-se em altura tonal do som ambiente (mais grave = mais denso).",
+    "tertiary": "A silhueta emergente (visual) é acompanhada por um murmúrio (auditivo) que evoca uma memória colectiva."
+  },
+  "silence_or_absence": {
+    "mechanism": "O campo pode entrar em modo 'silencioso' se a pessoa não interagir durante 30 segundos: todos os sons param, os pontos congelam, e apenas a pulsação do ponto inicial continua. Um toque qualquer reativa o campo.",
+    "purpose": "Criar um momento de suspensão onde a ausência de estímulo convida à reflexão sobre o acto de acumulação."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": [
+      "A silhueta emergente é gerada aleatoriamente a partir de um conjunto pré-definido de formas (animais, objectos, palavras), mas a sua aparição depende de um limiar de densidade não linear (ex: 12, 20, ou 30 pontos, variando por sessão).",
+      "A cor dos novos pontos pode variar subtismente entre tons de uma paleta limitada (ex: azuis e brancos), criando padrões inesperados.",
+      "A semente gerada pode, em 10% das casos, conter um 'erro' propositado (ex: um ponto extra ou uma cor invertida), criando um campo 'defectivo' mas ainda funcional.",
+      "Se a pessoa apagar todos os pontos excepto um, este começa a pulsar em vermelho e emite um som de 'alerta' até que um novo ponto seja criado."
+    ],
+    "purpose": "Manter a experiência imprevisível sem quebra da coerência poética."
+  },
+  "session_variation": [
+    {
+      "type": "acaso_controlado",
+      "description": "A paleta de cores dos pontos é seleccionada aleatoriamente entre 3 opções (ex: tons pastel, tons terra, tons neon) no início de cada sessão."
+    },
+    {
+      "type": "ordem_mutável",
+      "description": "O limiar de densidade para a inversão de cor do campo varia entre 8, 12 ou 16 pontos."
+    },
+    {
+      "type": "resposta_a_ritmo",
+      "description": "Se a pessoa criar pontos rapidamente (mais de 5 em 10 segundos), os sons de 'splash' tornam-se mais agudos e as divisões mais caóticas. Se for lentamente, os sons são graves e as divisões mais suaves."
+    },
+    {
+      "type": "resposta_a_posição",
+      "description": "A direcção inicial dos novos pontos depende da posição do cursor/dedo no ecrã (ex: toque no canto superior esquerdo faz os pontos moverem-se para a direita).",
+      "fallback": "Se não houver toque, a direcção é aleatória."
+    },
+    {
+      "type": "combinação_de_fragmentos",
+      "description": "As silhuetas emergentes são seleccionadas a partir de um conjunto de 20 formas, mas a sua ordem de aparição é aleatória e pode repetir-se."
+    }
+  ],
+  "territorial_binding": {
+    "relation": "A experiência evoca o acto de marcar o território com pontos (como em mapas, tecidos ou paredes), mas sem referências geográficas directas. A semente partilhável funciona como um 'marco' digital que pode ser associado a um lugar físico pela pessoa (ex: 'Este campo é da minha varanda').",
+    "sustainability": "A ligação ao território é simbólica e opcional, baseada na memória ou intenção da pessoa."
+  },
+  "trace_and_return": {
+    "trace": {
+      "digital": "A semente alfanumérica (ex: 'K-7X9') que captura o estado exacto do campo num momento específico.",
+      "emotional": "A memória da silhueta emergente e do som associado, que pode ser descrita ou partilhada oralmente."
+    },
+    "return": {
+      "immediate": "A semente permite regressar ao campo exacto mais tarde ou partilhá-lo com outros.",
+      "latent": "O campo continua a evoluir em segundo plano, criando uma sensação de vida autónoma."
+    },
+    "dissolution": "Campos inactivos por mais de 24 horas dissolvem-se, leaving apenas um ponto inicial para reiniciar o ciclo."
+  },
+  "accessibility_equivalents": {
+    "visual_impairment": {
+      "description": "Modo de alto contraste: pontos são substituídos por círculos preenchidos com bordas grossas. As silhuetas emergentes são descritas em texto (ex: 'Uma silhueta de um pássaro apareceu no centro').",
+      "alternative_interaction": "Teclado: setas para mover um cursor invisível; Enter para criar um ponto; Backspace para apagar o ponto mais próximo."
+    },
+    "auditory_impairment": {
+      "description": "Legendas visuais para todos os sons (ex: 'Ping de cristal', 'Splash de água'). Os sons espacializados são representados por barras de volume à esquerda/direita do ecrã.",
+      "alternative_interaction": "Vibração (opcional) substitui os sons de 'splash' e 'pop'."
+    },
+    "motor_impairment": {
+      "description": "Modo 'toque único': um único toque/clique cria um ponto no centro do ecrã. Modo 'arrastar assistido': o cursor move-se automaticamente para o ponto mais próximo ao aproximar o dedo.",
+      "alternative_interaction": "Voz: comandos como 'criar ponto', 'apagar ponto', 'puxar ponto [número]' (os pontos são numerados sequencialmente)."
+    },
+    "cognitive_load": {
+      "description": "Modo 'lento': a velocidade de movimento dos pontos e a frequência dos sons são reduzidas. A silhueta emergente permanece visível por 30 segundos em vez de 10.",
+      "alternative_interaction": "Instruções textuais opcionais aparecem no topo do ecrã (ex: 'Toque para criar um ponto')."
+    },
+    "reduced_motion": {
+      "description": "Todos os movimentos (pulsação, deslocamento de pontos) são substituídos por transições instantâneas. As linhas efémeras entre pontos são estáticas."
+    }
+  },
+  "optional_permissions": {
+    "none": {
+      "description": "A experiência funciona integralmente sem qualquer permissão (microfone, câmara, geolocalização, movimento)."
+    },
+    "optional": [
+      {
+        "permission": "device_motion",
+        "purpose": "Permitir que a inclinação do dispositivo afecte a direcção dos novos pontos (ex: inclinar para a esquerda faz os pontos moverem-se para a direita).",
+        "fallback": "Sem permissão, a direcção é aleatória ou baseada na posição do toque."
+      },
+      {
+        "permission": "geolocation",
+        "purpose": "Associar a semente gerada a uma localização física (ex: 'Campo da Praça do Rossio'). A localização é apenas guardada localmente e nunca enviada para servidores.",
+        "fallback": "A semente é gerada sem referências geográficas."
+      }
+    ]
+  },
+  "overstimulation_risk": {
+    "potential": [
+      "Flashing ou piscar rápido dos pontos em casos de alta densidade.",
+      "Som contínuo e sobreposto pode tornar-se caótico com muitos pontos.",
+      "Movimento rápido dos pontos pode causar desconforto visual."
+    ],
+    "mitigation": [
+      "Limitar o número máximo de pontos visíveis simultaneamente (ex: 50). Pontos além deste limite tornam-se transparentes ou desaparecem temporariamente.",
+      "Reduzir o volume dos sons à medida que o número de pontos aumenta (volume = 100% / número_de_pontos).",
+      "Oferecer modo 'reduced_motion' e 'baixo volume' por defeito, com opção para activar a versão completa.",
+      "Incluir um botão 'pausa' que congela o campo e silencia todos os sons, mantendo apenas a pulsação do ponto inicial."
+    ]
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "A acumulação de pontos como acto poético (não quantitativo) que transforma o campo visual e sonoro.",
+      "A tradução cruzada entre gesto táctil, som e transformação visual num ciclo contínuo.",
+      "A semente partilhável que captura um estado exacto do campo, permitindo co-criação assíncrona.",
+      "A silhueta emergente efémera que aparece e desaparece, convida à observação atenta.",
+      "O uso do silêncio como estado activo (modo 'silencioso' após inactividade).",
+      "A ausência de objectivos ou pontuações: a experiência é sobre o processo, não o resultado."
+    ],
+    "contrasts_with_others": [
+      {
+        "curatoria": "Dado Sem Lado",
+        "difference": "Enquanto 'Dado Sem Lado' explora o acaso e a quebra de regras, 'O Ponto de Kusama' foca-se na repetição e acumulação como método de transformação."
+      },
+      {
+        "curatoria": "Galeria Diletante",
+        "difference": "'Galeria Diletante' trabalha com palavras e fotografias, enquanto 'O Ponto de Kusama' usa formas geométricas mínimas e sons abstractos."
+      },
+      {
+        "curatoria": "Escutar o Silêncio",
+        "difference": "'Escutar o Silêncio' convida à ausência de estímulo, enquanto 'O Ponto de Kusama' convida à acumulação de estímulos mínimos."
+      }
+    ]
+  },
+  "questions_for_eduardo": [
+    "O limiar de densidade para a inversão de cor do campo deve ser fixo (ex: 12 pontos) ou variável por sessão? A variação adicione imprevisibilidade, mas pode confundir a perceção de progressão.",
+    "As silhuetas emergentes devem ser abstractas (formas geométricas) ou figurativas (animais, objectos)? A opção figurativa pode evocar memórias mais fortes, mas corre o risco de ser demasiado literal.",
+    "A semente partilhável deve incluir um 'erro' propositado em 10% dos casos (como descrito em 'surprise_or_indeterminacy')? Este detalhe adicione uma camada de imprevisibilidade, mas pode ser percebido como um bug.",
+    "Deve haver um limite máximo de pontos visíveis simultaneamente (ex: 50) para evitar sobre-estímulo, ou a experiência deve permitir a acumulação ilimitada, confando nos mecanismos de mitigação (transparência, redução de volume)?",
+    "A associação da semente a uma localização física (via geolocalização) é desejável, ou deve manter-se puramente digital e simbólica?"
+  ],
+  "improvement_proposals": [
+    {
+      "area": "territorial_binding",
+      "proposal": "Incluir uma opção para a pessoa associar manualmente a semente a um lugar (ex: 'Este campo é da minha rua') sem usar geolocalização. Isto preservaria a privacidade e reforçaria a ligação emocional ao território.",
+      "source": "Interpretação do princípio de 'sentipensar' e configuração relacional em 'A Deriva do Sentido'."
+    },
+    {
+      "area": "trace_and_return",
+      "proposal": "Permitir que a pessoa adicione uma nota textual à semente (ex: 'Campo criado no meu aniversário'). A nota seria visível apenas para quem receber a semente.",
+      "source": "Inspirado no 'rasto' como memória e história em 'Âncoras Autorais — Camada Pública'."
+    },
+    {
+      "area": "cross_sensory_translation",
+      "proposal": "Adicionar uma camada táctil opcional: em dispositivos com vibração, cada novo ponto criado emite um padrão de vibração único (ex: curto para pontos à esquerda, longo para pontos à direita).",
+      "source": "Extensão da tradução cruzada entre gesto e som para incluir o táctil."
+    },
+    {
+      "area": "silence_or_absence",
+      "proposal": "No modo 'silencioso', os pontos poderiam começar a 'desaparecer' lentamente (tornando-se transparentes) até restar apenas um, reiniciando o ciclo. Isto reforçaria a ideia de que o silêncio é um estado activo de transformação.",
+      "source": "Inspirado no princípio 'o silêncio é matéria' do Livro Cubo."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

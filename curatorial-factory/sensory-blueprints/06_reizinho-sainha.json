@@ -1,0 +1,452 @@
+{
+  "id": "reizinho-sainha",
+  "canonical_name": "Reizinho Sainha: A Regra que se Desfaz em Sainha",
+  "source_evidence": {
+    "primary": [
+      "Cópia de Fica registado neste dossiê… (fala autoral directa: 'O Reizinho que não tinha rainha porque ele mesmo usava sainha e coroa de sardinha')",
+      "Âncora autoral: Reizinho como função de liberdade narrativa, quebra de norma, travessura e fabulação popular"
+    ],
+    "secondary": [
+      "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md (D2 Catástrofe Produtiva: criação → ruptura → trabalhar com o que emerge)",
+      "CUBO_02_MANUAL_INVERTIDO_MELHORADO.md (princípios: 'o erro é entrada; o riso é método; o silêncio é matéria')"
+    ],
+    "tertiary": [
+      "Curadoria Cultural e Existencialismo Profundo.pdf (absurdo/Camus: contradição, revolta, júbilo trágico)"
+    ]
+  },
+  "authorial_invariants": [
+    "Nome público: 'O Reizinho que não tinha rainha porque ele mesmo usava sainha e coroa de sardinha'",
+    "Função: liberdade narrativa, quebra de norma, travessura, fabulação popular",
+    "Convite autoral: 'Inventa uma regra. Quebra-a com delicadeza.'",
+    "Mecânica: desobedecer",
+    "Relação com o Cubo: face 'o buraco' (que não tem fundo e por isso é livre) e face 'o espelho' (onde te encontras)",
+    "Princípio: a regra é um convite para ser transgredida, não um limite"
+  ],
+  "perceptual_intent": "Convidar a pessoa a experimentar a fragilidade das normas como um jogo de poder e delicadeza. A regra inventada pela pessoa deve sentir-se real, mas ao ser quebrada, revela-se como tecido maleável — como uma sainha que se desfaz em fios de luz, som e movimento. A experiência deve evocar a sensação de um ritual de coroação absurda, onde o 'erro' é a verdadeira entrada para a liberdade.",
+  "threshold": {
+    "description": "A pessoa entra num espaço vazio, exceto por um círculo de luz tênue no centro (como um holofote de teatro). O círculo pulsa lentamente, como uma respiração. Não há texto, apenas um som distal de sinos ou risos abafados (evocação de festa popular). A luz do círculo projeta uma sombra alongada da pessoa, que parece usar uma coroa invisível.",
+    "trigger": "A sombra da pessoa toca a borda do círculo de luz pela primeira vez."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": "limiar",
+      "description": "Espaço vazio com círculo de luz pulsante. Sombra da pessoa ganha contorno de coroa. Som de sinos distantes e risos abafados (evocação).",
+      "sensory_focus": [
+        "visual (luz/sombra)",
+        "auditory (som distal)",
+        "proprioceptive (percepção da sombra como extensão do corpo)"
+      ]
+    },
+    {
+      "stage": "chamada",
+      "description": "Uma voz sussurrada (ou texto que aparece e desaparece como fumaça) pergunta: *'Qual é a regra que vais inventar para este reino?'* A voz tem eco leve, como se viesse de um poço ou de uma sala vazia.",
+      "sensory_focus": [
+        "auditory (voz/eco)",
+        "visual (texto efémero)"
+      ]
+    },
+    {
+      "stage": "primeiro_gesto",
+      "description": "A pessoa digita ou diz uma regra (ex: 'Não pisar as sombras'). A regra aparece escrita no chão do círculo de luz, como se fosse gravada em pedra. O som dos sinos pára. Silêncio.",
+      "sensory_focus": [
+        "auditory (silêncio súbito)",
+        "visual (texto no chão)",
+        "kinesthetic (digitar/dizer)"
+      ]
+    },
+    {
+      "stage": "resposta_viva",
+      "description": "O círculo de luz expande-se lentamente, e a regra escrita no chão começa a tremer. A sombra da pessoa (agora com coroa) move-se sozinha, como se testasse a regra: pisando sombras, tocando bordas, etc. Cada vez que a sombra 'quebra' a regra, um fio de luz dourada se solta da coroa e cai no chão, formando um padrão de tecido (sainha).",
+      "sensory_focus": [
+        "visual (luz/sombra/movimento)",
+        "auditory (som de tecido a rasgar-se levemente)",
+        "haptic (vibração opcional do dispositivo, se suportado)"
+      ]
+    },
+    {
+      "stage": "desvio",
+      "description": "A voz sussurra: *'Agora quebra-a com delicadeza.'* A regra no chão racha-se como vidro, e os pedaços flutuam. A sombra da pessoa (ainda com coroa) para de se mover sozinha e olha para a pessoa, como se esperasse.",
+      "sensory_focus": [
+        "visual (rachadura/flutuação)",
+        "auditory (voz + som de vidro a partir)",
+        "proprioceptive (sensação de expectativa)"
+      ]
+    },
+    {
+      "stage": "aprofundamento_sensorial",
+      "description": "Se a pessoa interagir (ex: tocar nos pedaços da regra, mover o cursor/dedo para 'quebrar' a regra), os fios de luz da sainha começam a tecer-se no ar, criando uma cortina de luz que distorce o som ambiente (os sinos distantes agora soam como se estivessem dentro de um tecido). A coroa da sombra brilha e emite um som agudo, como um diapasão.",
+      "sensory_focus": [
+        "visual (tecelagem de luz)",
+        "auditory (som distorcido pelo tecido)",
+        "cross_sensory_translation (luz afeta som)"
+      ]
+    },
+    {
+      "stage": "escolha_acaso_silencio",
+      "description": "A cortina de luz abre-se em dois caminhos: um à esquerda (escuro, com som de risos abafados) e um à direita (luminoso, com som de sinos). A pessoa pode escolher ou esperar. Se esperar, a cortina fecha-se e reabre-se com os caminhos trocados. Se escolher um caminho, a cortina fecha-se atrás dela.",
+      "sensory_focus": [
+        "visual (caminhos)",
+        "auditory (sons contrastantes)",
+        "temporal_interoceptive (espera)"
+      ]
+    },
+    {
+      "stage": "aparição",
+      "description": "No caminho escolhido, a pessoa encontra a sombra da coroa (agora sem corpo) a flutuar. A coroa emite a regra original, mas as palavras estão invertidas ou fragmentadas (ex: 'ão pisar sombras não'). A sainha de luz tecida anteriormente aparece como um manto atrás da coroa, e um novo som emerge: o de uma multidão a aplaudir (evocação de coroação popular).",
+      "sensory_focus": [
+        "visual (coroa/sainha)",
+        "auditory (palavras invertidas + aplausos)",
+        "social_presence (evocação de multidão)"
+      ]
+    },
+    {
+      "stage": "devolução",
+      "description": "A coroa e a sainha dissolvem-se em partículas de luz que caem como confetes. As partículas formam uma frase no chão: *'A regra era um convite para ser livre.'* A voz sussurra: *'Leva a sainha contigo.'* A pessoa recebe um 'rasto' visual: um fio de luz dourada que se fixa na borda da tela (como um bordado). Este fio permanece visível em outras experiências do Atlas como um 'vestígio' da sua passagem pelo Reizinho.",
+      "sensory_focus": [
+        "visual (partículas/frase/rasto)",
+        "auditory (voz final)",
+        "spatial (rasto persistente)"
+      ]
+    },
+    {
+      "stage": "latência",
+      "description": "O círculo de luz inicial volta a aparecer, vazio. O som dos sinos retoma, mas agora com um novo tom (mais agudo, como se a festa tivesse começado). O rastro da sainha (fio de luz) permanece na tela como um elemento interativo: ao passar o cursor/dedo por cima, ele emite um som de tecido a esvoaçar.",
+      "sensory_focus": [
+        "visual (círculo vazio + rastro)",
+        "auditory (som modificado + tecido)",
+        "temporal_interoceptive (latência da festa)"
+      ]
+    }
+  ],
+  "participant_verbs": [
+    "inventar",
+    "quebrar",
+    "esperar",
+    "escolher",
+    "tocar",
+    "ouvir",
+    "observar"
+  ],
+  "system_responses": {
+    "to_inventar": "A regra aparece gravada no chão do círculo de luz, como pedra. A sombra da pessoa ganha contorno de coroa.",
+    "to_quebrar": "A regra racha-se. Fios de luz (sainha) caem da coroa. A sombra move-se sozinha, testando a regra.",
+    "to_esperar": "Os caminhos trocam de lugar. A cortina de luz reabre-se com nova configuração.",
+    "to_escolher": "A cortina fecha-se atrás da pessoa. O caminho escolhido revela a coroa e a sainha.",
+    "to_tocar": {
+      "regra_rachada": "Os pedaços flutuam e emitem som de vidro a partir.",
+      "sainha": "A tecelagem de luz acelera, distorcendo o som ambiente.",
+      "rasto": "O fio de luz emite som de tecido a esvoaçar."
+    },
+    "to_ouvir": "Os sons (sinos, risos, voz) respondem à proximidade do cursor/dedo: mais altos se próximos, abafados se distantes.",
+    "to_observar": "A sombra da pessoa (com coroa) reage ao movimento do cursor/olhar: vira-se para a pessoa, como se a observasse de volta."
+  },
+  "sensory_signature_id": "SS-REIZINHO-SAINHA-006",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "círculo de luz pulsante (limiar)",
+        "sombra com contorno de coroa",
+        "regra gravada no chão (como pedra)",
+        "rachadura da regra (vidro a partir)",
+        "fios de luz dourada (sainha)",
+        "cortina de luz tecida",
+        "caminhos (escuro/luminoso)",
+        "coroa flutuante",
+        "partículas de luz (confetes)",
+        "fio de luz dourada (rasto persistente)"
+      ],
+      "dynamics": [
+        "luz que pulsa como respiração",
+        "sombra que ganha vida própria",
+        "tecelagem de luz que distorce o espaço",
+        "partículas que formam frases"
+      ]
+    },
+    "auditory": {
+      "elements": [
+        "sinos distantes (evocação de festa)",
+        "risos abafados",
+        "voz sussurrada com eco",
+        "som de tecido a rasgar-se",
+        "som de vidro a partir",
+        "diapasão (coroa)",
+        "aplausos (evocação de multidão)",
+        "som de tecido a esvoaçar (rasto)"
+      ],
+      "dynamics": [
+        "som que se distorce ao passar pela cortina de luz",
+        "volume que responde à proximidade do cursor",
+        "silêncio súbito como pontuação"
+      ]
+    },
+    "haptic": {
+      "elements": [
+        "vibração opcional do dispositivo (quando a regra racha ou a sainha se tece)"
+      ],
+      "dynamics": [
+        "vibração que acompanha o ritmo da tecelagem de luz"
+      ],
+      "fallback": "pulso visual (luz que treme) para dispositivos sem vibração"
+    },
+    "kinesthetic": {
+      "elements": [
+        "movimento do cursor/dedo para interagir com a regra, sainha ou caminhos",
+        "gesto de digitar/dizer a regra"
+      ],
+      "dynamics": [
+        "sombra que reage ao movimento do cursor como se fosse um espelho vivo",
+        "caminhos que se reconfiguram com base na trajetória do cursor"
+      ],
+      "fallback": "teclado (setas para mover 'cursor invisível') ou voz (comandos como 'esquerda', 'direita')"
+    },
+    "proprioceptive": {
+      "elements": [
+        "percepção da sombra como extensão do corpo",
+        "sensação de expectativa quando a sombra olha para a pessoa",
+        "respiração percebida (ritmo da luz pulsante)"
+      ],
+      "dynamics": [
+        "corpo convocado a sentir-se como parte do ritual (coroa/sainha)"
+      ]
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "espera pelo reabrir da cortina de luz",
+        "ritmo da luz pulsante (respiração)",
+        "latência da festa (som que muda ao longo da experiência)"
+      ],
+      "dynamics": [
+        "tempo que se estica ou contrai com base na interação"
+      ]
+    },
+    "spatial": {
+      "elements": [
+        "círculo de luz como 'palco'",
+        "caminhos que dividem o espaço",
+        "rasto persistente na borda da tela"
+      ],
+      "dynamics": [
+        "espaço que se reconfigura com base na escolha da pessoa",
+        "profundidade sugerida pela cortina de luz"
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "evocação de tecido de sainha (cheiro a linho ou seda)",
+        "evocação de festa popular (cheiro a pão, vinho, flores)"
+      ],
+      "trigger": "quando a sainha de luz é tecida ou quando os aplausos soam"
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "evocação de sardinha (coroa de sardinha) como sabor salgado/marinho",
+        "evocação de doces de festa (confetes de luz)"
+      ],
+      "trigger": "quando a coroa aparece ou quando as partículas caem como confetes"
+    },
+    "social_presence": {
+      "elements": [
+        "evocação de multidão (aplausos)",
+        "evocação de risos abafados (como se houvesse outras pessoas no espaço)",
+        "sombra que observa a pessoa (como se fosse um outro)"
+      ],
+      "dynamics": [
+        "presença sugerida sem ser explícita"
+      ]
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "Luz (sainha tecida) afeta o som ambiente, distorcendo-o como se passasse por um tecido.",
+    "secondary": [
+      "Movimento da sombra (visual) traduzido em som de tecido a rasgar-se (auditory).",
+      "Regra escrita no chão (visual) traduzida em som de vidro a partir (auditory) quando quebrada.",
+      "Proximidade do cursor (kinesthetic) traduzida em volume do som (auditory)."
+    ]
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio súbito após a regra ser escrita (pára o som dos sinos) serve como pontuação dramática, convocando a atenção para a sombra que ganha vida própria. O silêncio também é usado na fase de 'espera' (quando a cortina de luz reabre os caminhos).",
+    "effect": "Cria um vazio que amplifica a presença da pessoa e a sensação de que algo está prestes a acontecer. O silêncio é matéria ativa, não ausência de som.",
+    "evocation": "Silêncio como convite para escutar o que não é dito (ex: a regra invertida, os aplausos imaginários)."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": [
+      "A sombra da pessoa move-se sozinha, testando a regra inventada.",
+      "A regra racha-se como vidro e os pedaços flutuam.",
+      "Os caminhos trocam de lugar se a pessoa esperar.",
+      "A coroa emite a regra invertida ou fragmentada.",
+      "O rastro da sainha (fio de luz) permanece em outras experiências do Atlas."
+    ],
+    "effect": "Quebra a expectativa de que a regra é imutável e de que a pessoa está sozinha no espaço. A surpresa é delicada, não agressiva."
+  },
+  "session_variation": [
+    {
+      "type": "acaso_controlado",
+      "description": "A regra inventada pela pessoa é aleatoriamente 'testada' pela sombra em 3 a 5 formas diferentes (ex: pisar sombras, tocar bordas, girar em círculo)."
+    },
+    {
+      "type": "ordem_mutável",
+      "description": "A ordem dos caminhos (escuro/luminoso) inverte-se se a pessoa esperar mais de 10 segundos."
+    },
+    {
+      "type": "resposta_a_ritmo",
+      "description": "Se a pessoa interagir rapidamente (ex: quebrar a regra em menos de 5 segundos), a sainha tece-se mais devagar, com sons mais graves. Se interagir lentamente, a tecelagem é rápida e os sons são agudos."
+    },
+    {
+      "type": "resposta_a_trajetória",
+      "description": "Se a pessoa mover o cursor em círculos, a sombra da coroa gira como um pião. Se mover em linhas retas, a sombra move-se em ziguezague."
+    },
+    {
+      "type": "temporalidade_real",
+      "description": "Se a experiência for acessada à noite, os sinos soam mais abafados e a luz do círculo é mais quente (tons alaranjados). Se for de dia, os sinos são mais claros e a luz é fria (tons azuis)."
+    },
+    {
+      "type": "memória_de_sessão",
+      "description": "Se a pessoa já deixou um rastro de sainha em sessões anteriores, o fio de luz na borda da tela aparece com um padrão único (ex: listras, pontos) que lembra a sua interação passada."
+    }
+  ],
+  "territorial_binding": {
+    "relation": "A experiência evoca o território de festas populares portuguesas (ex: coroação do Reizinho em festas de aldeia, onde as normas são subvertidas com humor).",
+    "evocation": [
+      "Som de sinos (evocação de igrejas ou festas de aldeia).",
+      "Risos abafados (evocação de multidão em festa).",
+      "Aplausos (evocação de coroação popular).",
+      "Sainha e coroa (evocação de trajes de festa tradicional).",
+      "Topónimos: se a pessoa permitir geolocalização (opcional), o som dos sinos pode ser substituído por um som gravado de uma festa real da sua freguesia (ex: sinos da igreja local)."
+    ],
+    "constraint": "A geolocalização é opcional e só é pedida se a pessoa clicar num ícone de 'festa local' (que aparece discretamente no canto da tela)."
+  },
+  "trace_and_return": {
+    "trace": {
+      "type": "visual",
+      "description": "Um fio de luz dourada (sainha) fixa-se na borda da tela como um bordado. Este fio é único para cada pessoa e persiste em outras experiências do Atlas.",
+      "persistence": "O rastro permanece até a pessoa fechar a sessão ou até ser 'apagado' por uma interação específica (ex: tocar no fio e arrastá-lo para fora da tela)."
+    },
+    "return": {
+      "type": "poetic",
+      "description": "A frase *'A regra era um convite para ser livre.'* aparece no chão, como um lembrete de que a transgressão pode ser um ato de criação. O rastro da sainha serve como devolução tangível da experiência."
+    },
+    "latency": {
+      "type": "cosmic",
+      "description": "O rastro da sainha pode 'conversar' com outros rastos em experiências futuras (ex: se dois fios de luz se cruzarem, emitem um som de sinos em uníssono)."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "reduced_motion": "A luz pulsante e a sombra em movimento são substituídas por um círculo estático com borda tracejada (como um contorno de coroa). A tecelagem da sainha é representada por uma linha em ziguezague que cresce verticalmente.",
+      "high_contrast": "O círculo de luz e a sombra são representados com cores de alto contraste (ex: círculo branco em fundo preto, sombra preta).",
+      "color_blind": "A sainha de luz usa padrões (ex: listras, pontos) em vez de apenas cor para diferenciar os fios."
+    },
+    "auditory": {
+      "no_audio": "Todos os sons são substituídos por vibrações (se o dispositivo suportar) ou por descrições textuais que aparecem no centro da tela (ex: '[Som de sinos distantes]').",
+      "transcript": "Um botão de 'legenda' (ícone de balão de fala) ativa descrições textuais de todos os sons (ex: 'Risos abafados vêm da esquerda')."
+    },
+    "haptic": {
+      "no_vibration": "A vibração é substituída por um pulso visual (ex: a luz do círculo pisca uma vez)."
+    },
+    "kinesthetic": {
+      "no_mouse": "A interação com o cursor é substituída por teclado (setas para mover, Enter para selecionar) ou voz (comandos como 'quebrar regra', 'escolher esquerda').",
+      "no_touch": "A interação táctil é substituída por teclado ou voz."
+    },
+    "proprioceptive": {
+      "no_movement": "A sombra da pessoa é representada por um ícone estático (ex: uma coroa) que reage à interação do teclado/voz."
+    },
+    "temporal_interoceptive": {
+      "no_wait": "A opção de esperar é substituída por um botão 'Pular espera' que avança para a próxima fase."
+    },
+    "cognitive": {
+      "simplified_text": "As frases complexas (ex: 'A regra era um convite para ser livre.') são substituídas por versões mais simples (ex: 'A regra era para ser quebrada.').",
+      "symbols": "Ícones são adicionados para representar ações (ex: 👑 para coroa, ✂️ para quebrar regra)."
+    }
+  },
+  "optional_permissions": {
+    "microphone": {
+      "purpose": "Permitir que a pessoa diga a regra em voz alta em vez de digitá-la.",
+      "trigger": "Aparece um ícone de microfone quando a pessoa clica no campo de texto para inventar a regra.",
+      "fallback": "A regra pode ser digitada no teclado."
+    },
+    "geolocation": {
+      "purpose": "Substituir o som genérico dos sinos por um som gravado de uma festa real da freguesia da pessoa.",
+      "trigger": "Aparece um ícone de 'festa local' discretamente no canto da tela. Ao clicar, pede permissão para geolocalização.",
+      "fallback": "O som genérico dos sinos é usado."
+    },
+    "camera": {
+      "purpose": "NÃO APLICÁVEL. A experiência não requer câmera.",
+      "trigger": null,
+      "fallback": null
+    },
+    "motion": {
+      "purpose": "NÃO APLICÁVEL. A sombra reage ao movimento do cursor, não do dispositivo.",
+      "trigger": null,
+      "fallback": null
+    }
+  },
+  "overstimulation_risk": {
+    "visual": {
+      "risk": "Luz pulsante e partículas em movimento rápido podem causar desconforto em pessoas com sensibilidade visual.",
+      "mitigation": [
+        "Opção de 'reduced motion' (desativar animações).",
+        "Limitar a velocidade das partículas e da luz pulsante.",
+        "Usar cores suaves e contrastes moderados."
+      ]
+    },
+    "auditory": {
+      "risk": "Sons súbitos (ex: vidro a partir, aplausos) podem assustar ou causar desconforto.",
+      "mitigation": [
+        "Aumentar gradualmente o volume dos sons.",
+        "Permitir que a pessoa ajuste o volume global.",
+        "Fornecer opção de desativar sons."
+      ]
+    },
+    "haptic": {
+      "risk": "Vibração contínua pode ser incómoda.",
+      "mitigation": [
+        "Limitar a duração da vibração a 1 segundo.",
+        "Permitir desativar vibração."
+      ]
+    },
+    "cognitive": {
+      "risk": "A experiência pode ser confusa para pessoas com dificuldades de processamento de informação.",
+      "mitigation": [
+        "Fornecer opção de 'modo guiado' com instruções passo a passo.",
+        "Simplificar o texto e adicionar ícones."
+      ]
+    }
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "A regra inventada pela pessoa é testada e quebrada pela sua própria sombra (com coroa), criando uma sensação de agência e surpresa.",
+      "A tradução cruzada entre luz (sainha tecida) e som (distorção) é específica desta experiência.",
+      "O rastro persistente (fio de luz) que 'conversa' com outros rastos em experiências futuras.",
+      "A evocação de festas populares e a subversão das normas com humor e delicadeza.",
+      "A coroa de sardinha como símbolo de liberdade e absurdo (referência autoral direta)."
+    ],
+    "comparison": "Nenhuma outra experiência no Atlas convida a pessoa a inventar uma regra para depois a quebrar com a sua própria sombra. Outras experiências podem envolver som e luz, mas a dinâmica de 'regra → teste → quebra → devolução' é única do Reizinho Sainha."
+  },
+  "questions_for_eduardo": [
+    "A regra inventada pela pessoa deve ser gravada e reutilizada em sessões futuras (ex: a sombra testar a mesma regra em outro contexto)? Ou cada sessão deve ser independente?",
+    "O rastro da sainha (fio de luz) deve ser visível apenas para a pessoa que o criou, ou pode ser visto por outros em experiências compartilhadas (ex: COSMICOXES)?",
+    "A voz sussurrada deve ter um sotaque ou timbres específicos (ex: voz de criança, voz de ancião) para reforçar a evocação territorial?",
+    "A coroa de sardinha deve ser representada visualmente de alguma forma (ex: com escamas de luz) ou deve permanecer abstrata?",
+    "O som dos aplausos deve ser substituído por um som mais específico (ex: aplausos de uma festa real gravada) se a geolocalização for permitida?"
+  ],
+  "improvement_proposals": [
+    {
+      "suggestion": "Adicionar uma fase opcional onde a pessoa pode 'coroar' outra pessoa (ex: convite para partilhar a experiência com um amigo, que recebe um link com a regra inventada e a sombra da coroa).",
+      "justification": "Reforça a dimensão social e territorial da experiência, alinhada com o princípio de 'encontro' do Atlas."
+    },
+    {
+      "suggestion": "Incluir uma opção para a pessoa 'guardar' a sua regra quebrada como um 'decreto' (ex: um PDF ou imagem gerada com a regra, a data e um selo do Reizinho).",
+      "justification": "Devolução tangível que pode ser partilhada ou impressa, reforçando o rasto."
+    },
+    {
+      "suggestion": "Integrar a experiência com o 'Cubo Interior' (D7): após quebrar a regra, a pessoa pode ser convidadas a 'entrar no buraco' (face do Cubo) para explorar o que emerge da transgressão.",
+      "justification": "Conexão com o núcleo autoral do Livro Cubo, aprofundando a dimensão de 'viagem'."
+    },
+    {
+      "suggestion": "Adicionar uma camada de 'memória territorial': se a pessoa permitir geolocalização, a regra inventada pode ser associada a um lugar real (ex: 'Esta regra foi inventada na Rua X, em Lisboa').",
+      "justification": "Reforça a ligação ao território e à curadoria territorial do Atlas."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

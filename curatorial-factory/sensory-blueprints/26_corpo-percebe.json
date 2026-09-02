@@ -1,0 +1,360 @@
+{
+  "id": "corpo-percebe",
+  "canonical_name": "O Corpo que Percebe",
+  "source_evidence": {
+    "primary": [
+      {
+        "source": "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md",
+        "authority": "autoral",
+        "quote": "D4 O Corpo que Percebe — percepção incorporada; digital quase ausente; corpo não é dado."
+      },
+      {
+        "source": "CUBO_02_MANUAL_INVERTIDO_MELHORADO.md",
+        "authority": "autoral",
+        "quote": "O erro é entrada; o riso é método; o silêncio é matéria; a pergunta abre; o ganhador não vence o outro, chega a si."
+      }
+    ],
+    "secondary": [
+      {
+        "source": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
+        "authority": "interpretativa",
+        "quote": "corpo inteiro, textura/hapticidade, psicogeografia activa"
+      }
+    ]
+  },
+  "authorial_invariants": [
+    "A experiência deve priorizar a percepção incorporada, não a representação digital.",
+    "O corpo não é um dado a ser recolhido, mas um agente ativo de percepção.",
+    "O digital deve ser 'quase ausente', servindo apenas como mediador mínimo.",
+    "A dinâmica deve permitir que o participante perceba o seu próprio corpo como instrumento de conhecimento.",
+    "A experiência deve preservar a possibilidade de erro, riso e silêncio como matérias válidas."
+  ],
+  "perceptual_intent": "Convidar o participante a redescobrir o seu corpo como um sistema de perceção ativa, onde o digital funciona como um espelho mínimo que devolve a atenção para a experiência física imediata. A ausência de estímulos digitais excessivos deve criar um vazio que convida à auto-observação.",
+  "threshold": {
+    "description": "A tela carregada exibe um fundo neutro (preto ou branco, conforme preferência de acessibilidade) com um único ponto de luz ou sombra a pulsar lentamente, como uma respiração. O texto 'Fecha os olhos. O corpo começa.' aparece em tipografia orgânica, quase como se fosse escrita à mão, e desaparece após 3 segundos. O ponto de luz/sombra continua a pulsar, mas agora em resposta ao movimento mínimo do cursor ou ao toque na tela (se presente).",
+    "sensory_trigger": "A pulsação do ponto (visual) e o seu eco sonoro (auditivo, um som de respiração ou batimento cardíaco muito suave) criam uma expectativa de que algo está vivo, mas não é ainda claro o que."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": "LIMIAR",
+      "description": "O ambiente digital reduz-se ao mínimo: um ponto pulsante e um convite textual que desaparece. A pessoa sente que algo está a acontecer, mas não sabe o quê. A pulsação do ponto sincroniza-se com um som de respiração (opcional, com alternativa visual)."
+    },
+    {
+      "stage": "CHAMADA",
+      "description": "O texto 'Toca aqui com a ponta dos dedos. Ou não.' aparece por 2 segundos e desaparece. O ponto pulsante agora reage à proximidade do cursor ou dedo (se touchscreen), expandindo-se ou contraindo-se como se fosse uma membrana sensível."
+    },
+    {
+      "stage": "PRIMEIRO GESTO",
+      "description": "A pessoa toca ou move o cursor sobre o ponto. O ponto explodir em partículas que se dispersam lentamente, revelando um círculo vazio no centro. O som de respiração é substituído por um zumbido suave que se desvanece em silêncio."
+    },
+    {
+      "stage": "RESPOSTA VIVA",
+      "description": "O círculo vazio no centro começa a preencher-se com uma textura que imita a pele humana (visual) e um som de fricção táctil (auditivo, como tecido a ser esfregado). A textura e o som respondem ao movimento do cursor/dedo: quanto mais rápido, mais áspera a textura e mais agudo o som; quanto mais lento, mais suave."
+    },
+    {
+      "stage": "DESVIO",
+      "description": "De repente, a textura e o som invertem-se: movimento rápido torna a textura macia e o som grave; movimento lento torna-a áspera e o som agudo. A pessoa percebe que a sua expectativa foi subvertida."
+    },
+    {
+      "stage": "APROFUNDAMENTO SENSORIAL",
+      "description": "O círculo agora divide-se em dois: um lado responde ao movimento do cursor/dedo (visual + auditivo), e o outro lado responde à pressão (se touchscreen) ou à velocidade do clique (haptic feedback opcional). Os dois lados interagem: o som de um lado afeta a textura do outro, criando uma tradução cruzada entre tato e audição."
+    },
+    {
+      "stage": "ESCOLHA / ACASO / SILÊNCIO",
+      "description": "A pessoa pode escolher focar-se num lado ou no outro, ou deixar o sistema em silêncio. Se não interagir durante 10 segundos, o círculo começa a desvanecer-se, e um novo texto aparece: 'Onde sentes o peso do teu corpo agora?'"
+    },
+    {
+      "stage": "APARIÇÃO",
+      "description": "Se a pessoa interagir com o círculo, uma palavra ou frase curta aparece no centro, escrita em tipografia que imita a caligrafia manual (ex: 'Aqui', 'Agora', 'Eu'). A palavra é gerada com base no ritmo e na intensidade da interação (ex: interação rápida = 'Agora'; interação lenta = 'Aqui'; interação mista = 'Eu'). Se a pessoa não interagir, a palavra aparece aleatoriamente entre um conjunto pré-definido."
+    },
+    {
+      "stage": "DEVOLUÇÃO",
+      "description": "A palavra permanece no ecrã por 5 segundos, e depois desaparece, deixando apenas o círculo vazio. Um som de suspiro ou exalação marca o final. A pessoa recebe um convite para guardar a palavra (opcional, sem registo obrigatório) ou para repetir a experiência."
+    },
+    {
+      "stage": "RASTO / LATÊNCIA",
+      "description": "Se a pessoa optar por guardar a palavra, esta é adicionada a uma constelação invisível de palavras de outros participantes (sem identificação). Em sessões futuras, a constelação pode influenciar a geração de novas palavras (ex: palavras guardadas anteriormente podem aparecer como opções de 'APARIÇÃO' para novos participantes)."
+    }
+  ],
+  "participant_verbs": [
+    "tocar",
+    "esfregar",
+    "escutar",
+    "respirar",
+    "sentir",
+    "esperar",
+    "observar"
+  ],
+  "system_responses": [
+    {
+      "trigger": "proximidade do cursor/dedo",
+      "response": "O ponto pulsante expande-se ou contrai-se, com som de respiração sincronizado."
+    },
+    {
+      "trigger": "toque/clique no ponto",
+      "response": "O ponto explode em partículas, revelando um círculo vazio com textura de pele e som de fricção táctil."
+    },
+    {
+      "trigger": "movimento do cursor/dedo",
+      "response": "A textura e o som do círculo alteram-se conforme a velocidade e direção do movimento."
+    },
+    {
+      "trigger": "pressão (touchscreen) ou velocidade do clique",
+      "response": "O lado oposto do círculo responde com textura e som invertidos."
+    },
+    {
+      "trigger": "silêncio (10 segundos sem interação)",
+      "response": "O círculo desvanece-se e um novo convite textual aparece."
+    },
+    {
+      "trigger": "interação com o círculo",
+      "response": "Uma palavra ou frase aparece no centro, gerada com base no ritmo da interação."
+    },
+    {
+      "trigger": "opção de guardar a palavra",
+      "response": "A palavra é adicionada a uma constelação invisível de palavras de outros participantes."
+    }
+  ],
+  "sensory_signature_id": "corpo-percebe-2026",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "ponto pulsante",
+        "partículas dispersas",
+        "círculo vazio",
+        "textura de pele",
+        "palavra caligráfica"
+      ],
+      "dynamics": [
+        "pulsação",
+        "expansão/contração",
+        "transparência",
+        "textura variável",
+        "aparição/desaparecimento"
+      ]
+    },
+    "auditory": {
+      "elements": [
+        "respiração",
+        "zumbido",
+        "fricção táctil",
+        "som de suspiro"
+      ],
+      "dynamics": [
+        "volume variável",
+        "frequência variável",
+        "silêncio",
+        "eco suave"
+      ]
+    },
+    "haptic": {
+      "elements": [
+        "vibração opcional (se dispositivo compatível)"
+      ],
+      "dynamics": [
+        "feedback mínimo em resposta à pressão ou movimento rápido"
+      ]
+    },
+    "kinesthetic": {
+      "elements": [
+        "movimento do cursor/dedo",
+        "pressão (touchscreen)",
+        "velocidade do gesto"
+      ],
+      "dynamics": [
+        "resposta à trajetória",
+        "resposta à intensidade"
+      ]
+    },
+    "proprioceptive": {
+      "elements": [
+        "atenção ao peso do corpo",
+        "respiração percebida"
+      ],
+      "dynamics": [
+        "convite à auto-observação"
+      ]
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "ritmo da interação",
+        "espera",
+        "silêncio"
+      ],
+      "dynamics": [
+        "aceleração/desaceleração",
+        "suspensão"
+      ]
+    },
+    "spatial": {
+      "elements": [
+        "proximidade do cursor/dedo",
+        "divisão do círculo em dois lados"
+      ],
+      "dynamics": [
+        "distância",
+        "orientação"
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "memória de cheiros associados à pele (ex: sabonete, suor, perfume)"
+      ],
+      "dynamics": [
+        "evocação por linguagem e textura visual"
+      ]
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "memória de sabores associados a momentos de perceção corporal (ex: salgado do suor, doce de um beijo)"
+      ],
+      "dynamics": [
+        "evocação por linguagem e som"
+      ]
+    },
+    "social_presence": {
+      "elements": [
+        "constelação invisível de palavras de outros participantes"
+      ],
+      "dynamics": [
+        "influência indireta em sessões futuras"
+      ]
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "O movimento do cursor/dedo (cinestésico) altera a textura visual e o som táctil (auditivo), criando uma tradução entre tato, visão e audição.",
+    "secondary": "A pressão (háptico) no lado esquerdo do círculo afeta a textura visual e o som do lado direito, e vice-versa."
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio é usado como matéria ativa: a ausência de interação durante 10 segundos desencadeia uma nova fase da experiência, e o som de suspiro marca o final da interação.",
+    "purpose": "Criar espaço para a auto-observação e a perceção do corpo sem estímulos externos."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": "A inversão repentina da relação entre movimento e textura/som (desvio) e a geração aleatória ou baseada em ritmo de palavras (aparição).",
+    "purpose": "Subverter as expectativas do participante e introduzir um elemento de imprevisibilidade controlada."
+  },
+  "session_variation": [
+    {
+      "type": "acaso controlado",
+      "description": "A palavra gerada na fase de 'APARIÇÃO' pode ser aleatória entre um conjunto pré-definido se o participante não interagir ativamente."
+    },
+    {
+      "type": "resposta a ritmo/velocidade do gesto",
+      "description": "A textura e o som do círculo alteram-se conforme a velocidade e intensidade do movimento do participante."
+    },
+    {
+      "type": "resposta a posição/trajetória",
+      "description": "A divisão do círculo em dois lados responde à trajetória do cursor/dedo, criando uma interação espacial única."
+    },
+    {
+      "type": "combinação de fragmentos curatoriais",
+      "description": "As palavras guardadas por outros participantes (constelação invisível) podem influenciar a geração de novas palavras em sessões futuras."
+    },
+    {
+      "type": "silêncio/espera",
+      "description": "A experiência pode entrar em modo de espera se o participante não interagir, desencadeando uma nova fase."
+    }
+  ],
+  "territorial_binding": {
+    "relation": "A experiência não está diretamente ligada a um território físico, mas a constelação de palavras guardadas pode ser associada a uma freguesia ou lugar se o participante optar por adicionar essa informação (opcional e sem rastreio).",
+    "justification": "A dinâmica 'O Corpo que Percebe' é universal e não depende de um lugar específico, mas a devolução (constelação de palavras) pode ter uma dimensão territorial se o participante assim o desejar."
+  },
+  "trace_and_return": {
+    "trace": {
+      "type": "palavra guardada",
+      "description": "A palavra gerada na fase de 'APARIÇÃO' pode ser guardada pelo participante e adicionada a uma constelação invisível de palavras de outros participantes."
+    },
+    "return": {
+      "type": "influência em sessões futuras",
+      "description": "As palavras guardadas podem aparecer como opções de 'APARIÇÃO' para novos participantes, criando um rasto coletivo."
+    },
+    "latency": {
+      "type": "constelação invisível",
+      "description": "As palavras permanecem na constelação e podem ser reencontradas em sessões futuras, sem identificação do autor."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "alternative": "Descrição auditiva de todas as alterações visuais (ex: 'O ponto está a pulsar', 'O círculo está a preencher-se com uma textura áspera').",
+      "reduced_motion": "Modo de movimento reduzido: o ponto pulsante e as partículas são estáticos, mas a interação com o cursor/dedo ainda desencadeia as respostas do sistema."
+    },
+    "auditory": {
+      "alternative": "Legendas visuais para todos os sons (ex: 'Som de respiração', 'Som de fricção táctil').",
+      "mute": "Modo mudo: os sons são substituídos por vibrações (se dispositivo compatível) ou por alterações visuais (ex: o círculo muda de cor em resposta ao que seria o som)."
+    },
+    "haptic": {
+      "alternative": "Feedback visual para pressão (ex: o círculo muda de cor ou textura em resposta à pressão)."
+    },
+    "kinesthetic": {
+      "alternative": "Controlo por teclado: as setas do teclado podem ser usadas para mover um cursor virtual, e a barra de espaço pode ser usada para 'tocar' o ponto."
+    },
+    "proprioceptive": {
+      "alternative": "Convite textual para fechar os olhos e focar na respiração ou no peso do corpo, sem depender de interação física."
+    },
+    "temporal_interoceptive": {
+      "alternative": "Modo sem pressão: a experiência não desaparece ou avança automaticamente, permitindo que o participante interaja no seu próprio ritmo."
+    }
+  },
+  "optional_permissions": {
+    "required": [],
+    "optional": [
+      {
+        "permission": "touchscreen/pressão",
+        "purpose": "Permitir que a pressão do dedo afete a textura e o som do círculo.",
+        "fallback": "A interação é baseada apenas no movimento do cursor/dedo."
+      },
+      {
+        "permission": "vibração",
+        "purpose": "Fornecer feedback háptico opcional em resposta à interação.",
+        "fallback": "O feedback é apenas visual e auditivo."
+      }
+    ]
+  },
+  "overstimulation_risk": {
+    "risks": [
+      "Flashing ou alterações visuais rápidas podem causar desconforto.",
+      "Sons súbitos ou repetitivos podem ser perturbadores.",
+      "Feedback háptico insistente pode ser incómodo."
+    ],
+    "mitigations": [
+      "O ponto pulsante tem uma frequência baixa e suave, sem flashing.",
+      "Os sons são sempre suaves e progressivos, com opção de mute.",
+      "O feedback háptico é mínimo e opcional, com alternativa visual.",
+      "A experiência inclui pausas e silêncio como parte da dinâmica.",
+      "O participante pode sair a qualquer momento."
+    ]
+  },
+  "distinctiveness": {
+    "unique_traits": [
+      "A experiência reduz o digital ao mínimo, convocando a perceção corporal direta.",
+      "A tradução cruzada entre movimento, textura e som é central e não decorativa.",
+      "O silêncio e a ausência são usados como matérias ativas, não como vazio passivo.",
+      "A devolução (palavra gerada) é única para cada sessão e pode influenciar sessões futuras.",
+      "A dinâmica não depende de permissões ou sensores, funcionando em qualquer dispositivo.",
+      "A acessibilidade preserva a intenção poética, não reduzindo a experiência a uma versão 'menor'."
+    ],
+    "comparison": "Nenhuma outra experiência no Atlas usa o corpo como instrumento de perceção de forma tão direta e minimalista, nem reduz o digital a um papel de mediador quase invisível. A tradução cruzada entre tato, visão e audição é única para esta curadoria."
+  },
+  "questions_for_eduardo": [
+    "A geração da palavra na fase de 'APARIÇÃO' deve ser baseada apenas no ritmo da interação, ou pode incluir outros fatores (ex: palavras guardadas anteriormente)?",
+    "A constelação de palavras deve ser global (para todos os participantes) ou pode ser territorial (associada a uma freguesia ou lugar)?",
+    "Deve haver um limite para o número de palavras que um participante pode guardar, ou a constelação pode crescer indefinidamente?",
+    "A experiência deve incluir um convite explícito para fechar os olhos, ou isso deve ser opcional e implícito?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Adicionar uma opção para o participante associar a palavra gerada a um lugar ou memória específica, criando uma camada territorial opcional.",
+      "justification": "Isso alinharia a experiência com a dimensão territorial do Atlas, sem forçar uma ligação artificial."
+    },
+    {
+      "proposal": "Incluir uma fase de 'reconhecimento' no final, onde o participante pode ver as palavras guardadas por outros (sem identificação) e refletir sobre a constelação coletiva.",
+      "justification": "Isso reforçaria a dimensão social e comunitária da experiência, alinhando-a com os princípios do Atlas."
+    },
+    {
+      "proposal": "Permitir que o participante 'apague' a sua palavra da constelação, se assim o desejar, reforçando o controle sobre o seu rasto.",
+      "justification": "Isso alinharia com os princípios de consentimento e autonomia do Atlas."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

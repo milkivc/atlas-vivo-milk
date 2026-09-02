@@ -1,0 +1,384 @@
+{
+  "id": "giria-do-avesso",
+  "canonical_name": "Gíria do Avesso",
+  "source_evidence": {
+    "primary": [
+      {
+        "source": "catalog_entry",
+        "authority": "high",
+        "details": "Curadoria 'giria-do-avesso' com mecânica 'traduzir', convite 'Traduz sem explicar. Deixa o som decidir.', família 'girias', camada 'pública', estado 'operavel_motor_comum'."
+      },
+      {
+        "source": "source_corpus",
+        "authority": "high",
+        "details": "FALArte / NÓS — Mecânica 7: 'Palavras que desapareceram — gírias, alcunhas e modos de dizer em desaparecimento.'"
+      }
+    ],
+    "secondary": [
+      {
+        "source": "source_corpus",
+        "authority": "medium",
+        "details": "Princípio FALArte: 'tecnologias e formas ancestrais/territoriais de transmitir informação e gerar conhecimento devem alimentar dinâmicas ligadas à identidade toponímica e à interacção real com o território.'"
+      },
+      {
+        "source": "source_corpus",
+        "authority": "medium",
+        "details": "Referência a 'travessura, fabulação popular' em Reizinho e 'oralidade' em FUCO."
+      }
+    ]
+  },
+  "authorial_invariants": [
+    "Traduzir sem explicar.",
+    "Deixar o som decidir.",
+    "Gíria como palavra em desaparecimento ou transformação.",
+    "Família 'girias' como núcleo de identidade toponímica e oralidade.",
+    "Mecânica de tradução não literal, não explicativa."
+  ],
+  "perceptual_intent": "Convidar a pessoa a entrar num campo sonoro onde as palavras (gírias) não são fixas, mas sim matéria viva que se deforma, colide e se traduz em tempo real, com o som a guiar a transformação. A experiência deve evocar a oralidade como um território onde o significado é fluido, e a tradução é um acto de escuta ativa, não de decifração intelectual.",
+  "threshold": {
+    "description": "A pessoa entra num espaço visualmente minimalista, dominado por um fundo negro ou escuro com partículas sonoras visíveis (ondas de som ou pontos luminosos que pulsam ao ritmo de um murmúrio inaudível). O cursor ou o toque inicial faz com que uma única gíria (ex: 'paneleiro', 'tacho', 'fole') apareça no centro, escrita em tipografia orgânica, como se fosse gravada à mão em uma parede de azulejo desbotado. A palavra não tem definição, apenas som.",
+    "sensory_trigger": "O som ambiente (um murmúrio de vozes sobrepostas, ininteligível) aumenta subtamente de volume, como se a pessoa tivesse entrado numa roda de conversa onde todos falam ao mesmo tempo, mas em línguas diferentes."
+  },
+  "dramaturgical_arc": [
+    {
+      "phase": "limiar",
+      "action": "A pessoa é imersa num campo sonoro de vozes sobrepostas (gírias pronunciadas em diferentes sotaques e ritmos). O ecrã exibe uma única gíria central, sem contexto, como um convite silencioso."
+    },
+    {
+      "phase": "chamada",
+      "action": "A gíria central pulsa ao ritmo de uma voz que a pronuncia em loop, mas a voz é distorcida, como se viesse de um rádio velho. O convite implícito: 'Traduz esta palavra sem explicar.'"
+    },
+    {
+      "phase": "primeiro_gesto",
+      "action": "A pessoa é convidada a arrastar a gíria para um de três 'poços' sonoros (visualmente representados como círculos concêntricos que vibram com frequências diferentes). Cada poço representa uma 'tradução' possível: som, imagem ou gesto."
+    },
+    {
+      "phase": "resposta_viva",
+      "action": "Ao soltar a gíria num poço, o som ambiente muda: as vozes sobrepostas silenciam-se, e a gíria é pronunciada claramente por uma voz única (mas anónima), enquanto o ecrã exibe uma tradução não literal (ex: 'paneleiro' → 'aquele que conserta o que os outros não veem'). A tradução aparece como uma mancha de tinta que se espalha, revelando uma imagem associada (ex: uma mão a segurar uma ferramenta, uma sombra projetada)."
+    },
+    {
+      "phase": "desvio",
+      "action": "A tradução não é estática: se a pessoa não interagir, a mancha de tinta começa a 'sangrar' para outras gírias relacionadas (ex: 'paneleiro' → 'chaveiro' → 'serralheiro'), criando uma rede visual e sonora de associações. Se a pessoa clicar numa das novas gírias, o processo repete-se, mas com uma voz diferente (ex: uma criança, um idoso)."
+    },
+    {
+      "phase": "aprofundamento_sensorial",
+      "action": "O som e a imagem começam a contaminar-se: a voz que pronuncia a gíria altera o ritmo da pulsação visual (ex: uma gíria pronunciada lentamente faz com que as partículas sonoras no ecrã se movam em câmera lenta). O cursor da pessoa, ao passar sobre as gírias, faz com que estas emitam sons únicos (ex: um 'clique' metálico para 'ferreiro', um assobio para 'paneleiro')."
+    },
+    {
+      "phase": "escolha_acaso_silencio",
+      "action": "A pessoa pode: (1) escolher uma gíria para 'fixar' (a tradução e a imagem ficam estáticas, como um selo); (2) deixar o sistema escolher aleatoriamente uma nova gíria; ou (3) fazer silêncio (parar de interagir por 10 segundos), o que faz com que todas as gírias e traduções desapareçam, leaving apenas o murmúrio original, agora mais alto e claro, como se a pessoa tivesse entrado num círculo de contadores de histórias."
+    },
+    {
+      "phase": "aparição",
+      "action": "Se a pessoa fixar uma gíria, aparece uma 'constelação' de todas as traduções e imagens associadas a essa palavra, organizadas como um mapa de memórias. Se escolher o acaso, uma nova gíria aparece com uma tradução inesperada (ex: 'tacho' → 'o som que a avó fazia ao mexer a panela'). Se optar pelo silêncio, o murmúrio revela-se como uma voz única a contar uma história curta que usa todas as gírias recolhidas até então."
+    },
+    {
+      "phase": "devolução",
+      "action": "A pessoa recebe de volta uma 'gíria traduzida' única, gerada a partir das suas interações: uma frase ou palavra nova que combina as gírias que explorou (ex: 'O paneleiro do tacho que conserta o fole'). Esta frase é apresentada como um 'bilhete' rasgado, com a data e hora da sessão, e pode ser guardada ou partilhada (opcional)."
+    },
+    {
+      "phase": "rasto_latencia",
+      "action": "A gíria traduzida da pessoa passa a fazer parte do 'murmúrio' de fundos em sessões futuras, como uma voz adicional na roda de conversa. Se a pessoa regressar, pode encontrar a sua gíria a ser pronunciada por outras vozes, como se tivesse entrado num território vivo de oralidade."
+    }
+  ],
+  "participant_verbs": [
+    "escutar",
+    "arrastar",
+    "soltar",
+    "fixar",
+    "silenciar",
+    "explorar",
+    "traduzir"
+  ],
+  "system_responses": {
+    "to_drag": "A gíria arrastada emite um som único (ex: um 'clique' metálico, um assobio) e a sua tipografia distorce-se levemente, como se estivesse a ser puxada por uma corrente invisível.",
+    "to_drop_in_poço_sonoro": "O poço chosen vibra, e a gíria é pronunciada claramente por uma voz aleatória (mas coerente com o território). Uma tradução não literal aparece como uma mancha de tinta que se expande.",
+    "to_hover": "O cursor faz com que a gíria emite um som contínuo (ex: um zumbido para 'mosca', um ranger para 'porta').",
+    "to_fix": "A gíria e a sua tradução ficam estáticas, e uma constelação de associações aparece em torno dela.",
+    "to_silence": "Todas as gírias desaparecem, e o murmúrio de fundos torna-se uma voz única a contar uma história com as gírias recolhidas.",
+    "to_return": "A gíria traduzida da pessoa é adicionada ao murmúrio de fundos em sessões futuras."
+  },
+  "sensory_signature_id": "giria-do-avesso-oralidade-fluida",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "gírias em tipografia orgânica (azulejo desbotado, tinta a sangrar)",
+        "poços sonoros como círculos concêntricos vibrante",
+        "manchas de tinta que se expandem para revelar imagens associadas",
+        "constelações de gírias e traduções como mapas de memórias",
+        "bilhete rasgado com a gíria traduzida da pessoa",
+        "partículas sonoras visíveis (ondas ou pontos luminosos)"
+      ],
+      "dynamics": [
+        "pulsação ao ritmo do som ambiente",
+        "distorsão da tipografia ao arrastar",
+        "expansão/contração das manchas de tinta",
+        "movimento lento ou rápido das partículas conforme o ritmo da voz"
+      ]
+    },
+    "auditory": {
+      "elements": [
+        "murmúrio de vozes sobrepostas (gírias pronunciadas em diferentes sotaques)",
+        "voz única a pronunciar a gíria claramente (após interação)",
+        "sons únicos associados a cada gíria (ex: 'clique' metálico, assobio)",
+        "história contada com as gírias recolhidas (após silêncio)",
+        "voz aleatória (criança, idoso, etc.) para cada tradução"
+      ],
+      "dynamics": [
+        "volume do murmúrio aumenta/subtrai conforme a interação",
+        "ritmo da voz altera a pulsação visual",
+        "sons contínuos ao hover sobre as gírias",
+        "silêncio como estado ativo (murmúrio torna-se voz única)"
+      ]
+    },
+    "haptic": {
+      "elements": [
+        "vibração sutil do dispositivo ao arrastar/soltar (opcional, se suportado)"
+      ],
+      "dynamics": [
+        "feedback háptico sincronizado com o som da gíria"
+      ]
+    },
+    "kinesthetic": {
+      "elements": [
+        "arrastar e soltar gírias para poços sonoros",
+        "movimento do cursor para explorar gírias e traduções"
+      ],
+      "dynamics": [
+        "trajetória do arrasto afeta a distorção da tipografia",
+        "velocidade do cursor afeta o volume do som associado à gíria"
+      ]
+    },
+    "proprioceptive": {
+      "elements": [
+        "instrução implícita para 'escutar com o corpo' (ex: fechar os olhos para focar no som)"
+      ],
+      "dynamics": [
+        "ritmo da respiração percebida (sem recolha biométrica) pode sincronizar com a pulsação visual"
+      ]
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "espera de 10 segundos para ativar o modo 'silêncio'",
+        "ritmo da voz (lento/rápido) afeta a perceção do tempo",
+        "suspensão do tempo durante a aparição da constelação"
+      ],
+      "dynamics": [
+        "aceleração/desaceleração da pulsação visual conforme o ritmo sonoro"
+      ]
+    },
+    "spatial": {
+      "elements": [
+        "poços sonoros organizados em círculo (como uma roda de conversa)",
+        "constelação de gírias como um mapa territorial"
+      ],
+      "dynamics": [
+        "distância do cursor em relação aos poços afeta o volume do som associado"
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "evocação de cheiros associados a gírias (ex: 'tacho' → cheiro a comida cozinhada, 'paneleiro' → cheiro a metal/ferrugem)"
+      ],
+      "dynamics": [
+        "descrições textuais ou sonoras que evocam memórias olfativas (ex: 'o cheiro que a avó trazia nas mãos')"
+      ]
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "evocação de sabores associados a gírias (ex: 'pãozinho' → sabor a pão quente, 'café' → amargor)"
+      ],
+      "dynamics": [
+        "descrições ou sons que evocam memórias gustativas (ex: 'o sabor que ficava na boca depois do almoço')"
+      ]
+    },
+    "social_presence": {
+      "elements": [
+        "murmúrio de vozes como presença de uma comunidade invisível",
+        "história contada com as gírias da pessoa como convite à partilha",
+        "gíria traduzida da pessoa adicionada ao murmúrio futuro"
+      ],
+      "dynamics": [
+        "a voz única que conta a história parece dirigir-se diretamente à pessoa"
+      ]
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": {
+      "from": "auditory",
+      "to": "visual",
+      "description": "O som da voz que pronuncia a gíria altera a pulsação e a forma das partículas visíveis no ecrã (ex: uma voz grave faz com que as partículas se movam lentamente e em círculos largos; uma voz aguda acelera o movimento e reduz o raio)."
+    },
+    "secondary": {
+      "from": "kinesthetic",
+      "to": "auditory",
+      "description": "A trajetória e velocidade do arrasto da gíria alteram o timbre e o volume do som associado (ex: um arrasto rápido e reto produz um som agudo e curto; um arrasto lento e curvo produz um som grave e prolongado)."
+    },
+    "tertiary": {
+      "from": "visual",
+      "to": "auditory",
+      "description": "A cor e a textura da mancha de tinta que revela a tradução da gíria influenciam o timbre da voz que a pronuncia (ex: uma mancha escura e densa produz uma voz rouca; uma mancha clara e líquida produz uma voz cristalina)."
+    }
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio ativo (10 segundos sem interação) transforma o murmúrio de fundos numa voz única que conta uma história com as gírias recolhidas. Durante este momento, o ecrã escurece progressivamente, e as gírias desaparecem, leaving apenas a voz e a escuridão.",
+    "purpose": "Evocar a oralidade como um acto de escuta profunda, onde o silêncio não é ausência, mas sim um convite à atenção. O silêncio também serve como 'reset' da experiência, permitindo à pessoa recomeçar com uma nova perspectiva.",
+    "sensory_impact": "A ausência visual (ecrã escuro) e a presença sonora (voz única) criam um contraste que convida à introspeção e à memória."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": [
+      {
+        "type": "acaso_controlado",
+        "description": "A voz que pronuncia a gíria é escolhida aleatoriamente entre um conjunto de vozes pré-gravadas (crianças, idosos, adultos, diferentes sotaques), mas sempre coerente com o território da gíria."
+      },
+      {
+        "type": "tradução_não_literal",
+        "description": "A tradução da gíria não é uma definição dicionária, mas sim uma associação poética ou territorial (ex: 'tacho' → 'o som que a avó fazia ao mexer a panela')."
+      },
+      {
+        "type": "constelação_dinâmica",
+        "description": "A constelação de associações que aparece ao fixar uma gíria é gerada dinamicamente com base nas interações anteriores da pessoa e em associações pré-definidas no corpus autoral."
+      },
+      {
+        "type": "história_gerada",
+        "description": "A história contada após o silêncio é gerada em tempo real, usando as gírias recolhidas pela pessoa durante a sessão, como se fosse uma narrativa coletiva."
+      }
+    ],
+    "purpose": "Criar um sentido de descoberta e surpresa, onde a pessoa nunca sabe exatamente o que vai encontrar, mas sempre sente que a experiência é única e pessoal."
+  },
+  "session_variation": [
+    {
+      "type": "voz_aleatória",
+      "description": "A voz que pronuncia as gírias muda entre sessões, com base num conjunto de vozes pré-gravadas."
+    },
+    {
+      "type": "ordem_das_gírias",
+      "description": "A gíria inicial e as associações que aparecem ao fixar uma gíria variam entre sessões, com base num algoritmo que prioriza gírias menos exploradas ou relacionadas com o território da pessoa (se geolocalização for permitida)."
+    },
+    {
+      "type": "ritmo_sonoro",
+      "description": "O ritmo do murmúrio de fundos e das vozes que pronunciam as gírias varia entre sessões (ex: mais rápido em sessões diurnas, mais lento em sessões noturnas)."
+    },
+    {
+      "type": "murmúrio_comunitário",
+      "description": "O murmúrio de fundos inclui vozes de outras sessões (anónimas), com as gírias traduzidas por outras pessoas, criando um sentido de comunidade viva."
+    },
+    {
+      "type": "imagens_associadas",
+      "description": "As imagens associadas às gírias (reveladas pelas manchas de tinta) variam entre sessões, com base num conjunto de imagens pré-selecionadas do corpus autoral."
+    }
+  ],
+  "territorial_binding": {
+    "relation": "A experiência está ligada à identidade toponímica e à oralidade territorial, com as gírias a serem pronunciadas em sotaques e ritmos específicos de diferentes regiões (ex: gírias de Lisboa, Porto, Alentejo). Se a geolocalização for permitida, as gírias e vozes podem ser priorizadas com base na localização da pessoa.",
+    "evidence": "FALArte / NÓS — Mecânica 7: 'Palavras que desapareceram — gírias, alcunhas e modos de dizer em desaparecimento.' + Princípio FALArte: 'dinâmicas ligadas à identidade toponímica e à interacção real com o território.'",
+    "sustainability": "As gírias e vozes são baseadas no corpus autoral existente, sem invenção de factos etnográficos."
+  },
+  "trace_and_return": {
+    "trace": {
+      "mechanism": "A gíria traduzida da pessoa (ex: 'O paneleiro do tacho que conserta o fole') é guardada como um 'bilhete' digital, com a data e hora da sessão. Este bilhete pode ser partilhado ou guardado localmente.",
+      "persistence": "A gíria traduzida passa a fazer parte do murmúrio de fundos em sessões futuras, como uma voz adicional na roda de conversa."
+    },
+    "return": {
+      "mechanism": "A pessoa recebe de volta a sua gíria traduzida como um objeto tangível (bilhete rasgado), que pode ser reutilizado em outras experiências ou partilhado com a comunidade.",
+      "purpose": "Devolver à pessoa um rasto da sua interação, transformado em algo que pode ser levado consigo ou deixado no território digital."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "for_blind": {
+        "description": "Todas as interações visuais são acompanhadas por descrições sonoras detalhadas (ex: 'Gíria 'paneleiro' à esquerda, poço sonoro à direita'). As manchas de tinta são descritas como texturas (ex: 'mancha escura e densa a expandir-se').",
+        "fallback": "Modo de áudio completo, onde a pessoa navega usando apenas o som e as descrições."
+      },
+      "for_low_vision": {
+        "description": "Contraste ajustável, tipografia escalável, e opção para desativar animações visuais complexas."
+      },
+      "for_color_blind": {
+        "description": "As manchas de tinta usam padrões e texturas em vez de apenas cor para distinguir as associações."
+      }
+    },
+    "auditory": {
+      "for_deaf": {
+        "description": "Todas as interações sonoras são acompanhadas por feedback visual (ex: vibração das partículas, pulsação das gírias). As vozes são transcritas em tempo real, com indicação do sotaque (ex: 'voz feminina, sotaque alentejano: paneleiro').",
+        "fallback": "Modo visual completo, onde a pessoa interage apenas com elementos visuais e texto."
+      },
+      "for_hard_of_hearing": {
+        "description": "Volume ajustável, legendas para todas as vozes, e opção para desativar sons de fundos."
+      }
+    },
+    "motor": {
+      "for_no_mouse": {
+        "description": "Todas as interações de arrastar/soltar podem ser feitas com teclado (ex: setas para navegar entre gírias, Enter para fixar, Espaço para soltar num poço)."
+      },
+      "for_no_touch": {
+        "description": "Navegação completa via teclado ou voz (ex: comandos de voz para 'fixar gíria', 'próxima gíria')."
+      }
+    },
+    "cognitive": {
+      "for_reduced_motion": {
+        "description": "Opção para desativar todas as animações e transições, mantendo a experiência estática mas funcional."
+      },
+      "for_time_pressure": {
+        "description": "Modo sem limite de tempo para interações, com a opção de pausar a experiência a qualquer momento."
+      }
+    },
+    "poetic_preservation": "Todas as alternativas de acessibilidade preservam a intenção poética da experiência: a tradução não literal, a oralidade como território, e a gíria como matéria viva."
+  },
+  "optional_permissions": {
+    "geolocation": {
+      "purpose": "Priorizar gírias e vozes do território da pessoa, se disponível no corpus autoral.",
+      "fallback": "Experiência funciona com gírias e vozes genéricas do corpus."
+    },
+    "microphone": {
+      "purpose": "Permitir à pessoa gravar a sua própria pronúncia de uma gíria, que pode ser adicionada ao murmúrio futuro (após moderação).",
+      "fallback": "A pessoa pode interagir apenas com as vozes pré-gravadas."
+    }
+  },
+  "overstimulation_risk": {
+    "potential_risks": [
+      "Murmúrio de vozes sobrepostas pode ser avassalador para pessoas sensíveis a estímulos sonoros.",
+      "Animações visuais rápidas (partículas, manchas de tinta) podem causar desconforto em pessoas com sensibilidade visual.",
+      "Feedback háptico contínuo pode ser incómodo em dispositivos com vibração forte."
+    ],
+    "mitigation": [
+      "Volume do murmúrio é ajustável e pode ser desativado.",
+      "Opção para reduzir ou desativar animações visuais (modo 'reduced-motion').",
+      "Feedback háptico é opcional e pode ser desativado.",
+      "Modo 'silêncio' permite à pessoa pausar todos os estímulos sonoros e visuais.",
+      "Avisos claros antes de ativação de sons ou animações intensas."
+    ]
+  },
+  "distinctiveness": {
+    "unique_features": [
+      "Tradução não literal de gírias, guiada pelo som e não pela definição.",
+      "Murmúrio de vozes sobrepostas como campo sonoro vivo, que evolui com as interações da pessoa.",
+      "Manchas de tinta que se expandem para revelar imagens associadas, com o som a alterar a sua forma e ritmo.",
+      "História gerada em tempo real com as gírias recolhidas pela pessoa, contada por uma voz única.",
+      "Gíria traduzida da pessoa adicionada ao murmúrio futuro, criando um sentido de comunidade viva e intergeracional.",
+      "Uso de gírias como portais para memórias territoriais e orais, sem invenção de factos etnográficos."
+    ],
+    "comparison": "Esta experiência não pode ser confundida com outras porque: (1) não é um dicionário ou quiz de gírias; (2) não usa tradução literal; (3) o som é o guia da interação, não o texto; (4) a oralidade é tratada como um território vivo, não como um arquivo estático; (5) a devolução é uma gíria traduzida única, não um pontuação ou badge."
+  },
+  "questions_for_eduardo": [
+    "O corpus autoral contém um conjunto suficiente de gírias com pronúncias em diferentes sotaques para sustentar a variação de vozes? Se não, qual a fonte para estas gravações?",
+    "As imagens associadas às gírias (reveladas pelas manchas de tinta) devem ser baseadas em fotografias reais do corpus (ex: Nuno A) ou podem ser ilustrações abstratas?",
+    "A história gerada após o silêncio deve ser completamente aleatória ou pode seguir uma estrutura narrativa pré-definida (ex: 'Era uma vez um...')?",
+    "A gíria traduzida da pessoa deve ser moderada antes de ser adicionada ao murmúrio futuro, ou pode ser adicionada automaticamente (com opção de denúncia)?",
+    "O modo 'silêncio' deve ser ativado apenas por inação (10 segundos) ou também por um gesto explícito (ex: clicar num botão 'silenciar')?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Incluir uma opção para a pessoa gravar a sua própria voz a pronunciar uma gíria, que pode ser usada para gerar a sua tradução única (ex: a voz da pessoa a dizer 'paneleiro' é transformada em 'aquele que conserta o invisível').",
+      "justification": "Aumentaria o sentido de autoria e participação, alinhando com o princípio FALArte de 'tecnologias e formas ancestrais de transmitir informação'."
+    },
+    {
+      "proposal": "Adicionar um 'mapa de gírias' como pano de fundo opcional, onde as gírias aparecem como pontos luminosos em um território (ex: Lisboa), com a sua localização original. Este mapa só seria visível após a pessoa ter interagido com pelo menos 3 gírias.",
+      "justification": "Reforçaria a ligação territorial e a identidade toponímica, sem sobrecarregar a experiência inicial."
+    },
+    {
+      "proposal": "Permitir à pessoa 'doar' a sua gíria traduzida a uma 'festa' ou 'território' específico do Atlas, criando uma ligação entre a experiência e o corpus territorial.",
+      "justification": "Aumentaria o sentido de devolução comunitária e a integração com outras dinâmicas do Atlas."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

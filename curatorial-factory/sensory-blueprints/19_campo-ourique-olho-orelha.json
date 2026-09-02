@@ -1,0 +1,362 @@
+{
+  "id": "campo-ourique-olho-orelha",
+  "canonical_name": "Campo de Ourique: Olho / Orelha",
+  "source_evidence": {
+    "primary": [
+      {
+        "id": "catalog_entry",
+        "type": "curatorial_contract",
+        "authority": "high",
+        "details": "Convite autoral: 'Olha sem ouvir. Ouve sem olhar.'; Mecânica: 'alternar'; Família: 'curadoria'; Camada: 'pública'; Estado: 'operavel_motor_comum'."
+      },
+      {
+        "id": "constitution_4",
+        "type": "canonical_rule",
+        "authority": "high",
+        "details": "Princípio de tradução cruzada dos sentidos (ex: som que altera forma; gesto que altera timbre)."
+      },
+      {
+        "id": "constitution_11",
+        "type": "exemplary_direction",
+        "authority": "medium",
+        "details": "Exemplo de 'Escutar o Silêncio': ausência como matéria; ruídos mínimos, espera, redução visual."
+      }
+    ],
+    "secondary": [
+      {
+        "id": "corpus_anchors",
+        "type": "authorial_anchor",
+        "authority": "medium",
+        "details": "Camada pública como organismo de entrada, jogo, escuta, desvio, poesia, memória e convite. Estética: bilhetes/caixas como rascunho de caderno, folha rasgada, assimetria orgânica."
+      },
+      {
+        "id": "corpus_falarte",
+        "type": "mechanics",
+        "authority": "medium",
+        "details": "Mecânicas territoriais: 'O som que só existe aqui' (som singular da zona; áudio ou descrição; fonografia do lugar)."
+      }
+    ]
+  },
+  "authorial_invariants": [
+    "Convite central: 'Olha sem ouvir. Ouve sem olhar.'",
+    "Mecânica de alternância entre olho e orelha como eixo central.",
+    "Foco em Campo de Ourique (território real).",
+    "Ausência de explicações burocráticas ou menus genéricos.",
+    "Experiência deve ser viva, não estática."
+  ],
+  "perceptual_intent": "Criar uma experiência de desorientação sensorial controlada onde a pessoa é convidada a alternar entre dois modos de perceção (visão e audição) de forma a revelar camadas ocultas do território de Campo de Ourique. A alternância não é técnica, mas poética: o que se vê quando não se ouve, e o que se ouve quando não se olha.",
+  "threshold": {
+    "description": "A pessoa entra num espaço digital onde a tela está inicialmente preta e em silêncio absoluto. Um ponto de luz fraca (como uma vela ou estrela) pisca uma vez, lentamente, no centro. O som ambiente (se permitido) é reduzido a um zumbido quase impercetível, como um vento longínquo. O cursor/dedo da pessoa, ao aproximar-se do ponto, faz com que ele se divida em dois: um olho e uma orelha, suspensos no vazio.",
+    "trigger": "Primeiro movimento do cursor/dedo ou toque na tela."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": 1,
+      "name": "LIMIAR",
+      "description": "Tela preta, ponto de luz único. Silêncio ou zumbido mínimo. A pessoa percebe que algo está presente, mas não o que é."
+    },
+    {
+      "stage": 2,
+      "name": "CHAMADA",
+      "description": "O ponto divide-se em olho e orelha. Aparece, em letra manual e trémula, o convite: 'Olha sem ouvir. Ouve sem olhar.' (a frase surge em partes, como se fosse escrita à mão)."
+    },
+    {
+      "stage": 3,
+      "name": "PRIMEIRO GESTO",
+      "description": "A pessoa é convidada a escolher: tocar no olho ou na orelha. O gesto é simples, mas a escolha define o percurso inicial."
+    },
+    {
+      "stage": 4,
+      "name": "RESPOSTA VIVA",
+      "description": "Se tocar no olho: a tela preenche-se com uma imagem desfoqueada de Campo de Ourique (ex: uma rua, um largo, um detalhe arquitetónico), mas sem som. Se tocar na orelha: um som territorial de Campo de Ourique (ex: o ruído de um café, o sino de uma igreja, o murmúrio de um mercado) preenche o espaço, mas a tela permanece preta ou com texturas mínimas (como sombras de pessoas ou objetos)."
+    },
+    {
+      "stage": 5,
+      "name": "DESVIO",
+      "description": "Após 3-5 segundos, a imagem ou o som começam a 'desaparecer' lentamente (desfocagem progressiva ou redução de volume). Simultaneamente, o outro sentido (som ou imagem) começa a surgir em segundo plano, como se fosse uma camada escondida. Ex: se a pessoa escolheu o olho, o som começa a surgir como um eco distorcido da imagem; se escolheu a orelha, uma silhueta ou textura visual começa a formar-se."
+    },
+    {
+      "stage": 6,
+      "name": "APROFUNDAMENTO SENSORIAL",
+      "description": "As duas camadas (imagem e som) começam a contaminar-se: a imagem ganha texturas sonoras (ex: linhas que vibram ao ritmo do som), e o som ganha 'cor' (ex: frequências que alteram a saturação da imagem). A pessoa pode interagir com a tela para 'separar' ou 'misturar' as camadas, arrastando o cursor/dedo para aproximar ou afastar os elementos."
+    },
+    {
+      "stage": 7,
+      "name": "ESCOLHA / ACASO / SILÊNCIO",
+      "description": "A pessoa é convidada a 'fechar' um dos sentidos: clicar num botão invisível (apenas sugerido por um contorno tremulo) para 'apagar' o som ou a imagem. Alternativamente, pode esperar: após 10 segundos, o sistema 'escolhe' aleatoriamente um sentido para silenciar. O silêncio resultante revela uma nova camada: ex: uma palavra escrita à mão (ex: 'Ourique', 'Largo', 'Café') ou um objeto simbólico (ex: uma xícara, um sino)."
+    },
+    {
+      "stage": 8,
+      "name": "APARIÇÃO",
+      "description": "A camada revelada (palavra ou objeto) ganha vida: se for uma palavra, ela 'fala' (som de voz distorcida ou sintética, como um murmúrio); se for um objeto, ele emite um som característico (ex: o sino toca, a xícara range). A palavra/objeto move-se lentamente pela tela, como se fosse arrastada por uma corrente invisível."
+    },
+    {
+      "stage": 9,
+      "name": "DEVOLUÇÃO",
+      "description": "A pessoa recebe de volta uma 'memória sensorial' do território: uma combinação única de imagem, som e texto gerada a partir das suas escolhas. Ex: uma frase como 'No Largo de Campo de Ourique, o sino toca às 3 da tarde e o café cheira a pão quente.' (evocação de olfato e paladar). Esta memória é apresentada como um 'bilhete' digital, com estética de papel amarelado e escrita à mão, que a pessoa pode 'guardar' (download como imagem) ou 'deixar' (adicionar ao cosmos do Atlas)."
+    },
+    {
+      "stage": 10,
+      "name": "RASTO / LATÊNCIA",
+      "description": "Se a pessoa escolher 'deixar' a memória, esta passa a fazer parte de uma constelação invisível de Campo de Ourique. Em sessões futuras, outras pessoas podem 'encontrar' fragmentos desta memória (ex: uma palavra, um som, uma textura) ao interagir com a experiência. A memória não desaparece: ela volta como eco ou rasto, misturada com outras contribuições."
+    }
+  ],
+  "participant_verbs": [
+    "tocar",
+    "escolher",
+    "esperar",
+    "arrastar",
+    "silenciar",
+    "observar",
+    "ouvir"
+  ],
+  "system_responses": [
+    {
+      "gesture": "tocar no olho ou orelha",
+      "response": "Ativação do sentido correspondente (imagem ou som) em primeiro plano, com o outro sentido em segundo plano distorcido."
+    },
+    {
+      "gesture": "arrastar o cursor/dedo",
+      "response": "Mistura ou separação das camadas sensoriais (imagem e som), alterando a intensidade de cada uma."
+    },
+    {
+      "gesture": "clicar no botão invisível ou esperar",
+      "response": "Silenciamento de um sentido, revelando uma camada oculta (palavra ou objeto)."
+    },
+    {
+      "gesture": "guardar ou deixar a memória",
+      "response": "Devolução de um bilhete digital ou integração na constelação territorial."
+    },
+    {
+      "gesture": "sair da experiência",
+      "response": "A tela volta ao ponto inicial (luz única), mas agora com um eco mínimo do que foi vivido (ex: um som residual ou uma mancha de cor)."
+    }
+  ],
+  "sensory_signature_id": "ourique-alternancia-sensorial-019",
+  "sensory_channels": {
+    "visual": {
+      "description": "Imagens desfoqueadas de Campo de Ourique, texturas, silhuetas, palavras escritas à mão, bilhetes digitais com estética de papel, contornos trémulos, luz e sombra dinâmicas.",
+      "intensity": "variável (de preto total a saturação máxima)",
+      "rhythm": "Lento e orgânico, com pausas e acelerações súbitas."
+    },
+    "auditory": {
+      "description": "Sons territoriais de Campo de Ourique (sino, café, mercado, vento), zumbidos, murmúrios, vozes distorcidas, sons sintéticos que evocam objetos (ex: sino, xícara).",
+      "spatialization": "Estéreo ou mono, com variação de volume e frequência para criar profundidade.",
+      "silence": "Usado como matéria: pausas longas, redução progressiva de volume, silêncio total em momentos-chave."
+    },
+    "haptic": {
+      "description": "Vibração sutil em dispositivos compatíveis (ex: ao tocar no olho/orelha ou ao 'guardar' a memória).",
+      "optional": true,
+      "fallback": "Pulso visual (ex: tremulo na tela) para evocar tacto."
+    },
+    "kinesthetic": {
+      "description": "Movimento do cursor/dedo para arrastar, tocar ou clicar. Velocidade e trajetória do gesto alteram a mistura das camadas sensoriais.",
+      "fallback": "Teclado (setas ou espaço) para simular arrasto ou toque."
+    },
+    "proprioceptive": {
+      "description": "Instruções implícitas para alterar a postura (ex: 'fechar os olhos' para focar no som, 'inclinar a cabeça' para ver melhor a imagem).",
+      "optional": true
+    },
+    "temporal_interoceptive": {
+      "description": "Ritmo de espera, aceleração/desaceleração das camadas sensoriais, respiração percebida (ex: som que imita inalação/exalação).",
+      "fallback": "Indicação visual de tempo (ex: barra de progresso orgânica)."
+    },
+    "spatial": {
+      "description": "Profundidade criada pela mistura de imagem e som (ex: som mais alto = imagem mais próxima; som mais grave = imagem mais escura).",
+      "fallback": "Versão 2D estável com indicações de profundidade via contraste."
+    },
+    "olfactory_evocation": {
+      "description": "Evocação de cheiros de Campo de Ourique (ex: café, pão quente, flores) via linguagem ('cheira a...'), som (ex: barulho de torrefação) ou imagem (ex: fumaça, pão).",
+      "method": "Associação e memória."
+    },
+    "gustatory_evocation": {
+      "description": "Evocação de sabores (ex: pão, café, doce) via linguagem ('sabe a...'), som (ex: mastigação) ou imagem (ex: migalhas, xícara).",
+      "method": "Associação e memória."
+    },
+    "social_presence": {
+      "description": "Presença de outras memórias sensoriais deixadas por outras pessoas (fragmentos de som, imagem ou texto).",
+      "method": "Constelação territorial compartilhada."
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "Som que altera a textura visual (ex: frequências graves escurecem a imagem; agudas aumentam o contraste).",
+    "secondary": "Gesto (arrasto) que altera a espacialização do som (ex: arrastar para a esquerda move o som para o canal esquerdo).",
+    "tertiary": "Silêncio que revela camadas ocultas (ex: ao silenciar o som, uma palavra escrita aparece)."
+  },
+  "silence_or_absence": {
+    "mechanism": "Silêncio ativo: usado para revelar camadas ocultas (palavras, objetos) e para criar tensão entre o que é visto e o que é ouvido. Ausência de som ou imagem em momentos-chave para forçar a atenção no outro sentido.",
+    "examples": [
+      "Silêncio total no limiar inicial.",
+      "Redução progressiva de volume para revelar uma palavra.",
+      "Imagem preta quando o som está ativo (e vice-versa)."
+    ]
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": "Acaso controlado na revelação da camada oculta (palavra ou objeto) e na mistura das camadas sensoriais. A pessoa não controla totalmente o resultado, mas influencia-o.",
+    "examples": [
+      "A palavra ou objeto revelado é escolhido aleatoriamente a partir de um conjunto curatorial de Campo de Ourique.",
+      "A mistura das camadas sensoriais varia consoante a velocidade e trajetória do gesto da pessoa.",
+      "O sistema pode 'escolher' silenciar um sentido aleatoriamente se a pessoa não o fizer."
+    ]
+  },
+  "session_variation": [
+    {
+      "type": "acaso_controlado",
+      "description": "A camada oculta (palavra ou objeto) é selecionada aleatoriamente a partir de um conjunto pré-definido de elementos territoriais de Campo de Ourique."
+    },
+    {
+      "type": "ordem_mutavel",
+      "description": "A ordem de aparecimento das camadas (imagem primeiro ou som primeiro) inverte-se entre sessões."
+    },
+    {
+      "type": "resposta_a_ritmo",
+      "description": "A velocidade do gesto da pessoa (arrasto, toque) altera a intensidade da mistura das camadas sensoriais (ex: gesto rápido = mistura caótica; gesto lento = mistura suave)."
+    },
+    {
+      "type": "resposta_a_posicao",
+      "description": "A posição do cursor/dedo na tela altera a espacialização do som (ex: cursor à esquerda = som mais alto no canal esquerdo)."
+    },
+    {
+      "type": "temporalidade_real",
+      "description": "Se a sessão ocorrer de dia, a imagem inicial tem tons mais claros; se for de noite, tons mais escuros. O som ambiente (zumbido) pode variar consoante a hora do dia."
+    }
+  ],
+  "territorial_binding": {
+    "location": "Campo de Ourique (Lisboa)",
+    "elements": [
+      {
+        "type": "visual",
+        "examples": [
+          "Largo de Campo de Ourique",
+          "Igreja de São João de Deus",
+          "ruas com comércio tradicional",
+          "detalhes arquitetónicos (azulejos, portas, janelas)"
+        ]
+      },
+      {
+        "type": "auditory",
+        "examples": [
+          "Sino da Igreja de São João de Deus",
+          "ruído de café (xícaras, conversas)",
+          "murmúrio de mercado",
+          "vento nas árvores do jardim"
+        ]
+      },
+      {
+        "type": "memory",
+        "examples": [
+          "Palavras: 'Ourique', 'Largo', 'Café', 'Sino'",
+          "Objetos: xícara, sino, pão, flor"
+        ]
+      }
+    ],
+    "source": "Corpus autoral (FALArte, dinâmicas territoriais) e conhecimento público do território."
+  },
+  "trace_and_return": {
+    "trace": {
+      "description": "Memória sensorial única gerada a partir das escolhas da pessoa (combinação de imagem, som e texto).",
+      "format": "Bilhete digital com estética de papel amarelado e escrita à mão.",
+      "persistence": "Pode ser guardada (download) ou deixada no cosmos do Atlas (constelação territorial)."
+    },
+    "return": {
+      "immediate": "Bilhete digital entregue no final da experiência.",
+      "latent": "Fragmentos da memória (palavra, som, textura) podem ser encontrados por outras pessoas em sessões futuras, misturados com outras contribuições."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "fallback": "Descrição em áudio de todas as imagens e texturas visuais (ex: 'Uma imagem desfoqueada de uma rua de Campo de Ourique, com sombras de pessoas a passar.').",
+      "reduced_motion": "Versão estável sem animações ou transições rápidas; imagens e sons aparecem/desaparecem instantaneamente."
+    },
+    "auditory": {
+      "fallback": "Legendas em tempo real para todos os sons (ex: '[Sino a tocar]', '[Ruído de café]'). Transcrição visual de sons territoriais (ex: ondas sonoras como formas geométricas)."
+    },
+    "haptic": {
+      "fallback": "Pulso visual (ex: tremulo na tela) para evocar vibração."
+    },
+    "kinesthetic": {
+      "fallback": "Teclado: setas para arrastar, espaço para tocar, Enter para confirmar escolhas."
+    },
+    "proprioceptive": {
+      "fallback": "Instruções em texto para alterar a postura (ex: 'Feche os olhos para focar no som.')."
+    },
+    "temporal_interoceptive": {
+      "fallback": "Indicação visual de tempo (ex: barra de progresso orgânica) e opção para desativar limites de tempo."
+    },
+    "color_blindness": {
+      "fallback": "Alto contraste e texturas para diferenciar elementos visuais."
+    }
+  },
+  "optional_permissions": {
+    "microphone": {
+      "required": false,
+      "purpose": "Nenhum. A experiência funciona sem áudio do utilizador.",
+      "fallback": "Som pré-gravado ou gerado sinteticamente."
+    },
+    "camera": {
+      "required": false,
+      "purpose": "Nenhum. A experiência não requer imagem do utilizador.",
+      "fallback": "Imagens pré-carregadas de Campo de Ourique."
+    },
+    "geolocation": {
+      "required": false,
+      "purpose": "Opcional: se a pessoa estiver em Campo de Ourique, a experiência pode ajustar os sons e imagens para refletir o local exato (ex: som do sino da igreja mais próximo).",
+      "fallback": "Localização genérica (Campo de Ourique) sem precisão."
+    },
+    "device_motion": {
+      "required": false,
+      "purpose": "Opcional: inclinação do dispositivo pode alterar a espacialização do som.",
+      "fallback": "Controlo via cursor/teclado."
+    }
+  },
+  "overstimulation_risk": {
+    "risks": [
+      "Flashing ou transições rápidas entre luz e escuridão.",
+      "Som súbito ou alto (ex: sino a tocar inesperadamente).",
+      "Vibração insistente em dispositivos hápticos.",
+      "Loops sonoros contínuos sem pausas."
+    ],
+    "mitigations": [
+      "Transições suaves entre estados visuais (sem flashing).",
+      "Volume máximo controlado (nunca acima de 70% do volume do dispositivo).",
+      "Vibração limitada a 1-2 pulsos curtos por interação.",
+      "Pausas obrigatórias entre loops sonoros (mínimo 5 segundos de silêncio).",
+      "Opção para desativar som e animações (modo 'reduced motion')."
+    ]
+  },
+  "distinctiveness": [
+    "Alternância poética entre olho e orelha como eixo central, não técnica.",
+    "Uso do silêncio como matéria ativa para revelar camadas ocultas.",
+    "Tradução cruzada entre som e imagem (frequências que alteram texturas visuais).",
+    "Devolução de uma 'memória sensorial' única do território, com estética de bilhete manual.",
+    "Integração de fragmentos de outras contribuições públicas na constelação territorial.",
+    "Foco exclusivo em Campo de Ourique, com elementos visuais e sonoros específicos do território.",
+    "Experiência que não pode ser reduzida a um quiz, card, menu ou animação decorativa."
+  ],
+  "questions_for_eduardo": [
+    "Confirmar se o conjunto de palavras e objetos para a camada oculta (ex: 'Ourique', 'Largo', 'Café', xícara, sino) deve ser fixo ou pode ser expandido com base em contribuições públicas validadas.",
+    "Validar se a estética do 'bilhete digital' (papel amarelado, escrita à mão) está alinhada com a identidade visual do Atlas Vivo MILK.",
+    "Clarificar se a constelação territorial (rasto latente) deve ser visível em alguma forma (ex: mapa, lista) ou permanecer completamente invisível até ser 'encontrada' por outras pessoas.",
+    "Confirmar se a experiência deve ter uma duração máxima (ex: 5 minutos) ou pode ser livre."
+  ],
+  "improvement_proposals": [
+    {
+      "type": "territorial_deepening",
+      "description": "Incluir sons e imagens de Campo de Ourique gravados in loco (com consentimento) para aumentar a autenticidade territorial. Ex: gravar o sino da Igreja de São João de Deus em diferentes horas do dia."
+    },
+    {
+      "type": "social_presence",
+      "description": "Permitir que a memória sensorial deixada pela pessoa possa ser 'encontrada' por outras em tempo real (ex: uma notificação sutil de que 'alguém deixou um rasto em Campo de Ourique')."
+    },
+    {
+      "type": "accessibility",
+      "description": "Adicionar opção para ajustar o contraste e o tamanho da fonte em todos os elementos textuais (palavras, bilhetes)."
+    },
+    {
+      "type": "cross_sensory",
+      "description": "Explorar a tradução de gesto em som: ex: o movimento do cursor/dedo gera um som único (como um instrumento) que se mistura com os sons territoriais."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

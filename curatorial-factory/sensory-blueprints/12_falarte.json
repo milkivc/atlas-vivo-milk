@@ -1,0 +1,354 @@
+{
+  "id": "falarte",
+  "canonical_name": "falARTE",
+  "source_evidence": {
+    "primary": [
+      "PUBLICO_TERRITORIAL__CURADORIA_NOS_FALARTE_RESIDUAL.pdf (fala autoral directa, 10 propostas territoriais)",
+      "falARTE.pdf + fragmentos falARTE.pdf (10 mecânicas territoriais estruturadas e regras de recolha/consentimento)",
+      "curadoria entrada freguesias.xlsx (fonte territorial primária)"
+    ],
+    "secondary": [
+      "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf (princípios CARE, dissidência, intergeracionalidade)",
+      "A Deriva do Sentido: Cartografia Psicogeográfica e Sensorial de Lisboa (sentipensar, configuração relacional)"
+    ],
+    "authority_level": "high"
+  },
+  "authorial_invariants": [
+    "Princípio FALArte: tecnologias e formas ancestrais/territoriais de transmitir informação e gerar conhecimento alimentam dinâmicas ligadas à identidade toponímica e à interacção real com o território.",
+    "10 mecânicas territoriais autorais: O lugar escondido; 30 dias, o mesmo lugar; O mais antigo e o mais novo; A embalagem conta; O som que só existe aqui; O que ainda resiste; Palavras que desapareceram; O que ainda não foi apagado; Só existe na tua memória; Remetente Ausente.",
+    "Recolha: idade mínima 13+, escolha de nome (real/inventado/anónimo), publicação integral/trechos/não publicar, retirada a pedido, curadoria humana antes de publicação, minimização de dados, consentimento granular.",
+    "Cada contribuição pode ser fragmentada/remisturada em peças; referências teóricas são operadas, não decorativas.",
+    "A camada legal deve proteger sem matar a experiência."
+  ],
+  "perceptual_intent": "Transformar a palavra em matéria viva e territorial, onde o acto de *falar* (ou evocar) uma palavra convoca camadas de memória, lugar, som e ausência. A experiência deve sentir-se como um ritual de nomeação que revela o invisível do território, misturando oralidade, topónimos e rastos humanos num campo sensorial partilhado.",
+  "threshold": {
+    "description": "A pessoa entra num espaço digital onde o ecrã está inicialmente vazio, exceto por um ponto de luz pulsante (como uma estrela ou vaquinha MILK) que se move lentamente em órbita circular. O fundo é um negro profundo com textura de papel envelhecido, como se fosse uma folha rasgada de caderno. O som ambiente é um murmúrio distorcido de vozes sobrepostas (evocação de oralidade territorial), que se desvanece em silêncio à medida que o cursor/dedo se aproxima do ponto de luz.",
+    "sensory_trigger": "A aproximação do cursor/dedo ao ponto de luz faz com que este se expanda em anéis concêntricos (como uma pedra na água), revelando uma palavra solta no centro: **‘fala’**. A palavra aparece em tipografia manual, como escrita à pressa, e desaparece ao fim de 3 segundos, deixando apenas o ponto de luz e o eco sonoro de um suspiro."
+  },
+  "dramaturgical_arc": {
+    "1_limiar": "O ecrã vazio com o ponto de luz pulsante e o murmúrio de vozes criam uma expectativa de que algo está prestes a acontecer, mas a pessoa não sabe o quê. O movimento orbital do ponto sugere uma gravidade invisível.",
+    "2_chamada": "A palavra ‘fala’ aparece e desaparece, como um convite subliminar. O som do suspiro (evocação de respiração territorial) convida à ação sem explicar.",
+    "3_primeiro_gesto": "A pessoa é convidada a *dizer uma palavra* (via teclado, voz opcional ou seleção de um fragmento de topónimo pré-existente no corpus territorial). O gesto é mínimo: escrever ou escolher uma única palavra.",
+    "4_resposta_viva": "A palavra escrita/selecionada ganha peso: aparece no centro do ecrã, mas em vez de texto estático, as suas letras *caem* como objectos físicos (com som de impacto suave, como grãos de areia ou sementes). Cada letra, ao tocar o ",
+    "chão": "digital",
+    "emite": "um",
+    "som": "de",
+    "pronúncia": "ou",
+    "ritmo": "associado",
+    "ao": "seu",
+    "significado": "territorial",
+    "ou": "memória",
+    "coletiva": "",
+    "5_desvio": "Se a palavra pertencer a um dos 10 tipos de contribuições autorais (ex: um topónimo, um ofício, uma gíria), o sistema *responde com uma camada adicional*: uma fotografia distorcida de um lugar real (do corpus Nuno A ou territorial) surge por trás das letras, como se a palavra fosse uma janela. Se a palavra não for reconhecida, as letras *desaparecem uma a uma*, leaving apenas o som de um vento que carrega a palavra para longe (evocação de ausência).",
+    "6_aprofundamento_sensorial": "As letras que caem *alteram a paisagem sonora*: cada uma emite um fragmento de voz (de um arquivo de áudio territorial ou síntese) que pronuncia a letra ou sílaba, criando um coral de sons sobrepostos. Simultaneamente, o fundo ganha textura: aparece uma *sombra* da palavra escrita, como se fosse uma marca no território (evocação de pátina ou grafiti).",
+    "7_escolha_acaso_silencio": "A pessoa pode: (a) *repetir a palavra* (as letras voltam a cair, mas em ordem aleatória, criando um novo ritmo sonoro); (b) *escrever uma nova palavra* (a anterior desaparece, leaving um rasto de poeira digital); ou (c) *permanecer em silêncio* (após 10 segundos, o sistema devolve um *fragmento de uma contribuição real* do corpus falARTE, como uma voz que diz: ‘Aqui ainda se diz *x*’ ou ‘Este lugar guarda o som de *y*’).",
+    "8_aparição": "Se a pessoa interagir com a palavra por 3 vezes (repetindo, mudando ou silenciando), emerge uma *constelação de palavras relacionadas* (do corpus territorial) que orbitam a palavra original. Cada palavra na constelação tem um *peso* (tamanho e som) proporcional à sua frequência ou importância no território. A constelação move-se como um cardume de peixes ou um bando de pássaros.",
+    "9_devolução": "O sistema devolve à pessoa um *bilhete digital* (como um recorte de papel) com: (1) a palavra original; (2) um fragmento de som ou imagem associado (se existirem no corpus); (3) uma *pista territorial* (ex: ‘Esta palavra vive em *Alcântara*’ ou ‘Aqui se ouve o som de *y* às 5 da manhã’). O bilhete pode ser *guardado* (como rasto) ou *deixado cair* (desaparece como poeira).",
+    "10_rasto_latência": "Se a pessoa guardar o bilhete, este *permanece no cosmos* da WebApp como uma partícula (visível em COSMICOXES ou em futuras sessões). Se não guardar, a palavra *deixa um rasto efémero*: uma mancha de tinta digital que se desvanece lentamente no fundo do ecrã, como uma memória que se apaga."
+  },
+  "participant_verbs": [
+    "dizer",
+    "escrever",
+    "escutar",
+    "repetir",
+    "silenciar",
+    "escolher",
+    "deixar"
+  ],
+  "system_responses": {
+    "immediate": [
+      "As letras da palavra caem como objectos físicos com som de impacto.",
+      "A palavra emite um coral de sons (pronúncias, ritmos ou memórias associadas).",
+      "O fundo ganha textura de sombra ou pátina territorial."
+    ],
+    "delayed": [
+      "Aparece uma constelação de palavras relacionadas (se a interação for repetida).",
+      "Devolve um bilhete digital com fragmento sonoro/visual e pista territorial.",
+      "Deixa um rasto efémero (mancha de tinta) ou permanente (partícula em COSMICOXES)."
+    ],
+    "conditional": [
+      "Se a palavra for reconhecida no corpus: mostra fotografia distorcida de lugar real.",
+      "Se a palavra não for reconhecida: letras desaparecem com som de vento.",
+      "Se a pessoa silenciar: devolve fragmento de contribuição real do falARTE."
+    ]
+  },
+  "sensory_signature_id": "falarte_sig_012",
+  "sensory_channels": {
+    "visual": {
+      "primary": [
+        "tipografia manual em queda",
+        "textura de papel envelhecido",
+        "sombra da palavra como pátina",
+        "constelação de palavras orbitando",
+        "fotografia distorcida de lugar real",
+        "mancha de tinta efémera"
+      ],
+      "secondary": [
+        "ponto de luz pulsante (vaquinha MILK)",
+        "anéis concêntricos como onda",
+        "bilhete digital como recorte de papel"
+      ]
+    },
+    "auditory": {
+      "primary": [
+        "murmúrio de vozes sobrepostas (oralidade territorial)",
+        "suspiro (evocação de respiração)",
+        "coral de pronúncias/sílabas",
+        "som de impacto das letras (grãos de areia/sementes)",
+        "fragmento de voz do corpus falARTE",
+        "som de vento (ausência)"
+      ],
+      "secondary": [
+        "eco suave das letras ao caírem",
+        "ritmo de pronúncia associado à palavra"
+      ]
+    },
+    "haptic": {
+      "primary": [
+        "vibração sutil em dispositivos compatíveis (ao impacto das letras)"
+      ],
+      "secondary": [
+        "feedback de pressão ao arrastar o cursor sobre as letras"
+      ]
+    },
+    "kinesthetic": {
+      "primary": [
+        "movimento orbital do ponto de luz",
+        "queda das letras como objectos físicos",
+        "constelação de palavras em órbita"
+      ],
+      "secondary": [
+        "trajectória do cursor/dedo altera a velocidade da queda das letras"
+      ]
+    },
+    "proprioceptive": {
+      "primary": [
+        "instrução implícita para focar a atenção na palavra e no som",
+        "ritmo de respiração sugerido pelo suspiro e pelo silêncio"
+      ],
+      "secondary": [
+        "postura de escuta ativa (evocada pelo coral de vozes)"
+      ]
+    },
+    "temporal_interoceptive": {
+      "primary": [
+        "espera de 3 segundos para a palavra ‘fala’ desaparecer",
+        "espera de 10 segundos para devolução de fragmento em silêncio",
+        "ritmo da queda das letras (aceleração/desaceleração)"
+      ],
+      "secondary": [
+        "pulso do ponto de luz orbital"
+      ]
+    },
+    "spatial": {
+      "primary": [
+        "profundidade sugerida pela sombra da palavra e pela fotografia distorcida",
+        "órbita circular do ponto de luz e da constelação"
+      ],
+      "secondary": [
+        "posição do cursor/dedo altera a intimidade do som (mais próximo = mais alto)"
+      ]
+    },
+    "olfactory_evocation": [
+      "cheiro de papel velho (evocado pela textura visual)",
+      "aroma de terra molhada (evocado pelo som de impacto das letras como grãos de areia)"
+    ],
+    "gustatory_evocation": [
+      "sabor de pão recém-cozido (evocado pela palavra ‘forno’ ou topónimos relacionados)",
+      "gosto de sal (evocado por palavras ligadas ao mar ou a Alcântara)"
+    ],
+    "social_presence": [
+      "presença de vozes do corpus falARTE (contribuições reais)",
+      "sensação de partilha do território através das pistas e constelações"
+    ]
+  },
+  "cross_sensory_translation": {
+    "primary": "A palavra escrita (visual) é traduzida em som (coral de pronúncias) e em textura (sombra/pátina no fundo). O som da pronúncia altera a *profundidade visual* da palavra (palavras com sons graves aparecem mais ‘pesadas’ e escuras; agudas, mais leves e claras).",
+    "secondary": "O movimento das letras em queda (cinestésico) é traduzido em som de impacto (auditivo), e a posição do cursor (espacial) altera o volume do som (auditivo)."
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio é uma *matéria ativa*: (1) o murmúrio inicial desvanece-se em silêncio à medida que o cursor se aproxima do ponto de luz; (2) se a pessoa não interagir, o sistema devolve um fragmento de voz *após* um período de silêncio (10 segundos); (3) palavras não reconhecidas desaparecem com o som de vento (ausência como resposta); (4) o bilhete digital pode ser *deixado cair* (desaparece como poeira, evocando ausência).",
+    "effect": "O silêncio convoca a atenção para o que *não está presente* (memórias, lugares desaparecidos, palavras em risco) e cria um ritmo de espera que torna a aparição subsequente mais impactante."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": [
+      "A constelação de palavras relacionadas aparece *apenas após 3 interações* com a palavra original, quebrando a expectativa de imediatez.",
+      "As letras caem em *ordem aleatória* se a palavra for repetida, alterando o ritmo sonoro.",
+      "Se a palavra não for reconhecida no corpus, as letras *desaparecem com som de vento*, em vez de devolverem um erro.",
+      "O bilhete digital pode conter *fragmentos inesperados* do corpus (ex: uma voz que diz ‘Aqui ainda se diz *x* às 3 da manhã’)."
+    ],
+    "effect": "Cria um sentido de *descoberta progressiva* e de *colaboração com o acaso*, onde a pessoa não controla tudo, mas influencia o percurso."
+  },
+  "session_variation": [
+    {
+      "type": "acaso_controlado",
+      "description": "A ordem das letras ao caírem é aleatória, mas o som associado a cada letra é fixo (baseado no corpus territorial)."
+    },
+    {
+      "type": "ordem_mutável",
+      "description": "A constelação de palavras relacionadas aparece em ordens diferentes a cada sessão, baseada em: (a) palavras recentemente contribuídas por outras pessoas (com consentimento); (b) palavras associadas ao território da sessão anterior da mesma pessoa."
+    },
+    {
+      "type": "resposta_a_ritmo",
+      "description": "A velocidade da queda das letras e o volume do coral de vozes ajustam-se ao ritmo de escrita da pessoa (ex: se escrever rápido, as letras caem mais depressa; se pausar, o som fica mais suave)."
+    },
+    {
+      "type": "resposta_a_posição",
+      "description": "A posição do cursor/dedo altera a *intimidade* do som: mais próximo do centro = som mais alto e claro; mais afastado = som mais baixo e distorcido."
+    },
+    {
+      "type": "temporalidade_real",
+      "description": "Se a sessão ocorrer à noite, o fundo ganha tons mais escuros e o murmúrio inicial é substituído por sons de grilos ou vento (evocação de território noturno)."
+    },
+    {
+      "type": "território_escolhido",
+      "description": "Se a pessoa já interagiu com um território específico (ex: Alcântara) em sessões anteriores, a constelação de palavras prioriza contribuições desse território."
+    }
+  ],
+  "territorial_binding": {
+    "primary": "A experiência está *ancorada no corpus territorial real* do falARTE: topónimos, ofícios, gírias, sons e memórias de Lisboa e suas freguesias. Cada palavra escrita pela pessoa é *comparada com o corpus* para devolver respostas específicas (ex: fotografias de Nuno A, fragmentos de voz, pistas territoriais).",
+    "secondary": "A constelação de palavras relacionadas *reflete a geografia real* do Atlas: palavras de uma mesma freguesia aparecem mais próximas umas das outras na órbita.",
+    "evocation": "Mesmo quando a palavra não é reconhecida, o sistema *evoca o território* através de sons de vento, fotografias distorcidas ou pistas genéricas (ex: ‘Esta palavra pode viver em *Alfama*’)."
+  },
+  "trace_and_return": {
+    "immediate": {
+      "description": "O bilhete digital é a devolução imediata: contém a palavra, um fragmento sonoro/visual e uma pista territorial. Pode ser *guardado* (como rasto permanente) ou *deixado cair* (desaparece).",
+      "rasto": "Se guardado, o bilhete torna-se uma *partícula* visível em COSMICOXES ou em futuras sessões da mesma pessoa."
+    },
+    "latent": {
+      "description": "Se a pessoa não guardar o bilhete, a palavra *deixa um rasto efémero*: uma mancha de tinta digital que se desvanece lentamente no fundo do ecrã, como uma memória que se apaga.",
+      "rasto": "A mancha de tinta *persiste por 30 segundos* e depois desaparece, mas pode ser *reencontrada* em sessões futuras como uma *sombra* no fundo do ecrã (evocação de latência)."
+    },
+    "communal": {
+      "description": "As palavras guardadas por outras pessoas (com consentimento) *aparecem na constelação* de palavras relacionadas, criando um *campo partilhado* de memórias e territórios.",
+      "rasto": "A constelação é *dinâmica*: palavras recentemente guardadas aparecem mais brilhantes e com som mais alto."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "reduced_motion": "As letras caem em linha reta (sem órbita) e a constelação aparece como uma lista vertical estática. O ponto de luz pulsante é substituído por um círculo estático.",
+      "high_contrast": "O fundo é branco e o texto/letras são pretos com contorno grosso. A sombra da palavra é substituída por um contorno a tracejado.",
+      "color_blind": "As letras e o fundo usam padrões de textura (ex: letras com padrão de pontos) em vez de cor para diferenciar profundidade."
+    },
+    "auditory": {
+      "no_audio": "Todas as camadas sonoras (murmúrio, coral, som de impacto) são substituídas por: (a) *legendas* que aparecem no ecrã (ex: ‘[murmúrio de vozes]’); (b) *vibração* em dispositivos compatíveis; (c) *pulsos visuais* (ex: círculo que expande e contrai ao ritmo do som).",
+      "low_audio": "O volume dos sons é reduzido e as legendas aparecem com maior destaque."
+    },
+    "haptic": {
+      "no_vibration": "A vibração é substituída por um *pulso visual* (ex: círculo que treme ao impacto das letras)."
+    },
+    "kinesthetic": {
+      "no_movement": "O movimento orbital do ponto de luz e a queda das letras são substituídos por: (a) *setas* que indicam a direção do movimento; (b) *botões* para ‘fazer as letras caírem’ ou ‘mostrar constelação’.",
+      "keyboard_only": "A pessoa pode navegar usando: (1) *teclas de seta* para mover o cursor; (2) *Enter* para confirmar a palavra; (3) *Espaço* para repetir a palavra; (4) *Backspace* para apagar."
+    },
+    "proprioceptive": {
+      "no_body_awareness": "As instruções implícitas de postura/ritmo são substituídas por *textos* que guiam a atenção (ex: ‘Feche os olhos e escute o som da palavra’)."
+    },
+    "temporal_interoceptive": {
+      "no_wait": "Os tempos de espera (3 segundos para ‘fala’, 10 segundos para devolução em silêncio) são *reduzidos para 1 segundo* ou substituídos por um botão ‘Continuar’."
+    },
+    "cognitive": {
+      "simplified_language": "As pistas territoriais e os fragmentos de voz são substituídos por *textos simples* (ex: ‘Esta palavra é de Lisboa’ em vez de ‘Esta palavra vive em Alcântara às 5 da manhã’).",
+      "no_reading": "A palavra escrita pela pessoa é *lida em voz alta* pelo sistema (se o dispositivo tiver síntese de voz) e as letras caem com *sons distintos* para cada letra (ex: ‘A’ = som de sino, ‘B’ = som de tambor)."
+    }
+  },
+  "optional_permissions": {
+    "microphone": {
+      "purpose": "Permitir que a pessoa *diga* a palavra em vez de escrevê-la. O sistema transcreve a palavra falada para texto e prossegue com a dinâmica.",
+      "fallback": "A pessoa pode sempre escrever a palavra via teclado.",
+      "trigger": "O sistema pergunta: ‘Queres dizer a palavra em voz alta?’ apenas *depois* da pessoa clicar num botão ‘Falar’ (que aparece ao lado do campo de texto)."
+    },
+    "geolocation": {
+      "purpose": "Se a pessoa permitir, o sistema *prioriza palavras e pistas do território onde ela está* (ex: se estiver em Alfama, a constelação mostra mais palavras de Alfama).",
+      "fallback": "O sistema usa o *território da sessão anterior* ou o *corpus geral* do falARTE.",
+      "trigger": "O sistema pergunta: ‘Queres que a experiência use o teu local atual?’ apenas *depois* da pessoa interagir com a palavra pela primeira vez."
+    },
+    "camera": {
+      "purpose": "Permitir que a pessoa *tire uma foto* de um lugar ou objecto para associar à palavra (evocação da mecânica ‘O lugar escondido’ ou ‘A embalagem conta’). A foto é distorcida e integrada na dinâmica.",
+      "fallback": "A pessoa pode sempre usar palavras ou sons pré-existentes do corpus.",
+      "trigger": "O sistema pergunta: ‘Queres associar uma foto a esta palavra?’ apenas *depois* da pessoa guardar o bilhete digital."
+    }
+  },
+  "overstimulation_risk": {
+    "visual": {
+      "risk": "Flashing ou movimento rápido das letras/constelação pode causar desconforto em pessoas com epilepsia ou sensibilidade visual.",
+      "mitigation": [
+        "Reduzir a velocidade da queda das letras e da órbita da constelação.",
+        "Oferecer modo ‘reduced-motion’ por defeito (ativado via preferências do sistema ou botão visível).",
+        "Limitar o número de palavras na constelação a 10 (para evitar sobrecarga visual)."
+      ]
+    },
+    "auditory": {
+      "risk": "Coral de vozes sobrepostas ou sons de impacto repetidos podem causar sobrecarga auditiva.",
+      "mitigation": [
+        "Limitar o volume máximo dos sons a 50% do volume do sistema.",
+        "Oferecer botão ‘Silenciar sons’ visível em todos os ecrãs.",
+        "Reduzir o número de vozes no coral para 3 (em vez de todas as letras).",
+        "Usar sons suaves (ex: grãos de areia, vento) em vez de sons abruptos."
+      ]
+    },
+    "haptic": {
+      "risk": "Vibração contínua pode causar desconforto em dispositivos móveis.",
+      "mitigation": [
+        "Limitar a vibração a 1 pulso por interação (ex: ao impacto das letras).",
+        "Oferecer opção para desativar vibração."
+      ]
+    },
+    "cognitive": {
+      "risk": "A complexidade da constelação de palavras e das pistas territoriais pode causar sobrecarga cognitiva.",
+      "mitigation": [
+        "Oferecer modo ‘simplificado’ com menos palavras na constelação (ex: 3 em vez de 10).",
+        "Permitir que a pessoa *pausar* a experiência a qualquer momento (botão ‘Pausar’ visível).",
+        "Fornecer *dicas visuais* (ex: setas) para guiar a atenção."
+      ]
+    }
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "A palavra como *matéria física* (letras que caem com som de impacto e peso visual).",
+      "A *tradução cruzada* entre palavra escrita (visual), som (coral de pronúncias) e textura (sombra/pátina).",
+      "O *silêncio como matéria ativa* (murmúrio que desvanece, vento que carrega palavras, espera que convoca fragmento de voz).",
+      "A *constelação de palavras* que reflete a geografia real do Atlas (palavras de uma freguesia aparecem mais próximas).",
+      "O *bilhete digital* como devolução tangível (recorte de papel com fragmento sonoro/visual e pista territorial).",
+      "A *ancoragem no corpus territorial real* do falARTE (topónimos, ofícios, gírias, sons e memórias de Lisboa).",
+      "A *evocação de olfacto e paladar* através de associações visuais e sonoras (ex: cheiro de papel velho, sabor de pão recém-cozido)."
+    ],
+    "comparison": "Nenhuma outra experiência no Atlas usa: (1) a *queda física das letras* como gesto central; (2) a *tradução de palavra em som e textura* de forma tão direta; (3) a *constelação territorial* como resposta dinâmica; (4) o *bilhete digital* como rasto tangível. Experiências como ‘Galeria Diletante’ ou ‘Fucô’ focam-se em imagem ou voz, não na *materialidade da palavra* como esta o faz."
+  },
+  "questions_for_eduardo": [
+    "As 10 mecânicas territoriais autorais do falARTE (ex: ‘O lugar escondido’, ‘30 dias, o mesmo lugar’) devem ser *integradas como opções de interação* nesta experiência (ex: ao guardar o bilhete, a pessoa pode escolher associá-lo a uma das mecânicas)? Ou devem permanecer como *inspiração* para a dinâmica, sem serem opções explícitas?",
+    "O corpus territorial do falARTE (topónimos, ofícios, etc.) está *disponível em formato estruturado* (ex: JSON) para que o sistema possa comparar as palavras escritas pela pessoa e devolver respostas específicas? Se não, qual o formato atual?",
+    "A *fotografia distorcida de lugar real* (do corpus Nuno A ou territorial) deve ser *estática* ou pode ter *movimento* (ex: zoom lento, desfoque progressivo) para evocar a ideia de ‘lugar vivo’?",
+    "O *bilhete digital* deve ser *imprimível* (como um recorte de papel físico) ou permanece apenas digital?",
+    "A *constelação de palavras* deve *priorizar* palavras de um território específico (ex: Alcântara) se a pessoa já interagiu com esse território em sessões anteriores? Ou deve ser sempre *aleatória* dentro do corpus?",
+    "O *som de impacto das letras* deve ser *único para cada letra* (ex: ‘A’ = som de sino, ‘B’ = som de tambor) ou *genérico* (ex: som de grãos de areia para todas)?"
+  ],
+  "improvement_proposals": [
+    {
+      "title": "Integração das 10 mecânicas territoriais como ‘modos de contribuição’",
+      "description": "Adicionar um *menu opcional* (acessível via gesto ou teclado) que permita à pessoa escolher uma das 10 mecânicas autorais (ex: ‘O lugar escondido’) para *contextualizar* a sua palavra. Exemplo: se escolher ‘O som que só existe aqui’, a palavra escrita será associada a um *fragmento sonoro* do corpus territorial.",
+      "impact": "Aumenta a *profundidade territorial* da experiência e alinha-a mais diretamente com o corpus autoral.",
+      "dependency": "Requer que o corpus territorial esteja estruturado por mecânicas (ex: palavras associadas a ‘O som que só existe aqui’)."
+    },
+    {
+      "title": "Bilhete digital como ‘semente’ para COSMICOXES",
+      "description": "Permitir que o bilhete digital guardado *cresça* em COSMICOXES: a cada sessão, a partícula associada ao bilhete *ganha camadas* (ex: mais palavras, mais sons) com base em interações futuras da pessoa ou de outras pessoas com o mesmo território.",
+      "impact": "Cria uma *narrativa contínua* entre experiências e reforça a ideia de *cosmos vivo*.",
+      "dependency": "Requer coordenação com a dinâmica de COSMICOXES."
+    },
+    {
+      "title": "Modo ‘Deriva’ para exploração territorial",
+      "description": "Adicionar um *modo de exploração* onde a pessoa pode *navegar pela constelação de palavras* como se fosse um mapa territorial. Ao clicar numa palavra, o sistema devolve *todas as contribuições associadas* a essa palavra no corpus (fotografias, sons, pistas).",
+      "impact": "Transforma a experiência num *portal de descoberta* do Atlas, mantendo a assinatura sensorial do falARTE.",
+      "dependency": "Requer que o corpus esteja indexado por palavras-chave territoriais."
+    },
+    {
+      "title": "Evocação de olfacto e paladar via ‘receitas territoriais’",
+      "description": "Associar palavras do corpus a *receitas ou ingredientes* (ex: ‘pão’ → receita de pão de Alfama; ‘peixe’ → receita de bacalhau). Ao interagir com a palavra, o sistema devolve um *fragmento da receita* (ex: ‘Misture a farinha com água e sal…’) como evocação de paladar.",
+      "impact": "Aprofundar a *evocação multissensorial* sem fingir output físico.",
+      "dependency": "Requer um corpus de receitas ou ingredientes associados a palavras territoriais."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

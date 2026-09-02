@@ -1,0 +1,323 @@
+{
+  "id": "dado-rosa",
+  "canonical_name": "Dado Rosa",
+  "source_evidence": {
+    "primary": [
+      {
+        "source": "catálogo de entrada (ordem 9, id: dado-rosa)",
+        "authority": "autoral_explicita",
+        "extract": "nome: 'Dado Rosa'; família: 'curadoria'; mecânica: 'sortear'; convite: 'Atira uma possibilidade ao ar.'; camada: 'pública'; estado: 'operável_motor_comum'"
+      },
+      {
+        "source": "Âncoras Autoriais — Dado Sem Lado",
+        "authority": "autoral_recuperada",
+        "extract": "jogo-festival de desvio; pode dobrar-se como avião de papel, voar como mosca e desafiar a pessoa a apanhá-lo; pode haver prémio secreto; desafios misturam lenda, comida, absurdo, oralidade, infância e adulto; nunca reduzir a botão 'sortear'."
+      }
+    ],
+    "secondary": [
+      {
+        "source": "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md",
+        "authority": "interpretativa",
+        "extract": "D2 Catástrofe Produtiva — criação → ruptura/catástrofe → trabalhar com o que sobrevive/emerge."
+      },
+      {
+        "source": "SOMOSTODOSPOSSIVEIS (Livro Cubo)",
+        "authority": "interpretativa",
+        "extract": "anti-regras; jogo termina quando todos querem continuar; cada sessão cria novas cartas."
+      }
+    ]
+  },
+  "authorial_invariants": [
+    "O convite é 'Atira uma possibilidade ao ar.' (nunca 'clicar para sortear').",
+    "A mecânica é 'sortear', mas o dado não é um objecto estático.",
+    "O dado deve escapar à expectativa de um objecto geométrico rígido (ex: dobrar-se, voar, desafiar).",
+    "Deve misturar lenda, comida, absurdo, oralidade, infância e adulto nos desafios.",
+    "Pode conter prémio secreto (opcional e não explicado de antemão).",
+    "Nunca reduzir a um botão genérico de sorteio."
+  ],
+  "perceptual_intent": "Transformar o acto de 'sortear' num ritual lúdico e corporal onde o acaso é uma presença física, sensorial e narrativa. O dado não é um objecto passivo, mas um ser vivo que convida à brincadeira, desafia a lógica e devolve uma possibilidade como se fosse um presente do território ou da memória colectiva.",
+  "threshold": {
+    "description": "A tela começa em branco, com um murmúrio distorcido de vozes infantis a repetir 'um, dois, três...' em volumes decrescentes. De repente, o murmúrio pára. Um ponto rosa (quase imperceptível) aparece no centro do ecrã, a tremer como se fosse uma semente prestes a germinar. O cursor da pessoa, ao aproximar-se, faz o ponto expandir-se em direcções imprevisíveis, como se fosse atraído por uma gravidade invisível.",
+    "sensory_trigger": [
+      "auditory (murmúrio distorcido)",
+      "visual (ponto rosa tremulo)",
+      "kinesthetic (cursor como íman)"
+    ]
+  },
+  "dramaturgical_arc": {
+    "limiar": "Murmúrio infantil e ponto rosa tremulo que reage à presença do cursor.",
+    "chamada": "O ponto rosa cresce e transforma-se num dado de faces irregulares (algumas em forma de folha, outras de nuvem, outras de boca aberta). Sobre uma das faces, lê-se: 'Atira uma possibilidade ao ar.'",
+    "primeiro_gesto": "A pessoa arrasta o dado com o cursor ou dedo (ou pressiona a tecla 'espaço' para lançar).",
+    "resposta_viva": "O dado voa em trajectória parabólica, rodando no ar. Cada face que passa pelo centro do ecrã emite um som único: um riso, um estalo de dedos, um suspiro, um estalar de língua, um som de panela a ferver, ou o nome de uma rua de Lisboa pronunciado em voz baixa.",
+    "desvio": "No auge da trajectória, o dado desdobra-se: uma das faces abre-se como uma porta, revelando uma imagem fragmentada (ex: um pormenor de uma festa tradicional, um objecto doméstico, uma sombra de criança a correr). A imagem desaparece ao tocar o chão.",
+    "aprofundamento_sensorial": "O som do impacto do dado no 'chão' (invisível) faz tremer o ecrã como se fosse uma membrana. O tremor propaga-se em ondas concêntricas que distorcem temporariamente as cores do ambiente (ex: o rosa do dado contamina a tela como tinta na água).",
+    "escolha_acaso_silencio": "A pessoa pode: (1) apanhar o dado e lançá-lo novamente; (2) esperar que ele se recomponha sozinho (demora 3-7 segundos, com sons de respiração); ou (3) clicar na imagem fragmentada que apareceu (se a memorizou) para 'perseguir' o rasto.",
+    "aparição": "Se a pessoa escolher perseguir o rasto, surge uma constelação de 3-5 'possibilidades' (palavras, sons ou imagens) que flutuam como bolhas. Cada bolha contém um fragmento de uma lenda, uma receita, um topónimo ou um desafio absurdo (ex: 'Encontra o lugar onde o pão é mais doce que o açúcar').",
+    "devolução": "A pessoa recebe uma 'possibilidade' aleatória (ou a que escolheu) na forma de um 'bilhete' digital: um texto curto (máx. 12 palavras) que combina elementos do fragmento (ex: 'Rua das Portas Santo Antão + bolacha de azeite + riso da avó'). O bilhete pode ser guardado, partilhado ou 'deixado cair' no território (geolocalização opcional).",
+    "latencia": "O dado, ao ser abandonado, volta ao centro do ecrã como um ponto rosa, mas agora com uma face adicional: a 'possibilidade' devolta pela pessoa (se partilhada). Em sessões futuras, o dado pode 'lembrar-se' de possibilidades anteriores, misturando-as com as novas."
+  },
+  "participant_verbs": [
+    "arrastar",
+    "lançar",
+    "esperar",
+    "perseguir",
+    "escolher",
+    "deixar cair",
+    "ouvir"
+  ],
+  "system_responses": {
+    "to_arrastar": "O dado segue o cursor/dedo, mas com inércia e micro-desvios (como se fosse vivo). Emite sons de fricção (ex: papel a rasgar, tecido a esfregar).",
+    "to_lancar": "Trajectória parabólica com rotação aleatória. Cada face visível emite um som único. A altura do lançamento afecta a duração do voo e o número de faces visíveis.",
+    "to_esperar": "O dado recompõe-se sozinho, emitindo sons de respiração ou de um relógio de areia. A tela treme levemente como se o tempo estivesse a passar.",
+    "to_perseguir": "A imagem fragmentada expande-se em constelação de bolhas. O cursor/dedo atrai as bolhas mais próximas, que emitem sons de campainhas ou risos.",
+    "to_escolher": "A bolha seleccionada explode em confetes digitais (partículas que caem lentamente) e revela o fragmento completo (texto, som ou imagem).",
+    "to_deixar_cair": "O bilhete digital 'cai' no ecrã como se fosse um objecto físico, emitindo um som de impacto suave. Se geolocalização estiver activada, o bilhete 'aterra' num mapa minimalista da freguesia associada ao fragmento.",
+    "to_ouvir": "Os sons do dado (risos, suspiros, etc.) misturam-se com sons ambientais opcionais (ex: vento, passos) se o utilizador permitir microfone. Caso contrário, os sons são gerados pelo sistema."
+  },
+  "sensory_signature_id": "dado-rosa-49-09",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "ponto rosa tremulo (limiar)",
+        "dado de faces irregulares (geometria orgânica)",
+        "trajectória parabólica com rotação",
+        "imagem fragmentada (porta aberta no dado)",
+        "ondas concêntricas de distorção de cor",
+        "constelação de bolhas flutuantes",
+        "bilhete digital (textura de papel enrugado)",
+        "partículas de confetes (queda lenta)",
+        "mapa minimalista (linhas e pontos, sem preenchimento)"
+      ],
+      "dynamics": [
+        "expansão/contracção",
+        "rotação",
+        "distorção de cor",
+        "transparência variável",
+        "foco/desfoco"
+      ]
+    },
+    "auditory": {
+      "elements": [
+        "murmúrio infantil distorcido (limiar)",
+        "sons de fricção (arrastar)",
+        "riso, estalo de dedos, suspiro, estalar de língua, panela a ferver, topónimo pronunciado (faces do dado)",
+        "respiração ou relógio de areia (recomposição do dado)",
+        "campainhas ou risos (bolhas)",
+        "som de impacto suave (bilhete a cair)",
+        "vento ou passos (ambiente opcional)"
+      ],
+      "dynamics": [
+        "espacialização (esquerda/direita conforme posição do dado)",
+        "volume variável com distância",
+        "eco leve em momentos de silêncio"
+      ]
+    },
+    "haptic": {
+      "elements": [
+        "vibração suave no impacto do dado (se dispositivo suportar)"
+      ],
+      "dynamics": [
+        "intensidade proporcional à altura do lançamento"
+      ]
+    },
+    "kinesthetic": {
+      "elements": [
+        "arrastar com inércia",
+        "lançamento com trajectória física simulada",
+        "perseguição de bolhas com atracção magnética"
+      ],
+      "dynamics": [
+        "resistência leve ao movimento",
+        "aceleração/desaceleração"
+      ]
+    },
+    "proprioceptive": {
+      "elements": [
+        "instrução implícita para usar a mão dominante (arrastar) ou não dominante (esperar)",
+        "sensação de peso do dado ao lançar (feedback visual de inércia)"
+      ]
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "espera pela recomposição do dado (3-7 segundos)",
+        "ritmo do murmúrio inicial (decrescente)",
+        "pulsação das ondas de distorção"
+      ],
+      "dynamics": [
+        "aceleração/desaceleração do tempo percebido"
+      ]
+    },
+    "spatial": {
+      "elements": [
+        "profundidade simulada na trajectória do dado",
+        "posicionamento das bolhas em 3D (flutuando à frente/atrás)",
+        "mapa minimalista com perspectiva isométrica"
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "cheiro a pão quente (evocado pelo fragmento 'bolacha de azeite')",
+        "cheiro a terra molhada (evocado pelo fragmento 'rua')",
+        "cheiro a erva fresca (evocado pelo fragmento 'festa tradicional')"
+      ],
+      "method": "associação textual e sonora (ex: som de forno + texto 'pão')"
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "sabor doce (evocado por 'bolacha de azeite')",
+        "sabor salgado (evocado por 'sardinha')",
+        "sabor ácido (evocado por 'limão na festa')"
+      ],
+      "method": "descrição poética + som de mastigação ou riso"
+    },
+    "social_presence": {
+      "elements": [
+        "vozes infantis (murmúrio inicial)",
+        "risos e sons corporais (faces do dado)",
+        "memória colectiva (fragmentos de lendas/receitas)"
+      ],
+      "dynamics": [
+        "sensação de partilha sem interacção directa"
+      ]
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "O som emitido por cada face do dado (auditory) altera a cor e a textura visual do ambiente (visual). Ex: um riso (som agudo) faz o ecrã ganhar tons pastel; um estalo de língua (som seco) introduz granulação na imagem.",
+    "secondary": "A trajectória do dado (kinesthetic/visual) modula a espacialização do som (auditory). Ex: quando o dado sobe, o som parece vir de cima; quando desce, o som parece vir de baixo."
+  },
+  "silence_or_absence": {
+    "mechanism": "O dado, ao ser abandonado por mais de 10 segundos, 'adormece': para de emitir sons, as cores desaturam e o ponto rosa volta ao centro, tremendo levemente. O silêncio é um convite para recomeçar ou sair.",
+    "effect": "Cria uma pausa deliberada, quebrando o ritmo da interacção e permitindo à pessoa reflectir sobre a 'possibilidade' recebida."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": [
+      "O dado desdobra-se no ar, revelando uma face oculta com uma imagem fragmentada (imprevisível).",
+      "A constelação de bolhas aparece com um número aleatório de elementos (3-5).",
+      "O prémio secreto (se existir) é revelado apenas se a pessoa escolher a bolha 'certa' (determinada por um algoritmo simples: ex: a bolha que emite o som mais grave).",
+      "O bilhete devolve uma combinação única de elementos (lenda + comida + topónimo), gerada em tempo real."
+    ],
+    "intensity": "baixa a média (surpresa suave, não choque)"
+  },
+  "session_variation": [
+    {
+      "type": "acaso_controlado",
+      "description": "As faces do dado e os seus sons são seleccionados aleatoriamente de um conjunto fixo (ex: 12 sons diferentes)."
+    },
+    {
+      "type": "ordem_mutável",
+      "description": "A sequência de fragmentos (lendas, receitas, etc.) na constelação de bolhas é reordenada em cada sessão."
+    },
+    {
+      "type": "resposta_a_ritmo",
+      "description": "A altura do lançamento do dado afecta a duração do voo e o número de faces visíveis (lançamento rápido = menos faces; lento = mais faces)."
+    },
+    {
+      "type": "resposta_a_posição",
+      "description": "A posição do cursor/dedo no momento do lançamento influencia a direcção inicial do dado (ex: lançamento da esquerda = trajectória para a direita)."
+    },
+    {
+      "type": "combinação_de_fragmentos",
+      "description": "O bilhete final combina elementos de fragmentos diferentes em cada sessão (ex: lenda A + comida B + topónimo C)."
+    },
+    {
+      "type": "memória_de_sessões_anteriores",
+      "description": "Se a pessoa partilhou um bilhete em sessões anteriores, o dado pode 'lembrar-se' e incluir uma face com esse bilhete (opcional, sem rastreio de identidade)."
+    }
+  ],
+  "territorial_binding": {
+    "relation": "Os fragmentos (lendas, receitas, topónimos) são extraídos de um corpus territorial real associado à camada pública do Atlas Vivo MILK. Cada fragmento está ligado a uma freguesia ou lugar específico de Lisboa.",
+    "evidence": [
+      "Fragmentos de lendas: ex: 'A lenda da Rua das Portas Santo Antão' (freguesia de Santa Maria Maior).",
+      "Receitas: ex: 'Bolacha de azeite' (associada a Alfama).",
+      "Topónimos: ex: 'Rua do Poço dos Negros' (freguesia de Misericórdia)."
+    ],
+    "geolocation": {
+      "optional": true,
+      "use": "Se activada, o bilhete 'aterra' num mapa minimalista da freguesia associada ao fragmento. A pessoa pode ver outros bilhetes 'deixados cair' por outras pessoas (anónimos)."
+    }
+  },
+  "trace_and_return": {
+    "trace": {
+      "digital": "O bilhete guardado ou partilhado fica associado à sessão (sem identidade). Em sessões futuras, o dado pode incluir uma face com um fragmento de um bilhete anterior.",
+      "territorial": "Se geolocalização estiver activada, o bilhete é 'deixado' no mapa da freguesia, visível para outros utilizadores (anónimo)."
+    },
+    "return": {
+      "immediate": "O bilhete digital (texto curto) é a devolução principal.",
+      "latent": "O dado 'lembra-se' de possibilidades anteriores, integrando-as nas faces em sessões futuras."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "reduced_motion": "O dado move-se em trajectórias lineares (sem rotação) e as ondas de distorção são substituídas por transições suaves de cor.",
+      "high_contrast": "O ponto rosa e o dado têm contornos pretos grossos. As bolhas têm cores sólidas e alto contraste.",
+      "color_blind": "As faces do dado são diferenciadas por texturas (ex: listras, pontos) em vez de cores."
+    },
+    "auditory": {
+      "no_audio": "Todos os sons são substituídos por vibrações (se dispositivo suportar) ou por legendas visuais (ex: 'riso', 'estalo de dedos').",
+      "transcript": "Os fragmentos de lendas/receitas são sempre acompanhados por texto (mesmo com áudio activado)."
+    },
+    "motor": {
+      "no_drag": "O dado pode ser lançado com a tecla 'espaço' ou com um botão virtual (grande e central).",
+      "no_click": "A selecção de bolhas pode ser feita com as setas do teclado + 'Enter'.",
+      "slow_response": "O tempo de espera pela recomposição do dado é reduzido para 1-2 segundos."
+    },
+    "cognitive": {
+      "simplified_fragments": "Os fragmentos de lendas/receitas podem ser reduzidos a palavras-chave (ex: 'pão + rua + avó').",
+      "no_surprise": "A constelação de bolhas aparece sempre com o mesmo número de elementos (3) e sem prémio secreto."
+    }
+  },
+  "optional_permissions": [
+    "microphone (para captar sons ambientais e misturar com os sons do dado)",
+    "geolocation (para 'deixar cair' o bilhete no mapa da freguesia)"
+  ],
+  "overstimulation_risk": {
+    "potential": [
+      "Flashing: Nenhum (as distorções de cor são suaves e sem piscar rápido).",
+      "Sound: Sons súbitos (ex: riso alto) podem ser surpreendentes, mas são curtos e não repetitivos.",
+      "Motion: Trajectória do dado pode causar desconforto em pessoas com sensibilidade ao movimento (mitigado com reduced_motion).",
+      "Cognitive load: Combinação de sons, imagens e texto pode ser complexa para algumas pessoas (mitigado com opções de simplificação)."
+    ],
+    "mitigation": [
+      "Opção de reduzir movimento (reduced_motion).",
+      "Opção de desactivar sons (ou substituir por vibração/legendas).",
+      "Opção de simplificar fragmentos (palavras-chave em vez de texto completo).",
+      "Botão de pausa em todos os momentos (congela a experiência)."
+    ]
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "O dado como ser vivo (geometria orgânica, sons corporais, desdobramento no ar).",
+      "A tradução cruzada entre som (faces do dado) e cor/textura do ambiente.",
+      "A devolução na forma de um 'bilhete' que combina lenda + comida + topónimo.",
+      "A latência do dado 'lembrar-se' de possibilidades anteriores.",
+      "A evocação de cheiros e sabores através de associação textual e sonora (sem fingir output físico)."
+    ],
+    "comparison": "Nenhuma outra curadoria do Atlas usa um objecto (dado) que se desdobra no ar, emite sons corporais e devolve uma combinação única de elementos territoriais. Outras experiências podem usar acaso ou interacção física, mas não com esta assinatura sensorial e narrativa."
+  },
+  "questions_for_eduardo": [
+    "O 'prémio secreto' mencionada em 'Dado Sem Lado' deve ser um elemento fixo (ex: uma lenda rara) ou gerado dinâmicamente em cada sessão?",
+    "Os fragmentos (lendas, receitas, topónimos) devem ser extraídos de um corpus específico do Atlas ou podem ser gerados a partir de uma base de dados territorial mais ampla?",
+    "A geolocalização deve ser usada apenas para 'deixar cair' o bilhete ou também para personalizar os fragmentos com base na localização da pessoa?",
+    "O dado deve ter um número fixo de faces (ex: 6) ou variável (ex: 4-8) em cada sessão?"
+  ],
+  "improvement_proposals": [
+    {
+      "area": "territorial_binding",
+      "proposal": "Integração com o corpus de 'FALArte' (ex: usar os 10 mecanismos autorais como categorias de fragmentos). Ex: 'O lugar escondido' → fragmento de uma lenda associada a um lugar secreto; '30 dias, o mesmo lugar' → fragmento de uma receita tradicional de uma rua específica."
+    },
+    {
+      "area": "cross_sensory_translation",
+      "proposal": "Adicionar uma camada de 'peso' ao dado: o som emitido por cada face pode alterar a 'gravidade' do dado (ex: som grave = dado mais pesado; som agudo = dado mais leve), afectando a trajectória."
+    },
+    {
+      "area": "trace_and_return",
+      "proposal": "Permitir que os bilhetes 'deixados cair' no território possam ser 'apanhados' por outros utilizadores em sessões futuras, criando uma rede de possibilidades partilhadas (com moderação para evitar spam)."
+    },
+    {
+      "area": "accessibility",
+      "proposal": "Adicionar uma opção de 'modo táctil' para dispositivos com ecrã táctil, onde o dado pode ser 'segurado' e 'lançado' com gestos de pressionar e soltar (sem arrastar)."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

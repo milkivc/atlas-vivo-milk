@@ -1,0 +1,362 @@
+{
+  "id": "dado-100lado",
+  "canonical_name": "DADO 100LADO",
+  "source_evidence": {
+    "primary": [
+      {
+        "source": "Cópia de Fica registado neste dossiê…",
+        "quote": "Dado Sem Lado — jogo-festival de desvio; pode dobrar-se como avião de papel, voar como mosca e desafiar a pessoa a apanhá-lo; pode haver prémio secreto; desafios misturam lenda, comida, absurdo, oralidade, infância e adulto; nunca reduzir a botão 'sortear'.",
+        "authority": "autoral_direct"
+      },
+      {
+        "source": "catalog_entry",
+        "quote": "convite: 'Roda até o lado deixar de existir.'; mecanica: 'rodar'",
+        "authority": "catalog_operational"
+      }
+    ],
+    "secondary": [
+      {
+        "source": "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md",
+        "quote": "D2 Catástrofe Produtiva — criação → ruptura/catástrofe → trabalhar com o que sobrevive/emerge.",
+        "authority": "interpretative"
+      }
+    ]
+  },
+  "authorial_invariants": [
+    "O dado deve escapar à lógica binária ou fixa de lados.",
+    "O objecto digital deve comportar-se como um objecto físico vivo: dobrar, voar, desafiar.",
+    "O convite é 'Roda até o lado deixar de existir'.",
+    "Nunca reduzir a um botão de sorteio ou randomização genérica.",
+    "Deve misturar lenda, comida, absurdo, oralidade, infância e adulto.",
+    "Pode incluir prémio secreto (nunca material, sempre experiencial)."
+  ],
+  "perceptual_intent": "Transformar a noção de acaso num acto corporal e sensorial, onde o dado não é um objecto passivo, mas uma entidade que desafia, foge e reconfigura as regras da sua própria existência. A pessoa deve sentir que está a interagir com uma força lúdica e imprevisível, não com uma ferramenta.",
+  "threshold": {
+    "description": "A tela está vazia, exceto por um ponto minúsculo e pulsante no centro, como um dado a dois dimensões. O cursor, ao aproximar-se, faz o ponto tremer e emitir um som agudo e curto (como um 'tic' de relógio de brinquedo). Não há texto, apenas a sugestão de que algo está prestes a nascer ou a fugir.",
+    "sensory_trigger": [
+      "visual_pulse",
+      "auditory_tic"
+    ]
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": "LIMIAR",
+      "action": "O ponto central (dado) treme e emite sons intermitentes. A tela tem um fundos de textura orgânica (como papel amassado) que se move levemente com o cursor, como se fosse uma superfície instável."
+    },
+    {
+      "stage": "CHAMADA",
+      "action": "O dado 'rola' sozinho uma vez, sem input, e pára num ângulo impossível (ex: 47 graus). Um murmúrio distorcido (como voz de criança a contar) diz: 'Roda até o lado deixar de existir.'"
+    },
+    {
+      "stage": "PRIMEIRO GESTO",
+      "action": "A pessoa clica/arrasta o dado. Ele reage como um objecto físico: salta, gira, ou dobra-se em direcções inesperadas. O som muda para um 'clique' metálico ou um ruído de papel a rasgar."
+    },
+    {
+      "stage": "RESPOSTA VIVA",
+      "action": "O dado ganha volume: passa de 2D a uma forma 3D minimalista (cubo distorcido) e começa a 'voar' pela tela, como uma mosca ou um avião de papel. O som acompanha o movimento (zumbido de inseto ou vento)."
+    },
+    {
+      "stage": "DESVIO",
+      "action": "De repente, o dado dobra-se ao meio, como se fosse de papel, e um dos lados 'desaparece' visualmente (transparência ou distorção). O som corta abruptamente, substituído por um silvo agudo."
+    },
+    {
+      "stage": "APROFUNDAMENTO SENSORIAL",
+      "action": "O dado agora tem lados 'vivos': cada face exibe uma textura diferente (ex: pão, pedra, tecido, água) e emite um som único ao ser tocada. O movimento do cursor altera a gravidade do dado (ele cai, flutua ou gira em espiral)."
+    },
+    {
+      "stage": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "O dado pára e 'pede' um gesto: a pessoa pode soprar no microfone (opcional), arrastá-lo para um canto da tela, ou esperar. Cada opção desencadeia uma reação diferente (ex: soprar faz o dado voar mais rápido; arrastar para um canto faz uma face desaparecer; esperar faz o dado emitir um som de respiração)."
+    },
+    {
+      "stage": "APARIÇÃO",
+      "action": "Uma face do dado revela uma palavra, imagem ou som ligado a uma lenda, comida ou memória territorial (ex: uma face mostra 'pão de ló' e emite o som de uma padaria; outra mostra 'sardinha' e um murmúrio de mercado). A palavra/imagem/som surge como se fosse 'puxada' do dado."
+    },
+    {
+      "stage": "DEVOLUÇÃO",
+      "action": "O dado 'devolve' algo à pessoa: uma frase absurda (ex: 'O lado que faltava era o teu'), um som que se repete como eco, ou uma textura que fica gravada na tela como 'rasto' (ex: uma mancha de tinta que persiste até a próxima sessão)."
+    },
+    {
+      "stage": "RASTO / LATÊNCIA",
+      "action": "O dado desaparece, mas o rastro (mancha, som residual, ou palavra) permanece na tela por tempo indeterminado. Em sessões futuras, o dado pode 'lembrar' este rastro e reagir a ele (ex: evitar a mancha ou emitir um som diferente ao passá-la)."
+    }
+  ],
+  "participant_verbs": [
+    "rodar",
+    "perseguir",
+    "soprar",
+    "esperar",
+    "arrastar",
+    "escutar",
+    "observar"
+  ],
+  "system_responses": {
+    "to_rodar": "O dado gira em eixos impossíveis, emitindo sons de fricção (papel, metal, ou água).",
+    "to_perseguir": "O dado foge do cursor, acelerando ou mudando de direcção. O som torna-se mais agudo à medida que a distância aumenta.",
+    "to_soprar": {
+      "with_permission": "O dado voa em espiral, emitindo um som de vento. Se o sopro for forte, o dado dobra-se ou parte-se.",
+      "without_permission": "O dado treme como se fosse soprado, mas o som é gerado sinteticamente (sem microfone)."
+    },
+    "to_esperar": "O dado pára e emite sons de respiração ou batimento cardíaco. Após 5 segundos, uma face desaparece ou uma nova textura aparece.",
+    "to_arrastar": "O dado segue o cursor, mas com inércia (como se fosse pesado). Se arrastado para as bordas, uma face 'cai' e revela algo por baixo.",
+    "to_escutar": "O dado emite sons mais altos ou complexos quando o cursor está imóvel sobre ele.",
+    "to_observar": "O dado muda de textura ou cor lentamente, como se estivesse a 'envelhecer'."
+  },
+  "sensory_signature_id": "dado-100lado-voo-e-desaparecimento",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "ponto_pulsante",
+        "cubo_distorcido",
+        "texturas_vivas",
+        "mancha_rasto",
+        "transparência_dinâmica"
+      ],
+      "behaviors": [
+        "movimento_3D_minimalista",
+        "distorção_perspectiva",
+        "aparição_desaparição",
+        "cores_orgânicas"
+      ]
+    },
+    "auditory": {
+      "elements": [
+        "tic_relógio",
+        "zumbido_mosca",
+        "clique_metálico",
+        "ruído_papel",
+        "respiração",
+        "eco_territorial"
+      ],
+      "behaviors": [
+        "espacialização_2D",
+        "variação_timbre_com_movimento",
+        "silêncio_súbito",
+        "sons_evocativos"
+      ]
+    },
+    "haptic": {
+      "elements": [
+        "vibração_leve"
+      ],
+      "behaviors": [
+        "feedback_táctil_opcional"
+      ],
+      "note": "Apenas em dispositivos compatíveis e como complemento, nunca como requisito."
+    },
+    "kinesthetic": {
+      "elements": [
+        "movimento_cursor",
+        "arrasto",
+        "pressão"
+      ],
+      "behaviors": [
+        "inércia_física",
+        "gravidade_dinâmica",
+        "trajectória_imprevisível"
+      ]
+    },
+    "proprioceptive": {
+      "elements": [
+        "postura_observação",
+        "ritmo_respiração"
+      ],
+      "behaviors": [
+        "conscientização_corpo_via_som",
+        "pausa_para_observar"
+      ]
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "espera",
+        "aceleração",
+        "suspensão"
+      ],
+      "behaviors": [
+        "ritmo_adaptativo",
+        "cansaço_perceptivo_controlado"
+      ]
+    },
+    "spatial": {
+      "elements": [
+        "profundidade_2D",
+        "gravidade_virtual"
+      ],
+      "behaviors": [
+        "campos_de_força_invisíveis",
+        "limites_tela_como_território"
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "memória_pão",
+        "cheiro_mercado",
+        "aroma_territorial"
+      ],
+      "note": "Evocado via som, imagem ou texto (ex: 'cheiro a pão quente')."
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "sabor_sardinha",
+        "gosto_doce",
+        "memória_comida"
+      ],
+      "note": "Evocado via som, imagem ou texto (ex: 'sabor a laranja azeda')."
+    },
+    "social_presence": {
+      "elements": [
+        "murmúrio_coletivo",
+        "eco_de_outras_sessões"
+      ],
+      "behaviors": [
+        "sons_residuais_de_outros_participantes"
+      ],
+      "note": "Apenas sons não identificáveis, sem gravação ou rastreio de voz real."
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "O movimento do dado (visual/kinesthetic) altera o timbre e volume do som (auditory), criando uma relação direta entre trajectória e paisagem sonora.",
+    "secondary": "A textura visual de cada face do dado (ex: pão, pedra) evoca memórias olfativas ou gustativas (olfactory/gustatory evocation) sem produzir cheiro ou sabor real."
+  },
+  "silence_or_absence": {
+    "mechanism": "O dado pode 'desaparecer' temporariamente (transparência total) ou emitir silêncio súbito para criar suspense. O silêncio é usado como ferramenta dramática: quando o dado pára de emitir som, a pessoa é forçada a prestar atenção a outros canais (ex: textura visual ou movimento).",
+    "purpose": "Quebrar a expectativa de estímulo contínuo e convocar a atenção para o vazio como parte da experiência."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanisms": [
+      "O dado dobra-se ou parte-se em momentos aleatórios, revelando faces ocultas.",
+      "Uma face do dado pode 'sumir' permanentemente durante a sessão, alterando as regras do jogo.",
+      "O dado reage de forma diferente consoante a velocidade ou trajectória do gesto da pessoa.",
+      "Em sessões subsequentes, o dado 'lembra' rastos de sessões anteriores (ex: evita uma mancha ou emite um som diferente ao passá-la)."
+    ],
+    "note": "O acaso é controlado por algoritmos simples (ex: tempo de espera, posição do cursor) e nunca por perfil psicológico."
+  },
+  "session_variation": [
+    {
+      "type": "acaso_controlado",
+      "description": "O dado pode 'nascer' com um número diferente de faces (entre 4 e 100) em cada sessão."
+    },
+    {
+      "type": "ordem_mutável",
+      "description": "A ordem das texturas/faces do dado é aleatória em cada sessão."
+    },
+    {
+      "type": "resposta_a_ritmo",
+      "description": "Se a pessoa interagir rapidamente, o dado move-se mais rápido e emite sons mais agudos. Se interagir devagar, o dado move-se lentamente e emite sons graves."
+    },
+    {
+      "type": "resposta_a_posição",
+      "description": "O dado reage de forma diferente consoante a posição do cursor na tela (ex: canto superior esquerdo = som de mercado; canto inferior direito = som de chuva)."
+    },
+    {
+      "type": "combinação_fragmentos",
+      "description": "As faces do dado podem combinar elementos de diferentes lendas, comidas ou memórias territoriais (ex: uma face mistura 'pão de ló' e 'sardinha')."
+    },
+    {
+      "type": "temporalidade_real",
+      "description": "Em dias de festa territorial documentada, o dado pode emitir sons ou exibir texturas relacionadas com essa festa."
+    }
+  ],
+  "territorial_binding": {
+    "relation": "O dado evoca memórias, lendas e comidas ligadas a territórios específicos (ex: pão de ló de Alfeite, sardinha de Lisboa, mercados de bairro).",
+    "source": "Fonte autoral recuperada em 'Dado Sem Lado' e corpus territorial do Atlas Vivo MILK.",
+    "note": "As evocações territoriais são genéricas e não dependem de geolocalização real. Podem ser personalizadas com base em contribuições públicas validadas (ex: FALArte)."
+  },
+  "trace_and_return": {
+    "trace": {
+      "types": [
+        "mancha_visual",
+        "som_residual",
+        "palavra_ou_frase"
+      ],
+      "persistence": "O rastro pode persistir na tela até a pessoa fechar a sessão ou até ser 'apagado' por uma interação futura (ex: o dado 'passa por cima' da mancha)."
+    },
+    "return": {
+      "to_participant": "A pessoa recebe uma frase absurda, um som ou uma textura que 'fica' com ela (ex: 'O lado que faltava era o teu').",
+      "to_system": "O dado 'aprende' com os rastos: em sessões futuras, pode evitar manchas ou reagir a elas de forma diferente."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "reduced_motion": "O dado move-se em linhas retas e com velocidade constante. As texturas são substituídas por formas geométricas simples e contrastadas.",
+      "high_contrast": "O dado e as texturas usam cores de alto contraste (ex: preto e branco).",
+      "screen_reader": "Descrições dinâmicas do estado do dado (ex: 'Dado a girar. Face visível: pão de ló. Som: zumbido de mosca.')."
+    },
+    "auditory": {
+      "no_audio": "Todas as interações são acompanhadas por feedback visual (ex: vibração do dado, mudança de cor).",
+      "subtitles": "Legendas para todos os sons (ex: 'Som de mercado.').",
+      "volume_control": "Controlo de volume global e por tipo de som (ex: sons do dado vs. sons territoriais)."
+    },
+    "haptic": {
+      "fallback": "Feedback visual (ex: pulso de cor) substitui vibração."
+    },
+    "kinesthetic": {
+      "static_control": "O dado pode ser controlado via teclado (setas para mover, espaço para 'soprar').",
+      "reduced_precision": "O dado reage a toques grossos ou cliques simples, sem precisão."
+    },
+    "proprioceptive": {
+      "alternative": "Instruções de postura são opcionais e substituídas por sugestões visuais (ex: 'Tenta fechar os olhos e escutar.')."
+    },
+    "temporal_interoceptive": {
+      "no_time_pressure": "Modo 'sem pressa' onde o dado move-se lentamente e a pessoa pode interagir sem limite de tempo."
+    },
+    "poetic_preservation": "Todas as alternativas acessíveis preservam a intenção poética da experiência: o dado continua a ser uma entidade viva e imprevisível, apenas com meios alternativos de interação."
+  },
+  "optional_permissions": {
+    "microphone": {
+      "purpose": "Permitir que a pessoa 'sopre' no dado para alterar o seu movimento ou som.",
+      "fallback": "O dado reage a cliques ou arrastos longos como se fosse soprado.",
+      "request_timing": "Apenas quando o dado pára e 'pede' um sopro (ex: 'Sopra para me fazer voar.')."
+    },
+    "motion": {
+      "purpose": "Usar a inclinação do dispositivo para alterar a gravidade do dado.",
+      "fallback": "O dado reage ao movimento do cursor ou teclado.",
+      "request_timing": "Nunca. A experiência funciona sem movimento."
+    }
+  },
+  "overstimulation_risk": {
+    "potential_risks": [
+      "Movimento rápido e imprevisível do dado pode causar desconforto visual.",
+      "Sons súbitos ou agudos podem ser incómodos para pessoas sensíveis ao áudio.",
+      "Vibração (em dispositivos compatíveis) pode ser incómoda se excessiva."
+    ],
+    "mitigation": [
+      "Modo 'reduced motion' desativa movimento imprevisível e vibração.",
+      "Controlo de volume global e por tipo de som.",
+      "O dado pára periodicamente para criar pausas visuais e sonoras.",
+      "A pessoa pode 'congelar' o dado a qualquer momento (ex: clique longo)."
+    ]
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "O dado como entidade viva que escapa, dobra e voa, em vez de um objecto passivo.",
+      "A tradução cruzada entre movimento (visual/kinesthetic) e som (auditory) como núcleo da experiência.",
+      "O uso do silêncio e do desaparecimento como ferramentas dramáticas.",
+      "A devolução de rastos que persistem e influenciam sessões futuras.",
+      "A evocação territorial via memórias de comida, lendas e sons, sem depender de geolocalização real.",
+      "A combinação de absurdo, oralidade e infância como tema central."
+    ],
+    "comparison": "Nenhuma outra experiência no Atlas usa um objecto que se comporta como uma entidade física viva, com movimento, som e textura dinâmicos, e que evoca território através de memórias sensoriais. Outras experiências (ex: COSMICOXES, Fucô) focam-se em constelações, conversa ou escuta, não em objectos com agência própria."
+  },
+  "questions_for_eduardo": [
+    "O 'prémio secreto' mencionado na fonte autoral deve ser experiencial (ex: uma frase, som ou textura) ou pode incluir algo mais tangível (ex: um convite para uma festa territorial)?",
+    "As faces do dado devem ser sempre ligadas a elementos territoriais específicos (ex: pão de ló de Alfeite) ou podem ser genéricas (ex: 'pão', 'pedra')?",
+    "O dado deve ter um número fixo de faces (ex: 6) ou pode variar entre sessões (ex: 4 a 100)?",
+    "A devolução (ex: frase ou som) deve ser única por sessão ou pode repetir-se em sessões diferentes?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Integração com contribuições públicas validadas (ex: FALArte) para personalizar as faces do dado com elementos territoriais reais (ex: lendas, comidas, sons) de cada freguesia.",
+      "justification": "Aumentaria a ligação territorial e a sensação de que o dado é um 'objeto vivo' ligado ao Atlas."
+    },
+    {
+      "proposal": "Adicionar um modo 'coletivo' onde o dado de uma pessoa pode 'encontrar' o dado de outra pessoa em sessões simultâneas (ex: os dados colidem e trocam faces).",
+      "justification": "Exploraria a dimensão social do Atlas, mas requer moderação para evitar sobrecarga ou interações não desejadas."
+    },
+    {
+      "proposal": "Permitir que a pessoa 'guarde' uma face do dado como 'favorita' para sessões futuras.",
+      "justification": "Criaria um sentido de continuidade e personalização, mas deve ser opcional e não obrigatório."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

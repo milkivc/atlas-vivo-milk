@@ -1,0 +1,347 @@
+{
+  "id": "parlendas",
+  "canonical_name": "Parlendas Vivas",
+  "source_evidence": {
+    "primary": [
+      {
+        "source": "catalog_entry",
+        "authority": "high",
+        "details": "Mecânica: 'ritmar'. Convite: 'Bate o ritmo. Troca a última palavra.' Família: folclore. Camada: pública. Estado: operável_motor_comum."
+      },
+      {
+        "source": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
+        "authority": "high",
+        "details": "16 seres folclóricos; jogos tradicionais, trava-línguas e adivinhas como parte do folclore vivo."
+      }
+    ],
+    "secondary": [
+      {
+        "source": "Curadoria Cultural e Existencialismo Profundo.pdf",
+        "authority": "medium",
+        "details": "Língua viva, oralidade, interacção sensorial, sotaques, pluralidade."
+      }
+    ]
+  },
+  "authorial_invariants": [
+    "Ritmo como eixo central da experiência.",
+    "Troca da última palavra como gesto participativo.",
+    "Folclore como matéria viva, não estática.",
+    "Oralidade e repetição como mecanismos de transmissão.",
+    "Jogo de linguagem e som como base."
+  ],
+  "perceptual_intent": "Transformar parlendas de objetos de memória em campos vivos de ritmo, voz e corpo, onde a pessoa é convocada a co-criar a sua versão efémera, sentindo a parlenda como uma dança entre som, gesto e território.",
+  "threshold": {
+    "description": "A pessoa entra num espaço escuro, onde um pulso rítmico suave (como um coração ou um tambor distante) se faz ouvir. A tela está quase vazia, exceto por uma linha horizontal finíssima que pulsa ao ritmo do som. Não há texto, apenas um convite implícito: o som está à espera de resposta.",
+    "sensory_trigger": "Som subliminar (pulso rítmico) + linha visual pulsante."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": "limiar",
+      "description": "Pulso rítmico e linha visual pulsante introduzem uma presença viva, sem explicação."
+    },
+    {
+      "stage": "chamada",
+      "description": "O pulso acelera levemente e a linha ganha uma sombra que se move como uma onda. Uma voz sussurra (ou aparece em texto efémero): *'Bate o ritmo.'*"
+    },
+    {
+      "stage": "primeiro_gesto",
+      "description": "A pessoa é convidada a bater um ritmo (clique, toque, tecla de espaço ou voz). O sistema responde com um eco da parlenda base, mas apenas a última sílaba é audível, como se o resto fosse engolido pelo silêncio."
+    },
+    {
+      "stage": "resposta_viva",
+      "description": "O sistema completa a parlenda com a última palavra trocada pela pessoa (ex: se a parlenda for *'Batatinha quando nasce, esparrama pelo chão'*, e a pessoa disser *'mar'*, o sistema responde *'Batatinha quando nasce, esparrama pelo mar'*). A voz é humana, mas levemente distorcida, como se viesse de um outro tempo."
+    },
+    {
+      "stage": "desvio",
+      "description": "A parlenda repete-se, mas agora com a palavra trocada integrada. No entanto, na terceira repetição, o ritmo quebra: a última palavra é substituída por um som não linguístico (ex: um estalo, um suspiro, um riso)."
+    },
+    {
+      "stage": "aprofundamento_sensorial",
+      "description": "O som da parlenda começa a modular a cor e a forma da linha inicial: cada sílaba altera a sua espessura, cor ou curvatura. Simultaneamente, o pulso rítmico sincroniza com o movimento do cursor ou do dedo (se em toque)."
+    },
+    {
+      "stage": "escolha_acaso_silencio",
+      "description": "A pessoa pode: (1) bater um novo ritmo para reiniciar o ciclo com uma nova parlenda; (2) esperar em silêncio, o que faz a linha desaparecer e revelar uma imagem efémera (ex: uma mão a bater palmas, uma roda de crianças); ou (3) repetir a mesma palavra, o que faz a parlenda distorcer-se até se tornar um trava-língua absurdo."
+    },
+    {
+      "stage": "aparição",
+      "description": "Se a pessoa escolher o silêncio, aparece uma fotografia em tons sepia de um grupo de crianças a brincar (imagem real do acervo MILK, se disponível). Se escolher repetir, a parlenda transforma-se num loop sonoro que se sobrepõe a si próprio, criando uma textura rítmica. Se escolher um novo ritmo, uma nova parlenda emerge."
+    },
+    {
+      "stage": "devolução",
+      "description": "O sistema devolve à pessoa a sua versão da parlenda (ex: *'Batatinha quando nasce, esparrama pelo mar'*) como um objeto sonoro gravado (se microfone permitido) ou como texto gerado com a sua palavra. A devolução é acompanhada por um som de sino ou campainha, como se a parlenda fosse um presente."
+    },
+    {
+      "stage": "rasto_latencia",
+      "description": "A parlenda modificada pela pessoa fica disponível para ser ouvida por outros visitantes (anónima, sem dados pessoais) como parte de um 'coral de parlendas vivas'. A linha inicial volta ao estado original, mas agora com uma nova camada de cor, como se guardasse a memória da interação."
+    }
+  ],
+  "participant_verbs": [
+    "bater",
+    "trocar",
+    "escutar",
+    "esperar",
+    "repetir",
+    "silenciar",
+    "co-criar"
+  ],
+  "system_responses": [
+    {
+      "type": "sonoro",
+      "description": "Pulso rítmico inicial, eco da parlenda com a última palavra trocada, som não linguístico no desvio, loop sonoro sobreposto, sino/campainha na devolução."
+    },
+    {
+      "type": "visual",
+      "description": "Linha pulsante, sombra em movimento, modulação de cor/formas pela sílaba, imagem efémera (fotografia ou mão/roda), camadas de cor na linha final."
+    },
+    {
+      "type": "haptico",
+      "description": "Vibração sutil (se dispositivo compatível) no momento do 'estalo' ou do sino, sincronizada com o ritmo."
+    },
+    {
+      "type": "cinestésico",
+      "description": "Sincronização do movimento do cursor/dedo com o pulso rítmico (opcional, sem permissões)."
+    },
+    {
+      "type": "social",
+      "description": "Integração anónima da parlenda modificada no 'coral de parlendas vivas' para outros visitantes."
+    }
+  ],
+  "sensory_signature_id": "parlendas_ritmo_voz_corpo_032",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "linha pulsante",
+        "sombra em movimento",
+        "modulação de cor/formas",
+        "imagem efémera",
+        "camadas de cor"
+      ],
+      "intensity": "subtle_to_medium"
+    },
+    "auditory": {
+      "elements": [
+        "pulso rítmico",
+        "voz sussurrada",
+        "eco da parlenda",
+        "som não linguístico",
+        "loop sonoro",
+        "sino/campainha"
+      ],
+      "spatialization": "mono_to_stereo",
+      "intensity": "medium"
+    },
+    "haptic": {
+      "elements": [
+        "vibração sutil"
+      ],
+      "intensity": "low",
+      "optional": true
+    },
+    "kinesthetic": {
+      "elements": [
+        "movimento do cursor/dedo",
+        "ritmo corporal implícito"
+      ],
+      "intensity": "low_to_medium",
+      "optional": true
+    },
+    "proprioceptive": {
+      "elements": [
+        "atenção ao ritmo",
+        "pausa/esperar",
+        "respiração percebida"
+      ],
+      "intensity": "low"
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "pulso",
+        "aceleração/desaceleração",
+        "espera",
+        "loop",
+        "latência"
+      ],
+      "intensity": "medium"
+    },
+    "spatial": {
+      "elements": [
+        "profundidade sonora",
+        "posicionamento visual da linha"
+      ],
+      "intensity": "low"
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "memória de cheiros associados a brincadeiras infantis (ex: terra molhada, pão quente, erva cortada)"
+      ],
+      "trigger": "imagem efémera ou palavra trocada"
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "memória de sabores associados a festas ou brincadeiras (ex: doçura de bolos, acidez de frutas)"
+      ],
+      "trigger": "palavra trocada ou loop sonoro"
+    },
+    "social_presence": {
+      "elements": [
+        "coral de parlendas vivas (vozes anónimas de outros visitantes)"
+      ],
+      "intensity": "low"
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "Som (ritmo da parlenda) → Forma (modulação da linha visual).",
+    "secondary": "Gesto (bater ritmo) → Som (eco da parlenda com palavra trocada).",
+    "tertiary": "Silêncio (espera) → Imagem (aparição de fotografia ou mão/roda)."
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio é usado como: (1) ausência inicial de texto; (2) pausa entre repetições da parlenda; (3) momento de revelação da imagem efémera; (4) camada de latência na linha visual.",
+    "purpose": "Criar expectativa, convite à escuta ativa e espaço para a aparição do inesperado."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanisms": [
+      "A última palavra da parlenda é substituída por um som não linguístico (ex: estalo, suspiro).",
+      "A parlenda distorce-se em loop sonoro sobreposto se a palavra for repetida.",
+      "A imagem efémera que aparece no silêncio é aleatória (mas sempre do acervo folclórico MILK).",
+      "A cor da linha final é gerada a partir do ritmo e das palavras trocadas na sessão."
+    ],
+    "purpose": "Quebrar a previsibilidade da parlenda tradicional e convocar a co-criação."
+  },
+  "session_variation": [
+    {
+      "type": "acaso_controlado",
+      "description": "Seleção aleatória da parlenda inicial entre um conjunto de 5-10 parlendas folclóricas (ex: 'Batatinha quando nasce...', 'Um, dois, feijão com arroz...')."
+    },
+    {
+      "type": "ordem_mutável",
+      "description": "A ordem das sílabas na modulação visual da linha é aleatória a cada sessão."
+    },
+    {
+      "type": "resposta_a_ritmo",
+      "description": "O tempo entre o gesto da pessoa e a resposta do sistema varia levemente (entre 0.5s e 2s) para evitar previsibilidade."
+    },
+    {
+      "type": "resposta_a_posição",
+      "description": "A imagem efémera que aparece no silêncio depende da posição do cursor/dedo no momento da pausa (ex: lado esquerdo = mão a bater palmas; lado direito = roda de crianças)."
+    },
+    {
+      "type": "combinação_fragmentos",
+      "description": "As parlendas modificadas por outros visitantes (coral) são misturadas em tempo real, criando uma textura sonora única a cada sessão."
+    }
+  ],
+  "territorial_binding": {
+    "relation": "As parlendas são selecionadas a partir de um acervo folclórico associado a regiões específicas de Portugal (ex: parlendas do Alentejo, Minho, Lisboa). A imagem efémera que aparece pode ser uma fotografia de brincadeiras infantis em territórios reais (se disponível no acervo MILK).",
+    "sustainability": "A relação territorial é evocada, não fingida. Não são inventados factos etnográficos; apenas são usadas parlendas e imagens documentadas.",
+    "questions_for_eduardo": [
+      "Confirmar se o acervo MILK inclui fotografias de brincadeiras infantis por região, e se podem ser usadas como 'imagens efémeras' na experiência.",
+      "Validar se as parlendas devem ser agrupadas por território ou se a mistura é livre."
+    ]
+  },
+  "trace_and_return": {
+    "trace": {
+      "type": "sonoro",
+      "description": "A parlenda modificada pela pessoa é adicionada ao 'coral de parlendas vivas' (anónima).",
+      "persistence": "Temporária (24h) ou permanente (se autorizado)."
+    },
+    "return": {
+      "type": "objeto_sonoro_ou_texto",
+      "description": "A pessoa recebe a sua versão da parlenda como um objeto sonoro (se microfone permitido) ou como texto gerado. O objeto pode ser descarregado ou partilhado (opcional).",
+      "format": "Áudio (WAV/MP3) ou texto (TXT)."
+    },
+    "latency": {
+      "description": "A linha visual final ganha uma camada de cor única, gerada a partir da sessão, que persiste para o próximo visitante (como um 'rasto' visual)."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "alternative": "Todas as informações visuais (linha, imagem) são descritas em texto para leitores de ecrã. A modulação da linha é traduzida em sons ou vibrações.",
+      "reduced_motion": "A linha pulsante e a sombra em movimento podem ser desativadas, substituídas por um ponto estático que muda de cor."
+    },
+    "auditory": {
+      "alternative": "Todos os sons (pulso, voz, eco) são transcritos em texto ou representados visualmente (ex: onda sonora). O 'coral de parlendas' é disponibilizado como lista de textos.",
+      "captions": "Legendas em tempo real para a voz sussurrada e para a parlenda modificada."
+    },
+    "haptic": {
+      "alternative": "Vibrações são substituídas por pulsos visuais ou sonoros."
+    },
+    "kinesthetic": {
+      "alternative": "O ritmo pode ser batido com teclas (ex: barra de espaço) ou voz (ex: 'bate'). O movimento do cursor é opcional e pode ser substituído por controlo via teclado."
+    },
+    "temporal": {
+      "alternative": "Modo 'sem pressão': a pessoa pode pausar o pulso rítmico a qualquer momento e reiniciar quando quiser."
+    },
+    "color": {
+      "alternative": "A modulação de cor é substituída por modulação de forma ou textura (ex: linha pontilhada vs. linha cheia)."
+    }
+  },
+  "optional_permissions": {
+    "microphone": {
+      "purpose": "Gravar a voz da pessoa para gerar o objeto sonoro da parlenda modificada e integrar no 'coral de parlendas vivas'.",
+      "fallback": "A pessoa pode digitar a palavra trocada, e o sistema gera a parlenda modificada em texto ou com voz sintética."
+    },
+    "camera": {
+      "purpose": "Não aplicável.",
+      "fallback": "N/A"
+    },
+    "geolocation": {
+      "purpose": "Selecionar parlendas ou imagens associadas à região do visitante (opcional).",
+      "fallback": "Seleção aleatória de parlendas e imagens do acervo geral."
+    },
+    "motion": {
+      "purpose": "Sincronizar o movimento do cursor/dedo com o pulso rítmico.",
+      "fallback": "O pulso rítmico continua independentemente do movimento."
+    }
+  },
+  "overstimulation_risk": {
+    "potential_risks": [
+      "Loop sonoro contínuo pode causar desconforto em pessoas sensíveis a sons repetitivos.",
+      "Pulso rítmico visual pode ser excessivo para pessoas com epilepsia fotossensível.",
+      "Vibrações (se ativadas) podem ser incómodas para algumas pessoas."
+    ],
+    "mitigation": [
+      "Limitar o loop sonoro a 3 repetições máximas antes de uma pausa forçada de 2 segundos.",
+      "Oferecer modo 'reduced motion' que desativa a linha pulsante e substitui por um ponto estático.",
+      "Vibrações são opcionais e de baixa intensidade; podem ser desativadas nas definições.",
+      "Incluir botão de 'pausa' visível em todos os momentos para interromper a experiência."
+    ]
+  },
+  "distinctiveness": {
+    "unique_traits": [
+      "A parlenda é tratada como um organismo vivo que responde ao ritmo e à palavra da pessoa, não como um texto estático.",
+      "A tradução cruzada entre som (ritmo) e forma (linha visual) é específica desta experiência e não repetida em outras curadorias.",
+      "O 'coral de parlendas vivas' cria uma camada social anónima e efémera, única no Atlas.",
+      "A devolução é um objeto sonoro ou textual gerado a partir da interação, não um 'prémio' ou badge genérico.",
+      "O silêncio é usado como mecanismo ativo de revelação (imagem efémera) e não como ausência passiva."
+    ],
+    "non_generic": [
+      "Não é um quiz ou jogo de adivinhas.",
+      "Não é uma página explicativa sobre parlendas.",
+      "Não usa pontos, XP ou badges.",
+      "Não é uma animação decorativa sem propósito interativo.",
+      "Não finge cheiro ou gosto como output do browser."
+    ]
+  },
+  "questions_for_eduardo": [
+    "Confirmar se o acervo MILK inclui um conjunto de parlendas folclóricas específicas por região, e se podem ser usadas como base para a experiência.",
+    "Validar se a imagem efémera deve ser sempre uma fotografia real do acervo ou se pode incluir ilustrações abstratas (ex: mão a bater palmas).",
+    "Clarificar se o 'coral de parlendas vivas' deve ser permanente (com moderação) ou temporário (24h).",
+    "Confirmar se a voz do sistema deve ser humana (gravada) ou sintética, e se há preferência por um estilo específico (ex: voz infantil, voz idosa)."
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Incluir uma opção para a pessoa gravar a sua própria versão da parlenda (com a palavra trocada) e partilhá-la como um 'rasto' público (anónimo).",
+      "justification": "Aumenta a camada social e a devolução, alinhando com o princípio de co-criação do Atlas."
+    },
+    {
+      "proposal": "Adicionar uma camada territorial mais forte: se a geolocalização for permitida, a parlenda inicial e a imagem efémera são selecionadas com base na região do visitante.",
+      "justification": "Reforça a ligação ao território real, mas mantém a experiência funcional sem permissões."
+    },
+    {
+      "proposal": "Explorar a integração de sons ambientais reais (ex: som de uma praça, mercado) como pano de fundo para as parlendas, evocando o território.",
+      "justification": "Enriquece a evocação sensorial do folclore, mas requer validação autoral sobre o uso de sons territoriais."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

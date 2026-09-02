@@ -1,0 +1,380 @@
+{
+  "id": "festas-827",
+  "canonical_name": "827 Festas",
+  "source_evidence": {
+    "primary": [
+      "RELATORIO_COMPLETO_ESTADO_CAMADA_PUBLICA_ATLAS_VIVO_MILK_2026-07-25 (827 festas públicas reais + 1 registo técnico interno)",
+      "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf (16 seres folclóricos; 5 núcleos/dispositivos; jogos tradicionais, trava-línguas e adivinhas)",
+      "A Deriva do Sentido: Cartografia Psicogeográfica e Sensorial de Lisboa (sentipensar, configuração relacional, psicogeografia activa, textura/hapticidade)"
+    ],
+    "secondary": [
+      "Cópia de Fica registado neste dossiê… (estética, rastos, humor, oralidade e intergeracionalidade)",
+      "PUBLICO_TERRITORIAL__CURADORIA_NOS_FALARTE_RESIDUAL.pdf (10 mecânicas territoriais, regras de recolha/consentimento)"
+    ],
+    "authorial_anchors": [
+      "Festa como porta territorial composta: lugar + tempo + memória + fonte + gesto + objecto + provocação + devolução comunitária",
+      "Dinâmicas territoriais transformam consulta em experiência sensível; participação exige consentimento e moderação",
+      "Rasto desejado: memória, lembrança, história, receita, piada, rua, bairro, venda, café, pãozinho, lugar desaparecido, brincadeira, palavra, som, gesto, folclore, fábula"
+    ]
+  },
+  "authorial_invariants": [
+    "A festa é uma convocação territorial viva, não um evento estático ou agenda",
+    "A dinâmica deve misturar lenda, comida, absurdo, oralidade, infância e adulto",
+    "A participação deve ser opcional, consentida e moderada",
+    "O convite deve ser territorial e responder a um gesto da pessoa",
+    "A devolução deve ser comunitária e deixar rasto (memória, objecto, palavra, som, gesto)",
+    "A experiência deve preservar a intergeracionalidade e a oralidade"
+  ],
+  "perceptual_intent": "Transformar a consulta de uma festa num ritual digital vivo onde o território, a memória e o gesto da pessoa se fundem num convite sensorial. A pessoa deve sentir que a festa a chamou, não que a procurou num catálogo.",
+  "threshold": {
+    "description": "A tela escurece lentamente, como se uma porta se fechasse. Um som de sinos distantes (ou equivalente visual para quem não tem áudio) surge em volume mínimo, crescendo até se tornar um murmúrio de vozes sobrepostas. A pessoa percebe que algo a observou antes de ela observar a tela.",
+    "trigger": "Carregamento inicial da curadoria ou navegação a partir da constelação COSMICOXES"
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": "LIMIAR",
+      "action": "A tela transita de um estado neutro para um ambiente de expectativa: o fundo ganha textura de tecido desgastado (como um pano de festa antigo), e um ponto de luz pulsante (como uma vela) aparece no centro. Um som de passos em saibro ou pedras é ouvido em loop suave, com eco variável."
+    },
+    {
+      "stage": "CHAMADA",
+      "action": "Uma voz (ou texto que aparece e desaparece como se fosse sussurrado) diz: *‘Há uma festa que te espera. Não é qualquer uma. É a que o teu corpo já conhece.’* O ponto de luz divide-se em três, formando um triângulo instável que gira lentamente."
+    },
+    {
+      "stage": "PRIMEIRO GESTO",
+      "action": "A pessoa é convidada a tocar num dos pontos de luz (ou pressionar uma tecla/ativar um switch). Cada ponto representa um elemento territorial: *terra* (baixo), *céu* (alto), *mar* (meio). O gesto define o tipo de convite que será gerado."
+    },
+    {
+      "stage": "RESPOSTA VIVA",
+      "action": "O sistema responde com um som único para cada escolha (ex: terra = tambor surdo; céu = sino; mar = concha a ressoar). O triângulo de luz colapsa num único ponto que se expande em uma mancha de cor associada ao elemento (terra: ocre; céu: azul-pálido; mar: verde-água). A mancha revela lentamente uma silhueta de um objecto ou gesto folclórico (ex: boneco de trapos, máscara, dança)."
+    },
+    {
+      "stage": "DESVIO",
+      "action": "A silhueta começa a tremer e, de repente, inverte-se (como um negativo). O som correspondente distorce-se levemente (ex: tambor vira um ruído de ventania; sino vira um riso; concha vira um murmúrio de ondas). Uma voz (ou texto) pergunta: *‘E se fosse ao contrário?’*"
+    },
+    {
+      "stage": "APROFUNDAMENTO SENSORIAL",
+      "action": "A mancha de cor agora responde ao movimento do cursor/dedo da pessoa: aproximar-se faz o som ficar mais agudo e a silhueta mais nítida; afastar-se faz o som ficar mais grave e a silhueta mais difusa. A voz/silhueta começa a narrar um fragmento de uma lenda ou trava-língua associada à festa, mas as palavras são entrecortadas por sons ambientais (ex: risos, passos, cantos)."
+    },
+    {
+      "stage": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "A pessoa pode: (1) *manter o cursor/dedo imóvel* para ouvira lenda completa; (2) *mover-se rapidamente* para interromper a narrativa e fazer a silhueta explodir em partículas que se reorganizam num novo símbolo; ou (3) *sair do ecrã* (ou pressionar ESC) para mergulhar num silêncio de 3 segundos, onde apenas um som residual (ex: um suspiro) permanece."
+    },
+    {
+      "stage": "APARIÇÃO",
+      "action": "Consoante a escolha: (1) A lenda é revelada em texto e som, com uma palavra-chave sublinhada que, ao ser tocada, abre uma janela com uma receita ou objecto associado à festa; (2) As partículas formam um mapa minimalista da freguesia onde a festa ocorre, com um ponto pulsante no local exacto; (3) O silêncio é quebrado por um som único (ex: um apito, um sino, um grito) que revela o nome da festa e a data em que ocorreu pela última vez."
+    },
+    {
+      "stage": "DEVOLUÇÃO",
+      "action": "O sistema devolve um *convite físico digital*: um bilhete virtual com o nome da festa, a data, o local e um gesto ou objecto que a pessoa deve ",
+      "trazê-lo": "para a próxima vez que visitar o território (ex: *‘Leva um lenço vermelho amarrado no pulso’*). O bilhete tem textura de papel envelhecido e pode ser guardado, partilhado ou descartado."
+    },
+    {
+      "stage": "RASTO / LATÊNCIA",
+      "action": "O bilhete, se guardado, permanece na constelação COSMICOXES como uma estrela territorial. Se descartado, deixa um rasto de partículas que se dissipam lentamente. Em sessões futuras, a pessoa pode encontrar o bilhete ou o rasto em outras curadorias, como um eco da sua participação."
+    }
+  ],
+  "participant_verbs": [
+    "tocar",
+    "escutar",
+    "mover-se",
+    "esperar",
+    "interromper",
+    "escolher",
+    "guardar"
+  ],
+  "system_responses": [
+    {
+      "trigger": "Toque num ponto de luz (terra/céu/mar)",
+      "response": "Som único + mancha de cor + silhueta folclórica associada ao elemento"
+    },
+    {
+      "trigger": "Cursor/dedo imóvel durante 5 segundos",
+      "response": "Narração completa da lenda + palavra-chave interativa"
+    },
+    {
+      "trigger": "Movimento rápido do cursor/dedo",
+      "response": "Silhueta explode em partículas que se reorganizam num símbolo ou mapa"
+    },
+    {
+      "trigger": "Sair do ecrã ou pressionar ESC",
+      "response": "Silêncio de 3 segundos + som residual (suspiro) + revelação do nome/data da festa"
+    },
+    {
+      "trigger": "Toque na palavra-chave sublinhada",
+      "response": "Abre janela com receita/objecto associado à festa"
+    },
+    {
+      "trigger": "Guardar o bilhete",
+      "response": "Bilhete permanece na constelação COSMICOXES como estrela territorial"
+    },
+    {
+      "trigger": "Descartar o bilhete",
+      "response": "Rasto de partículas que se dissipam lentamente"
+    }
+  ],
+  "sensory_signature_id": "festas-827-silhueta-som-memoria",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "textura de tecido desgastado",
+        "ponto de luz pulsante",
+        "triângulo instável de luz",
+        "mancha de cor (ocre/azul-pálido/verde-água)",
+        "silhueta folclórica (boneco, máscara, dança)",
+        "negativo da silhueta",
+        "partículas que se reorganizam",
+        "mapa minimalista da freguesia",
+        "bilhete virtual com textura de papel envelhecido"
+      ],
+      "dynamics": [
+        "transparência variável",
+        "escala e profundidade",
+        "inversão de cores",
+        "movimento orgânico (como tecido ao vento)"
+      ]
+    },
+    "auditory": {
+      "elements": [
+        "sinos distantes",
+        "murmúrio de vozes sobrepostas",
+        "passos em saibro ou pedras",
+        "som único por elemento (tambor, sino, concha)",
+        "narração de lenda entrecortada",
+        "sons ambientais (risos, passos, cantos)",
+        "distorsão de som (ventania, riso, murmúrio)",
+        "silêncio de 3 segundos",
+        "som residual (suspiro, apito, sino, grito)",
+        "palavra-chave pronunciada com eco"
+      ],
+      "dynamics": [
+        "volume e pitch variáveis com movimento do cursor",
+        "espacialização estéreo",
+        "loop com variação aleatória"
+      ]
+    },
+    "haptic": {
+      "elements": [
+        "vibração sutil em dispositivos compatíveis (opcional) ao tocar a silhueta ou o bilhete"
+      ],
+      "dynamics": [
+        "intensidade proporcional à proximidade do cursor"
+      ]
+    },
+    "kinesthetic": {
+      "elements": [
+        "movimento do cursor/dedo",
+        "velocidade e trajectória",
+        "pressão (se suportado)"
+      ],
+      "dynamics": [
+        "resposta visual e sonora à velocidade e direcção"
+      ]
+    },
+    "proprioceptive": {
+      "elements": [
+        "instrução implícita para manter o corpo imóvel ou mover-se",
+        "sensação de equilíbrio/desorientação com a inversão da silhueta"
+      ],
+      "dynamics": [
+        "contraste entre movimento e imobilidade"
+      ]
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "espera de 5 segundos para narração completa",
+        "silêncio de 3 segundos",
+        "ritmo da narração entrecortada"
+      ],
+      "dynamics": [
+        "aceleração/desaceleração do tempo percebido"
+      ]
+    },
+    "spatial": {
+      "elements": [
+        "profundidade da mancha de cor",
+        "posicionamento do triângulo de luz",
+        "mapa minimalista da freguesia"
+      ],
+      "dynamics": [
+        "perspectiva e escala variáveis"
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "cheiro de pão recém-assado (evocado pela receita)",
+        "cheiro de ervas aromáticas (evocado pela lenda)",
+        "cheiro de maresia (evocado pelo elemento mar)"
+      ],
+      "dynamics": [
+        "descrição textual ou sonora que evoca memórias olfativas"
+      ]
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "sabor de um prato típico (evocado pela receita)",
+        "sabor de um doce tradicional (evocado pelo gesto folclórico)"
+      ],
+      "dynamics": [
+        "descrição textual ou sonora que evoca memórias gustativas"
+      ]
+    },
+    "social_presence": {
+      "elements": [
+        "vozes sobrepostas (murmúrio)",
+        "risos e cantos ambientais",
+        "presença implícita de outras pessoas que já participaram (rasto na constelação)"
+      ],
+      "dynamics": [
+        "sensação de comunidade sem interação directa"
+      ]
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "O movimento do cursor/dedo (cinestésico) altera o pitch do som (auditivo) e a nitidez da silhueta (visual).",
+    "secondary": "A cor da mancha (visual) está associada a um som único (auditivo) e a um elemento territorial (táctil/proprioceptivo).",
+    "tertiary": "O silêncio (auditivo) revela o nome e a data da festa (visual/textual)."
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio de 3 segundos é um elemento ativo: quebra a expectativa de som contínuo e prepara a revelação do nome/data da festa. A ausência de som é tão importante quanto a sua presença.",
+    "effect": "Cria uma pausa dramática que convida à reflexão e à antecipação."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": [
+      "A inversão da silhueta (negativo) e a distorção do som correspondente criam um desvio inesperado.",
+      "A reorganização das partículas em um novo símbolo ou mapa é aleatória mas controlada (baseada em sementes territoriais).",
+      "A palavra-chave sublinhada na lenda é escolhida aleatoriamente entre 3 opções possíveis para a mesma festa.",
+      "O som residual no silêncio (suspiro, apito, sino) é aleatório mas coerente com o elemento inicial (terra/céu/mar)."
+    ],
+    "effect": "Mantém a experiência fresca em cada sessão, sem depender de perfil ou vigilância."
+  },
+  "session_variation": [
+    {
+      "type": "acaso controlado",
+      "description": "A silhueta folclórica inicial é escolhida aleatoriamente entre 3 opções associadas ao elemento (terra/céu/mar)."
+    },
+    {
+      "type": "ordem mutável",
+      "description": "A sequência dos fragmentos da lenda é embaralhada em cada sessão, mas mantém coerência narrativa."
+    },
+    {
+      "type": "resposta a ritmo/velocidade do gesto",
+      "description": "A distorção do som e a nitidez da silhueta variam consoante a velocidade do movimento do cursor/dedo."
+    },
+    {
+      "type": "resposta a posição/trajectória",
+      "description": "A mancha de cor e o som associado mudam de intensidade consoante a distância do cursor/dedo ao centro do ecrã."
+    },
+    {
+      "type": "temporalidade real",
+      "description": "Se a festa estiver associada a uma data específica (ex: São João em 23 de Junho), o bilhete devolve uma mensagem diferente consoante a época do ano (ex: *‘Esta festa já passou, mas o seu cheiro ainda está no ar’*)."
+    },
+    {
+      "type": "memória já deixada",
+      "description": "Se a pessoa já guardou um bilhete numa sessão anterior, a silhueta inicial pode ser influenciada por esse rasto (ex: a cor da mancha mistura-se com a cor do bilhete anterior)."
+    }
+  ],
+  "territorial_binding": {
+    "real_relation": true,
+    "mechanism": [
+      "Cada ponto de luz (terra/céu/mar) está associado a uma região geográfica real de Lisboa (ex: terra = Alfama; céu = Graça; mar = Alcântara).",
+      "O mapa minimalista revelado na fase de *APARIÇÃO* é baseado em dados geográficos reais da freguesia onde a festa ocorre.",
+      "O nome e a data da festa são extraídos do corpus autoral (827 festas públicas reais).",
+      "O gesto ou objecto do convite está ligado a práticas folclóricas documentadas no território."
+    ],
+    "evidence": "Corpus autoral: 827 festas públicas reais + 198 dinâmicas territoriais documentais."
+  },
+  "trace_and_return": {
+    "mechanism": [
+      "O bilhete virtual guardado permanece na constelação COSMICOXES como uma estrela territorial, visível em outras curadorias.",
+      "O rasto de partículas (se o bilhete for descartado) dissipa-se lentamente, mas pode ser reencontrado em sessões futuras como um eco.",
+      "A palavra-chave interativa (na lenda) pode ser usada para pesquisar outras festas ou objectos associados no Atlas."
+    ],
+    "return_to_participant": "O convite físico digital (bilhete) é uma devolução tangível que a pessoa pode levar consigo (guardar, partilhar ou descartar)."
+  },
+  "accessibility_equivalents": {
+    "visual_impairment": {
+      "description": "Todas as silhuetas e manchas de cor têm descrições sonoras detalhadas (ex: *‘Uma máscara de papel com chifres e bigode torcido’*). O mapa minimalista é descrito em áudio ou texto alternativo.",
+      "preserves_poetry": "As descrições usam linguagem poética e sensorial (ex: *‘O azul do céu é como o som de um sino que nunca para de tocar’*)."
+    },
+    "auditory_impairment": {
+      "description": "Todos os sons são acompanhados por legendas visuais (ex: *‘[Sino a tocar ao longe]’*) e por vibrações sutis (opcionais). A narração da lenda é transcrita em texto que aparece em sincronia.",
+      "preserves_poetry": "As legendas e o texto usam tipografia e ritmo que evocam o som (ex: palavras em itálico para sons suaves, negrito para sons fortes)."
+    },
+    "motor_impairment": {
+      "description": "O movimento do cursor/dedo pode ser substituído por: (1) teclas de seta para mover um ponto de foco; (2) voz (comandos como *‘mais perto’*, *‘mais longe’*); (3) switch ou botão único para alternar entre estados.",
+      "preserves_poetry": "Os comandos de voz ou teclado mantêm a mesma dinâmica de resposta do sistema (ex: *‘mais perto’* aumenta o pitch do som e a nitidez da silhueta)."
+    },
+    "cognitive_load": {
+      "description": "Modo *reduced-motion*: desativa animações complexas (ex: partículas, inversão da silhueta) e mantém apenas transições suaves. O texto da lenda pode ser lido em fragmentos menores com pausas automáticas.",
+      "preserves_poetry": "As transições suaves e os fragmentos de texto mantêm o ritmo e a intenção poética da experiência."
+    },
+    "reduced_motion": {
+      "description": "Todas as animações são substituídas por estados estáticos com transições mínimas (ex: a silhueta aparece/desaparece em *fade* em vez de explodir em partículas)."
+    }
+  },
+  "optional_permissions": {
+    "none": {
+      "description": "A experiência funciona completamente sem qualquer permissão (microfone, câmara, geolocalização, movimento)."
+    },
+    "microphone": {
+      "optional": true,
+      "benefit": "Permite à pessoa usar a voz para interagir com a silhueta (ex: *‘diz o nome da festa’* para revelar a data).",
+      "fallback": "Comandos de teclado ou toque."
+    },
+    "geolocation": {
+      "optional": true,
+      "benefit": "Se a pessoa permitir, o mapa minimalista pode centrar-se na sua localização actual e sugerir festas próximas.",
+      "fallback": "Mapa genérico da freguesia associada à festa."
+    }
+  },
+  "overstimulation_risk": {
+    "potential_risks": [
+      "Flashing ou animações rápidas (partículas, inversão da silhueta) podem causar desconforto em pessoas com epilepsia fotossensível.",
+      "Sons súbitos ou distorcidos podem ser desconfortáveis para pessoas com sensibilidade auditiva.",
+      "Múltiplos estímulos sensoriais simultâneos (som, movimento, cor) podem ser esmagadores para pessoas com sobrecarga sensorial."
+    ],
+    "mitigation": [
+      "Modo *reduced-motion* desativa todas as animações rápidas.",
+      "Controlo de volume global e opção para desativar sons distorcidos.",
+      "Opção para pausar a experiência a qualquer momento (tecla ESPAÇO ou botão *PAUSAR*).",
+      "Avisos prévios: *‘Esta experiência usa sons e animações. Podes ajustar as definições a qualquer momento.’*",
+      "Duração máxima de cada fase controlada (ex: narração da lenda não excede 30 segundos)."
+    ]
+  },
+  "distinctiveness": [
+    "A experiência não é um catálogo ou agenda: é um ritual de convocação territorial onde a festa *chama* a pessoa, não o contrário.",
+    "A tradução cruzada entre movimento (cursor), som (pitch) e visual (nitidez) é única e não repetida em outras curadorias.",
+    "O uso do silêncio como elemento ativo (3 segundos de pausa) é central e não decorativo.",
+    "A devolução é um *convite físico digital* (bilhete) que a pessoa pode levar consigo, não um troféu ou badge.",
+    "A associação entre elementos territoriais (terra/céu/mar) e festas reais (do corpus autoral) garante autenticidade e profundidade.",
+    "A intergeracionalidade e a oralidade são preservadas através de lendas, trava-línguas e sons ambientais (risos, cantos).",
+    "O rasto (bilhete ou partículas) persiste na constelação COSMICOXES, criando uma narrativa contínua entre curadorias."
+  ],
+  "questions_for_eduardo": [
+    "Qual é a relação exacta entre os 3 elementos territoriais (terra/céu/mar) e as 827 festas? Devem ser mapeados para regiões específicas de Lisboa ou são categorias abstratas?",
+    "Há festas no corpus que tenham associação explícita a objectos, receitas ou gestos folclóricos? Se sim, podem ser usados como base para as silhuetas e os convites?",
+    "O bilhete virtual deve ter um formato específico (ex: tamanho, cor, textura) ou pode variar consoante a festa?",
+    "A narração da lenda deve ser em voz humana (gravada) ou pode ser gerada por síntese de voz com entoação poética?",
+    "Há restrições autorais quanto ao uso de sons ambientais (ex: risos, cantos) ou podem ser criados/seleccionados livremente?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Integração com o *Livro Cubo*: o bilhete virtual poderia ser uma das faces do Cubo (ex: *a porta*), permitindo à pessoa explorar a festa a partir de uma dinâmica do Cubo (ex: *Inventário do Meu Mundo*).",
+      "justification": "Aprofundaria a conexão entre curadorias e enriqueceria a devolução com camadas adicionais de significado."
+    },
+    {
+      "proposal": "Uso de *FUCO* como mediador: em vez de a silhueta narrar a lenda, FUCO poderia aparecer como uma voz ou figura que guia a pessoa, adicionando humor e afeto à experiência.",
+      "justification": "Alinharia com a função de FUCO como mediador vivo e afetuoso, e traria coerência com outras curadorias onde FUCO está presente."
+    },
+    {
+      "proposal": "Inclusão de *topónimos*: o nome da festa ou da freguesia poderia ser pronunciado em diferentes sotaques (ex: lisboeta, alentejano) para evocar a diversidade territorial.",
+      "justification": "Reforçaria a dimensão folclórica e a relação com o território, alinhando com o princípio de *língua viva* do Museu da Língua Portuguesa."
+    },
+    {
+      "proposal": "Adição de um *modo comunitário*: se a pessoa permitir, o seu rasto (bilhete ou partículas) poderia ser visível para outros participantes, criando uma teia de memórias partilhadas.",
+      "justification": "Aprofundaria o princípio de *devolução comunitária* e *encontro intergeracional*, mas requereria moderação e consentimento explícito."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

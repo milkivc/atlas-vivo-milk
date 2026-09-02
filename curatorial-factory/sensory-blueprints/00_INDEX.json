@@ -1,0 +1,303 @@
+{
+  "state": "AUTHOR_REVIEW_REQUIRED",
+  "approved_for_code": false,
+  "count": 49,
+  "unique_sensory_signatures": 49,
+  "council_status": "PASS",
+  "entries": [
+    {
+      "ordem": 1,
+      "id": "livro-cubo",
+      "nome": "Livro Cubo",
+      "file": "01_livro-cubo.json"
+    },
+    {
+      "ordem": 2,
+      "id": "festival-dado-sem-lado",
+      "nome": "Festival Dado Sem Lado",
+      "file": "02_festival-dado-sem-lado.json"
+    },
+    {
+      "ordem": 3,
+      "id": "arquitetura-sete-dinamicas",
+      "nome": "Arquitectura Digital das 7 Dinâmicas",
+      "file": "03_arquitetura-sete-dinamicas.json"
+    },
+    {
+      "ordem": 4,
+      "id": "galeria-diletante",
+      "nome": "Galeria Diletante",
+      "file": "04_galeria-diletante.json"
+    },
+    {
+      "ordem": 5,
+      "id": "cronicas-fuco",
+      "nome": "Crónicas Cãotadas por Fucô",
+      "file": "05_cronicas-fuco.json"
+    },
+    {
+      "ordem": 6,
+      "id": "reizinho-sainha",
+      "nome": "Reizinho Sainha",
+      "file": "06_reizinho-sainha.json"
+    },
+    {
+      "ordem": 7,
+      "id": "nuno-escuta",
+      "nome": "Nuno / Escuta",
+      "file": "07_nuno-escuta.json"
+    },
+    {
+      "ordem": 8,
+      "id": "cosmicoxes",
+      "nome": "COSMICOXES",
+      "file": "08_cosmicoxes.json"
+    },
+    {
+      "ordem": 9,
+      "id": "dado-rosa",
+      "nome": "Dado Rosa",
+      "file": "09_dado-rosa.json"
+    },
+    {
+      "ordem": 10,
+      "id": "dado-100lado",
+      "nome": "DADO 100LADO",
+      "file": "10_dado-100lado.json"
+    },
+    {
+      "ordem": 11,
+      "id": "nos",
+      "nome": "NÓS",
+      "file": "11_nos.json"
+    },
+    {
+      "ordem": 12,
+      "id": "falarte",
+      "nome": "falARTE",
+      "file": "12_falarte.json"
+    },
+    {
+      "ordem": 13,
+      "id": "simplicidade",
+      "nome": "simpliCIDADE",
+      "file": "13_simplicidade.json"
+    },
+    {
+      "ordem": 14,
+      "id": "arteria",
+      "nome": "ARTÉRIA",
+      "file": "14_arteria.json"
+    },
+    {
+      "ordem": 15,
+      "id": "cinco-portas",
+      "nome": "Cinco Portas",
+      "file": "15_cinco-portas.json"
+    },
+    {
+      "ordem": 16,
+      "id": "palavra-ritual",
+      "nome": "Palavra Ritual",
+      "file": "16_palavra-ritual.json"
+    },
+    {
+      "ordem": 17,
+      "id": "curadoria-inesperado",
+      "nome": "Curadoria do Inesperado",
+      "file": "17_curadoria-inesperado.json"
+    },
+    {
+      "ordem": 18,
+      "id": "casa-nao-existia",
+      "nome": "A Casa que Não Existia",
+      "file": "18_casa-nao-existia.json"
+    },
+    {
+      "ordem": 19,
+      "id": "campo-ourique-olho-orelha",
+      "nome": "Campo de Ourique: Olho / Orelha",
+      "file": "19_campo-ourique-olho-orelha.json"
+    },
+    {
+      "ordem": 20,
+      "id": "bilhete-assimetrico",
+      "nome": "Bilhete Assimétrico",
+      "file": "20_bilhete-assimetrico.json"
+    },
+    {
+      "ordem": 21,
+      "id": "caderno-rasgado",
+      "nome": "Caderno Rasgado",
+      "file": "21_caderno-rasgado.json"
+    },
+    {
+      "ordem": 22,
+      "id": "selo-atlas-vaquinhas",
+      "nome": "Selo Atlas / Vaquinhas",
+      "file": "22_selo-atlas-vaquinhas.json"
+    },
+    {
+      "ordem": 23,
+      "id": "inventario-meu-mundo",
+      "nome": "Inventário do Meu Mundo",
+      "file": "23_inventario-meu-mundo.json"
+    },
+    {
+      "ordem": 24,
+      "id": "catastrofe-produtiva",
+      "nome": "Catástrofe Produtiva",
+      "file": "24_catastrofe-produtiva.json"
+    },
+    {
+      "ordem": 25,
+      "id": "ponto-kusama",
+      "nome": "O Ponto de Kusama",
+      "file": "25_ponto-kusama.json"
+    },
+    {
+      "ordem": 26,
+      "id": "corpo-percebe",
+      "nome": "O Corpo que Percebe",
+      "file": "26_corpo-percebe.json"
+    },
+    {
+      "ordem": 27,
+      "id": "escutar-silencio",
+      "nome": "Escutar o Silêncio",
+      "file": "27_escutar-silencio.json"
+    },
+    {
+      "ordem": 28,
+      "id": "rizoma-interior",
+      "nome": "O Rizoma Interior",
+      "file": "28_rizoma-interior.json"
+    },
+    {
+      "ordem": 29,
+      "id": "cubo-interior",
+      "nome": "O Cubo Interior",
+      "file": "29_cubo-interior.json"
+    },
+    {
+      "ordem": 30,
+      "id": "festas-827",
+      "nome": "827 Festas",
+      "file": "30_festas-827.json"
+    },
+    {
+      "ordem": 31,
+      "id": "lendas-138",
+      "nome": "138 Lendas",
+      "file": "31_lendas-138.json"
+    },
+    {
+      "ordem": 32,
+      "id": "parlendas",
+      "nome": "Parlendas",
+      "file": "32_parlendas.json"
+    },
+    {
+      "ordem": 33,
+      "id": "trava-linguas",
+      "nome": "Trava-línguas",
+      "file": "33_trava-linguas.json"
+    },
+    {
+      "ordem": 34,
+      "id": "lengalengas",
+      "nome": "Lengalengas",
+      "file": "34_lengalengas.json"
+    },
+    {
+      "ordem": 35,
+      "id": "adivinhas",
+      "nome": "Adivinhas",
+      "file": "35_adivinhas.json"
+    },
+    {
+      "ordem": 36,
+      "id": "proverbios",
+      "nome": "Provérbios",
+      "file": "36_proverbios.json"
+    },
+    {
+      "ordem": 37,
+      "id": "pregoes",
+      "nome": "Pregões",
+      "file": "37_pregoes.json"
+    },
+    {
+      "ordem": 38,
+      "id": "cantares",
+      "nome": "Cantares",
+      "file": "38_cantares.json"
+    },
+    {
+      "ordem": 39,
+      "id": "dancas",
+      "nome": "Danças",
+      "file": "39_dancas.json"
+    },
+    {
+      "ordem": 40,
+      "id": "oficios",
+      "nome": "Ofícios",
+      "file": "40_oficios.json"
+    },
+    {
+      "ordem": 41,
+      "id": "alcunhas",
+      "nome": "Alcunhas",
+      "file": "41_alcunhas.json"
+    },
+    {
+      "ordem": 42,
+      "id": "contos-orais",
+      "nome": "Contos Orais",
+      "file": "42_contos-orais.json"
+    },
+    {
+      "ordem": 43,
+      "id": "romarias",
+      "nome": "Romarias",
+      "file": "43_romarias.json"
+    },
+    {
+      "ordem": 44,
+      "id": "brincadeiras-roda",
+      "nome": "Brincadeiras de Roda",
+      "file": "44_brincadeiras-roda.json"
+    },
+    {
+      "ordem": 45,
+      "id": "palavra-da-freguesia",
+      "nome": "Palavra da Freguesia",
+      "file": "45_palavra-da-freguesia.json"
+    },
+    {
+      "ordem": 46,
+      "id": "giria-do-avesso",
+      "nome": "Gíria do Avesso",
+      "file": "46_giria-do-avesso.json"
+    },
+    {
+      "ordem": 47,
+      "id": "eco-toponimico",
+      "nome": "Eco Toponímico",
+      "file": "47_eco-toponimico.json"
+    },
+    {
+      "ordem": 48,
+      "id": "palavra-intrusa",
+      "nome": "Palavra Intrusa",
+      "file": "48_palavra-intrusa.json"
+    },
+    {
+      "ordem": 49,
+      "id": "dicionario-mutante",
+      "nome": "Dicionário Mutante",
+      "file": "49_dicionario-mutante.json"
+    }
+  ]
+}

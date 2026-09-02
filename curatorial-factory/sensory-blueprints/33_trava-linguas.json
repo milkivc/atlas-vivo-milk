@@ -1,0 +1,368 @@
+{
+  "id": "trava-linguas",
+  "canonical_name": "Trava-línguas",
+  "source_evidence": {
+    "primary": [
+      {
+        "source": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
+        "quote": "jogos tradicionais, trava-línguas e adivinhas",
+        "authority": "high"
+      },
+      {
+        "source": "catalog_entry",
+        "quote": "Diz depressa. Guarda o tropeção.",
+        "authority": "canonical"
+      }
+    ],
+    "secondary": [
+      {
+        "source": "Curadoria Cultural e Existencialismo Profundo.pdf",
+        "quote": "língua viva, oralidade",
+        "authority": "interpretative"
+      }
+    ]
+  },
+  "authorial_invariants": [
+    "O convite é 'Diz depressa. Guarda o tropeção.'",
+    "Pertence à família do folclore",
+    "Mecânica base: 'tropeçar' (erro, hesitação, ritmo quebrado)",
+    "Deve preservar a oralidade e a brincadeira com a língua",
+    "Não é um quiz ou teste de performance"
+  ],
+  "perceptual_intent": "Transformar o erro linguístico num evento sensorial vivo, onde o tropeço na fala se converte em textura, ritmo e espaço, convocando a atenção para a materialidade da língua e do corpo que a produz.",
+  "threshold": {
+    "description": "A pessoa entra num espaço vazio, escuro ou de cor uniforme (ex: preto profundo ou branco leitoso). Um murmúrio distorcido e quase inaudível de vozes a repetir trava-línguas soa em loop, mas sem clareza. A tela vibra levemente (haptic opcional) como se o ar estivesse a tremer. O cursor, se presente, parece pesado ou instável.",
+    "sensory_trigger": "O som subliminar e a instabilidade visual criam uma expectativa de que algo está prestes a emergir."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": "limiar",
+      "description": "Espaço vazio com murmúrio distorcido e instabilidade visual/táctil. Nada é claro, mas algo parece iminente."
+    },
+    {
+      "stage": "chamada",
+      "description": "Aparece uma frase central, em tipografia orgânica e irregular: 'Diz depressa.' A voz do murmúrio ganha nitidez por um instante, como se uma pessoa real tivesse falado, e depois volta a distorcer-se."
+    },
+    {
+      "stage": "primeiro_gesto",
+      "description": "A pessoa é convidada a clicar/toque ou pressionar uma tecla (ou dizer uma palavra, se microfone permitido). O gesto inicial é mínimo: um toque ou som curto."
+    },
+    {
+      "stage": "resposta_viva",
+      "description": "O sistema responde com um trava-língua escrito em letras que se movem como se estivessem a ser ditas em ritmo acelerado. As letras tropeçam umas nas outras, caem, levantam-se, como se a palavra fosse um objeto físico. Simultaneamente, um som de voz robótica (ou humana, se gravado) repete o trava-língua em loop, mas com pausas e erros deliberados."
+    },
+    {
+      "stage": "desvio",
+      "description": "Se a pessoa tentar repetir o trava-língua (via microfone ou teclado), o sistema 'tropeça' de propósito: as letras desmoronam-se, o som distorce-se ou inverte-se, e a tela treme. Se a pessoa não interagir, o trava-língua começa a desintegrar-se sozinho, como se o silêncio fosse um gesto."
+    },
+    {
+      "stage": "aprofundamento_sensorial",
+      "description": "O som do trava-língua passa a modular a luz: cada sílaba acende ou apaga uma parte da tela, criando um ritmo visual. O movimento das letras passa a gerar um som de fricção (como papel a rasgar ou areia a cair). A pessoa percebe que o seu gesto (ou ausência dele) afeta a 'física' do trava-língua."
+    },
+    {
+      "stage": "escolha_acaso_silencio",
+      "description": "A pessoa pode: (1) tentar 'consertar' o trava-língua arrastando as letras de volta ao lugar; (2) deixar que ele se desfaça completamente; ou (3) esperar em silêncio. Cada opção leva a um percurso diferente."
+    },
+    {
+      "stage": "aparição",
+      "description": "Se o trava-língua for 'consertado', surge uma nova frase: 'Guarda o tropeção.' Se for desfeito, aparece um vazio com um som de riso ou suspiro. Se a pessoa esperar, o trava-língua transforma-se numa constelação de pontos sonoros (cada letra vira um som único)."
+    },
+    {
+      "stage": "devolução",
+      "description": "O sistema devolve à pessoa: (a) um registo sonoro do seu tropeço (se microfone usado), transformado em música ou ritmo; (b) uma imagem das letras desfeitas, como um 'retrato' do seu gesto; ou (c) um novo trava-língua gerado a partir do que foi dito/escrito, com uma assinatura territorial (ex: 'Trava-língua de Alfama')."
+    },
+    {
+      "stage": "rasto_latencia",
+      "description": "O trava-língua original (ou a sua desintegração) permanece como um 'rasto' no cosmos da WebApp: pode reaparecer noutra sessão como um eco, ou ser encontrado por outra pessoa como um 'objecto' no território digital. A experiência não 'acaba' — apenas se transforma."
+    }
+  ],
+  "participant_verbs": [
+    "tropeçar",
+    "repetir",
+    "consertar",
+    "desfazer",
+    "escutar",
+    "esperar",
+    "arrastar"
+  ],
+  "system_responses": [
+    {
+      "trigger": "primeiro_gesto (toque/tecla/voz)",
+      "response": "Trava-língua aparece em letras móveis e som robótico com erros deliberados."
+    },
+    {
+      "trigger": "tentativa de repetir o trava-língua",
+      "response": "Letras desmoronam-se, som distorce-se, tela treme."
+    },
+    {
+      "trigger": "silêncio prolongado",
+      "response": "Trava-língua desintegra-se sozinho, gerando sons de fricção."
+    },
+    {
+      "trigger": "arrastar letras para 'consertar'",
+      "response": "Letras voltam ao lugar, mas o som ganha camadas (ex: eco, reverberação)."
+    },
+    {
+      "trigger": "deixar desintegrar",
+      "response": "Vazio com som de riso ou suspiro, seguido de constelação sonora."
+    },
+    {
+      "trigger": "espera sem interação",
+      "response": "Trava-língua transforma-se em ritmo visual e sonoro."
+    }
+  ],
+  "sensory_signature_id": "trava-linguas_oralidade_tropeco_ritmo",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "tipografia orgânica e irregular",
+        "letras que caem/levantam como objetos físicos",
+        "luz modulada pelo som (sílaba = clarão/escuridão)",
+        "tela que treme ou vibra visualmente",
+        "constelação de pontos sonoros (letras como estrelas)"
+      ],
+      "intensity": "high",
+      "accessibility_note": "Contraste elevado, movimento reduzido opcional, alternativa estática para letras em movimento."
+    },
+    "auditory": {
+      "elements": [
+        "murmúrio distorcido de vozes",
+        "voz robótica ou humana com erros deliberados",
+        "som de fricção (papel, areia)",
+        "eco e reverberação controlados",
+        "ritmo sonoro gerado por sílabas",
+        "riso ou suspiro como punctum"
+      ],
+      "intensity": "high",
+      "accessibility_note": "Legendas sincronizadas, transcrição textual opcional, controle de volume."
+    },
+    "haptic": {
+      "elements": [
+        "vibração sutil (opcional, em dispositivos compatíveis)",
+        "feedback táctil ao arrastar letras"
+      ],
+      "intensity": "low",
+      "accessibility_note": "Equivalente visual para vibração (ex: pulso de cor)."
+    },
+    "kinesthetic": {
+      "elements": [
+        "arrastar letras com o dedo/rato",
+        "pressionar teclas ou tocar ecrã",
+        "movimento do cursor como extensão do gesto"
+      ],
+      "intensity": "medium",
+      "accessibility_note": "Controlo via teclado (setas, Enter, Espaço) ou voz (comandos simples)."
+    },
+    "proprioceptive": {
+      "elements": [
+        "percepção do ritmo corporal (respiração, hesitação)",
+        "consciência do gesto (ex: mão a tremer ao tentar 'consertar')"
+      ],
+      "intensity": "low",
+      "accessibility_note": "Instruções claras para postura ou ritmo, sem exigência física."
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "espera como gesto ativo",
+        "aceleração/desaceleração do trava-língua",
+        "silêncio como parte da dinâmica"
+      ],
+      "intensity": "high",
+      "accessibility_note": "Modo sem pressão temporal, pausas opcionais."
+    },
+    "spatial": {
+      "elements": [
+        "letras como objetos em 2D com profundidade sugerida",
+        "constelação sonora como mapa espacial",
+        "posição do cursor afeta a 'gravidade' das letras"
+      ],
+      "intensity": "medium",
+      "accessibility_note": "Navegação linear opcional para quem não usa rato."
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "evocação de cheiros associados a memórias de trava-línguas (ex: 'cheiro a papel de jornal velho', 'cheiro a tinta de impressora')"
+      ],
+      "intensity": "low",
+      "accessibility_note": "Descrição textual opcional."
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "evocação de sabores associados a expressões populares (ex: 'sabor a doçura de um 'pão com chouriço' ao dizer 'três pratos de trigo para três tigres tristes')"
+      ],
+      "intensity": "low",
+      "accessibility_note": "Descrição textual opcional."
+    },
+    "social_presence": {
+      "elements": [
+        "sensação de que outras pessoas já 'tropeçaram' aqui (rasto no cosmos)",
+        "voz robótica como 'outro' que interage"
+      ],
+      "intensity": "medium",
+      "accessibility_note": "Indicação clara de que a voz é gerada pelo sistema."
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "Som (trava-língua falado) → Movimento visual (letras que caem/levantam) → Som de fricção (tactilidade evocada).",
+    "secondary": "Silêncio da pessoa → Desintegração visual do trava-língua → Ritmo sonoro (sílaba = clarão).",
+    "tertiary": "Gesto de arrastar letras → Modulação do som (eco, reverberação)."
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio da pessoa é um gesto ativo: o trava-língua desintegra-se sozinho, revelando que a ausência de interação também é uma forma de participação. O vazio resultante é preenchido por um som de riso ou suspiro, ou por uma constelação sonora.",
+    "purpose": "Mostrar que o 'erro' ou a não-ação são tão válidos quanto a interação ativa. O silêncio não é ausência de resposta, mas uma camada da experiência."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": [
+      "O trava-língua 'tropeça' de propósito quando a pessoa tenta repeti-lo, criando um momento de quebra de expectativa.",
+      "A desintegração do trava-língua pode gerar uma constelação sonora única, baseada no ritmo da interação da pessoa.",
+      "A devolução pode ser um novo trava-língua gerado a partir do que foi dito/escrito, com uma assinatura territorial aleatória (ex: 'Trava-língua de Belém').",
+      "O rastro do trava-língua pode reaparecer noutra sessão como um eco ou objecto para outra pessoa."
+    ],
+    "purpose": "Subverter a ideia de que o trava-língua é um exercício de perfeição. O erro e o acaso são centrais."
+  },
+  "session_variation": [
+    {
+      "type": "acaso_controlado",
+      "description": "O trava-língua inicial é selecionado aleatoriamente de um conjunto pré-definido (ex: 'Três pratos de trigo para três tigres tristes', 'O tempo perguntou ao tempo...')."
+    },
+    {
+      "type": "ordem_mutável",
+      "description": "A sequência de desintegração/recomposição das letras varia entre sessões (ex: letras caem da esquerda para a direita, ou em espiral)."
+    },
+    {
+      "type": "resposta_a_ritmo",
+      "description": "A velocidade com que a pessoa repete o trava-língua (via teclado ou voz) afeta a intensidade da distorção sonora e visual."
+    },
+    {
+      "type": "resposta_a_posição",
+      "description": "A posição do cursor ou o local do toque afeta a 'gravidade' das letras (ex: cursor no canto esquerdo faz as letras caírem para a direita)."
+    },
+    {
+      "type": "combinação_fragmentos",
+      "description": "Se a pessoa interagir com mais de um trava-língua na mesma sessão, os sons e letras podem misturar-se, criando uma nova 'obra'."
+    },
+    {
+      "type": "temporalidade_real",
+      "description": "Em datas específicas (ex: dia de São João), o trava-língua pode ter uma assinatura territorial temática (ex: 'Trava-língua de Santo António')."
+    }
+  ],
+  "territorial_binding": {
+    "mechanism": "A devolução pode incluir uma assinatura territorial (ex: 'Trava-língua de Alfama'), evocando um lugar real de Lisboa ou de Portugal. O rastro do trava-língua pode ser associado a um topónimo ou memória local, que aparece como uma 'etiqueta' no cosmos da WebApp.",
+    "sustainability": "A associação territorial é baseada em dados reais do corpus (ex: festas, topónimos, memórias), sem inventar factos. Se não houver dados suficientes, a assinatura é genérica (ex: 'Trava-língua do Atlas').",
+    "questions_for_eduardo": [
+      "Há um corpus de trava-línguas associados a territórios específicos em Lisboa/Portugal? Se sim, qual a fonte exata?"
+    ]
+  },
+  "trace_and_return": {
+    "mechanism": [
+      {
+        "type": "rasto_no_cosmos",
+        "description": "O trava-língua desfeito ou 'consertado' pela pessoa permanece como um rastro no cosmos da WebApp. Pode reaparecer como: (a) um eco sonoro em outra sessão; (b) um objecto visual (ex: letras flutuantes) no território digital; (c) um novo trava-língua gerado a partir do original."
+      },
+      {
+        "type": "devolução_pessoal",
+        "description": "A pessoa recebe: (a) um registo sonoro do seu tropeço (transformado em música ou ritmo); (b) uma imagem das letras desfeitas (como um 'retrato' do seu gesto); ou (c) um novo trava-língua com assinatura territorial."
+      },
+      {
+        "type": "latência",
+        "description": "O rastro pode demorar horas ou dias a reaparecer, criando uma sensação de que a experiência continua a 'viver' no sistema."
+      }
+    ],
+    "accessibility": "O rastro é sempre acessível via descrição textual ou som alternativo."
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "reduced_motion": "Versão estática das letras, com descrição textual do movimento (ex: 'As letras do trava-língua caem como folhas ao vento').",
+      "high_contrast": "Modo de alto contraste para as letras e fundo.",
+      "color_blind": "Paleta de cores testada para daltonismo."
+    },
+    "auditory": {
+      "captions": "Legendas sincronizadas para todos os sons, com descrição do ritmo e da distorção.",
+      "transcript": "Transcrição textual completa do trava-língua e das interações sonoras.",
+      "volume_control": "Controle de volume e opção para desativar sons."
+    },
+    "haptic": {
+      "visual_feedback": "Equivalente visual para vibração (ex: pulso de cor ou forma)."
+    },
+    "kinesthetic": {
+      "keyboard": "Controlo via teclado: setas para mover letras, Enter para 'consertar', Espaço para 'desfazer'.",
+      "voice": "Comandos de voz simples (ex: 'Repete', 'Conserta', 'Desfaz').",
+      "switch": "Compatibilidade com dispositivos de switch (ex: um botão para cada ação)."
+    },
+    "proprioceptive": {
+      "static_mode": "Modo estático onde o ritmo é sugerido por instruções textuais (ex: 'Respira e diz devagar')."
+    },
+    "temporal": {
+      "no_time_pressure": "Modo sem pressão temporal, onde a pessoa pode interagir no seu próprio ritmo."
+    }
+  },
+  "optional_permissions": {
+    "microphone": {
+      "purpose": "Permitir que a pessoa repita o trava-língua via voz, para uma interação mais imersiva.",
+      "fallback": "A experiência funciona completamente com teclado ou toque. A voz é opcional e apenas usada para detetar o ritmo da fala, não para gravar áudio permanente.",
+      "consent": "Perguntar permissão no momento, com explicação clara do benefício (ex: 'Usa o microfone para dizer o trava-língua e ver como o sistema responde ao teu ritmo')."
+    },
+    "camera": {
+      "required": false,
+      "note": "Não é necessária para esta experiência."
+    },
+    "geolocation": {
+      "required": false,
+      "note": "Não é necessária para esta experiência, mas pode ser usada opcionalmente para associar o rastro a um território real (com consentimento)."
+    },
+    "motion": {
+      "required": false,
+      "note": "Não é necessária para esta experiência."
+    }
+  },
+  "overstimulation_risk": {
+    "potential_risks": [
+      "Flashing ou movimento rápido das letras pode causar desconforto em pessoas com epilepsia fotossensível.",
+      "Sons repentinos ou distorcidos podem ser incómodos para pessoas com sensibilidade auditiva.",
+      "Vibração contínua (haptic) pode ser desconfortável em dispositivos móveis."
+    ],
+    "mitigation": [
+      "Modo 'reduced motion' que desativa animações rápidas ou flashing.",
+      "Controle de volume e opção para desativar sons distorcidos.",
+      "Vibração opcional e limitada a feedbacks curtos.",
+      "Aviso prévio de que a experiência inclui sons e movimentos intensos, com opção para ajustar ou sair.",
+      "Duração máxima controlada para cada fase (ex: o trava-língua não repete mais do que 3 vezes seguidas sem pausa)."
+    ]
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "O trava-língua é tratado como um objeto físico que pode 'tropeçar', desintegrar-se ou ser 'consertado', em vez de um exercício de memorização.",
+      "A tradução cruzada entre som, movimento visual e tactilidade evocada (fricção) é específica desta experiência.",
+      "O silêncio e a não-ação são gestos ativos que alteram o percurso.",
+      "A devolução inclui um rastro que persiste no cosmos da WebApp, criando uma sensação de continuidade entre sessões.",
+      "A assinatura territorial (quando aplicável) liga o trava-língua a um lugar real, sem inventar factos.",
+      "A acessibilidade preserva a poesia: o modo estático ou sem som não é uma versão 'menor', mas uma forma alternativa de viver a mesma intenção."
+    ],
+    "comparison": "Nenhuma outra experiência no Atlas usa o 'tropeço' como mecânica central, nem trata a língua como um objeto físico que pode ser desfeito e recomposto. Outras experiências podem usar som ou texto, mas não esta combinação de oralidade, erro, ritmo e rastro."
+  },
+  "questions_for_eduardo": [
+    "Há um corpus autoral de trava-línguas específicos associados a territórios (ex: Lisboa, Portugal) que possam ser usados para a assinatura territorial? Se sim, qual a fonte exata e como deve ser citada?",
+    "A frase 'Guarda o tropeção' é uma invariante autoral ou pode ser adaptada para outras formas de devolução?",
+    "Deve haver um limite máximo de tentativas para 'consertar' o trava-língua, ou a pessoa pode interagir livremente até decidir sair?",
+    "A constelação sonora gerada pela desintegração do trava-língua deve ser única por sessão ou pode ser reutilizada em outras sessões?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Incluir uma camada de 'memória coletiva' onde os trava-línguas mais 'tropeçados' pela comunidade aparecem como 'objetos' no cosmos, com uma assinatura do número de interações (sem identificar pessoas).",
+      "justification": "Reforça a ideia de que o erro é parte de uma experiência partilhada, sem vigilância ou pontuação individual.",
+      "source": "Inspirado no princípio de 'encontro entre rastos de pessoas diferentes' (Constituição, secção 10)."
+    },
+    {
+      "proposal": "Adicionar uma fase opcional onde a pessoa pode 'inventar' um trava-língua, que depois é submetido a moderação humana antes de entrar no cosmos como rastro.",
+      "justification": "Alineia com o princípio de co-autoria e participação ativa (Freire/Boal, Curadoria Cultural e Existencialismo Profundo.pdf).",
+      "risk": "Requer moderação humana para evitar conteúdo inadequado, o que pode atrasar a devolução."
+    },
+    {
+      "proposal": "Usar dados de topónimos reais do corpus (ex: curadoria entrada freguesias.xlsx) para gerar assinaturas territoriais mais precisas (ex: 'Trava-língua da Graça').",
+      "justification": "Aumenta a autenticidade territorial sem inventar factos.",
+      "dependency": "Acesso ao ficheiro curadoria entrada freguesias.xlsx e validação dos dados."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

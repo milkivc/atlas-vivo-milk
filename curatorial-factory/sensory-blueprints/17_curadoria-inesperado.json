@@ -1,0 +1,375 @@
+{
+  "id": "curadoria-inesperado",
+  "canonical_name": "Curadoria do Inesperado",
+  "source_evidence": {
+    "primary": [
+      "catalog_entry.mecanica: 'desviar'",
+      "catalog_entry.convite: 'Escolhe o que não estavas a procurar.'"
+    ],
+    "secondary": [
+      "constitution.11: Exemplos de direção (COSMICOXES, Galeria Diletante, Fucô, Dado Sem Lado, Reizinho)",
+      "source_corpus: Âncoras Autorais (Galeria Diletante, FUCO, Dado Sem Lado, Reizinho)",
+      "source_corpus: Livro Cubo (princípios de erro, riso, silêncio, pergunta)"
+    ]
+  },
+  "authorial_invariants": [
+    "Mecânica central: 'desviar'",
+    "Convite: 'Escolhe o que não estavas a procurar.'",
+    "Família: curadoria",
+    "Camada: pública",
+    "Estado: operável_motor_comum",
+    "Não é um menu, card, quiz ou dashboard",
+    "Deve convocar a presença ativa da pessoa, não a passividade"
+  ],
+  "perceptual_intent": "Criar uma experiência onde a pessoa é confrontada com a sua própria expectativa e, ao desviar-se dela, descobre camadas ocultas de sentido. A curadoria age como um espelho distorcido: o que não era procurado revela-se como o mais relevante, e o gesto de 'escolher' torna-se um ato de desobediência criativa. A sensação final é de ter sido guiado por uma lógica invisível, mas não arbitrária — como um sonho em que o acaso tem uma gramática própria.",
+  "threshold": {
+    "description": "A pessoa entra num espaço digital onde um único objeto (uma porta semi-aberta, uma sombra alongada, um som que parece vir de trás do ecrã) parece estar 'fora do lugar'. Não há instruções. O ambiente é estático, mas algo nele vibra com uma frequência impercetível. A luz é suave, mas uma mancha de cor (ex: um vermelho profundo ou um azul elétrico) parece pulsar no canto do ecrã, como se fosse um erro ou um convite.",
+    "sensory_trigger": "A mancha de cor pulsa em ritmo irregular, sincronizada com um som subliminar (ex: um zumbido ou um suspiro). Se a pessoa não interagir, a mancha desvanece-se lentamente, substituída por um silêncio mais denso e uma sombra que cresce no centro do ecrã."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": "LIMIAR",
+      "action": "A mancha de cor e o som subliminar criam uma quebra na expectativa de uma interface 'normal'. A pessoa percebe que algo está 'errado' ou 'vivo' no ambiente."
+    },
+    {
+      "stage": "CHAMADA",
+      "action": "A sombra no centro do ecrã ganha forma: é uma silhueta de um objeto ou pessoa, mas distorcida, como se fosse vista através de água. Um texto aparece, flutuando: *'O que não estavas a procurar está aqui. Mas não é o que pensas.'* O texto desaparece antes de poder ser lido por completo."
+    },
+    {
+      "stage": "PRIMEIRO GESTO",
+      "action": "A pessoa é convidadas a tocar/arrastar a mancha de cor ou a sombra. Se o fizer, a mancha explode em partículas que se reorganizam em formas geométricas abstratas (ex: triângulos, círculos quebrados). Cada forma tem um som associado (ex: um triângulo emite um 'ting', um círculo um 'hum')."
+    },
+    {
+      "stage": "RESPOSTA VIVA",
+      "action": "As formas geométricas começam a mover-se em direções opostas à do cursor/dedo, como se estivessem a fugir. O som associado a cada forma muda de tom conforme a distância do cursor. Se a pessoa parar, as formas param também, como se estivessem à espera."
+    },
+    {
+      "stage": "DESVIO",
+      "action": "De repente, uma das formas (escolhida aleatoriamente ou com base no ritmo da interação) inverte a sua trajetória e move-se *em direção* ao cursor. Se a pessoa não reagir, a forma toca o cursor e 'absorve' uma parte da interface (ex: o fundo escurece, ou um som de 'aspiração' é ouvido)."
+    },
+    {
+      "stage": "APROFUNDAMENTO SENSORIAL",
+      "action": "As formas restantes começam a emitir sons que se sobrepõem, criando uma paisagem sonora complexa. Simultaneamente, o fundo do ecrã ganha textura (ex: parece papel rasgado ou tecido). A pessoa percebe que os sons estão a *responder* ao movimento do cursor, mas de uma forma não linear: um movimento rápido pode criar um som agudo, enquanto um movimento lento pode gerar um som grave e prolongado."
+    },
+    {
+      "stage": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "As formas param de se mover. Um novo texto aparece: *'Escolhe uma. Mas não a que queres.'* A pessoa pode clicar em qualquer forma. Se não o fizer, após 10 segundos, uma forma é selecionada aleatoriamente. O som associado a essa forma é amplificado, e as outras desaparecem."
+    },
+    {
+      "stage": "APARIÇÃO",
+      "action": "A forma escolhida expande-se até preencher o ecrã, revelando uma imagem ou texto oculto. A imagem pode ser: (a) uma fotografia distorcida de um lugar real (ex: uma rua de Lisboa), (b) uma palavra ou frase em uma língua desconhecida, ou (c) um símbolo abstrato. O som associado à forma transforma-se em uma voz que sussurra a palavra ou descreve a imagem (ex: *'Aqui o tempo é circular.'*)."
+    },
+    {
+      "stage": "DEVOLUÇÃO",
+      "action": "A voz pede à pessoa para *devolver* algo: (a) um gesto (ex: desenhar um círculo no ar com o cursor), (b) um som (ex: assobiar ou bater palmas, se o microfone estiver ativo), ou (c) uma palavra (ex: digitar uma resposta). A devolução é opcional, mas se a pessoa o fizer, a forma original (a mancha de cor) reaparece, agora com a cor ou som alterado pela sua contribuição."
+    },
+    {
+      "stage": "RASTO / LATÊNCIA",
+      "action": "A experiência termina com a forma a desvanecer-se lentamente, deixando um rasto: (a) uma mancha de cor no canto do ecrã (que persiste em outras experiências), (b) um som que ecoa por mais 3 segundos, ou (c) um texto que aparece brevemente: *'Isto não era o que procuravas. Mas agora é teu.'* A pessoa pode regressar à Curadoria do Inesperado em qualquer altura, e o rasto (mancha, som ou texto) pode estar presente, alterado ou ausente."
+    }
+  ],
+  "participant_verbs": [
+    "tocar",
+    "arrastar",
+    "perseguir",
+    "escolher",
+    "devolver",
+    "esperar",
+    "ouvir"
+  ],
+  "system_responses": [
+    {
+      "trigger": "Toque/arrasto inicial",
+      "response": "Explosão de partículas em formas geométricas com sons associados."
+    },
+    {
+      "trigger": "Movimento do cursor",
+      "response": "Formas movem-se em direções opostas, sons mudam de tom conforme a distância."
+    },
+    {
+      "trigger": "Paragem do cursor",
+      "response": "Formas param, como se estivessem à espera."
+    },
+    {
+      "trigger": "Escolha de uma forma",
+      "response": "Forma expande-se, revela imagem/texto/voz, e pede uma devolução."
+    },
+    {
+      "trigger": "Devolução (gesto, som ou palavra)",
+      "response": "Forma original reaparece com alterações baseadas na contribuição."
+    },
+    {
+      "trigger": "Silêncio ou inação prolongada",
+      "response": "Sombra cresce, mancha de cor desvanece, som subliminar intensifica-se."
+    }
+  ],
+  "sensory_signature_id": "inesperado-silencio-desvio-eco",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "mancha de cor pulsante",
+        "sombra distorcida",
+        "formas geométricas abstratas",
+        "textura de fundo (papel/tecido)",
+        "imagem/texto oculto",
+        "rasto (mancha persistente)"
+      ],
+      "behaviors": [
+        "pulsação rítmica",
+        "explosão em partículas",
+        "movimento não linear",
+        "expansão/shrinking",
+        "desvanecimento"
+      ]
+    },
+    "auditory": {
+      "elements": [
+        "som subliminar (zumbido/suspiro)",
+        "sons associados a formas (ting, hum, etc.)",
+        "paisagem sonora sobreposta",
+        "voz sussurrada",
+        "eco final"
+      ],
+      "behaviors": [
+        "mudança de tom com distância",
+        "sobreposição de sons",
+        "amplificação seletiva",
+        "silêncio denso"
+      ]
+    },
+    "haptic": {
+      "elements": [
+        "vibração opcional (se dispositivo suportar)"
+      ],
+      "behaviors": [
+        "feedback táctil leve em momentos de 'absorção' ou 'escolha'"
+      ]
+    },
+    "kinesthetic": {
+      "elements": [
+        "movimento do cursor/dedo",
+        "velocidade e trajetória"
+      ],
+      "behaviors": [
+        "resposta dinâmica ao movimento",
+        "inversão de trajetória",
+        "paragem sincronizada"
+      ]
+    },
+    "proprioceptive": {
+      "elements": [
+        "atenção ao ritmo da interação",
+        "postura perante o ecrã"
+      ],
+      "behaviors": [
+        "convite a gestos lentos/rápidos",
+        "perceção de 'espera' do sistema"
+      ]
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "ritmo irregular da pulsação",
+        "duração variável das fases",
+        "silêncio prolongado"
+      ],
+      "behaviors": [
+        "aceleração/desaceleração percebida",
+        "suspensão do tempo"
+      ]
+    },
+    "spatial": {
+      "elements": [
+        "profundidade sugerida pela sombra",
+        "posicionamento das formas no ecrã"
+      ],
+      "behaviors": [
+        "movimento em 2D com ilusão de 3D",
+        "distância percebida entre formas"
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "memória de cheiros associados a lugares (ex: 'rua molhada', 'pão quente')"
+      ],
+      "behaviors": [
+        "evocação através de imagem/texto/voz (ex: *'Cheira a chuva que não caiu.'*)"
+      ]
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "memória de sabores associados a palavras (ex: 'doce', 'azedo')"
+      ],
+      "behaviors": [
+        "evocação através de metáforas (ex: *'Esta palavra sabe a limão.'*)"
+      ]
+    },
+    "social_presence": {
+      "elements": [
+        "voz sussurrada (simulada ou gravada)",
+        "rasto deixado por outras interações (mancha persistente)"
+      ],
+      "behaviors": [
+        "sensação de diálogo com uma presença invisível",
+        "devolução como ato de partilha"
+      ]
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "Movimento (kinesthetic) → Som (auditory): A trajetória e velocidade do cursor alteram o tom e volume dos sons associados às formas geométricas.",
+    "secondary": "Cor (visual) → Textura (haptic/visual): A mancha de cor inicial, quando tocada, revela formas com texturas que evocam sensações tácteis (ex: rugosidade, suavidade).",
+    "tertiary": "Silêncio (auditory) → Sombra (visual): O silêncio prolongado faz crescer uma sombra no centro do ecrã, como se a ausência de som fosse uma presença física."
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio é usado como: (1) *limiar* (som subliminar que desaparece se não houver interação), (2) *resposta* (as formas param e esperam quando o cursor para), e (3) *devolução* (o eco final após a experiência).",
+    "purpose": "Criar uma sensação de que o sistema está 'à espera' ou 'a observar', e que o silêncio é uma parte ativa da dinâmica, não uma ausência de conteúdo."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": [
+      "A forma que inverte a trajetória e se move em direção ao cursor é escolhida aleatoriamente ou com base em padrões não óbvios (ex: a forma que foi menos tocada).",
+      "A imagem/texto revelado após a escolha é gerado a partir de um conjunto pré-definido, mas a seleção é não determinista (ex: baseada no tempo gasto na interação ou na posição do cursor).",
+      "A voz que sussurra pode variar em tom e conteúdo entre sessões (ex: uma de várias frases pré-gravadas ou geradas a partir de um corpus de textos autorais)."
+    ],
+    "purpose": "Quebrar a expectativa de linearidade e controle, reforçando a ideia de que a curadoria 'sabe' algo que a pessoa não sabe."
+  },
+  "session_variation": [
+    {
+      "type": "acaso controlado",
+      "description": "A forma que inverte a trajetória é selecionada aleatoriamente entre as formas presentes."
+    },
+    {
+      "type": "ordem mutável",
+      "description": "A sequência de aparição das formas geométricas e sons associados varia entre sessões."
+    },
+    {
+      "type": "resposta a ritmo/velocidade",
+      "description": "A intensidade e tom dos sons respondem à velocidade e trajetória do cursor de forma não linear (ex: movimento rápido = som agudo e curto; movimento lento = som grave e longo)."
+    },
+    {
+      "type": "resposta a posição/trajetória",
+      "description": "A direção em que as formas fogem do cursor depende da posição inicial do cursor no ecrã (ex: se o cursor estiver no canto superior esquerdo, as formas fogem para o canto inferior direito)."
+    },
+    {
+      "type": "combinação de fragmentos curatoriais",
+      "description": "A imagem/texto revelado é uma combinação aleatória de fragmentos de um corpus autoral (ex: frases de crónicas, topónimos, ou descrições de lugares)."
+    },
+    {
+      "type": "temporalidade real",
+      "description": "A cor da mancha inicial e o tom do som subliminar variam conforme a hora do dia (ex: tons quentes de manhã, frios à noite)."
+    }
+  ],
+  "territorial_binding": {
+    "relation": "A experiência evoca território através de: (1) *imagens distorcidas de lugares reais* (ex: ruas, praças, ou objetos simbólicos de Lisboa), (2) *palavras ou frases em línguas/ dialetos locais* (ex: topónimos, gírias), e (3) *sons ambientais* (ex: zumbido de trânsito, vozes distantes).",
+    "sustainability": "As imagens e sons são baseados em corpus autoral (ex: fotografias de Nuno A, gravações de FUCO, ou descrições de lugares do Atlas). Não são gerados aleatoriamente sem fonte.",
+    "questions_for_eduardo": [
+      "Quais são os lugares reais (ex: ruas, bairros) que podem ser usados como base para as imagens distorcidas?",
+      "Existem gravações de sons ambientais ou vozes (ex: de FUCO ou outras fontes autorais) que possam ser usadas para a voz sussurrada ou paisagem sonora?"
+    ]
+  },
+  "trace_and_return": {
+    "trace": {
+      "types": [
+        "Mancha de cor persistente no canto do ecrã (visível em outras experiências da WebApp).",
+        "Som que ecoa por 3 segundos após o término da experiência.",
+        "Texto breve que aparece no final (ex: *'Isto não era o que procuravas. Mas agora é teu.'*) e persiste como notificação ou elemento flutuante."
+      ],
+      "persistence": "O rasto pode ser: (a) *temporário* (desaparece após fechar a WebApp), (b) *persistente* (visível em outras sessões), ou (c) *latente* (aparece apenas em interações futuras com a Curadoria do Inesperado)."
+    },
+    "return": {
+      "mechanism": "A devolução é opcional e pode ser: (a) *gesto* (ex: desenhar um círculo com o cursor), (b) *som* (ex: assobiar, se microfone estiver ativo), ou (c) *palavra* (ex: digitar uma resposta). A contribuição da pessoa altera a forma original (ex: a mancha de cor ganha uma nova camada de cor ou som).",
+      "purpose": "Reinforçar a ideia de que a pessoa não é apenas um espectador, mas um co-criador da experiência, e que a sua presença deixa um marco."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "alternative": "Todas as formas geométricas e manchas de cor têm descrições textuais (ex: *'Mancha vermelha pulsante no canto superior esquerdo.'*). O texto flutuante é lido em voz alta por um leitor de ecrã.",
+      "reduced_motion": "Versão estável onde as formas não se movem, mas mudam de cor ou textura conforme a interação (ex: toque = forma ganha contorno brilhante)."
+    },
+    "auditory": {
+      "alternative": "Os sons são acompanhados por legendas visuais (ex: *'Som agudo, como um sino.'*). A voz sussurrada é transcrita em texto.",
+      "no_audio": "Versão onde os sons são substituídos por vibrações (se dispositivo suportar) ou por mudanças visuais (ex: formas tremem ou brilham)."
+    },
+    "haptic": {
+      "alternative": "Vibrações são substituídas por feedback visual (ex: formas piscam ou mudam de cor)."
+    },
+    "kinesthetic": {
+      "alternative": "Movimento do cursor é substituído por teclas (ex: setas para mover uma forma central) ou por voz (ex: comandos como 'esquerda', 'direita')."
+    },
+    "proprioceptive": {
+      "alternative": "Instruções de ritmo são dadas em texto (ex: *'Move devagar.'* ou *'Espera 5 segundos.'*)."
+    },
+    "temporal_interoceptive": {
+      "alternative": "A duração das fases é ajustável (ex: modo 'sem pressão' onde o tempo não é um fator)."
+    },
+    "cognitive": {
+      "alternative": "Texto simplificado e opção para desativar elementos visuais complexos (ex: formas geométricas são substituídas por ícones simples)."
+    }
+  },
+  "optional_permissions": {
+    "microphone": {
+      "purpose": "Permitir que a pessoa devolva um som (ex: assobiar, bater palmas) como parte da interação.",
+      "fallback": "A devolução por som é opcional; a pessoa pode sempre escolher devolver um gesto ou uma palavra."
+    },
+    "motion": {
+      "purpose": "Nenhum. A experiência funciona sem deteção de movimento ou orientação do dispositivo.",
+      "fallback": "A experiência é desenhada para funcionar sem permissões de movimento."
+    },
+    "geolocation": {
+      "purpose": "Nenhum. A experiência não depende de localização geográfica.",
+      "fallback": "A experiência é desenhada para funcionar sem permissões de localização."
+    }
+  },
+  "overstimulation_risk": {
+    "risks": [
+      "Flashing ou piscar rápido das formas geométricas (pode causar desconforto ou crises em pessoas com epilepsia fotosensível).",
+      "Sons súbitos ou altos (pode causar susto ou desconforto auditivo).",
+      "Movimento rápido e não linear das formas (pode causar tonturas ou náuseas).",
+      "Sobreposição de sons complexos (pode causar fadiga auditiva)."
+    ],
+    "mitigations": [
+      "Limitar a frequência de piscar das formas a menos de 3 vezes por segundo.",
+      "Manter o volume dos sons abaixo de 80% do máximo e evitar sons agudos repentinos.",
+      "Oferecer uma opção para reduzir o movimento (ex: modo 'reduced-motion' onde as formas se movem lentamente ou não se movem).",
+      "Permitir que a pessoa pause ou mude o volume dos sons a qualquer momento.",
+      "Incluir um botão de 'sair' visível em todos os momentos, que interrompe a experiência imediatamente."
+    ]
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "A mecânica de *desvio* como eixo central: a pessoa é convidadas a escolher o que *não* estava a procurar, invertendo a lógica tradicional de interação.",
+      "A tradução cruzada entre *movimento* e *som* de forma não linear (ex: trajetória do cursor altera o tom, não apenas o volume).",
+      "O uso do *silêncio* como elemento ativo: o sistema 'espera' e responde à inação da pessoa.",
+      "A *devolução* como ato de co-criação: a contribuição da pessoa altera permanentemente (ou temporariamente) a experiência.",
+      "A *latência* do rasto: a mancha de cor ou som pode persistir em outras experiências, criando uma narrativa transversal.",
+      "A *evocação territorial* sem depender de geolocalização: lugares e sons são evocados através de imagens distorcidas, palavras e memórias, não de dados de localização."
+    ],
+    "comparison": "Esta experiência não pode ser confundida com: (1) *COSMICOXES* (que lida com constelações e gravidade), (2) *Galeria Diletante* (que transformar palavras em imagens e vice-versa), (3) *Fucô* (que é um mediador vivo em forma de chat), ou (4) *Dado Sem Lado* (que é um objeto físico/digital com regras absurdas). A Curadoria do Inesperado é única na sua abordagem ao *desvio* como mecânica central e na sua exploração do *silêncio* e da *escolha invertida*."
+  },
+  "questions_for_eduardo": [
+    "A mancha de cor inicial deve ser sempre a mesma cor (ex: vermelho) ou pode variar entre sessões? Se variar, quais são as cores autorais a usar?",
+    "As formas geométricas (triângulos, círculos, etc.) devem ter um significado simbólico específico (ex: triângulo = fogo, círculo = água) ou são abstratas?",
+    "A voz sussurrada deve ser uma gravação real (ex: de Eduardo ou FUCO) ou pode ser gerada sinteticamente?",
+    "As imagens distorcidas de lugares reais devem ser baseadas em fotografias específicas do Atlas (ex: de Nuno A) ou podem ser geradas a partir de descrições?",
+    "O texto final (*'Isto não era o que procuravas. Mas agora é teu.'*) é fixo ou pode variar entre sessões?",
+    "Existem restrições autorais sobre o tipo de sons a usar (ex: evitar sons de instrumentos musicais, usar apenas sons ambientais)?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Incluir uma opção para que a pessoa possa *salvar* o rasto (mancha de cor, som ou texto) como um 'objeto' na sua coleção pessoal no Atlas, para regressar mais tarde.",
+      "justification": "Reinforça a ideia de devolução e latência, e permite que a pessoa construa uma narrativa pessoal ao longo do tempo."
+    },
+    {
+      "proposal": "Adicionar uma camada de *memória* onde, se a pessoa regressar à Curadoria do Inesperado, o sistema 'lembra' da sua interação anterior (ex: as formas geométricas aparecem nas posições onde a pessoa as deixou na sessão anterior).",
+      "justification": "Aumenta a sensação de que o sistema está vivo e responde à história da pessoa, sem depender de vigilância ou perfil psicológico."
+    },
+    {
+      "proposal": "Incorporar *topónimos ou palavras em línguas locais* (ex: mirandês, barranquenho) nas frases sussurradas ou nos textos revelados, para reforçar a ligação territorial.",
+      "justification": "Aprofundar a conexão com o território e a oralidade, alinhado com os princípios do Atlas (ex: FALArte, Livro Cubo)."
+    },
+    {
+      "proposal": "Permitir que a pessoa *desenhe* a sua própria forma geométrica (ex: com o cursor) como parte da devolução, em vez de apenas escolher entre formas pré-definidas.",
+      "justification": "Aumenta a agência da pessoa e a personalização da experiência, mantendo a mecânica de desvio."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

@@ -1,0 +1,370 @@
+{
+  "id": "selo-atlas-vaquinhas",
+  "canonical_name": "Selo Atlas / Vaquinhas",
+  "source_evidence": {
+    "primary": [
+      "Cópia de Fica registado neste dossiê… (fonte autoral forte para estado-alvo da camada pública, estética, vaquinhas/MILKs como estrelas territoriais pulsantes)",
+      "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf (princípios CARE, entrada silenciosa/encantatória, selo quase invisível, constelação, descoberta)"
+    ],
+    "secondary": [
+      "A Deriva do Sentido: Cartografia Psicogeográfica e Sensorial de Lisboa (sentipensar, configuração relacional, textura/hapticidade)"
+    ],
+    "tertiary": []
+  },
+  "authorial_invariants": [
+    "Vaquinhas/MILKs funcionam como estrelas territoriais pulsantes, leves, não como marcadores de dashboard.",
+    "Estética: bilhetes/caixas como rascunho de caderno, folha rasgada, assimetria orgânica, bagunça com ordem.",
+    "Calor táctil sem perder legibilidade.",
+    "A entrada é silenciosa/encantatória: selo quase invisível, constelação, descoberta e permissividade.",
+    "A interface comunica que hesitar, tropeçar e errar não serão castigados.",
+    "Rasto desejado: memória, lembrança, história, receita, piada, rua, bairro, lugar desaparecido, brincadeira, palavra, som, gesto."
+  ],
+  "perceptual_intent": "Convidar a pessoa a marcar um possível sem o fechar, transformando o acto de assinalar num gesto poético de descoberta territorial. O selo não é um ícone estático, mas uma presença viva que pulsa, respira e responde à atenção, evocando a memória colectiva e a identidade dos lugares como constelações de vaquinhas/MILKs.",
+  "threshold": {
+    "description": "O ecrã começa vazio, com um fundo de textura orgânica (papel envelhecido, tecido rasgado ou azulejo desgastado) que respira lentamente em tons de terra e leite. Um único ponto de luz fraca (como uma vaquinha distante) piscar uma vez, sem som, e desaparece. A pessoa percebe que algo está ali, mas não sabe o que é.",
+    "sensory_trigger": "A ausência de elementos interativos óbvios e o movimento sutil do fundo criam uma tensão de expectativa. O olho é atraído para o centro, onde a textura parece mais densa, como se algo estivesse prestes a emergir."
+  },
+  "dramaturgical_arc": [
+    {
+      "phase": "LIMIAR",
+      "action": "O fundo respira. Um ponto de luz (vaquinha) piscar uma vez e desaparecer. A textura do fundo altera-se levemente, como se algo tivesse sido tocado."
+    },
+    {
+      "phase": "CHAMADA",
+      "action": "Aparece uma mancha de tinta ou carimbo desbotado (sugerindo um selo) no centro do ecrã, com a silhueta de uma vaquinha em negativo. A mancha não tem texto, mas a sua forma convida ao toque. Um som de sino distante (ou um murmúrio de voz humana, como um chamamento) soa uma vez, muito baixo."
+    },
+    {
+      "phase": "PRIMEIRO GESTO",
+      "action": "A pessoa toca a mancha. O selo reage: a vaquinha no negativo ganha volume, como se fosse preenchida por tinta fresca, e o som do sino/murmúrio repete-se, agora mais próximo. O fundo parou de respirar."
+    },
+    {
+      "phase": "RESPOSTA VIVA",
+      "action": "O selo expande-se levemente, revelando um padrão de constelação de vaquinhas em torno dele. Cada vaquinha pulsa em ritmo próprio, como se respirasse. Um som de campainhas (ou risos distantes) emerge, espacializado: parece vir de diferentes direcções, como se as vaquinhas estivessem a mover-se no território."
+    },
+    {
+      "phase": "DESVIO",
+      "action": "Se a pessoa não interagir por 5 segundos, uma das vaquinhas da constelação 'foge' para a borda do ecrã, como se assustada. Se a pessoa seguir o seu dedo/cursor, a vaquinha pára e olha para trás. Se a pessoa tocar nela, a vaquinha volta ao centro, mas a constelação reorganiza-se, como se o gesto tivesse alterado o território."
+    },
+    {
+      "phase": "APROFUNDAMENTO SENSORIAL",
+      "action": "As vaquinhas começam a emitir sons únicos (campainhas, mugidos suaves, risos, murmúrios de topónimos) que se misturam com a textura visual. O toque da pessoa em qualquer vaquinha faz com que o som dessa vaquinha se isole e ganhe volume, enquanto as outras se tornam mais silenciosas. A textura do fundo muda para refletir o território associado à vaquinha tocada (ex: azulejo para um lugar com azulejos, terra para um lugar rural)."
+    },
+    {
+      "phase": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "A pessoa pode: (1) tocar uma vaquinha para 'marcá-la' (o selo central absorve a sua luz e som, e a vaquinha desaparece da constelação), (2) esperar que uma vaquinha 'escolha' a pessoa (uma vaquinha aproxima-se sozinha do selo central e é absorvida), ou (3) fazer silêncio (não tocar nada por 10 segundos). No caso (3), todas as vaquinhas param de pulsar e o som desvanece-se, como se o território tivesse adormecido."
+    },
+    {
+      "phase": "APARIÇÃO",
+      "action": "Quando uma vaquinha é absorvida pelo selo central, aparece uma palavra ou fragmento de memória territorial (ex: um topónimo, uma receita, uma brincadeira) escrito à mão, como se fosse um carimbo ou bilhete. A palavra surge em camadas: primeiro como sombra, depois como tinta fresca, e finalmente como texto legível. O som associado à vaquinha transforma-se em voz (ou em um instrumento musical) que 'fala' ou 'canta' a palavra."
+    },
+    {
+      "phase": "DEVOLUÇÃO",
+      "action": "O selo central, agora com a vaquinha e a palavra absorvidos, ganha uma pátina de uso (como se fosse um carimbo usado muitas vezes). A pessoa recebe um 'rasto': um bilhete digital com a palavra/memória e a data/hora da marcação, como se fosse um recado deixado no território. O bilhete pode ser guardado, partilhado ou descartado."
+    },
+    {
+      "phase": "RASTO / LATÊNCIA",
+      "action": "A vaquinha absorvida permanece no cosmos do Atlas como uma estrela territorial pulsante. Se a pessoa regressar à experiência, a constelação lembra-se das vaquinhas já marcadas (elas aparecem com um brilho diferente). O bilhete guardado pode ser 'devolvido' ao território em sessões futuras, criando uma rede de memórias."
+    }
+  ],
+  "participant_verbs": [
+    "tocar",
+    "seguir",
+    "escutar",
+    "marcar",
+    "esperar",
+    "deixar-se escolher",
+    "guardar"
+  ],
+  "system_responses": [
+    {
+      "trigger": "Toque inicial na mancha/selo",
+      "response": "A vaquinha no negativo ganha volume e o som do sino/murmúrio repete-se mais próximo. O fundo pára de respirar."
+    },
+    {
+      "trigger": "Toque em uma vaquinha da constelação",
+      "response": "O som da vaquinha isola-se e ganha volume. A textura do fundo muda para refletir o território associado."
+    },
+    {
+      "trigger": "Seguir uma vaquinha que 'fugiu'",
+      "response": "A vaquinha pára e olha para trás. Se tocada, volta ao centro e a constelação reorganiza-se."
+    },
+    {
+      "trigger": "Marcação de uma vaquinha (toque prolongado ou gesto de arrastar para o selo central)",
+      "response": "A vaquinha é absorvida pelo selo central, que emite um som de 'selagem'. Uma palavra/memória territorial aparece em camadas."
+    },
+    {
+      "trigger": "Silêncio (10 segundos sem interação)",
+      "response": "Todas as vaquinhas param de pulsar e o som desvanece-se. O fundo escurece levemente, como se o território adormecesse."
+    },
+    {
+      "trigger": "Vaquinhas não tocadas por muito tempo",
+      "response": "Uma vaquinha aproxima-se sozinha do selo central e é absorvida (escolha pelo sistema)."
+    }
+  ],
+  "sensory_signature_id": "vaquinhas-constelacao-pulsante",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "textura orgânica respirante (papel, tecido, azulejo)",
+        "mancha de tinta/carimbo com vaquinha em negativo",
+        "constelação de vaquinhas pulsantes com ritmos próprios",
+        "palavras/memórias surgindo em camadas (sombra → tinta fresca → texto)",
+        "pátina de uso no selo central após marcação",
+        "bilhete digital como recado territorial"
+      ],
+      "dynamics": [
+        "respiração lenta do fundo",
+        "expansão/contração do selo e vaquinhas",
+        "mudança de textura do fundo de acordo com o território",
+        "aparição gradual de palavras"
+      ]
+    },
+    "auditory": {
+      "elements": [
+        "som de sino distante (chamamento inicial)",
+        "campainhas espacializadas (vaquinhas a mover-se)",
+        "mugidos suaves, risos, murmúrios de topónimos",
+        "voz ou instrumento musical a 'falar' ou 'cantar' a palavra territorial",
+        "som de 'selagem' ao marcar uma vaquinha",
+        "silêncio progressivo durante a espera"
+      ],
+      "dynamics": [
+        "espacialização do som (direcção e distância)",
+        "isolamento e amplificação do som da vaquinha tocada",
+        "transformação de sons em voz/instrumento"
+      ]
+    },
+    "haptic": {
+      "elements": [
+        "vibração sutil em dispositivos compatíveis ao tocar uma vaquinha (opcional)",
+        "feedback táctil ao arrastar uma vaquinha para o selo central (opcional)"
+      ],
+      "dynamics": []
+    },
+    "kinesthetic": {
+      "elements": [
+        "movimento do cursor/dedo para seguir vaquinhas",
+        "gesto de arrastar para marcar uma vaquinha",
+        "velocidade do toque (toque rápido vs. prolongado)"
+      ],
+      "dynamics": [
+        "resposta do sistema à trajectória do cursor/dedo",
+        "reorganização da constelação com base no gesto"
+      ]
+    },
+    "proprioceptive": {
+      "elements": [
+        "instrução implícita para focar a atenção no centro do ecrã",
+        "sensação de 'peso' ou 'resistência' ao arrastar uma vaquinha (feedback visual)",
+        "ritmo da respiração do fundo (convite a sincronizar a atenção)"
+      ],
+      "dynamics": []
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "espera de 5 segundos para vaquinha 'fugir'",
+        "espera de 10 segundos para o território 'adormecer'",
+        "ritmo de pulso das vaquinhas (ritmo cardíaco sugerido)",
+        "duração variável da aparição das palavras"
+      ],
+      "dynamics": [
+        "aceleração/desaceleração do ritmo das vaquinhas com base na interação",
+        "suspensão do tempo durante o silêncio"
+      ]
+    },
+    "spatial": {
+      "elements": [
+        "constelação de vaquinhas como mapa territorial abstrato",
+        "posicionamento das vaquinhas no ecrã (proximidade/distância)",
+        "espacialização do som (direcção e profundidade)"
+      ],
+      "dynamics": [
+        "reorganização da constelação com base nos gestos",
+        "movimento das vaquinhas em resposta ao cursor/dedo"
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "memória de cheiros territoriais (ex: pão quente, terra molhada, ervas aromáticas) evocados pelas palavras/memórias",
+        "sugestão de cheiros associados a topónimos ou receitas"
+      ],
+      "dynamics": []
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "memória de sabores territoriais (ex: doçaria local, frutas da época) evocados pelas palavras/memórias",
+        "sugestão de sabores associados a receitas ou festas"
+      ],
+      "dynamics": []
+    },
+    "social_presence": {
+      "elements": [
+        "murmúrios de vozes humanas (como se outras pessoas estivessem a interagir com o território)",
+        "risos distantes (sugestão de presença colectiva)",
+        "palavras/memórias como rastos deixados por outros"
+      ],
+      "dynamics": []
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "O som das vaquinhas (campainhas, mugidos, risos) traduz-se em textura visual: cada som único altera a cor, o brilho ou a pátina da vaquinha associada.",
+    "secondary": "O gesto de tocar/arrastar uma vaquinha traduz-se em som: a trajectória e a velocidade do gesto alteram o timbre e o volume do som emitido pela vaquinha.",
+    "tertiary": "A palavra/memória territorial que aparece visualmente é 'falada' ou 'cantada' pelo som da vaquinha, criando uma tradução entre texto e áudio."
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio é um estado activo: quando a pessoa não interage por 10 segundos, o sistema entra em modo de 'território adormecido'. As vaquinhas param de pulsar, os sons desvanecem-se e o fundo escurece levemente. Este silêncio não é vazio, mas uma presença de espera, como se o território estivesse a respirar.",
+    "effect": "O silêncio convida à reflexão e à escuta atenta. Quando a pessoa volta a interagir, o território 'acorda' gradualmente, como se a sua presença tivesse reavivado a memória do lugar."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": [
+      "As vaquinhas têm ritmos de pulso aleatórios, criando uma constelação dinâmica e imprevisível.",
+      "Uma vaquinha pode 'fugir' para a borda do ecrã se não for tocada por 5 segundos, quebrando a expectativa de estaticidade.",
+      "O sistema pode 'escolher' uma vaquinha para a pessoa (aproximando-a do selo central) se não houver interação por muito tempo.",
+      "A palavra/memória territorial que aparece é seleccionada aleatoriamente de um conjunto associado à vaquinha, mas sempre coerente com o território.",
+      "A textura do fundo muda de forma imprevisível (mas coerente) com base no território associado à vaquinha tocada."
+    ],
+    "effect": "A surpresa mantém a experiência viva e imprevisível, como um território real que nunca é igual duas vezes."
+  },
+  "session_variation": [
+    {
+      "type": "acaso controlado",
+      "description": "A constelação inicial de vaquinhas é gerada aleatoriamente, mas sempre com base em vaquinhas/MILKs reais associadas a territórios."
+    },
+    {
+      "type": "ordem mutável",
+      "description": "A ordem de aparição das palavras/memórias territoriais é aleatória, mas sempre coerente com a vaquinha marcada."
+    },
+    {
+      "type": "resposta a ritmo/velocidade do gesto",
+      "description": "A velocidade e a trajectória do toque/arrastar alteram o timbre e o volume do som da vaquinha, bem como a intensidade da sua pulsação visual."
+    },
+    {
+      "type": "resposta a posição/trajectória",
+      "description": "A posição do cursor/dedo no ecrã influencia a espacialização do som (ex: vaquinhas mais próximas do cursor soam mais altas)."
+    },
+    {
+      "type": "combinação de fragmentos curatoriais",
+      "description": "As palavras/memórias territoriais são combinadas de forma única em cada sessão, criando um bilhete digital único."
+    },
+    {
+      "type": "temporalidade real (dia/noite)",
+      "description": "A textura do fundo e os sons das vaquinhas podem variar subtamente com base na hora do dia (ex: sons mais suaves à noite, texturas mais escuras)."
+    }
+  ],
+  "territorial_binding": {
+    "relation": "Cada vaquinha está associada a um território real (freguesia, lugar, topónimo) do Atlas Vivo MILK. A constelação de vaquinhas representa um mapa abstrato do território, onde a proximidade entre vaquinhas sugere relações geográficas ou culturais.",
+    "evidence": "As vaquinhas/MILKs são 'estrelas territoriais pulsantes' (fonte autoral). As palavras/memórias que aparecem são associadas a territórios reais (ex: topónimos, receitas, brincadeiras).",
+    "constraints": "A associação entre vaquinhas e territórios deve ser baseada em dados reais do Atlas, não inventada."
+  },
+  "trace_and_return": {
+    "trace": {
+      "digital": "O bilhete digital com a palavra/memória e a data/hora da marcação é o rasto principal. Este bilhete pode ser guardado, partilhado ou descartado.",
+      "cosmic": "As vaquinhas marcadas permanecem no cosmos do Atlas como estrelas territoriais pulsantes, criando uma constelação pessoal de memórias."
+    },
+    "return": {
+      "immediate": "A pessoa recebe o bilhete digital como devolução imediata.",
+      "latent": "O bilhete pode ser 'devolvido' ao território em sessões futuras, criando uma rede de memórias. A constelação lembra-se das vaquinhas já marcadas, que aparecem com um brilho diferente."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "alternative": "Para pessoas com baixa visão ou cegueira: as vaquinhas e o selo central são descritos em texto (ex: 'Vaquinha pulsante à esquerda, associada ao topónimo X'). O bilhete digital é lido em voz alta ou disponibilizado em braille digital.",
+      "preservation": "A textura orgânica do fundo é substituída por um padrão de alto contraste, e as vaquinhas são representadas por formas geométricas simples com descrições textuais."
+    },
+    "auditory": {
+      "alternative": "Para pessoas com deficiência auditiva: os sons das vaquinhas são representados visualmente por ondas ou cores que mudam com o volume e o timbre. As palavras/memórias aparecem sempre em texto.",
+      "preservation": "Os murmúrios e risos são substituídos por vibrações ou pulsações visuais."
+    },
+    "haptic": {
+      "alternative": "Para pessoas que não podem usar toque: as vaquinhas podem ser seleccionadas com o teclado (setas para navegar, Enter para marcar). O gesto de arrastar é substituído por um comando de voz ou teclado.",
+      "preservation": "A vibração é opcional e pode ser desactivada."
+    },
+    "kinesthetic": {
+      "alternative": "Para pessoas com mobilidade reduzida: o cursor pode ser controlado com o teclado ou voz. A trajectória do cursor é simulada com base na posição do teclado.",
+      "preservation": "A reorganização da constelação é baseada na posição do cursor, não no movimento físico."
+    },
+    "temporal": {
+      "alternative": "Para pessoas que precisam de mais tempo: a espera para a vaquinha 'fugir' ou para o território 'adormecer' é estendida ou removida. O ritmo das vaquinhas pode ser abrandado.",
+      "preservation": "A duração da aparição das palavras é ajustável."
+    },
+    "cognitive": {
+      "alternative": "Para pessoas com dificuldades cognitivas: as instruções são simplificadas e repetidas. As palavras/memórias são apresentadas de forma clara e sem ambiguidade.",
+      "preservation": "A surpresa e a indeterminação são mantidas, mas com menos complexidade."
+    }
+  },
+  "optional_permissions": {
+    "required": [],
+    "optional": [
+      {
+        "permission": "microfone",
+        "purpose": "Permitir que a pessoa use a voz para 'chamar' uma vaquinha ou para 'falar' uma palavra territorial (ex: pronunciar um topónimo para activar uma vaquinha associada).",
+        "fallback": "A interação por voz é substituída por teclado ou toque. As vaquinhas podem ser activadas por toque ou comando de teclado."
+      },
+      {
+        "permission": "geolocalização",
+        "purpose": "Associar a constelação de vaquinhas ao território físico onde a pessoa está, destacando vaquinhas próximas da sua localização.",
+        "fallback": "A constelação é gerada com base em vaquinhas aleatórias ou em vaquinhas associadas a um território pré-seleccionado."
+      },
+      {
+        "permission": "movimento/orientação",
+        "purpose": "Permitir que o movimento do dispositivo (ex: inclinação) altere a espacialização do som ou a posição das vaquinhas no ecrã.",
+        "fallback": "A espacialização do som e a posição das vaquinhas são baseadas na posição do cursor/dedo."
+      }
+    ]
+  },
+  "overstimulation_risk": {
+    "potential_risks": [
+      "Flashing ou pulsações rápidas das vaquinhas (pode causar desconforto em pessoas com epilepsia ou sensibilidade à luz).",
+      "Sons súbitos ou altos (pode causar susto ou desconforto auditivo).",
+      "Vibrações insistentes (pode causar desconforto em pessoas com sensibilidade táctil).",
+      "Loops sonoros contínuos sem pausas (pode causar fadiga auditiva)."
+    ],
+    "mitigation": [
+      "As pulsações das vaquinhas são suaves e com frequência baixa (menos de 3 Hz).",
+      "Os sons são sempre progressivos (volume aumenta e diminui gradualmente) e nunca excedem um limite seguro.",
+      "A vibração é opcional, sutil e pode ser desactivada.",
+      "Os loops sonoros têm pausas aleatórias e a pessoa pode silenciá-los a qualquer momento.",
+      "A experiência tem um botão de 'pausa' ou 'silêncio' sempre visível, que interrompe todos os estímulos sonoros e visuais dinâmicos.",
+      "A pessoa pode ajustar a intensidade dos estímulos (ex: volume, brilho, velocidade das pulsações)."
+    ]
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "O selo como uma mancha de tinta/carimbo que 'respira' e absorve vaquinhas, em vez de um ícone estático.",
+      "A constelação de vaquinhas como um mapa territorial abstrato, onde cada vaquinha tem um ritmo de pulso único e um som associado.",
+      "A tradução cruzada entre som e textura visual (o som das vaquinhas altera a sua aparência).",
+      "O silêncio como estado activo, onde o território 'adormece' e os sons desvanecem-se.",
+      "A devolução sob a forma de um bilhete digital com uma palavra/memória territorial, como um recado deixado no território.",
+      "A latência das vaquinhas marcadas no cosmos do Atlas, criando uma constelação pessoal de memórias.",
+      "A associação entre vaquinhas e territórios reais, com base em dados do Atlas Vivo MILK."
+    ],
+    "comparison": "Esta experiência não pode ser confundida com outras porque: (1) não é um mapa funcional, mas uma constelação poética; (2) não é um jogo de marcação genérico, mas um ritual de descoberta territorial; (3) não usa sons ou imagens aleatórias, mas sons e memórias associados a territórios reais; (4) a devolução não é um 'prémio' ou 'pontuação', mas um bilhete com uma palavra/memória que pode ser guardada ou partilhada."
+  },
+  "questions_for_eduardo": [
+    "As vaquinhas/MILKs têm associações territoriais específicas (ex: topónimos, receitas) já definidas no Atlas? Se sim, onde estão documentadas?",
+    "O bilhete digital deve ser guardado localmente (no dispositivo) ou no servidor do Atlas? Qual é a política de privacidade para estes rastos?",
+    "As palavras/memórias territoriais que aparecem devem ser seleccionadas de um corpus existente ou podem ser geradas dinamicamente com base nos dados do Atlas?",
+    "O 'cosmos do Atlas' (onde as vaquinhas marcadas permanecem) é uma funcionalidade já implementada ou precisa de ser desenvolvida?",
+    "Há restrições na forma como os sons das vaquinhas podem ser espacializados (ex: uso de Web Audio API, limites de volume)?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Integração com o COSMICOXES: as vaquinhas marcadas poderiam ser representadas como partículas no fluxo do COSMICOXES, criando uma ligação visual entre a experiência do Selo e o cosmos do Atlas.",
+      "justification": "Isso reforçaria a ideia de que as memórias territoriais são parte de um sistema vivo e interconectado."
+    },
+    {
+      "proposal": "Adição de um modo 'deriva': a pessoa pode 'caminhar' pelo território virtual, movendo o cursor como se fosse um passeio, e as vaquinhas aparecem à medida que se aproxima de 'lugares' no mapa abstrato.",
+      "justification": "Isso adicionaria uma camada de exploração territorial mais imersiva, alinhada com a psicogeografia do Atlas."
+    },
+    {
+      "proposal": "Uso de voz para interagir com as vaquinhas: a pessoa pode pronunciar um topónimo ou uma palavra associada a um território para activar a vaquinha correspondente.",
+      "justification": "Isso reforçaria a ligação entre oralidade e território, alinhada com os princípios do Atlas."
+    },
+    {
+      "proposal": "Inclusão de um 'modo noturno' para a textura do fundo e os sons, com base na hora do dia, para reflectir a mudança de ambiente no território real.",
+      "justification": "Isso adicionaria uma camada de realismo territorial e variabilidade entre sessões."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

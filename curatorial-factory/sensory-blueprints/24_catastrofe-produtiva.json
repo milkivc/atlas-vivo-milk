@@ -1,0 +1,464 @@
+{
+  "id": "catastrofe-produtiva",
+  "canonical_name": "Catástrofe Produtiva",
+  "source_evidence": {
+    "primary": [
+      "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md (D2: Catástrofe Produtiva)"
+    ],
+    "secondary": [
+      "CUBO_02_MANUAL_INVERTIDO_MELHORADO.md (princípios: erro como entrada, riso como método, silêncio como matéria)"
+    ],
+    "tertiary": [
+      "Curadoria Cultural e Existencialismo Profundo.pdf (absurdo/Camus, etnofísica, soberania da memória)"
+    ]
+  },
+  "authorial_invariants": [
+    "Criação → ruptura/catástrofe → trabalho com o que sobrevive/emerge",
+    "Processo não linear: fazer, rasgar, continuar",
+    "Transformação como mecânica central, não como resultado final",
+    "Ausência de juízo moral sobre o 'erro' ou a 'catástrofe'",
+    "Preservação do fragmento como valor (Llansol: cena-fulgor)",
+    "Riso e humor como métodos de resistência (princípios do Livro Cubo)"
+  ],
+  "perceptual_intent": "Convocar a experiência física e emocional de criar algo, vê-lo desmoronar (ou ser rasgado), e depois encontrar formas de continuar com os fragmentos. A catástrofe não é o fim, mas um limiar que revela novas possibilidades de composição. A pessoa deve sentir o peso do gesto, a surpresa do desvio e a leveza do recomeço.",
+  "threshold": {
+    "description": "A tela está em branco, mas não vazio. Um cursor/ponto de luz (ou sombra) pulsa lentamente no centro, como uma respiração. Não há instruções. O fundo tem uma textura sutil de papel rasgado ou tecido desgastado, que só se revela com movimento lento do rato/dedo.",
+    "sensory_trigger": "O primeiro movimento da pessoa (mesmo que acidental) faz o cursor explodir em partículas finas que se espalham como tinta derramada, revelando um fragmento de texto ou imagem por baixo: 'Faz.'"
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": 1,
+      "name": "LIMIAR",
+      "description": "A tela parece estática, mas a textura do fundo reage ao movimento do rato/dedo com micro-vibrações visuais (como se o papel respirasse). O cursor pulsa em ritmo cardíaco.",
+      "sensory_focus": [
+        "visual (textura, pulso)",
+        "temporal_interoceptive (ritmo)"
+      ]
+    },
+    {
+      "stage": 2,
+      "name": "CHAMADA",
+      "description": "Aparece a palavra 'Faz.' em tipografia irregular, como se escrita à mão com tinta que ainda escorre. A palavra tremula levemente, como se fosse instável.",
+      "sensory_focus": [
+        "visual (tipografia viva)",
+        "kinesthetic (tremor)"
+      ]
+    },
+    {
+      "stage": 3,
+      "name": "PRIMEIRO GESTO",
+      "description": "A pessoa arrasta o rato/dedo sobre a tela. O traço que deixa não é uma linha, mas sim um rasgo: a tela parece se partir ao longo do caminho, revelando camadas de cor/textura por baixo (como um palimpsesto).",
+      "sensory_focus": [
+        "visual (rasgo, camadas)",
+        "haptic (resistência simulada ao arrasto)",
+        "auditory (som de papel a rasgar, opcional e sutil)"
+      ]
+    },
+    {
+      "stage": 4,
+      "name": "RESPOSTA VIVA",
+      "description": "O rasgo não some. Em vez disso, os fragmentos criados pelo gesto começam a mover-se lentamente, como se fossem levados por uma corrente invisível. Algumas partes colidem, outras se afastam. Um som de vento ou água distorcida acompanha o movimento.",
+      "sensory_focus": [
+        "visual (movimento dos fragmentos)",
+        "auditory (paisagem sonora líquida)",
+        "spatial (profundidade simulada)"
+      ]
+    },
+    {
+      "stage": 5,
+      "name": "DESVIO",
+      "description": "De repente, um dos fragmentos (aleatoriamente ou o maior) 'cai' para fora da tela, como se fosse sugado por um buraco. O som para abruptamente. A tela fica em silêncio visual por 2-3 segundos, com apenas um fragmento isolado a pairar no centro.",
+      "sensory_focus": [
+        "visual (ausência repentina)",
+        "auditory (silêncio abrupto)",
+        "temporal_interoceptive (suspensão)"
+      ]
+    },
+    {
+      "stage": 6,
+      "name": "APROFUNDAMENTO SENSORIAL",
+      "description": "O fragmento isolado começa a emitir um som grave e contínuo (como um zumbido ou um sino distorcido). A pessoa pode interagir com ele: ao aproximar o cursor, o som aumenta em volume e o fragmento 'incha' visualmente. Ao afastar, o som diminui e o fragmento 'murcha'. A cor do fragmento também muda com a distância do cursor (de quente para fria ou vice-versa).",
+      "sensory_focus": [
+        "visual (escala, cor)",
+        "auditory (volume, timbre)",
+        "kinesthetic (distância do cursor)",
+        "proprioceptive (controle da interação)"
+      ]
+    },
+    {
+      "stage": 7,
+      "name": "ESCOLHA / ACASO / SILÊNCIO",
+      "description": "A pessoa tem três opções não explícitas: 1) Deixar o fragmento sozinho (o som e a cor estabilizam-se, e o fragmento começa a 'crescer' lentamente, como uma planta); 2) Clicar/tocar no fragmento (ele explode em novos fragmentos menores, que caem como folhas); 3) Arrasar o fragmento para fora da tela (ele desaparece com um som de queda, e a tela fica vazio por 5 segundos).",
+      "sensory_focus": [
+        "visual (transformação ou ausência)",
+        "auditory (resposta ao gesto)",
+        "temporal_interoceptive (espera)"
+      ]
+    },
+    {
+      "stage": 8,
+      "name": "APARIÇÃO",
+      "description": "Independentemente da escolha, algo novo emerge: se o fragmento cresceu, aparece uma palavra ou imagem por baixo (ex: 'Continua.'); se explodiu, os fragmentos menores formam uma constelação que se move em espiral; se desapareceu, a tela mostra um rasgo no 'pano de fundo' que revela uma textura de papel ou tecido novo, com a palavra 'Rasga.' escrita em tinta fresca.",
+      "sensory_focus": [
+        "visual (aparição de novo elemento)",
+        "spatial (profundidade ou movimento)",
+        "olfactory_evocation (cheiro de tinta ou papel molhado, sugerido por texto ou som)"
+      ]
+    },
+    {
+      "stage": 9,
+      "name": "DEVOLUÇÃO",
+      "description": "A experiência devolve à pessoa um 'fragmento digital' único: uma imagem gerada a partir dos gestos feitos (rasgos, cliques, arrastos), com uma frase curta que resume a sua interação (ex: 'Rasgaste o silêncio. Continua.'). Este fragmento pode ser guardado como imagem ou som (se a pessoa interagiu com áudio).",
+      "sensory_focus": [
+        "visual (imagem gerada)",
+        "auditory (som gerado, se aplicável)",
+        "social_presence (devolução como rasto)"
+      ]
+    },
+    {
+      "stage": 10,
+      "name": "RASTO / LATÊNCIA",
+      "description": "O fragmento gerado fica disponível para ser 'deixado' no território digital do Atlas (opcional). Se a pessoa permitir, o fragmento pode ser encontrado por outros em experiências futuras, como um 'rasto' de uma catástrofe passada. A tela volta ao estado inicial (branco com textura sutil), mas agora com uma marca subtis de que algo aconteceu (ex: uma sombra ou mancha que não estava lá antes).",
+      "sensory_focus": [
+        "visual (marca residual)",
+        "spatial (território digital)",
+        "temporal_interoceptive (memória da interação)"
+      ]
+    }
+  ],
+  "participant_verbs": [
+    "Rasgar",
+    "Deixar cair",
+    "Esperar",
+    "Aproximar",
+    "Afastar",
+    "Crescer",
+    "Explodir"
+  ],
+  "system_responses": [
+    {
+      "gesture": "Arrasto inicial",
+      "response": "Rasgo visual + som de papel a rasgar + fragmentos em movimento",
+      "sensory_layers": [
+        "visual",
+        "auditory",
+        "kinesthetic"
+      ]
+    },
+    {
+      "gesture": "Aproximação do cursor ao fragmento",
+      "response": "Fragmento incha visualmente + som aumenta em volume e distorção",
+      "sensory_layers": [
+        "visual",
+        "auditory",
+        "spatial"
+      ]
+    },
+    {
+      "gesture": "Clique/toque no fragmento",
+      "response": "Explosão em fragmentos menores + som de estalo ou vidro a partir",
+      "sensory_layers": [
+        "visual",
+        "auditory"
+      ]
+    },
+    {
+      "gesture": "Deixar fragmento sozinho",
+      "response": "Fragmento cresce lentamente + som evolui para um tom mais grave e harmónico",
+      "sensory_layers": [
+        "visual",
+        "auditory",
+        "temporal_interoceptive"
+      ]
+    },
+    {
+      "gesture": "Arrasto do fragmento para fora da tela",
+      "response": "Fragmento desaparece com som de queda + tela fica em silêncio visual por 5 segundos",
+      "sensory_layers": [
+        "visual",
+        "auditory",
+        "temporal_interoceptive"
+      ]
+    },
+    {
+      "gesture": "Silêncio/espera prolongada",
+      "response": "Fragmentos começam a mover-se em espiral ou a formar padrões inesperados",
+      "sensory_layers": [
+        "visual",
+        "spatial"
+      ]
+    }
+  ],
+  "sensory_signature_id": "CP-2026-09-02-0024",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "textura de papel rasgado",
+        "tipografia instável",
+        "fragmentos em movimento",
+        "rasgos dinâmicos",
+        "camadas de cor",
+        "sombras residuais",
+        "palimpsesto visual"
+      ],
+      "dynamics": [
+        "pulso do cursor",
+        "movimento dos fragmentos",
+        "transição de cores com distância",
+        "aparição/desaparição"
+      ]
+    },
+    "auditory": {
+      "elements": [
+        "som de papel a rasgar",
+        "zumbido grave",
+        "som de vento/água distorcida",
+        "estalo de fragmento a partir",
+        "tom harmónico em evolução",
+        "silêncio abrupto"
+      ],
+      "dynamics": [
+        "volume e timbre variam com a interação",
+        "paisagem sonora líquida",
+        "resposta imediata ao gesto"
+      ]
+    },
+    "haptic": {
+      "elements": [
+        "resistência simulada ao arrasto",
+        "vibração sutil em dispositivos compatíveis (opcional)"
+      ],
+      "dynamics": [
+        "feedback táctil opcional para gestos de rasgo"
+      ]
+    },
+    "kinesthetic": {
+      "elements": [
+        "movimento do cursor/dedo",
+        "distância ao fragmento",
+        "velocidade do gesto"
+      ],
+      "dynamics": [
+        "controle da interação com o fragmento",
+        "resposta visual/auditiva ao movimento"
+      ]
+    },
+    "proprioceptive": {
+      "elements": [
+        "postura do corpo (sugestão opcional para interagir com mais precisão)",
+        "atenção à respiração (ritmo do cursor)"
+      ],
+      "dynamics": [
+        "instruções opcionais para explorar a interação com mais nuance"
+      ]
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "ritmo cardíaco do cursor",
+        "suspensão do tempo (silêncio visual/auditivo)",
+        "espera ativa",
+        "aceleração/desaceleração dos fragmentos"
+      ],
+      "dynamics": [
+        "controle do tempo da interação",
+        "respiração percebida"
+      ]
+    },
+    "spatial": {
+      "elements": [
+        "profundidade simulada",
+        "movimento em espiral dos fragmentos",
+        "posição do fragmento na tela"
+      ],
+      "dynamics": [
+        "alteração da perceção de espaço com a interação"
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "cheiro de tinta fresca",
+        "cheiro de papel molhado",
+        "cheiro de pó de livro antigo"
+      ],
+      "dynamics": [
+        "evocação através de texto ou som (ex: 'O cheiro a tinta ainda está no ar.')"
+      ]
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "sabor metálico de tinta",
+        "sabor a papel"
+      ],
+      "dynamics": [
+        "evocação através de metáforas visuais ou sonoras (ex: 'Como se a boca ficasse com gosto a ferro.')"
+      ]
+    },
+    "social_presence": {
+      "elements": [
+        "rasto deixado por outros",
+        "fragmento único gerado pela interação",
+        "encontro com rastos de outras pessoas (opcional)"
+      ],
+      "dynamics": [
+        "devolução como memória partilhada",
+        "território digital como espaço de encontro"
+      ]
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "O gesto de rasgar (táctil/kinestético) traduz-se em som de papel a rasgar (auditivo) e em fragmentos visuais que se movem como se fossem levados por uma corrente (visual + espacial).",
+    "secondary": "A distância do cursor ao fragmento (kinestético) altera o volume e timbre do som emitido pelo fragmento (auditivo) e a sua escala visual (visual).",
+    "tertiary": "O silêncio visual (ausência de movimento) traduz-se em um som grave e contínuo (auditivo), que por sua vez evoca a sensação de um cheiro a tinta fresca (olfacto evocativo)."
+  },
+  "silence_or_absence": {
+    "mechanism": "Silêncio visual e auditivo abrupto após a 'queda' de um fragmento, criando uma suspensão temporal que convida à reflexão ou à próxima ação.",
+    "purpose": "Quebrar a expectativa de continuidade imediata, convocar a atenção para o vazio como parte da experiência, e preparar o terreno para a aparição de algo novo.",
+    "sensory_impact": [
+      "temporal_interoceptive (suspensão)",
+      "visual (ausência repentina)",
+      "auditory (silêncio abrupto)"
+    ]
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": [
+      "Fragmento aleatório 'cai' para fora da tela (acaso controlado)",
+      "Fragmentos formam padrões inesperados (ex: espiral, constelação) após espera prolongada",
+      "Aparência de uma palavra ou imagem nova por baixo dos fragmentos (ex: 'Continua.', 'Rasga.')",
+      "O fragmento gerado como devolução é único e depende dos gestos específicos da pessoa"
+    ],
+    "purpose": "Manter a experiência imprevisível e viva, evitando que a pessoa sinta que está a repetir um script."
+  },
+  "session_variation": [
+    {
+      "type": "acaso_controlado",
+      "description": "O fragmento que 'cai' para fora da tela é escolhido aleatoriamente entre os fragmentos criados."
+    },
+    {
+      "type": "ordem_mutável",
+      "description": "A ordem de aparição das palavras ('Faz.', 'Rasga.', 'Continua.') varia entre sessões."
+    },
+    {
+      "type": "resposta_a_ritmo",
+      "description": "A velocidade do movimento dos fragmentos adapta-se ao ritmo dos gestos da pessoa (ex: gestos rápidos = fragmentos movem-se mais rápido)."
+    },
+    {
+      "type": "resposta_a_posição",
+      "description": "A direção do movimento dos fragmentos é influenciada pela trajetória do cursor/dedo (ex: movimento circular do cursor = fragmentos movem-se em espiral)."
+    },
+    {
+      "type": "combinação_de_fragmentos",
+      "description": "Os fragmentos gerados em sessões anteriores (se a pessoa permitir) podem aparecer como 'rastos' na tela inicial, misturando-se com os novos."
+    },
+    {
+      "type": "temporalidade_real",
+      "description": "A cor dos fragmentos pode variar subtamente com a hora do dia (ex: tons mais quentes de manhã, mais frios à noite)."
+    }
+  ],
+  "territorial_binding": {
+    "relation": "A experiência evoca o território através da metáfora do rasgo e da recomposição, como se a tela fosse um mapa ou tecido urbano que pode ser alterado. Os fragmentos podem ser associados a lugares reais do Atlas (ex: um fragmento 'cai' na direção de uma freguesia específica, sugerida por um topónimo ou som territorial).",
+    "sustainability": "A relação territorial é evocativa e poética, não literal. Não depende de geolocalização ou dados específicos de lugar, mas sim de uma conexão simbólica com a ideia de transformação do espaço.",
+    "evidence": "Inspirado nos princípios de psicogeografia activa e configuração relacional da 'Deriva do Sentido', mas adaptado para o digital sem dependência de GPS."
+  },
+  "trace_and_return": {
+    "trace": {
+      "type": "fragmento_digital",
+      "description": "Imagem ou som gerado a partir dos gestos da pessoa, que captura a essência da sua interação (ex: um 'rasgo' visual único ou um som criado a partir dos movimentos).",
+      "persistence": "O fragmento pode ser guardado localmente ou, se a pessoa permitir, adicionado ao território digital do Atlas como um 'rasto' para outras pessoas encontrarem."
+    },
+    "return": {
+      "type": "devolução_poética",
+      "description": "A pessoa recebe uma frase ou imagem que resume a sua experiência (ex: 'Rasgaste o silêncio. Continua.'). Esta devolução é única e não repetível.",
+      "latency": "O fragmento gerado pode 'voltar' em sessões futuras como parte do território digital, criando uma sensação de continuidade e memória."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual_impairment": {
+      "description": "Toda a interação é acompanhada por descrições sonoras detalhadas (ex: 'O cursor pulsa como um coração. Arraste para rasgar a tela.'). Os fragmentos são descritos em tempo real (ex: 'Um fragmento azul está a mover-se para a direita.').",
+      "preservation": "A experiência mantém a sua intenção poética: a pessoa ouve a 'catástrofe' e a recomposição como uma narrativa sonora."
+    },
+    "auditory_impairment": {
+      "description": "Todos os sons são traduzidos em vibrações visuais (ex: o som de papel a rasgar é representado por uma onda ou textura que se move na tela). As descrições textuais substituem os sons (ex: 'O fragmento emite um zumbido grave.').",
+      "preservation": "A experiência mantém a sua riqueza sensorial através de elementos visuais e tácteis."
+    },
+    "motor_impairment": {
+      "description": "A interação pode ser feita através de teclado (ex: setas para mover o cursor, Enter para clicar) ou voz (ex: comandos como 'Rasgar', 'Aproximar', 'Afastar'). O ritmo da interação é adaptável (ex: modo lento para quem precisa de mais tempo).",
+      "preservation": "A experiência convoca o corpo de forma opcional, sem excluir quem não pode ou não quer mover-se."
+    },
+    "cognitive_load": {
+      "description": "A experiência tem um modo 'simplificado' onde os fragmentos se movem mais devagar e as instruções são mais diretas (ex: 'Arraste para rasgar.'). O número de fragmentos é reduzido para evitar sobrecarga.",
+      "preservation": "A essência da catástrofe e da recomposição é mantida, mas com menos estímulos simultâneos."
+    },
+    "reduced_motion": {
+      "description": "Os fragmentos não se movem automaticamente; em vez disso, a pessoa pode 'ativar' o movimento com um gesto (ex: clicar em um botão 'Mover Fragmentos'). As transições são suaves e sem animações bruscas.",
+      "preservation": "A experiência mantém a sua dramaticidade através de gestos intencionais."
+    }
+  },
+  "optional_permissions": {
+    "none": {
+      "description": "A experiência funciona completamente sem qualquer permissão (microfone, câmara, geolocalização, etc.).",
+      "fallback": "Todas as interações são baseadas em gestos do rato/dedo ou teclado."
+    },
+    "microphone": {
+      "description": "Opcional: a pessoa pode usar a voz para interagir com os fragmentos (ex: gritar para 'explodir' um fragmento).",
+      "benefit": "Adiciona uma camada de interação auditiva e corporal, mas não é necessário para a experiência.",
+      "request_timing": "A permissão é pedida apenas quando a pessoa clica em um ícone de microfone, com uma explicação clara do benefício."
+    },
+    "geolocation": {
+      "description": "Opcional: a pessoa pode permitir a geolocalização para associar os fragmentos a lugares reais do Atlas.",
+      "benefit": "Permite uma conexão mais direta com o território, mas a experiência funciona sem esta permissão.",
+      "request_timing": "A permissão é pedida apenas no final da experiência, se a pessoa quiser guardar o fragmento no território digital."
+    }
+  },
+  "overstimulation_risk": {
+    "potential_risks": [
+      "Flashing ou movimento rápido dos fragmentos pode causar desconforto visual.",
+      "Sons abruptos ou distorcidos podem ser incómodos para pessoas sensíveis ao som.",
+      "Múltiplos estímulos simultâneos (visual, auditivo, táctil) podem sobrecarregar cognitivamente."
+    ],
+    "mitigation": [
+      "Os fragmentos movem-se a uma velocidade controlada e nunca em padrões de flashing perigoso.",
+      "Os sons são sempre suaves e com volume ajustável (ou desligável).",
+      "A experiência tem um modo 'reduzido' com menos fragmentos e estímulos.",
+      "A pessoa pode pausar a experiência a qualquer momento com a tecla 'P' ou um botão de pausa.",
+      "Instruções claras no início sobre como ajustar ou desligar sons e movimentos."
+    ]
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "A mecânica de 'rasgar' a tela como gesto inicial, que não é um clique ou arrasto convencional, mas sim uma ação que altera permanentemente o estado visual.",
+      "A tradução cruzada entre gesto (rasgar), som (papel a rasgar) e movimento (fragmentos como corrente líquida).",
+      "O uso do silêncio e da ausência como elementos ativos da experiência, não como falta de conteúdo.",
+      "A devolução de um fragmento único gerado a partir dos gestos da pessoa, que pode ser deixado como rasto no território digital.",
+      "A associação poética com o território através da metáfora do tecido urbano rasgado e recomposto.",
+      "A ausência de juízo sobre a 'catástrofe': não é um erro, mas um limiar para nova criação."
+    ],
+    "comparison": "Nenhuma outra experiência no Atlas usa a metáfora do rasgo como gesto central, nem traduz o gesto em som e movimento de forma tão direta e poética. Outras experiências podem envolver transformação (ex: Dado Sem Lado), mas não a catástrofe como parte do processo criativo."
+  },
+  "questions_for_eduardo": [
+    "A devolução do fragmento digital deve ser uma imagem estática, uma animação ou um som? Ou deve ser uma combinação dos três, dependendo dos gestos da pessoa?",
+    "A experiência deve permitir que a pessoa 'recomece' do zero a qualquer momento, ou o rasgo inicial deve ser permanente até ao final da sessão?",
+    "Os fragmentos gerados por outras pessoas (rastos) devem aparecer na tela inicial de forma aleatória ou apenas se a pessoa explorar ativamente o território digital?",
+    "Deve haver um limite de tempo para a experiência (ex: 5 minutos) ou deve ser aberta, permitindo que a pessoa explore até se cansar?",
+    "A palavra 'Catástrofe' deve aparecer explicitamente em algum momento da experiência, ou deve ser apenas implícita?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Incluir uma camada de 'memória' onde os fragmentos guardados pela pessoa em sessões anteriores aparecem como 'fantasmas' na tela inicial, com uma opacidade reduzida.",
+      "justification": "Reforça a ideia de rasto e latência, e cria uma conexão mais forte entre sessões."
+    },
+    {
+      "proposal": "Adicionar uma opção para a pessoa 'nomear' o fragmento gerado antes de o guardar, como se fosse um objeto simbólico (ex: 'O Rasgo do Silêncio').",
+      "justification": "Aprofunda a devolução poética e a conexão emocional com o fragmento."
+    },
+    {
+      "proposal": "Explorar a tradução do gesto de rasgar para o som de forma mais orgânica, usando síntese sonora que imite o som real de papel a rasgar com base na velocidade e direção do gesto.",
+      "justification": "Aumenta a imersão e a conexão entre os canais sensoriais."
+    },
+    {
+      "proposal": "Incluir uma 'porta' ou 'buraco' na tela que, quando o fragmento 'cai', revela uma vista de um lugar real do Atlas (ex: uma rua de uma freguesia), sugerindo uma conexão territorial mais direta.",
+      "justification": "Aprofunda a relação com o território, mas deve ser feito de forma poética e não literal."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

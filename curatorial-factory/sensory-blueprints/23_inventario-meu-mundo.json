@@ -1,0 +1,405 @@
+{
+  "id": "inventario-meu-mundo",
+  "canonical_name": "Inventário do Meu Mundo",
+  "source_evidence": {
+    "primary": [
+      "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md (D1)"
+    ],
+    "secondary": [
+      "CUBO_02_MANUAL_INVERTIDO_MELHORADO.md (Manual Invertido, SOMOSTODOSPOSSIVEIS)"
+    ],
+    "authorial_quote": "Escolhe três coisas. Dá-lhes um gesto."
+  },
+  "authorial_invariants": [
+    "Seleção de três objectos simbólicos (pessoais, territoriais ou imaginados).",
+    "Atribuição de um gesto único a cada objecto.",
+    "Inventário vivo: os objectos e gestos não são estáticos; ganham vida na interacção.",
+    "Memória e corpo como matéria-prima.",
+    "Ausência de hierarquia entre objectos ou gestos.",
+    "Possibilidade de o inventário ser colectivo ou individual, mas sempre com rasto."
+  ],
+  "perceptual_intent": "Transformar a acção de inventariar num ritual sensorial onde objectos ganham peso, som e movimento através do gesto. A pessoa deve sentir que está a criar um mapa vivo de si ou do território, onde cada item é um nó de uma constelação que respira, ecoa e se reconfigura.",
+  "threshold": {
+    "description": "A tela começa em branco, com um murmúrio sonoro quase impercetível (como o som de uma folha a cair ou um suspiro). Um único ponto de luz pulsante aparece no centro, como um convite silencioso. O cursor, ao aproximar-se, faz o ponto expandir-se em três círculos concêntricos que se desvanecem lentamente, revelando a frase: *Escolhe três coisas.*",
+    "sensory_trigger": [
+      "visual (luz pulsante)",
+      "auditory (murmúrio subliminar)",
+      "temporal_interoceptive (espera ativa)"
+    ]
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": "limiar",
+      "description": "Tela em branco com murmúrio sonoro e ponto de luz. A pessoa percebe que algo está a acontecer sem saber o quê.",
+      "sensory_focus": [
+        "auditory (murmúrio)",
+        "visual (ponto de luz)",
+        "spatial (vazio ativo)"
+      ]
+    },
+    {
+      "stage": "chamada",
+      "description": "Aparece a frase *Escolhe três coisas.* em tipografia orgânica, como se escrita à mão. A frase tremula levemente, como se fosse um objecto físico.",
+      "sensory_focus": [
+        "visual (tipografia viva)",
+        "haptic (tremor visual)"
+      ]
+    },
+    {
+      "stage": "primeiro_gesto",
+      "description": "A pessoa clica ou toca na tela para *escolher* um objecto. O gesto é registado como o primeiro de três. Cada escolha faz surgir um círculo que se preenche com uma textura única (ex: papel rasgado, tecido, metal) e emite um som breve (ex: sineta, riso, vento).",
+      "sensory_focus": [
+        "kinesthetic (clique/toque)",
+        "visual (textura)",
+        "auditory (som único)"
+      ]
+    },
+    {
+      "stage": "resposta_viva",
+      "description": "Após a terceira escolha, os três círculos organizam-se em triângulo e começam a *respirar*: expandem e contraem em ritmo lento. Cada círculo emite um som contínuo (ex: corda vibrante, água a pingar, voz sussurrada) que se mistura com os outros, criando uma paisagem sonora única.",
+      "sensory_focus": [
+        "visual (respiração dos círculos)",
+        "auditory (paisagem sonora emergente)",
+        "temporal_interoceptive (ritmo)"
+      ]
+    },
+    {
+      "stage": "desvio",
+      "description": "Um dos círculos *desaparece* por 2 segundos, como se tivesse sido roubado. Quando regressa, traz consigo uma palavra ou símbolo que não estava lá antes (ex: um nome de lugar, uma data, um emoji de objecto).",
+      "sensory_focus": [
+        "visual (desaparecimento/surgimento)",
+        "auditory (silêncio momentâneo no som do círculo)",
+        "social_presence (sensação de agência externa)"
+      ]
+    },
+    {
+      "stage": "aprofundamento_sensorial",
+      "description": "Os três círculos começam a *interagir*: o som de um altera a cor do outro; o gesto de arrastar um círculo faz os outros vibrarem; a distância entre eles modifica a intensidade dos sons. A pessoa descobre que pode *reorganizar* o triângulo, criando novas combinações sonoras e visuais.",
+      "sensory_focus": [
+        "visual (interacção entre círculos)",
+        "auditory (modulação sonora cruzada)",
+        "kinesthetic (arrasto)",
+        "haptic (vibração visual)"
+      ]
+    },
+    {
+      "stage": "escolha_acaso_silencio",
+      "description": "A pessoa é convidada a *dar um gesto* a cada objecto. Pode escolher entre: (1) desenhar um gesto com o rato/dedo, (2) gravar um som (opcional, com permissão), ou (3) atribuir um símbolo pré-definido. Se não fizer nada, o sistema atribuí um gesto aleatório (ex: um traço sinuoso, um som de campainha).",
+      "sensory_focus": [
+        "kinesthetic (desenho)",
+        "auditory (gravação opcional)",
+        "visual (símbolo)",
+        "silence_or_absence (opção de não agir)"
+      ]
+    },
+    {
+      "stage": "aparição",
+      "description": "Os três objectos e os seus gestos são *animados*: os círculos transformam-se em silhuetas dos objectos (ex: uma chave, um pão, uma pedra) e os gestos ganham vida (ex: a chave gira, o pão é partido, a pedra rola). Uma voz sussurra: *Isto é o teu mundo.*",
+      "sensory_focus": [
+        "visual (animação orgânica)",
+        "auditory (voz sussurrada)",
+        "social_presence (reconhecimento)"
+      ]
+    },
+    {
+      "stage": "devolução",
+      "description": "O sistema devolve um *inventário vivo*: uma imagem gerativa que combina os três objectos e gestos num único símbolo (ex: uma constelação, um mapa, um emblema). A imagem pode ser guardada, partilhada ou impressa. Além disso, a pessoa recebe uma *frase-poema* gerada a partir das palavras associadas aos objectos (ex: *A chave que abre o pão da pedra*).",
+      "sensory_focus": [
+        "visual (imagem gerativa)",
+        "gustatory_evocation (palavras que evocam sabores, ex: 'pão')",
+        "olfactory_evocation (palavras que evocam cheiros, ex: 'pão quente')",
+        "social_presence (partilha opcional)"
+      ]
+    },
+    {
+      "stage": "rasto_latencia",
+      "description": "O inventário fica *latente* no sistema. Se a pessoa regressar, os objectos podem aparecer em outras experiências (ex: como parte de uma constelação em COSMICOXES, ou como referência em uma Crónica Cãotada de FUCO). O símbolo gerado pode também aparecer como *partícula* no cosmos do Atlas, visível para outros utilizadores (sem dados pessoais).",
+      "sensory_focus": [
+        "visual (partícula no cosmos)",
+        "spatial (persistência no território digital)",
+        "temporal_interoceptive (memória)"
+      ]
+    }
+  ],
+  "participant_verbs": [
+    "escolher",
+    "arrastar",
+    "desenhar",
+    "escutar",
+    "reorganizar",
+    "sussurrar",
+    "guardar"
+  ],
+  "system_responses": [
+    {
+      "trigger": "primeira escolha de objecto",
+      "response": "Círculo com textura única + som breve."
+    },
+    {
+      "trigger": "terceira escolha de objecto",
+      "response": "Triângulo de círculos a respirar + paisagem sonora emergente."
+    },
+    {
+      "trigger": "arrastar círculo",
+      "response": "Modulação do som dos outros círculos + vibração visual."
+    },
+    {
+      "trigger": "atribuir gesto",
+      "response": "Animação do objecto + gesto + voz sussurrada."
+    },
+    {
+      "trigger": "inactividade prolongada",
+      "response": "Gesto aleatório atribuído + som de campainha."
+    },
+    {
+      "trigger": "finalização",
+      "response": "Imagem gerativa + frase-poema + opção de guardar/partilhar."
+    }
+  ],
+  "sensory_signature_id": "INV-MUNDO-023",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "luz pulsante",
+        "tipografia orgânica",
+        "texturas (papel, tecido, metal)",
+        "círculos respirantes",
+        "silhuetas animadas",
+        "imagem gerativa",
+        "partículas no cosmos"
+      ],
+      "intensity": "variável (de subtileza a vibração)"
+    },
+    "auditory": {
+      "elements": [
+        "murmúrio subliminar",
+        "sons únicos por objecto (sineta, riso, vento)",
+        "paisagem sonora emergente",
+        "modulação cruzada",
+        "voz sussurrada",
+        "silêncio momentâneo"
+      ],
+      "spatialization": "estéreo (esquerda/direita conforme posição dos círculos)"
+    },
+    "haptic": {
+      "elements": [
+        "vibração visual (tremor dos círculos)",
+        "feedback de arrasto"
+      ],
+      "optional": true
+    },
+    "kinesthetic": {
+      "elements": [
+        "clique/toque",
+        "arrasto",
+        "desenho com rato/dedo"
+      ],
+      "alternatives": [
+        "teclado (setas para mover círculos)",
+        "voz (comandos simples como 'esquerda', 'direita')"
+      ]
+    },
+    "proprioceptive": {
+      "elements": [
+        "instruções de ritmo (respiração dos círculos)",
+        "distância entre objectos (proximidade/intimidade)"
+      ]
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "espera ativa (limiar)",
+        "ritmo de respiração dos círculos",
+        "duração variável das animações"
+      ]
+    },
+    "spatial": {
+      "elements": [
+        "posicionamento dos círculos (triângulo, linha, aleatório)",
+        "profundidade visual (sombras, sobreposição)"
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "palavras que evocam cheiros (ex: 'pão quente', 'terra molhada')"
+      ],
+      "method": "linguagem e memória"
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "palavras que evocam sabores (ex: 'doce', 'azedo', 'salgado')"
+      ],
+      "method": "linguagem e associação"
+    },
+    "social_presence": {
+      "elements": [
+        "sensação de agência externa (desaparecimento do círculo)",
+        "partilha opcional do inventário",
+        "aparição no cosmos (partículas)"
+      ]
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "O gesto (kinestético) altera a paisagem sonora (auditivo) e a textura visual (visual).",
+    "secondary": "A distância entre objectos (espacial) modifica a intensidade do som (auditivo) e a vibração visual (haptic).",
+    "tertiary": "A palavra (linguagem) evoca cheiros e sabores (olfacto/paladar) na frase-poema final."
+  },
+  "silence_or_absence": {
+    "use": [
+      "Murmúrio subliminar no limiar (silêncio como convite).",
+      "Desaparecimento momentâneo de um círculo (ausência como surpresa).",
+      "Silêncio momentâneo no som de um círculo durante o desvio.",
+      "Opção de não atribuir gesto (silêncio como escolha)."
+    ],
+    "effect": "Cria expectativa, quebra o ritmo e convida à atenção."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanisms": [
+      "Desaparecimento aleatório de um círculo durante 2 segundos.",
+      "Atribuição de uma palavra/símbolo não escolhido pela pessoa.",
+      "Gesto aleatório atribuído em caso de inactividade.",
+      "Imagem gerativa única por combinação de objectos e gestos.",
+      "Frase-poema gerada a partir de palavras associadas aos objectos."
+    ],
+    "control": "Acaso controlado dentro de parâmetros autorais (ex: palavras pré-definidas para cada objecto)."
+  },
+  "session_variation": [
+    {
+      "type": "acaso_controlado",
+      "description": "Palavra/símbolo que aparece no círculo desaparecido é aleatória dentro de um conjunto pré-definido (ex: 10 palavras por objecto)."
+    },
+    {
+      "type": "ordem_mutável",
+      "description": "A ordem de aparição dos círculos e dos sons é aleatória em cada sessão."
+    },
+    {
+      "type": "resposta_a_ritmo",
+      "description": "A velocidade do arrasto dos círculos altera a modulação do som (ex: arrasto rápido = som agudo; lento = som grave)."
+    },
+    {
+      "type": "resposta_a_posição",
+      "description": "A posição final dos círculos (triângulo, linha, aleatório) afecta a imagem gerativa final (ex: triângulo = constelação; linha = mapa)."
+    },
+    {
+      "type": "combinação_fragmentos",
+      "description": "A frase-poema é gerada a partir de combinações únicas de palavras associadas aos objectos escolhidos."
+    },
+    {
+      "type": "temporalidade_real",
+      "description": "Se a sessão decorrer de noite, os sons são mais graves e as texturas mais escuras; de dia, sons agudos e texturas claras."
+    }
+  ],
+  "territorial_binding": {
+    "relation": "Os objectos podem ser *territoriais* (ex: um marco de uma freguesia, um prato típico, um cheiro local). Se a pessoa escolher objectos com referência territorial (ex: 'Pastel de Belém', 'Torre de Belém'), a frase-poema final pode incluir o nome do lugar (ex: *O pastel que cheira a Belém*).",
+    "sources": [
+      "curadoria entrada freguesias.xlsx (pendente de parsing)",
+      "FALARTE (mecânica 5: O som que só existe aqui)"
+    ],
+    "evocation": "O inventário pode evocar o território através de objectos simbólicos, sons ou palavras."
+  },
+  "trace_and_return": {
+    "trace": {
+      "digital": "O inventário (objectos + gestos + símbolo gerado) fica guardado no sistema como *partícula* no cosmos do Atlas. Pode aparecer em outras experiências (ex: COSMICOXES, Crónicas Cãotadas).",
+      "physical": "A pessoa pode imprimir ou guardar a imagem gerativa e a frase-poema."
+    },
+    "return": {
+      "immediate": "Imagem gerativa + frase-poema.",
+      "latent": "Aparição do símbolo em outras experiências do Atlas (com consentimento implícito da pessoa)."
+    },
+    "consent": "A partilha no cosmos é opcional e anónima (sem dados pessoais)."
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "alternative": "Descrição em áudio de todas as acções visuais (ex: *Um círculo com textura de papel rasgado apareceu à esquerda*).",
+      "reduced_motion": "Opção para desactivar animações (círculos estáticos, sem respiração)."
+    },
+    "auditory": {
+      "alternative": "Legendas para todos os sons (ex: *Sineta a tocar*). Transcrição da voz sussurrada.",
+      "mute": "Opção para desactivar som."
+    },
+    "kinesthetic": {
+      "alternative": "Controlo por teclado (setas para mover círculos, Enter para seleccionar). Comandos de voz (ex: 'escolher objecto 1', 'arrastar para a direita')."
+    },
+    "haptic": {
+      "alternative": "Feedback visual (ex: círculo a piscar) em vez de vibração."
+    },
+    "proprioceptive": {
+      "alternative": "Instruções em texto (ex: *Respira lentamente como os círculos*)."
+    },
+    "temporal_interoceptive": {
+      "alternative": "Modo sem pressão: tempo ilimitado para todas as acções."
+    },
+    "olfactory_gustatory_evocation": {
+      "alternative": "Descrição textual das evocações (ex: *Este objecto evoca o cheiro a pão quente*)."
+    }
+  },
+  "optional_permissions": {
+    "microphone": {
+      "purpose": "Gravar um som como gesto para um objecto.",
+      "request_timing": "Apenas quando a pessoa selecciona a opção *gravar som*.",
+      "fallback": "Gesto aleatório ou símbolo pré-definido."
+    },
+    "camera": {
+      "purpose": "N/A (não aplicável a esta experiência).",
+      "request_timing": "N/A"
+    },
+    "geolocation": {
+      "purpose": "Sugerir objectos territoriais baseados na localização da pessoa (opcional).",
+      "request_timing": "Apenas se a pessoa activar a opção *objectos da minha zona*.",
+      "fallback": "Objectos genéricos ou baseados em memória."
+    },
+    "motion_orientation": {
+      "purpose": "N/A (não aplicável a esta experiência).",
+      "request_timing": "N/A"
+    }
+  },
+  "overstimulation_risk": {
+    "potential_risk": [
+      "Animações rápidas (respiração dos círculos) podem causar desconforto em pessoas com sensibilidade visual.",
+      "Sons sobrepostos (paisagem sonora) podem ser intensos para pessoas com sensibilidade auditiva.",
+      "Múltiplas acções simultâneas (arrastar, escutar, ver) podem ser esmagadoras."
+    ],
+    "mitigation": [
+      "Opção *reduced motion* para desactivar animações.",
+      "Controlo de volume individual para cada som.",
+      "Modo *focado*: uma acção de cada vez (ex: primeiro escolher objectos, depois atribuir gestos).",
+      "Pausa a qualquer momento com a tecla *Espaço*."
+    ]
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "Inventário vivo: objectos ganham vida através de gestos e sons, não são estáticos.",
+      "Tradução cruzada entre gesto (kinestético), som (auditivo) e textura (visual).",
+      "Desaparecimento momentâneo de um objecto como mecanismo de surpresa.",
+      "Frase-poema gerativa que evoca cheiros e sabores.",
+      "Rasto latente: inventário aparece como partícula em outras experiências do Atlas.",
+      "Territorialidade opcional: objectos podem ser ligados a lugares reais."
+    ],
+    "comparison": "Difere de *Galeria Diletante* (fotografia + palavra) e *Dado Sem Lado* (acaso físico) ao focar-se em objectos simbólicos + gestos + som. Não é um quiz, um catálogo ou um jogo de pontos."
+  },
+  "questions_for_eduardo": [
+    "Os objectos do inventário devem ser *pessoais* (escolhidos pela pessoa) ou podem ser *sugeridos* pelo sistema (ex: baseados em território ou memória colectiva)?",
+    "A frase-poema final deve ser *gerada automaticamente* a partir de palavras pré-definidas, ou pode incluir *contribuições humanas* (ex: de FUCO ou da comunidade)?",
+    "O símbolo gerado (imagem final) deve ser *único por sessão* ou pode ser *reutilizado* em outras sessões (ex: como partícula recorrente)?",
+    "A aparição do inventário em outras experiências (ex: COSMICOXES) deve ser *anónima* ou pode incluir *metadados* (ex: data, localização aproximada)?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Incluir uma opção para a pessoa *descrever* os objectos em vez de os escolher de uma lista pré-definida, permitindo objectos mais pessoais ou abstractos.",
+      "justification": "Aumenta a liberdade criativa e a conexão emocional com o inventário."
+    },
+    {
+      "proposal": "Adicionar um *modo colectivo* onde várias pessoas podem contribuir para o mesmo inventário (ex: uma família ou um grupo de amigos).",
+      "justification": "Reforça a dimensão comunitária e intergeracional do Atlas."
+    },
+    {
+      "proposal": "Integração com *FALARTE*: permitir que os objectos do inventário sejam ligados a contribuições territoriais (ex: um objecto pode ser *O som que só existe aqui* de uma freguesia).",
+      "justification": "Aprofundar a relação entre o inventário pessoal e o território."
+    },
+    {
+      "proposal": "Adicionar um *modo táctil* para dispositivos com ecrã sensível à pressão, onde a intensidade do toque afecta a textura ou o som do objecto.",
+      "justification": "Explorar mais o canal háptico sem excluir quem não tem dispositivos avançados."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

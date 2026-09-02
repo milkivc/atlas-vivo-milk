@@ -1,0 +1,382 @@
+{
+  "id": "lengalengas",
+  "canonical_name": "Lengalengas",
+  "source_evidence": {
+    "primary": [
+      {
+        "source": "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf",
+        "authority": "high",
+        "excerpt": "16 seres folclóricos; 5 núcleos/dispositivos nomeados; jogos tradicionais, trava-línguas e adivinhas."
+      },
+      {
+        "source": "catalog_entry",
+        "authority": "high",
+        "excerpt": "familia: folclore; mecanica: continuar; convite: 'Repete. Acrescenta. Passa adiante.'"
+      }
+    ],
+    "secondary": [
+      {
+        "source": "Curadoria Cultural e Existencialismo Profundo.pdf",
+        "authority": "medium",
+        "excerpt": "língua viva, oralidade, interacção sensorial, sotaques, pluralidade."
+      }
+    ]
+  },
+  "authorial_invariants": [
+    "A lengalenga é uma forma oral de brincadeira com palavras, ritmo e repetição.",
+    "O convite é 'Repete. Acrescenta. Passa adiante.'",
+    "Pertence à família do folclore.",
+    "Mecânica de 'continuar' (narrativa ou sonoridade que se estende).",
+    "Deve preservar a oralidade, a musicalidade e a transmissão intergeracional."
+  ],
+  "perceptual_intent": "Transformar a lengalenga num organismo vivo que respira, cresce e se deforma com a participação, evocando a memória colectiva do folclore como um corpo sonoro e visual em mutação. A pessoa deve sentir que está a tecer uma rede de vozes, gestos e silêncios que transcendem o tempo e o espaço.",
+  "threshold": {
+    "description": "A pessoa entra num espaço escuro, onde um murmúrio distorcido e quase inaudível de uma lengalenga tradicional (ex: 'O rato roeu a roupa do rei de Roma') emerge como um fio de som. O ambiente visual é uma neblina de partículas que se movem lentamente, como se estivessem a ser sopradas por uma brisa invisível. O cursor ou dedo da pessoa, ao aproximar-se, faz com que as partículas se agreguem em formas efémeras que lembram letras ou sílabas, mas nunca se fixam.",
+    "sensory_trigger": "O som subliminar e o movimento das partículas criam uma sensação de presença de algo vivo, mas indeterminado. A pessoa é convocada a interagir sem saber exactamente como."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": 1,
+      "name": "LIMIAR",
+      "description": "Murmúrio sonoro e partículas em movimento lento. A pessoa percebe que algo está a acontecer, mas não identifica o quê."
+    },
+    {
+      "stage": 2,
+      "name": "CHAMADA",
+      "description": "O murmúrio ganha clareza: uma sílaba ou palavra da lengalenga (ex: 'ra-to') é repetida em loop, como um convite para completar. As partículas formam uma sombra de letra ou símbolo que desaparece quando a pessoa tenta fixá-la."
+    },
+    {
+      "stage": 3,
+      "name": "PRIMEIRO GESTO",
+      "description": "A pessoa repete a sílaba em voz alta (opcional) ou clica/arrasta o cursor para 'puxar' o som. O sistema responde amplificando a sílaba e mostrando uma letra ou símbolo correspondente, que se dissolve em novas partículas."
+    },
+    {
+      "stage": 4,
+      "name": "RESPOSTA VIVA",
+      "description": "O sistema completa a palavra ou sílaba seguinte da lengalenga (ex: 'roeu'), e as partículas reorganizam-se em formas que sugerem a próxima sílaba. O som ganha camadas: a voz da pessoa (se gravada) mistura-se com vozes pré-gravadas de crianças e idosos, criando um coral heterogéneo."
+    },
+    {
+      "stage": 5,
+      "name": "DESVIO",
+      "description": "De repente, a lengalenga 'erra': uma sílaba é substituída por um som absurdo (ex: um latido, um riso, um ruído de objeto quotidiano). As partículas formam uma imagem ou símbolo inesperado (ex: um rato a roer uma letra)."
+    },
+    {
+      "stage": 6,
+      "name": "APROFUNDAMENTO SENSORIAL",
+      "description": "A lengalenga agora é uma paisagem sonora: cada sílaba ou palavra activa uma camada visual e auditiva. Por exemplo, 'rei' pode evocar um som de coroação e uma coroa de partículas douradas; 'Roma' pode trazer um eco de passos em pedra e uma textura de mosaico. O ritmo da lengalenga sincroniza com o movimento das partículas e a intensidade do som."
+    },
+    {
+      "stage": 7,
+      "name": "ESCOLHA / ACASO / SILÊNCIO",
+      "description": "A pessoa pode: (1) continuar a repetir a lengalenga para a estender; (2) introduzir uma palavra ou som novo (ex: 'roeu o pão'); (3) fazer silêncio. Se escolher o silêncio, as partículas congelam e o som desvanece-se, deixando apenas um eco longínquo."
+    },
+    {
+      "stage": 8,
+      "name": "APARIÇÃO",
+      "description": "Se a pessoa continuou ou acresceu à lengalenga, surge uma 'versão' nova da brincadeira, misturando a contribuição da pessoa com fragmentos de outras lengalengas ou sons territoriais (ex: um sino de igreja, um pregão de feira). As partículas formam uma constelação de símbolos que representam a nova versão. Se a pessoa escolheu o silêncio, aparece uma 'lengalenga do vazio': um padrão de partículas que se move como uma onda, acompanhado por um som de vento ou respiração."
+    },
+    {
+      "stage": 9,
+      "name": "DEVOLUÇÃO",
+      "description": "O sistema devolve à pessoa: (1) um áudio da sua contribuição misturada com as vozes do coral (se gravou); (2) uma imagem gerativa da constelação de partículas com a sua 'assinatura' (ex: um símbolo único criado a partir do seu gesto ou voz); (3) um texto com a nova versão da lengalenga, se a alterou. Tudo é opcional para guardar ou partilhar."
+    },
+    {
+      "stage": 10,
+      "name": "RASTO / LATÊNCIA",
+      "description": "A constelação de partículas e o áudio da nova lengalenga ficam disponíveis no 'cosmos' da curadoria, como um rasto público anónimo (a menos que a pessoa opte por assinar). Outras pessoas podem encontrar esta contribuição em sessões futuras, e a lengalenga pode evoluir ainda mais. A experiência pode regressar ao limiar, agora com a nova camada de som e partículas."
+    }
+  ],
+  "participant_verbs": [
+    "Repetir",
+    "Acrescentar",
+    "Puxar",
+    "Silenciar",
+    "Ouvir",
+    "Observar",
+    "Deixar-se surpreender"
+  ],
+  "system_responses": [
+    {
+      "trigger": "Repetir sílaba/palavra",
+      "response": "Amplifica a sílaba, completa a palavra seguinte, e reorganiza partículas em formas que sugerem a próxima sílaba. Adiciona camadas sonoras de vozes pré-gravadas."
+    },
+    {
+      "trigger": "Acrescentar palavra/som novo",
+      "response": "Incorpora a contribuição na lengalenga, criando uma versão híbrida. As partículas formam símbolos que representam a nova versão. O som ganha texturas inesperadas (ex: risos, sons de objetos)."
+    },
+    {
+      "trigger": "Puxar som/partículas com cursor ou dedo",
+      "response": "A sílaba ou palavra é 'esticada' visual e sonoramente, como um elástico, antes de se dissolver em novas partículas."
+    },
+    {
+      "trigger": "Silêncio prolongado",
+      "response": "Congela as partículas e desvanece o som, deixando um eco longínquo. Aparece a 'lengalenga do vazio' (padrão de partículas + som de vento/respiração)."
+    },
+    {
+      "trigger": "Movimento rápido do cursor/dedo",
+      "response": "Acelera o ritmo da lengalenga e a velocidade das partículas, criando um efeito de 'corrida' sonora e visual."
+    },
+    {
+      "trigger": "Movimento lento do cursor/dedo",
+      "response": "Desacelera a lengalenga, alongando as sílabas e criando um efeito de 'câmera lenta' nas partículas."
+    },
+    {
+      "trigger": "Toque em dispositivo háptico (opcional)",
+      "response": "Vibração sutil que acompanha o ritmo da lengalenga ou o movimento das partículas."
+    }
+  ],
+  "sensory_signature_id": "lengalengas_coral_particulado",
+  "sensory_channels": {
+    "visual": {
+      "description": "Partículas em movimento que se agregam em formas efémeras (letras, símbolos, objetos do folclore). Transparência, profundidade e ritmo visual sincronizados com o som. Texturas que evocam materiais tradicionais (ex: tecido, pedra, papel).",
+      "intensity": "high"
+    },
+    "auditory": {
+      "description": "Murmúrio inicial, sílabas/palavras da lengalenga em loop, vozes pré-gravadas de diferentes idades e sotaques, sons territoriais (ex: sino, pregão), eco, respiração, risos, sons de objetos. Espacialização do som (esquerda/direita, proximidade/distância).",
+      "intensity": "high"
+    },
+    "haptic": {
+      "description": "Vibração sutil em dispositivos compatíveis, sincronizada com o ritmo da lengalenga ou o movimento das partículas. Feedback háptico opcional para gestos de 'puxar' ou 'tocar'.",
+      "intensity": "low",
+      "optional": true
+    },
+    "kinesthetic": {
+      "description": "Movimento do cursor/dedo afeta a velocidade, direção e agregação das partículas. Gestos de arrasto ou toque alteram o ritmo e a intensidade do som. Inclinação do dispositivo (opcional) pode alterar a perspectiva visual.",
+      "intensity": "medium"
+    },
+    "proprioceptive": {
+      "description": "Instruções subtis para a pessoa ajustar a postura, distância do ecrã ou ritmo de interação (ex: 'Respira com a lengalenga'). Convite para usar a mão não dominante ou fechar os olhos momentaneamente.",
+      "intensity": "low"
+    },
+    "temporal_interoceptive": {
+      "description": "Ritmo da lengalenga sincronizado com a respiração percebida da pessoa (sem recolha biométrica). Espera e suspensão entre sílabas. Aceleração/desaceleração do tempo visual e sonoro.",
+      "intensity": "high"
+    },
+    "spatial": {
+      "description": "Espacialização do som (3D ou estéreo) e profundidade visual das partículas. A posição do cursor/dedo altera a intimidade do som (ex: mais próximo = mais alto).",
+      "intensity": "medium"
+    },
+    "olfactory_evocation": {
+      "description": "Evocação de cheiros através de linguagem e imagem: 'o cheiro a pão quente da padaria da avó', 'o aroma a terra molhada depois da chuva'. Nunca fingido como output do browser.",
+      "intensity": "low"
+    },
+    "gustatory_evocation": {
+      "description": "Evocação de sabores através de linguagem e som: 'o gosto doce do mel que se comia na festa', 'o sabor azedo da laranja da árvore da rua'. Nunca fingido como output do browser.",
+      "intensity": "low"
+    },
+    "social_presence": {
+      "description": "Presença de vozes pré-gravadas de outras pessoas (crianças, idosos) que se misturam com a voz da pessoa, criando um coral. Sensação de estar a participar num ritual colectivo, mesmo sozinha.",
+      "intensity": "medium"
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": {
+      "from": "auditory",
+      "to": "visual",
+      "description": "O som da lengalenga (sílabas, palavras, vozes) traduz-se em formas de partículas que se agregam e dissolvem, como se o som tivesse peso e textura visual. O ritmo sonoro altera a velocidade e a direcção das partículas."
+    },
+    "secondary": {
+      "from": "kinesthetic",
+      "to": "auditory",
+      "description": "O movimento do cursor/dedo altera o timbre, volume e espacialização do som. Por exemplo, um gesto rápido pode distorcer a voz, enquanto um gesto lento pode alongar as sílabas."
+    },
+    "tertiary": {
+      "from": "visual",
+      "to": "temporal_interoceptive",
+      "description": "A agregação e dissolução das partículas sincroniza com a respiração percebida da pessoa, criando uma sensação de ritmo corporal partilhado com a lengalenga."
+    }
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio é um gesto activo. Se a pessoa não interagir ou escolher o silêncio, o sistema responde com a 'lengalenga do vazio': um padrão de partículas que se move como uma onda, acompanhado por um som de vento ou respiração. O silêncio também pode ser um intervalo entre sílabas, criando suspensão e expectativa.",
+    "purpose": "Convidar a pessoa a perceber o vazio como parte da experiência, não como ausência de conteúdo. O silêncio permite que a lengalenga 'respire' e que a pessoa sinta a sua própria presença no ritual."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": [
+      {
+        "type": "desvio sonoro",
+        "description": "A lengalenga 'erra' intencionalmente, substituindo uma sílaba por um som absurdo (ex: latido, riso, ruído de objeto)."
+      },
+      {
+        "type": "aparição visual inesperada",
+        "description": "As partículas formam uma imagem ou símbolo inesperado (ex: um rato a roer uma letra, uma coroa dourada)."
+      },
+      {
+        "type": "contribuição anónima",
+        "description": "A pessoa pode encontrar contribuições de outras sessões (ex: uma sílaba ou palavra acrescida por outra pessoa), que aparecem aleatoriamente."
+      },
+      {
+        "type": "ritmo aleatório",
+        "description": "O ritmo da lengalenga pode acelerar ou desacelerar aleatoriamente, criando um efeito de 'brincadeira' com o tempo."
+      }
+    ],
+    "purpose": "Quebrar a expectativa de linearidade e controlar, convidando a pessoa a abraçar o acaso e a surpresa como parte do folclore vivo."
+  },
+  "session_variation": [
+    {
+      "type": "ordem mutável",
+      "description": "A ordem das sílabas ou palavras da lengalenga pode variar entre sessões, criando versões alternativas."
+    },
+    {
+      "type": "resposta a ritmo/velocidade do gesto",
+      "description": "A velocidade do cursor/dedo ou da voz da pessoa afeta o ritmo e a intensidade da lengalenga e das partículas."
+    },
+    {
+      "type": "combinação de fragmentos curatoriais",
+      "description": "Fragmentos de diferentes lengalengas ou sons territoriais podem ser misturados aleatoriamente."
+    },
+    {
+      "type": "presença de contribuição pública",
+      "description": "Contribuições anónimas de outras sessões podem aparecer como sílabas ou sons adicionais."
+    },
+    {
+      "type": "temporalidade real",
+      "description": "A lengalenga pode incluir sons ou símbolos relacionados com a hora do dia, estação do ano ou fase da lua (ex: um sino ao meio-dia, um som de chuva no inverno)."
+    },
+    {
+      "type": "território escolhido",
+      "description": "Se a pessoa permitir geolocalização, a lengalenga pode incluir sons ou símbolos específicos da sua região (ex: um pregão de feira local)."
+    }
+  ],
+  "territorial_binding": {
+    "description": "A experiencia pode evocar sons, símbolos ou memórias específicas de territórios (ex: pregões de feira, sinos de igreja, sons de ofícios tradicionais). Se a pessoa permitir geolocalização, a lengalenga pode incorporar elementos sonoros ou visuais da sua freguesia ou bairro. No entanto, a experiência funciona plenamente sem geolocalização.",
+    "sources": [
+      "curadoria entrada freguesias.xlsx",
+      "PUBLICO_TERRITORIAL__CURADORIA_NOS_FALARTE_RESIDUAL.pdf"
+    ],
+    "optional": true
+  },
+  "trace_and_return": {
+    "trace": {
+      "description": "A constelação de partículas e o áudio da nova versão da lengalenga (se alterada) ficam disponíveis no 'cosmos' da curadoria como um rasto público anónimo. Outras pessoas podem encontrar e interagir com estas contribuições em sessões futuras.",
+      "persistence": "public_anonymous",
+      "format": [
+        "generative_image",
+        "audio_mix"
+      ]
+    },
+    "return": {
+      "description": "A pessoa recebe: (1) um áudio da sua contribuição misturada com o coral de vozes; (2) uma imagem gerativa da constelação de partículas com a sua 'assinatura'; (3) um texto com a nova versão da lengalenga, se a alterou. Tudo é opcional para guardar ou partilhar.",
+      "format": [
+        "audio",
+        "image",
+        "text"
+      ]
+    }
+  },
+  "accessibility_equivalents": {
+    "visual_impairment": {
+      "description": "Todas as interacções visuais têm equivalentes sonoros. As partículas são descritas em tempo real por uma voz sintética (ex: 'partículas a formar a letra R'). O ritmo e a intensidade do som são ajustáveis. Modo de alto contraste para as partículas.",
+      "features": [
+        "screen_reader_compatible",
+        "high_contrast_mode",
+        "adjustable_audio_feedback"
+      ]
+    },
+    "auditory_impairment": {
+      "description": "Todas as interacções sonoras têm equivalentes visuais. As sílabas e palavras são representadas por formas e cores específicas (ex: 'ra' = círculo vermelho; 'to' = quadrado azul). O ritmo da lengalenga é visível através do movimento das partículas. Legendas em tempo real para as vozes pré-gravadas.",
+      "features": [
+        "visual_rhythm_representation",
+        "color_coded_syllables",
+        "real_time_captions"
+      ]
+    },
+    "motor_impairment": {
+      "description": "Alternativas para gestos: (1) voz para repetir ou acrescer à lengalenga; (2) teclado para navegar e interagir com as partículas; (3) switch ou dispositivo adaptado para gestos simples. O ritmo da lengalenga pode ser controlado por comandos de voz (ex: 'mais devagar').",
+      "features": [
+        "voice_control",
+        "keyboard_navigation",
+        "switch_compatibility",
+        "adjustable_rhythm"
+      ]
+    },
+    "cognitive_impairment": {
+      "description": "Modo simplificado com menos estímulos visuais e sonoros. A lengalenga é apresentada em passos mais lentos e com menos camadas. Opção para desativar o 'desvio' (erro intencional) e manter a lengalenga linear.",
+      "features": [
+        "simplified_mode",
+        "reduced_stimuli",
+        "linear_option"
+      ]
+    },
+    "reduced_motion": {
+      "description": "Modo com movimento mínimo: as partículas movem-se lentamente ou ficam estáticas, e o som é apresentado sem espacialização complexa. A experiencia preserva a intenção poética sem sobrecarregar visualmente.",
+      "features": [
+        "static_particles",
+        "minimal_motion",
+        "simplified_audio"
+      ]
+    }
+  },
+  "optional_permissions": {
+    "microphone": {
+      "purpose": "Permitir à pessoa gravar a sua voz para repetir ou acrescer à lengalenga, misturando-a com o coral de vozes pré-gravadas.",
+      "fallback": "A pessoa pode usar o teclado ou cliques para interagir com as sílabas e palavras."
+    },
+    "geolocation": {
+      "purpose": "Incorporar sons ou símbolos específicos da região da pessoa na lengalenga.",
+      "fallback": "A experiencia funciona plenamente com sons e símbolos genéricos do folclore."
+    },
+    "device_motion": {
+      "purpose": "Permitir que a inclinação do dispositivo afete a perspectiva visual das partículas.",
+      "fallback": "A experiencia funciona com interacções de cursor/dedo."
+    }
+  },
+  "overstimulation_risk": {
+    "risks": [
+      {
+        "type": "visual_overload",
+        "description": "Movimento rápido e constante das partículas pode causar desconforto visual ou vertigem.",
+        "mitigation": "Modo de movimento reduzido; opção para congelar as partículas; ajuste de velocidade."
+      },
+      {
+        "type": "auditory_overload",
+        "description": "Múltiplas camadas sonoras (vozes, sons territoriais, eco) podem ser excessivas.",
+        "mitigation": "Controlo de volume individual para cada camada sonora; modo de áudio simplificado."
+      },
+      {
+        "type": "cognitive_overload",
+        "description": "A combinação de estímulos visuais, sonoros e interacções pode ser confusa ou cansativa.",
+        "mitigation": "Modo simplificado com menos camadas; opção para desativar o 'desvio' e manter a linearidade."
+      }
+    ],
+    "general_mitigation": "A experiencia inclui pausas naturais (silêncio, suspensão) e convida a pessoa a ajustar o ritmo ou a intensidade dos estímulos."
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "A lengalenga como organismo vivo que evolui com a participação, misturando vozes de diferentes gerações e territórios.",
+      "A tradução cruzada entre som e partículas visuais, onde o ritmo sonoro altera a forma e o movimento das partículas.",
+      "O 'desvio' intencional na lengalenga, que quebra a linearidade e convida à surpresa.",
+      "A 'lengalenga do vazio', que aparece quando a pessoa escolhe o silêncio, transformando a ausência em presença sensorial.",
+      "A devolução de uma versão única da lengalenga, misturando a contribuição da pessoa com fragmentos de outras sessões.",
+      "A evocação de cheiros e sabores através de linguagem e som, sem fingir output físico.",
+      "A assinatura sensorial do 'coral particulado', que mistura vozes e formas em constante mutação."
+    ],
+    "comparison": "Nenhuma outra experiencia no Atlas Vivo MILK usa a lengalenga como ponto de partida para uma dinâmica de coral sonoro e visual em mutação. Outras experiências podem explorar oralidade ou folclore, mas não através desta combinação única de tradução cruzada entre som e partículas, desvio intencional e devolução de uma versão evoluída da brincadeira."
+  },
+  "questions_for_eduardo": [
+    "A lengalenga inicial deve ser fixa (ex: 'O rato roeu a roupa do rei de Roma') ou pode variar entre sessões, usando um conjunto pré-definido de lengalengas tradicionais?",
+    "As vozes pré-gravadas devem ser de pessoas reais (ex: crianças e idosos de comunidades específicas) ou podem ser geradas sinteticamente para evitar questões de consentimento?",
+    "O 'desvio' na lengalenga (ex: sílaba substituída por um som absurdo) deve ser aleatório ou seguir uma regra curatorial específica (ex: sempre na terceira sílaba)?",
+    "A 'lengalenga do vazio' deve ser uma versão pré-definida ou pode ser gerada dinâmicamente com base no silêncio da pessoa?",
+    "A devolução da nova versão da lengalenga deve incluir apenas a contribuição da pessoa ou pode misturar fragmento de outras sessões anónimas?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Incluir uma opção para a pessoa escolher uma lengalenga específica de uma lista pré-definida, permitindo personalizar a experiencia desde o início.",
+      "justification": "Aumentaria a sensação de agência e conexão com o folclore local ou pessoal."
+    },
+    {
+      "proposal": "Adicionar uma camada de 'memória' onde a pessoa pode ver ou ouvir contribuições de sessões anteriores (anónimas) que evoluíram a partir da mesma lengalenga inicial.",
+      "justification": "Reforçaria a idéia de uma rede viva de transmissão oral e intergeracional."
+    },
+    {
+      "proposal": "Incorporar sons ambientais reais (ex: vento, chuva) que se misturam com a lengalenga, evocando o território de forma mais imersiva.",
+      "justification": "Aprofundaria a conexão com o folclore como algo enraizado no lugar e no tempo."
+    },
+    {
+      "proposal": "Permitir que a pessoa 'guarde' a sua versão da lengalenga como um 'objecto' no inventário do Atlas, que pode ser partilhado ou reutilizado em outras experiências.",
+      "justification": "Criaria um rasto mais tangível e duradouro da participação."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

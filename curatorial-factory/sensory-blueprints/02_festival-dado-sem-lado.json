@@ -1,0 +1,346 @@
+{
+  "id": "festival-dado-sem-lado",
+  "canonical_name": "Festival Dado Sem Lado",
+  "source_evidence": {
+    "primary": [
+      "Cópia de Fica registado neste dossiê… (fonte autoral forte para Dado Sem Lado)",
+      "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md (princípios de jogo, anti-regras, absurdo)",
+      "Atlas Vivo MILK - Especificação Completa da Camada Pública Encantada.pdf (gramáticas de jogo tradicional e desvio)"
+    ],
+    "secondary": [
+      "curadoria entrada freguesias.xlsx (territorialidade opcional, não determinante)",
+      "A Deriva do Sentido: Cartografia Psicogeográfica e Sensorial de Lisboa (psicogeografia activa, brincadeira territorial)"
+    ],
+    "excluded": [
+      "Qualquer solução técnica legada (GAS/Sheets) ou invenção de mecânicas sem suporte autoral"
+    ]
+  },
+  "authorial_invariants": [
+    "Jogo-festival de desvio, não botão 'sortear'.",
+    "O dado pode dobrar-se como avião de papel, voar como mosca e desafiar a pessoa a apanhá-lo.",
+    "Desafios misturam lenda, comida, absurdo, oralidade, infância e adulto.",
+    "Prémio secreto opcional (nunca pontuação ou badge).",
+    "Anti-regra: o dado não tem lado 'certo'; a regra é o desvio.",
+    "Relação com o Livro Cubo: erro como entrada, riso como método, silêncio como matéria."
+  ],
+  "perceptual_intent": "Transformar o acaso num corpo vivo que escapa, desafia e convida à perseguição lúdica. A pessoa deve sentir que o dado é um ser teimoso, não um objecto passivo. A experiência evoca a infância (brincadeira de rua), a oralidade (lendas, trava-línguas) e o território (ruas, festas, comidas) sem nunca se reduzir a um quiz ou sorteio genérico.",
+  "threshold": {
+    "description": "A tela está quase vazia, com um ponto minúsculo e pulsante no centro (como um dado a 3D reduzido a um pixel). O fundo é um degradê orgânico de tons terrosos (como um chão de terra batida), com uma textura subtil de grãos que se mexem lentamente, como se respirassem. Um som de ventoinha ou asa a bater (baixo volume, quase subliminar) sugere movimento oculto.",
+    "sensory_trigger": "O ponto pisca uma vez, como se chamasse, e desaparece. No mesmo instante, o som de ventoinha cessa abruptamente, deixando um silêncio que 'pesa' (como se o ar tivesse sido sugado)."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": "LIMIAR",
+      "action": "O ponto desaparece. A tela escurece 10% e o som de ventoinha é substituído por um zumbido grave (como um dado a rolar dentro de uma caixinha de metal). A pessoa percebe que algo mudou, mas não sabe o quê."
+    },
+    {
+      "stage": "CHAMADA",
+      "action": "Aparece uma sombra alongada e distorcida do dado, projectada na parede (lado esquerdo da tela). A sombra move-se lentamente, como se o dado estivesse a rolar. Uma voz sussurrada (ou texto que aparece e desaparece) diz: *‘Lança sem procurar o lado certo.’* O zumbido aumenta de volume."
+    },
+    {
+      "stage": "PRIMEIRO GESTO",
+      "action": "A pessoa pode: (1) tocar/arrastar a sombra; (2) soprar para o microfone (opcional); (3) mover o dispositivo (opcional); ou (4) esperar. Qualquer gesto faz a sombra reagir: se tocada, salta; se soprada, gira; se o dispositivo se mover, a sombra projecta-se num ângulo diferente; se esperar, a sombra aproxima-se sozinha."
+    },
+    {
+      "stage": "RESPOSTA VIVA",
+      "action": "O dado materializa-se em 3D (mas não realista: é uma forma geométrica orgânica, com arestas irregulares e textura de papel amassado). Começa a rolar em direcção ao cursor/dedo da pessoa, emitindo um som de rolagem (madeira em pedra). Se a pessoa se mexer, o dado ajusta a trajectória, como se a perseguição fosse mútua."
+    },
+    {
+      "stage": "DESVIO",
+      "action": "Quando o dado está a 20% da tela da pessoa, ele *dobra-se* ao meio (como um avião de papel) e voa em direcção aleatória, emitindo um som de asa. Se a pessoa tentar apanhá-lo com o cursor, o dado acelera. Se a pessoa parar, o dado abrandar e paira no ar, como uma mosca."
+    },
+    {
+      "stage": "APROFUNDAMENTO SENSORIAL",
+      "action": "O som do dado transformou-se: agora é uma mistura de zumbido, riso abafado e um *clique* metálico (como um dado a bater num copo). A sombra do dado projecta-se em todas as direcções, criando um padrão de luz fractal. Se a pessoa mover o cursor para a sombra, esta *queima* (como papel) e revela uma palavra ou símbolo efémero (ex: ‘SARDINHA’, ‘REPOLHO’, ‘JANELA QUEBRADA’ — referências ao baralho SOMOSTODOSPOSSIVEIS)."
+    },
+    {
+      "stage": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "O dado para no ar e *cai* lentamente. A pessoa pode: (1) apanhá-lo com o cursor (o dado desdobra-se num desafio: ex: ‘Diz um trava-língua de [freguesia aleatória]’); (2) deixar cair (o dado bate no ‘chão’ e salta para um lado aleatório, emitindo um som de riso); ou (3) ignorar (o dado desaparece e o som de ventoinha regressa, mais forte)."
+    },
+    {
+      "stage": "APARIÇÃO",
+      "action": "Se apanhado: o dado abre-se como uma flor, revelando um *prémio secreto* (ex: uma receita de um doce tradicional, uma lenda local em forma de adivinha, ou uma foto distorcida de um lugar da freguesia). Se caído: o dado transformou-se num *pião* e gira, projectando sombras de outras formas (estrelas, corações, peixes). Se ignorado: a tela escurece e aparece um texto: *‘O dado foi-se embora. Mas volta quando menos esperares.’*"
+    },
+    {
+      "stage": "DEVOLUÇÃO",
+      "action": "A pessoa recebe um *rasto*: (1) se interagiu, uma *partícula* (símbolo ou palavra) é adicionada ao seu ‘inventário’ (visível como um ícone flutuante no canto da tela, que pode ser arrastado para o COSMICOXES); (2) se ignorou, o dado deixa uma *mancha de tinta* no ‘chão’ (que permanece nas próximas sessões, como um graffiti). Em ambos os casos, o som de ventoinha regressa, mas agora com um *eco* da interacção (ex: um riso ou um *clique* metálico ocasional)."
+    },
+    {
+      "stage": "RASTO / LATÊNCIA",
+      "action": "O dado *nunca some completamente*. Nas sessões seguintes, pode aparecer: (1) como uma sombra passageira; (2) como um som de rolagem ao carregar a página; ou (3) como uma partícula no COSMICOXES. A mancha de tinta (se ignorado) cresce lentamente com o tempo, como um musgo digital."
+    }
+  ],
+  "participant_verbs": [
+    "perseguir",
+    "soprar",
+    "esperar",
+    "apanhar",
+    "deixar cair",
+    "ignorar",
+    "ouvir"
+  ],
+  "system_responses": [
+    "O dado rola em direcção ao cursor, ajustando a trajectória.",
+    "O dado dobra-se e voa como avião de papel.",
+    "O dado projecta sombras fractais que revelam palavras efémeras.",
+    "O dado abre-se como uma flor, revelando um prémio secreto.",
+    "O dado transforma-se num pião e gira, projectando sombras.",
+    "O dado desaparece e regressa como sombra ou som.",
+    "A tela escurece e o som de ventoinha regressa com eco.",
+    "Partículas ou manchas são adicionadas ao inventário ou ao território."
+  ],
+  "sensory_signature_id": "DSL_002_FESTIVAL_DADO_SEM_LADO",
+  "sensory_channels": {
+    "visual": {
+      "primary": [
+        "sombra distorcida",
+        "dado 3D orgânico",
+        "textura de papel amassado",
+        "projecção de luz fractal",
+        "degradê terroso",
+        "partículas efémeras",
+        "mancha de tinta"
+      ],
+      "secondary": [
+        "piscar do ponto inicial",
+        "queimar da sombra",
+        "abrir como flor",
+        "girar como pião"
+      ]
+    },
+    "auditory": {
+      "primary": [
+        "zumbido grave (dado a rolar)",
+        "som de asa (voo)",
+        "clique metálico",
+        "riso abafado",
+        "ventoinha/asa a bater",
+        "eco do som de rolagem"
+      ],
+      "secondary": [
+        "silêncio repentino",
+        "som de papel a queimar",
+        "som de pião a girar"
+      ]
+    },
+    "haptic": {
+      "optional": [
+        "vibração subtil ao apanhar o dado (se dispositivo suportar)",
+        "feedback de pressão ao tocar a sombra (se ecrã táctil)"
+      ]
+    },
+    "kinesthetic": {
+      "primary": [
+        "trajectória do cursor/dedo",
+        "movimento do dispositivo (opcional)",
+        "velocidade de perseguição"
+      ],
+      "secondary": [
+        "soprar para o microfone (opcional)"
+      ]
+    },
+    "proprioceptive": {
+      "primary": [
+        "postura de espera (corpo imóvel)",
+        "ritmo de respiração (sugerido pelo som)"
+      ]
+    },
+    "temporal_interoceptive": {
+      "primary": [
+        "espera pelo regresso do dado",
+        "aceleração/abrandamento do som",
+        "latência da mancha de tinta"
+      ],
+      "secondary": [
+        "suspensão do tempo durante a queda do dado"
+      ]
+    },
+    "spatial": {
+      "primary": [
+        "projecção da sombra em 2D/3D",
+        "distância entre dado e cursor",
+        "orientação do dispositivo (opcional)"
+      ],
+      "secondary": [
+        "profundidade da textura do chão"
+      ]
+    },
+    "olfactory_evocation": {
+      "evocation": [
+        "cheiro a papel velho (pela textura visual)",
+        "cheiro a terra molhada (pelo degradê terroso)",
+        "cheiro a comida tradicional (pelo prémio secreto)"
+      ]
+    },
+    "gustatory_evocation": {
+      "evocation": [
+        "sabor de doce tradicional (pelo prémio secreto)",
+        "sabor a terra (pela mancha de tinta)"
+      ]
+    },
+    "social_presence": {
+      "primary": [
+        "voz sussurrada (como um convite)",
+        "riso abafado (como resposta)"
+      ]
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "O som do dado (zumbido, clique metálico) altera a textura visual do dado (de liso para amassado) e a trajectória da sombra (de recta para fractal).",
+    "secondary": "O movimento do cursor (cinestésico) altera o volume e o timbre do som do dado (auditivo).",
+    "tertiary": "A palavra efémera (visual) é pronunciada em sussurro (auditivo) se a pessoa parar o cursor sobre ela."
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio repentino (após o zumbido inicial) é usado para: (1) marcar a transição do limiar para a chamada; (2) criar expectativa durante a queda do dado; (3) dar espaço para o eco dos sons anteriores (ventoinha, riso).",
+    "effect": "O silêncio não é vazio: é uma presença que *puxa* a atenção da pessoa para o que está prestes a acontecer."
+  },
+  "surprise_or_indeterminacy": {
+    "primary": "O dado dobra-se e voa como avião de papel (quebra a expectativa de rolagem).",
+    "secondary": "O prémio secreto é aleatório (receita, lenda, foto) e específico do território.",
+    "tertiary": "A mancha de tinta cresce com o tempo, mesmo sem interacção.",
+    "quaternary": "O dado pode regressar em sessões futuras como sombra, som ou partícula."
+  },
+  "session_variation": [
+    {
+      "type": "acaso controlado",
+      "description": "O prémio secreto (receita, lenda, foto) é seleccionado aleatoriamente de um conjunto curatorial pré-definido para a freguesia ou tema."
+    },
+    {
+      "type": "ordem mutável",
+      "description": "A sequência de desafios (trava-língua, adivinha, etc.) altera-se entre sessões."
+    },
+    {
+      "type": "resposta a ritmo/velocidade",
+      "description": "Se a pessoa perseguir o dado rapidamente, este acelera e emite sons mais agudos; se lentamente, abrandar e emite sons graves."
+    },
+    {
+      "type": "resposta a posição/trajectória",
+      "description": "A sombra do dado projecta-se em ângulos diferentes consoante a posição do cursor ou a orientação do dispositivo."
+    },
+    {
+      "type": "combinação de fragmentos curatoriais",
+      "description": "As palavras efémeras (ex: ‘SARDINHA’) são combinadas aleatoriamente com símbolos ou imagens do corpus autoral."
+    },
+    {
+      "type": "temporalidade real",
+      "description": "O som de ventoinha é mais forte durante a noite (se o dispositivo permitir detecção de hora sem rastreio)."
+    }
+  ],
+  "territorial_binding": {
+    "primary": {
+      "relation": "O prémio secreto (receita, lenda, foto) é específico de uma freguesia ou lugar real, extraído do corpus territorial (ex: ‘curadoria entrada freguesias.xlsx’).",
+      "example": "Se o dado for apanhado em Alfama, o prémio pode ser uma receita de *arroz de leite* ou uma lenda sobre o *Castelo de São Jorge*."
+    },
+    "secondary": {
+      "relation": "As palavras efémeras (ex: ‘REPOLHO’) são topónimos ou referências do baralho SOMOSTODOSPOSSIVEIS, que por sua vez remetem para lugares reais.",
+      "note": "A relação territorial é *evocada*, não imposta. A pessoa não precisa de saber a localização exacta para interagir."
+    },
+    "optional": {
+      "geolocation": "Se a pessoa permitir geolocalização, o dado pode *pousar* num lugar próximo (ex: uma rua da freguesia actual), mas a experiência funciona sem esta permissão."
+    }
+  },
+  "trace_and_return": {
+    "immediate": {
+      "type": "partícula ou mancha",
+      "description": "A pessoa recebe uma partícula (símbolo ou palavra) no inventário ou uma mancha de tinta no ‘chão’ da tela."
+    },
+    "latent": {
+      "type": "regresso do dado",
+      "description": "O dado regressa em sessões futuras como sombra, som ou partícula no COSMICOXES."
+    },
+    "cosmic": {
+      "type": "integração no COSMICOXES",
+      "description": "As partículas podem ser arrastadas para o COSMICOXES, onde se tornam parte de uma constelação maior."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual_impairment": {
+      "description": "Todas as acções visuais (sombra, dado 3D, textura) são acompanhadas por sons distintos (ex: zumbido para rolagem, clique para dobra, riso para voo). As palavras efémeras são lidas em voz alta (opcional, com controlo de volume).",
+      "alternative": "Modo de alto contraste: o dado e a sombra são representados por formas geométricas simples (círculo, quadrado) com cores sólidas."
+    },
+    "auditory_impairment": {
+      "description": "Todos os sons são acompanhados por legendas visuais (ex: ‘Zumbido do dado’, ‘Riso abafado’) que aparecem e desaparecem em sincronia. O volume dos sons é controlável.",
+      "alternative": "Modo silencioso: os sons são substituídos por vibrações (se dispositivo suportar) ou por pulsos visuais (ex: círculo concêntrico a expandir-se)."
+    },
+    "motor_impairment": {
+      "description": "Todas as interacções com o cursor/dedo têm equivalentes no teclado: (1) setas para mover; (2) barra de espaço para apanhar; (3) tecla ‘S’ para soprar; (4) tecla ‘E’ para esperar. O dado move-se mais lentamente para dar tempo de reacção.",
+      "alternative": "Modo estático: o dado move-se automaticamente em direcção ao centro da tela, e a pessoa pode interagir apenas com teclas ou voz (ex: ‘apanha’, ‘deixa cair’)."
+    },
+    "cognitive_load": {
+      "description": "A experiência pode ser pausada a qualquer momento (tecla ‘P’). Os desafios (trava-línguas, adivinhas) têm uma versão simplificada (ex: ‘Diz uma palavra que rime com [palavra]’).",
+      "alternative": "Modo guiado: uma voz ou texto explica cada passo (ex: ‘Toca no dado para o apanhar’)."
+    },
+    "reduced_motion": {
+      "description": "O dado move-se em linha recta (sem dobras ou voos) e as sombras são estáticas. Os sons são mais suaves e sem eco."
+    }
+  },
+  "optional_permissions": [
+    {
+      "type": "microphone",
+      "purpose": "Soprar para o dado (fazê-lo girar ou voar).",
+      "fallback": "Botão na tela para simular o sopro (tecla ‘S’)."
+    },
+    {
+      "type": "device_motion",
+      "purpose": "Inclinar o dispositivo para alterar a trajectória do dado.",
+      "fallback": "Controlo com setas do teclado."
+    },
+    {
+      "type": "geolocation",
+      "purpose": "Associar o prémio secreto a uma freguesia próxima.",
+      "fallback": "Prémio secreto aleatório do corpus geral."
+    }
+  ],
+  "overstimulation_risk": {
+    "potential": [
+      "Flashing: Nenhum (evitado por design).",
+      "Sound: Som súbito excessivo (mitigado por volume controlável e modo silencioso).",
+      "Motion: Movimento rápido do dado (mitigado por modo reduzido e controlo de velocidade).",
+      "Cognitive: Pressão de tempo (mitigado por modo pausado e desafios opcionais)."
+    ],
+    "mitigation": [
+      "Volume dos sons é ajustável e o modo silencioso está sempre disponível.",
+      "O dado move-se a uma velocidade adaptável (lento/rápido) consoante as preferências da pessoa.",
+      "A experiência pode ser pausada ou abandonada a qualquer momento.",
+      "Nenhum loop compulsivo: o dado para após 30 segundos de inactividade."
+    ]
+  },
+  "distinctiveness": {
+    "unique_elements": [
+      "O dado como ser teimoso (não objecto passivo).",
+      "A tradução cruzada entre som (zumbido) e textura visual (amassado).",
+      "O prémio secreto como devolução territorial (receita, lenda, foto).",
+      "A mancha de tinta como rasto latente (cresce com o tempo).",
+      "A integração com o COSMICOXES (partículas tornam-se constelação).",
+      "A anti-regra: o dado não tem lado ‘certo’; o desvio é a regra."
+    ],
+    "comparison": "Nenhuma outra experiência no Atlas usa: (1) um objecto que foge e desafia a perseguição; (2) uma tradução som-textura; (3) um prémio secreto territorial; (4) um rasto que cresce com o tempo. A Galeria Diletante trabalha com palavras e fotos, mas não com perseguição lúdica. O FUCO é um mediador, não um objecto. O Reizinho quebra normas, mas não persegue."
+  },
+  "questions_for_eduardo": [
+    "O prémio secreto deve ser sempre específico de uma freguesia, ou pode ser aleatório do corpus geral quando a geolocalização não é permitida?",
+    "As palavras efémeras (ex: ‘SARDINHA’) devem ser sempre do baralho SOMOSTODOSPOSSIVEIS, ou podem incluir outros elementos do corpus (ex: topónimos, gírias)?",
+    "O dado deve ter um número limitado de ‘vidas’ (ex: 3 tentativas de apanhar) ou pode ser infinito?",
+    "A mancha de tinta deve desaparecer após um certo tempo, ou permanecer permanentemente?",
+    "O som de ventoinha deve ser o mesmo para todas as sessões, ou pode variar consoante o território (ex: som de mar para freguesias costeiras)?"
+  ],
+  "improvement_proposals": [
+    {
+      "type": "territorial_deepening",
+      "description": "Integrar o ‘O som que só existe aqui’ (FALArte mecânica 5) como um dos prémios secretos: a pessoa recebe um áudio ou descrição de um som singular da freguesia."
+    },
+    {
+      "type": "social_presence",
+      "description": "Permitir que o dado, ao ser apanhado, *convide* outra pessoa (aleatória, com consentimento) para uma sessão conjunta de perseguição (ex: dois dados a voar em sincronia)."
+    },
+    {
+      "type": "cross_curatorial_link",
+      "description": "Se o dado pousar num lugar associado a uma festa do corpus (ex: F01–F20), a sombra do dado pode projectar um símbolo ou palavra relacionada com essa festa."
+    },
+    {
+      "type": "haptic_enhancement",
+      "description": "Para dispositivos com feedback háptico, adicionar vibrações que imitem o som do dado (ex: vibração curta para *clique* metálico, longa para zumbido)."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

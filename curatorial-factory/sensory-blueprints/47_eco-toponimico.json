@@ -1,0 +1,295 @@
+{
+  "id": "eco-toponimico",
+  "canonical_name": "Eco Toponímico",
+  "source_evidence": {
+    "primary": [
+      {
+        "source": "catalog_entry",
+        "quote": "Diz o lugar. Escuta o que o nome devolve.",
+        "authority": "authorial"
+      },
+      {
+        "source": "source_corpus",
+        "section": "FALARTE / NÓS — 10 MECÂNICAS AUTORAIS",
+        "quote": "Palavras que desapareceram — gírias, alcunhas e modos de dizer em desaparecimento.",
+        "authority": "authorial"
+      },
+      {
+        "source": "source_corpus",
+        "section": "TEORIA / METODOLOGIA",
+        "quote": "Museu da Língua Portuguesa: língua como património vivo, oralidade, interacção sensorial, sotaques, pluralidade.",
+        "authority": "interpretative"
+      }
+    ],
+    "secondary": [
+      {
+        "source": "source_corpus",
+        "section": "A DERIVA DO SENTIDO",
+        "quote": "tato, paladar, escuta, aroma, pátina, comércio e memória local; configuração relacional; leitura da cidade com o corpo inteiro.",
+        "authority": "curatorial"
+      }
+    ]
+  },
+  "authorial_invariants": [
+    "O convite é direto: 'Diz o lugar'.",
+    "A resposta é um eco que devolve algo mais do que a palavra pronunciada.",
+    "O foco está na toponímia e nas camadas de significado que os nomes carregam.",
+    "A oralidade e a pronúncia são centrais.",
+    "A experiência deve ser pública e operável com o motor comum."
+  ],
+  "perceptual_intent": "Transformar a pronúncia de um topónimo num ato de escuta ativa, onde o nome do lugar se desdobra em camadas sonoras, visuais e territoriais, revelando a sua história, memórias e ressonâncias ocultas. A pessoa deve sentir que o lugar responde à sua voz, como se o nome fosse um portal para o território e as suas narrativas.",
+  "threshold": {
+    "description": "A pessoa entra num espaço visual minimalista, onde o fundo é um mapa de Lisboa em tons de cinza desaturado, quase invisível. No centro, um círculo pulsante (como um ponto de água ou uma boca) convida à interação. O círculo emite um som subliminar de respiração ou vento, como se o território estivesse vivo e à espera. Nenhum texto explicativo é visível.",
+    "sensory_trigger": "O som do círculo aumenta subtamente de volume à medida que o cursor se aproxima, criando uma sensação de proximidade territorial."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": "limiar",
+      "action": "O círculo pulsante no centro do ecrã emite um som de respiração territorial. O mapa de fundo está presente, mas desfoque e desaturado, como se fosse uma memória do lugar."
+    },
+    {
+      "stage": "chamada",
+      "action": "Aparece o convite: 'Diz o lugar.' em tipografia orgânica, como se fosse escrito à mão com tinta que escorre levemente. A frase surge em fragmentos, como se fosse ditada por uma voz invisível."
+    },
+    {
+      "stage": "primeiro_gesto",
+      "action": "A pessoa pronuncia ou digita o nome de um lugar (ex: 'Alfama'). O sistema não corrige nem valida — aceita qualquer entrada como um convite."
+    },
+    {
+      "stage": "resposta_viva",
+      "action": "O nome pronunciado/digitado ecoa de volta, mas transformado: a pronúncia é repetida em diferentes sotaques históricos ou regionais (ex: 'Alfama' em árabe, em português arcaico, em mirandês). Simultaneamente, o círculo central expande-se em ondas concêntricas que revelam fragmento do mapa correspondente ao lugar, como se o nome tivesse 'acordado' o território."
+    },
+    {
+      "stage": "desvio",
+      "action": "As ondas sonoras e visuais não param no lugar esperado. Elas propagam-se para áreas adjacentes, revelando conexões toponímicas ocultas (ex: 'Alfama' ecoa em 'Alcântara' por partilha de raiz árabe). O som ganha camadas: vozes de moradores (gravadas ou sintetizadas com base em arquivos autorais), ruídos ambientais do lugar, ou silêncios significativos."
+    },
+    {
+      "stage": "aprofundamento_sensorial",
+      "action": "A visualização do mapa ganha textura: as ruas do lugar assumem cores e padrões baseados em memórias ou dados territoriais (ex: azulejos, sombras de prédios, traços de comércio local). O som mistura-se com a visualização: o ritmo da pronúncia afeta a velocidade das ondas no mapa, e a intensidade da voz afeta a saturação das cores."
+    },
+    {
+      "stage": "escolha_acaso_silencio",
+      "action": "A pessoa pode: (1) repetir o nome para aprofundar o eco, (2) dizer outro lugar para criar uma nova onda, ou (3) ficar em silêncio. Se optar pelo silêncio, o sistema responde com um 'suspiro' territorial — um som que imita o vento a passar por ruas estreitas, seguido de um fragmento de uma lenda ou história associada ao lugar (ex: 'Aqui, dizem que as pedras suspiram à noite')."
+    },
+    {
+      "stage": "aparição",
+      "action": "Emergem elementos não visíveis no início: uma fotografia histórica do lugar (se disponível no corpus autoral), um objeto simbólico (ex: uma chave, um azulejo), ou uma palavra em uma língua esquecida que ressoa com o topónimo. Estes elementos aparecem como 'fantasmas' no mapa, semi-transparentes, como se estivessem a ser revelados pela voz da pessoa."
+    },
+    {
+      "stage": "devolução",
+      "action": "O sistema devolve uma 'cápsula de eco': um áudio curto (3-5 segundos) que mistura a voz da pessoa com os sons e vozes do lugar, como se fosse um registo do momento. Esta cápsula pode ser guardada (como um ficheiro descarregável) ou partilhada (como um link único). O nome do lugar pronunciado pela pessoa é adicionado a uma 'constelação de topónimos' visível no final, onde cada ponto representa um lugar ecoado por outras pessoas (sem dados pessoais)."
+    },
+    {
+      "stage": "rasto_latencia",
+      "action": "A cápsula de eco fica disponível para ser ouvida novamente em sessões futuras, como um rasto sonoro do território. O lugar ecoado pela pessoa passa a fazer parte de um 'mapa vivo' que evolui com as contribuições públicas, mas sem rastreio individual. A experiência pode ser interrompida a qualquer momento, e o estado é guardado como uma 'memória territorial' anónima."
+    }
+  ],
+  "participant_verbs": [
+    "pronunciar",
+    "escutar",
+    "respirar",
+    "tocar",
+    "silenciar",
+    "repetir",
+    "descobrir"
+  ],
+  "system_responses": {
+    "to_voice_or_text": {
+      "immediate": "O nome ecoa em múltiplos sotaques e camadas sonoras.",
+      "visual": "Ondas concêntricas revelam o lugar no mapa e as suas conexões.",
+      "haptic": "Vibração sutil (se suportado) no momento do eco, como um 'toque' do território."
+    },
+    "to_silence": {
+      "auditory": "Suspiro territorial seguido de um fragmento de lenda ou história.",
+      "visual": "O mapa ganha texturas e elementos semi-transparentes associados ao lugar."
+    },
+    "to_repetition": {
+      "auditory": "O eco ganha mais camadas (ex: sons ambientais, vozes de moradores).",
+      "visual": "As ondas expandem-se para lugares conectados toponimicamente."
+    },
+    "to_choice": {
+      "auditory": "Mistura da voz da pessoa com sons do lugar em uma cápsula de eco.",
+      "visual": "Adição do lugar a uma constelação de topónimos públicos."
+    }
+  },
+  "sensory_signature_id": "eco-toponimico-47",
+  "sensory_channels": {
+    "visual": {
+      "description": "Mapa desaturado e desfoque que ganha cor e textura com a interação. Ondas concêntricas revelam lugares e conexões. Elementos 'fantasmas' (fotografias, objetos) aparecem semi-transparentes.",
+      "intensity": "variável (de minimalista a rico em detalhes)"
+    },
+    "auditory": {
+      "description": "Eco do nome em múltiplos sotaques, camadas de sons ambientais (ruas, comércio, vento), vozes de moradores (sintetizadas ou gravadas), silêncios significativos e suspiros territoriais.",
+      "intensity": "variável (de subliminar a imersivo)"
+    },
+    "haptic": {
+      "description": "Vibração sutil no dispositivo (se suportado) durante o eco, como um 'toque' do território. Feedback táctil opcional para gestos de toque/arrasto.",
+      "intensity": "baixa (apenas como acento)"
+    },
+    "kinesthetic": {
+      "description": "Movimento do cursor/dedo afeta a propagação das ondas no mapa (velocidade, direção). Inclinação do dispositivo (se permitido) pode alterar a perspectiva do mapa.",
+      "intensity": "opcional"
+    },
+    "proprioceptive": {
+      "description": "Instruções subtis para ajustar a postura ou a respiração (ex: 'Respira como se estivesses a subir a colina').",
+      "intensity": "baixa"
+    },
+    "temporal_interoceptive": {
+      "description": "Ritmo da voz afeta a velocidade das ondas. Silêncio prolongado desencadeia respostas territoriais (suspiros, lendas).",
+      "intensity": "variável"
+    },
+    "spatial": {
+      "description": "O mapa é um espaço 2D que ganha profundidade com a interação. A posição do cursor/dedo afeta a 'proximidade' dos sons (ex: mais próximo = mais alto).",
+      "intensity": "moderada"
+    },
+    "olfactory_evocation": {
+      "description": "Evocação de cheiros através de linguagem e som (ex: 'O cheiro a pão quente da padaria da esquina' acompanhado de sons de forno).",
+      "intensity": "evocativa"
+    },
+    "gustatory_evocation": {
+      "description": "Evocação de sabores através de memórias associadas ao lugar (ex: 'O sabor do ginjinha que se bebia aqui há 50 anos').",
+      "intensity": "evocativa"
+    },
+    "social_presence": {
+      "description": "Presença de vozes de moradores (gravadas ou sintetizadas) e a constelação de topónimos públicos, que mostra contribuições anónimas de outras pessoas.",
+      "intensity": "subtil"
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "A voz (som) transforma-se em ondas visuais no mapa, que por sua vez revelam sons e memórias territoriais.",
+    "secondary": "O ritmo da pronúncia afeta a saturação das cores no mapa (som → visual). O silêncio desencadeia a aparição de elementos visuais 'fantasmas' (ausência de som → visual)."
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio da pessoa é um gesto ativo. Durante 3 segundos de silêncio, o sistema responde com um 'suspiro territorial' (som de vento ou respiração) seguido de um fragmento de uma lenda ou história associada ao lugar. Visualmente, o mapa ganha texturas e elementos semi-transparentes que não estavam visíveis antes.",
+    "purpose": "Transformar a ausência de som num momento de revelação, onde o território 'fala' por si só."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": [
+      "O eco do nome pode revelar conexões toponímicas inesperadas (ex: 'Alfama' ecoa em 'Alcântara').",
+      "A cápsula de eco gerada mistura a voz da pessoa com sons aleatórios do lugar (ex: um cão a ladrar, um sino de igreja).",
+      "Elementos 'fantasmas' (fotografias, objetos) aparecem em posições aleatórias no mapa, mas sempre associados ao lugar pronunciado.",
+      "A constelação de topónimos públicos evolui com contribuições anónimas, criando padrões imprevisíveis."
+    ],
+    "purpose": "Criar momentos de descoberta e conexão inesperada, onde o acaso é uma parte ativa da experiência."
+  },
+  "session_variation": [
+    {
+      "type": "acaso_controlado",
+      "description": "A seleção de sotaques e sons ambientais para o eco é aleatória, mas baseada em dados autorais (ex: sotaques históricos documentados)."
+    },
+    {
+      "type": "ordem_mutável",
+      "description": "A ordem das camadas sonoras (sotaques, sons ambientais, vozes) varia entre sessões."
+    },
+    {
+      "type": "resposta_a_ritmo",
+      "description": "A velocidade e intensidade do eco variam de acordo com o ritmo e volume da voz da pessoa."
+    },
+    {
+      "type": "resposta_a_posição",
+      "description": "A posição do cursor/dedo no momento da pronúncia afeta a direção das ondas no mapa e a mistura de sons (ex: cursor no canto superior esquerdo = mais sons de ruas estreitas)."
+    },
+    {
+      "type": "temporalidade_real",
+      "description": "Se a experiência for acessada durante o dia, os sons ambientais são mais 'diurnos' (ex: comércio, crianças a brincar). À noite, são mais 'noturnos' (ex: silêncios, sons de bares)."
+    }
+  ],
+  "territorial_binding": {
+    "real_relation": true,
+    "description": "A experiência está profundamente ligada à toponímia e ao território de Lisboa. Os nomes dos lugares, os sotaques, os sons ambientais e as lendas são todos baseados em dados reais do corpus autoral. A constelação de topónimos públicos reflete contribuições reais de outras pessoas, criando um mapa vivo do território.",
+    "scope": "Freguesias e lugares de Lisboa, com potencial expansão para outros territórios documentados no corpus."
+  },
+  "trace_and_return": {
+    "trace": {
+      "personal": "A cápsula de eco (áudio curto) é gerada e pode ser guardada ou partilhada como um rasto sonoro do momento.",
+      "collective": "O lugar ecoado pela pessoa é adicionado à constelação de topónimos públicos, que evolui com as contribuições de outras pessoas (sem dados pessoais)."
+    },
+    "return": {
+      "immediate": "A cápsula de eco é devolvida à pessoa no final da experiência.",
+      "latent": "A constelação de topónimos e as cápsulas de eco ficam disponíveis para serem exploradas em sessões futuras, como um arquivo vivo do território."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual_impairment": {
+      "description": "Toda a informação visual é descrita em áudio. O mapa é narrado em tempo real (ex: 'O cursor está sobre Alfama, um lugar com ruas estreitas e cheiro a especiarias'). As ondas visuais são traduzidas em sons (ex: um som de onda a propagar-se). As fotografias e objetos 'fantasmas' são descritos em detalhe.",
+      "preserves_poetry": true
+    },
+    "auditory_impairment": {
+      "description": "Todos os sons são traduzidos em elementos visuais. O eco do nome aparece como texto animado (ex: 'Alfama' a pulsar em diferentes estilos tipográficos). Os sons ambientais são representados por ícones ou animações (ex: um sino para sons de igreja, uma nuvem de fumaça para cheiros evocados). As lendas e histórias são exibidas como texto.",
+      "preserves_poetry": true
+    },
+    "motor_impairment": {
+      "description": "A interação por voz é a principal forma de entrada. Alternativas: digitar o nome do lugar, usar teclas de atalho para repetir o eco ou silenciar, e navegar pelo mapa com o teclado (setas para mover, Enter para selecionar).",
+      "preserves_poetry": true
+    },
+    "cognitive_load": {
+      "description": "Modo 'respiração': a experiência pode ser pausada a qualquer momento, e o ritmo é ajustado para ser mais lento. As instruções são simples e repetidas se necessário.",
+      "preserves_poetry": true
+    },
+    "reduced_motion": {
+      "description": "As animações (ondas, texturas) são desativadas ou substituídas por transições suaves. O mapa é exibido em modo estático, com o lugar pronunciado destacado em cor sólida.",
+      "preserves_poetry": true
+    }
+  },
+  "optional_permissions": {
+    "microphone": {
+      "required": false,
+      "benefit": "Permite pronunciar o nome do lugar para um eco mais imersivo e pessoal.",
+      "fallback": "A pessoa pode digitar o nome do lugar."
+    },
+    "geolocation": {
+      "required": false,
+      "benefit": "Se permitido, o sistema pode sugerir lugares próximos ao local atual da pessoa para ecoar.",
+      "fallback": "A pessoa pode escolher qualquer lugar do mapa."
+    },
+    "device_motion": {
+      "required": false,
+      "benefit": "Permite usar a inclinação do dispositivo para alterar a perspectiva do mapa.",
+      "fallback": "Navegação por cursor ou teclado."
+    }
+  },
+  "overstimulation_risk": {
+    "potential_risk": "Sobreposição de sons (múltiplos sotaques, sons ambientais, vozes) pode ser esmagadora para pessoas sensíveis a estímulos auditivos. As animações das ondas e texturas podem ser intensas visualmente.",
+    "mitigation": [
+      "Volume ajustável para cada camada sonora (sotaques, sons ambientais, vozes).",
+      "Modo 'silêncio': desativa todos os sons exceto o eco do nome pronunciado.",
+      "Modo 'visual minimalista': desativa animações e exibe apenas o mapa estático com o lugar destacado.",
+      "Tempo de pausa entre camadas sonoras para permitir absorção.",
+      "Instruções claras para reduzir o volume ou desativar sons/animações."
+    ]
+  },
+  "distinctiveness": {
+    "unique_traits": [
+      "A tradução cruzada entre voz (som) e ondas visuais no mapa, que revelam conexões toponímicas ocultas.",
+      "O uso do silêncio como gesto ativo que desencadeia respostas territoriais (suspiros, lendas).",
+      "A cápsula de eco, que mistura a voz da pessoa com sons do lugar, como um registo único do momento.",
+      "A constelação de topónimos públicos, que evolui com contribuições anónimas e mostra o território como um organismo vivo.",
+      "A evocação de cheiros e sabores através de linguagem e som, sem fingir output físico.",
+      "A integração de dados autorais reais (sotaques, lendas, sons ambientais) para criar uma experiência autêntica e territorial."
+    ],
+    "why_not_confusable": "Nenhuma outra experiência no Atlas Vivo MILK combina a prononúncia de topónimos com eco sonoro multissensorial, tradução cruzada som-visual, e uma constelação pública de lugares que evolui com as contribuições das pessoas. A assinatura sensorial é única na sua abordagem à toponímia como um portal para o território e as suas memórias."
+  },
+  "questions_for_eduardo": [
+    "Existem gravações autorais de sotaques históricos ou regionais para os topónimos de Lisboa que possam ser usadas no eco? Se sim, onde estão armazenadas?",
+    "Há um corpus de lendas ou histórias associadas a lugares específicos que possam ser usadas nos 'suspiros territoriais' durante o silêncio?",
+    "A constelação de topónimos públicos deve ser visível apenas no final da experiência ou pode ser um elemento persistente no mapa?",
+    "Deve haver um limite para o número de lugares que uma pessoa pode ecoar numa única sessão, ou a experiência deve permitir exploração livre?",
+    "Como deve ser tratada a pronúncia de lugares que não existem no corpus autoral? Deve o sistema sugerir lugares semelhantes ou aceitar qualquer entrada?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Integração com o 'Livro Cubo' para permitir que as cápsulas de eco sejam 'guardadas' em uma das faces do cubo (ex: a face 'o buraco' como arquivo de sons territoriais).",
+      "justification": "Aprofundaria a conexão entre a experiência digital e a metodologia autoral do Livro Cubo, criando uma ponte entre o físico e o digital."
+    },
+    {
+      "proposal": "Adição de um modo 'deriva toponímica', onde o sistema sugere um percurso aleatório entre lugares conectados (ex: Alfama → Alcântara → Belém), com base em dados autorais de conexões históricas ou culturais.",
+      "justification": "Enriqueceria a experiência com uma camada de descoberta territorial, alinhada com a psicogeografia e a deriva do corpus autoral."
+    },
+    {
+      "proposal": "Inclusão de um 'glossário vivo' de topónimos, onde a pessoa pode clicar em qualquer lugar do mapa para ver a sua etimologia, história e conexões, com base em dados autorais.",
+      "justification": "Adicionaria uma camada educativa e de contexto, sem comprometer a imersão sensorial."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

@@ -1,0 +1,321 @@
+{
+  "id": "arteria",
+  "canonical_name": "ARTÉRIA",
+  "source_evidence": {
+    "primary": [
+      "catalog_entry.mecanica: 'circular'",
+      "catalog_entry.convite: 'Faz circular uma memória entre dois pontos.'"
+    ],
+    "secondary": [
+      "constitution.11: Exemplos de direcção para experiências curatoriais",
+      "source_corpus: Âncoras autorais — Camada Pública (estética, rasto, jogo como conversa)"
+    ]
+  },
+  "authorial_invariants": [
+    "A dinâmica é circular.",
+    "O convite é 'Faz circular uma memória entre dois pontos.'",
+    "A experiência pertence à camada pública do Atlas Vivo MILK.",
+    "Deve preservar a estética de bilhetes/caixas como rascunho de caderno, folha rasgada, assimetria orgânica."
+  ],
+  "perceptual_intent": "Criar uma experiência de fluxo contínuo e orgânico onde a memória (pessoal ou territorial) se move como um líquido entre dois pontos, transformando o ambiente digital à medida que circula. A pessoa deve sentir que está a participar num acto de transmissão viva, onde o corpo, o som e a imagem se entrelaçam para evocar o que não está presente, mas é sentido.",
+  "threshold": {
+    "description": "A tela começa em tons de cinzento opaco, com um traço fino e pulsante (como uma veia ou rio) a atravessar o ecrã diagonalmente. O traço não é interativo, mas a sua presença altera subtamente a cor de fundo, como se algo invisível estivesse a circular. Um som de respiração longínqua e irregular (como um vento em túneis distantes) preenche o espaço, mas é tão suave que a pessoa pode não o notar de imediato.",
+    "sensory_trigger": "O som da respiração aumenta imperceptivelmente de volume à medida que o cursor se aproxima do traço, como se a memória estivesse a 'acordar'."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": "LIMIAR",
+      "action": "A tela está em tons de cinzento com um traço pulsante. O som de respiração longínqua está presente, mas quase inaudível."
+    },
+    {
+      "stage": "CHAMADA",
+      "action": "O traço começa a brilhar fracamente e uma voz sussurrada (ou texto que aparece e desaparece como um eco) diz: 'Há algo que queres fazer circular?'. A voz não é humana, mas tem uma textura orgânica, como água a escorrer por uma fenda."
+    },
+    {
+      "stage": "PRIMEIRO GESTO",
+      "action": "A pessoa é convidada a tocar ou arrastar o traço com o cursor/dedo. O gesto é simples: um clique ou arrasto curto."
+    },
+    {
+      "stage": "RESPOSTA VIVA",
+      "action": "O traço transforma-se num rio de partículas finas (como poeira ou sementes) que começam a fluir na direção do gesto. O som da respiração transforma-se num murmúrio de vozes sobrepostas, como se várias memórias estivessem a ser transportadas. O fundo ganha tons de azul profundo e verde musgo, como se a tela estivesse a 'respirar'."
+    },
+    {
+      "stage": "DESVIO",
+      "action": "De repente, o fluxo de partículas inverte a direção por um instante, como se algo tivesse 'empurrado' a memória de volta. O som torna-se mais agudo, como um lamento breve, e o rio de partículas ganha uma cor vermelha escura por um segundo."
+    },
+    {
+      "stage": "APROFUNDAMENTO SENSORIAL",
+      "action": "As partículas começam a formar silhuetas de objectos ou lugares (ex: uma cadeira, uma janela, um topo de uma colina) que desaparecem tão rápido quanto aparecem. O som agora mistura a respiração com sons ambientais (ex: pássaros, passos, risos). A pessoa pode sentir que o ecrã está a 'puxar' o seu olhar para a direção do fluxo."
+    },
+    {
+      "stage": "ESCOLHA / ACASO / SILÊNCIO",
+      "action": "A pessoa pode: (1) deixar o fluxo continuar até um dos 'pontos' (extremidades do traço), (2) tocar no fluxo para 'parar' a memória e observá-la, ou (3) não fazer nada e esperar que o fluxo se dissolva. Se não interagir, o fluxo desvanece-se lentamente, deixando um rastro de cor no traço original."
+    },
+    {
+      "stage": "APARIÇÃO",
+      "action": "Se a memória chegar a um dos pontos, uma imagem ou palavra emerge no ecrã, como se fosse 'depositada' ali. A imagem pode ser uma fotografia desbotada, um desenho ou uma palavra escrita à mão. Se a pessoa parou o fluxo, a memória aparece como uma silhueta preta sobre um fundo branco, como um negativo. Se não interagiu, o traço original fica com uma mancha de cor que não desaparece."
+    },
+    {
+      "stage": "DEVOLUÇÃO",
+      "action": "A experiência devolve à pessoa uma 'cápsula' visual e sonora: uma combinação única de cor, som e forma que representa a memória que circularam. Esta cápsula pode ser guardada (como um favorito) ou partilhada como um 'rasto' anónimo no Atlas. A cápsula tem um nome gerado automaticamente, como 'O Rio que Carregava o Silêncio' ou 'A Memória que Voltou'."
+    },
+    {
+      "stage": "RASTO / LATÊNCIA",
+      "action": "A cápsula fica disponível no 'cosmos' do Atlas como uma partícula que pode ser encontrada por outras pessoas em experiências futuras. O traço original no ecrã ganha uma nova camada de cor, como se a memória tivesse deixado uma marca permanente."
+    }
+  ],
+  "participant_verbs": [
+    "tocar",
+    "arrastar",
+    "observar",
+    "escutar",
+    "esperar",
+    "deixar circular",
+    "parar"
+  ],
+  "system_responses": [
+    "O traço transforma-se num rio de partículas que fluem na direção do gesto.",
+    "O som evolui de respiração para murmúrios e sons ambientais.",
+    "O fundo ganha vida com cores orgânicas e texturas que respondem ao movimento.",
+    "As partículas formam silhuetas efémeras de objectos ou lugares.",
+    "O fluxo inverte a direção ou acelera/desacelera em resposta à interação.",
+    "Uma cápsula visual e sonora é gerada como devolução.",
+    "O traço original ganha uma nova camada de cor como rasto permanente."
+  ],
+  "sensory_signature_id": "arteria_fluxo_memoria_viva",
+  "sensory_channels": {
+    "visual": {
+      "elements": [
+        "traço pulsante",
+        "rio de partículas",
+        "silhuetas efémeras",
+        "fundo orgânico em transformação",
+        "cápsula visual",
+        "mancha de cor permanente"
+      ],
+      "dynamics": [
+        "transparência variável",
+        "cor em fluxo",
+        "profundidade simulada",
+        "ritmo de aparição/desaparecimento"
+      ]
+    },
+    "auditory": {
+      "elements": [
+        "respiração longínqua",
+        "murmúrios de vozes",
+        "sons ambientais (pássaros, passos, risos)",
+        "lamento breve",
+        "cápsula sonora"
+      ],
+      "dynamics": [
+        "volume variável",
+        "espacialização sutil",
+        "transição entre sons orgânicos e abstratos"
+      ]
+    },
+    "haptic": {
+      "elements": [
+        "vibração sutil em dispositivos compatíveis (opcional)"
+      ],
+      "dynamics": [
+        "feedback tátil para confirmar interação com o fluxo"
+      ]
+    },
+    "kinesthetic": {
+      "elements": [
+        "movimento do cursor/dedo",
+        "velocidade do gesto",
+        "trajectória do arrasto"
+      ],
+      "dynamics": [
+        "resposta do fluxo à direção e velocidade do gesto"
+      ]
+    },
+    "proprioceptive": {
+      "elements": [
+        "instrução implícita para seguir o fluxo com o olhar",
+        "sensação de 'puxar' o olhar"
+      ],
+      "dynamics": [
+        "ritmo de interação adaptado à atenção da pessoa"
+      ]
+    },
+    "temporal_interoceptive": {
+      "elements": [
+        "espera",
+        "ritmo do fluxo",
+        "pausas entre aparições"
+      ],
+      "dynamics": [
+        "aceleração/desaceleração do tempo percebido"
+      ]
+    },
+    "spatial": {
+      "elements": [
+        "traço diagonal como eixo",
+        "fluxo que ocupa o espaço do ecrã",
+        "silhuetas que aparecem em diferentes profundidades"
+      ],
+      "dynamics": [
+        "profundidade e distância percebidas"
+      ]
+    },
+    "olfactory_evocation": {
+      "elements": [
+        "memória de cheiros associados a lugares ou objectos (ex: 'cheiro a terra molhada', 'cheiro a pão quente')"
+      ],
+      "dynamics": [
+        "evocação através de palavras ou sons que sugerem cheiros"
+      ]
+    },
+    "gustatory_evocation": {
+      "elements": [
+        "memória de sabores associados a momentos (ex: 'gosto a laranja da infância', 'gosto a sal do mar')"
+      ],
+      "dynamics": [
+        "evocação através de descrições ou sons que sugerem sabores"
+      ]
+    },
+    "social_presence": {
+      "elements": [
+        "murmúrios de vozes como memórias colectivas",
+        "cápsula partilhável como rasto anónimo"
+      ],
+      "dynamics": [
+        "sensação de presença de outros através de rastos deixados"
+      ]
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "O gesto (kinestético) do arrasto transforma-se em fluxo visual (partículas) e som (murmúrios/sons ambientais).",
+    "secondary": "A cor do fluxo (visual) influencia o timbre do som (auditivo), criando uma relação direta entre o que se vê e o que se ouve."
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio é usado como um 'vazio ativo': quando a pessoa não interage, o fluxo desvanece-se lentamente, deixando apenas o traço original com uma mancha de cor. Este silêncio não é ausência de experiência, mas um momento de reflexão onde a memória 'respira'.",
+    "effect": "O silêncio permite que a pessoa perceba a latência da memória e a sua presença no espaço digital."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": [
+      "O fluxo pode inverter a direção inesperadamente, como se a memória 'resistisse' a circular.",
+      "As silhuetas que aparecem são geradas aleatoriamente a partir de um conjunto de formas pré-definidas, mas a sua ordem e combinação são únicas por sessão.",
+      "A cápsula gerada como devolução tem um nome aleatório, mas coerente com a experiência (ex: baseada em palavras-chave da interação).",
+      "O som pode incluir sons ambientais aleatórios, mas sempre coerentes com o tema da memória (ex: sons de uma feira, de uma floresta, de uma rua)."
+    ],
+    "effect": "Cria uma sensação de que a memória tem vida própria e não é totalmente controlável."
+  },
+  "session_variation": [
+    {
+      "type": "acaso controlado",
+      "description": "As silhuetas que aparecem no fluxo são seleccionadas aleatoriamente a partir de um conjunto de formas pré-definidas."
+    },
+    {
+      "type": "ordem mutável",
+      "description": "A sequência de sons ambientais que se misturam com os murmúrios é diferente em cada sessão."
+    },
+    {
+      "type": "resposta a ritmo/velocidade do gesto",
+      "description": "A velocidade do fluxo de partículas e a intensidade do som respondem à velocidade e direção do gesto da pessoa."
+    },
+    {
+      "type": "resposta a posição/trajectória",
+      "description": "A direção inicial do fluxo (da esquerda para a direita ou vice-versa) depende da posição do cursor/dedo quando a pessoa interage pela primeira vez."
+    },
+    {
+      "type": "combinação de fragmentos curatoriais",
+      "description": "A cápsula gerada como devolução combina elementos visuais e sonoros únicos, baseados na interação da sessão."
+    }
+  ],
+  "territorial_binding": {
+    "relation": "A experiência evoca memórias territoriais sem estar ligada a um lugar específico. No entanto, as silhuetas efémeras e os sons ambientais podem ser inspirados em lugares reais do Atlas (ex: uma janela pode evocar uma varanda em Alfama, um som de feira pode evocar a Feira da Ladra).",
+    "constraint": "Não está ligada a geolocalização ou a um território específico, mas a estética e os elementos sensoriais são inspirados no corpus territorial do Atlas."
+  },
+  "trace_and_return": {
+    "trace": {
+      "type": "cápsula visual e sonora",
+      "description": "Uma combinação única de cor, som e forma que representa a memória circular. A cápsula pode ser guardada ou partilhada como um rasto anónimo no cosmos do Atlas.",
+      "persistence": "A cápsula permanece disponível no cosmos e o traço original ganha uma nova camada de cor como marca permanente."
+    },
+    "return": {
+      "type": "devolução imediata e latente",
+      "description": "A pessoa recebe a cápsula como devolução imediata e pode reencontrá-la mais tarde no cosmos, onde outras pessoas podem interagir com ela."
+    }
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "alternative": "Todas as interações visuais (partículas, silhuetas, cores) têm descrições sonoras opcionais (ex: 'Um rio de partículas azuis está a fluir da esquerda para a direita').",
+      "reduced_motion": "Modo de movimento reduzido: as partículas movem-se mais devagar e as transições são suaves."
+    },
+    "auditory": {
+      "alternative": "Todas as pistas sonoras (murmúrios, sons ambientais) têm legendas visuais opcionais (ex: 'Murmúrios de vozes distantes').",
+      "volume_control": "Controlo de volume global e opção para desativar sons ambientais."
+    },
+    "haptic": {
+      "alternative": "A vibração é opcional e pode ser substituída por um pulso visual (ex: um círculo a expandir-se no ponto de interação)."
+    },
+    "kinesthetic": {
+      "alternative": "Todas as interações com o cursor/dedo podem ser feitas com teclado (ex: setas para mover o 'fluxo', barra de espaço para parar)."
+    },
+    "proprioceptive": {
+      "alternative": "Instruções claras e opcionais para guiar a atenção (ex: 'Siga o fluxo com o olhar')."
+    },
+    "temporal_interoceptive": {
+      "alternative": "Modo sem pressão: a experiência pode ser pausada e retomada sem perder progresso."
+    },
+    "olfactory_gustatory_evocation": {
+      "alternative": "As evocações de cheiro e sabor são sempre acompanhadas por descrições textuais ou sonoras (ex: 'Esta memória cheira a terra molhada')."
+    }
+  },
+  "optional_permissions": {
+    "required": [],
+    "optional": [
+      {
+        "permission": "movimento/orientação do dispositivo",
+        "purpose": "Permitir que o fluxo responda à inclinação do dispositivo (ex: em tablets ou telemóveis), criando uma sensação de que a memória está a 'escorrer' com o movimento físico.",
+        "fallback": "A experiência funciona completamente sem esta permissão, usando apenas o cursor/dedo ou teclado."
+      }
+    ]
+  },
+  "overstimulation_risk": {
+    "risks": [
+      "Flashing ou transições visuais demasiado rápidas.",
+      "Sons súbitos ou excessivamente altos.",
+      "Vibração insistente em dispositivos compatíveis."
+    ],
+    "mitigations": [
+      "Limitar a velocidade das partículas e das transições visuais.",
+      "Usar sons suaves e progressivos, com opção para desativar sons ambientais.",
+      "A vibração é opcional e limitada a um feedback curto por interação.",
+      "Incluir um modo 'reduced-motion' para pessoas sensíveis a movimento."
+    ]
+  },
+  "distinctiveness": [
+    "A experiência é única na sua abordagem à circularidade da memória como um fluxo vivo e orgânico, onde o gesto da pessoa não apenas move, mas 'alimenta' a memória com a sua presença.",
+    "A tradução cruzada entre gesto (kinestético), fluxo visual e som ambiental é específica e não repetida em outras curadorias.",
+    "O uso do silêncio como 'vazio ativo' (onde a não-interação é parte da experiência) é central e não decorativo.",
+    "A devolução sob a forma de uma cápsula visual e sonora, que pode ser partilhada como rasto anónimo, é uma assinatura única.",
+    "A estética de 'rio de partículas' que forma silhuetas efémeras é visualmente distinta de outras experiências no Atlas."
+  ],
+  "questions_for_eduardo": [
+    "O traço inicial deve ser sempre diagonal ou pode ter outras orientações (ex: horizontal, vertical, circular) para variar entre sessões?",
+    "As silhuetas efémeras devem ser baseadas em elementos específicos do corpus territorial do Atlas (ex: objectos ou lugares reais) ou podem ser abstratas?",
+    "A cápsula gerada como devolução deve ter um formato específico (ex: circular, quadrada) ou pode variar?",
+    "Deve haver um limite de tempo para a experiência (ex: a memória 'morre' se não circular dentro de X segundos) ou a pessoa pode interagir livremente?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Incluir uma opção para a pessoa 'nomear' a sua cápsula antes de a guardar, adicionando uma camada de autoria à devolução.",
+      "justification": "Aumentaria o sentido de propriedade e conexão emocional com o rasto deixado."
+    },
+    {
+      "proposal": "Permitir que a cápsula gerada possa ser 'alimentada' por outras memórias em sessões futuras, criando uma rede de memórias interligadas.",
+      "justification": "Reforçaria a ideia de circularidade e conexão entre experiências."
+    },
+    {
+      "proposal": "Adicionar uma camada de 'textura' ao fluxo de partículas, onde a textura evolui com base na interação (ex: de suave para áspera, como se a memória estivesse a 'envelhecer').",
+      "justification": "Aumentaria a profundidade sensorial da experiência."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}

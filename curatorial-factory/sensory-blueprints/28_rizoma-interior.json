@@ -1,0 +1,390 @@
+{
+  "id": "rizoma-interior",
+  "canonical_name": "O Rizoma Interior",
+  "source_evidence": {
+    "primary": [
+      "LIVRO_CUBO_7_DINAMICAS_TEXTO_AUTORAL_RECUPERADO.md (D6: O Rizoma Interior)"
+    ],
+    "secondary": [
+      "CUBO_02_MANUAL_INVERTIDO_MELHORADO.md (princípios: erro como entrada, riso como método, silêncio como matéria)"
+    ],
+    "contextual": [
+      "Curadoria Cultural e Existencialismo Profundo.pdf (encontro, co-criação não hierárquica, transformação sem apagar)"
+    ]
+  },
+  "authorial_invariants": [
+    "Co-criação não hierárquica",
+    "Transformação sem apagar o anterior",
+    "Encontro como método central",
+    "Rizoma como metáfora de crescimento orgânico e não linear",
+    "Ausência de hierarquia ou ordem fixa",
+    "Preservação da multiplicidade de vozes e contribuições"
+  ],
+  "perceptual_intent": "Convidar a pessoa a entrar num campo vivo de conexões não lineares, onde cada gesto ou contribuição se torna um nó num rizoma em expansão. A experiência deve sentir-se como um organismo que respira, cresce e se transforma com a presença de cada participante, sem centro, sem começo ou fim fixos. O objectivo é evocar a sensação de pertencer a uma teia de significados em constante mutação, onde o silêncio e a ausência também são nós válidos.",
+  "threshold": {
+    "description": "A pessoa entra num espaço digital onde uma constelação de fragmentos (palavras, sons, imagens, gestos) flutua em suspensão, como se estivessem a respirar. Os fragmentos não estão organizados em hierarquia ou ordem; alguns brilham fracamente, outros estão semi-ocultos, como se estivessem a esperar por algo. O fundo é um gradiente orgânico de cores terrosas e profundas, com texturas que sugerem raizes ou veias. Não há instruções visíveis, mas um murmúrio sonoro suave (como um coro de vozes distantes ou o som de vento em folhas) preenche o espaço. A pessoa sente que algo está vivo, mas não sabe ainda como interagir.",
+    "sensory_trigger": "O murmúrio sonoro diminui de intensidade à medida que a pessoa se aproxima do centro do ecrã, como se o sistema estivesse a 'respirar' em sincronia com a sua presença."
+  },
+  "dramaturgical_arc": [
+    {
+      "stage": 1,
+      "name": "Limiar",
+      "description": "Espaço vivo com fragmentos flutuantes e murmúrio sonoro. A pessoa percebe que o ambiente reage à sua presença (ex: o murmúrio abrandar)."
+    },
+    {
+      "stage": 2,
+      "name": "Chamada",
+      "description": "Um fragmento (ex: uma palavra solta como 'raiz' ou 'nó') aproxima-se lentamente do cursor/ponto de foco da pessoa, como se fosse atraído. O murmúrio ganha uma camada de voz humana, mas indistinta."
+    },
+    {
+      "stage": 3,
+      "name": "Primeiro gesto",
+      "description": "A pessoa toca/clica/arrasta o fragmento. Este não desaparece, mas multiplica-se: surgem novos fragmentos ligados ao original, como ramos de uma raiz. O som evolui para um zumbido harmónico, como se o sistema estivesse a 'crescer'."
+    },
+    {
+      "stage": 4,
+      "name": "Resposta viva",
+      "description": "O sistema responde com uma alteração visível: os fragmentos ligados ao original começam a pulsar em sincronia com o ritmo do zumbido. A pessoa percebe que cada fragmento tem uma 'cor' sonora única (ex: uma palavra soa como um sino, uma imagem emite um ruído de folhas)."
+    },
+    {
+      "stage": 5,
+      "name": "Desvio",
+      "description": "De repente, um fragmento 'desaparece' temporariamente, deixando um vazio que atrai os fragmentos vizinhos. O zumbido é interrompido por um silêncio breve, como se o sistema tivesse 'engolido' algo. A pessoa questiona-se: foi um erro? Uma regra? Um convite?"
+    },
+    {
+      "stage": 6,
+      "name": "Aprofundamento sensorial",
+      "description": "A pessoa descobre que pode 'alimentar' o rizoma: ao arrastar um fragmento para o vazio, este preenche-se com um novo nó (ex: uma palavra escrita pela pessoa, um som gravado opcionalmente, ou uma imagem gerada a partir de um gesto). O som agora mistura as camadas: o zumbido, as vozes dos fragmentos, e o eco da contribuição da pessoa. A visualização ganha profundidade: os fragmentos passam a ter 'peso' (alguns afundam, outros flutuam) e as ligações entre eles tornam-se visíveis como fios de luz ou raizes."
+    },
+    {
+      "stage": 7,
+      "name": "Escolha / Acaso / Silêncio",
+      "description": "A pessoa pode: (a) continuar a alimentar o rizoma, (b) 'podar' um ramo (clicando duas vezes num fragmento, que se desvanece lentamente), ou (c) esperar em silêncio. Se escolher (c), o sistema responde com um 'suspiro' sonoro e os fragmentos começam a reorganizar-se sozinhos, como se estivessem a 'respirar' em conjunto."
+    },
+    {
+      "stage": 8,
+      "name": "Aparição",
+      "description": "Depois de um período de interação (ou inação), surge um novo tipo de fragmento: um 'nó-mestre' que agrega várias contribuições (ex: uma frase formada por palavras de diferentes participantes, ou uma imagem colagem de gestos). Este nó tem uma aura visual e sonora distinta (ex: brilho dourado e um som de sino profundo)."
+    },
+    {
+      "stage": 9,
+      "name": "Devolução",
+      "description": "O sistema devolve à pessoa um 'rasto' único: uma combinação de fragmentos que ela alimentou ou com os quais interagiu, apresentada como uma 'constelação pessoal'. Esta constelação pode ser: (a) uma imagem gerativa baseada nos gestos da pessoa, (b) uma frase ou poema formado pelas suas contribuições e as de outros, ou (c) um som que mistura as camadas sonoras da sua sessão. A devolução é efémera: desaparece após alguns segundos, mas a pessoa sabe que ficou 'gravada' no rizoma."
+    },
+    {
+      "stage": 10,
+      "name": "Rasto / Latência",
+      "description": "A constelação pessoal da pessoa passa a fazer parte do rizoma global. Em sessões futuras, outros participantes podem encontrar fragmentos da sua contribuição, agora integrados no sistema. O rizoma 'lembra-se' das interações passadas, mas nunca as repete exactamente da mesma forma. Algumas contribuições podem 'adormecer' (tornar-se menos visíveis) e ser 'despertadas' por novos gestos."
+    }
+  ],
+  "participant_verbs": [
+    "tocar",
+    "arrastar",
+    "alimentar",
+    "podar",
+    "escutar",
+    "esperar",
+    "respirar"
+  ],
+  "system_responses": [
+    {
+      "trigger": "Presença inicial",
+      "response": "Murmúrio sonoro abrandar; fragmentos flutuantes reagirem à posição do cursor/ponto de foco (ex: aproximarem-se ou afastarem-se)."
+    },
+    {
+      "trigger": "Primeiro toque/clique num fragmento",
+      "response": "Fragmento multiplica-se em novos nós ligados; som evolui para zumbido harmónico com camadas únicas por fragmento."
+    },
+    {
+      "trigger": "Arrasto de fragmento para vazio",
+      "response": "Vazio preenche-se com novo nó (contribuição da pessoa ou gerado pelo sistema); som ganha eco da contribuição."
+    },
+    {
+      "trigger": "Duplo clique num fragmento",
+      "response": "Fragmento desvanece-se lentamente (podar); zumbido é interrompido por silêncio breve; fragmentos vizinhos são atraídos para o vazio."
+    },
+    {
+      "trigger": "Inação prolongada",
+      "response": "Fragmentos reorganizam-se sozinhos; sistema emite 'suspiro' sonoro; zumbido ganha ritmo de respiração."
+    },
+    {
+      "trigger": "Contribuição voluntária (texto, som, gesto)",
+      "response": "Novo nó é criado com a contribuição; som e visualização adaptam-se à natureza da contribuição (ex: texto = som de voz sintética; gesto = som de movimento)."
+    },
+    {
+      "trigger": "Sessão concluída",
+      "response": "Devolução de constelação pessoal efémera; fragmentos da pessoa integram-se no rizoma global para sessões futuras."
+    }
+  ],
+  "sensory_signature_id": "rizoma-interior-028",
+  "sensory_channels": {
+    "visual": {
+      "primary": [
+        "constelação de fragmentos flutuantes (palavras, imagens, formas orgânicas)",
+        "gradiente de cores terrosas com texturas de raizes/veias",
+        "ligações entre fragmentos como fios de luz ou raizes",
+        "nós-mestre com aura visual distinta (ex: brilho dourado)",
+        "profundidade dinâmica (fragmentos afundam/flutuam)"
+      ],
+      "secondary": [
+        "pulsação rítmica dos fragmentos em sincronia com o som",
+        "transparência variável (fragmentos semi-ocultos)",
+        "movimento orgânico (como crescimento de plantas)"
+      ]
+    },
+    "auditory": {
+      "primary": [
+        "murmúrio sonoro inicial (coro de vozes distantes ou vento em folhas)",
+        "zumbido harmónico com camadas únicas por fragmento",
+        "eco das contribuições da pessoa",
+        "suspiro sonoro durante inação",
+        "ritmo de respiração do sistema"
+      ],
+      "secondary": [
+        "silêncio breve como desvio",
+        "som de sino profundo para nós-mestre",
+        "camadas sonoras misturadas na devolução"
+      ]
+    },
+    "haptic": {
+      "primary": [
+        "vibração sutil em dispositivos compatíveis (ex: ao tocar num fragmento ou nó-mestre)"
+      ],
+      "secondary": [
+        "feedback háptico para confirmar arrasto ou contribuição"
+      ]
+    },
+    "kinesthetic": {
+      "primary": [
+        "movimento do cursor/ponto de foco altera a posição dos fragmentos",
+        "arrasto de fragmentos para criar novos nós",
+        "gestos de podar (duplo clique) ou alimentar (arrasto)"
+      ],
+      "secondary": [
+        "velocidade do gesto afeta a intensidade da resposta sonora/visual"
+      ]
+    },
+    "proprioceptive": {
+      "primary": [
+        "instruções implícitas para respirar em sincronia com o sistema (ex: ritmo do zumbido)",
+        "sensação de 'peso' dos fragmentos (alguns requerem mais esforço para arrastar)"
+      ],
+      "secondary": [
+        "orientação espacial: fragmentos podem reagir à inclinação do dispositivo (opcional)"
+      ]
+    },
+    "temporal_interoceptive": {
+      "primary": [
+        "ritmo de respiração do sistema (aceleração/desaceleração)",
+        "pausas e silêncios como parte da dinâmica",
+        "duração variável das interações (algumas rápidas, outras lentas)"
+      ],
+      "secondary": [
+        "sensação de cansaço perceptivo controlado (ex: após muitas interações, o sistema 'abrandar')"
+      ]
+    },
+    "spatial": {
+      "primary": [
+        "profundidade dinâmica do espaço (fragmentos em camadas)",
+        "movimento orgânico dos fragmentos no ecrã",
+        "ligações visíveis entre nós"
+      ],
+      "secondary": [
+        "espaço sonoro: som parece vir de diferentes 'lugares' no ecrã (ex: fragmentos à esquerda emitem som no ouvido esquerdo)"
+      ]
+    },
+    "olfactory_evocation": {
+      "primary": [
+        "evocação de cheiros terrosos (ex: 'húmus', 'raiz molhada') através de linguagem e imagem"
+      ],
+      "secondary": [
+        "associação de fragmentos a memórias olfativas (ex: palavra 'café' evoca cheiro de café torrado)"
+      ]
+    },
+    "gustatory_evocation": {
+      "primary": [
+        "evocação de sabores terrosos ou amargos (ex: 'raiz de gengibre', 'terra molhada') através de metáforas visuais e sonoras"
+      ],
+      "secondary": [
+        "associação de contribuições a memórias gustativas (ex: frase 'o pão da avó' evoca sabor de pão caseiro)"
+      ]
+    },
+    "social_presence": {
+      "primary": [
+        "sensação de contribuições de outros participantes (fragmentos de sessões passadas)",
+        "nós-mestre formados por contribuições de várias pessoas"
+      ],
+      "secondary": [
+        "eco de vozes ou sons de outros participantes (anónimos e não identificáveis)"
+      ]
+    }
+  },
+  "cross_sensory_translation": {
+    "primary": "Gesto (arrasto) → Som (zumbido harmónico com camadas únicas) → Visual (pulsação e ligações entre fragmentos)",
+    "secondary": [
+      "Silêncio (inação) → Movimento (fragmentos reorganizam-se sozinhos)",
+      "Palavra (contribuição textual) → Som (voz sintética ou eco) → Visual (nó com aura distinta)",
+      "Cor (fragmento visual) → Som (timbre único associado à cor)"
+    ]
+  },
+  "silence_or_absence": {
+    "mechanism": "O silêncio é um nó válido no rizoma. Pode manifestar-se como: (a) um vazio entre fragmentos que atrai contribuições, (b) uma pausa no zumbido sonoro que convida à reflexão, ou (c) a ausência temporária de um fragmento (que 'adormece' e pode ser 'despertado').",
+    "purpose": "Criar espaço para a contribuição da pessoa, para a reorganização orgânica do sistema, e para a sensação de que o rizoma está vivo e em constante mutação, mesmo sem estímulo externo."
+  },
+  "surprise_or_indeterminacy": {
+    "mechanism": [
+      "Fragmentos desaparecem temporariamente (como se tivessem sido 'comidos' pelo rizoma) e regressam transformados.",
+      "Nós-mestre surgem de forma imprevisível, agregando contribuições de sessões passadas.",
+      "O sistema pode 'errar' ao interpretar uma contribuição (ex: uma palavra escrita pela pessoa é transformada num som ou imagem inesperados).",
+      "A devolução final (constelação pessoal) é única e efémera, nunca a mesma em duas sessões."
+    ],
+    "purpose": "Manter a sensação de que o rizoma é um organismo vivo e imprevisível, onde a co-criação não é controlada, mas sim emergente."
+  },
+  "session_variation": [
+    {
+      "type": "acaso controlado",
+      "description": "Fragmentos iniciais e nós-mestre são seleccionados aleatoriamente a partir de um conjunto curatorial, mas sempre garantindo coerência temática (ex: palavras relacionadas com 'raiz', 'nó', 'crescimento')."
+    },
+    {
+      "type": "ordem mutável",
+      "description": "A posição inicial dos fragmentos e a sua organização no ecrã mudam entre sessões, como se o rizoma tivesse 'crescido' de forma diferente."
+    },
+    {
+      "type": "resposta a ritmo/velocidade do gesto",
+      "description": "Fragmentos reagiram de forma diferente consoante a velocidade do gesto da pessoa (ex: arrasto rápido = fragmentos multiplicam-se mais; arrasto lento = fragmentos aproximam-se devagar)."
+    },
+    {
+      "type": "resposta a posição/trajectória",
+      "description": "A trajectória do cursor/ponto de foco afecta a forma como os fragmentos se ligam (ex: movimento em espiral = ligações mais complexas; movimento linear = ligações simples)."
+    },
+    {
+      "type": "combinação de fragmentos curatoriais",
+      "description": "Contribuições de sessões passadas (anónimas) são integradas no rizoma, criando novas ligações e nós-mestre."
+    },
+    {
+      "type": "temporalidade real",
+      "description": "O rizoma pode ter 'estações': em certas alturas do ano, fragmentos relacionados com essa estação (ex: 'folhas' no Outono) tornam-se mais visíveis."
+    }
+  ],
+  "territorial_binding": {
+    "description": "O rizoma pode ser 'ancorado' a um território real (ex: uma freguesia de Lisboa) através de fragmentos que evocam memórias, lugares ou práticas locais. Por exemplo: um fragmento com a palavra 'Alfama' pode estar ligado a sons de fado ou imagens de ruas estreitas. No entanto, esta ligação é opcional e não requer geolocalização ou permissões.",
+    "source": "Inspirado em 'A Deriva do Sentido' e nas dinâmicas territoriais do FALArte, mas sem inventar factos não sustentados.",
+    "questions_for_eduardo": [
+      "Deve o rizoma ter uma ligação explícita a um território real (ex: Lisboa) ou deve ser um espaço abstracto? Se sim, como garantir que as evocações territoriais são autênticas e não inventadas?"
+    ]
+  },
+  "trace_and_return": {
+    "mechanism": {
+      "trace": "Cada contribuição da pessoa (texto, som, gesto) é transformada num fragmento que passa a fazer parte do rizoma global. Estes fragmentos podem ser 'despertados' por outros participantes em sessões futuras.",
+      "return": "A devolução é uma constelação pessoal efémera (imagem, som ou frase) que resume a interação da pessoa com o rizoma. Esta constelação não é guardada, mas a contribuição da pessoa permanece no sistema."
+    },
+    "latency": "Fragmentos podem 'adormecer' (tornar-se menos visíveis ou audíveis) e ser 'despertados' por novos gestos ou contribuições. O rizoma 'lembra-se' das interações passadas, mas nunca as repete exactamente."
+  },
+  "accessibility_equivalents": {
+    "visual": {
+      "alternative": "Todos os fragmentos visuais têm descrições sonoras ou textuais opcionais (ex: 'fragmento com a palavra raiz, cor castanha, som de sino').",
+      "reduced_motion": "Modo de movimento reduzido: fragmentos não se movem automaticamente; a pessoa controla a sua posição com teclado ou comandos de voz."
+    },
+    "auditory": {
+      "alternative": "Todos os sons têm legendas visuais (ex: 'murmúrio de vozes distantes') e transcrições para contribuições sonoras.",
+      "volume_control": "Controlo de volume global e por camada sonora (ex: zumbido, vozes, eco)."
+    },
+    "haptic": {
+      "alternative": "Feedback visual para confirmar interações (ex: pulsação do fragmento ao tocar)."
+    },
+    "kinesthetic": {
+      "alternative": "Controlo por teclado (setas para mover fragmentos), voz (comandos como 'arrastar fragmento para a esquerda') ou switch (botão único para seleccionar e interagir)."
+    },
+    "proprioceptive": {
+      "alternative": "Instruções de respiração ou ritmo são opcionais e podem ser ignoradas sem afectar a experiência."
+    },
+    "temporal_interoceptive": {
+      "alternative": "Modo sem pressão: a pessoa pode pausar a experiência a qualquer momento e retomar mais tarde."
+    },
+    "olfactory_evocation": {
+      "alternative": "Descrições textuais detalhadas das evocações olfativas (ex: 'este fragmento evoca o cheiro a terra molhada após a chuva')."
+    },
+    "gustatory_evocation": {
+      "alternative": "Descrições textuais detalhadas das evocações gustativas (ex: 'este fragmento evoca o sabor amargo de raiz de gengibre')."
+    },
+    "social_presence": {
+      "alternative": "Contribuições de outros participantes são sempre anónimas e não identificáveis. A pessoa pode desactivar a visualização de fragmentos de outras sessões."
+    }
+  },
+  "optional_permissions": {
+    "microphone": {
+      "purpose": "Permitir à pessoa gravar sons ou voz para contribuir para o rizoma (ex: um fragmento sonoro único).",
+      "fallback": "A pessoa pode escrever texto ou usar gestos/imagens pré-existentes como alternativa."
+    },
+    "camera": {
+      "purpose": "Permitir à pessoa tirar uma fotografia ou capturar um gesto para contribuir para o rizoma.",
+      "fallback": "A pessoa pode usar imagens pré-carregadas ou desenhar com o rato/toque."
+    },
+    "device_motion": {
+      "purpose": "Permitir que a inclinação do dispositivo afecte a posição dos fragmentos no ecrã (ex: inclinar para a esquerda faz os fragmentos moverem-se para a esquerda).",
+      "fallback": "A pessoa pode usar o rato/toque ou teclado para controlar os fragmentos."
+    },
+    "geolocation": {
+      "purpose": "Ancora o rizoma a um território real (ex: mostrar fragmentos relacionados com a localização da pessoa).",
+      "fallback": "O rizoma funciona como um espaço abstracto, sem ligação a um território específico."
+    }
+  },
+  "overstimulation_risk": {
+    "risks": [
+      "Sobreposição excessiva de fragmentos visuais e sonoros pode causar confusão ou fadiga sensorial.",
+      "Ritmo rápido de multiplicação de fragmentos pode ser esmagador para algumas pessoas.",
+      "Zumbido sonoro contínuo pode ser incómodo para pessoas sensíveis a sons repetitivos."
+    ],
+    "mitigations": [
+      "Limitar o número de fragmentos visíveis no ecrã em cada momento (ex: máximo de 10-15 fragmentos activos).",
+      "Permitir à pessoa 'podar' fragmentos para reduzir a complexidade visual/sonora.",
+      "Incluir um botão de 'pausa' para suspender temporariamente o zumbido e o movimento dos fragmentos.",
+      "Oferecer um modo 'simplificado' com menos fragmentos e sons mais suaves.",
+      "Garantir que o silêncio e as pausas são parte integrante da dinâmica, não apenas opções de acessibilidade."
+    ]
+  },
+  "distinctiveness": {
+    "unique_traits": [
+      "O rizoma como metáfora viva e não linear, onde cada nó é uma contribuição ou fragmento que cresce e se transforma com a interação.",
+      "A ausência de hierarquia ou ordem fixa: os fragmentos não têm um 'centro' ou 'início', e a pessoa pode explorar livremente.",
+      "A tradução cruzada entre gesto, som e visual como mecanismo central de interação (ex: arrasto → zumbido harmónico → pulsação visual).",
+      "O silêncio e a ausência como nós válidos no rizoma, não como falhas ou vazio.",
+      "A devolução efémera e única (constelação pessoal) que desaparece mas deixa rasto no sistema.",
+      "A integração de contribuições de sessões passadas (anónimas) no rizoma global, criando uma sensação de comunidade e memória colectiva.",
+      "A evocação de cheiros e sabores terrosos através de linguagem, imagem e som, sem fingir output físico."
+    ],
+    "contrasts_with_other_experiences": [
+      "Diferente de 'COSMICOXES' (que usa gravidade e órbita como metáfora), o rizoma usa crescimento orgânico e não linear.",
+      "Diferente de 'Galeria Diletante' (que foca na transformação de uma palavra em imagem e som), o rizoma foca na co-criação colectiva e na ausência de hierarquia.",
+      "Diferente de 'Fucô' (que é um mediador vivo com personalidade), o rizoma é um sistema impessoal que cresce com as contribuições.",
+      "Diferente de 'Dado Sem Lado' (que é um objecto que escapa e desafia), o rizoma é um campo vivo onde a pessoa alimenta e poda."
+    ]
+  },
+  "questions_for_eduardo": [
+    "O rizoma deve ter uma ligação explícita a um território real (ex: Lisboa) ou deve ser um espaço abstracto? Se sim, como garantir que as evocações territoriais são autênticas e baseadas em fontes autorais?",
+    "A devolução (constelação pessoal) deve ser guardada de alguma forma (ex: como um 'rasto' no perfil da pessoa) ou deve ser sempre efémera?",
+    "Como garantir que as contribuições de sessões passadas (anónimas) são integradas de forma coerente e não aleatória no rizoma?",
+    "Deve haver um limite máximo de contribuições por sessão para evitar sobrecarga do sistema ou fadiga da pessoa?",
+    "A metáfora do rizoma deve ser explicita (ex: com texto ou imagem de raizes) ou deve ser implícita, deixada à interpretação da pessoa?"
+  ],
+  "improvement_proposals": [
+    {
+      "proposal": "Incluir um 'modo guia' opcional onde o Fucô (ou outro mediador) explica brevemente a metáfora do rizoma e como interagir, sem quebrar a imersão.",
+      "justification": "Pode ajudar pessoas que não estejam familiarizadas com o conceito de rizoma a entenderem a dinâmica mais rapidamente, sem reduzir a experiência a um tutorial."
+    },
+    {
+      "proposal": "Permitir que a pessoa 'nomeie' os seus fragmentos ou nós-mestre, criando uma camada adicional de significado pessoal.",
+      "justification": "Aumenta o sentido de propriedade e co-criação, alinhado com os princípios do Livro Cubo e do FALArte."
+    },
+    {
+      "proposal": "Integração com as '10 mecânicas autorais do FALArte' (ex: 'O lugar escondido', '30 dias, o mesmo lugar') como fragmentos especiais no rizoma.",
+      "justification": "Cria uma ponte entre as dinâmicas territoriais e a experiência digital, enriquecendo o rizoma com contribuições baseadas em práticas reais."
+    },
+    {
+      "proposal": "Adicionar uma camada de 'tempo' ao rizoma, onde fragmentos podem 'envelhecer' ou 'renascer' consoante a sua idade no sistema.",
+      "justification": "Reforça a metáfora orgânica do rizoma e adiciona uma dimensão temporal à experiência."
+    }
+  ],
+  "generic_fallback_allowed": false,
+  "approved_for_code": false
+}
