@@ -78,8 +78,9 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["proposal", "basis", "changes_authored_meaning", "author_decision"],
+        "required": ["id", "proposal", "basis", "changes_authored_meaning", "author_decision"],
         "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
           "proposal": {"type": "string", "minLength": 1},
           "basis": {"type": "string", "minLength": 1},
           "changes_authored_meaning": {"type": "boolean"},
