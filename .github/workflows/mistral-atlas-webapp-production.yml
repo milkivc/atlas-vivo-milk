@@ -135,7 +135,7 @@ jobs:
           import base64, hashlib, io, json, os, pathlib, tarfile, urllib.parse, urllib.request
           raw=os.environ.get('NEXTCLOUD_ATLAS','').strip()
           secret=os.environ.get('NEXTCLOUD_KEY','').strip()
-          base=''; user='admin'; password=secret
+          base='https://nuvem.associacaomilk.pt'; user='admin'; password=secret
           try:
               obj=json.loads(raw)
               if isinstance(obj,dict):
@@ -144,6 +144,7 @@ jobs:
                   password=str(obj.get('app_password') or obj.get('password') or password)
           except Exception:
               if raw.startswith('http'): base=raw
+              elif raw and '=' not in raw and '\n' not in raw: user=raw
               else:
                   for line in raw.splitlines():
                       if '=' in line:
@@ -215,7 +216,7 @@ jobs:
           python - <<'PY'
           import base64, hashlib, json, os, pathlib, tarfile, urllib.parse, urllib.request
           raw=os.environ.get('NEXTCLOUD_ATLAS','').strip(); secret=os.environ.get('NEXTCLOUD_KEY','').strip()
-          base=''; user='admin'; password=secret
+          base='https://nuvem.associacaomilk.pt'; user='admin'; password=secret
           try:
               obj=json.loads(raw)
               if isinstance(obj,dict):
@@ -224,6 +225,7 @@ jobs:
                   password=str(obj.get('app_password') or obj.get('password') or password)
           except Exception:
               if raw.startswith('http'): base=raw
+              elif raw and '=' not in raw and '\n' not in raw: user=raw
               else:
                   for line in raw.splitlines():
                       if '=' in line:
