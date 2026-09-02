@@ -7,6 +7,7 @@ on:
     paths:
       - '.vibe/agents/atlas-opening-fix.toml'
       - '.vibe/prompts/atlas-opening-fix.md'
+      - 'docs/agent-input/OPENING_CANONICAL_LOCK.md'
       - '.github/workflows/mistral-sitejet-corpus-build.yml'
   workflow_dispatch:
 
@@ -44,6 +45,7 @@ jobs:
           set -euo pipefail
           test -f .vibe/agents/atlas-opening-fix.toml
           test -f .vibe/prompts/atlas-opening-fix.md
+          test -f docs/agent-input/OPENING_CANONICAL_LOCK.md
           test -f docs/ATLAS_CAMADA_PUBLICA_EXPERIENCIA_CANONICA_20260829.md
           test -f deploy/atlas-public/public-runtime-config.json
           test -f deploy/atlas-public/experience-machine.js
@@ -95,8 +97,8 @@ jobs:
         run: |
           set -euo pipefail
           vibe --trust --agent atlas-opening-fix \
-            --prompt "Executa somente a missão do teu system prompt: materializa PRETO → SELO → TOQUE antes do COSMICOXES existente. Lê apenas as fontes e ficheiros indicados, faz a alteração mínima, executa os testes e termina." \
-            --max-turns 14 --output json > /tmp/mistral-opening.json
+            --prompt "Executa agora exactamente a missão definida no system prompt. Não explores o repositório. Lê apenas OPENING_CANONICAL_LOCK e os quatro ficheiros públicos indicados, implementa, testa e termina." \
+            --max-turns 20 --output json > /tmp/mistral-opening.json
           test -s /tmp/mistral-opening.json
 
       - name: Deterministic opening non-regression gate
@@ -136,16 +138,16 @@ jobs:
           import json, os, pathlib, urllib.request
           key=os.environ['MISTRAL_API_KEY'].strip()
           diff=pathlib.Path('/tmp/opening.diff').read_text(encoding='utf-8')
-          canon=pathlib.Path('docs/ATLAS_CAMADA_PUBLICA_EXPERIENCIA_CANONICA_20260829.md').read_text(encoding='utf-8')
+          lock=pathlib.Path('docs/agent-input/OPENING_CANONICAL_LOCK.md').read_text(encoding='utf-8')
           roles=[
-            ('opening_dramaturgy','Confirma que a alteração implementa PRETO → SELO → TOQUE antes de COSMICOXES e não cria onboarding/menu/header visual na entrada.'),
+            ('opening_dramaturgy','Confirma PRETO → SELO → TOQUE antes de COSMICOXES e ausência de onboarding/menu/header visual na entrada.'),
             ('runtime_accessibility','Confirma activação por teclado/pointer/touch, foco utilizável e reduced-motion sem apagar significado.'),
-            ('public_boundary','Confirma que não foram adicionados dados, segredos, referências à camada não pública, publicação ou conteúdo inventado.')]
+            ('public_boundary','Confirma ausência de dados, segredos, camada não pública, publicação ou conteúdo inventado.')]
           failed=[]
           for role,scope in roles:
               payload={'model':'mistral-medium-latest','temperature':0.0,'response_format':{'type':'json_object'},'messages':[
                 {'role':'system','content':f'És o revisor Mistral {role} da MILK. {scope} Só bloqueias com evidência literal no DIFF ligada à fonte. Responde JSON estrito com pass(boolean), blockers(array), checks(array).'},
-                {'role':'user','content':'FONTE CANÓNICA:\n'+canon+'\n\nDIFF EXACTO:\n'+diff}]}
+                {'role':'user','content':'FONTE BLOQUEADA:\n'+lock+'\n\nDIFF EXACTO:\n'+diff}]}
               req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
               with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
               review=json.loads(body['choices'][0]['message']['content'])
