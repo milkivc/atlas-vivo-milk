@@ -1,0 +1,150 @@
+name: MILK Vibe Code — Atlas P0 guarded build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - codex/milk-curadorias-ia-webapp-20260821
+    paths:
+      - '.vibe/agents/atlas-build-p0.toml'
+      - '.vibe/prompts/atlas-build-p0.md'
+      - '.github/workflows/mistral-vibe-code-atlas-p0.yml'
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: milk-vibe-code-atlas-p0
+  cancel-in-progress: false
+
+jobs:
+  build-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      PTSERVIDOR_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.run_id }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Establish immutable baseline
+        run: |
+          set -euo pipefail
+          cp deploy/atlas-public/app.js /tmp/app-before.js
+          (cd deploy/atlas-public && sha256sum -c manifest.sha256)
+          node --check deploy/atlas-public/app.js
+          python - <<'PY'
+          import json, pathlib
+          c=json.loads(pathlib.Path('deploy/atlas-public/catalogo-curatorial.json').read_text(encoding='utf-8'))
+          assert len(c['entradas']) == 49
+          assert [x['ordem'] for x in c['entradas']] == list(range(1,50))
+          PY
+
+      - name: Install Mistral Vibe Code
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check mistral-vibe
+          vibe --version
+
+      - name: Vibe Code implements verified P0 fixes in ephemeral checkout
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY" || { echo '::error::MISTRAL_API_KEY missing'; exit 2; }
+          vibe --trust --agent atlas-build-p0 \
+            --prompt "Executa exactamente a tarefa definida em .vibe/prompts/atlas-build-p0.md. Antes de editar, lê AGENTS.md e deploy/atlas-public/app.js. Altera somente app.js. Não publiques, não cries PR e não alteres conteúdo curatorial." \
+            --max-turns 18 --output json > /tmp/vibe-p0-output.json
+          test -s /tmp/vibe-p0-output.json
+
+      - name: Hard gate changed files and syntax
+        run: |
+          set -euo pipefail
+          changed="$(git diff --name-only)"
+          printf 'CHANGED_FILES=%s\n' "$changed"
+          test "$changed" = "deploy/atlas-public/app.js" || { echo '::error::Vibe changed forbidden files'; git diff --name-only; exit 20; }
+          node --check deploy/atlas-public/app.js
+          cmp -s /tmp/app-before.js deploy/atlas-public/app.js && { echo '::error::No implementation change produced'; exit 21; } || true
+          grep -Fq 'Inventário do Meu Mundo' deploy/atlas-public/app.js
+          grep -Fq 'Catástrofe Produtiva' deploy/atlas-public/app.js
+          grep -Fq 'O Ponto de Kusama' deploy/atlas-public/app.js
+          grep -Fq 'O Corpo que Percebe' deploy/atlas-public/app.js
+          grep -Fq 'Escutar o Silêncio' deploy/atlas-public/app.js
+          grep -Fq 'O Rizoma Interior' deploy/atlas-public/app.js
+          grep -Fq 'O Cubo Interior' deploy/atlas-public/app.js
+          grep -Fq 'document.hidden' deploy/atlas-public/app.js
+          grep -Fq 'visibilitychange' deploy/atlas-public/app.js
+          grep -Fq 'audio.close' deploy/atlas-public/app.js
+          git diff -- deploy/atlas-public/app.js > /tmp/atlas-p0.diff
+          test -s /tmp/atlas-p0.diff
+          echo "P0_DIFF_BYTES=$(wc -c < /tmp/atlas-p0.diff)"
+
+      - name: Three Mistral agents review the actual diff
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, pathlib, urllib.request
+          key=os.environ['MISTRAL_API_KEY'].strip()
+          diff=pathlib.Path('/tmp/atlas-p0.diff').read_text(encoding='utf-8')
+          before=pathlib.Path('/tmp/app-before.js').read_text(encoding='utf-8')
+          after=pathlib.Path('deploy/atlas-public/app.js').read_text(encoding='utf-8')
+          roles=[
+            ('regression_guard','Verifica se o diff altera apenas gestão de RAF/visibilidade e AudioContext; bloqueia qualquer mudança curatorial, de dados, de rede ou comportamento dos sete motores.'),
+            ('browser_runtime','Verifica corridas, loops RAF duplicados, lifecycle de visibilitychange e promises de AudioContext.close; procura erros concretos de browser.'),
+            ('accessibility_performance','Verifica se a alteração reduz trabalho em background sem contrariar o controlo manual de movimento e sem degradar teclado, diálogo ou experiências.')
+          ]
+          reviews=[]
+          for role,instruction in roles:
+              payload={'model':'mistral-medium-latest','temperature':0.0,'response_format':{'type':'json_object'},'messages':[
+                {'role':'system','content':f'És o agente Mistral {role} da MILK. {instruction} Responde JSON com role, pass, blockers, regressions, tests.'},
+                {'role':'user','content':'AGENTS.md fixa 49 entradas e proíbe mudanças curatoriais. Avalia este diff real:\n'+diff}
+              ]}
+              req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
+              review=json.loads(body['choices'][0]['message']['content']); review['role']=role; reviews.append(review)
+          pathlib.Path('/tmp/p0-reviews.json').write_text(json.dumps(reviews,ensure_ascii=False,indent=2),encoding='utf-8')
+          for r in reviews:
+              print('MISTRAL_P0_REVIEW='+json.dumps(r,ensure_ascii=False))
+              if r.get('pass') is not True or r.get('blockers'):
+                  raise SystemExit('MISTRAL_P0_REVIEW_BLOCKED_'+r['role'])
+          print('MISTRAL_P0_REVIEWS_OK=3')
+          PY
+
+      - name: Store candidate diff and reviews privately with readback
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ftplib, hashlib, io, json, os, pathlib, ssl, tarfile, urllib.request
+          pwd=os.environ.get('PTSERVIDOR_FTPS_PASSWORD','').strip()
+          if not pwd: raise SystemExit('PTSERVIDOR_FTPS_PASSWORD_MISSING')
+          run=os.environ['RUN_ID']
+          meta={'run':run,'publication':False,'repo_webapp_commit':False,'changed_files':['deploy/atlas-public/app.js'],'human_review_required':True}
+          b=io.BytesIO()
+          with tarfile.open(fileobj=b,mode='w:gz') as tf:
+              for source,arc in [('/tmp/atlas-p0.diff','atlas-p0.diff'),('/tmp/p0-reviews.json','mistral-reviews.json'),('/tmp/vibe-p0-output.json','vibe-output.json'),('deploy/atlas-public/app.js','candidate-app.js')]:
+                  tf.add(source,arcname=arc)
+              raw=json.dumps(meta,sort_keys=True).encode(); info=tarfile.TarInfo('receipt.json'); info.size=len(raw); tf.addfile(info,io.BytesIO(raw))
+          data=b.getvalue(); sha=hashlib.sha256(data).hexdigest(); name=f'atlas-p0-candidate-{run}.tar.gz'
+          ftp=ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=120)
+          ftp.connect('troi.ptservidor.net',21); ftp.login('migration@associacaomilk.pt',pwd); ftp.prot_p()
+          for part in ('atlas-vibe-code-analysis','p0-candidates',run):
+              try: ftp.mkd(part)
+              except ftplib.all_errors: pass
+              ftp.cwd(part)
+          ftp.storbinary('STOR '+name,io.BytesIO(data),blocksize=1048576)
+          back=bytearray(); ftp.retrbinary('RETR '+name,back.extend,blocksize=1048576); ftp.quit()
+          if hashlib.sha256(back).hexdigest()!=sha: raise RuntimeError('P0_CANDIDATE_READBACK_MISMATCH')
+          msg=f'MILK_VIBE_CODE_P0_CANDIDATE_VERIFIED run={run} bytes={len(data)} sha256={sha} changed=app.js reviews=3 publication=no webapp_commit=no secret_values_disclosed=0'
+          print(msg)
+          req=urllib.request.Request(f'https://api.github.com/repos/{os.environ["REPO"]}/issues/35/comments',data=json.dumps({'body':msg}).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Content-Type':'application/json','Accept':'application/vnd.github+json'})
+          urllib.request.urlopen(req,timeout=30).read()
+          PY
