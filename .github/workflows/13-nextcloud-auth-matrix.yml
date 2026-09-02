@@ -1,4 +1,4 @@
-name: 13 MILK Nextcloud authentication matrix
+name: 13 MILK Nextcloud admin authentication
 
 on:
   workflow_dispatch:
@@ -10,68 +10,51 @@ permissions:
   contents: read
 
 env:
-  NEXTCLOUD_ATLAS: ${{ secrets.NEXTCLOUD_ATLAS }}
-  NEXTCLOUD_KEY: ${{ secrets.NEXTCLOUD_KEY }}
-  PTSERVIDOR_FTP_WEBDAV: ${{ secrets.PTSERVIDOR_FTP_WEBDAV }}
+  ADMIN_NEXTCLOUD: ${{ secrets.ADMIN_NEXTCLOUD }}
 
 jobs:
   probe:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - name: Probe all existing credential aliases read-only
+      - name: Authenticate admin read-only using dedicated secret
         shell: bash
         run: |
           set -euo pipefail
+          test -n "$ADMIN_NEXTCLOUD"
           python - <<'PY'
-          import base64,json,os,ssl,urllib.error,urllib.parse,urllib.request
+          import base64,os,ssl,time,urllib.error,urllib.parse,urllib.request
           base='https://associacaomilk.pt/nextcloud'
-          users=('admin','milk','associ16','migration@associacaomilk.pt')
-          candidates=[]
-          def add(label,value):
-              value=(value or '').strip()
-              if not value or value.startswith('http') or any(value==v for _,v in candidates): return
-              candidates.append((label,value))
-          add('NEXTCLOUD_KEY',os.environ.get('NEXTCLOUD_KEY'))
-          add('NEXTCLOUD_ATLAS',os.environ.get('NEXTCLOUD_ATLAS'))
-          raw=(os.environ.get('PTSERVIDOR_FTP_WEBDAV') or '').strip()
-          if raw:
+          user='admin'
+          password=os.environ['ADMIN_NEXTCLOUD'].strip()
+          endpoint=base+'/remote.php/dav/files/'+urllib.parse.quote(user,safe='')+'/'
+          auth=base64.b64encode((user+':'+password).encode()).decode()
+          body=b'<?xml version="1.0"?><d:propfind xmlns:d="DAV:"><d:prop><d:resourcetype/><d:getetag/></d:prop></d:propfind>'
+          def attempt():
+              req=urllib.request.Request(endpoint,data=body,method='PROPFIND',headers={
+                  'Authorization':'Basic '+auth,
+                  'Depth':'1',
+                  'Content-Type':'application/xml; charset=utf-8',
+                  'Accept':'application/xml',
+                  'User-Agent':'MILK-Nextcloud-Admin-Probe/2.0'})
               try:
-                  obj=json.loads(raw)
-                  if isinstance(obj,dict):
-                      for key in ('nextcloud_password','webdav_password','password','key'):
-                          add('PTSERVIDOR_FTP_WEBDAV:'+key,str(obj.get(key) or ''))
-              except Exception:
-                  for line in raw.splitlines():
-                      if '=' in line:
-                          k,v=line.split('=',1)
-                          if 'PASS' in k.upper() or 'KEY' in k.upper(): add('PTSERVIDOR_FTP_WEBDAV:'+k.strip(),v)
-                  if '\n' not in raw and '=' not in raw and len(raw)<512: add('PTSERVIDOR_FTP_WEBDAV',raw)
-          if not candidates: raise SystemExit('NO_CREDENTIAL_CANDIDATES')
-          winner=None; results=[]
-          for label,password in candidates:
-              for user in users:
-                  path='/remote.php/dav/files/'+urllib.parse.quote(user,safe='')+'/'
-                  auth=base64.b64encode((user+':'+password).encode()).decode()
-                  req=urllib.request.Request(base+path,data=b'<?xml version="1.0"?><d:propfind xmlns:d="DAV:"><d:prop><d:resourcetype/></d:prop></d:propfind>',method='PROPFIND',headers={'Authorization':'Basic '+auth,'Depth':'0','Content-Type':'application/xml','User-Agent':'MILK-Nextcloud-Auth-Matrix/1.0'})
-                  try:
-                      with urllib.request.urlopen(req,timeout=30,context=ssl.create_default_context()) as r: status=r.status
-                  except urllib.error.HTTPError as e: status=e.code
-                  except Exception: status='ERR'
-                  results.append((label,user,status))
-                  if status in (200,207): winner=(label,user,status); break
-              if winner: break
-          print('NEXTCLOUD_AUTH_CANDIDATES='+str(len(candidates)))
-          print('NEXTCLOUD_AUTH_ATTEMPTS='+str(len(results)))
-          if winner:
-              print('NEXTCLOUD_AUTH_MATRIX=PASS')
-              print('NEXTCLOUD_AUTH_ALIAS='+winner[0])
-              print('NEXTCLOUD_AUTH_USER='+winner[1])
-              print('NEXTCLOUD_AUTH_HTTP='+str(winner[2]))
-          else:
-              print('NEXTCLOUD_AUTH_MATRIX=BLOCKED')
-              print('NEXTCLOUD_STATUS_SET='+','.join(sorted({str(x[2]) for x in results})))
-              raise SystemExit(41)
+                  with urllib.request.urlopen(req,timeout=45,context=ssl.create_default_context()) as r:
+                      data=r.read()
+                      return r.status,len(data),None
+              except urllib.error.HTTPError as e:
+                  return e.code,0,e.headers.get('Retry-After')
+          status,size,retry=attempt()
+          if status==429:
+              delay=60
+              try: delay=max(30,min(180,int(retry or '60')))
+              except Exception: pass
+              print('NEXTCLOUD_RATE_LIMIT_RETRY_SECONDS='+str(delay))
+              time.sleep(delay)
+              status,size,retry=attempt()
+          print('NEXTCLOUD_ADMIN_HTTP='+str(status))
+          if status not in (200,207): raise SystemExit('NEXTCLOUD_ADMIN_AUTH_BLOCKED')
+          print('NEXTCLOUD_ADMIN_AUTH=PASS')
+          print('NEXTCLOUD_ADMIN_RESPONSE_BYTES='+str(size))
           print('NEXTCLOUD_WRITES=0')
           print('SECRET_VALUES_DISCLOSED=0')
           PY
