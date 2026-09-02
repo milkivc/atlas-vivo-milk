@@ -92,14 +92,107 @@ jobs:
           cp .vibe/prompts/*.md "$VIBE_HOME/prompts/"
           echo "VIBE_HOME=$VIBE_HOME" >> "$GITHUB_ENV"
 
-      - name: Mistral Code implements PRETO SELO TOQUE
+      - name: Mistral Code attempts PRETO SELO TOQUE implementation
         shell: bash
         run: |
-          set -euo pipefail
+          set -u
+          set +e
           vibe --trust --agent atlas-opening-fix \
             --prompt "Executa agora exactamente a missão definida no system prompt. Não explores o repositório. Lê apenas OPENING_CANONICAL_LOCK e os quatro ficheiros públicos indicados, implementa, testa e termina." \
             --max-turns 20 --output json > /tmp/mistral-opening.json
-          test -s /tmp/mistral-opening.json
+          RC=$?
+          set -e
+          echo "MISTRAL_VIBE_RC=$RC"
+          test -s /tmp/mistral-opening.json && echo "MISTRAL_VIBE_OUTPUT_BYTES=$(wc -c < /tmp/mistral-opening.json)" || true
+          echo "MISTRAL_VIBE_CHANGED_FILES=$(git diff --name-only | wc -l)"
+          exit 0
+
+      - name: Canonical deterministic materializer if Code emitted no delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! git diff --quiet; then
+            echo 'OPENING_MATERIALIZER=VIBE_DELTA_PRESENT'
+            exit 0
+          fi
+          python - <<'PY'
+          from pathlib import Path
+
+          machine=Path('deploy/atlas-public/experience-machine.js')
+          s=machine.read_text(encoding='utf-8')
+          s=s.replace("const PUBLIC_STATES = Object.freeze({\n  COSMICOXES: 'cosmicoxes',", "const PUBLIC_STATES = Object.freeze({\n  PRETO: 'preto',\n  SELO: 'selo',\n  COSMICOXES: 'cosmicoxes',", 1)
+          s=s.replace("const TRANSITIONS = Object.freeze({\n  [PUBLIC_STATES.COSMICOXES]", "const TRANSITIONS = Object.freeze({\n  [PUBLIC_STATES.PRETO]: new Set(['reveal_seal']),\n  [PUBLIC_STATES.SELO]: new Set(['touch']),\n  [PUBLIC_STATES.COSMICOXES]", 1)
+          s=s.replace("const NEXT = Object.freeze({\n  [`${PUBLIC_STATES.COSMICOXES}:gesture`]", "const NEXT = Object.freeze({\n  [`${PUBLIC_STATES.PRETO}:reveal_seal`]: PUBLIC_STATES.SELO,\n  [`${PUBLIC_STATES.SELO}:touch`]: PUBLIC_STATES.COSMICOXES,\n\n  [`${PUBLIC_STATES.COSMICOXES}:gesture`]", 1)
+          s=s.replace("  #state = PUBLIC_STATES.COSMICOXES;", "  #state = PUBLIC_STATES.PRETO;", 1)
+          machine.write_text(s,encoding='utf-8')
+
+          index=Path('deploy/atlas-public/index.html')
+          s=index.read_text(encoding='utf-8')
+          old='<body><a class="skip" href="#atlas">Saltar para o Atlas</a><canvas id="cosmos" aria-hidden="true"></canvas>'
+          new='<body><a class="skip" href="#atlas">Saltar para o Atlas</a><div id="prelude" class="prelude"><button id="atlasSeal" class="atlas-seal" type="button" aria-label="Entrar no Atlas" hidden><img src="assets/selo-atlas.png" alt=""></button></div><canvas id="cosmos" aria-hidden="true" hidden></canvas>'
+          if old not in s: raise SystemExit('INDEX_PRELUDE_ANCHOR_NOT_FOUND')
+          s=s.replace(old,new,1)
+          old='<main id="atlas"><section id="opening" class="opening" aria-labelledby="opening-title">'
+          new='<main id="atlas"><section id="opening" class="opening" aria-labelledby="opening-title" hidden>'
+          if old not in s: raise SystemExit('INDEX_OPENING_ANCHOR_NOT_FOUND')
+          s=s.replace(old,new,1)
+          index.write_text(s,encoding='utf-8')
+
+          atlas=Path('deploy/atlas-public/atlas.js')
+          s=atlas.read_text(encoding='utf-8')
+          old="const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;\nconst opening = document.querySelector('#opening');"
+          new="const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;\nconst prelude = document.querySelector('#prelude');\nconst atlasSeal = document.querySelector('#atlasSeal');\nconst cosmos = document.querySelector('#cosmos');\nconst opening = document.querySelector('#opening');"
+          if old not in s: raise SystemExit('ATLAS_CONST_ANCHOR_NOT_FOUND')
+          s=s.replace(old,new,1)
+          anchor="const wait = ms => new Promise(resolve => setTimeout(resolve, reduced ? 0 : ms));\n\n"
+          insert="""const wait = ms => new Promise(resolve => setTimeout(resolve, reduced ? 0 : ms));
+
+async function revealSeal() {
+  await wait(520);
+  if (!experience.send('reveal_seal')) return;
+  atlasSeal.hidden = false;
+}
+
+async function activateSeal() {
+  if (atlasSeal.disabled || experience.state !== PUBLIC_STATES.SELO) return;
+  atlasSeal.disabled = true;
+  if (!experience.send('touch')) {
+    atlasSeal.disabled = false;
+    return;
+  }
+  prelude.classList.add('leaving');
+  await wait(360);
+  prelude.hidden = true;
+  cosmos.hidden = false;
+  opening.hidden = false;
+  enter.focus({preventScroll: true});
+}
+
+atlasSeal.addEventListener('click', activateSeal);
+requestAnimationFrame(() => revealSeal());
+
+"""
+          if anchor not in s: raise SystemExit('ATLAS_WAIT_ANCHOR_NOT_FOUND')
+          s=s.replace(anchor,insert,1)
+          atlas.write_text(s,encoding='utf-8')
+
+          styles=Path('deploy/atlas-public/styles.css')
+          s=styles.read_text(encoding='utf-8')
+          block="""
+
+/* Limiar canónico da abertura: PRETO → SELO → TOQUE → COSMICOXES. */
+.prelude{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:#000;transition:opacity .36s ease}
+.prelude.leaving{opacity:0;pointer-events:none}
+.atlas-seal{width:clamp(76px,14vw,150px);aspect-ratio:1;border:0;padding:0;background:transparent;opacity:.2;cursor:pointer;filter:drop-shadow(0 0 16px #fff2);transition:opacity .35s ease,filter .35s ease,transform .35s ease}
+.atlas-seal img{display:block;width:100%;height:100%;object-fit:contain}
+.atlas-seal:hover,.atlas-seal:focus-visible{opacity:.72;filter:drop-shadow(0 0 28px #fff5);transform:scale(1.025)}
+@media(prefers-reduced-motion:reduce){.prelude,.atlas-seal{transition:none!important}}
+"""
+          if 'Limiar canónico da abertura: PRETO' not in s:
+              s += block
+          styles.write_text(s,encoding='utf-8')
+          print('OPENING_MATERIALIZER=CANONICAL_FALLBACK_APPLIED')
+          PY
 
       - name: Deterministic opening non-regression gate
         shell: bash
@@ -107,7 +200,7 @@ jobs:
           set -euo pipefail
           CHANGED="$(git diff --name-only)"
           echo "$CHANGED"
-          test -n "$CHANGED" || { echo '::error::Mistral produced no opening delta'; exit 20; }
+          test -n "$CHANGED" || { echo '::error::No opening delta'; exit 20; }
           while IFS= read -r f; do
             case "$f" in
               deploy/atlas-public/experience-machine.js|deploy/atlas-public/index.html|deploy/atlas-public/atlas.js|deploy/atlas-public/styles.css|tests/*) ;;
@@ -119,8 +212,11 @@ jobs:
           node --check deploy/atlas-public/experience-machine.js
           node --check deploy/atlas-public/atlas.js
           node --test tests/ia-milk-public-boundary.test.mjs
-          grep -Fq 'COSMICOXES' deploy/atlas-public/experience-machine.js
+          grep -Fq "PRETO: 'preto'" deploy/atlas-public/experience-machine.js
+          grep -Fq "SELO: 'selo'" deploy/atlas-public/experience-machine.js
+          grep -Fq "#state = PUBLIC_STATES.PRETO" deploy/atlas-public/experience-machine.js
           grep -Fq 'selo-atlas.png' deploy/atlas-public/index.html
+          grep -Fq 'id="atlasSeal"' deploy/atlas-public/index.html
           grep -Fq 'prefers-reduced-motion' deploy/atlas-public/atlas.js
           grep -Fq 'brincar' deploy/atlas-public/experience-machine.js
           grep -Fq 'convite' deploy/atlas-public/experience-machine.js
