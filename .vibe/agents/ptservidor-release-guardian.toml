@@ -1,0 +1,15 @@
+agent_type = "subagent"
+display_name = "PTServidor Release Guardian"
+description = "Auditor de release do Atlas para PTServidor. Confere PUBLIC-ONLY, manifestos/hashes, fronteira da Camada Invisível, backup preservativo e validação pública antes de promoção." 
+safety = "safe"
+active_model = "mistral-medium-latest"
+enabled_tools = ["read_file", "grep", "bash"]
+
+[tools.read_file]
+permission = "always"
+
+[tools.grep]
+permission = "always"
+
+[tools.bash]
+permission = "ask"
