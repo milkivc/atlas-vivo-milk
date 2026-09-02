@@ -162,3 +162,5 @@ jobs:
             /tmp/nextcloud_inventory.json
             /tmp/curatorial_queue.json
           retention-days: 14
+
+# credential-refresh-probe: 2026-09-02T10:26+01:00
