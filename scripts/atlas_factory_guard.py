@@ -18,6 +18,9 @@ schema = require('specs/curatorial-experience-contract.schema.json')
 review_schema = require('specs/curatorial-author-review.schema.json')
 approval_schema = require('specs/curatorial-author-approval.schema.json')
 transformation_rule = require('curatorial-factory/PUBLIC_DYNAMIC_TRANSFORMATION_RULE_20260902.md')
+sensory_constitution = require('curatorial-factory/DIGITAL_MULTISENSORY_EXPERIENCE_CONSTITUTION_20260902.md')
+sensory_blueprint_schema = require('specs/digital-multisensory-curatorial-blueprint.schema.json')
+require('.github/workflows/19-mistral-49-digital-multisensory-blueprints.yml')
 require('scripts/verify_curatorial_author_approval.py')
 require('scripts/provision_mistral_curatorial_foundry.py')
 require('.vibe/agents/author-experience-preview.toml')
@@ -85,6 +88,35 @@ if transformation_rule.exists():
         if token not in tt:
             errors.append('PUBLIC_TRANSFORMATION_RULE_MISSING:'+token)
 
+if sensory_constitution.exists():
+    st=sensory_constitution.read_text(encoding='utf-8', errors='replace').lower()
+    for token in (
+        'foco actual: webapp / camada pública experiencial',
+        'experiências digitais curatoriais',
+        'todos os sentidos',
+        'tradução cruzada dos sentidos',
+        'assinatura sensorial única — 49/49',
+        'approved_for_code=false',
+        'não desviar a fábrica para desenho de infra-estrutura física'
+    ):
+        if token not in st:
+            errors.append('MULTISENSORY_FOCUS_RULE_MISSING:'+token)
+
+if sensory_blueprint_schema.exists():
+    try:
+        obj=json.loads(sensory_blueprint_schema.read_text(encoding='utf-8'))
+        props=obj.get('properties',{})
+        required=set(obj.get('required',[]))
+        for name in ('sensory_signature_id','sensory_channels','cross_sensory_translation','silence_or_absence','surprise_or_indeterminacy','session_variation','accessibility_equivalents','distinctiveness'):
+            if name not in required:
+                errors.append('MULTISENSORY_BLUEPRINT_SCHEMA_MISSING:'+name)
+        if props.get('generic_fallback_allowed',{}).get('const') is not False:
+            errors.append('MULTISENSORY_GENERIC_FALLBACK_NOT_FALSE')
+        if props.get('approved_for_code',{}).get('const') is not False:
+            errors.append('MULTISENSORY_BLUEPRINT_MUST_REQUIRE_AUTHOR_GATE')
+    except Exception as exc:
+        errors.append('MULTISENSORY_BLUEPRINT_SCHEMA_INVALID:'+type(exc).__name__)
+
 vibe=list((ROOT/'.vibe/agents').glob('*.toml')) if (ROOT/'.vibe/agents').exists() else []
 if len(vibe) < 14:
     errors.append(f'MISTRAL_AGENT_FACTORY_REGRESSION:count={len(vibe)}')
@@ -133,11 +165,12 @@ if errors:
 
 print('ATLAS_FACTORY_GUARD=PASS')
 print(f'MISTRAL_PROJECT_AGENTS={len(vibe)}')
-print('FOCUS=PTSERVIDOR_NEXTCLOUD_MISTRAL_WEBAPP')
+print('FOCUS=WEBAPP_DIGITAL_MULTISENSORY_CURATORIAL_EXPERIENCES')
+print('FORTY_NINE_DISTINCT_SENSORY_SIGNATURES=REQUIRED')
 print('AUTHOR_EXPERIENCE_PREVIEW_BEFORE_CODE=ENFORCED')
 print('EXACT_AUTHOR_APPROVED_HASH_REQUIRED=ENFORCED')
 print('PUBLIC_DYNAMIC_TRANSFORMATION=ENFORCED')
-print('TERRITORIAL_TO_POSSIBLE_PHYSICAL_MATERIALIZATION=HUMAN_GATED')
+print('PHYSICAL_INFRASTRUCTURE_DESIGN_NOT_CURRENT_FOCUS=ENFORCED')
 print('GENERIC_CURATORIAL_FALLBACK=FORBIDDEN')
 print('DESTRUCTIVE_GIT_PUSH=FORBIDDEN')
 print('SECRET_LITERAL_EXPOSURE=FORBIDDEN')
