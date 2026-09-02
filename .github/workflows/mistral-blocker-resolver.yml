@@ -1,0 +1,152 @@
+name: MILK Mistral Blocker Resolver
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - work/mistral-sitejet-orchestration-20260902
+    paths:
+      - '.github/workflows/mistral-blocker-resolver.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: milk-mistral-blocker-resolver
+  cancel-in-progress: false
+
+jobs:
+  resolve:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      PTSERVIDOR_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/mistral-sitejet-orchestration-20260902
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Canonical and boundary preflight
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          test -f docs/agent-input/OPENING_CANONICAL_LOCK.md
+          test -f scripts/materialize_canonical_opening.py
+          test -f scripts/mistral_blocker_review.py
+          node --check deploy/atlas-public/experience-machine.js
+          node --check deploy/atlas-public/atlas.js
+          node --test tests/ia-milk-public-boundary.test.mjs
+          echo 'BLOCKER_PREFLIGHT=OK'
+
+      - name: PTServidor FTPS read-only route check
+        run: |
+          set -euo pipefail
+          if [ -z "${PTSERVIDOR_FTPS_PASSWORD:-}" ]; then
+            echo 'PTSERVIDOR_FTPS_ROUTE=SKIPPED_NO_SECRET'
+            exit 0
+          fi
+          python - <<'PY'
+          import ftplib, os, ssl
+          pwd=os.environ['PTSERVIDOR_FTPS_PASSWORD']
+          try:
+              ftp=ftplib.FTP_TLS(context=ssl.create_default_context(), timeout=40)
+              ftp.connect('troi.ptservidor.net',21)
+              ftp.login('migration@associacaomilk.pt',pwd)
+              ftp.prot_p()
+              ftp.pwd()
+              ftp.nlst()[:5]
+              ftp.quit()
+              print('PTSERVIDOR_FTPS_ROUTE=OK_READONLY')
+          except Exception as exc:
+              print('PTSERVIDOR_FTPS_ROUTE=UNAVAILABLE:'+type(exc).__name__)
+          PY
+
+      - name: Materialize canonical opening from locked source
+        run: |
+          set -euo pipefail
+          python scripts/materialize_canonical_opening.py
+          git diff --check
+          git diff > /tmp/atlas-opening.diff
+          test -s /tmp/atlas-opening.diff
+
+      - name: Install Mistral Vibe Code
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check mistral-vibe
+          vibe --version
+
+      - name: Mistral Code inspects and repairs candidate
+        run: |
+          set -u
+          set +e
+          vibe --trust --prompt "Lê docs/agent-input/OPENING_CANONICAL_LOCK.md e o diff actual de deploy/atlas-public. O candidato já materializa PRETO → SELO → TOQUE → COSMICOXES. Inspecciona apenas erros reais de runtime, teclado/touch/foco, prefers-reduced-motion e fidelidade ao lock. Corrige SOMENTE se encontrares defeito comprovado. Não alteres corpus, catálogo, dados territoriais, assets, curadorias, scripts, workflows ou produção. Não cries ficheiros. Termina depois da verificação/correcção." --max-turns 14 --output json > /tmp/vibe-blocker-repair.json
+          echo "MISTRAL_VIBE_REPAIR_RC=$?"
+          set -e
+
+      - name: Hard non-regression gate
+        run: |
+          set -euo pipefail
+          CHANGED="$(git diff --name-only)"
+          echo "$CHANGED"
+          test -n "$CHANGED"
+          while IFS= read -r f; do
+            case "$f" in
+              deploy/atlas-public/experience-machine.js|deploy/atlas-public/index.html|deploy/atlas-public/atlas.js|deploy/atlas-public/styles.css) ;;
+              *) echo "::error::Forbidden changed path: $f"; exit 21;;
+            esac
+          done <<< "$CHANGED"
+          node --check deploy/atlas-public/experience-machine.js
+          node --check deploy/atlas-public/atlas.js
+          node --test tests/ia-milk-public-boundary.test.mjs
+          grep -Fq "PRETO: 'preto'" deploy/atlas-public/experience-machine.js
+          grep -Fq "SELO: 'selo'" deploy/atlas-public/experience-machine.js
+          grep -Fq "#state = PUBLIC_STATES.PRETO" deploy/atlas-public/experience-machine.js
+          grep -Fq 'id="atlasSeal"' deploy/atlas-public/index.html
+          grep -Fq 'selo-atlas.png' deploy/atlas-public/index.html
+          grep -Fq 'prefers-reduced-motion' deploy/atlas-public/atlas.js
+          grep -Fq 'brincar' deploy/atlas-public/experience-machine.js
+          grep -Fq 'convite' deploy/atlas-public/experience-machine.js
+          grep -Fq 'tentar_a_sorte' deploy/atlas-public/experience-machine.js
+          git diff --check
+          git diff > /tmp/atlas-opening.diff
+          echo 'BLOCKER_HARD_GATE=OK'
+
+      - name: Three Mistral agents resolve evidence blockers
+        run: |
+          set -euo pipefail
+          set +e
+          python scripts/mistral_blocker_review.py
+          RC=$?
+          set -e
+          if [ "$RC" -ne 0 ]; then
+            echo 'MISTRAL_COUNCIL_REQUESTED_REPAIR=YES'
+            REPORT="$(cat /tmp/mistral-blocker-reviews.json)"
+            set +e
+            vibe --trust --prompt "Os três revisores Mistral encontraram blockers no candidato PRETO/SELO/TOQUE. Corrige apenas blockers que citem evidência literal no diff e que sejam exigidos por docs/agent-input/OPENING_CANONICAL_LOCK.md. Não cries novos requisitos nem ficheiros. Não alteres dados, catálogo, curadorias, assets, scripts ou workflows. Relatório dos revisores: $REPORT" --max-turns 12 --output json > /tmp/vibe-second-repair.json
+            set -e
+            node --check deploy/atlas-public/experience-machine.js
+            node --check deploy/atlas-public/atlas.js
+            node --test tests/ia-milk-public-boundary.test.mjs
+            git diff --check
+            git diff > /tmp/atlas-opening.diff
+            python scripts/mistral_blocker_review.py
+          fi
+          echo 'MISTRAL_BLOCKERS_RESOLVED=YES'
+
+      - name: Commit only validated public delta
+        run: |
+          set -euo pipefail
+          git config user.name 'Associação MILK - Mistral Blocker Resolver'
+          git config user.email 'milk@associacaomilk.pt'
+          git add deploy/atlas-public/experience-machine.js deploy/atlas-public/index.html deploy/atlas-public/atlas.js deploy/atlas-public/styles.css
+          git commit -m 'feat(atlas): materialize canonical preto selo toque opening'
+          git push origin HEAD:work/mistral-sitejet-orchestration-20260902
+          echo "MISTRAL_RESOLVED_COMMIT=$(git rev-parse HEAD)"
+          echo 'PRODUCTION_PUBLISH=NO'
