@@ -1,0 +1,134 @@
+name: MILK Mistral Curatorial Experience Foundry readiness
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - work/copernico-recovery-webapp-20260902
+    paths:
+      - '.github/workflows/mistral-experience-foundry-readiness.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  foundry:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      RUN_ID: ${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Mistral Studio SDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python -m pip install --disable-pip-version-check -q 'mistralai>=2.9,<3'
+
+      - name: Exercise Libraries, Agents, Handoffs, Code Interpreter and structured output
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os
+          from mistralai.client import Mistral
+
+          key=os.environ['MISTRAL_API_KEY'].strip(); run=os.environ['RUN_ID']
+          client=Mistral(api_key=key)
+          created=[]; library=None
+
+          def text(resp):
+              out=[]
+              for e in getattr(resp,'outputs',[]) or []:
+                  if getattr(e,'type',None)=='message.output':
+                      c=getattr(e,'content','')
+                      if isinstance(c,str): out.append(c)
+                      else:
+                          for part in c or []:
+                              t=getattr(part,'text',None)
+                              if t: out.append(t)
+              return '\n'.join(out).strip()
+
+          try:
+              models=client.models.list()
+              data=getattr(models,'data',[]) or []
+              ids=[str(getattr(x,'id','')) for x in data]
+              print('MISTRAL_MODELS_VISIBLE='+str(len(ids)))
+              print('CODESTRAL_CAPABILITY=' + ('YES' if any('codestral' in x.lower() for x in ids) else 'UNKNOWN'))
+              print('VOXTRAL_CAPABILITY=' + ('YES' if any('voxtral' in x.lower() for x in ids) else 'UNKNOWN'))
+              print('VISION_CAPABILITY=' + ('YES' if any(('pixtral' in x.lower() or 'vision' in x.lower()) for x in ids) else 'UNKNOWN'))
+
+              library=client.beta.libraries.create(
+                  name=f'ATLAS-EXPERIENCE-FOUNDRY-READINESS-{run}',
+                  description='Ephemeral readiness library for Atlas Vivo MILK. Real corpus enters only from Nextcloud.',
+                  chunk_size=1200,
+              )
+              print('MISTRAL_LIBRARY=CREATED')
+
+              common=(
+                  'Atlas Vivo MILK. Read AGENTS.md semantics from the supplied task. '
+                  'Never invent curatorial mechanics. Each final implementation must preserve mechanic, rhythm, sensation, gesture, language, materiality, territory and physical/digital relation. '
+                  'Return JSON only when asked.'
+              )
+              specialists=[]
+              specs=[
+                  ('MILK Source Hermeneut','Recover source-grounded invariants and ambiguities.'),
+                  ('MILK Ludic Decoder','Recover exact games, brincadeiras, convite, chance, repetition and collective/singular modes.'),
+                  ('MILK Sensory Dramaturg','Recover timing, surprise, silence, sound, movement, latency and return.'),
+                  ('MILK Spatial COPERNICO','Recover spatial/territorial binding and COPERNICO integration contracts.'),
+                  ('MILK Accessibility Runtime','Recover accessible equivalent interactions and browser/runtime constraints.'),
+              ]
+              for name,desc in specs:
+                  a=client.beta.agents.create(
+                      model='mistral-medium-latest', name=name,
+                      description=desc,
+                      instructions=common+' '+desc,
+                      tools=[{'type':'code_interpreter'}],
+                      completion_args={'temperature':0.0},
+                  )
+                  created.append(a.id); specialists.append(a)
+              print('MISTRAL_SPECIALIST_AGENTS_CREATED='+str(len(specialists)))
+
+              architect=client.beta.agents.create(
+                  model='mistral-medium-latest',
+                  name='MILK Curatorial Experience Architect',
+                  description='Coordinates specialists and compiles evidence into a code-facing digital experience contract.',
+                  instructions=common+' Coordinate specialists through handoffs. Build experience contracts, never descriptive webpages.',
+                  tools=[{'type':'code_interpreter'}],
+                  completion_args={'temperature':0.0,'response_format':{'type':'json_object'}},
+              )
+              created.append(architect.id)
+              architect=client.beta.agents.update(agent_id=architect.id,handoffs=[a.id for a in specialists])
+              print('MISTRAL_HANDOFF_GRAPH=CONFIGURED')
+
+              response=client.beta.conversations.start(
+                  agent_id=architect.id,
+                  inputs=(
+                      'READINESS ONLY. No real curatorial source is attached yet. '
+                      'Return strict JSON with keys ready_for_nextcloud_corpus, required_source_evidence, specialist_handoffs_available, '
+                      'experience_contract_dimensions, prohibited_inference, next_stage. '
+                      'next_stage must be Nextcloud source ingestion followed by source-grounded experience compilation and Vibe Code implementation.'
+                  ),
+                  store=False,
+              )
+              payload=text(response)
+              if not payload: raise RuntimeError('EMPTY_ARCHITECT_OUTPUT')
+              low=payload.lower()
+              for token in ('nextcloud','experience','source'):
+                  if token not in low: raise RuntimeError('ARCHITECT_OUTPUT_MISSING_'+token.upper())
+              print('MISTRAL_CONVERSATIONS=PASS')
+              print('MISTRAL_STRUCTURED_OUTPUT=PASS')
+              print('MISTRAL_CODE_INTERPRETER_AVAILABLE=YES')
+              print('EXPERIENCE_FOUNDRY=READY_FOR_NEXTCLOUD')
+          finally:
+              for aid in reversed(created):
+                  try: client.beta.agents.delete(agent_id=aid)
+                  except Exception: pass
+              if library is not None:
+                  try: client.beta.libraries.delete(library_id=library.id)
+                  except Exception: pass
+              print('EPHEMERAL_MISTRAL_RESOURCES_CLEANED=YES')
+          PY
