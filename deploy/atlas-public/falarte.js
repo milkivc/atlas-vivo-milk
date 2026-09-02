@@ -1,4 +1,5 @@
-const STORAGE_PREFIX = 'atlas-milk-falarte-v1:';
+const STORAGE_PREFIX = 'atlas-milk-falarte-v2:';
+const PERSISTED_PREFERENCE_FIELDS = ['age13', 'authorMode', 'publication'];
 
 const mechanics = [
   {
@@ -108,7 +109,7 @@ const mechanics = [
     id: 'remetente-ausente',
     title: 'Remetente Ausente',
     subtitle: 'Mecânica 10 · Postal para o cosmos',
-    instruction: 'Escreve a carta que nunca foi entregue: para quem já não está, para quem nunca vai ler, para o tempo. Nesta versão digital, a carta pode dissolver-se visualmente em partículas — sem sair deste aparelho.',
+    instruction: 'Escreve a carta que nunca foi entregue: para quem já não está, para quem nunca vai ler, para o tempo. Esta versão não envia a carta ao espaço, a destinatário ou pela rede; apenas a transforma visualmente neste aparelho.',
     cosmic: true,
     fields: [
       { id: 'zona', label: 'Território desta carta, se houver', type: 'text' },
@@ -124,16 +125,36 @@ function node(tag, className, text) {
   return element;
 }
 
-function loadDraft(id) {
+function persistableFieldIds(mechanic) {
+  return mechanic.fields.filter(field => field.type !== 'file').map(field => field.id);
+}
+
+function sanitizeDraft(mechanic, value) {
+  const source = value && typeof value === 'object' ? value : {};
+  const clean = {};
+  persistableFieldIds(mechanic).forEach(id => {
+    if (typeof source[id] === 'string') clean[id] = source[id];
+  });
+  PERSISTED_PREFERENCE_FIELDS.forEach(id => {
+    if (id === 'age13') clean[id] = source[id] === true;
+    else if (typeof source[id] === 'string') clean[id] = source[id];
+  });
+  if (mechanic.dayGrid && Array.isArray(source.days)) {
+    clean.days = source.days.filter(day => Number.isInteger(day) && day >= 1 && day <= 30);
+  }
+  return clean;
+}
+
+function loadDraft(mechanic) {
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_PREFIX + id) || '{}');
+    return sanitizeDraft(mechanic, JSON.parse(localStorage.getItem(STORAGE_PREFIX + mechanic.id) || '{}'));
   } catch {
     return {};
   }
 }
 
-function saveDraft(id, data) {
-  localStorage.setItem(STORAGE_PREFIX + id, JSON.stringify(data));
+function saveDraft(mechanic, data) {
+  localStorage.setItem(STORAGE_PREFIX + mechanic.id, JSON.stringify(sanitizeDraft(mechanic, data)));
 }
 
 function buildInput(field, draft, status) {
@@ -157,7 +178,7 @@ function buildInput(field, draft, status) {
     input.addEventListener('change', () => {
       const chosen = input.files?.[0];
       status.textContent = chosen
-        ? `ficheiro escolhido neste navegador: ${chosen.name} · não foi enviado`
+        ? 'ficheiro escolhido apenas para esta sessão · não foi enviado nem guardado no rascunho'
         : 'nenhum ficheiro escolhido';
     });
   }
@@ -165,7 +186,7 @@ function buildInput(field, draft, status) {
   return wrapper;
 }
 
-function buildDayGrid(draft) {
+function buildDayGrid(draft, status) {
   const region = node('fieldset', 'falarte-days');
   const legend = node('legend', '', 'Dias já observados neste aparelho');
   region.append(legend);
@@ -179,6 +200,7 @@ function buildDayGrid(draft) {
       if (days.has(day)) days.delete(day); else days.add(day);
       button.setAttribute('aria-pressed', String(days.has(day)));
       region.dataset.days = JSON.stringify([...days].sort((a, b) => a - b));
+      status.textContent = days.has(day) ? `dia ${day} marcado neste rascunho local` : `dia ${day} retirado deste rascunho local`;
     });
     region.append(button);
   }
@@ -202,7 +224,9 @@ function buildPreferences(draft) {
   [['nome','nome'],['inventado','nome inventado'],['anonimo','anónimo/a']].forEach(([value, label]) => {
     const item = node('label', 'falarte-radio');
     const radio = document.createElement('input');
-    radio.type = 'radio'; radio.name = 'authorMode'; radio.value = value;
+    radio.type = 'radio';
+    radio.name = 'authorMode';
+    radio.value = value;
     radio.checked = (draft.authorMode || 'anonimo') === value;
     item.append(radio, document.createTextNode(` ${label}`));
     signatures.append(item);
@@ -214,27 +238,30 @@ function buildPreferences(draft) {
   [['integral','integral'],['trechos','apenas trechos'],['nao','não publicar']].forEach(([value, label]) => {
     const item = node('label', 'falarte-radio');
     const radio = document.createElement('input');
-    radio.type = 'radio'; radio.name = 'publication'; radio.value = value;
+    radio.type = 'radio';
+    radio.name = 'publication';
+    radio.value = value;
     radio.checked = (draft.publication || 'nao') === value;
     item.append(radio, document.createTextNode(` ${label}`));
     publication.append(item);
   });
   section.append(publication);
-  section.append(node('p', 'falarte-privacy', 'Estas escolhas ficam apenas neste aparelho. Não existe envio externo activo nesta versão.'));
+  section.append(node('p', 'falarte-privacy', 'Estas escolhas e o rascunho textual ficam apenas neste aparelho. Ficheiros não entram no rascunho. Não existe envio externo activo nesta versão.'));
   return section;
 }
 
-function collectDraft(form, dayGrid) {
+function collectDraft(form, mechanic, dayGrid) {
   const data = {};
-  form.querySelectorAll('input:not([type="file"]), textarea').forEach(input => {
-    if (input.type === 'radio') {
-      if (input.checked) data[input.name] = input.value;
-    } else if (input.type === 'checkbox') {
-      data[input.name] = input.checked;
-    } else {
-      data[input.name] = input.value;
-    }
+  persistableFieldIds(mechanic).forEach(id => {
+    const input = form.elements[id];
+    if (input && typeof input.value === 'string') data[id] = input.value;
   });
+  const age = form.elements.age13;
+  data.age13 = Boolean(age?.checked);
+  const authorMode = form.querySelector('input[name="authorMode"]:checked');
+  const publication = form.querySelector('input[name="publication"]:checked');
+  data.authorMode = authorMode?.value || 'anonimo';
+  data.publication = publication?.value || 'nao';
   if (dayGrid) data.days = JSON.parse(dayGrid.dataset.days || '[]');
   return data;
 }
@@ -259,7 +286,7 @@ function cosmicDissolve(text, reduced) {
 }
 
 function renderMechanic(container, mechanic, reduced) {
-  const draft = loadDraft(mechanic.id);
+  const draft = loadDraft(mechanic);
   container.replaceChildren();
   const form = node('form', 'falarte-form');
   form.noValidate = true;
@@ -268,7 +295,7 @@ function renderMechanic(container, mechanic, reduced) {
   form.append(node('p', 'falarte-subtitle', mechanic.subtitle));
   form.append(node('p', 'falarte-instruction', mechanic.instruction));
 
-  const status = node('p', 'falarte-status', 'rascunho local · nenhum envio externo');
+  const status = node('p', 'falarte-status', 'rascunho textual local · nenhum envio externo');
   status.setAttribute('role', 'status');
   status.setAttribute('aria-live', 'polite');
   status.setAttribute('aria-atomic', 'true');
@@ -276,7 +303,7 @@ function renderMechanic(container, mechanic, reduced) {
 
   let dayGrid = null;
   if (mechanic.dayGrid) {
-    dayGrid = buildDayGrid(draft);
+    dayGrid = buildDayGrid(draft, status);
     form.append(dayGrid);
   }
 
@@ -297,7 +324,7 @@ function renderMechanic(container, mechanic, reduced) {
       const text = form.elements.carta?.value || '';
       form.querySelector('.falarte-cosmos')?.remove();
       form.append(cosmicDissolve(text, reduced));
-      status.textContent = 'transmutação visual local · nada foi enviado';
+      status.textContent = 'transmutação visual local · a carta não foi enviada ao espaço, a destinatário ou pela rede';
     });
     toolbar.append(transform);
   }
@@ -305,8 +332,8 @@ function renderMechanic(container, mechanic, reduced) {
   form.append(toolbar);
   form.addEventListener('submit', event => {
     event.preventDefault();
-    saveDraft(mechanic.id, collectDraft(form, dayGrid));
-    status.textContent = 'rascunho guardado neste aparelho';
+    saveDraft(mechanic, collectDraft(form, mechanic, dayGrid));
+    status.textContent = 'rascunho textual guardado neste aparelho · ficheiros excluídos';
   });
   clear.addEventListener('click', () => {
     localStorage.removeItem(STORAGE_PREFIX + mechanic.id);
@@ -332,18 +359,37 @@ export function openFalarte({ container, reducedMotion = false } = {}) {
   const nav = node('nav', 'falarte-nav');
   nav.setAttribute('aria-label', 'Escolher mecânica falARTE');
   const stage = node('div', 'falarte-stage');
+  const buttons = [];
+
+  const activate = (index, moveFocus = false) => {
+    const target = buttons[index];
+    if (!target) return;
+    buttons.forEach((item, itemIndex) => item.setAttribute('aria-pressed', String(itemIndex === index)));
+    renderMechanic(stage, mechanics[index], reduced);
+    if (moveFocus) target.focus({ preventScroll: true });
+    else stage.focus({ preventScroll: true });
+  };
+
   mechanics.forEach((mechanic, index) => {
     const button = node('button', 'falarte-nav-button', `${String(index + 1).padStart(2, '0')} · ${mechanic.title}`);
     button.type = 'button';
     button.dataset.mechanic = mechanic.id;
     button.setAttribute('aria-pressed', String(index === 0));
-    button.addEventListener('click', () => {
-      nav.querySelectorAll('button').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
-      renderMechanic(stage, mechanic, reduced);
-      stage.focus({ preventScroll: true });
+    button.addEventListener('click', () => activate(index));
+    button.addEventListener('keydown', event => {
+      let next = index;
+      if (event.key === 'ArrowRight') next = (index + 1) % mechanics.length;
+      else if (event.key === 'ArrowLeft') next = (index - 1 + mechanics.length) % mechanics.length;
+      else if (event.key === 'Home') next = 0;
+      else if (event.key === 'End') next = mechanics.length - 1;
+      else return;
+      event.preventDefault();
+      activate(next, true);
     });
+    buttons.push(button);
     nav.append(button);
   });
+
   shell.append(nav, stage);
   container.append(shell);
   stage.tabIndex = -1;
