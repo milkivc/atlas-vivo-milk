@@ -1,0 +1,31 @@
+name: MILK alternate Drive secret kind probe
+on:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths: ['.github/workflows/drive-somostodos-safe-kind-probe.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    env:
+      S: ${{ secrets.DRIVE_SOMOSTODOSPOSSIVEIS }}
+    steps:
+      - name: Classify family only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os
+          s=os.environ.get('S','').strip()
+          if not s: kind='EMPTY'
+          elif s.startswith('1//'): kind='GOOGLE_REFRESH_TOKEN'
+          elif s.startswith('ya29.'): kind='GOOGLE_ACCESS_TOKEN'
+          elif s.startswith('4/'): kind='GOOGLE_AUTH_CODE'
+          elif s.startswith('AIza'): kind='GOOGLE_API_KEY'
+          elif s.startswith('GOCSPX-'): kind='GOOGLE_CLIENT_SECRET'
+          elif s.count('.')==2: kind='JWT_LIKE'
+          else: kind='OTHER_OPAQUE'
+          print('ALT_DRIVE_KIND='+kind)
+          print('ALT_DRIVE_LENGTH_BUCKET=' + ('<40' if len(s)<40 else '40-99' if len(s)<100 else '100-499' if len(s)<500 else '500+'))
+          PY
