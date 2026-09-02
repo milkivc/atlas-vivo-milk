@@ -17,6 +17,7 @@ registry = require('ops/critical-credentials-registry.yml')
 schema = require('specs/curatorial-experience-contract.schema.json')
 review_schema = require('specs/curatorial-author-review.schema.json')
 approval_schema = require('specs/curatorial-author-approval.schema.json')
+transformation_rule = require('curatorial-factory/PUBLIC_DYNAMIC_TRANSFORMATION_RULE_20260902.md')
 require('scripts/verify_curatorial_author_approval.py')
 require('scripts/provision_mistral_curatorial_foundry.py')
 require('.vibe/agents/author-experience-preview.toml')
@@ -71,6 +72,19 @@ if approval_schema.exists():
     except Exception as exc:
         errors.append('AUTHOR_APPROVAL_SCHEMA_INVALID:'+type(exc).__name__)
 
+if transformation_rule.exists():
+    tt=transformation_rule.read_text(encoding='utf-8', errors='replace').lower()
+    for token in (
+        'regra canónica de transformação curatorial pública',
+        'camada pública experiencial',
+        'não existe correspondência rígida 1:1',
+        'possível materialização física',
+        'necessidade, potência ou desejo territorial',
+        'validação humana'
+    ):
+        if token not in tt:
+            errors.append('PUBLIC_TRANSFORMATION_RULE_MISSING:'+token)
+
 vibe=list((ROOT/'.vibe/agents').glob('*.toml')) if (ROOT/'.vibe/agents').exists() else []
 if len(vibe) < 14:
     errors.append(f'MISTRAL_AGENT_FACTORY_REGRESSION:count={len(vibe)}')
@@ -122,6 +136,8 @@ print(f'MISTRAL_PROJECT_AGENTS={len(vibe)}')
 print('FOCUS=PTSERVIDOR_NEXTCLOUD_MISTRAL_WEBAPP')
 print('AUTHOR_EXPERIENCE_PREVIEW_BEFORE_CODE=ENFORCED')
 print('EXACT_AUTHOR_APPROVED_HASH_REQUIRED=ENFORCED')
+print('PUBLIC_DYNAMIC_TRANSFORMATION=ENFORCED')
+print('TERRITORIAL_TO_POSSIBLE_PHYSICAL_MATERIALIZATION=HUMAN_GATED')
 print('GENERIC_CURATORIAL_FALLBACK=FORBIDDEN')
 print('DESTRUCTIVE_GIT_PUSH=FORBIDDEN')
 print('SECRET_LITERAL_EXPOSURE=FORBIDDEN')
