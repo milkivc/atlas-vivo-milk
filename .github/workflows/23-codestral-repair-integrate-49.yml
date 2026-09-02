@@ -1,15 +1,14 @@
-name: 23 MILK Codestral repair and integrate 49
+name: 23 MILK Codestral repair and integrate exact 49
 
 on:
   push:
     branches: [work/copernico-recovery-webapp-20260902]
-    paths:
-      - '.github/workflows/23-codestral-repair-integrate-49.yml'
+    paths: ['.github/workflows/23-codestral-repair-integrate-49.yml']
   workflow_dispatch:
 
 permissions:
   contents: write
-  actions: read
+  actions: write
 
 concurrency:
   group: milk-codestral-repair-integrate-49
@@ -38,74 +37,55 @@ jobs:
           ref: work/copernico-recovery-webapp-20260902
           fetch-depth: 0
 
-      - name: Regenerate exact failed batches with strict runtime contract
+      - name: Generate only the 14 missing runtimes with refreshed Codestral access
         shell: bash
         run: |
           set -euo pipefail
           test -n "$MISTRAL_API_KEY"
           python - <<'PY'
-          import concurrent.futures, json, os, pathlib, random, re, subprocess, time, urllib.error, urllib.request
-
-          API='https://api.mistral.ai/v1/chat/completions'
-          MODEL='codestral-latest'
-          key=os.environ['MISTRAL_API_KEY']
-          start,end=int(os.environ['START']),int(os.environ['END'])
-          batch=os.environ['BATCH']
+          import concurrent.futures,json,os,pathlib,random,re,subprocess,time,urllib.error,urllib.request
+          API='https://api.mistral.ai/v1/chat/completions'; MODEL='codestral-latest'; key=os.environ['MISTRAL_API_KEY']
+          start,end=int(os.environ['START']),int(os.environ['END']); batch=os.environ['BATCH']
           idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text(encoding='utf-8'))
-          rows=[x for x in idx['entries'] if start <= int(x['ordem']) <= end]
+          rows=[x for x in idx['entries'] if start<=int(x['ordem'])<=end]
           matrix=pathlib.Path('curatorial-factory/EXPERIENCE_RESEARCH_MATRIX_20260902.md').read_text(encoding='utf-8')
           constitution=pathlib.Path('curatorial-factory/DIGITAL_MULTISENSORY_EXPERIENCE_CONSTITUTION_20260902.md').read_text(encoding='utf-8')
-          out=pathlib.Path('generated')/('repair-'+batch)
-          out.mkdir(parents=True,exist_ok=True)
-
-          skeleton='''MANDATORY OUTPUT SHAPE:\nexport function mountCuratorialExperience({ root, context = {}, onClose = () => {} }) {\n  // build one specific interactive experience here\n  function destroy() {\n    // remove listeners, timers, RAF, audio and injected nodes/styles created by this module\n  }\n  return { destroy };\n}\nThe final answer MUST contain that exported function, MUST define destroy inside it, and MUST return { destroy }. Never omit these three elements.'''
-          system='''És Codestral, engenheiro de experiências digitais do Atlas Vivo MILK. PRODUZ CÓDIGO, não relatório. O blueprint é soberano; a investigação só aprofunda. Devolve APENAS JavaScript ES válido, sem markdown. Cria uma experiência browser REAL e específica, nunca card, quiz, formulário, chatbot ou click->modal genérico. A interacção deve alterar estado perceptivo. Usa DOM/SVG/Canvas/Web Audio/CSS injectado pelo módulo quando coerente. Som apenas após gesto. Vibração apenas feature-detected. Sem fetch, CDN, trackers, cookies, localStorage ou sessionStorage. Touch e teclado equivalentes. Respeita prefers-reduced-motion com equivalência poética. Não inventes factos, fotografias, áudios, memórias ou texto territorial. Cheiro/sabor apenas evocação. Limpa listeners, timers, RAF e AudioContext em destroy(). Não recries COPÉRNICO nem a entrada COSMICOXES; se o id for cosmicoxes cria somente uma composição curatorial autónoma que não substitui o runtime canónico.'''
-
-          def call(messages,max_tokens=10000):
-              payload={'model':MODEL,'temperature':0.12,'max_tokens':max_tokens,'messages':messages}
+          out=pathlib.Path('generated')/('repair-'+batch); out.mkdir(parents=True,exist_ok=True)
+          system='''És Codestral, engenheiro de experiências digitais do Atlas Vivo MILK. Produz APENAS JavaScript ES completo. O blueprint é soberano. Implementa uma experiência browser real, específica, multissensorial e lúdica; nunca card, quiz, formulário, chatbot ou click->modal genérico. A interacção principal deve alterar estado perceptivo. Tempo, espera, gesto, silêncio, acaso e cruzamento sensorial só quando coerentes com o blueprint. Sem fetch, CDN, trackers, cookies, localStorage ou sessionStorage. Touch e teclado equivalentes; prefers-reduced-motion preserva significado. Som apenas após gesto. Não inventes factos, fotografias, áudios, memórias ou texto territorial. Não recries COPÉRNICO nem a entrada COSMICOXES. CONTRATO LITERAL: export function mountCuratorialExperience({ root, context = {}, onClose = () => {} }) { ... function destroy() { ... } ... return { destroy }; }'''
+          def call(msgs):
+              payload={'model':MODEL,'temperature':0.12,'max_tokens':10000,'messages':msgs}
               req=urllib.request.Request(API,data=json.dumps(payload,ensure_ascii=False).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
               with urllib.request.urlopen(req,timeout=300) as r: body=json.loads(r.read())
-              content=body['choices'][0]['message']['content']
-              if isinstance(content,list): content=''.join(str(x.get('text','')) if isinstance(x,dict) else str(x) for x in content)
-              return str(content).strip()
-
-          def strip_fences(text):
-              text=re.sub(r'^```(?:javascript|js)?\s*','',text.strip(),flags=re.I)
-              return re.sub(r'\s*```$','',text).strip()
-
+              c=body['choices'][0]['message']['content']
+              if isinstance(c,list): c=''.join(str(x.get('text','')) if isinstance(x,dict) else str(x) for x in c)
+              return str(c).strip()
+          def clean(t):
+              t=re.sub(r'^```(?:javascript|js)?\s*','',t.strip(),flags=re.I); return re.sub(r'\s*```$','',t).strip()
           def validate(code,path):
-              if not re.search(r'export\s+function\s+mountCuratorialExperience\s*\(',code): return 'missing exact exported mountCuratorialExperience function'
-              if not re.search(r'function\s+destroy\s*\(',code): return 'missing inner destroy function'
-              if not re.search(r'return\s*\{\s*destroy\s*\}\s*;?',code): return 'missing return { destroy }'
-              if 'fetch(' in code: return 'fetch forbidden'
-              if 'localStorage' in code or 'sessionStorage' in code: return 'storage forbidden'
+              if not re.search(r'export\s+function\s+mountCuratorialExperience\s*\(',code): return 'missing mount'
+              if not re.search(r'function\s+destroy\s*\(',code): return 'missing destroy'
+              if not re.search(r'return\s*\{\s*destroy\s*\}',code): return 'missing return destroy'
+              if any(x in code for x in ('fetch(','localStorage','sessionStorage')): return 'forbidden network/storage'
               path.write_text(code+'\n',encoding='utf-8')
               p=subprocess.run(['node','--check',str(path)],capture_output=True,text=True)
-              if p.returncode: return (p.stderr or p.stdout)[-2500:]
-              return None
-
+              return None if p.returncode==0 else (p.stderr or p.stdout)[-2200:]
           def build(row):
               bp=json.loads((pathlib.Path('curatorial-factory/sensory-blueprints')/row['file']).read_text(encoding='utf-8'))
-              user={'id':row['id'],'blueprint':bp,'research_lenses':matrix,'constitution':constitution,'strict_contract':skeleton,'task':'Implementa esta experiência como obra digital multissensorial autónoma e específica.'}
-              base=[{'role':'system','content':system+'\n\n'+skeleton},{'role':'user','content':json.dumps(user,ensure_ascii=False)}]
-              previous=''; last='unknown'; path=out/(row['id']+'.js')
+              user=json.dumps({'id':row['id'],'blueprint':bp,'research_lenses':matrix,'constitution':constitution},ensure_ascii=False)
+              previous=''; err='unknown'; path=out/(row['id']+'.js')
               for attempt in range(8):
+                  msgs=[{'role':'system','content':system},{'role':'user','content':user}]
+                  if attempt: msgs += [{'role':'assistant','content':previous[:50000]},{'role':'user','content':'Repara o módulo integralmente. Erro do validador: '+err+'. Mantém a profundidade da experiência. Devolve só JavaScript completo e cumpre literalmente mount/destroy/return.'}]
                   try:
-                      msgs=base if attempt==0 else [base[0],base[1],{'role':'assistant','content':previous[:50000]},{'role':'user','content':'REPARA o módulo completo. O validador encontrou: '+last+'\nNão simplifiques a experiência. Devolve APENAS o JavaScript completo, obedecendo literalmente ao MANDATORY OUTPUT SHAPE.'}]
-                      code=strip_fences(call(msgs))
-                      previous=code
-                      last=validate(code,path)
-                      if not last:
-                          print('CODESTRAL_REPAIR_PASS='+row['id'],flush=True)
-                          return
+                      previous=clean(call(msgs)); err=validate(previous,path)
+                      if not err:
+                          print('CODESTRAL_REPAIR_PASS='+row['id'],flush=True); return
                   except urllib.error.HTTPError as e:
-                      last=f'HTTP {e.code}'
+                      err='HTTP '+str(e.code)
                       if e.code not in (408,409,429,500,502,503,504): raise
-                  except Exception as e:
-                      last=type(e).__name__+':'+str(e)
+                  except Exception as e: err=type(e).__name__+':'+str(e)
                   time.sleep(min(30,2**attempt+random.random()*2))
-              raise RuntimeError(row['id']+':'+last)
-
+              raise RuntimeError(row['id']+':'+err)
           failures=[]
           with concurrent.futures.ThreadPoolExecutor(max_workers=2) as ex:
               futs={ex.submit(build,row):row for row in rows}
@@ -113,10 +93,8 @@ jobs:
                   try: fut.result()
                   except Exception as e: failures.append(str(e))
           if failures:
-              print('\n'.join('CODESTRAL_REPAIR_FAIL='+x for x in failures))
-              raise SystemExit('CODESTRAL_REPAIR_FAILURES='+str(len(failures)))
-          expected={x['id']+'.js' for x in rows}; actual={p.name for p in out.glob('*.js')}
-          assert actual==expected,(expected-actual,actual-expected)
+              print('\n'.join('CODESTRAL_REPAIR_FAIL='+x for x in failures)); raise SystemExit('CODESTRAL_REPAIR_FAILURES='+str(len(failures)))
+          assert {p.name for p in out.glob('*.js')}=={x['id']+'.js' for x in rows}
           print('CODESTRAL_REPAIR_BATCH_PASS='+batch)
           PY
 
@@ -128,7 +106,7 @@ jobs:
           retention-days: 3
 
   integrate:
-    name: Assemble and commit exact 49 runtimes
+    name: Materialize and register exact 49
     needs: repair
     runs-on: ubuntu-24.04
     timeout-minutes: 30
@@ -138,55 +116,60 @@ jobs:
           ref: work/copernico-recovery-webapp-20260902
           fetch-depth: 0
 
-      - name: Recover the 35 successful runtimes from run 33631822788
-        uses: actions/download-artifact@v4
-        with:
-          pattern: codestral-direct-batch-*
-          path: generated/all
-          merge-multiple: true
-          run-id: 33631822788
-          github-token: ${{ github.token }}
-
-      - name: Add repaired batches 2 and 6
-        uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4
         with:
           pattern: codestral-repair-batch-*
-          path: generated/all
+          path: generated/repair
           merge-multiple: true
 
-      - name: Assemble exact 49 module set and registry
+      - name: Merge repaired 14 into preserved 35 and build exact registry
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
           import json,pathlib,shutil,subprocess
           idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text(encoding='utf-8'))
-          src=pathlib.Path('generated/all'); dst=pathlib.Path('deploy/atlas-public/experiences'); dst.mkdir(parents=True,exist_ok=True)
-          expected={x['id']+'.js' for x in idx['entries']}; actual={p.name for p in src.glob('*.js')}
+          dst=pathlib.Path('deploy/atlas-public/experiences'); dst.mkdir(parents=True,exist_ok=True)
+          repair=list(pathlib.Path('generated/repair').glob('*.js'))
+          assert len(repair)==14, f'EXPECTED_REPAIR_14_GOT_{len(repair)}'
+          for p in repair:
+              subprocess.run(['node','--check',str(p)],check=True); shutil.copy2(p,dst/p.name)
+          expected={x['id']+'.js' for x in idx['entries']}; actual={p.name for p in dst.glob('*.js') if p.name!='registry.js'}
           assert actual==expected,(len(actual),sorted(expected-actual),sorted(actual-expected))
-          for p in src.glob('*.js'):
-              shutil.copy2(p,dst/p.name)
-              subprocess.run(['node','--check',str(dst/p.name)],check=True)
-          lines=['// 49 distinct Codestral curatorial runtimes','export const CURATORIAL_EXPERIENCE_LOADERS = {']
+          lines=['// Exact 49 Atlas Vivo MILK curatorial runtime loaders','export const CURATORIAL_EXPERIENCE_LOADERS = {']
           for x in idx['entries']: lines.append(f"  {json.dumps(x['id'])}: () => import('./{x['id']}.js'),")
           lines += ['};','','export async function loadCuratorialExperience(id) {','  const loader = CURATORIAL_EXPERIENCE_LOADERS[id];',"  if (!loader) throw new Error('CURATORIAL_RUNTIME_NOT_FOUND:'+id);",'  return loader();','}','']
           (dst/'registry.js').write_text('\n'.join(lines),encoding='utf-8')
+          for p in dst.glob('*.js'): subprocess.run(['node','--check',str(p)],check=True)
           print('CODESTRAL_EXACT_49_ASSEMBLED=PASS')
           PY
           node tests/ia-milk-public-boundary.test.mjs
           git diff --check
-          test "$(find deploy/atlas-public/experiences -maxdepth 1 -name '*.js' ! -name 'registry.js' | wc -l)" -eq 49
           if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_.*PASSWORD|NEXTCLOUD_.*KEY|client_secret|access_token' deploy/atlas-public/experiences; then exit 31; fi
           echo CODESTRAL_49_RUNTIME_GATE=PASS
 
-      - name: Commit 49 Codestral runtimes
-        shell: bash
+      - name: Commit exact 49 runtimes
         run: |
           set -euo pipefail
           git config user.name 'Atlas Mistral Code'
           git config user.email 'milk@associacaomilk.pt'
           git add deploy/atlas-public/experiences
-          git commit -m 'feat(experiences): materialize 49 Codestral curatorial runtimes'
+          git commit -m 'feat(experiences): complete exact 49 Codestral curatorial runtimes'
           git pull --rebase origin work/copernico-recovery-webapp-20260902
           git push origin HEAD:work/copernico-recovery-webapp-20260902
           echo CODESTRAL_49_COMMIT_PUSHED=1
+
+      - name: Dispatch deep refinement and private PTServidor staging
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          for wf in 21-mistral-code-deep-curatorial-refinement.yml ptservidor-private-webapp-staging.yml; do
+            curl -fsS -X POST \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H 'Accept: application/vnd.github+json' \
+              -H 'X-GitHub-Api-Version: 2022-11-28' \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/${wf}/dispatches" \
+              -d '{"ref":"work/copernico-recovery-webapp-20260902"}'
+            echo DISPATCHED=$wf
+          done
