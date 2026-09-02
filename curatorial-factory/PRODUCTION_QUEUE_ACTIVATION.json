@@ -1,0 +1,12 @@
+{
+  "activated_at": "2026-09-02T10:00:00Z",
+  "mode": "PRODUCTION",
+  "source": "NEXTCLOUD",
+  "target": "atlas.associacaomilk.pt",
+  "mistral_agents": "PERSISTENT_FOUNDRY",
+  "queue": "CURATORIA_BY_CURATORIA",
+  "author_preview_before_code": true,
+  "generic_fallback_allowed": false,
+  "preserve_copernico": true,
+  "secret_values": 0
+}
