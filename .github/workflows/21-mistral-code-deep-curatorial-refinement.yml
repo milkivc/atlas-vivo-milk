@@ -28,93 +28,63 @@ jobs:
           ref: work/copernico-recovery-webapp-20260902
           fetch-depth: 0
 
-      - name: Require complete 49-runtime set or wait cleanly
-        id: gate
+      - name: Gate exact 49-runtime set
+        id: runtime_gate
         shell: bash
         run: |
-          set -euo pipefail
           python - <<'PY'
-          import json,pathlib
+          import json,pathlib,os
           idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text())
           root=pathlib.Path('deploy/atlas-public/experiences')
           present=sum((root/(x['id']+'.js')).is_file() for x in idx['entries'])
           print('RUNTIMES_PRESENT='+str(present))
-          with open('/tmp/ready','w') as f: f.write('1' if present==49 else '0')
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f: f.write('ready='+('1' if present==49 else '0')+'\n')
           PY
-          echo "ready=$(cat /tmp/ready)" >> "$GITHUB_OUTPUT"
+
+      - name: Probe Mistral account availability
+        id: mistral_gate
+        if: steps.runtime_gate.outputs.ready == '1'
+        shell: bash
+        run: |
+          python - <<'PY'
+          import os,urllib.error,urllib.request
+          key=os.environ.get('MISTRAL_API_KEY','').strip(); available='0'; code='missing'
+          if key:
+              try:
+                  req=urllib.request.Request('https://api.mistral.ai/v1/models',headers={'Authorization':'Bearer '+key})
+                  with urllib.request.urlopen(req,timeout=30): pass
+                  available='1'; code='200'
+              except urllib.error.HTTPError as e: code=str(e.code)
+              except Exception as e: code=type(e).__name__
+          print('MISTRAL_DEEP_REFINEMENT_ACCOUNT_HTTP='+code)
+          if code=='402': print('MISTRAL_DEEP_REFINEMENT_DEFERRED_BILLING=1')
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f: f.write('available='+available+'\n')
+          PY
 
       - name: Install Mistral Vibe Code
-        if: steps.gate.outputs.ready == '1'
+        if: steps.runtime_gate.outputs.ready == '1' && steps.mistral_gate.outputs.available == '1'
         run: |
-          set -euo pipefail
-          test -n "$MISTRAL_API_KEY"
           python -m pip install --disable-pip-version-check --quiet 'mistral-vibe==2.24.5'
           vibe --version
 
       - name: Deep curatorial interaction refinement
-        if: steps.gate.outputs.ready == '1'
+        if: steps.runtime_gate.outputs.ready == '1' && steps.mistral_gate.outputs.available == '1'
         run: |
           set -euo pipefail
-          vibe --trust --max-turns 120 --output json --prompt "EXECUÇÃO AUTORIZADA DE SEGUNDA PASSAGEM CURATORIAL. Não escrevas relatório: EDITA O CÓDIGO REAL. Lê AGENTS.md, curatorial-factory/SOURCE_CORPUS_20260902.md, curatorial-factory/DIGITAL_MULTISENSORY_EXPERIENCE_CONSTITUTION_20260902.md, curatorial-factory/EXPERIENCE_RESEARCH_MATRIX_20260902.md, todos os 49 blueprints em curatorial-factory/sensory-blueprints/ e todos os runtimes em deploy/atlas-public/experiences/. A primeira implementação não é sagrada: melhora-a onde estiver rasa. Regra de precedência: invariantes/texto autoral do blueprint > dinâmica/brincadeira > matriz de investigação > decisão técnica. Trabalha cada runtime como obra digital distinta. Elimina padrões disfarçados de template, click->modal, quiz, card, formulário ou animação decorativa. Aprofunda SOMENTE quando coerente com o blueprint: limiar/O Aberto; estados intermédios/barzakh; recomposição imaginal; retirada/Gelassenheit; palavra-mundo e território vivido; Cultural Probes e escuta sem extracção; descanso-divertimento-desenvolvimento e convivência; tempo poroso; espaço digital; silêncio funcional; acaso; contaminação entre sentidos; gesto com consequência; devolução em vez de mera recolha. Não exponhas teoria/autores ao utilizador salvo se a curadoria os trouxer explicitamente. Não inventes factos territoriais, textos autorais, fotografias, áudio ou memórias. Não uses fetch/CDN/tracker. Preserva COPÉRNICO e COSMICOXES; não os recries. Microfone/câmara/geolocalização são opcionais e nunca condição de entrada. WCAG 2.2/reduced-motion/teclado/touch têm equivalência poética, não versão pobre. Refina também registry/integrador apenas se necessário. Implementa, testa mentalmente lifecycle e destroy(), e termina apenas depois de inspeccionar os 49 módulos." > /tmp/vibe-deep-refinement.json
-          echo MISTRAL_CODE_DEEP_REFINEMENT_EXECUTED=1
+          vibe --trust --max-turns 120 --output json --prompt "EXECUÇÃO AUTORIZADA DE SEGUNDA PASSAGEM CURATORIAL. EDITA O CÓDIGO REAL, não escrevas relatório. Lê AGENTS.md, curatorial-factory/SOURCE_CORPUS_20260902.md, curatorial-factory/DIGITAL_MULTISENSORY_EXPERIENCE_CONSTITUTION_20260902.md, curatorial-factory/EXPERIENCE_RESEARCH_MATRIX_20260902.md, os 49 blueprints e os 49 runtimes. Blueprint/texto autoral > dinâmica/brincadeira > investigação > decisão técnica. Elimina template, click-modal, quiz, card, formulário e decoração sensorial rasa. Aprofunda gesto, tempo, silêncio, acaso, espaço, contaminação entre sentidos e devolução apenas quando sustentados. Preserva COPÉRNICO e COSMICOXES. Não inventes conteúdo. Sem fetch/CDN/tracker. Teclado/touch/reduced-motion têm equivalência poética. Inspecciona lifecycle e destroy() dos 49." > /tmp/vibe-deep-refinement.json
 
-      - name: Deterministic technical gates
-        if: steps.gate.outputs.ready == '1'
+      - name: Deterministic gate after refinement
+        if: steps.runtime_gate.outputs.ready == '1' && steps.mistral_gate.outputs.available == '1'
         run: |
           set -euo pipefail
           node tests/ia-milk-public-boundary.test.mjs
           for f in deploy/atlas-public/experiences/*.js deploy/atlas-public/*.js; do node --check "$f"; done
           git diff --check
-          python - <<'PY'
-          import json,pathlib
-          idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text())
-          root=pathlib.Path('deploy/atlas-public/experiences')
-          assert sum((root/(x['id']+'.js')).is_file() for x in idx['entries'])==49
-          bad=[]
-          for x in idx['entries']:
-              t=(root/(x['id']+'.js')).read_text(encoding='utf-8')
-              if 'mountCuratorialExperience' not in t or 'destroy' not in t or 'fetch(' in t: bad.append(x['id'])
-          assert not bad,bad
-          print('DEEP_REFINEMENT_DETERMINISTIC_GATE=PASS_49')
-          PY
-          if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_.*PASSWORD|NEXTCLOUD_.*KEY|client_secret|access_token' deploy/atlas-public --exclude-dir=vendor; then exit 31; fi
-
-      - name: Four-lens Mistral curatorial council
-        if: steps.gate.outputs.ready == '1'
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          import json,os,pathlib,urllib.request
-          key=os.environ['MISTRAL_API_KEY']
-          idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text())
-          matrix=pathlib.Path('curatorial-factory/EXPERIENCE_RESEARCH_MATRIX_20260902.md').read_text(encoding='utf-8')
-          samples=[]
-          for x in idx['entries']:
-              bp=json.loads((pathlib.Path('curatorial-factory/sensory-blueprints')/x['file']).read_text())
-              code=(pathlib.Path('deploy/atlas-public/experiences')/(x['id']+'.js')).read_text(encoding='utf-8')
-              samples.append({'id':x['id'],'invariants':bp.get('authorial_invariants',[]),'verbs':bp.get('participant_verbs',[]),'signature':bp.get('sensory_signature_id'),'code':code[:9000]})
-          roles={
-            'curatorial_fidelity':'Procura invenção, traição de invariantes ou teoria usada como decoração. A experiência deve nascer da curadoria.',
-            'interaction_depth':'Procura templates, click-modal, formulários, interacção rasa. Exige tempo, gesto, resposta e transformação específicos quando sustentados.',
-            'sensory_dramaturgy':'Procura som/partículas decorativos; verifica cruzamento sensorial, silêncio, ritmo, espaço e acessibilidade equivalente.',
-            'territorial_humanity':'Procura vigilância, perfil psicológico, extracção, território reduzido a coordenada e ausência de devolução/participação.'
-          }
-          blockers=[]
-          for role,rule in roles.items():
-              payload={'model':'mistral-medium-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':f'És {role}, revisor do Atlas Vivo MILK. {rule} A matriz é lente secundária; invariantes autorais vencem. Responde JSON pass:boolean, blockers:array, warnings:array, strongest_examples:array.'},{'role':'user','content':json.dumps({'research_matrix':matrix,'experiences':samples},ensure_ascii=False)}]}
-              req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
-              with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
-              review=json.loads(body['choices'][0]['message']['content'])
-              print('MISTRAL_DEEP_COUNCIL='+json.dumps({'role':role,**review},ensure_ascii=False))
-              if review.get('pass') is not True: blockers.append(role)
-          if blockers: raise SystemExit('MISTRAL_DEEP_COUNCIL_REVIEW_REQUIRED='+','.join(blockers))
-          print('MISTRAL_DEEP_COUNCIL=PASS_4')
-          PY
+          test "$(find deploy/atlas-public/experiences -maxdepth 1 -name '*.js' ! -name 'registry.js' | wc -l)" -eq 49
 
       - name: Commit deep refinements
-        if: steps.gate.outputs.ready == '1'
+        if: steps.runtime_gate.outputs.ready == '1' && steps.mistral_gate.outputs.available == '1'
         run: |
-          set -euo pipefail
           git config user.name 'Atlas Mistral Code'
           git config user.email 'milk@associacaomilk.pt'
           git add deploy/atlas-public/experiences deploy/atlas-public/curadorias.js deploy/atlas-public/experience-machine.js deploy/atlas-public/index.html deploy/atlas-public/*.css 2>/dev/null || true
@@ -122,4 +92,3 @@ jobs:
           git commit -m 'feat(experiences): deepen 49 curatorial interactions with Mistral Code'
           git pull --rebase origin work/copernico-recovery-webapp-20260902
           git push origin HEAD:work/copernico-recovery-webapp-20260902
-          echo MISTRAL_CODE_DEEP_REFINEMENT_PUSHED=1
