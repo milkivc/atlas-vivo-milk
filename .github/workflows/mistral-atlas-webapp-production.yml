@@ -89,8 +89,8 @@ jobs:
           roles={
             'copernico_runtime':'Verifica iTowns, lifecycle, layer, picking e fail-closed. Contratos intencionais: WMS remoto é enriquecimento opcional com fallback para o globo base; clique sem feature é no-op; controller indefinido após catch não é blocker sem callsite posterior. Não exijas apagar window.itowns, que é bundle partilhado.',
             'territorial_integrity':'Confirma 826/826, IDs únicos, escopos territoriais rastreáveis e zero coordenadas inventadas.',
-            'curatorial_fidelity':'Bloqueia cards genéricos como substituto das experiências específicas e regressões falARTE/Palavra Ritual. A existência de módulos standalone não prova card genérico: cita o elemento e a mecânica que achata a curadoria ou passa.',
-            'accessibility_performance':'Verifica teclado, aria-live, reduced motion e custo de 826 pontos usando também index.html e styles.css. O globo role=region não é modal e não exige focus trap/Escape. Só bloqueia uma violação WCAG aplicável com elemento exacto e regra verificável.',
+            'curatorial_fidelity':'Gate de regressão deste incremento COPÉRNICO/826 festas: bloqueia se territory-data.js ou as alterações de atlas.js/index.html achatam, substituem ou quebram falARTE, Palavra Ritual ou outra experiência específica. Dívida preexistente fora deste incremento deve ser registada em tests, não em blockers. A existência de módulos standalone não prova card genérico.',
+            'accessibility_performance':'Verifica teclado, aria-live, reduced motion e custo de 826 pontos usando também index.html e styles.css. O globo role=region não é modal e não exige focus trap/Escape. Uma região gráfica pode ter nome acessível por aria-label e descrição por aria-describedby; WCAG 2.5.3 Label in Name só se aplica quando existe label textual visível. Só bloqueia uma violação WCAG aplicável com elemento exacto e regra verificável.',
             'public_boundary':'Bloqueia segredos, PII, Camada Invisível, prompts e ligação reversa.'
           }
           failed=[]
