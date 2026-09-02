@@ -56,8 +56,8 @@ function mountPair(config) {
   body.innerHTML = `${heading(config, '<p class="authorial-hint">Toca duas vezes no campo. O intervalo também é uma escolha.</p>')}
     <div class="diletante-field" role="application" aria-label="Campo de aproximação de duas coisas" tabindex="0">
       <svg class="diletante-line" aria-hidden="true"><line x1="0" y1="0" x2="0" y2="0"></line></svg>
-      <span class="diletante-point diletante-a" aria-hidden="true"></span>
-      <span class="diletante-point diletante-b" aria-hidden="true"></span>
+      <span class="diletante-point diletante-a" aria-hidden="true" hidden></span>
+      <span class="diletante-point diletante-b" aria-hidden="true" hidden></span>
       <p class="diletante-result" aria-live="polite">nenhuma autoridade escolheu ainda</p>
     </div>`;
 
