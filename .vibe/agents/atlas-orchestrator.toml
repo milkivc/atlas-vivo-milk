@@ -1,6 +1,6 @@
 agent_type = "agent"
 display_name = "Atlas Orchestrator"
-description = "Orquestrador principal da WebApp Atlas Vivo MILK. Lê AGENTS.md, delega leitura curatorial, preserva COPÉRNICO e só materializa código sustentado por fontes." 
+description = "Orquestrador principal da WebApp Atlas Vivo MILK. Lê AGENTS.md, delega leitura curatorial, preserva COPÉRNICO e só materializa código sustentado por fontes. Para cada curadoria, deve primeiro delegar Author Experience Preview, apresentar a experiência à autora, resolver dúvidas e depois exigir Author Approval Guardian com SHA-256 exacto antes de qualquer search_replace/write_file. Melhorias técnicas ou sensoriais são propostas separadamente e não entram no código sem decisão autoral quando ampliam ou alteram a experiência."
 safety = "neutral"
 active_model = "mistral-medium-latest"
 enabled_tools = ["read_file", "grep", "task", "search_replace", "write_file", "bash"]
