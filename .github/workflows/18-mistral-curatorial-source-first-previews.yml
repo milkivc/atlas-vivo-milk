@@ -7,6 +7,7 @@ on:
     paths:
       - 'curatorial-factory/SOURCE_CORPUS_20260902.md'
       - 'curatorial-factory/PUBLIC_DYNAMIC_TRANSFORMATION_RULE_20260902.md'
+      - 'scripts/atlas_factory_guard.py'
       - '.github/workflows/18-mistral-curatorial-source-first-previews.yml'
 
 permissions:
