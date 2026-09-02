@@ -200,19 +200,18 @@ jobs:
           if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_.*PASSWORD|NEXTCLOUD_.*KEY|client_secret|access_token' deploy/atlas-public/experiences; then exit 31; fi
           echo CODESTRAL_49_RUNTIME_GATE=PASS
 
-      - name: Dispatch deep refinement and private PTServidor staging
+      - name: Dispatch sovereign Mistral refinement
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          for wf in 21-mistral-code-deep-curatorial-refinement.yml ptservidor-private-webapp-staging.yml; do
-            curl -fsS -X POST \
-              -H "Authorization: Bearer $GH_TOKEN" \
-              -H 'Accept: application/vnd.github+json' \
-              -H 'X-GitHub-Api-Version: 2022-11-28' \
-              "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/${wf}/dispatches" \
-              -d '{"ref":"work/copernico-recovery-webapp-20260902"}'
-            echo DISPATCHED=$wf
-          done
+          wf=21-mistral-code-deep-curatorial-refinement.yml
+          curl -fsS -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H 'Accept: application/vnd.github+json' \
+            -H 'X-GitHub-Api-Version: 2022-11-28' \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/${wf}/dispatches" \
+            -d '{"ref":"work/copernico-recovery-webapp-20260902"}'
+          echo DISPATCHED=$wf
 
 # refreshed primary MISTRAL_API_KEY validated with codestral-latest at 2026-09-02T13:31Z
