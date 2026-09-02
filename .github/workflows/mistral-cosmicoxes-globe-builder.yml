@@ -19,7 +19,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 50
     env:
       MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
       PTSERVIDOR_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
@@ -77,31 +77,34 @@ jobs:
         run: |
           set -u
           set +e
-          vibe --trust --prompt "Lê primeiro docs/agent-input/COSMICOXES_GLOBE_CANONICAL_LOCK.md e docs/ATLAS_CAMADA_PUBLICA_EXPERIENCIA_CANONICA_20260829.md, depois inspecciona SOMENTE deploy/atlas-public/app.js, atlas.js, experience-machine.js, index.html e styles.css. Implementa o próximo incremento canónico real: COSMICOXES reactivo → PALAVRAS CÓSMICAS usando exclusivamente COSMIC_WORDS_SEED → segundo gesto no próprio campo, não botão continuar → DISSOLUÇÃO → GLOBO NEGRO táctil/rotativo com teclado, controlo de movimento e reduced-motion. Mantém MILKs territoriais bloqueadas e invisíveis. Não alteres catálogo, curadorias, Livro Cubo, assets, dados, scripts, workflows ou produção. Não inventes texto, território ou conteúdo. Testa sintaxe e boundary. Faz alterações reais apenas nos cinco ficheiros públicos permitidos e termina." --max-turns 26 --output json > /tmp/vibe-cosmic-build.json
+          vibe --trust --prompt "Lê primeiro docs/agent-input/COSMICOXES_GLOBE_CANONICAL_LOCK.md e docs/ATLAS_CAMADA_PUBLICA_EXPERIENCIA_CANONICA_20260829.md. Depois trabalha SOMENTE em deploy/atlas-public/app.js, atlas.js, experience-machine.js, index.html e styles.css. Implementa de verdade COSMICOXES reactivo → PALAVRAS CÓSMICAS exclusivamente de COSMIC_WORDS_SEED → SEGUNDO GESTO NO PRÓPRIO CAMPO → DISSOLUÇÃO → GLOBO NEGRO. Tens de corrigir a orquestração em atlas.js: o botão enterAtlas NÃO pode continuar a comprimir toda esta sequência e territory_ready NÃO pode disparar automaticamente. Quando chegar a GLOBE, pára aí porque ainda não existem MILKs territoriais materializadas. app.js deve renderizar/reagir ao estado sem tracking nem persistência. O segundo gesto deve funcionar por pointer/touch e teclado equivalente. O globo negro deve ser táctil/rotativo, com controlo explícito de movimento e reduced-motion. Não inventes conteúdo, coordenadas, festas, curadorias ou texto autoral. Não alteres catálogo, Livro Cubo, assets, scripts, workflows nem produção. Testa e termina com alterações reais." --max-turns 32 --output json > /tmp/vibe-cosmic-build.json
           echo "MISTRAL_COSMIC_BUILD_RC=$?"
           set -e
-          echo "MISTRAL_COSMIC_CHANGED=$(git diff --name-only | wc -l)"
+          git diff --name-only
 
-      - name: Mistral Code second attempt only if no delta
+      - name: Mistral Code completes orchestration if first delta is partial
         run: |
           set -euo pipefail
-          if ! git diff --quiet; then
-            echo 'MISTRAL_SECOND_ATTEMPT=NOT_NEEDED'
+          CHANGED="$(git diff --name-only)"
+          if printf '%s\n' "$CHANGED" | grep -Fxq 'deploy/atlas-public/app.js' && printf '%s\n' "$CHANGED" | grep -Fxq 'deploy/atlas-public/atlas.js'; then
+            echo 'MISTRAL_COMPLETION_PASS=NOT_NEEDED'
             exit 0
           fi
+          echo 'MISTRAL_COMPLETION_PASS=REQUIRED'
           set +e
-          vibe --trust --prompt "A primeira passagem não produziu delta. Executa agora a implementação, não apenas análise. Lê o lock COSMICOXES_GLOBE_CANONICAL_LOCK.md. O código existente já tem a máquina com COSMIC_WORDS, WORLD_GESTURE, DISSOLVE e GLOBE, mas atlas.js actualmente comprime tudo no botão enterTerritory e app.js tem um céu não reactivo. Corrige isso nos ficheiros públicos permitidos. O segundo gesto deve nascer do canvas/campo e ter equivalente por teclado. Materializa globo negro sem dados territoriais fictícios. Não cries ficheiros nem dependências externas." --max-turns 24 --output json > /tmp/vibe-cosmic-build-second.json
+          vibe --trust --prompt "A primeira passagem ficou parcial. NÃO pares na análise. O diff tem de incluir app.js E atlas.js. Corrige explicitamente o fluxo antigo em atlas.js: remove a compressão automática do botão enterTerritory; após TOQUE, o campo COSMICOXES recebe o primeiro gesto e entra em COSMIC_WORDS; o segundo gesto acontece no próprio campo e envia continue para WORLD_GESTURE; depois dissolve; depois chega a GLOBE. NÃO envies territory_ready automaticamente e NÃO mostres territory/topbar como substituto do globo. Em app.js, o canvas reage a pointer/touch/velocidade/pausa, materializa as palavras fornecidas por atlas.js sem inventar novas e muda para renderização de globo negro quando o estado for GLOBE. Inclui teclado equivalente e controlo de rotação. Mantém os pontos territoriais bloqueados. Trabalha só nos cinco ficheiros públicos permitidos." --max-turns 30 --output json > /tmp/vibe-cosmic-completion.json
           RC=$?
           set -e
-          echo "MISTRAL_SECOND_ATTEMPT_RC=$RC"
-          test -n "$(git diff --name-only)" || { echo '::error::Mistral Code produced no implementation delta'; exit 24; }
+          echo "MISTRAL_COMPLETION_RC=$RC"
+          CHANGED="$(git diff --name-only)"
+          printf '%s\n' "$CHANGED" | grep -Fxq 'deploy/atlas-public/app.js' || { echo '::error::app.js not implemented'; exit 25; }
+          printf '%s\n' "$CHANGED" | grep -Fxq 'deploy/atlas-public/atlas.js' || { echo '::error::atlas.js orchestration not implemented'; exit 26; }
 
       - name: Hard canonical and non-regression gate
         run: |
           set -euo pipefail
           CHANGED="$(git diff --name-only)"
           echo "$CHANGED"
-          test -n "$CHANGED"
           while IFS= read -r f; do
             case "$f" in
               deploy/atlas-public/app.js|deploy/atlas-public/atlas.js|deploy/atlas-public/experience-machine.js|deploy/atlas-public/index.html|deploy/atlas-public/styles.css) ;;
@@ -113,55 +116,94 @@ jobs:
           node --check deploy/atlas-public/atlas.js
           node --check deploy/atlas-public/experience-machine.js
           node --test tests/ia-milk-public-boundary.test.mjs
-          grep -Fq "COSMIC_WORDS: 'cosmic_words'" deploy/atlas-public/experience-machine.js
-          grep -Fq "WORLD_GESTURE: 'world_gesture'" deploy/atlas-public/experience-machine.js
-          grep -Fq "DISSOLVE: 'dissolve'" deploy/atlas-public/experience-machine.js
-          grep -Fq "GLOBE: 'globe'" deploy/atlas-public/experience-machine.js
-          grep -Fq 'COSMIC_WORDS_SEED' deploy/atlas-public/atlas.js
-          grep -Eq 'pointer(move|down)|PointerEvent|pointer' deploy/atlas-public/app.js deploy/atlas-public/atlas.js
-          grep -Eq 'keydown|KeyboardEvent' deploy/atlas-public/app.js deploy/atlas-public/atlas.js
-          grep -Fq 'prefers-reduced-motion' deploy/atlas-public/atlas.js
-          grep -Fq "blocked-until-materialized" deploy/atlas-public/atlas.js
+          python - <<'PY'
+          from pathlib import Path
+          app=Path('deploy/atlas-public/app.js').read_text(encoding='utf-8')
+          atlas=Path('deploy/atlas-public/atlas.js').read_text(encoding='utf-8')
+          machine=Path('deploy/atlas-public/experience-machine.js').read_text(encoding='utf-8')
+          checks={
+            'STATE_COSMIC_WORDS': "COSMIC_WORDS: 'cosmic_words'" in machine,
+            'STATE_WORLD_GESTURE': "WORLD_GESTURE: 'world_gesture'" in machine,
+            'STATE_DISSOLVE': "DISSOLVE: 'dissolve'" in machine,
+            'STATE_GLOBE': "GLOBE: 'globe'" in machine,
+            'SEED_USED': 'COSMIC_WORDS_SEED' in atlas,
+            'APP_POINTER': 'pointer' in app.lower(),
+            'KEYBOARD_EQUIVALENT': ('keydown' in app.lower() or 'keydown' in atlas.lower()),
+            'REDUCED_MOTION': 'prefers-reduced-motion' in atlas,
+            'TERRITORIAL_BLOCK': 'blocked-until-materialized' in atlas,
+            'NO_OLD_BUTTON_COMPRESSION': "enter.addEventListener('click', enterTerritory)" not in atlas,
+            'NO_AUTOMATIC_TERRITORY_READY': "experience.send('territory_ready')" not in atlas,
+            'GLOBE_RUNTIME': ('PUBLIC_STATES.GLOBE' in atlas or 'globe' in app.lower()),
+          }
+          for name,ok in checks.items(): print(name+'='+('OK' if ok else 'FAIL'))
+          bad=[k for k,v in checks.items() if not v]
+          if bad: raise SystemExit('COSMIC_HARD_GATE_FAILED='+','.join(bad))
+          PY
           git diff --check
           git diff > /tmp/cosmic-globe.diff
           test -s /tmp/cosmic-globe.diff
           if grep -E '^\+.*https?://' /tmp/cosmic-globe.diff; then echo '::error::External URL introduced'; exit 32; fi
-          if grep -E '^\+.*(localStorage|sessionStorage|indexedDB)' /tmp/cosmic-globe.diff; then echo '::error::New tracking/storage in cosmic sequence'; exit 33; fi
+          if grep -E '^\+.*(localStorage|sessionStorage|indexedDB)' /tmp/cosmic-globe.diff; then echo '::error::New tracking/storage introduced'; exit 33; fi
           echo 'COSMIC_HARD_GATE=OK'
 
-      - name: Four independent Mistral agents review evidence
+      - name: First four-agent Mistral council
         run: |
           set -euo pipefail
           python - <<'PY'
           import json, os, pathlib, urllib.request
-          key=os.environ['MISTRAL_API_KEY'].strip()
-          diff=pathlib.Path('/tmp/cosmic-globe.diff').read_text(encoding='utf-8')
-          lock=pathlib.Path('docs/agent-input/COSMICOXES_GLOBE_CANONICAL_LOCK.md').read_text(encoding='utf-8')
-          files=[]
-          for p in ['deploy/atlas-public/app.js','deploy/atlas-public/atlas.js','deploy/atlas-public/experience-machine.js','deploy/atlas-public/index.html','deploy/atlas-public/styles.css']:
-              files.append('\n### '+p+'\n'+pathlib.Path(p).read_text(encoding='utf-8'))
-          context=''.join(files)
-          roles=[
-            ('cosmic_dramaturgy','Verifica a sequência COSMICOXES → PALAVRAS CÓSMICAS → SEGUNDO GESTO → DISSOLUÇÃO → GLOBO NEGRO e que o segundo gesto não é um botão continuar.'),
-            ('runtime_performance','Verifica RAF, pointer/touch, resize, loops, desempenho, lifecycle e ausência de regressões técnicas evidentes.'),
-            ('accessibility_motion','Verifica teclado equivalente, foco, controlo de rotação, reduced-motion e que acessibilidade preserva significado.'),
-            ('public_boundary','Verifica ausência de território fictício, tracking, storage novo, rede externa, Camada Invisível, publicação ou conteúdo inventado.')]
-          failed=[]; reviews=[]
-          evidence_rule=('Só bloqueies defeito real demonstrável. Antes de afirmar que algo falta, consulta o CÓDIGO FINAL fornecido. '
-                         'Cada blocker deve citar uma linha/trecho literal do DIFF ou do código final e ligar a uma regra explícita do LOCK. '
-                         'Não inventes requisitos adicionais. Responde JSON estrito: pass(boolean), blockers(array), checks(array).')
+          key=os.environ['MISTRAL_API_KEY'].strip(); diff=pathlib.Path('/tmp/cosmic-globe.diff').read_text(encoding='utf-8'); lock=pathlib.Path('docs/agent-input/COSMICOXES_GLOBE_CANONICAL_LOCK.md').read_text(encoding='utf-8')
+          context=''.join('\n### '+p+'\n'+pathlib.Path(p).read_text(encoding='utf-8') for p in ['deploy/atlas-public/app.js','deploy/atlas-public/atlas.js','deploy/atlas-public/experience-machine.js','deploy/atlas-public/index.html','deploy/atlas-public/styles.css'])
+          roles=[('cosmic_dramaturgy','sequência, segundo gesto e descoberta'),('runtime_performance','RAF, pointer/touch, lifecycle e desempenho'),('accessibility_motion','teclado, foco, controlo de rotação e reduced-motion'),('public_boundary','território fictício, tracking, rede, camada não pública e publicação')]
+          reviews=[]; failed=[]
+          rule='Consulta o código final antes de afirmar ausência. Só bloqueia defeito real com trecho literal e regra explícita do lock. Não inventes requisitos. JSON estrito com pass, blockers, checks.'
           for role,scope in roles:
-              payload={'model':'mistral-medium-latest','temperature':0.0,'response_format':{'type':'json_object'},'messages':[
-                {'role':'system','content':f'És o agente Mistral {role} da Associação MILK. {scope} {evidence_rule}'},
-                {'role':'user','content':'LOCK CANÓNICO:\n'+lock+'\n\nDIFF EXACTO:\n'+diff+'\n\nCÓDIGO FINAL PARA VERIFICAÇÃO:\n'+context}]}
+              payload={'model':'mistral-medium-latest','temperature':0.0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':f'És {role} da MILK; revê {scope}. {rule}'},{'role':'user','content':'LOCK:\n'+lock+'\nDIFF:\n'+diff+'\nCÓDIGO FINAL:\n'+context}]}
               req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
               with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
-              review=json.loads(body['choices'][0]['message']['content']); review['role']=role; reviews.append(review)
-              print('MISTRAL_COSMIC_REVIEW='+json.dumps(review,ensure_ascii=False))
-              if review.get('pass') is not True or (review.get('blockers') or []): failed.append(role)
+              review=json.loads(body['choices'][0]['message']['content']); review['role']=role; reviews.append(review); print('MISTRAL_COSMIC_REVIEW='+json.dumps(review,ensure_ascii=False))
+              if review.get('pass') is not True or review.get('blockers'): failed.append(role)
           pathlib.Path('/tmp/mistral-cosmic-reviews.json').write_text(json.dumps(reviews,ensure_ascii=False,indent=2),encoding='utf-8')
-          if failed: raise SystemExit('MISTRAL_COSMIC_BLOCKERS='+','.join(failed))
-          print('MISTRAL_COSMIC_COUNCIL=4_OK')
+          pathlib.Path('/tmp/council.failed').write_text(','.join(failed),encoding='utf-8')
+          print('MISTRAL_FIRST_COUNCIL_BLOCKERS='+(','.join(failed) if failed else 'NONE'))
+          PY
+
+      - name: Mistral Code repairs council blockers if any
+        run: |
+          set -euo pipefail
+          FAILED="$(cat /tmp/council.failed)"
+          if [ -z "$FAILED" ]; then echo 'MISTRAL_COUNCIL_REPAIR=NOT_NEEDED'; exit 0; fi
+          REPORT="$(cat /tmp/mistral-cosmic-reviews.json)"
+          set +e
+          vibe --trust --prompt "Quatro agentes Mistral auditaram o incremento COSMICOXES/GLOBE. Corrige SOMENTE blockers reais que estejam sustentados por evidência literal e pelo lock. Não aceites requisitos inventados. Não alteres dados, catálogo, curadorias, assets, scripts, workflows ou produção. Mantém territory_ready bloqueado. Relatório: $REPORT" --max-turns 22 --output json > /tmp/vibe-council-repair.json
+          RC=$?
+          set -e
+          echo "MISTRAL_COUNCIL_REPAIR_RC=$RC"
+          node --check deploy/atlas-public/app.js
+          node --check deploy/atlas-public/atlas.js
+          node --check deploy/atlas-public/experience-machine.js
+          node --test tests/ia-milk-public-boundary.test.mjs
+          sha256sum -c /tmp/protected.before
+          git diff --check
+          git diff > /tmp/cosmic-globe.diff
+
+      - name: Final four-agent Mistral council
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, pathlib, urllib.request
+          key=os.environ['MISTRAL_API_KEY'].strip(); diff=pathlib.Path('/tmp/cosmic-globe.diff').read_text(encoding='utf-8'); lock=pathlib.Path('docs/agent-input/COSMICOXES_GLOBE_CANONICAL_LOCK.md').read_text(encoding='utf-8')
+          context=''.join('\n### '+p+'\n'+pathlib.Path(p).read_text(encoding='utf-8') for p in ['deploy/atlas-public/app.js','deploy/atlas-public/atlas.js','deploy/atlas-public/experience-machine.js','deploy/atlas-public/index.html','deploy/atlas-public/styles.css'])
+          roles=[('cosmic_dramaturgy','sequência, segundo gesto e descoberta'),('runtime_performance','RAF, pointer/touch, lifecycle e desempenho'),('accessibility_motion','teclado, foco, controlo de rotação e reduced-motion'),('public_boundary','território fictício, tracking, rede, camada não pública e publicação')]
+          failed=[]
+          rule='Consulta o código final antes de afirmar ausência. Só bloqueia defeito real com trecho literal e regra explícita do lock. Não inventes requisitos. JSON estrito com pass, blockers, checks.'
+          for role,scope in roles:
+              payload={'model':'mistral-medium-latest','temperature':0.0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':f'És {role} da MILK; revê {scope}. {rule}'},{'role':'user','content':'LOCK:\n'+lock+'\nDIFF:\n'+diff+'\nCÓDIGO FINAL:\n'+context}]}
+              req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
+              review=json.loads(body['choices'][0]['message']['content']); print('MISTRAL_FINAL_COSMIC_REVIEW='+json.dumps({'role':role,**review},ensure_ascii=False))
+              if review.get('pass') is not True or review.get('blockers'): failed.append(role)
+          if failed: raise SystemExit('MISTRAL_FINAL_COSMIC_BLOCKERS='+','.join(failed))
+          print('MISTRAL_FINAL_COSMIC_COUNCIL=4_OK')
           PY
 
       - name: Commit validated cosmic sequence to work branch only
