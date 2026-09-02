@@ -173,3 +173,5 @@ jobs:
               -d '{"ref":"work/copernico-recovery-webapp-20260902"}'
             echo DISPATCHED=$wf
           done
+
+# refreshed primary MISTRAL_API_KEY validated with codestral-latest at 2026-09-02T13:31Z
