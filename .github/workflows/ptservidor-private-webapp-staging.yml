@@ -6,6 +6,9 @@ on:
     branches:
       - work/copernico-recovery-webapp-20260902
     paths:
+      - 'deploy/atlas-public/**'
+      - 'tests/**'
+      - 'specs/**'
       - '.github/workflows/ptservidor-private-webapp-staging.yml'
 
 permissions:
@@ -20,6 +23,8 @@ jobs:
       PTSERVIDOR_FTPS_PASSWORD: ${{ secrets.PTSERVIDOR_FTPS_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
       - uses: actions/setup-node@v4
         with: { node-version: '22' }
 
@@ -53,7 +58,7 @@ jobs:
           python - <<'PY'
           import json,os,pathlib,urllib.request
           key=os.environ['MISTRAL_API_KEY']
-          files=['AGENTS.md','specs/curatorial-experience-contract.schema.json','deploy/atlas-public/index.html','deploy/atlas-public/atlas.js','deploy/atlas-public/copernico.js','deploy/atlas-public/experience-machine.js','deploy/atlas-public/falarte.js','deploy/atlas-public/palavra-ritual.js','deploy/atlas-public/curadorias.js']
+          files=['AGENTS.md','specs/curatorial-experience-contract.schema.json','deploy/atlas-public/index.html','deploy/atlas-public/atlas.js','deploy/atlas-public/copernico.js','deploy/atlas-public/experience-machine.js','deploy/atlas-public/falarte.js','deploy/atlas-public/palavra-ritual.js','deploy/atlas-public/curadorias.js','deploy/atlas-public/authorial-portals.js','deploy/atlas-public/authorial-portals.css']
           src='\n\n'.join('FILE '+p+'\n'+pathlib.Path(p).read_text(encoding='utf-8') for p in files if pathlib.Path(p).exists())
           roles={
             'experience_integrity':'Verifica que a WebApp continua experiencial, COPÉRNICO é preservado e nenhuma curadoria é considerada concluída só por descrição/card.',
@@ -120,4 +125,4 @@ jobs:
           print('PRODUCTION_WRITES=0')
           PY
 
-# webapp-implementation-trigger: 2026-09-02 — no generic curatorial fallback
+# production-pipeline: auto-stage every public runtime change
