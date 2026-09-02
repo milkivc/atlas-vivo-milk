@@ -227,3 +227,4 @@ jobs:
           retention-days: 14
 
 # parser-hardening: 2026-09-02 tolerant DAV + no private inventory artifact
+# production activation 2026-09-02T10:00Z
