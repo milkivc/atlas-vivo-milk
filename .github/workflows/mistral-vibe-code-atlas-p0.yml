@@ -61,8 +61,8 @@ jobs:
         run: |
           set -euo pipefail
           test -n "$MISTRAL_API_KEY" || { echo '::error::MISTRAL_API_KEY missing'; exit 2; }
-          vibe --trust --agent atlas-build-p0 \
-            --prompt "Executa exactamente a tarefa definida em .vibe/prompts/atlas-build-p0.md. Antes de editar, lê AGENTS.md e deploy/atlas-public/app.js. Altera somente app.js. Não publiques, não cries PR e não alteres conteúdo curatorial." \
+          vibe --trust \
+            --prompt "Lê AGENTS.md, .vibe/prompts/atlas-build-p0.md e deploy/atlas-public/app.js. Implementa exactamente as duas melhorias P0 descritas no prompt: lifecycle do RAF do Cosmos com Page Visibility e libertação segura do AudioContext. Altera SOMENTE deploy/atlas-public/app.js. Não mudes nenhuma string curatorial, D, BOOK_FACES, os sete motores, catálogo, HTML, CSS ou assets. Não publiques, não cries PR, não faças commit. Faz as edições reais no ficheiro e termina." \
             --max-turns 18 --output json > /tmp/vibe-p0-output.json
           test -s /tmp/vibe-p0-output.json
 
@@ -71,9 +71,8 @@ jobs:
           set -euo pipefail
           changed="$(git diff --name-only)"
           printf 'CHANGED_FILES=%s\n' "$changed"
-          test "$changed" = "deploy/atlas-public/app.js" || { echo '::error::Vibe changed forbidden files'; git diff --name-only; exit 20; }
+          test "$changed" = "deploy/atlas-public/app.js" || { echo '::error::Vibe changed forbidden files or made no implementation change'; git diff --name-only; exit 20; }
           node --check deploy/atlas-public/app.js
-          cmp -s /tmp/app-before.js deploy/atlas-public/app.js && { echo '::error::No implementation change produced'; exit 21; } || true
           grep -Fq 'Inventário do Meu Mundo' deploy/atlas-public/app.js
           grep -Fq 'Catástrofe Produtiva' deploy/atlas-public/app.js
           grep -Fq 'O Ponto de Kusama' deploy/atlas-public/app.js
@@ -95,8 +94,6 @@ jobs:
           import json, os, pathlib, urllib.request
           key=os.environ['MISTRAL_API_KEY'].strip()
           diff=pathlib.Path('/tmp/atlas-p0.diff').read_text(encoding='utf-8')
-          before=pathlib.Path('/tmp/app-before.js').read_text(encoding='utf-8')
-          after=pathlib.Path('deploy/atlas-public/app.js').read_text(encoding='utf-8')
           roles=[
             ('regression_guard','Verifica se o diff altera apenas gestão de RAF/visibilidade e AudioContext; bloqueia qualquer mudança curatorial, de dados, de rede ou comportamento dos sete motores.'),
             ('browser_runtime','Verifica corridas, loops RAF duplicados, lifecycle de visibilitychange e promises de AudioContext.close; procura erros concretos de browser.'),
