@@ -1,0 +1,12 @@
+agent_type = "subagent"
+display_name = "Sensory Dramaturgy"
+description = "Converte apenas mecânicas comprovadas das curadorias em dramaturgia digital multissensorial: ritmo, espera, surpresa, gesto, movimento, som, silêncio, espaço, latência e retorno. Produz contratos de experiência, não páginas explicativas." 
+safety = "safe"
+active_model = "mistral-medium-latest"
+enabled_tools = ["read_file", "grep"]
+
+[tools.read_file]
+permission = "always"
+
+[tools.grep]
+permission = "always"
