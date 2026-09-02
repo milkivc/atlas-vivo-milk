@@ -1,0 +1,305 @@
+name: 22 MILK Codestral direct 49 runtimes
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths:
+      - 'curatorial-factory/sensory-blueprints/**'
+      - 'curatorial-factory/EXPERIENCE_RESEARCH_MATRIX_20260902.md'
+      - '.github/workflows/22-codestral-direct-49-runtimes.yml'
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: milk-codestral-direct-49-runtimes
+  cancel-in-progress: false
+
+jobs:
+  code-batches:
+    name: Codestral direct batch ${{ matrix.batch }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      max-parallel: 7
+      matrix:
+        include:
+          - { batch: 1, start: 1, end: 7 }
+          - { batch: 2, start: 8, end: 14 }
+          - { batch: 3, start: 15, end: 21 }
+          - { batch: 4, start: 22, end: 28 }
+          - { batch: 5, start: 29, end: 35 }
+          - { batch: 6, start: 36, end: 42 }
+          - { batch: 7, start: 43, end: 49 }
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      START: ${{ matrix.start }}
+      END: ${{ matrix.end }}
+      BATCH: ${{ matrix.batch }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 0
+
+      - name: Generate browser runtimes directly with Codestral
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python - <<'PY'
+          import concurrent.futures, json, os, pathlib, random, re, subprocess, time, urllib.error, urllib.request
+
+          API='https://api.mistral.ai/v1/chat/completions'
+          MODEL='codestral-latest'
+          key=os.environ['MISTRAL_API_KEY']
+          start,end=int(os.environ['START']),int(os.environ['END'])
+          batch=os.environ['BATCH']
+          idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text(encoding='utf-8'))
+          rows=[x for x in idx['entries'] if start <= int(x['ordem']) <= end]
+          matrix=pathlib.Path('curatorial-factory/EXPERIENCE_RESEARCH_MATRIX_20260902.md').read_text(encoding='utf-8')
+          constitution=pathlib.Path('curatorial-factory/DIGITAL_MULTISENSORY_EXPERIENCE_CONSTITUTION_20260902.md').read_text(encoding='utf-8')
+          out=pathlib.Path('generated')/('batch-'+batch)
+          out.mkdir(parents=True,exist_ok=True)
+
+          system='''És Codestral, engenheiro de experiências digitais do Atlas Vivo MILK. PRODUZ CÓDIGO, não relatório. Receberás um blueprint curatorial autoral e lentes de investigação. O blueprint é soberano; as lentes apenas aprofundam. Devolve APENAS um módulo JavaScript ES válido, sem markdown e sem fences. O módulo exporta function mountCuratorialExperience({root, context={}, onClose=()=>{}}) e devolve {destroy()}. Tem de criar interactividade REAL e específica, não card, quiz, formulário, chatbot ou click->modal. Usa DOM/SVG/Canvas/Web Audio/CSS injectado pelo próprio módulo quando necessário. Som só após gesto. Vibração feature-detected. Sem fetch, CDN, trackers, cookies, localStorage ou permissões obrigatórias. Touch e teclado equivalentes; reduced-motion preserva significado. Não inventes factos, fotografias, áudios, memórias ou texto territorial. Cheiro/sabor apenas evocação. Isola estilos por experience id. Limpa listeners, timers, RAF e AudioContext em destroy(). Não recries COPÉRNICO nem COSMICOXES. Se a experiência for uma curadoria que já possui runtime canónico no Atlas, cria uma composição autónoma fiel ao blueprint sem substituir nem importar esse runtime.'''
+
+          def call(messages, max_tokens=9000):
+              payload={'model':MODEL,'temperature':0.25,'max_tokens':max_tokens,'messages':messages}
+              data=json.dumps(payload,ensure_ascii=False).encode()
+              req=urllib.request.Request(API,data=data,method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=300) as r:
+                  body=json.loads(r.read())
+              content=body['choices'][0]['message']['content']
+              if isinstance(content,list):
+                  content=''.join(str(x.get('text','')) if isinstance(x,dict) else str(x) for x in content)
+              return str(content).strip()
+
+          def strip_fences(text):
+              text=text.strip()
+              text=re.sub(r'^```(?:javascript|js)?\s*','',text,flags=re.I)
+              text=re.sub(r'\s*```$','',text)
+              return text.strip()
+
+          def validate_code(code,path):
+              if 'mountCuratorialExperience' not in code: return 'missing mountCuratorialExperience'
+              if 'destroy' not in code: return 'missing destroy'
+              if 'fetch(' in code: return 'fetch forbidden'
+              if 'localStorage' in code or 'sessionStorage' in code: return 'storage forbidden'
+              path.write_text(code+'\n',encoding='utf-8')
+              p=subprocess.run(['node','--check',str(path)],capture_output=True,text=True)
+              if p.returncode: return (p.stderr or p.stdout)[-3000:]
+              return None
+
+          def build(row):
+              bp_path=pathlib.Path('curatorial-factory/sensory-blueprints')/row['file']
+              bp=json.loads(bp_path.read_text(encoding='utf-8'))
+              user={
+                'task':'Implementa esta experiência como runtime browser excepcional e autónomo.',
+                'id':row['id'],
+                'blueprint':bp,
+                'research_lenses':matrix,
+                'constitution':constitution,
+                'quality_demands':[
+                  'A interacção principal deve alterar estado perceptivo, não apenas mostrar conteúdo.',
+                  'Tempo, espera ou ritmo devem ter consequência quando coerentes.',
+                  'Silêncio/ausência deve ser funcional quando coerente.',
+                  'Gestos diferentes devem produzir respostas diferentes quando o blueprint os distingue.',
+                  'Usa pelo menos uma tradução cruzada entre sentidos quando o blueprint a define.',
+                  'A sessão deve poder variar sem perfil psicológico nem vigilância.',
+                  'A experiência deve continuar inteligível e poética sem som e com reduced-motion.',
+                  'Não exponhas os nomes dos teóricos na UI salvo se o blueprint os exigir.',
+                  'Não inventes conteúdo para preencher lacunas.'
+                ]
+              }
+              messages=[{'role':'system','content':system},{'role':'user','content':json.dumps(user,ensure_ascii=False)}]
+              path=out/(row['id']+'.js')
+              last='unknown'
+              previous=''
+              for attempt in range(5):
+                  try:
+                      if attempt==0:
+                          code=strip_fences(call(messages))
+                      else:
+                          repair=[
+                            {'role':'system','content':system},
+                            {'role':'user','content':json.dumps(user,ensure_ascii=False)},
+                            {'role':'assistant','content':previous[:50000]},
+                            {'role':'user','content':'CORRIGE o módulo anterior. Erro do validador: '+last+'\nDevolve novamente APENAS o módulo JavaScript completo e corrigido.'}
+                          ]
+                          code=strip_fences(call(repair))
+                      previous=code
+                      last=validate_code(code,path)
+                      if not last:
+                          print('CODESTRAL_RUNTIME_PASS='+row['id'],flush=True)
+                          return row['id']
+                  except urllib.error.HTTPError as e:
+                      last=f'HTTP {e.code}'
+                      if e.code not in (408,409,429,500,502,503,504): raise
+                  except Exception as e:
+                      last=type(e).__name__+':'+str(e)
+                  time.sleep(min(35,2**attempt+random.random()*3))
+              raise RuntimeError(row['id']+':'+last)
+
+          failures=[]
+          with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
+              futs={ex.submit(build,row):row for row in rows}
+              for fut,row in list(futs.items()):
+                  try: fut.result()
+                  except Exception as e: failures.append(str(e))
+          if failures:
+              print('\n'.join('CODESTRAL_RUNTIME_FAIL='+x for x in failures))
+              raise SystemExit('CODESTRAL_BATCH_FAILURES='+str(len(failures)))
+          expected={x['id']+'.js' for x in rows}
+          actual={p.name for p in out.glob('*.js')}
+          assert actual==expected,(expected-actual,actual-expected)
+          print('CODESTRAL_DIRECT_BATCH_PASS='+batch)
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: codestral-direct-batch-${{ matrix.batch }}
+          path: generated/batch-${{ matrix.batch }}/*.js
+          if-no-files-found: error
+          retention-days: 3
+
+  integrate:
+    name: Integrate Codestral 49 runtimes
+    needs: code-batches
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: codestral-direct-batch-*
+          path: generated/all
+          merge-multiple: true
+
+      - name: Assemble 49 runtimes and registry
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,pathlib,shutil
+          idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text())
+          src=pathlib.Path('generated/all'); dst=pathlib.Path('deploy/atlas-public/experiences'); dst.mkdir(parents=True,exist_ok=True)
+          expected={x['id']+'.js' for x in idx['entries']}; actual={p.name for p in src.glob('*.js')}
+          assert actual==expected,(len(actual),sorted(expected-actual),sorted(actual-expected))
+          for p in src.glob('*.js'): shutil.copy2(p,dst/p.name)
+          lines=['// 49 distinct Codestral curatorial runtimes','export const CURATORIAL_EXPERIENCE_LOADERS = {']
+          for x in idx['entries']: lines.append(f"  {json.dumps(x['id'])}: () => import('./{x['id']}.js'),")
+          lines += ['};','','export async function loadCuratorialExperience(id) {','  const loader = CURATORIAL_EXPERIENCE_LOADERS[id];',"  if (!loader) throw new Error('CURATORIAL_RUNTIME_NOT_FOUND:'+id);",'  return loader();','}','']
+          (dst/'registry.js').write_text('\n'.join(lines),encoding='utf-8')
+          PY
+          for f in deploy/atlas-public/experiences/*.js; do node --check "$f"; done
+
+      - name: Write deterministic generated-runtime bridge
+        run: |
+          cat > deploy/atlas-public/generated-curatorial-runtime.js <<'JS'
+          import { loadCuratorialExperience } from './experiences/registry.js';
+
+          let active = null;
+
+          export async function openGeneratedCuratorialExperience({ id, root, context = {}, onClose = () => {} }) {
+            if (!id || !root) return false;
+            active?.destroy?.();
+            active = null;
+            root.replaceChildren();
+            const module = await loadCuratorialExperience(id);
+            if (typeof module.mountCuratorialExperience !== 'function') throw new Error('CURATORIAL_RUNTIME_INVALID:'+id);
+            active = module.mountCuratorialExperience({ root, context, onClose });
+            return true;
+          }
+
+          export function closeGeneratedCuratorialExperience() {
+            active?.destroy?.();
+            active = null;
+          }
+          JS
+          node --check deploy/atlas-public/generated-curatorial-runtime.js
+
+      - name: Wire generated experiences into current curatorial surface
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('deploy/atlas-public/curadorias.js')
+          s=p.read_text(encoding='utf-8')
+          if "generated-curatorial-runtime.js" not in s:
+              s=s.replace("import { openPalavraRitual } from './palavra-ritual.js';", "import { openPalavraRitual } from './palavra-ritual.js';\nimport { openGeneratedCuratorialExperience, closeGeneratedCuratorialExperience } from './generated-curatorial-runtime.js';")
+          s=s.replace("const PUBLIC_READY = new Set([...APP_JS_SPECIFIC, ...MODULE_SPECIFIC]);", "const GENERATED_SPECIFIC = new Set();\nconst PUBLIC_READY = new Set([...APP_JS_SPECIFIC, ...MODULE_SPECIFIC]);")
+          s=s.replace("function renderSpecificRegistry(entries) {\n  const readyEntries = entries.filter(item => MODULE_SPECIFIC.has(item.id));", "function renderSpecificRegistry(entries) {\n  entries.forEach(item => GENERATED_SPECIFIC.add(item.id));\n  GENERATED_SPECIFIC.forEach(id => PUBLIC_READY.add(id));\n  const readyEntries = entries.filter(item => !APP_JS_SPECIFIC.has(item.id));")
+          old="""  return false;\n}\n\ndeck.addEventListener('click', event => {\n  const button = event.target.closest('[data-curadoria]');\n  if (!button) return;\n  const item = catalogue.find(candidate => candidate.id === button.dataset.curadoria);\n  if (!item || !MODULE_SPECIFIC.has(item.id)) return;\n  openSpecific(item);\n});"""
+          new="""  if (GENERATED_SPECIFIC.has(item.id)) {\n    dialog.showModal();\n    openGeneratedCuratorialExperience({\n      id: item.id,\n      root: body,\n      context: { source: 'curatorial-surface', catalogue: item },\n      onClose: () => dialog.close()\n    }).catch(() => {\n      dialog.close();\n      document.documentElement.dataset.curatorialRuntime = 'fail-closed';\n    });\n    return true;\n  }\n\n  return false;\n}\n\ndeck.addEventListener('click', event => {\n  const button = event.target.closest('[data-curadoria]');\n  if (!button) return;\n  const item = catalogue.find(candidate => candidate.id === button.dataset.curadoria);\n  if (!item || APP_JS_SPECIFIC.has(item.id)) return;\n  openSpecific(item);\n});\n\ndialog.addEventListener('close', closeGeneratedCuratorialExperience);\n\nwindow.addEventListener('atlas:open-curatorial-experience', event => {\n  const id = event.detail?.id;\n  const item = catalogue.find(candidate => candidate.id === id);\n  if (!item || APP_JS_SPECIFIC.has(id)) return;\n  openSpecific(item);\n});"""
+          if old not in s: raise SystemExit('CURADORIAS_INTEGRATION_ANCHOR_NOT_FOUND')
+          s=s.replace(old,new)
+          p.write_text(s,encoding='utf-8')
+          PY
+          node --check deploy/atlas-public/curadorias.js
+
+      - name: Deterministic public gates
+        run: |
+          set -euo pipefail
+          node tests/ia-milk-public-boundary.test.mjs
+          for f in deploy/atlas-public/*.js deploy/atlas-public/experiences/*.js; do node --check "$f"; done
+          git diff --check
+          test "$(find deploy/atlas-public/experiences -maxdepth 1 -name '*.js' ! -name 'registry.js' | wc -l)" -eq 49
+          if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_.*PASSWORD|NEXTCLOUD_.*KEY|client_secret|access_token' deploy/atlas-public --exclude-dir=vendor; then exit 31; fi
+          echo CODESTRAL_49_RUNTIME_GATE=PASS
+
+      - name: Mistral four-agent interaction council
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os,pathlib,urllib.request
+          key=os.environ['MISTRAL_API_KEY']
+          idx=json.loads(pathlib.Path('curatorial-factory/sensory-blueprints/00_INDEX.json').read_text())
+          matrix=pathlib.Path('curatorial-factory/EXPERIENCE_RESEARCH_MATRIX_20260902.md').read_text(encoding='utf-8')
+          manifest=[]
+          for x in idx['entries']:
+              bp=json.loads((pathlib.Path('curatorial-factory/sensory-blueprints')/x['file']).read_text())
+              code=(pathlib.Path('deploy/atlas-public/experiences')/(x['id']+'.js')).read_text(encoding='utf-8')
+              manifest.append({'id':x['id'],'signature':bp['sensory_signature_id'],'verbs':bp['participant_verbs'],'invariants':bp.get('authorial_invariants',[]),'code':code[:9000]})
+          roles={
+            'fidelity':'Bloqueia invenção ou traição dos invariantes autorais.',
+            'interaction':'Bloqueia templates, cards, quiz, formulário e click-modal disfarçado.',
+            'sensory':'Bloqueia estímulo decorativo sem dramaturgia; verifica silêncio, tempo, gesto, cruzamento sensorial e equivalência acessível.',
+            'human_territory':'Bloqueia vigilância, perfil psicológico e território reduzido a coordenada; procura devolução e participação quando sustentadas.'
+          }
+          bad=[]
+          for role,rule in roles.items():
+              payload={'model':'mistral-medium-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':f'És revisor {role} do Atlas Vivo MILK. {rule} A matriz de investigação é secundária aos invariantes. Responde JSON pass:boolean, blockers:array, warnings:array.'},{'role':'user','content':json.dumps({'matrix':matrix,'experiences':manifest},ensure_ascii=False)}]}
+              req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=300) as r: body=json.loads(r.read())
+              review=json.loads(body['choices'][0]['message']['content'])
+              print('MISTRAL_INTERACTION_COUNCIL='+json.dumps({'role':role,**review},ensure_ascii=False))
+              if review.get('pass') is not True: bad.append(role)
+          if bad: raise SystemExit('MISTRAL_INTERACTION_COUNCIL_BLOCKED='+','.join(bad))
+          print('MISTRAL_INTERACTION_COUNCIL=PASS_4')
+          PY
+
+      - name: Commit Codestral runtimes
+        run: |
+          set -euo pipefail
+          git config user.name 'Atlas Codestral Production'
+          git config user.email 'milk@associacaomilk.pt'
+          git add deploy/atlas-public/experiences deploy/atlas-public/generated-curatorial-runtime.js deploy/atlas-public/curadorias.js
+          git commit -m 'feat(experiences): Codestral implements 49 interactive curatorial runtimes'
+          git pull --rebase origin work/copernico-recovery-webapp-20260902
+          git push origin HEAD:work/copernico-recovery-webapp-20260902
+          echo CODESTRAL_49_RUNTIME_COMMIT_PUSHED=1
+
+      - name: Dispatch PTServidor staging
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run ptservidor-private-webapp-staging.yml --ref work/copernico-recovery-webapp-20260902
+          echo PTSERVIDOR_STAGING_DISPATCHED=1
