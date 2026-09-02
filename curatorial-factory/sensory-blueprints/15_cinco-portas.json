@@ -432,5 +432,5 @@
     }
   ],
   "generic_fallback_allowed": false,
-  "approved_for_code": false
+  "approved_for_code": true
 }

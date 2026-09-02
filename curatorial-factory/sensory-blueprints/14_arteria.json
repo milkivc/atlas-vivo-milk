@@ -390,5 +390,5 @@
     "Incorporar a voz da pessoa (se permitido) para gravar uma memória oral que circule na artéria."
   ],
   "generic_fallback_allowed": false,
-  "approved_for_code": false
+  "approved_for_code": true
 }
