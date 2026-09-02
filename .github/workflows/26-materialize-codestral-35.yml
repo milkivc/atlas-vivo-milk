@@ -1,0 +1,63 @@
+name: 26 MILK materialize 35 completed Codestral runtimes
+
+on:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths: ['.github/workflows/26-materialize-codestral-35.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  materialize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 0
+
+      - name: Recover successful Codestral artifacts from run 33631822788
+        uses: actions/download-artifact@v4
+        with:
+          pattern: codestral-direct-batch-*
+          path: generated/all
+          merge-multiple: true
+          run-id: 33631822788
+          github-token: ${{ github.token }}
+
+      - name: Validate and install exactly 35 completed runtimes
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib,re,shutil,subprocess
+          src=pathlib.Path('generated/all')
+          files=sorted(src.glob('*.js'))
+          assert len(files)==35, f'EXPECTED_35_GOT_{len(files)}'
+          dst=pathlib.Path('deploy/atlas-public/experiences'); dst.mkdir(parents=True,exist_ok=True)
+          for p in files:
+              text=p.read_text(encoding='utf-8')
+              if 'mountCuratorialExperience' not in text or 'destroy' not in text: raise SystemExit('INVALID_RUNTIME:'+p.name)
+              if 'fetch(' in text or 'localStorage' in text or 'sessionStorage' in text: raise SystemExit('FORBIDDEN_RUNTIME_IO:'+p.name)
+              subprocess.run(['node','--check',str(p)],check=True)
+              shutil.copy2(p,dst/p.name)
+          print('CODESTRAL_COMPLETED_RUNTIME_FILES=35')
+          print('CODESTRAL_35_VALIDATION=PASS')
+          PY
+          node tests/ia-milk-public-boundary.test.mjs
+          git diff --check
+
+      - name: Commit preserved Codestral production
+        run: |
+          set -euo pipefail
+          git config user.name 'Atlas Mistral Code'
+          git config user.email 'milk@associacaomilk.pt'
+          git add deploy/atlas-public/experiences
+          if git diff --cached --quiet; then echo CODESTRAL_35_ALREADY_MATERIALIZED=1; exit 0; fi
+          git commit -m 'feat(experiences): preserve 35 completed Codestral interactive runtimes'
+          git pull --rebase origin work/copernico-recovery-webapp-20260902
+          git push origin HEAD:work/copernico-recovery-webapp-20260902
+          echo CODESTRAL_35_COMMIT_PUSHED=1
