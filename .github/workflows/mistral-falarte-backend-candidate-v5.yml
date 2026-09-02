@@ -1,0 +1,84 @@
+name: MILK Mistral falARTE backend candidate v5
+
+on:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths: ['.github/workflows/mistral-falarte-backend-candidate-v5.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: milk-mistral-falarte-backend-v5
+  cancel-in-progress: false
+
+jobs:
+  backend:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      BRANCH: work/copernico-recovery-webapp-20260902
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 1
+
+      - name: Install Mistral Vibe Code
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python -m pip install --disable-pip-version-check mistral-vibe==2.24.5
+          vibe --version
+
+      - name: Generate backend candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          vibe --agent auto-approve --trust --max-turns 24 --output json --prompt "ATLAS VIVO MILK — FALARTE BACKEND CANDIDATO. Trabalha SOMENTE em deploy/atlas-public/api/curadoria/falarte/. Cria helpers.php se útil, submit.php e withdraw.php. Não alteres frontend, catálogo, workflows ou outras curadorias. Regras: submit apenas POST multipart/form-data; mechanic_id apenas lugar-escondido,trinta-dias,antigo-novo,embalagem-conta,som-local,ainda-resiste,palavras-desapareceram,nao-apagado,so-memoria,remetente-ausente; age13 obrigatório verdadeiro; consent_curatorial verdadeiro; author_mode nome_real|nome_inventado|anonimo; publication_scope integral|trechos|nao_publicar; integral/trechos exigem consent_public verdadeiro. Texto limitado e sanitizado. Upload opcional máximo 12MiB, MIME real finfo, allowlist apenas JPEG/PNG/WEBP/MP3/OGG/WAV/WEBM/PDF, rejeita SVG/HTML/executáveis. Não uses filename original em path nem metadata. Usa random_bytes para receipt_id, storage name e withdrawal_code. Preserva original via move_uploaded_file e SHA-256. Storage obrigatoriamente fora de realpath(DOCUMENT_ROOT), por exemplo dirname(realpath(DOCUMENT_ROOT))/atlas-private/falarte-intake; se DOCUMENT_ROOT ausente/inválido ou storage privado não puder ser criado/escrito, falha fechado. Metadata JSON PENDENTE_CURADORIA + UTC + mechanic_id + consentimentos + autoria + scope + texto + MIME/tamanho/SHA256/stored_name; proíbe IP, user-agent, cookies, headers de rede, session ids e filename original. Withdrawal code devolvido só na resposta inicial; em disco apenas verificador derivado não reversível; comparação constant-time. withdraw.php recebe receipt_id + withdrawal_code apenas POST JSON/form; só resolve receipt sob storage privado; em sucesso acrescenta evento RETIRADA_SOLICITADA UTC ao metadata, sem apagar/mover/publicar original. Respostas JSON, sem stack traces. Sem dependências externas. Executa php -l. Não faças commit." > /tmp/falarte-backend-v5.json
+          for f in deploy/atlas-public/api/curadoria/falarte/*.php; do php -l "$f"; done
+
+      - name: Critical safety preflight across backend
+        shell: bash
+        run: |
+          set -euo pipefail
+          d=deploy/atlas-public/api/curadoria/falarte
+          test -f "$d/submit.php"
+          test -f "$d/withdraw.php"
+          grep -R -Fq 'PENDENTE_CURADORIA' "$d"
+          grep -R -Fq 'RETIRADA_SOLICITADA' "$d"
+          grep -R -Eq 'finfo|finfo_file' "$d"
+          grep -R -Fq 'move_uploaded_file' "$d"
+          grep -R -Eq 'random_bytes|bin2hex' "$d"
+          grep -R -Eq 'hash_equals|password_verify' "$d"
+          grep -R -Eiq 'sha256|hash_file|hash\(' "$d"
+          grep -R -Fq 'DOCUMENT_ROOT' "$d"
+          if grep -R -Eiq 'REMOTE_ADDR|HTTP_USER_AGENT|HTTP_COOKIE|analytics|telemetry' "$d"; then
+            echo '::error::NETWORK_METADATA_OR_TELEMETRY_REFERENCE'; exit 31
+          fi
+          if grep -R -Eiq 'copy\([^;]*DOCUMENT_ROOT|move_uploaded_file\([^;]*DOCUMENT_ROOT' "$d"; then
+            echo '::error::UPLOAD_COULD_TARGET_DOCUMENT_ROOT'; exit 32
+          fi
+          git diff --check
+          mapfile -t changed < <(git status --porcelain -uall | awk '{print $2}' | sort -u)
+          test ${#changed[@]} -gt 0
+          for f in "${changed[@]}"; do
+            case "$f" in deploy/atlas-public/api/curadoria/falarte/*) ;; *) echo "::error::OUTSIDE_BACKEND_BOUNDARY:$f"; exit 33;; esac
+          done
+          echo 'FALARTE_BACKEND_PREFLIGHT_V5=PASS'
+
+      - name: Commit auditable backend candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Associação MILK - Mistral Vibe Code'
+          git config user.email 'milk@associacaomilk.pt'
+          git add deploy/atlas-public/api/curadoria/falarte
+          git diff --cached --quiet && { echo '::error::NO_BACKEND_DELTA'; exit 40; }
+          git diff --cached --check
+          git commit -m 'feat(webapp): materialize falARTE private intake backend candidate'
+          git push origin HEAD:$BRANCH
+          echo "FALARTE_BACKEND_CANDIDATE_COMMIT=$(git rev-parse HEAD)"
+          echo 'PRODUCTION_PUBLISH=NO'
