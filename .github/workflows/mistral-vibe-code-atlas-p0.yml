@@ -1,4 +1,4 @@
-name: MILK Vibe Code — Atlas P0 guarded build
+name: MILK Vibe Code — Atlas P1 guarded build
 
 on:
   workflow_dispatch:
@@ -6,8 +6,6 @@ on:
     branches:
       - codex/milk-curadorias-ia-webapp-20260821
     paths:
-      - '.vibe/agents/atlas-build-p0.toml'
-      - '.vibe/prompts/atlas-build-p0.md'
       - '.github/workflows/mistral-vibe-code-atlas-p0.yml'
 
 permissions:
@@ -15,7 +13,7 @@ permissions:
   issues: write
 
 concurrency:
-  group: milk-vibe-code-atlas-p0
+  group: milk-vibe-code-atlas-p1
   cancel-in-progress: false
 
 jobs:
@@ -58,14 +56,14 @@ jobs:
           python -m pip install --disable-pip-version-check mistral-vibe
           vibe --version
 
-      - name: Vibe Code constructs the P0 candidate
+      - name: Mistral Vibe Code constructs P1 candidate
         run: |
           set -euo pipefail
           test -n "$MISTRAL_API_KEY"
           vibe --trust \
-            --prompt "Lê AGENTS.md, .vibe/prompts/atlas-build-p0.md e deploy/atlas-public/app.js. Implementa exactamente as duas melhorias técnicas definidas no prompt do projecto. Altera SOMENTE deploy/atlas-public/app.js. Não alteres texto curatorial, D, BOOK_FACES, motores, catálogo, HTML, CSS ou assets. Não publiques, não cries PR, não faças commit." \
-            --max-turns 18 --output json > /tmp/vibe-p0-output.json
-          test -s /tmp/vibe-p0-output.json
+            --prompt "Lê AGENTS.md e deploy/atlas-public/app.js. Implementa UMA correcção P1 real e mínima: o dialog #engine pode ser fechado pelo Escape nativo do HTML dialog, mas nesse caminho stopMedia() não é chamado. Garante que QUALQUER fecho efectivo do dialog, incluindo Escape, liberta stream, analyser RAF e AudioContext através do stopMedia() já existente. Prefere o evento nativo close do dialog e não dupliques lógica de media. Altera SOMENTE deploy/atlas-public/app.js. Não mudes nenhuma string curatorial, D, BOOK_FACES, os sete motores, catálogo, HTML, CSS, assets, Cosmos, rede ou armazenamento. Não publiques, não cries PR, não faças commit. Revê o diff e termina." \
+            --max-turns 12 --output json > /tmp/vibe-p1-output.json
+          test -s /tmp/vibe-p1-output.json
 
       - name: Deterministic hard gates
         run: |
@@ -73,67 +71,48 @@ jobs:
           changed="$(git diff --name-only)"
           test "$changed" = "deploy/atlas-public/app.js" || { echo "::error::Forbidden changed files: $changed"; exit 20; }
           node --check deploy/atlas-public/app.js
-          git diff --unified=0 -- deploy/atlas-public/app.js > /tmp/atlas-p0.diff
-          test -s /tmp/atlas-p0.diff
-          echo "P0_DIFF_BYTES=$(wc -c < /tmp/atlas-p0.diff)"
-          cat /tmp/atlas-p0.diff
-          grep -Fq 'document.hidden' deploy/atlas-public/app.js
-          grep -Fq 'visibilitychange' deploy/atlas-public/app.js
-          grep -Eq '\.close\(' deploy/atlas-public/app.js
-          for text in 'Inventário do Meu Mundo' 'Catástrofe Produtiva' 'O Ponto de Kusama' 'O Corpo que Percebe' 'Escutar o Silêncio' 'O Rizoma Interior' 'O Cubo Interior'; do
-            grep -Fq "$text" deploy/atlas-public/app.js
-          done
-          if grep -E '^[+-].*(Inventário do Meu Mundo|Catástrofe Produtiva|O Ponto de Kusama|O Corpo que Percebe|Escutar o Silêncio|O Rizoma Interior|O Cubo Interior|BOOK_FACES|const D=)' /tmp/atlas-p0.diff; then
-            echo '::error::Curatorial invariant touched'; exit 22
-          fi
+          git diff --unified=1 -- deploy/atlas-public/app.js > /tmp/atlas-p1.diff
+          test -s /tmp/atlas-p1.diff
+          grep -Eq "dlg\.(addEventListener\(['\"]close['\"]|onclose)" deploy/atlas-public/app.js
+          grep -Fq 'stopMedia' deploy/atlas-public/app.js
+          for text in 'Inventário do Meu Mundo' 'Catástrofe Produtiva' 'O Ponto de Kusama' 'O Corpo que Percebe' 'Escutar o Silêncio' 'O Rizoma Interior' 'O Cubo Interior'; do grep -Fq "$text" deploy/atlas-public/app.js; done
+          if grep -E '^[+-].*(Inventário do Meu Mundo|Catástrofe Produtiva|O Ponto de Kusama|O Corpo que Percebe|Escutar o Silêncio|O Rizoma Interior|O Cubo Interior|BOOK_FACES|const D=)' /tmp/atlas-p1.diff; then echo '::error::Curatorial invariant touched'; exit 22; fi
+          echo "P1_DIFF_BYTES=$(wc -c < /tmp/atlas-p1.diff)"
+          cat /tmp/atlas-p1.diff
 
-      - name: Three Mistral agents review exact delta with evidence
+      - name: Three Mistral agents review P1 exact delta
         run: |
           set -euo pipefail
           python - <<'PY'
           import json, os, pathlib, urllib.request
-          key=os.environ['MISTRAL_API_KEY'].strip()
-          diff=pathlib.Path('/tmp/atlas-p0.diff').read_text(encoding='utf-8')
-          app=pathlib.Path('deploy/atlas-public/app.js').read_text(encoding='utf-8')
+          key=os.environ['MISTRAL_API_KEY'].strip(); diff=pathlib.Path('/tmp/atlas-p1.diff').read_text(encoding='utf-8'); app=pathlib.Path('deploy/atlas-public/app.js').read_text(encoding='utf-8')
           roles=[
-            ('regression_guard','Bloqueia mudança curatorial, dados, rede, armazenamento ou alteração funcional dos sete motores.'),
-            ('browser_runtime','Analisa apenas lifecycle RAF/Page Visibility e AudioContext. Procura corridas reais, impossibilidade de retomar, loops duplicados e close/recreate inválidos. Cosmos e stopMedia têm lifecycles diferentes; não exijas que stopMedia pare o Cosmos.'),
-            ('accessibility_performance','Confirma redução de trabalho em background sem contrariar o botão manual de movimento nem degradar a experiência.')
-          ]
+            ('privacy_resource','Confirma que fechar o dialog por qualquer caminho liberta microfone/stream, RAF do analisador e AudioContext usando stopMedia e que não adiciona recolha ou rede.'),
+            ('browser_runtime','Confirma semântica real de HTMLDialogElement close/Escape e procura loops, dupla execução perigosa ou erros de lifecycle. stopMedia é idempotente.'),
+            ('regression_guard','Bloqueia qualquer alteração curatorial, Cosmos, sete motores, dados, HTML, CSS, rede ou armazenamento.')]
           reviews=[]
-          evidence_rule=(
-            'REGRAS DE EVIDÊNCIA: cada blocker deve citar literalmente uma linha ADICIONADA do diff que o prova. '
-            'Não declares ausente uma guarda que esteja visível no código. Em JavaScript, uma callback RAF executa até ao fim sem outro evento intercalar: '
-            'zerar o ID no início da callback que acabou de disparar e agendar o próximo RAF no fim é um padrão válido quando a função de agendamento impede novo RAF se o ID já for não-zero. '
-            'Não inventes requisitos fora do objectivo autorizado. Se não houver prova concreta numa linha adicionada, não é blocker.'
-          )
           for role,instruction in roles:
               payload={'model':'mistral-medium-latest','temperature':0.0,'response_format':{'type':'json_object'},'messages':[
-                {'role':'system','content':f'És o agente Mistral {role} da MILK. {instruction} {evidence_rule} Responde JSON estrito com pass(boolean), blockers(array), regressions(array), tests(array).'},
-                {'role':'user','content':'Avalia o candidato P0. Primeiro o diff exacto; depois o app.js completo para contexto. Só as linhas + e - do diff são alterações.\n\nDIFF:\n'+diff+'\n\nAPP.JS COMPLETO:\n'+app}
-              ]}
+                {'role':'system','content':f'És o agente Mistral {role} da MILK. {instruction} Só aceita blockers com evidência literal no diff. Responde JSON com pass(boolean), blockers(array), regressions(array), tests(array).'},
+                {'role':'user','content':'Objectivo autorizado: garantir cleanup de media em qualquer fecho efectivo do #engine, incluindo Escape, com alteração mínima. DIFF:\n'+diff+'\n\nAPP.JS:\n'+app}]}
               req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
               with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
               review=json.loads(body['choices'][0]['message']['content']); review['role']=role; reviews.append(review)
-          pathlib.Path('/tmp/p0-reviews.json').write_text(json.dumps(reviews,ensure_ascii=False,indent=2),encoding='utf-8')
+          pathlib.Path('/tmp/p1-reviews.json').write_text(json.dumps(reviews,ensure_ascii=False,indent=2),encoding='utf-8')
           failed=[]
           for r in reviews:
-              print('MISTRAL_P0_REVIEW='+json.dumps(r,ensure_ascii=False))
-              blockers=r.get('blockers') or []
-              if r.get('pass') is not True or blockers: failed.append(r['role'])
-          if failed: raise SystemExit('MISTRAL_P0_REVIEW_BLOCKED='+','.join(failed))
-          print('MISTRAL_P0_REVIEWS_OK=3')
+              print('MISTRAL_P1_REVIEW='+json.dumps(r,ensure_ascii=False))
+              if r.get('pass') is not True or (r.get('blockers') or []): failed.append(r['role'])
+          if failed: raise SystemExit('MISTRAL_P1_REVIEW_BLOCKED='+','.join(failed))
+          print('MISTRAL_P1_REVIEWS_OK=3')
           PY
 
-      - name: Update manifest deterministically and revalidate package
+      - name: Update manifest and revalidate package
         run: |
           set -euo pipefail
           python - <<'PY'
           import hashlib, pathlib
-          root=pathlib.Path('deploy/atlas-public')
-          h=hashlib.sha256((root/'app.js').read_bytes()).hexdigest()
-          p=root/'manifest.sha256'
-          lines=[]
+          root=pathlib.Path('deploy/atlas-public'); p=root/'manifest.sha256'; h=hashlib.sha256((root/'app.js').read_bytes()).hexdigest(); lines=[]
           for line in p.read_text(encoding='utf-8').splitlines():
               if line.rstrip().endswith('  app.js'): line=f'{h}  app.js'
               lines.append(line)
@@ -143,40 +122,34 @@ jobs:
           node --check deploy/atlas-public/app.js
           test "$(git diff --name-only | sort | tr '\n' ' ')" = "deploy/atlas-public/app.js deploy/atlas-public/manifest.sha256 "
 
-      - name: Commit validated candidate to the existing work branch only
+      - name: Commit validated P1 candidate to work branch
         run: |
           set -euo pipefail
           git config user.name 'Associação MILK - Mistral Vibe Code'
           git config user.email 'milk@associacaomilk.pt'
           git add deploy/atlas-public/app.js deploy/atlas-public/manifest.sha256
-          git commit -m 'perf(atlas): pause Cosmos offscreen and release audio context'
+          git commit -m 'fix(atlas): release media whenever engine dialog closes'
           git push origin HEAD:codex/milk-curadorias-ia-webapp-20260821
-          echo "P0_COMMIT=$(git rev-parse HEAD)"
+          echo "P1_COMMIT=$(git rev-parse HEAD)"
 
-      - name: Store review receipt privately on PTServidor
+      - name: Store verified P1 receipt privately on PTServidor
         run: |
           set -euo pipefail
           python - <<'PY'
-          import ftplib, hashlib, io, json, os, ssl, tarfile, urllib.request, subprocess
-          pwd=os.environ.get('PTSERVIDOR_FTPS_PASSWORD','').strip(); run=os.environ['RUN_ID']
-          commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
-          meta={'run':run,'commit':commit,'publication':False,'branch':'codex/milk-curadorias-ia-webapp-20260821','reviews_passed':3,'changed_files':['deploy/atlas-public/app.js','deploy/atlas-public/manifest.sha256']}
+          import ftplib, hashlib, io, json, os, ssl, tarfile, subprocess
+          pwd=os.environ.get('PTSERVIDOR_FTPS_PASSWORD','').strip(); run=os.environ['RUN_ID']; commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          meta={'run':run,'commit':commit,'publication':False,'branch':'codex/milk-curadorias-ia-webapp-20260821','reviews_passed':3,'scope':'dialog-media-cleanup'}
           b=io.BytesIO()
           with tarfile.open(fileobj=b,mode='w:gz') as tf:
-              for source,arc in [('/tmp/atlas-p0.diff','atlas-p0.diff'),('/tmp/p0-reviews.json','mistral-reviews.json'),('/tmp/vibe-p0-output.json','vibe-output.json')]: tf.add(source,arcname=arc)
+              for source,arc in [('/tmp/atlas-p1.diff','atlas-p1.diff'),('/tmp/p1-reviews.json','mistral-reviews.json'),('/tmp/vibe-p1-output.json','vibe-output.json')]: tf.add(source,arcname=arc)
               raw=json.dumps(meta,sort_keys=True).encode(); info=tarfile.TarInfo('receipt.json'); info.size=len(raw); tf.addfile(info,io.BytesIO(raw))
-          data=b.getvalue(); sha=hashlib.sha256(data).hexdigest(); name=f'atlas-p0-verified-{run}.tar.gz'
-          ftp=ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=120)
-          ftp.connect('troi.ptservidor.net',21); ftp.login('migration@associacaomilk.pt',pwd); ftp.prot_p()
-          for part in ('atlas-vibe-code-analysis','p0-verified',run):
+          data=b.getvalue(); sha=hashlib.sha256(data).hexdigest(); name=f'atlas-p1-verified-{run}.tar.gz'
+          ftp=ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=120); ftp.connect('troi.ptservidor.net',21); ftp.login('migration@associacaomilk.pt',pwd); ftp.prot_p()
+          for part in ('atlas-vibe-code-analysis','p1-verified',run):
               try: ftp.mkd(part)
               except ftplib.all_errors: pass
               ftp.cwd(part)
-          ftp.storbinary('STOR '+name,io.BytesIO(data),blocksize=1048576)
-          back=bytearray(); ftp.retrbinary('RETR '+name,back.extend,blocksize=1048576); ftp.quit()
-          if hashlib.sha256(back).hexdigest()!=sha: raise RuntimeError('P0_RECEIPT_READBACK_MISMATCH')
-          msg=f'MILK_VIBE_CODE_P0_COMMITTED run={run} commit={commit} reviews=3 package_hashes=ok storage=private_ftps publication=no main_site_writes=0'
-          print(msg)
-          req=urllib.request.Request(f'https://api.github.com/repos/{os.environ["REPO"]}/issues/35/comments',data=json.dumps({'body':msg}).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Content-Type':'application/json','Accept':'application/vnd.github+json'})
-          urllib.request.urlopen(req,timeout=30).read()
+          ftp.storbinary('STOR '+name,io.BytesIO(data),blocksize=1048576); back=bytearray(); ftp.retrbinary('RETR '+name,back.extend,blocksize=1048576); ftp.quit()
+          if hashlib.sha256(back).hexdigest()!=sha: raise RuntimeError('P1_RECEIPT_READBACK_MISMATCH')
+          print(f'MILK_VIBE_CODE_P1_COMMITTED run={run} commit={commit} reviews=3 package_hashes=ok storage=private_ftps publication=no main_site_writes=0')
           PY
