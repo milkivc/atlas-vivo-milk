@@ -1,0 +1,13 @@
+agent_type = "agent"
+display_name = "Atlas Plan"
+description = "Auditoria read-only da Web App Atlas Vivo MILK antes de qualquer alteração."
+safety = "safe"
+active_model = "mistral-medium-latest"
+system_prompt_id = "atlas-plan"
+disabled_tools = ["search_replace", "write_file", "bash"]
+
+[tools.read_file]
+permission = "always"
+
+[tools.grep]
+permission = "always"
