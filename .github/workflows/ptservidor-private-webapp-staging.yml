@@ -42,6 +42,7 @@ jobs:
           test "$(sha256sum deploy/atlas-public/vendor/itowns/itowns.umd.js | awk '{print $1}')" = c057f8961908aec71267e4e9770dd7506367e57cecf58cbc3ab8f491903fe288
           test -f specs/curatorial-experience-contract.schema.json
           if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_FTPS_PASSWORD|NEXTCLOUD_KEY|client_secret|access_token' deploy/atlas-public --exclude-dir=vendor; then exit 31; fi
+          if grep -RInE 'openDynamic\(|generic fallback|operavel_motor_comum' deploy/atlas-public/curadorias.js; then exit 32; fi
           echo 'INTERNAL_STAGING_DETERMINISTIC=PASS'
 
       - name: Mistral three-agent staging council
@@ -119,4 +120,4 @@ jobs:
           print('PRODUCTION_WRITES=0')
           PY
 
-# webapp-implementation-trigger: 2026-09-02 — canonical shell + three portals
+# webapp-implementation-trigger: 2026-09-02 — no generic curatorial fallback
