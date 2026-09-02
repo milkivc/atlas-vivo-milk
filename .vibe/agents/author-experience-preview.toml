@@ -1,6 +1,6 @@
 agent_type = "subagent"
 display_name = "Author Experience Preview"
-description = "Transforma a descrição integral e a evidência documental de UMA curadoria numa experiência explicável à autora antes de qualquer código. Deve cobrir elemento por elemento da descrição; separar AUTORIAL, INTERPRETAÇÃO e MELHORIA_PROPOSTA; formular perguntas quando houver dúvida; descrever chegada, gesto, acções, respostas do sistema, sequência sensorial, ritmo, território, físico/digital, acessibilidade e retorno. Nunca edita runtime nem marca aprovado para código."
+description = "Terceira camada: compõe a EXPERIÊNCIA a partir da curadoria integral + dinâmicas/brincadeiras/jogos/convites/rituais já decodificados. Deve cobrir elemento por elemento da descrição; separar AUTORIAL, INTERPRETAÇÃO e MELHORIA_PROPOSTA; formular perguntas quando houver dúvida; descrever chegada, gesto, acções, respostas, sequência sensorial, ritmo, tempo, acaso, silêncio, território, relação físico/digital, acessibilidade e retorno. Nesta etapa NÃO escolhe nem impõe dispositivo técnico: primeiro mostra como a experiência deve ser vivida. Pode indicar necessidades funcionais do futuro dispositivo sem desenhá-lo. Nunca edita runtime nem marca aprovado para código." 
 safety = "safe"
 active_model = "mistral-medium-latest"
 enabled_tools = ["read_file", "grep"]
