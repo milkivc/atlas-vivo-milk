@@ -1,0 +1,164 @@
+name: 12 MILK Nextcloud real corpus discovery
+
+on:
+  push:
+    branches:
+      - work/copernico-recovery-webapp-20260902
+    paths:
+      - '.github/workflows/12-nextcloud-corpus-discovery.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  NEXTCLOUD_BASE_URL: ${{ secrets.NEXTCLOUD_BASE_URL }}
+  NEXTCLOUD_USER: ${{ secrets.NEXTCLOUD_USER }}
+  NEXTCLOUD_APP_PASSWORD: ${{ secrets.NEXTCLOUD_APP_PASSWORD }}
+  NEXTCLOUD_ATLAS: ${{ secrets.NEXTCLOUD_ATLAS }}
+  NEXTCLOUD_KEY: ${{ secrets.NEXTCLOUD_KEY }}
+
+jobs:
+  discover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve Nextcloud route without printing credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os
+          base=os.environ.get('NEXTCLOUD_BASE_URL','').strip()
+          atlas=os.environ.get('NEXTCLOUD_ATLAS','').strip()
+          user=os.environ.get('NEXTCLOUD_USER','').strip()
+          password=os.environ.get('NEXTCLOUD_APP_PASSWORD','').strip() or os.environ.get('NEXTCLOUD_KEY','').strip()
+          if not base:
+              base = atlas if atlas.startswith('http') else 'https://associacaomilk.pt/nextcloud'
+          if not user:
+              user = atlas if atlas and not atlas.startswith('http') else 'admin'
+          print('NEXTCLOUD_BASE_RESOLVED=' + ('YES' if base else 'NO'))
+          print('NEXTCLOUD_USER_RESOLVED=' + ('YES' if user else 'NO'))
+          print('NEXTCLOUD_PASSWORD_PRESENT=' + ('YES' if password else 'NO'))
+          print('NEXTCLOUD_SECRET_VALUES_DISCLOSED=0')
+          if not base or not user or not password:
+              raise SystemExit('NEXTCLOUD_ROUTE_INCOMPLETE')
+          PY
+
+      - name: Real WebDAV read-only recursive inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64, collections, json, os, pathlib, urllib.error, urllib.parse, urllib.request, xml.etree.ElementTree as ET
+
+          base=os.environ.get('NEXTCLOUD_BASE_URL','').strip()
+          atlas=os.environ.get('NEXTCLOUD_ATLAS','').strip()
+          user=os.environ.get('NEXTCLOUD_USER','').strip()
+          password=os.environ.get('NEXTCLOUD_APP_PASSWORD','').strip() or os.environ.get('NEXTCLOUD_KEY','').strip()
+          if not base:
+              base = atlas if atlas.startswith('http') else 'https://associacaomilk.pt/nextcloud'
+          if not user:
+              user = atlas if atlas and not atlas.startswith('http') else 'admin'
+          base=base.rstrip('/')
+          root=f"{base}/remote.php/dav/files/{urllib.parse.quote(user, safe='')}"
+          auth=base64.b64encode(f'{user}:{password}'.encode()).decode()
+          ns={'d':'DAV:'}
+          body=b'''<?xml version="1.0"?><d:propfind xmlns:d="DAV:"><d:prop><d:resourcetype/><d:getcontentlength/><d:getcontenttype/><d:getlastmodified/><d:getetag/></d:prop></d:propfind>'''
+
+          def propfind(url):
+              req=urllib.request.Request(url, data=body, method='PROPFIND', headers={
+                  'Authorization':'Basic '+auth,
+                  'Depth':'1',
+                  'Content-Type':'application/xml; charset=utf-8',
+                  'User-Agent':'MILK-Atlas-ReadOnly-Inventory/1.0'
+              })
+              try:
+                  with urllib.request.urlopen(req, timeout=60) as r:
+                      raw=r.read(); status=r.status
+              except urllib.error.HTTPError as e:
+                  print('NEXTCLOUD_WEBDAV_HTTP_STATUS='+str(e.code))
+                  raise SystemExit('NEXTCLOUD_WEBDAV_AUTH_OR_ROUTE_BLOCKED')
+              if status not in (200,207):
+                  raise SystemExit('NEXTCLOUD_WEBDAV_UNEXPECTED_STATUS:'+str(status))
+              return ET.fromstring(raw)
+
+          q=collections.deque([root+'/'])
+          seen_dirs=set(); inventory=[]; requests=0
+          while q:
+              url=q.popleft()
+              if url in seen_dirs: continue
+              seen_dirs.add(url); requests+=1
+              tree=propfind(url)
+              for resp in tree.findall('d:response',ns):
+                  href=resp.findtext('d:href', default='', namespaces=ns)
+                  if not href: continue
+                  decoded=urllib.parse.unquote(href)
+                  prop=resp.find('.//d:prop',ns)
+                  if prop is None: continue
+                  rtype=prop.find('d:resourcetype',ns)
+                  is_dir=rtype is not None and rtype.find('d:collection',ns) is not None
+                  entry={
+                      'href': href,
+                      'path': decoded,
+                      'is_dir': is_dir,
+                      'size': int(prop.findtext('d:getcontentlength', default='0', namespaces=ns) or 0),
+                      'content_type': prop.findtext('d:getcontenttype', default='', namespaces=ns),
+                      'modified': prop.findtext('d:getlastmodified', default='', namespaces=ns),
+                      'etag': prop.findtext('d:getetag', default='', namespaces=ns),
+                  }
+                  if href.rstrip('/') == urllib.parse.urlparse(url).path.rstrip('/'):
+                      continue
+                  inventory.append(entry)
+                  if is_dir:
+                      absolute=urllib.parse.urljoin(base+'/', href.lstrip('/'))
+                      q.append(absolute.rstrip('/')+'/')
+              if len(inventory)>20000 or requests>2000:
+                  raise SystemExit('NEXTCLOUD_INVENTORY_SAFETY_LIMIT')
+
+          files=[x for x in inventory if not x['is_dir']]
+          dirs=[x for x in inventory if x['is_dir']]
+          exts={}
+          for x in files:
+              suffix=pathlib.PurePosixPath(x['path']).suffix.lower() or '<none>'
+              exts[suffix]=exts.get(suffix,0)+1
+          out={'source':'NEXTCLOUD','read_only':True,'base':base,'user_label':'configured','requests':requests,'files':files,'directories':dirs,'extension_counts':dict(sorted(exts.items()))}
+          pathlib.Path('/tmp/nextcloud_inventory.json').write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding='utf-8')
+          print('NEXTCLOUD_WEBDAV_AUTH=PASS')
+          print('NEXTCLOUD_INVENTORY_FILES='+str(len(files)))
+          print('NEXTCLOUD_INVENTORY_DIRS='+str(len(dirs)))
+          print('NEXTCLOUD_INVENTORY_REQUESTS='+str(requests))
+          print('NEXTCLOUD_WRITES=0')
+          print('NEXTCLOUD_SECRET_VALUES_DISCLOSED=0')
+          PY
+
+      - name: Build curatorial candidate queue from all documents
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, pathlib, re
+          inv=json.load(open('/tmp/nextcloud_inventory.json',encoding='utf-8'))
+          supported={'.pdf','.docx','.doc','.md','.txt','.html','.htm','.xlsx','.xls','.csv','.json','.zip','.pptx','.ppt'}
+          signals=('curadoria','dinamica','dinâmica','atlas','milk','festa','lenda','folclore','toponim','falarte','palavra','cubo','dado','galeria','fuco','fucô','reizinho','cosmicox','perceptio','absurdo','deriva','ritual','nos','nós','arteria','artéria','simplicidade')
+          queue=[]
+          for f in inv['files']:
+              p=f['path']; low=p.lower(); ext=pathlib.PurePosixPath(low).suffix
+              if ext not in supported: continue
+              score=sum(1 for s in signals if s in low)
+              queue.append({'path':p,'href':f['href'],'size':f['size'],'modified':f['modified'],'ext':ext,'curatorial_signal_score':score})
+          queue.sort(key=lambda x:(-x['curatorial_signal_score'],x['path']))
+          pathlib.Path('/tmp/curatorial_queue.json').write_text(json.dumps({'source':'NEXTCLOUD','total':len(queue),'items':queue},ensure_ascii=False,indent=2),encoding='utf-8')
+          print('NEXTCLOUD_SUPPORTED_DOCUMENTS='+str(len(queue)))
+          print('NEXTCLOUD_CURATORIAL_SIGNAL_DOCUMENTS='+str(sum(1 for x in queue if x['curatorial_signal_score']>0)))
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nextcloud-corpus-discovery
+          path: |
+            /tmp/nextcloud_inventory.json
+            /tmp/curatorial_queue.json
+          retention-days: 14
