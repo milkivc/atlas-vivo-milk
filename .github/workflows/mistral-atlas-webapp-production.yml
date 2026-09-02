@@ -119,6 +119,7 @@ jobs:
     env:
       NEXTCLOUD_ATLAS: ${{ secrets.NEXTCLOUD_ATLAS }}
       NEXTCLOUD_KEY: ${{ secrets.NEXTCLOUD_KEY }}
+      PTSERVIDOR_FTP_WEBDAV: ${{ secrets.PTSERVIDOR_FTP_WEBDAV }}
     steps:
       - uses: actions/checkout@v4
       - name: Materialize pinned public release files
@@ -135,7 +136,15 @@ jobs:
           import base64, hashlib, io, json, os, pathlib, tarfile, urllib.parse, urllib.request
           raw=os.environ.get('NEXTCLOUD_ATLAS','').strip()
           secret=os.environ.get('NEXTCLOUD_KEY','').strip()
+          route=os.environ.get('PTSERVIDOR_FTP_WEBDAV','').strip()
           base='https://nuvem.associacaomilk.pt'; user='admin'; password=secret
+          try:
+              route_obj=json.loads(route)
+              if isinstance(route_obj,dict):
+                  base=str(route_obj.get('nextcloud_url') or route_obj.get('webdav_url') or base)
+                  user=str(route_obj.get('nextcloud_user') or route_obj.get('webdav_user') or user)
+                  password=str(route_obj.get('nextcloud_password') or route_obj.get('webdav_password') or password)
+          except Exception: pass
           try:
               obj=json.loads(raw)
               if isinstance(obj,dict):
@@ -226,7 +235,15 @@ jobs:
           python - <<'PY'
           import base64, hashlib, json, os, pathlib, tarfile, urllib.parse, urllib.request
           raw=os.environ.get('NEXTCLOUD_ATLAS','').strip(); secret=os.environ.get('NEXTCLOUD_KEY','').strip()
+          route=os.environ.get('PTSERVIDOR_FTP_WEBDAV','').strip()
           base='https://nuvem.associacaomilk.pt'; user='admin'; password=secret
+          try:
+              route_obj=json.loads(route)
+              if isinstance(route_obj,dict):
+                  base=str(route_obj.get('nextcloud_url') or route_obj.get('webdav_url') or base)
+                  user=str(route_obj.get('nextcloud_user') or route_obj.get('webdav_user') or user)
+                  password=str(route_obj.get('nextcloud_password') or route_obj.get('webdav_password') or password)
+          except Exception: pass
           try:
               obj=json.loads(raw)
               if isinstance(obj,dict):
