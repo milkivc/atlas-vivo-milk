@@ -84,13 +84,13 @@ jobs:
           python - <<'PY'
           import json, os, pathlib, urllib.request
           key=os.environ['MISTRAL_API_KEY'].strip()
-          paths=['deploy/atlas-public/atlas.js','deploy/atlas-public/copernico.js','deploy/atlas-public/territory-data.js','deploy/atlas-public/experience-machine.js','deploy/atlas-public/falarte.js','deploy/atlas-public/palavra-ritual.js','recovery/PUBLIC_TERRITORY_PROJECTION_REPORT_2026-09-02.json']
+          paths=['deploy/atlas-public/index.html','deploy/atlas-public/styles.css','deploy/atlas-public/atlas.js','deploy/atlas-public/copernico.js','deploy/atlas-public/territory-data.js','deploy/atlas-public/experience-machine.js','deploy/atlas-public/falarte.js','deploy/atlas-public/palavra-ritual.js','deploy/atlas-public/curadorias.js','recovery/PUBLIC_TERRITORY_PROJECTION_REPORT_2026-09-02.json']
           source='\n\n'.join('FILE '+p+'\n'+pathlib.Path(p).read_text(encoding='utf-8') for p in paths)
           roles={
-            'copernico_runtime':'Verifica iTowns, lifecycle, layer, picking e fail-closed.',
+            'copernico_runtime':'Verifica iTowns, lifecycle, layer, picking e fail-closed. Contratos intencionais: WMS remoto é enriquecimento opcional com fallback para o globo base; clique sem feature é no-op; controller indefinido após catch não é blocker sem callsite posterior. Não exijas apagar window.itowns, que é bundle partilhado.',
             'territorial_integrity':'Confirma 826/826, IDs únicos, escopos territoriais rastreáveis e zero coordenadas inventadas.',
-            'curatorial_fidelity':'Bloqueia cards genéricos como substituto das experiências específicas e regressões falARTE/Palavra Ritual.',
-            'accessibility_performance':'Verifica teclado, aria-live, reduced motion e custo de 826 pontos.',
+            'curatorial_fidelity':'Bloqueia cards genéricos como substituto das experiências específicas e regressões falARTE/Palavra Ritual. A existência de módulos standalone não prova card genérico: cita o elemento e a mecânica que achata a curadoria ou passa.',
+            'accessibility_performance':'Verifica teclado, aria-live, reduced motion e custo de 826 pontos usando também index.html e styles.css. O globo role=region não é modal e não exige focus trap/Escape. Só bloqueia uma violação WCAG aplicável com elemento exacto e regra verificável.',
             'public_boundary':'Bloqueia segredos, PII, Camada Invisível, prompts e ligação reversa.'
           }
           failed=[]
