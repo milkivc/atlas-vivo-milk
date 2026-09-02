@@ -1,0 +1,12 @@
+agent_type = "subagent"
+display_name = "Runtime Accessibility Reviewer"
+description = "Audita o runtime da WebApp Atlas: teclado, touch, foco, reduced-motion, cleanup de media/RAF/AudioContext, estados de erro, WCAG e desempenho sem alterar autoria curatorial." 
+safety = "safe"
+active_model = "mistral-medium-latest"
+enabled_tools = ["read_file", "grep"]
+
+[tools.read_file]
+permission = "always"
+
+[tools.grep]
+permission = "always"
