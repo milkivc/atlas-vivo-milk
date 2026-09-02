@@ -1,0 +1,164 @@
+name: MILK COPERNICO — recover existing WebApp code
+
+on:
+  push:
+    branches:
+      - work/copernico-recovery-webapp-20260902
+    paths:
+      - 'recovery/**'
+      - '.github/workflows/copernico-recovery-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: milk-copernico-recovery-webapp
+  cancel-in-progress: false
+
+jobs:
+  recover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+
+    steps:
+      - name: Checkout recovery branch with full history
+        uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 0
+
+      - name: Fetch every branch and tag read-only
+        run: |
+          set -euo pipefail
+          git fetch origin '+refs/heads/*:refs/remotes/origin/*' --tags --force --prune
+          git branch -r | sed 's/^ *//' > /tmp/all-remote-branches.txt
+          echo "REMOTE_BRANCHES=$(wc -l < /tmp/all-remote-branches.txt)"
+
+      - name: Search all Git refs for the existing COPERNICO implementation
+        run: |
+          set -euo pipefail
+          : > /tmp/copernico-search.txt
+          pattern='CopernicusGlobe|visualizar_globo|sh\.dataspace\.copernicus\.eu/ogc/wms|seer-container|geojson_export|gerar_globo_copernico'
+          while IFS= read -r ref; do
+            [ -n "$ref" ] || continue
+            git grep -n -I -E "$pattern" "$ref" -- '*.js' '*.mjs' '*.ts' '*.tsx' '*.html' '*.py' '*.json' '*.md' '*.yml' '*.yaml' 2>/dev/null \
+              | sed "s#^#$ref | #" >> /tmp/copernico-search.txt || true
+          done < /tmp/all-remote-branches.txt
+          git log --all --date=iso-strict --pretty='COMMIT %H %ad %d %s' \
+            -G'CopernicusGlobe|visualizar_globo|sh\.dataspace\.copernicus\.eu/ogc/wms|seer-container|geojson_export|gerar_globo_copernico' \
+            -- . >> /tmp/copernico-history.txt || true
+          sort -u /tmp/copernico-search.txt -o /tmp/copernico-search.txt
+          echo "COPERNICO_MATCH_LINES=$(wc -l < /tmp/copernico-search.txt)"
+          echo '--- SEARCH MATCHES ---'
+          sed -n '1,400p' /tmp/copernico-search.txt
+          echo '--- HISTORY ---'
+          sed -n '1,250p' /tmp/copernico-history.txt
+
+      - name: Preserve exact candidate blobs from matching refs
+        run: |
+          set -euo pipefail
+          rm -rf recovery/candidate
+          mkdir -p recovery/candidate
+          python - <<'PY'
+          import pathlib, re, subprocess, hashlib, json
+          src=pathlib.Path('/tmp/copernico-search.txt')
+          out=pathlib.Path('recovery/candidate')
+          manifest=[]
+          seen=set()
+          for line in src.read_text(errors='replace').splitlines() if src.exists() else []:
+              m=re.match(r'([^|]+) \| ([^:]+):(\d+):(.*)$', line)
+              if not m: continue
+              ref=m.group(1).strip(); path=m.group(2).strip()
+              key=(ref,path)
+              if key in seen: continue
+              seen.add(key)
+              try:
+                  data=subprocess.check_output(['git','show',f'{ref}:{path}'])
+              except subprocess.CalledProcessError:
+                  continue
+              safe=(ref.replace('/','__').replace(':','_')+'__'+path.replace('/','__'))
+              target=out/safe
+              target.write_bytes(data)
+              manifest.append({'ref':ref,'path':path,'sha256':hashlib.sha256(data).hexdigest(),'bytes':len(data),'recovered_file':str(target)})
+          (out/'MANIFEST.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('RECOVERED_CANDIDATE_FILES='+str(len(manifest)))
+          PY
+
+      - name: Install Mistral Vibe Code
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check mistral-vibe
+          vibe --version
+          test -n "$MISTRAL_API_KEY"
+
+      - name: Mistral Code reconstructs genealogy only — no replacement globe
+        run: |
+          set -euo pipefail
+          cp /tmp/copernico-search.txt recovery/COPERNICO_GIT_SEARCH.txt
+          cp /tmp/copernico-history.txt recovery/COPERNICO_GIT_HISTORY.txt
+          vibe --trust \
+            --prompt "A missão é recuperar, não reinventar, a WebApp COPÉRNICO do Atlas Vivo MILK. Lê recovery/COPERNICO_SOURCE_LOCK_2026-09-02.md, recovery/COPERNICO_GIT_SEARCH.txt, recovery/COPERNICO_GIT_HISTORY.txt, recovery/candidate/MANIFEST.json e todos os ficheiros em recovery/candidate/. Compara-os também com deploy/atlas-public/atlas.js, experience-machine.js, index.html e public-runtime-config.json. Cria SOMENTE recovery/COPERNICO_GENEALOGY_REPORT.md. Determina com evidência verificável se a implementação concreta de CopernicusGlobe foi encontrada, quais refs/commits/ficheiros a contêm, que dependências reais aparecem no código, e o delta exacto para a WebApp actual. Não inventes classe, biblioteca, token, endpoint, licença, coordenada ou camada. Não alteres deploy/, não publiques, não faças commit. A primeira linha do relatório deve ser COPERNICO_FOUND=1 apenas se a definição/implementação executável de CopernicusGlobe ou equivalente concreto estiver recuperada; caso contrário COPERNICO_FOUND=0." \
+            --max-turns 20 --output json > /tmp/vibe-copernico.json
+          test -s recovery/COPERNICO_GENEALOGY_REPORT.md
+
+      - name: Deterministic recovery boundary gate
+        run: |
+          set -euo pipefail
+          changed="$(git status --porcelain | awk '{print $2}')"
+          echo "$changed"
+          if echo "$changed" | grep -Ev '^recovery/' | grep -q .; then
+            echo '::error::Mistral changed files outside recovery/'
+            exit 40
+          fi
+          grep -Eq '^COPERNICO_FOUND=[01]$' recovery/COPERNICO_GENEALOGY_REPORT.md
+          if grep -RIlE '(BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|sk-[A-Za-z0-9]|password[[:space:]]*=)' recovery/; then
+            echo '::error::Potential secret material in recovery output'
+            exit 41
+          fi
+
+      - name: Two Mistral agents audit genealogy evidence
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, pathlib, urllib.request
+          key=os.environ['MISTRAL_API_KEY'].strip()
+          report=pathlib.Path('recovery/COPERNICO_GENEALOGY_REPORT.md').read_text(encoding='utf-8')
+          search=pathlib.Path('recovery/COPERNICO_GIT_SEARCH.txt').read_text(encoding='utf-8')
+          manifest=pathlib.Path('recovery/candidate/MANIFEST.json').read_text(encoding='utf-8')
+          roles={
+            'genealogy_guard':'Confirma que cada afirmação de código encontrado deriva de ref/path/hash concretos. Bloqueia qualquer invenção ou inferência apresentada como recuperação.',
+            'webapp_integration_guard':'Confirma que o relatório preserva COPÉRNICO como base, identifica o delta para a WebApp sem substituir o globo, e não mistura Camada Invisível com superfície pública.'
+          }
+          reviews=[]
+          for role,rule in roles.items():
+              payload={'model':'mistral-medium-latest','temperature':0.0,'response_format':{'type':'json_object'},'messages':[
+                {'role':'system','content':f'És {role} da Associação MILK. {rule} Responde JSON estrito: pass(boolean), blockers(array), evidence(array).'},
+                {'role':'user','content':'RELATORIO:\n'+report+'\n\nGIT SEARCH:\n'+search+'\n\nMANIFEST:\n'+manifest}
+              ]}
+              req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
+              review=json.loads(body['choices'][0]['message']['content']); review['role']=role; reviews.append(review)
+          pathlib.Path('recovery/MISTRAL_COPERNICO_REVIEWS.json').write_text(json.dumps(reviews,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          for r in reviews:
+              print('MISTRAL_COPERNICO_REVIEW='+json.dumps(r,ensure_ascii=False))
+              if r.get('pass') is not True or (r.get('blockers') or []): raise SystemExit('COPERNICO_RECOVERY_BLOCKED='+r['role'])
+          print('MISTRAL_COPERNICO_REVIEWS_OK=2')
+          PY
+
+      - name: Commit recovery evidence to isolated branch only
+        run: |
+          set -euo pipefail
+          git config user.name 'Associação MILK - Mistral Recovery'
+          git config user.email 'milk@associacaomilk.pt'
+          git add recovery/
+          if git diff --cached --quiet; then
+            echo 'NO_RECOVERY_DELTA=1'
+            exit 0
+          fi
+          git commit -m 'recovery(copernico): preserve Git genealogy evidence'
+          git push origin HEAD:work/copernico-recovery-webapp-20260902
+          echo "COPERNICO_RECOVERY_COMMIT=$(git rev-parse HEAD)"
+          echo 'PUBLICATION=NO'
