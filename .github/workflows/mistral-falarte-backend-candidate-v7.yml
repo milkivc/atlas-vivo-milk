@@ -1,0 +1,157 @@
+name: MILK Mistral falARTE backend candidate v7
+
+on:
+  push:
+    branches: [work/copernico-recovery-webapp-20260902]
+    paths: ['.github/workflows/mistral-falarte-backend-candidate-v7.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: milk-mistral-falarte-backend-v7
+  cancel-in-progress: false
+
+jobs:
+  backend:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      BRANCH: work/copernico-recovery-webapp-20260902
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/copernico-recovery-webapp-20260902
+          fetch-depth: 1
+
+      - name: Install Mistral Vibe Code
+        run: |
+          set -euo pipefail
+          test -n "$MISTRAL_API_KEY"
+          python -m pip install --disable-pip-version-check mistral-vibe==2.24.5
+          vibe --version
+
+      - name: Generate backend candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          vibe --agent auto-approve --trust --max-turns 24 --output json --prompt "ATLAS VIVO MILK — FALARTE BACKEND. Trabalha SOMENTE em deploy/atlas-public/api/curadoria/falarte/. Cria helpers.php se útil, submit.php e withdraw.php. Não alteres frontend, catálogo, workflows ou outras curadorias. Submit: apenas POST multipart/form-data; mechanic_id apenas lugar-escondido,trinta-dias,antigo-novo,embalagem-conta,som-local,ainda-resiste,palavras-desapareceram,nao-apagado,so-memoria,remetente-ausente; age13=true obrigatório; consent_curatorial=true obrigatório; author_mode nome_real|nome_inventado|anonimo; publication_scope integral|trechos|nao_publicar; integral/trechos exigem consent_public=true. Texto limitado/sanitizado. Upload opcional máximo 12MiB; MIME real finfo; allowlist JPEG/PNG/WEBP/MP3/OGG/WAV/WEBM/PDF; rejeita SVG/HTML/executáveis. Não uses filename original em path nem metadata. Usa random_bytes para receipt_id, stored_name e withdrawal_code. Preserva original intacto com move_uploaded_file e SHA-256. Storage obrigatoriamente fora de realpath(DOCUMENT_ROOT), preferencialmente dirname(realpath(DOCUMENT_ROOT))/atlas-private/falarte-intake; falha fechado se DOCUMENT_ROOT ou storage privado for inválido/não gravável. Metadata JSON: schema_version, receipt_id, status PENDENTE_CURADORIA, received_at UTC, mechanic_id, consentimentos, author_mode, publication_scope, textos controlados, MIME/tamanho/SHA-256/stored_name; NÃO guardar IP, user-agent, cookies, headers de rede, session ids ou filename original. withdrawal_code devolvido uma única vez; em disco guarda apenas password_hash ou verificador criptográfico não reversível. withdraw.php: só POST JSON/form com receipt_id+withdrawal_code; resolve receipt apenas sob storage privado; password_verify ou comparação constant-time; em sucesso acrescenta RETIRADA_SOLICITADA com UTC, sem apagar/mover/publicar original. Respostas JSON sem stack traces. Sem dependências externas. Não faças commit." > /tmp/falarte-backend-v7.json
+          python - <<'PY'
+          from pathlib import Path
+          root=Path('deploy/atlas-public/api/curadoria/falarte')
+          for p in root.glob('*.php'):
+              s=p.read_text(encoding='utf-8')
+              p.write_text('\n'.join(line.rstrip() for line in s.splitlines())+'\n',encoding='utf-8')
+          PY
+          for f in deploy/atlas-public/api/curadoria/falarte/*.php; do php -l "$f"; done
+
+      - name: Diagnose invariants without aborting
+        id: diagnose
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re, json
+          root=Path('deploy/atlas-public/api/curadoria/falarte')
+          files=list(root.glob('*.php'))
+          corpus='\n'.join(p.read_text(encoding='utf-8',errors='replace') for p in files)
+          required_files=['submit.php','withdraw.php']
+          fails=[]
+          checks={
+            'status_pending': 'PENDENTE_CURADORIA' in corpus,
+            'withdraw_status': 'RETIRADA_SOLICITADA' in corpus,
+            'mime_finfo': bool(re.search(r'\bfinfo(?:_file|_open)?\b', corpus, re.I)),
+            'move_uploaded_file': 'move_uploaded_file' in corpus,
+            'cryptographic_random': bool(re.search(r'\brandom_bytes\b', corpus)),
+            'withdraw_verifier': bool(re.search(r'\b(?:password_hash|password_verify|hash_equals)\b', corpus)),
+            'sha256': bool(re.search(r"sha-?256|hash_file\s*\(\s*['\"]sha256|hash\s*\(\s*['\"]sha256", corpus, re.I)),
+            'document_root': 'DOCUMENT_ROOT' in corpus,
+            'age13': 'age13' in corpus,
+            'curatorial_consent': 'consent_curatorial' in corpus,
+            'public_consent': 'consent_public' in corpus,
+            'author_modes': all(x in corpus for x in ['nome_real','nome_inventado','anonimo']),
+            'publication_scopes': all(x in corpus for x in ['integral','trechos','nao_publicar']),
+            'mechanics': all(x in corpus for x in ['lugar-escondido','trinta-dias','antigo-novo','embalagem-conta','som-local','ainda-resiste','palavras-desapareceram','nao-apagado','so-memoria','remetente-ausente']),
+            'no_network_metadata': not bool(re.search(r'REMOTE_ADDR|HTTP_USER_AGENT|HTTP_COOKIE|analytics|telemetry', corpus, re.I)),
+            'no_obvious_documentroot_upload': not bool(re.search(r'(?:copy|move_uploaded_file)\s*\([^;]*DOCUMENT_ROOT', corpus, re.I)),
+          }
+          for f in required_files:
+              ok=(root/f).is_file(); print(f'CHECK file_{f}={"PASS" if ok else "FAIL"}')
+              if not ok:fails.append('file_'+f)
+          for k,ok in checks.items():
+              print(f'CHECK {k}={"PASS" if ok else "FAIL"}')
+              if not ok:fails.append(k)
+          Path('/tmp/falarte_backend_failures.json').write_text(json.dumps(fails),encoding='utf-8')
+          print('FAILURES='+','.join(fails) if fails else 'FAILURES=NONE')
+          PY
+          fails=$(python -c "import json; print(len(json.load(open('/tmp/falarte_backend_failures.json'))))")
+          echo "failure_count=$fails" >> "$GITHUB_OUTPUT"
+
+      - name: Mistral repair only failed invariants
+        if: steps.diagnose.outputs.failure_count != '0'
+        shell: bash
+        run: |
+          set -euo pipefail
+          failures=$(cat /tmp/falarte_backend_failures.json)
+          vibe --agent auto-approve --trust --max-turns 14 --output json --prompt "FALARTE BACKEND — REPARAÇÃO CIRÚRGICA. Trabalha SOMENTE em deploy/atlas-public/api/curadoria/falarte/. O candidato já existe e passou php -l. Corrige SOMENTE estes invariantes falhados: $failures. Não removas funções que já satisfazem o contrato. Mantém obrigatoriamente: POST-only; 10 mechanic_ids; age13; consent_curatorial; author_mode nome_real/nome_inventado/anonimo; publication_scope integral/trechos/nao_publicar; consent_public separado para scopes publicáveis; finfo + allowlist segura; max 12MiB; random_bytes; filename original nunca usado em path/metadata; move_uploaded_file; SHA-256; storage fora de DOCUMENT_ROOT e fail-closed; PENDENTE_CURADORIA; sem IP/UA/cookies/telemetria; withdrawal secret não armazenado em plaintext; password_hash/password_verify ou equivalente constant-time; RETIRADA_SOLICITADA sem apagar/publicar. Sem dependências externas. Não alteres nada fora desta pasta. Não faças commit." > /tmp/falarte-backend-repair-v7.json
+          python - <<'PY'
+          from pathlib import Path
+          root=Path('deploy/atlas-public/api/curadoria/falarte')
+          for p in root.glob('*.php'):
+              s=p.read_text(encoding='utf-8')
+              p.write_text('\n'.join(line.rstrip() for line in s.splitlines())+'\n',encoding='utf-8')
+          PY
+          for f in deploy/atlas-public/api/curadoria/falarte/*.php; do php -l "$f"; done
+
+      - name: Final deterministic diagnostic
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          root=Path('deploy/atlas-public/api/curadoria/falarte')
+          files=list(root.glob('*.php'))
+          corpus='\n'.join(p.read_text(encoding='utf-8',errors='replace') for p in files)
+          checks=[
+            ('submit_file',(root/'submit.php').is_file()),('withdraw_file',(root/'withdraw.php').is_file()),
+            ('status_pending','PENDENTE_CURADORIA' in corpus),('withdraw_status','RETIRADA_SOLICITADA' in corpus),
+            ('mime_finfo',bool(re.search(r'\bfinfo(?:_file|_open)?\b',corpus,re.I))),('move_uploaded_file','move_uploaded_file' in corpus),
+            ('cryptographic_random',bool(re.search(r'\brandom_bytes\b',corpus))),('withdraw_verifier',bool(re.search(r'\b(?:password_hash|password_verify|hash_equals)\b',corpus))),
+            ('sha256',bool(re.search(r"sha-?256|hash_file\s*\(\s*['\"]sha256|hash\s*\(\s*['\"]sha256",corpus,re.I))),
+            ('document_root','DOCUMENT_ROOT' in corpus),('age13','age13' in corpus),('curatorial_consent','consent_curatorial' in corpus),
+            ('public_consent','consent_public' in corpus),('author_modes',all(x in corpus for x in ['nome_real','nome_inventado','anonimo'])),
+            ('publication_scopes',all(x in corpus for x in ['integral','trechos','nao_publicar'])),
+            ('mechanics',all(x in corpus for x in ['lugar-escondido','trinta-dias','antigo-novo','embalagem-conta','som-local','ainda-resiste','palavras-desapareceram','nao-apagado','so-memoria','remetente-ausente'])),
+            ('no_network_metadata',not bool(re.search(r'REMOTE_ADDR|HTTP_USER_AGENT|HTTP_COOKIE|analytics|telemetry',corpus,re.I))),
+            ('no_obvious_documentroot_upload',not bool(re.search(r'(?:copy|move_uploaded_file)\s*\([^;]*DOCUMENT_ROOT',corpus,re.I))),
+          ]
+          failed=[]
+          for name,ok in checks:
+              print(f'FINAL_CHECK {name}={"PASS" if ok else "FAIL"}')
+              if not ok: failed.append(name)
+          if failed: raise SystemExit('FINAL_INVARIANTS_FAILED:'+','.join(failed))
+          print('FALARTE_BACKEND_INVARIANTS_V7=PASS')
+          PY
+          for f in deploy/atlas-public/api/curadoria/falarte/*.php; do php -l "$f"; done
+          git diff --check
+          mapfile -t changed < <(git status --porcelain -uall | awk '{print $2}' | sort -u)
+          test ${#changed[@]} -gt 0
+          for f in "${changed[@]}"; do case "$f" in deploy/atlas-public/api/curadoria/falarte/*) ;; *) echo "::error::OUTSIDE_BACKEND_BOUNDARY:$f"; exit 33;; esac; done
+
+      - name: Commit auditable backend candidate only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Associação MILK - Mistral Vibe Code'
+          git config user.email 'milk@associacaomilk.pt'
+          git add deploy/atlas-public/api/curadoria/falarte
+          git diff --cached --quiet && { echo '::error::NO_BACKEND_DELTA'; exit 40; }
+          git diff --cached --check
+          git commit -m 'feat(webapp): materialize falARTE private intake backend candidate'
+          git push origin HEAD:$BRANCH
+          echo "FALARTE_BACKEND_CANDIDATE_COMMIT=$(git rev-parse HEAD)"
+          echo 'PRODUCTION_PUBLISH=NO'
