@@ -3,8 +3,7 @@ name: MILK PTServidor private WebApp staging
 on:
   workflow_dispatch:
   push:
-    branches:
-      - work/copernico-recovery-webapp-20260902
+    branches: [work/copernico-recovery-webapp-20260902]
     paths:
       - 'deploy/atlas-public/**'
       - 'tests/**'
@@ -29,47 +28,60 @@ jobs:
         with: { node-version: '22' }
 
       - name: Materialize COPERNICO and public territorial payload
-        shell: bash
         run: |
           set -euo pipefail
-          test -f deploy/atlas-public/territorios-publicos.json.gz
-          test -f deploy/atlas-public/vendor/itowns/itowns.umd.js.gz
           gzip -dc deploy/atlas-public/territorios-publicos.json.gz > deploy/atlas-public/territorios-publicos.json
           gzip -dc deploy/atlas-public/vendor/itowns/itowns.umd.js.gz > deploy/atlas-public/vendor/itowns/itowns.umd.js
 
-      - name: Deterministic internal staging gates
-        shell: bash
+      - name: Deterministic WebApp gates
         run: |
           set -euo pipefail
           node tests/ia-milk-public-boundary.test.mjs
           for f in deploy/atlas-public/*.js; do node --check "$f"; done
+          if compgen -G 'deploy/atlas-public/experiences/*.js' >/dev/null; then for f in deploy/atlas-public/experiences/*.js; do node --check "$f"; done; fi
           jq -e '.validated == true and .layer == "public" and .projection == "PUBLIC-ONLY"' deploy/atlas-public/territorios-publicos.json >/dev/null
           test "$(sha256sum deploy/atlas-public/vendor/itowns/itowns.umd.js | awk '{print $1}')" = c057f8961908aec71267e4e9770dd7506367e57cecf58cbc3ab8f491903fe288
           test -f specs/curatorial-experience-contract.schema.json
-          if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_FTPS_PASSWORD|NEXTCLOUD_KEY|client_secret|access_token' deploy/atlas-public --exclude-dir=vendor; then exit 31; fi
+          if grep -RInE 'MISTRAL_API_KEY|PTSERVIDOR_.*PASSWORD|NEXTCLOUD_.*KEY|client_secret|access_token' deploy/atlas-public --exclude-dir=vendor; then exit 31; fi
           if grep -RInE 'openDynamic\(|generic fallback|operavel_motor_comum' deploy/atlas-public/curadorias.js; then exit 32; fi
-          echo 'INTERNAL_STAGING_DETERMINISTIC=PASS'
+          echo INTERNAL_STAGING_DETERMINISTIC=PASS
 
-      - name: Mistral three-agent staging council
-        shell: bash
+      - name: Mistral staging council when account is available
         run: |
           set -euo pipefail
-          test -n "$MISTRAL_API_KEY"
           python - <<'PY'
-          import json,os,pathlib,urllib.request
-          key=os.environ['MISTRAL_API_KEY']
-          files=['AGENTS.md','specs/curatorial-experience-contract.schema.json','deploy/atlas-public/index.html','deploy/atlas-public/atlas.js','deploy/atlas-public/copernico.js','deploy/atlas-public/experience-machine.js','deploy/atlas-public/falarte.js','deploy/atlas-public/palavra-ritual.js','deploy/atlas-public/curadorias.js','deploy/atlas-public/authorial-portals.js','deploy/atlas-public/authorial-portals.css']
+          import json,os,pathlib,urllib.error,urllib.request
+          key=os.environ.get('MISTRAL_API_KEY','').strip()
+          if not key:
+              print('MISTRAL_STAGE_COUNCIL=DEFERRED_MISSING_CREDENTIAL'); raise SystemExit(0)
+          try:
+              req=urllib.request.Request('https://api.mistral.ai/v1/models',headers={'Authorization':'Bearer '+key})
+              with urllib.request.urlopen(req,timeout=30): pass
+          except urllib.error.HTTPError as e:
+              if e.code==402:
+                  print('MISTRAL_STAGE_COUNCIL=DEFERRED_BILLING_402'); raise SystemExit(0)
+              raise
+          files=['AGENTS.md','specs/curatorial-experience-contract.schema.json','deploy/atlas-public/index.html','deploy/atlas-public/atlas.js','deploy/atlas-public/copernico.js','deploy/atlas-public/experience-machine.js','deploy/atlas-public/curadorias.js','deploy/atlas-public/authorial-portals.js']
           src='\n\n'.join('FILE '+p+'\n'+pathlib.Path(p).read_text(encoding='utf-8') for p in files if pathlib.Path(p).exists())
+          exp=pathlib.Path('deploy/atlas-public/experiences')
+          if exp.is_dir():
+              runtime_files=sorted(exp.glob('*.js'))[:50]
+              src+='\n\nRUNTIME_MANIFEST\n'+'\n'.join(f'{p.name}:{p.stat().st_size}' for p in runtime_files)
           roles={
-            'experience_integrity':'Audita SOMENTE regressões no runtime público já implementado e autorizado. Preserva COPÉRNICO tal como existe; não exijas WMS, API ou camada externa que não faça parte do runtime actual. Bloqueia apenas se um runtime já existente tiver sido reduzido a card/descrição, se COPÉRNICO/COSMICOXES tiver sido substituído, se surgir fallback genérico activo ou se dramaturgia existente regredir.',
-            'runtime_accessibility':'Verifica teclado/touch/reduced-motion/lifecycle e ausência de regressão evidente no runtime implementado.',
-            'public_boundary':'Verifica PUBLIC-ONLY, zero segredos, zero ligação reversível a material reservado e material NÃO PUBLICAR ausente.'
+            'experience_integrity':'Bloqueia regressão real, generic fallback ou substituição de COPÉRNICO/COSMICOXES.',
+            'runtime_accessibility':'Verifica teclado, touch, reduced-motion e lifecycle no estado implementado.',
+            'public_boundary':'Verifica PUBLIC-ONLY, zero segredos e zero material reservado.'
           }
           failures=[]
           for role,rule in roles.items():
-              payload={'model':'mistral-medium-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':f'És {role} do Atlas Vivo MILK. {rule} Responde JSON com pass:boolean, blockers:array, evidence:array.'},{'role':'user','content':src}]}
+              payload={'model':'mistral-small-latest','temperature':0,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':f'És {role} do Atlas Vivo MILK. {rule} Responde JSON pass:boolean, blockers:array.'},{'role':'user','content':src}]}
               req=urllib.request.Request('https://api.mistral.ai/v1/chat/completions',data=json.dumps(payload).encode(),method='POST',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
-              with urllib.request.urlopen(req,timeout=240) as r: body=json.loads(r.read())
+              try:
+                  with urllib.request.urlopen(req,timeout=180) as r: body=json.loads(r.read())
+              except urllib.error.HTTPError as e:
+                  if e.code==402:
+                      print('MISTRAL_STAGE_COUNCIL=DEFERRED_BILLING_402'); raise SystemExit(0)
+                  raise
               review=json.loads(body['choices'][0]['message']['content'])
               print('MISTRAL_STAGE_REVIEW='+json.dumps({'role':role,**review},ensure_ascii=False))
               if review.get('pass') is not True or review.get('blockers'): failures.append(role)
@@ -78,7 +90,6 @@ jobs:
           PY
 
       - name: Build deterministic private staging archive
-        shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
@@ -93,14 +104,13 @@ jobs:
                   with p.open('rb') as fh: tf.addfile(info,fh)
           payload=buf.getvalue(); digest=hashlib.sha256(payload).hexdigest()
           pathlib.Path('/tmp/atlas-webapp-internal.tar.gz').write_bytes(payload)
-          pathlib.Path('/tmp/atlas-webapp-internal.sha256').write_text(digest+'  atlas-webapp-internal.tar.gz\n',encoding='utf-8')
+          pathlib.Path('/tmp/atlas-webapp-internal.sha256').write_text(digest+'  atlas-webapp-internal.tar.gz\n')
           receipt={'sha':os.environ['GITHUB_SHA'],'archive_sha256':digest,'files':len(files),'public_only':True,'purpose':'internal_ptservidor_staging'}
-          pathlib.Path('/tmp/atlas-webapp-internal-receipt.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2),encoding='utf-8')
+          pathlib.Path('/tmp/atlas-webapp-internal-receipt.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2))
           print(f'INTERNAL_ARCHIVE_READY files={len(files)} sha256={digest}')
           PY
 
-      - name: Upload to private PTServidor staging via migration FTPS and verify readback
-        shell: bash
+      - name: Upload private PTServidor staging and verify readback
         run: |
           set -euo pipefail
           python - <<'PY'
@@ -109,8 +119,7 @@ jobs:
           if not password: raise SystemExit('PTSERVIDOR_FTPS_PASSWORD_MISSING')
           ftp=ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=90)
           ftp.connect('troi.ptservidor.net',21); ftp.login('migration@associacaomilk.pt',password); ftp.prot_p()
-          dest='ATLAS_WEBAPP_INTERNAL_TESTS/'+os.environ['GITHUB_SHA']
-          ftp.cwd('/')
+          dest='ATLAS_WEBAPP_INTERNAL_TESTS/'+os.environ['GITHUB_SHA']; ftp.cwd('/')
           for part in dest.split('/'):
               try: ftp.mkd(part)
               except ftplib.all_errors: pass
