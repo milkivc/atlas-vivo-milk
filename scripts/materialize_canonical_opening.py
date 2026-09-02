@@ -49,12 +49,17 @@ if 'id="opening" class="opening" aria-labelledby="opening-title" hidden' not in 
 index.write_text(s, encoding="utf-8")
 
 s = atlas.read_text(encoding="utf-8")
-if "const atlasSeal = document.querySelector('#atlasSeal');" not in s:
+if "const atlasSeal = requireElement('#atlasSeal');" not in s:
     anchor = "const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;\nconst opening = document.querySelector('#opening');"
-    replacement = "const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;\nconst prelude = document.querySelector('#prelude');\nconst atlasSeal = document.querySelector('#atlasSeal');\nconst cosmos = document.querySelector('#cosmos');\nconst opening = document.querySelector('#opening');"
+    replacement = "const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;\nconst requireElement = selector => {\n  const node = document.querySelector(selector);\n  if (!node) throw new Error(`ATLAS_REQUIRED_ELEMENT_MISSING:${selector}`);\n  return node;\n};\nconst prelude = requireElement('#prelude');\nconst atlasSeal = requireElement('#atlasSeal');\nconst cosmos = requireElement('#cosmos');\nconst opening = requireElement('#opening');"
     if anchor not in s:
         raise SystemExit("ATLAS_CONST_ANCHOR_NOT_FOUND")
     s = s.replace(anchor, replacement, 1)
+
+s = s.replace("const territory = document.querySelector('#territory');", "const territory = requireElement('#territory');", 1)
+s = s.replace("const topbar = document.querySelector('.topbar');", "const topbar = requireElement('.topbar');", 1)
+s = s.replace("const enter = document.querySelector('#enterAtlas');", "const enter = requireElement('#enterAtlas');", 1)
+s = s.replace("const openingWord = document.querySelector('.opening-word');", "const openingWord = requireElement('.opening-word');", 1)
 
 if "async function revealSeal()" not in s:
     anchor = "const wait = ms => new Promise(resolve => setTimeout(resolve, reduced ? 0 : ms));\n\n"
@@ -81,6 +86,7 @@ async function activateSeal() {
   enter.focus({preventScroll: true});
 }
 
+// Button nativo: click cobre pointer/touch e activação por Enter/Espaço.
 atlasSeal.addEventListener('click', activateSeal);
 requestAnimationFrame(() => revealSeal());
 
@@ -99,7 +105,7 @@ if "Limiar canónico da abertura: PRETO" not in s:
 .prelude.leaving{opacity:0;pointer-events:none}
 .atlas-seal{width:clamp(76px,14vw,150px);aspect-ratio:1;border:0;padding:0;background:transparent;opacity:.2;cursor:pointer;filter:drop-shadow(0 0 16px #fff2);transition:opacity .35s ease,filter .35s ease,transform .35s ease}
 .atlas-seal img{display:block;width:100%;height:100%;object-fit:contain}
-.atlas-seal:hover,.atlas-seal:focus-visible{opacity:.72;filter:drop-shadow(0 0 28px #fff5);transform:scale(1.025)}
+.atlas-seal:hover,.atlas-seal:focus,.atlas-seal:focus-visible{opacity:.72;filter:drop-shadow(0 0 28px #fff5);transform:scale(1.025)}
 @media(prefers-reduced-motion:reduce){.prelude,.atlas-seal{transition:none!important}}
 """
 styles.write_text(s, encoding="utf-8")
