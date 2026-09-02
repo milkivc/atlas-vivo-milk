@@ -1,0 +1,12 @@
+agent_type = "subagent"
+display_name = "COPERNICO Integrity"
+description = "Auditor read-only do globo COPÉRNICO e da sua integração territorial. Verifica que o código existente é recuperado/completado e que estados, dados públicos, acessibilidade e performance não regridem." 
+safety = "safe"
+active_model = "mistral-medium-latest"
+enabled_tools = ["read_file", "grep"]
+
+[tools.read_file]
+permission = "always"
+
+[tools.grep]
+permission = "always"
