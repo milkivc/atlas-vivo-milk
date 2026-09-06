@@ -99,6 +99,7 @@ function canvasFor(el) {
   resize();
   const observer = new ResizeObserver(resize);
   observer.observe(el);
+  el.addEventListener('atlas:destroy', () => observer.disconnect(), { once: true });
   return { canvas, context, observer };
 }
 
@@ -327,6 +328,9 @@ function echo() {
     context.stroke();
     whisper(el, WORDS[Math.floor(Math.random() * WORDS.length)], p.x / canvas.clientWidth * 100, p.y / canvas.clientHeight * 100);
   });
+  el.addEventListener('atlas:destroy', () => {
+    if (audio && audio.state !== 'closed') audio.close();
+  }, { once: true });
   return el;
 }
 
