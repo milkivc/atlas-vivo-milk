@@ -1,0 +1,65 @@
+{
+  "titulo": "Manifesto de Proveniencia e Curadoria — Atlas Vivo MILK",
+  "gerado_em": "2026-09-08T05:23:46.433601",
+  "autor": "Eduardo Mauricio Vieira Cabral e Araujo",
+  "nome_artistico": "Eduardo Mauer",
+  "email_autor": "eduardomauriciovieiracabral@gmail.com",
+  "responsavel_entidade": "Associacao MILK",
+  "dispositivo_curatorial": "Atlas Vivo MILK",
+  "declaracao": "Todos os documentos, pesquisas e referencias academicas deste corpus canonico foram recolhidos, investigados e curados por Eduardo Mauricio Vieira Cabral e Araujo (Eduardo Mauer). A investigacao de campo, recolha documental e entrecruzamento de ideias sao obra do autor. O corpus e gerido pela Associacao MILK no ambito do projeto Atlas Vivo do Folclore Portugues.",
+  "operacao_atualizacao": {
+    "documentos_atualizados": 10360,
+    "erros": 0,
+    "duracao_segundos": 33.5,
+    "campos_definidos": [
+      "author",
+      "responsible_entity",
+      "curatorial_device",
+      "notes"
+    ],
+    "nota_adicionada": "Documento recolhido, pesquisado e curado por Eduardo Mauricio Vieira Cabral e Araujo (Eduardo Mauer). Referencias academicas e investigacao de campo fornecidas pelo autor. Corpus canonico do projeto Atlas Vivo MILK da Associacao MILK."
+  },
+  "principios_curatoriais": [
+    "Data Feminism",
+    "Intergeracional",
+    "Antirracial",
+    "Queer",
+    "CARE",
+    "Nao normalizar, nao hierarquizar",
+    "Consentimento informado",
+    "Human-in-the-loop",
+    "RGPD: protecao de dados pessoais"
+  ],
+  "seres_folcloricos": [
+    "Moura Encantada",
+    "Lobisomem",
+    "Coca",
+    "Bica",
+    "Tardo",
+    "Pele Vermelha",
+    "Marlinha",
+    "Pisando",
+    "Bruxa",
+    "Diabo",
+    "Mau Olhado",
+    "Putas",
+    "Pã",
+    "Trasgo",
+    "Gilde",
+    "Sereia"
+  ],
+  "dispositivos": [
+    "Galeria Diletante",
+    "Reizinho",
+    "Cronicas Caotadas",
+    "Nuno com Vestigios",
+    "Dado Sem Lado"
+  ],
+  "estado_corpus": {
+    "total_documentos": 10360,
+    "visibilidade_default": "restrita",
+    "estado_epistemico_default": "preparado",
+    "consentimento_default": "por_validar",
+    "proximo_passo": "curadoria territorial — classificar district/municipality/parish"
+  }
+}

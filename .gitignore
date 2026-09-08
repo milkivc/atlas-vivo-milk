@@ -1,0 +1,16 @@
+# MILK AI State Canonico — .gitignore
+# Nao versionar o corpus (10.535 ficheiros JSON, 268 MB)
+corpus/documents/
+corpus/quarantine/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
